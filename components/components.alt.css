@@ -15,19 +15,19 @@
 
 
 /***** INPUTS - START *****/
-.formatted_description kbd{font-size:.9em;background:color-mix(in srgb,var(--t) 20%,var(--b2));border-radius:4px;margin:0 .25em;padding:.06em .25em;border-bottom:2px solid}
+.formatted_description kbd{font-size:.9em;background:color-mix(in srgb,var(--t) 20%,var(--b2));border-radius:4px;margin:0 .5ch;padding:2px .35em;border-bottom:2px solid}
 /***** INPUTS - END *****/
+
+
+
+/***** LABELS - START *****/
+.custom-lb,.custom-tag{background:var(--l);color:var(--b2)!important;text-decoration:none;padding:0 1ch;margin:.4ch;font-weight:700;border-radius:4px;display:inline-block}.custom-tag{font-family:Lato,sans-serif;margin-right:1em}.custom-tag:before{content:"\2022";margin-right:.5ch;color:var(--b2)}.custom-tag:after{content:"";position:absolute;margin-left:.75ch;border-top:1ch solid #fff0;border-bottom:1.2ch solid #fff0;border-left:1.2ch solid var(--l);border-radius:4px}
+/***** LABELS - END *****/
 
 
 
 /***** SPOILER - START *****/
 .custom-hd:not(:hover){color:var(--t);background:var(--t)}
 /***** SPOILER - END *****/
-
-
-
-/***** TAG BADGES - START *****/
-.custom-tag{background:var(--l);color:var(--b2)!important;text-decoration:none;padding:.1em .5em;margin:.25em .75em;font-weight:700;border-radius:4px 0 0 4px;display:inline-block}.custom-tag:before{content:"\2022";margin:0 .5em 0 0;color:var(--b2)}.custom-tag:after{content:"";position:absolute;margin:-.1em 0 0 .5em;border-top:.7em solid #fff0;border-bottom:.7em solid #fff0;border-left:.8em solid var(--l)}
-/***** TAG BADGES - END *****/
 
 
