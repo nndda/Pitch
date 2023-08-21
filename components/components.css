@@ -1,4 +1,4 @@
-.formatted_description {
+#wrapper {
   --l: var(--itchio_link_color);
   --t: var(--itchio_text_color);
   --b: var(--itchio_bg_color);
@@ -11,19 +11,23 @@
 .custom-accrd {  
   max-width: 553px;
   margin: auto;
-  outline: 1px solid color-mix(in srgb, var(--t) 50%, var(--b2));
+  border: 1px solid var(--t);
+  border-color: color-mix(in srgb, var(--t) 50%, var(--b2));
   border-radius: 6px;
   margin-top: 1.5em;
-  margin-bottom: 1.5em
+  margin-bottom: 1.5em;
+  overflow: hidden
 }
 
 .custom-accrd details {
-  background: color-mix(in srgb, var(--b2) 92.5%, var(--t));
-  padding: .5em 1em .75em 1em
+  background: var(--b2);
+  background: color-mix(in srgb, var(--b2) 94%, var(--t));
+  padding: .75em 1.2em;
 }
 
 .custom-accrd details:not(:last-child) {
-  border-bottom: 1px solid color-mix(in srgb, var(--t) 40%, var(--b2))
+  border-bottom: 1px solid var(--t);
+  border-color: color-mix(in srgb, var(--t) 40%, var(--b2))
 }
 
 .custom-accrd details[open] summary:after {
@@ -34,16 +38,12 @@
   font-size: 105%;
   cursor: pointer;
   color: var(--l);
-  display: flex;
-  transition: 0s
+  display: flex
 }
 
 .custom-accrd summary:hover {
-  color: var(--t)
-}
-
-.custom-accrd ::marker {
-  content: ""
+  color: var(--t);
+  text-decoration: underline
 }
 
 .custom-accrd summary::after {
@@ -99,13 +99,13 @@
 
 
 /***** INPUTS - START *****/
-.formatted_description kbd {
+#wrapper kbd {
   font-size: .9em;
-  background: color-mix(in srgb, var(--t) 20%, var(--b2));
+  background: var(--b2);
   border-radius: 4px;
-  margin: 0 .5ch;
-  padding: 2px .35em;
-  border-bottom: 2px solid
+  margin:.5em;
+  padding: .2ch .7ch;
+  box-shadow: 0 1px 0 2px
 }
 
 /***** INPUTS - END *****/

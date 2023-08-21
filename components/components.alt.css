@@ -1,9 +1,9 @@
-.formatted_description{--l:var(--itchio_link_color);--t:var(--itchio_text_color);--b:var(--itchio_bg_color);--b2:var(--itchio_bg2_color)}
+#wrapper{--l:var(--itchio_link_color);--t:var(--itchio_text_color);--b:var(--itchio_bg_color);--b2:var(--itchio_bg2_color)}
 
 
 
 /***** ACCORDION - START *****/
-.custom-accrd{max-width:553px;margin:auto;outline:1px solid color-mix(in srgb,var(--t) 50%,var(--b2));border-radius:6px;margin-top:1.5em;margin-bottom:1.5em}.custom-accrd details{background:color-mix(in srgb,var(--b2) 92.5%,var(--t));padding:.5em 1em .75em 1em}.custom-accrd details:not(:last-child){border-bottom:1px solid color-mix(in srgb,var(--t) 40%,var(--b2))}.custom-accrd details[open] summary:after{content:"\25BC"}.custom-accrd summary{font-size:105%;cursor:pointer;color:var(--l);display:flex;transition:0s}.custom-accrd summary:hover{color:var(--t)}.custom-accrd ::marker{content:""}.custom-accrd summary::after{text-align:right;flex-grow:1;content:"\25BA"}.custom-left{margin:0}.custom-right{margin:0 0 0 auto}.custom-full_w{max-width:100%}
+.custom-accrd{max-width:553px;margin:auto;border:1px solid var(--t);border-color:color-mix(in srgb,var(--t) 50%,var(--b2));border-radius:6px;margin-top:1.5em;margin-bottom:1.5em;overflow:hidden}.custom-accrd details{background:var(--b2);background:color-mix(in srgb,var(--b2) 94%,var(--t));padding:.75em 1.2em}.custom-accrd details:not(:last-child){border-bottom:1px solid var(--t);border-color:color-mix(in srgb,var(--t) 40%,var(--b2))}.custom-accrd details[open] summary:after{content:"\25BC"}.custom-accrd summary{font-size:105%;cursor:pointer;color:var(--l);display:flex}.custom-accrd summary:hover{color:var(--t);text-decoration:underline}.custom-accrd summary::after{text-align:right;flex-grow:1;content:"\25BA"}.custom-left{margin:0}.custom-right{margin:0 0 0 auto}.custom-full_w{max-width:100%}
 /***** ACCORDION - END *****/
 
 
@@ -15,7 +15,7 @@
 
 
 /***** INPUTS - START *****/
-.formatted_description kbd{font-size:.9em;background:color-mix(in srgb,var(--t) 20%,var(--b2));border-radius:4px;margin:0 .5ch;padding:2px .35em;border-bottom:2px solid}
+#wrapper kbd{font-size:.9em;background:var(--b2);border-radius:4px;margin:.5em;padding:.2ch .7ch;box-shadow:0 1px 0 2px}
 /***** INPUTS - END *****/
 
 
