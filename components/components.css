@@ -1,8 +1,13 @@
 #wrapper {
-  --l: var(--itchio_link_color);
-  --t: var(--itchio_text_color);
   --b: var(--itchio_bg_color);
-  --b2: var(--itchio_bg2_color)
+  --b2: var(--itchio_bg2_color);
+  --b2s: var(--itchio_bg2_sub);
+  --t: var(--itchio_text_color);
+  --l: var(--itchio_link_color);
+  --br: var(--itchio_border_color);
+  --btn: var(--itchio_button_color);
+  --btn_f: var(--itchio_button_fg_color);
+  --btn_s: var(--itchio_button_shadow_color);
 }
 
 
@@ -12,86 +17,104 @@
   max-width: 553px;
   margin: auto;
   border: 1px solid var(--t);
-  border-color: color-mix(in srgb, var(--t) 50%, var(--b2));
-  border-radius: 6px;
+  border-color: var(--l);
+  border-radius: 3px;
   margin-top: 1.5em;
   margin-bottom: 1.5em;
-  overflow: hidden
+  overflow: hidden;
 }
 
 .custom-accrd details {
-  background: var(--b2);
-  background: color-mix(in srgb, var(--b2) 94%, var(--t));
+  background: var(--b2s);
   padding: .75em 1.2em;
 }
 
 .custom-accrd details:not(:last-child) {
   border-bottom: 1px solid var(--t);
-  border-color: color-mix(in srgb, var(--t) 40%, var(--b2))
+  border-color: var(--l);
 }
 
 .custom-accrd details[open] summary:after {
-  content: "\25BC"
+  content: "\25BC";
+}
+
+.custom-accrd details[open] summary {
+  margin-bottom: .25em;
 }
 
 .custom-accrd summary {
   font-size: 105%;
   cursor: pointer;
   color: var(--l);
-  display: flex
+  display: flex;
 }
 
 .custom-accrd summary:hover {
   color: var(--t);
-  text-decoration: underline
+  text-decoration: underline;
 }
 
 .custom-accrd summary::after {
   text-align: right;
   flex-grow: 1;
-  content: "\25BA"
+  content: "\25BA";
 }
 
 .custom-left {
-  margin: 0
+  margin: 0;
 }
 
 .custom-right {
-  margin: 0 0 0 auto
+  margin: 0 0 0 auto;
 }
 
 .custom-full_w {
-  max-width: 100%
+  max-width: 100%;
 }
 
 /***** ACCORDION - END *****/
 
 
 
+/***** COLLAPSIBLE - START *****/
+.custom-cl summary {
+  background: var(--btn);
+  color: var(--btn_f);
+  margin:.5em;
+  border-radius: 4px;
+  padding: 0 .5em;
+  max-width: min-content;
+  white-space: nowrap;
+  cursor: pointer;
+}
+/***** COLLAPSIBLE - END *****/
+
+
+
 /***** CREDITS - START *****/
 .custom-crdt {
   display: grid;
-  grid-template-columns: 25% 60%
+  grid-template-columns: 25% 60%;
 }
 
-.custom-crdt>div {
-  margin: 2px 8px
+.custom-crdt > div {
+  margin: 2px 8px;
 }
 
-.custom-crdt>div:nth-child(odd) {
+.custom-crdt > div:nth-child(odd) {
   text-align: right;
   font-weight: 700;
-  opacity: .7
+  opacity: .7;
 }
 
-.custom-crdt>div>a {
-  display: inline-block
+.custom-crdt > div > a {
+  display: inline-block;
 }
 
-.custom-crdt div>a:not(:last-child):after {
+.custom-crdt div > a:not(:last-child):after {
   content: ",";
   margin-right: 1em;
-  color: var(--t)
+  color: var(--t);
 }
 
 /***** CREDITS - END *****/
@@ -101,11 +124,11 @@
 /***** INPUTS - START *****/
 #wrapper kbd {
   font-size: .9em;
-  background: var(--b2);
+  background: var(--br);
   border-radius: 4px;
-  margin:.5em;
+  border-bottom: 2px solid var(--b2s);
+  margin:.2em;
   padding: .2ch .7ch;
-  box-shadow: 0 1px 0 2px
 }
 
 /***** INPUTS - END *****/
@@ -114,25 +137,25 @@
 
 /***** LABELS - START *****/
 .custom-lb, .custom-tag {
-  background: var(--l);
-  color: var(--b2) !important;
+  background: var(--btn);
+  color: var(--btn_f) !important;
   text-decoration: none;
   padding: 0 1ch;
   margin: .4ch;
   font-weight: 700;
   border-radius: 4px;
-  display: inline-block
+  display: inline-block;
 }
 
 .custom-tag {
   font-family: Lato, sans-serif;
-  margin-right: 1em
+  margin-right: 1em;
 }
 
 .custom-tag:before {
   content: "\2022";
   margin-right: .5ch;
-  color: var(--b2)
+  color: var(--b2s);
 }
 
 .custom-tag:after {
@@ -141,8 +164,8 @@
   margin-left: .75ch ;
   border-top: 1ch solid #fff0;
   border-bottom: 1.2ch solid #fff0;
-  border-left: 1.2ch solid var(--l);
-  border-radius: 4px
+  border-left: 1.2ch solid var(--btn);
+  border-radius: 4px;
 }
 
 /***** LABELS - END *****/
@@ -152,9 +175,7 @@
 /***** SPOILER - START *****/
 .custom-hd:not(:hover) {
   color: var(--t);
-  background: var(--t)
+  background: var(--t);
 }
 
 /***** SPOILER - END *****/
-
-
