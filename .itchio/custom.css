@@ -32,7 +32,8 @@
   color:var(--itchio_link_color);
 }
 #wrapper > .inner_column {
-  max-width: 1100px
+/*   max-width: 1100px; */
+/*   max-width: px; */
 }
 .custom-hl{
   display: flex;
@@ -171,16 +172,26 @@
   margin-top: 0;
 }
 
-.custom-preview > div:nth-child(1) {
+.custom-preview {
+  display: grid;
+  grid-template: 
+    "a b b" auto
+    "c d e" auto;
+}
+
+/* .custom-preview > div:nth-child(1) {
   width: 20%;
 }
 .custom-preview > div:nth-child(2) {
   width: 50%;
 }
-.custom-preview > div:nth-child(4),
-.custom-preview > div:nth-child(5){
+.custom-preview > div:nth-child(3),
+.custom-preview > div:nth-child(4) {
   width: 25%;
 }
+.custom-preview > div:nth-child(5) {
+  width: 10%;
+} */
 .custom-prevctrl {
   display: inline-block;
   background: red;
@@ -227,7 +238,7 @@
   color: var(--l);
 }
 
-#view_game_footer{
+#view_game_footer {
   background: var(--itchio_text_color);
   color:var(--itchio_bg_color);
 }
@@ -238,22 +249,17 @@
 
 
 @media (max-width: 590px){
-.custom-ft{
-  grid-template-columns: 70%;
-  grid-template-rows: 30% 30% 30%;
-}
+  .custom-ft {
+    grid-template-columns: 70%;
+    grid-template-rows: 30% 30% 30%;
+  }
   .custom-ft > li:not(:first-child) img {
     margin-top: 3em;
   }
 }
 
 
-
 /* ================================================================================================ */
-/* ================================================================================================ */
-/* ================================================================================================ */
-
-
 
 
 /***** ACCORDION - START *****/
@@ -304,33 +310,18 @@
   content: "\25BA";
 }
 
-.custom-left {
+.custom-accrd.custom-left {
   margin: 0;
 }
 
-.custom-right {
+.custom-accrd.custom-right {
   margin: 0 0 0 auto;
 }
 
-.custom-full_w {
+.custom-accrd.custom-full_w {
   max-width: 100%;
 }
 /***** ACCORDION - END *****/
-
-
-
-/***** COLLAPSABLE - START *****/
-.custom-cl summary {
-  background: var(--btn);
-  color: var(--btn_f);
-  margin:.5em;
-  border-radius: 4px;
-  padding: 0 .5em;
-  max-width: min-content;
-  white-space: nowrap;
-  cursor: pointer;
-}
-/***** COLLAPSABLE - END *****/
 
 
 
@@ -382,10 +373,14 @@
   color: var(--btn_f) !important;
   text-decoration: none;
   padding: 0 1ch;
-  margin: .4ch;
+  margin: .15em;
   font-weight: 700;
   border-radius: 4px;
   display: inline-block;
+}
+
+p .custom-lb {
+  margin: 0 .15em;
 }
 
 .custom-tag {
