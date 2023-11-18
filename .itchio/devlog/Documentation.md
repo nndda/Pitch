@@ -14,9 +14,11 @@ Copy the file's content, and paste it in your page's custom CSS. Its located at 
 
 Go to your project's edit page. Edit the content/description in HTML mode. And follow the guides for each components below. or copy-paste the sample codes for a quick start.
 
-> `Important note:` once you edit your page's content in HTML mode, Its best to keep using HTML mode in the future to avoid messing up the layout.
+> **Important note:** once you edit your page's content in HTML mode, Its best to keep using HTML mode in the future to avoid messing up the layout.
 
-> `Limitation:` You can use these in any project pages, jam pages, and devlogs. But for now, these components **can't be used in profile pages**, due to some color variables that does not exist in profile pages. e.g 'Button color'
+> **Limitations:** You can use these in any project pages, and devlogs. But for now, these components **can't be used in jam and profile pages**, due to some color variables limitations.
+
+> **Best practice:** Test your project's pages against multiple screen sizes, and in multiple browsers, including the itch app before publishing it.
 
 <br>
 <hr>
@@ -31,7 +33,7 @@ Accordions are center-aligned by default. To align it to the left or right, add 
 
 You can also add `custom-full_w` class to make it takes up the entire width of the page.
 
-```html
+```
 <div class="custom-accrd">
 
   <details>
@@ -90,11 +92,11 @@ Result:
 
 Give attribution or credits with a nice layout (can be repurposed to any other 2 column layout too). Designed to be consistent with itch.io's 'More information' panel.
 
-Add class `custom-crdt` to a `<div>`
+Add class `custom-crdt` to a `<div>`. And add a pair of `<div>` for each row/category.
 
-And add a pair of `<div>` for each row/category
+The second `<div>` can be filled with hyperlinks (`<a>`) or just plain text.
 
-```html
+```
 <div class="custom-crdt">
 
   <div>Arts and Visuals</div>
@@ -145,8 +147,10 @@ Represent the keyboard inputs, controls, or any buttons. Unlike other components
 
 Wrap the keyboard's input text with `<kbd>` tags
 
-```html
-<kbd>Z</kbd> <kbd>X</kbd>, <kbd>Ctrl</kbd> + <kbd>C</kbd>
+```
+<kbd>Z</kbd>
+<kbd>X</kbd>,
+<kbd>Ctrl</kbd> + <kbd>C</kbd>
 ```
 Result: <kbd>Z</kbd> <kbd>X</kbd>, <kbd>Ctrl</kbd> + <kbd>C</kbd>
 
@@ -159,7 +163,7 @@ Highlight genres, tags, tools, or jam. Can be applied to hyperlinks or plain tex
 
 Add `custom-lb` or `custom-tag` class on any inline elements, such as `<a>`, `<b>`, `<i>`, or `<span>`.
 
-```html
+```
 <a class="custom-lb" href="https://example.com">Some link</a>
 <b class="custom-lb">Pixel Art</b>
 <b class="custom-tag">Free</b>
@@ -169,7 +173,9 @@ Result:
 <b class="custom-lb">Pixel Art</b>
 <b class="custom-tag">Free</b>
 
-Since its an inline element, you can also put Labels <i class="custom-lb">inbetween</i> lines of text or paragraph. If you used it inbetween lines of text, its best to wrap the text body inside `<p>`.
+Since its an inline element, you can also put Labels <i class="custom-lb">inbetween</i> lines of text or paragraph. If you used it inbetween lines of text, its best practice to wrap the text body inside `<p>`.
+
+To align a collection/set of Labels, put them inside a `<p>`, and add itch.io's built-in class for aligning text `text-center` or `text-right`.
 
 <br>
 <hr>
@@ -179,7 +185,7 @@ Hide any lines of text. Hover over it, to show the content. Can be applied to an
 
 Wrap the text you want to hide with `<span>` (or any inline elements) and add `custom-hd` class to it.
 
-```html
+```
 Fully visible text and
 <span class="custom-hd">not so visible text</span>
 (unless you hover over it).
