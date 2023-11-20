@@ -1,4 +1,4 @@
-# Getting started
+# Getting started <img src="https://cdn.simpleicons.org/css3/000/fff" alt="Node" align=left width=24>
 
 Make sure you have the components' CSS applied to your page. Download it from the [main page](https://nnda.itch.io/page-components), or directly copy it from [here](https://github.com/nndda/itchio-css/tree/main/components).
 
@@ -14,24 +14,21 @@ Copy the file's content, and paste it in your page's custom CSS. Its located at 
 
 Go to your project's edit page. Edit the content/description in HTML mode. And follow the guides for each components below. or copy-paste the sample codes for a quick start.
 
-> **Important note:** once you edit your page's content in HTML mode, Its best to keep using HTML mode in the future to avoid messing up the layout.
+> **&#9888; Important note:** once you edit your page's content in HTML mode, Its best to keep using HTML mode in the future to avoid messing up the layout.
 
-> **Limitations:** You can use these in any project pages, and devlogs. But for now, these components **can't be used in jam and profile pages**, due to some color variables limitations.
+> **&#9888; Limitations:** You can use these in any project pages, and devlogs. But for now, these components <mark><strong>can't be used in jam and profile pages,</strong></mark> due to some color variables limitations.
 
-> **Best practice:** Test your project's pages against multiple screen sizes, and in multiple browsers, including the itch app before publishing it.
+> **&#128712; Best practice:** Test your project's pages against multiple screen sizes, and in multiple browsers, including the itch app before publishing it.
 
 <br>
-<hr>
 
-# Accordion
+## Accordion
 
 Turns walls of texts into list of collapsable contents. It's basically just a prettified list of `<details>` elements. [Click here](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details) for more *details*.
 
 Add class `custom-accrd` to a `<div>` element, containing a number of `<details>` with `<summary>`.
 
-Accordions are center-aligned by default. To align it to the left or right, add another class `custom-left` or `custom-right`
-
-You can also add `custom-full_w` class to make it takes up the entire width of the page.
+Accordions are center-aligned by default. To align it to the left or right, add another class `custom-left` or `custom-right`. You can also add `custom-full_w` class to make it takes up the entire width of the page.
 
 ```
 <div class="custom-accrd">
@@ -86,33 +83,30 @@ Result:
 </div>
 
 <br>
-<hr>
 
-# Credits
+## Credits
 
 Give attribution or credits with a nice layout (can be repurposed to any other 2 column layout too). Designed to be consistent with itch.io's 'More information' panel.
 
-Add class `custom-crdt` to a `<div>`. And add a pair of `<div>` for each row/category.
-
-The second `<div>` can be filled with hyperlinks (`<a>`) or just plain text.
+Add class `custom-crdt` to a `<div>`. And add a pair of `<div>` for each row/category. The second `<div>` can be filled with hyperlinks `<a>` or just plain text.
 
 ```
 <div class="custom-crdt">
 
   <div>Arts and Visuals</div>
   <div>
-    <a href="https://itch.io/">Amazing artist</a>
+    <a href="https://itch.io">Amazing artist</a>
   </div>
 
   <div>Story</div>
   <div>
-    <a href="https://itch.io/">Wonderful writer</a>
+    <a href="https://itch.io">Wonderful writer</a>
   </div>
 
   <div>Codes</div>
   <div>
-    <a href="https://itch.io/">Creative coder</a>
-    <a href="https://itch.io/">Proficient programmer</a>
+    <a href="https://itch.io">Creative coder</a>
+    <a href="https://itch.io">Proficient programmer</a>
   </div>
 
 </div>
@@ -139,9 +133,8 @@ Result:
 </div>
 
 <br>
-<hr>
 
-# Inputs
+## Inputs
 
 Represent the keyboard inputs, controls, or any buttons. Unlike other components, Inputs don't make use of custom classes, instead it styles the `<kbd>` html tags directly.
 
@@ -155,9 +148,8 @@ Wrap the keyboard's input text with `<kbd>` tags
 Result: <kbd>Z</kbd> <kbd>X</kbd>, <kbd>Ctrl</kbd> + <kbd>C</kbd>
 
 <br>
-<hr>
 
-# Labels
+## Labels
 
 Highlight genres, tags, tools, or jam. Can be applied to hyperlinks or plain text. You can use emoji or unicode symbols too. Available in 2 variants: default and tags.
 
@@ -178,9 +170,8 @@ Since its an inline element, you can also put Labels <i class="custom-lb">inbetw
 To align a collection/set of Labels, put them inside a `<p>`, and add itch.io's built-in class for aligning text `text-center` or `text-right`.
 
 <br>
-<hr>
 
-# Spoiler
+## Spoiler
 Hide any lines of text. Hover over it, to show the content. Can be applied to any inline element. Its also the only one component that only used 1 CSS rule.
 
 Wrap the text you want to hide with `<span>` (or any inline elements) and add `custom-hd` class to it.
@@ -197,17 +188,10 @@ Fully visible text and
 (unless you hover over it).
 
 <br>
-<hr>
 
-### Excluding/including components
+# Excluding/including components
 
-Each components is contained within a block of comments. You can delete or copy the CSS codes starting from
-
-`/***** COMPONENT NAME - START *****/`
-
-to
-
-`/***** COMPONENT NAME - END *****/`
+Each components is contained within a block of comments. You can delete or copy the CSS codes starting from `/***** COMPONENT NAME - START *****/` to `/***** COMPONENT NAME - END *****/`
 
 Example with `components.alt.css`
 ![](https://img.itch.zone/aW1nLzEzMTc1Mzk4LnBuZw==/original/rKrhxM.png)
