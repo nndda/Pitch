@@ -2,12 +2,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
 
 .custom-docslnk {
-/*  margin:0 !important; */
   display: block;
 }
 .custom-docslnk:after{
-  content: "  \279C";
+  content: "  \1F87A";
+  color: var(--itchio_text_color);
 }
+/* .buy_row{
+  display: none;
+} */
+/* .buy_row .button_message .sub {
+  color: var(--itchio_link_color);
+} */
 
 .formatted_description p {
   max-width: 60em;
@@ -16,8 +22,6 @@
 
 .custom-prevheading {
   position: relative;
-  font-size: 250%;
-  font-weight: bold;
   text-align: center;
   letter-spacing: .1ch;
   text-decoration: 4px underline dashed var(--itchio_link_color)
@@ -30,6 +34,10 @@
 #wrapper blockquote > p > :first-child {
   color: var(--itchio_link_color);
   display: block;
+}
+
+.game_devlog_post_page {
+  background: #18181b;
 }
 
 .game_devlog_post_page h1, .game_devlog_post_page h2{
@@ -47,14 +55,8 @@
 
 .responsive #inner_column {
   max-width: 1100px;
-/*   max-width: px; */
 }
-/* .custom-hl{
-  display: flex;
-  
-  max-width: 90vw !important;
-  
-} */
+
 .custom-ft{
   display: grid;
   grid-template-columns: 30% 30% 30%;
@@ -75,7 +77,6 @@
   padding: 1.6em;
   border-radius: 4px;
   border: 1px solid var(--itchio_border_color);
-/*   border: 1px solid var(--itchio_link_color); */
   border-bottom: .5em solid var(--itchio_link_color);
 }
 .custom-ft img{
@@ -89,16 +90,11 @@
   font-family: 'Ubuntu';
   color: var(--itchio_link_color);
   font-size: 1.7em;
-/*   margin: 1.5em 0 3em 0; */
   margin: .7em 0;
 }
 .formatted_description > div > div.text-center + p {
   max-width: 24em;
   margin-top: 2em;
-  margin-bottom: 2em;
-}
-.formatted_description blockquote{
-  max-width: 26em;
 }
 
 .custom-pge:after{
@@ -158,23 +154,41 @@
 
 
 .custom-prevcont {
+  container-name: prevcont;
+  container-type: inline-size;
   position: relative;
-  padding-top: .5em;
-  overflow: auto;
+/*   padding-top: .5em; */
+  margin: auto;
+  overflow-y: scroll;
   max-height: 100vh;
+/*   min-height: 100%; */
+/*   min-height: 100%; */
+  min-width: 280px;
+  max-width: 1000px;
+  resize: horizontal;
 /*   outline: 1px solid #fff4; */
 }
 .custom-prevcont > span {
-  position: relative;
+/*   display: inline-block; */
+/*   position: relative; */
+  position: sticky;
+  top: .6em;
   z-index: 2;
+  font-weight: bold;
 /*   font-size: 1em; */
-  vertical-align: .8em;
+  vertical-align: -.6em;
   color: var(--itchio_bg_color)
+}
+.custom-prevcont > span:before {
+  content:"\1F878 "
 }
 
 .custom-prevhead {
-  position: absolute;
+/*   position: absolute; */
+  position: sticky;
   top:0;
+  margin-top: -2.8em;
+  
   width: 100%;
   height: 2.8em;
 /*   background: var(--itchio_border_color); */
@@ -184,16 +198,21 @@
 }
 
 .custom-preview {
-  display: flex;
-  flex-wrap: wrap;
   justify-content: center;
   background: var(--b2);
 /*   padding: 2em 0; */
   padding: .2em;
+  padding-top: 1em;
   border: 3px dashed  var(--itchio_text_color);
   border-top: 0;
 /*   outline: 2px dashed #fff4; */
   color: var(--t);
+  display: grid;
+  grid-template-columns:
+      1fr 1fr 2fr
+    ;
+/*   height: 90%; */
+  
 }
 .custom-preview a {
   color: var(--l);
@@ -210,12 +229,8 @@
 .custom-preview > div > h4 + * {
   margin-top: 0;
 }
-
-.custom-preview {
-  display: grid;
-  grid-template-columns:
-      1fr 1fr 2fr
-    ;
+.custom-preview > div:nth-child(4) {
+  grid-column: 1/3
 }
 .custom-preview > div:last-child{
   text-align: center;
@@ -223,19 +238,16 @@
   opacity: .6;
   grid-column: 1/4;
 }
-.custom-preview > div:nth-child(4) {
-  grid-column: 1/3
-}
 
 
 .custom-prevctrl {
   position: sticky;
-  top: 0;
+  top: .4em;
   display: inline-block;
   background: red;
   height: 28px;
   width: 28px;
-  margin: .2em .5em;
+  margin: -.4em .5em;
   border-radius: 6px;
   z-index: 3;
   box-shadow: 0 0 6px #000a;
@@ -281,6 +293,36 @@
   color: var(--l);
 }
 
+
+.more_information_toggle {
+  max-width: 400px !important;
+  margin: auto !important;
+}
+#download{
+  border-bottom: 2px dashed #fff6;
+}
+#download,
+#download + .buy_row,
+.buy_row + .uploads {
+/*   background: #fff1; */
+  background: var(--itchio_bg2_sub);
+  padding: .5em 1rem;
+  margin: 0 auto;
+  max-width: 400px;
+}
+#download + .buy_row {
+  padding-top: 1em;
+}
+.buy_row + .uploads > p {margin: 0}
+
+#devlog{ text-align: center }
+#devlog li {
+/*   justify-content: center */
+  max-width: 400px;
+/*   width: fit-content; */
+  margin: auto
+}
+
 #view_game_footer {
   background: var(--itchio_text_color);
   color:var(--itchio_bg_color);
@@ -290,6 +332,30 @@
 }
 
 
+@container prevcont (max-width: 750px) {
+  .custom-preview {
+    grid-template-columns: auto auto;
+  }
+  .custom-preview > div:nth-child(3),
+  .custom-preview > div:nth-child(4) {
+  grid-column: 1/3;
+  }
+  
+.custom-preview > div:last-child{
+  grid-column: unset;
+}
+}
+
+@container prevcont (max-width: 456px) {
+  .custom-preview {
+    grid-template-columns: auto;
+  }
+  .custom-preview > div:nth-child(3),
+  .custom-preview > div:nth-child(4) {
+  grid-column: unset;
+  }
+  
+}
 
 @media (max-width: 590px){
   .custom-ft {
