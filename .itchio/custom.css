@@ -93,11 +93,20 @@
   margin-bottom: 1.5em;
 }
 
+#header img{
+  object-fit: cover;
+/*   width: 100%; */
+  height: 300px;
+}
+
 .formatted_description > div > div.text-center{
   font-family: 'Ubuntu';
   color: var(--l);
   font-size: 1.7em;
   margin: .7em 0;
+}
+.formatted_description > div > div.text-center > span {
+  display: inline-block
 }
 .formatted_description > div > div.text-center + p {
   max-width: 24em;
@@ -234,7 +243,7 @@
     ;
 }
 .custom-prevctrl:hover {
-  outline: 2px solid #fff;
+/*   outline: 2px solid #fff; */
   transform: translateY(.5em)
 }
 
@@ -279,6 +288,9 @@
 .more_information_toggle {
   max-width: 400px;
   margin: auto !important;
+}
+.more_information_toggle > .toggle_row{
+  margin-left: 1em;
 }
 #download{
   border-bottom: 2px dashed #fff6;
@@ -491,5 +503,3 @@ p .custom-lb, p .custom-tag {
   text-decoration: none;
 }
 /***** SPOILER - END *****/
-
-
