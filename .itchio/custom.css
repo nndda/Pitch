@@ -286,16 +286,16 @@
   --l: #f16f19;
   --br: #694957;
   --btn: #f16f19;
-  --btn_f: #ffffff;
+  --btn_f: #fff;
   --btn_s: #dc5a03;
 }
 
 .custom-prevctrl:nth-child(2){
-  background: linear-gradient( 135deg, #d2e3e5 50%, #135a60 50%);
+  background: linear-gradient( 135deg, #e5e5e5 50%, #315993 50%);
 }
 .custom-prevctrl:nth-child(2):hover ~ .custom-preview{
   font-family: 'Indie Flower', cursive;
-  --b: #000000;
+/*  --b: #000000;
   --b2: #ebfcfe;
   --b2s: #d2e3e5;
   --t: #135a60;
@@ -303,7 +303,16 @@
   --br: #aaeaf1;
   --btn: #445c9e;
   --btn_f: #ffffff;
-  --btn_s: #5c74b6;
+  --btn_s: #5c74b6;*/
+  --b: #e5e5e5;
+  --b2: #e5e5e5;
+  --b2s: #d5d5d5;
+  --t: #07244e;
+  --l: #315993;
+  --br: #c6c6c6;
+  --btn: #739dd9;
+  --btn_f: #fff;
+  --btn_s: #5c86c2;
 }
 
 .custom-preview .custom-crdt > div > a {
@@ -343,15 +352,6 @@
   flex-grow: 1;
   text-align: left;
 }
-
-/* #view_game_footer {
-  background: var(--itchio_text_color);
-  color:var(--itchio_bg_color);
-}
-#view_game_footer svg {
-  fill: var(--itchio_bg_color) !important;
-} */
-
 
 @container prevcont (max-width: 750px) {
   .custom-preview {
@@ -468,17 +468,19 @@
 .custom-crdt > div:nth-child(odd) {
   text-align: right;
   font-weight: 700;
-  opacity: .7;
 }
 
-.custom-crdt > div > a {
+/* .custom-crdt > div > * {
   display: inline-block;
-}
+} */
 
-.custom-crdt div > a:not(:last-child):after {
-  position: absolute;
+/* .custom-crdt div > *:not(:first-child, .custom-lb, .custom-tag) {
+  margin-left: 1em;
+} */
+
+.custom-crdt div > *:not(:last-child, .custom-lb, .custom-tag, kbd):after {
   content: ",";
-  margin-right: 1em;
+  margin-right: .6em;
   color: var(--t);
 }
 /***** CREDITS - END *****/
@@ -509,7 +511,7 @@
   display: inline-block;
 }
 
-p .custom-lb {
+p .custom-lb, p .custom-tag {
   margin: 0 .15em;
 }
 
@@ -539,7 +541,8 @@ p .custom-lb {
 
 /***** SPOILER - START *****/
 .custom-hd:not(:hover) {
-  background: currentColor;
+  color: #0000;
+  background: var(--t);
 }
 /***** SPOILER - END *****/
 
