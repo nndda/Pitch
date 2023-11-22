@@ -1,5 +1,3 @@
-/*@import url('https://fonts.googleapis.com/css2?family=Lora&family=Quicksand&display=swap');*/
-/*@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');*/
 @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Lora&display=swap');
 
 #wrapper {
@@ -16,6 +14,8 @@
 
 .custom-docslnk {
   display: block;
+  margin: auto;
+  width: fit-content;
 }
 .custom-docslnk:after{
   content: "  \1F87A";
@@ -34,18 +34,9 @@
   text-decoration: 4px underline dashed var(--l)
 }
 
-#wrapper blockquote {
-  font-style: normal;
-  border-color: var(--l);
-}
-#wrapper blockquote > p > :first-child {
-  color: var(--l);
-  display: block;
-}
-
-.game_devlog_post_page {
-  background: #18181b;
-}
+/*.game_devlog_post_page {
+  background: var(--b);
+}*/
 
 .game_devlog_post_page h1, .game_devlog_post_page h2{
   color: var(--l);
@@ -58,6 +49,11 @@
   font-size: 95%;
   background: var(--b2s);
   border-radius: 4px;
+}
+
+.game_devlog_post_page .split_columns{
+  max-width: 980px;
+  margin: auto;
 }
 
 .responsive #inner_column {
@@ -119,8 +115,8 @@
   width: 6ch !important;
   text-align: center;
   animation: p 2s linear infinite;
-  transform: rotate(4.5deg);
-  color: var(--itchio_text_color);
+  transform: rotate(4deg);
+  color: var(--t);
   font-weight: bold;
   margin:0 1ch;
 }@keyframes p {
@@ -131,7 +127,7 @@
 }
 
 
-.inner_column > .view_game_page {
+.inner_column > .view_game_page, .game_devlog_post_page {
   border-top: 2px solid #eaeaea;
 }
 .right_col.column{
@@ -166,11 +162,11 @@
 .custom-prevctrl:nth-child(2):after {
   position: absolute;
   white-space: nowrap;
-  content:"\1F878 try it";
+  content:"\1F878  try it!";
   top: .1em;
   left: 2.5em;
   font-weight: bold;
-  color: var(--itchio_bg_color)
+  color: var(--b)
 }
 
 .custom-prevhead {
@@ -180,9 +176,9 @@
   
   width: 100%;
   height: 2.8em;
-  background: var(--itchio_text_color);
+  background: var(--t);
   box-shadow: 0 0 6px #000a;
-  border-top: 3px solid var(--itchio_link_color);
+  border-top: 3px solid var(--l);
 }
 
 .custom-preview {
@@ -190,7 +186,7 @@
   background: var(--b2);
 /*   padding: .2em; */
   padding-top: 1.5em;
-  border: 3px dashed  var(--itchio_text_color);
+  border: 3px dashed var(--t);
 /*   border-top: 0; */
   color: var(--t);
   display: grid;
@@ -200,6 +196,9 @@
 }
 .custom-preview a {
   color: var(--l);
+}
+.custom-preview h3 {
+  font-family: var(--ff);
 }
 .custom-preview > div {
   margin: .5em;
@@ -211,9 +210,15 @@
 }
 .custom-preview > div > h4{
   border-bottom: 1px solid var(--br);
+  opacity: .3;
 }
-.custom-preview > div:nth-child(4) {
-  grid-column: 1/3
+.custom-preview > div:hover > h4 {
+  opacity: 1;
+}
+.custom-preview > div:nth-child(4),
+.custom-preview > div:nth-child(6)
+{
+  grid-column: 1/3;
 }
 .custom-preview > div:last-child {
   box-shadow: none;
@@ -231,7 +236,6 @@
   position: sticky;
   top: .6em;
   display: inline-block;
-  background: red;
   height: 28px;
   width: 28px;
   margin: -.6em .5em;
@@ -243,7 +247,6 @@
     ;
 }
 .custom-prevctrl:hover {
-/*   outline: 2px solid #fff; */
   transform: translateY(.5em)
 }
 
@@ -252,7 +255,7 @@
   background: linear-gradient( 135deg, #f16f19 48%, #f8fac6 52%);
 }
 .custom-prevctrl:nth-child(1):hover ~ .custom-preview{
-  font-family: 'Lora', serif;
+  --ff: 'Lora', serif;
   --b: #e3e3e3;
   --b2: #3f2832;
   --b2s: #533c46;
@@ -262,35 +265,29 @@
   --btn: #f16f19;
   --btn_f: #fff;
   --btn_s: #dc5a03;
+  font-family: var(--ff);
 }
 
 .custom-prevctrl:nth-child(2){
-  background: linear-gradient( 135deg, #e5e5e5 48%, #315993 52%);
+  background: linear-gradient( 135deg, #e4fbfd 48%, #09969c 52%);
 }
 .custom-prevctrl:nth-child(2):hover ~ .custom-preview{
-  font-family: 'Indie Flower', cursive;
-  --b: #e5e5e5;
-  --b2: #e5e5e5;
-  --b2s: #d5d5d5;
-  --t: #07244e;
-  --l: #315993;
-  --br: #c6c6c6;
-  --btn: #739dd9;
-  --btn_f: #fff;
-  --btn_s: #5c86c2;
+  --ff: 'Indie Flower', cursive;
+  --b: #f7fbfa;
+  --b2: #e4fbfd;
+  --b2s: #cbe2e4;
+  --t: #5a667e;
+  --l: #09969c;
+  --br: #a5e8ee;
+  --btn: #91f4f8;
+  --btn_f: #1d3031;
+  --btn_s: #0000;
+  font-family: var(--ff);
 }
-
-.custom-preview .custom-crdt > div > a {
-  color: var(--l);
-}
-
 
 .more_information_toggle {
-  max-width: 400px;
+  max-width: 450px;
   margin: auto !important;
-}
-.more_information_toggle > .toggle_row{
-  margin-left: 1em;
 }
 #download{
   border-bottom: 2px dashed #fff6;
@@ -301,16 +298,17 @@
   background: var(--itchio_bg2_sub);
   padding: .5em 1rem;
   margin: 0 auto;
-  max-width: 400px;
+  max-width: 450px;
 }
 #download + .buy_row {
   padding-top: 1em;
 }
-.buy_row + .uploads > p {margin: 0}
+.uploads > p {margin: 0}
 
-#devlog{ text-align: center }
-#devlog li {
-  max-width: 400px;
+#devlog, .game_comments_widget > h2 { text-align: center }
+#devlog li,
+.community_post_form_widget {
+  max-width: 600px;
   margin: auto;
 }
 #devlog li a {
@@ -318,27 +316,36 @@
   text-align: left;
 }
 
+
 @container prevcont (max-width: 750px) {
   .custom-preview {
     grid-template-columns: auto auto;
   }
-  .custom-preview > div:nth-child(3),
+/*   .custom-preview > div:nth-child(3),
+  .custom-preview > div:nth-child(5),
+  .custom-preview > div:nth-child(6),
   .custom-preview > div:nth-child(4) {
   grid-column: 1/3;
-  }
+  } */
+  .custom-preview > div:not(:nth-child(1),:nth-child(2)) {
+  grid-column: 1/3;
+/*   }
   
-.custom-preview > div:last-child{
-  grid-column: unset;
+.custom-preview > div:last-child{ */
+/*   grid-column: unset; */
+  grid-column: 1/3;
 }
 }
 
 @container prevcont (max-width: 456px) {
+/*   .custom-preview {
+    filter: blur(20px);
+  } */
   .custom-preview {
     grid-template-columns: auto;
   }
-  .custom-preview > div:nth-child(3),
-  .custom-preview > div:nth-child(4) {
-  grid-column: unset;
+  .custom-preview > div {
+  grid-column: 1/3;
   }
   
 }
@@ -366,7 +373,6 @@
   border-radius: 3px;
   margin-top: 1.5em;
   margin-bottom: 1.5em;
-  overflow: hidden;
 }
 
 .custom-accrd details {
@@ -374,13 +380,10 @@
   padding: .75em 1.2em;
 }
 
+/* Add border inbetween accordion item */
 .custom-accrd details:not(:last-child) {
   border-bottom: 1px solid var(--t);
   border-color: var(--l);
-}
-
-.custom-accrd details[open] summary:after {
-  content: "\25BC";
 }
 
 .custom-accrd details[open] summary {
@@ -391,7 +394,7 @@
   font-size: 105%;
   cursor: pointer;
   color: var(--l);
-  display: flex;
+  display: flex; /* Remove the default marker */
 }
 
 .custom-accrd summary:hover {
@@ -399,12 +402,18 @@
   text-decoration: underline;
 }
 
+/* Change the default marker */
 .custom-accrd summary::after {
   text-align: right;
-  flex-grow: 1;
+  flex-grow: 1; /* Move the new marker to the most right */
   content: "\25BA";
 }
 
+.custom-accrd details[open] summary:after {
+  content: "\25BC";
+}
+
+/* Utility classes */
 .custom-accrd.custom-left {
   margin: 0;
 }
@@ -413,59 +422,93 @@
   margin: 0 0 0 auto;
 }
 
-.custom-accrd.custom-full_w {
+.custom-accrd.custom-full-w {
   max-width: 100%;
 }
 /***** ACCORDION - END *****/
 
 
 
+/***** ALERT BOX - START *****/
+blockquote.custom-warn {
+  font-style: normal; /* Remove the italic blockquote font-style */
+  border-color: var(--l);
+  padding: .05em 1em;
+  background: var(--b2s);
+  border-radius: 4px;
+}
+
+blockquote.custom-warn > p {
+  margin-top: 0;
+  margin-bottom: 1em !important; /* Override devlog paragraph margin */
+}
+
+blockquote.custom-warn > :first-child {
+  color: var(--l); /* Color the heading for alert box */
+}
+
+/* Add 'warning' exclamation mark symbol */
+/*blockquote.custom-warn > :first-child:before {
+  content: "\0026A0"; 
+  margin-right: .4em;
+}*/
+/***** ALERT BOX - END *****/
+
+
+
 /***** INFO PANEL - START *****/
-.custom-info-pn {
+/* Set up 2 column layout */
+.custom-info-ls {
   display: grid;
   grid-template-columns: 25% 60%;
 }
 
-.custom-info-pn > div {
+.custom-info-ls > div {
   margin: .2em 8px;
 }
 
-.custom-info-pn > div:nth-child(odd) {
+.custom-info-ls > div:nth-child(odd) {
   text-align: right;
   font-weight: 700;
 }
 
-.custom-info-pn div > *:not(:last-child, .custom-lb, .custom-tag, kbd):after {
+.custom-info-ls div:nth-child(even) > a:not(:last-child, .custom-lb, .custom-tag, kbd):after {
+  color: var(--t);
+  /* Add commas for every hyperlink elements */
   content: ",";
   margin-right: .2em;
-  color: var(--t);
 }
 /***** INFO PANEL - END *****/
 
 
 
-/***** INPUTS - START *****/
+/***** INPUT - START *****/
 #wrapper kbd {
   font-size: .9em;
   background: var(--br);
   border-radius: 4px;
-  border-bottom: 2px solid var(--b2s);
+  border-bottom: 3px solid var(--b2s);
   padding: .2ch .7ch;
 }
-/***** INPUTS - END *****/
+/***** INPUT - END *****/
 
 
 
-/***** LABELS - START *****/
+/***** LABEL - START *****/
 .custom-lb, .custom-tag {
   background: var(--btn);
-  color: var(--btn_f) !important;
-  text-decoration: none;
+  color: var(--btn_f);
+  text-decoration: none; /* Remove underline for hyperlinks */
   padding: 0 1ch;
   margin: .15em;
   font-weight: 700;
   border-radius: 4px;
   display: inline-block;
+}
+
+/* Override hyperlink font color */
+a.custom-lb, a.custom-tag {
+  color: var(--btn_f);
 }
 
 p .custom-lb, p .custom-tag {
@@ -474,32 +517,35 @@ p .custom-lb, p .custom-tag {
 
 .custom-tag {
   font-family: Lato, sans-serif;
+  font-size: 16px;
   margin-right: 1em;
 }
 
+/* Add the dot */
 .custom-tag:before {
   content: "\2022";
   margin-right: .5ch;
   color: var(--b2s);
 }
 
+/* Add the triangle */
 .custom-tag:after {
-  content: "";
-  position: absolute;
-  margin-left: .75ch ;
-  border-top: 1ch solid #fff0;
-  border-bottom: 1.2ch solid #fff0;
-  border-left: 1.2ch solid var(--btn);
-  border-radius: 4px;
+  content:"";
+  position:absolute;
+  margin-left:.5ch;
+  margin-top: -.15em;
+  border-top:.8rem solid #fff0;
+  border-bottom:.8rem solid #fff0;
+  border-left:1em solid var(--btn);
+  border-radius:9px;
 }
-/***** LABELS - END *****/
+/***** LABEL - END *****/
 
 
 
 /***** SPOILER - START *****/
 .custom-hd:not(:hover) {
-  color: #0000;
+  color: #0000; /* Make the text transparent */
   background: var(--t);
-  text-decoration: none;
 }
 /***** SPOILER - END *****/
