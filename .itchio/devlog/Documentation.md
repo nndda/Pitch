@@ -36,7 +36,7 @@ Go to your project's edit page. Edit the content/description in HTML mode. And f
 
 <blockquote class="custom-warn">
   <h3>&#128712; Best practice:</h3>
-  <p>Test your project's pages against multiple screen sizes, and in multiple browsers, including the <a target="_blank" href="https://itch.io/app">itch app</a> before publishing it.</p>
+  <p>Always back up and save your html codes to a file, everytime you make a change.<br> Test your project's pages against multiple screen sizes, and in multiple browsers, including the <a target="_blank" href="https://itch.io/app">itch app</a> before publishing it.</p>
 </blockquote>
 
 <br>
@@ -214,7 +214,7 @@ Since its an inline element, you can also put Label <i class="custom-lb">inbetwe
 
 If you used multiple Label, its best practice to wrap them inside a `div`. To align them, and add itch.io's built-in class for aligning text: `text-center` or `text-right` in their `div` container.
 
-The 'tag' variant use itch's default font 'Lato' and has a constant `font-size` of 16px to avoid messing up the style. It may still display a bit offset.
+The 'tag' variant use itch's default font 'Lato' and has a constant `font-size` of 16px to avoid messing up the style. It may still display a bit of offset.
 
 <br>
 
