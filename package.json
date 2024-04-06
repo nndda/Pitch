@@ -1,0 +1,16 @@
+{
+  "name": "pitch-css",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A small collection of CSS components and tweaks designed specifically for itch.io project pages.",
+  "main": "build.js",
+  "scripts": {
+    "build": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "nnda",
+  "license": "MIT",
+  "dependencies": {
+    "autoprefixer": "^10.4.19",
+    "postcss": "^8.4.38"
+  }
+}
