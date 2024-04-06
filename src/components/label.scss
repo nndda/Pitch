@@ -1,0 +1,42 @@
+.custom-lb, .custom-tag {
+  background: var(--btn);
+  color: var(--btn_f);
+  text-decoration: none; /* Remove underline for hyperlinks */
+  padding: 0 1ch;
+  margin: .15em;
+  font-weight: 700;
+  border-radius: 4px;
+  display: inline-block;
+}
+
+/* Override hyperlink font color */
+a {
+  &.custom-lb, &.custom-tag {
+    color: var(--btn_f);
+  }
+}
+
+.custom-tag {
+  font-family: Lato, sans-serif;
+  font-size: 16px;
+  margin-right: 1em;
+
+  /* Add the dot */
+  &::before {
+    content: "\\2022";
+    margin-right: .5ch;
+    color: var(--b2s);
+  }
+
+  /* Add the triangle */
+  &::after {
+    content:"";
+    position:absolute;
+    margin-left:.5ch;
+    margin-top: -.15em;
+    border-top:.8rem solid #fff0;
+    border-bottom:.8rem solid #fff0;
+    border-left:1em solid var(--btn);
+    border-radius:9px;
+  }
+}

@@ -1,0 +1,16 @@
+blockquote.custom-warn {
+  font-style: normal; /* Remove the italic blockquote font-style */
+  border-color: var(--l);
+  padding: .05em 1em;
+  background: var(--b2s);
+  border-radius: 4px;
+
+  & > p {
+    margin-top: 0;
+    margin-bottom: 1em !important; /* Override devlog paragraph margin */
+  }
+
+  & > :first-child {
+    color: var(--l); /* Color the heading for alert box */
+  }
+}

@@ -1,0 +1,60 @@
+.custom-accrd {  
+  max-width: 553px;
+  margin: auto;
+  border: 1px solid var(--t);
+  border-color: var(--l);
+  border-radius: 3px;
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+
+  & details {
+    background: var(--b2s);
+    padding: .75em 1.2em;
+
+    &[open] summary {
+      margin-bottom: .25em;
+
+      &:after {
+        content: ("\\25BC");
+      }
+    }
+
+    /* Add border inbetween accordion item */
+    &:not(:last-child) {
+      border-bottom: 1px solid var(--t);
+      border-color: var(--l);
+    }
+  }
+
+  & summary {
+    font-size: 105%;
+    cursor: pointer;
+    color: var(--l);
+    display: flex; /* Remove the default marker */
+
+    &:hover {
+      color: var(--t);
+      text-decoration: underline;
+    }
+
+    /* Change the default marker */
+    &::after {
+      text-align: right;
+      flex-grow: 1; /* Move the new marker to the most right */
+      content: "\\25BA";
+    }
+  }
+
+  /* Utility classes */
+  &.custom-left {
+    margin: 0;
+  }
+
+  &.custom-right {
+    margin: 0 0 0 auto;
+  }
+
+  &.custom-full-w {
+    max-width: 100%;
+  }
+}
