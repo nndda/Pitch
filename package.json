@@ -5,12 +5,15 @@
   "description": "A small collection of CSS components and tweaks designed specifically for itch.io project pages.",
   "main": "build.js",
   "scripts": {
-    "build": "echo \"Error: no test specified\" && exit 1"
+    "build": "node build.js",
+    "build-page": "node .itchio/build.js"
   },
   "author": "nnda",
   "license": "MIT",
-  "dependencies": {
+  "devDependencies": {
     "autoprefixer": "^10.4.19",
-    "postcss": "^8.4.38"
+    "clean-css": "^5.3.3",
+    "postcss": "^8.4.38",
+    "sass": "^1.74.1"
   }
 }
