@@ -5,15 +5,35 @@
   "description": "A small collection of CSS components and tweaks designed specifically for itch.io project pages.",
   "main": "build.js",
   "scripts": {
-    "build": "node build.js",
-    "build-page": "node .itchio/build.js"
+    "build-css": "node build.js",
+    "build-page": "node .itchio/build.js",
+    "start": "webpack-dev-server --config webpack.dev.js --port 8080",
+    "build": "webpack --config webpack.config.js"
   },
   "author": "nnda",
   "license": "MIT",
-  "devDependencies": {
+  "dependencies": {
     "autoprefixer": "^10.4.19",
     "clean-css": "^5.3.3",
+    "material-symbols": "^0.17.1",
+    "normalize.css": "^8.0.1",
     "postcss": "^8.4.38",
-    "sass": "^1.74.1"
+    "sass": "^1.74.1",
+    "spinkit": "^2.0.1"
+  },
+  "devDependencies": {
+    "copy-webpack-plugin": "^12.0.2",
+    "css-loader": "^7.0.0",
+    "css-minimizer-webpack-plugin": "^6.0.0",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.6.0",
+    "mini-css-extract-plugin": "^2.8.1",
+    "style-loader": "^3.3.4",
+    "terser-webpack-plugin": "^5.3.10",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.4.4",
+    "webpack": "^5.91.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.0.4"
   }
 }
