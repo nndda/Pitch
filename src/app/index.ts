@@ -1,3 +1,4 @@
+import "./styles/main.scss";
 import { components } from "./scripts/components";
 import { compileComponents } from "./scripts/compile";
 
@@ -21,8 +22,8 @@ components.forEach(comp => {
   compLabel.setAttribute("for", compID);
   compLabel.setAttribute("class", "component-toggle");
   compLabel.textContent = compName;
-  compLabel.appendChild(compInput);
 
+  d.getElementById("components-toggles").appendChild(compInput);
   d.getElementById("components-toggles").appendChild(compLabel);
 
   compInputs.push(compInput);
@@ -34,7 +35,9 @@ d.getElementById("compile-components-btn").addEventListener("click", () => {
     if (inp.checked)
       selectedComps.push(inp.getAttribute("data-comp"));
   });
-  console.log(
-    compileComponents(selectedComps)
-  );
+  compileComponents(selectedComps);
 });
+
+function getCompScope(): string {
+  return (<HTMLInputElement>d.querySelector("input[name='']:checked")).value
+}

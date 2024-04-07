@@ -1,0 +1,48 @@
+@use "variables" as *;
+
+button {
+  color: $text-col;
+  background: rgba($accent, 50%);
+  padding: .2em .8em;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: transform .2s ease;
+
+  &:hover {
+    background: rgba($accent, 70%);
+    transform: translateY(-.15em);
+    // outline: 1px solid $border-col;
+  }
+}
+
+input[type="radio"] {
+  display: none;
+  // transform: translate(20em);
+  & + label {
+    display: inline-block;
+    margin: .05em .5em;
+    cursor: pointer;
+    padding: .5em;
+    padding-bottom: .6em;
+
+    & .unchecked,
+    & .checked {
+      font-size: .85em;
+      margin-right: .5em;
+    }
+  }
+
+  &:checked {
+    & + label {
+      border-bottom: 3px solid $accent;
+      color: $accent;
+
+      & > .unchecked {
+        display: none;
+      }
+    }
+  }
+  &:not(:checked) + label > .checked {
+    display: none;
+  }
+}

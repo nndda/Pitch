@@ -1,0 +1,63 @@
+@use "reset";
+@use "input";
+@use "variables" as *;
+@use "modules" as *;
+
+html {
+  color-scheme: only dark !important;
+}
+
+body {
+  background: $background;
+  font-family: "Lato";
+}
+
+.main-app {
+  display: flex;
+  flex-direction: column;
+  max-width: 800px;
+  margin: auto;
+  margin-top: 1em;
+
+  & .components-selector-container {
+    // @include border-light;
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+
+    // max-width: 400px;
+    min-height: 200px;
+
+    & #components-toggles {
+      padding: .6em;
+      max-width: 400px;
+
+      & > input {
+        display: none;
+      }
+
+      & > input:checked + .component-toggle {
+        color: $background;
+        background: rgba($text-col, 90%);
+      }
+
+      & > .component-toggle {
+        @include border-light;
+        display: inline-block;
+        margin: .1em .25em;
+        padding: .2em .4em;
+        text-transform: capitalize;
+        cursor: pointer;
+        border-radius: 3px;
+
+        &:hover {
+          background: rgba($text-col, 20%);
+        }
+      }
+    }
+  }
+}
+
+#compile-components-btn > span {
+  font-size: .9em;
+}
