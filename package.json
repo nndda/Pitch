@@ -5,6 +5,7 @@
   "description": "A small collection of CSS components and tweaks designed specifically for itch.io project pages.",
   "main": "build.js",
   "scripts": {
+    "prestart": "tsc build.ts && node build.js",
     "build-css": "node build.js",
     "build-page": "node .itchio/build.js",
     "start": "webpack-dev-server --config webpack.dev.js --port 8080",
@@ -13,6 +14,8 @@
   "author": "nnda",
   "license": "MIT",
   "dependencies": {
+    "@fontsource/lato": "^5.0.20",
+    "@fontsource/ubuntu": "^5.0.12",
     "autoprefixer": "^10.4.19",
     "clean-css": "^5.3.3",
     "material-symbols": "^0.17.1",
@@ -28,6 +31,8 @@
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.6.0",
     "mini-css-extract-plugin": "^2.8.1",
+    "node-polyfill-webpack-plugin": "^3.0.0",
+    "sass-loader": "^14.1.1",
     "style-loader": "^3.3.4",
     "terser-webpack-plugin": "^5.3.10",
     "ts-loader": "^9.5.1",
