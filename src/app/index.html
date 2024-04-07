@@ -1,12 +1,76 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Pitch.CSS</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pitch.CSS</title>
 </head>
 <body>
-    <div id="components-toggles"></div>
-    <button id="compile-components-btn">Compile components</button>
+  <div class="main-app">
+    <fieldset class="scope-selector-container">
+      <input
+        type="radio"
+        id="scope-project-page"
+        name="comp-scope"
+        value="project"
+        checked>
+      <label for="scope-project-page">
+        <span class="material-symbols-outlined unchecked">
+          radio_button_unchecked
+        </span>
+        <span class="material-symbols-outlined checked">
+          radio_button_checked
+        </span>
+        Project page
+      </label>
+
+      <input
+        type="radio"
+        id="scope-profile-page"
+        name="comp-scope"
+        value="profile">
+      <label for="scope-profile-page">
+        <span class="material-symbols-outlined unchecked">
+          radio_button_unchecked
+        </span>
+        <span class="material-symbols-outlined checked">
+          radio_button_checked
+        </span>
+        Profile page
+      </label>
+
+      <input
+        type="radio"
+        id="scope-jam-page"
+        name="comp-scope"
+        value="jam">
+      <label for="scope-jam-page">
+        <span class="material-symbols-outlined unchecked">
+          radio_button_unchecked
+        </span>
+        <span class="material-symbols-outlined checked">
+          radio_button_checked
+        </span>
+        Project page
+      </label>
+    </fieldset>
+    <div class="components-selector-container">
+      <div>
+        <fieldset id="components-toggles"></fieldset>
+        <div class="copy-btn-container">
+          <button id="compile-components-btn">
+            <span class="material-symbols-outlined">
+              content_copy
+            </span>
+            Copy CSS codes
+          </button>
+          <span id="copy-notification"></span>
+        </div>
+      </div>
+      <div class="components-controls">
+
+      </div>
+    </div>
+  </div>
 </body>
 </html>
