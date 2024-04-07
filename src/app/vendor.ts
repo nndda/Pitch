@@ -5,5 +5,5 @@ import "normalize.css";
 import "material-symbols";
 
 // Fonts
-// import "@fontsource/lato";
-// import "@fontsource/ubuntu";
+import "@fontsource/lato";
+import "@fontsource/ubuntu";
