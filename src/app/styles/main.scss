@@ -12,52 +12,67 @@ body {
   font-family: "Lato";
 }
 
+.title {
+  font-size: 1.6em;
+  font-weight: lighter;
+  letter-spacing: .1ch;
+}
+
 .main-app {
   display: flex;
   flex-direction: column;
-  max-width: 800px;
+  max-width: 1100px;
   margin: auto;
   margin-top: 1em;
 
-  & .components-selector-container {
+  & .components-overview {
     // @include border-light;
     display: flex;
     flex-direction: row;
     flex-grow: 1;
 
     // max-width: 400px;
-    min-height: 200px;
+    min-height: 300px;
 
-    & #components-toggles {
-      padding: .6em;
-      max-width: 400px;
+    & > .components-selector-container {
+      border: 1px solid;
+      & #components-toggles {
+        padding: .6em;
+        max-width: 400px;
 
-      & > input {
-        display: none;
-      }
+        & > input {
+          display: none;
+        }
 
-      & > input:checked + .component-toggle {
-        color: $background;
-        background: rgba($text-col, 90%);
-      }
+        & > input:checked + .component-toggle {
+          color: $background;
+          background: rgba($text-col, 90%);
+        }
 
-      & > .component-toggle {
-        @include border-light;
-        display: inline-block;
-        margin: .1em .25em;
-        padding: .2em .4em;
-        text-transform: capitalize;
-        cursor: pointer;
-        border-radius: 3px;
+        & > .component-toggle {
+          @include border-light;
+          display: inline-block;
+          margin: .1em .25em;
+          padding: .2em .4em;
+          text-transform: capitalize;
+          cursor: pointer;
+          border-radius: 3px;
 
-        &:hover {
-          background: rgba($text-col, 20%);
+          &:hover {
+            background: rgba($text-col, 20%);
+          }
         }
       }
     }
-  }
-}
 
-#compile-components-btn > span {
-  font-size: .9em;
+    & > .component-info {
+      border: 1px solid;
+      flex-grow: 1;
+
+      & > div {
+        padding: 1.5em;
+        padding-top: 0;
+      }
+    }
+  }
 }
