@@ -7,7 +7,8 @@
 </head>
 <body>
   <div class="main-app">
-    <fieldset class="scope-selector-container">
+    <h1 class="title">Pitch.CSS Component Selector</h1>
+    <fieldset class="scope-selector-container hidden">
       <input
         type="radio"
         id="scope-project-page"
@@ -54,21 +55,49 @@
         Project page
       </label>
     </fieldset>
-    <div class="components-selector-container">
-      <div>
+    <div class="components-overview">
+      <div class="components-selector-container">
+
+        <fieldset>
+          <button id="btn-select-all" class="light">
+            <span class="btn-icon material-symbols-outlined">
+              grid_view
+            </span>
+            <span class="btn-text">
+              Select all
+            </span>
+          </button>
+          &nbsp;
+          <button id="btn-select-none" class="light">
+            <span class="btn-icon material-symbols-outlined">
+              square
+            </span>
+            <span class="btn-text">
+              Select none
+            </span>
+          </button>
+        </fieldset>
+
         <fieldset id="components-toggles"></fieldset>
         <div class="copy-btn-container">
           <button id="compile-components-btn">
-            <span class="material-symbols-outlined">
+            <span class="btn-icon material-symbols-outlined">
               content_copy
             </span>
-            Copy CSS codes
+            <span class="btn-text">
+              Copy CSS codes
+            </span>
           </button>
           <span id="copy-notification"></span>
         </div>
       </div>
-      <div class="components-controls">
-
+      <div class="component-info">
+        <div>
+          <h2 id="component-title">Accordion</h2>
+          <p id="component-description">
+            Turn walls of texts into list of collapsable contents. It's basically just a styled list of <code>&lt;details&gt;</code> elements.
+          </p>
+        </div>
       </div>
     </div>
   </div>
