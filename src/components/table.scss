@@ -1,0 +1,13 @@
+:not(.game_info_panel_widget) > table {
+  width: 100%;
+
+  & td, & th {
+    border: none !important;
+    border-bottom: 1px solid var(--t) !important;
+    padding: .6em 1em !important;
+  }
+
+  & th {
+    background: var(--b2s);
+  }
+}
