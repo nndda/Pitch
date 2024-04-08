@@ -11,9 +11,9 @@
     font-weight: 700;
   }
 
-  & > dd > a:not(:last-child, .custom-lb, .custom-tag, kbd):after {
+  /* Add commas for every hyperlink elements */
+  & > dd > a:not( :last-child, .custom-lb, .custom-tag, kbd ):after {
     color: var(--t);
-    /* Add commas for every hyperlink elements */
     content: ",";
     margin-right: .2em;
   }
