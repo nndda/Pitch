@@ -1,17 +1,45 @@
 @use "variables" as *;
 
 button {
+  display: inline-block;
   color: $text-col;
   background: rgba($accent, 50%);
   padding: .2em .8em;
   border-radius: 16px;
   cursor: pointer;
   transition: transform .2s ease;
+  // vertical-align: top;
 
-  &:hover {
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  &:not(:disabled):hover {
     background: rgba($accent, 70%);
     transform: translateY(-.15em);
     // outline: 1px solid $border-col;
+  }
+
+  &.light {
+    border-radius: 3px;
+    color: $text-col;
+    background: rgba($text-col, 10%);
+    border: 1px solid $border-col;
+  }
+
+  & > .btn-icon, & > .btn-text {
+    display: inline-block;
+    margin-top: -.5em;
+    vertical-align: middle;
+    vertical-align: -webkit-baseline-middle;
+  }
+
+  & > .btn-icon {
+    font-size: .9em;
+    margin-right: .5em;
+  }
+
+  & > .btn-text {
   }
 }
 
