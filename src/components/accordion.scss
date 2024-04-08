@@ -1,4 +1,4 @@
-.custom-accrd {  
+.custom-accrd {
   max-width: 553px;
   margin: auto;
   border: 1px solid var(--t);
@@ -42,6 +42,11 @@
       text-align: right;
       flex-grow: 1; /* Move the new marker to the most right */
       content: "\\25BA";
+    }
+
+    /* Remove the default marker on itch app */
+    &::-webkit-details-marker{
+      display: none;
     }
   }
 
