@@ -1,7 +1,9 @@
 export interface PitchComponentData {
   name: string,
-  variables: Array<string>,
-  css: string,
+  description: string,
+  variables?: Array<string>,
+  css?: string,
+  labels?: Array<string>,
 }
 
 export function getUsedVariables(css : string): Array<string> {
@@ -48,14 +50,38 @@ export function compileUsedVariables(vars : Array<string>): string {
   return css + "}"
 }
 
-export const components = [
-  "accordion",
-  "alert-box",
-  "description-list",
-  "input",
-  "label",
-  "spoiler",
-]
+export interface PitchComponentsLibrary {
+  [key: string]: {
+    desc: string,
+    labels?: Array<string>,
+  }
+}
+
+// export const components : Array<PitchComponentData> = [
+export const components : PitchComponentsLibrary = {
+  "accordion" : {
+    desc: "Turn walls of texts into list of collapsable contents. It's basically just a styled list of <details> elements.",
+    labels: [],
+  },
+  "admonition" : {
+    desc: "Inform the visitors about content warnings, additional informations, or a technical issues like the one used above in this documentation",
+  },
+  "description-list" : {
+    desc: "But since its just a 2 column table, it can be repurposed to anything that make use of that layout: credit section, key input guide for a game, etc.",
+  },
+  "input" : {
+    desc: "Represent the keyboard inputs, controls, or any buttons.",
+  },
+  "label" : {
+    desc: "Highlight genres, tags, tools, or jam. Can be applied to hyperlinks or plain text.",
+  },
+  "spoiler" : {
+    desc: "Hide any lines of text. Hover over it, to show the content. Can be applied to any inline element.",
+  },
+  "table" : {
+    desc: "",
+  },
+}
 // const comp = {
 //   "accordion",
 // }

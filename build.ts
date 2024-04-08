@@ -7,6 +7,7 @@ const autoprefixer = require("autoprefixer");
 
 import {
   components,
+  PitchComponentsLibrary,
   getUsedVariables,
   PitchComponentData,
 } from "./src/app/scripts/components";
@@ -47,11 +48,23 @@ fs.readdirSync(componentsPath).forEach((component: string) => {
     name: component.replace(".scss", ""),
     variables: getUsedVariables(cssStr),
     css: cssStr,
+    description: components[component].desc,
   });
 });
 
+let cssOut = "";
+for (const i in componentObjects) {
+  cssOut += componentObjects[i].css;
+}
+console.log("-".repeat(80), "\n", cssOut, "\n", "-".repeat(80));
+
 fs.writeFileSync(
   path.resolve(__dirname, "dist/app/" + "components.json"),
+  JSON.stringify(componentObjects)
+);
+// but why
+fs.writeFileSync(
+  path.resolve(__dirname, "dist/" + "components.json"),
   JSON.stringify(componentObjects)
 );
 
