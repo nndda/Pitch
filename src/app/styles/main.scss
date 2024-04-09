@@ -32,10 +32,13 @@ body {
     flex-grow: 1;
 
     // max-width: 400px;
-    min-height: 300px;
+    min-height: 400px;
 
     & > .components-selector-container {
-      border: 1px solid;
+      width: 300px;
+      padding: 1em .2em;
+      border: 1px solid $border-col;
+      
       & #components-toggles {
         padding: .6em;
         max-width: 400px;
@@ -52,8 +55,8 @@ body {
         & > .component-toggle {
           @include border-light;
           display: inline-block;
-          margin: .1em .25em;
-          padding: .2em .4em;
+          margin: .25em;
+          padding: .3em .5em;
           text-transform: capitalize;
           cursor: pointer;
           border-radius: 3px;
@@ -63,15 +66,48 @@ body {
           }
         }
       }
+
+      & > .copy-btn-container {
+        padding: 1em;
+
+        & > #copy-notification {
+          white-space: nowrap;
+          margin-left: .5em;
+        }
+
+        & > .pick-2-notif {
+          color: $accent;
+          opacity: .8;
+          margin-top: .5em;
+        }
+
+        & > #compile-components-btn {
+          &[disabled] {
+            opacity: .7;
+          }
+
+          &:not([disabled]) ~ .pick-2-notif {
+            display: none;
+          }
+        }
+      }
     }
 
     & > .component-info {
-      border: 1px solid;
+      border: 1px solid $border-col;
       flex-grow: 1;
 
       & > div {
         padding: 1.5em;
         padding-top: 0;
+
+        & > #component-title {
+          text-transform: capitalize;
+        }
+
+        & > #component-description {
+          max-width: 500px;
+        }
       }
     }
   }
