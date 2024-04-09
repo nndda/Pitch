@@ -8,11 +8,12 @@ const autoprefixer = require("autoprefixer");
 import {
   components,
   PitchComponentsLibrary,
+  PitchComponentsCollection,
   getUsedVariables,
   PitchComponentData,
 } from "./src/app/scripts/components";
 
-const componentsPath = path.resolve(__dirname, "src/components");
+const componentsPath : string = path.resolve(__dirname, "src/components");
 
 [
   "dist/components",
@@ -27,9 +28,14 @@ const componentsPath = path.resolve(__dirname, "src/components");
   );
 });
 
-let componentObjects : Array<PitchComponentData> = [];
+// let componentObjects : Array<PitchComponentData> = [];
+let componentObjects : PitchComponentsCollection = {};
 
 fs.readdirSync(componentsPath).forEach((component: string) => {
+  console.log(`Processing ${component}...`);
+
+  const compName = component.replace(".scss", "");
+
   let cssStr = compileComponentsCSS(
     sass.compileString(
       fs.readFileSync(
@@ -39,24 +45,38 @@ fs.readdirSync(componentsPath).forEach((component: string) => {
     ).css
   );
 
+  // console.log(`  ${components[compName]}`);
+
   fs.writeFileSync(
     path.resolve(__dirname, "dist/components/" + component.replace(".scss", ".css")),
     cssStr
   );
 
-  componentObjects.push({
-    name: component.replace(".scss", ""),
-    variables: getUsedVariables(cssStr),
+  // console.log(`  >${component}`);
+  // console.log(`   ${JSON.stringify(components[compName])}`);
+
+  componentObjects[compName] = {
+    name: compName,
     css: cssStr,
-    description: components[component].desc,
-  });
+  };
+  if (component !== "variables")
+    componentObjects[compName].sampleHTML = components[compName].sampleHTML;
+    componentObjects[compName].desc = components[compName].desc;
+    componentObjects[compName].variables = getUsedVariables(cssStr);
+
 });
 
 let cssOut = "";
 for (const i in componentObjects) {
   cssOut += componentObjects[i].css;
 }
-console.log("-".repeat(80), "\n", cssOut, "\n", "-".repeat(80));
+console.log(
+  "-".repeat(80),
+  "\n",
+  cssOut,
+  "\n",
+  "-".repeat(80)
+);
 
 fs.writeFileSync(
   path.resolve(__dirname, "dist/app/" + "components.json"),

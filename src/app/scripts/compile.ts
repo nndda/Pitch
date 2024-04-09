@@ -1,35 +1,35 @@
 import { copyComponentsCSS } from "./copy";
-import { PitchComponentData, compileUsedVariables } from "./components"
+import {
+  PitchComponentData,
+  PitchComponentsCollection,
+  compileUsedVariables,
+} from "./components"
 
-export function compileComponents(compList : string[]) {
-  fetch("./components.json")
-    .then( response => response.text())
-    .then( data => {
-      const compObj : Array<PitchComponentData> = JSON.parse(data);
-      let usedVars : Array<string> = [];
-      let css = "";
+export function compileComponents(
+  compList : string[],
+  compObj: PitchComponentsCollection
+) {
+  let usedVars : Array<string> = [];
+  let css = "";
 
-      compObj.forEach(comp => {
-        if (compList.includes(comp.name)) {
-          comp.variables.forEach(v => {
-            if (!usedVars.includes(v)) {
-              usedVars.push(v);
-            }
-          });
+  for (const comp in compObj) {
+    if (compList.includes(compObj[comp].name)) {
+      compObj[comp].variables.forEach(v => {
+        if (!usedVars.includes(v)) {
+          usedVars.push(v);
         }
       });
+    }
+  }
 
-      css += compileUsedVariables(usedVars);
+  console.log(usedVars);
+  css += compileUsedVariables(usedVars);
 
-      compObj.forEach(comp => {
-        if (compList.includes(comp.name)) {
-          css += comp.css;
-        }
-      });
+  for (const comp in compObj) {
+    if (compList.includes(compObj[comp].name)) {
+      css += compObj[comp].css;
+    }
+  }
 
-      copyComponentsCSS(css);
-
-    }).catch( err => {
-      console.log(err)
-    });
+  copyComponentsCSS(css);
 }
