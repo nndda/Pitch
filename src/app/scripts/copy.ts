@@ -1,4 +1,4 @@
-const copyNotif = document.getElementById("copy-notification");
+export const copyNotif = document.getElementById("copy-notification");
 
 export function copyComponentsCSS(css : string) {
   console.log(css);
