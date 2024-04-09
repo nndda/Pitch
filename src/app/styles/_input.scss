@@ -21,7 +21,8 @@ button {
   }
 
   &.light {
-    border-radius: 3px;
+    font-size: .9em;
+    border-radius: 16px;
     color: $text-col;
     background: rgba($text-col, 10%);
     border: 1px solid $border-col;
