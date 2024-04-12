@@ -19,18 +19,19 @@ const compileCompBtn = <HTMLInputElement>d.getElementById("compile-components-bt
 const compTitle = d.getElementById("component-title");
 const compDesc = d.getElementById("component-description");
 
+const compPreviewSelector = <HTMLSelectElement>d.getElementById("component-info-selector");
 const compPreview = d.getElementById("component-preview");
 
 let componentsData : PitchComponentsCollection;
 
 fetch("./components.json")
-  .then( response => response.text())
-  .then( data => {
+  .then(response => response.text())
+  .then(data => {
     componentsData = JSON.parse(data);
     // console.log(componentsData);
     initializeComponents();
   })
-  .catch( err => {throw err});
+  .catch(err => {throw err});
 
 function initializeComponents() {
   let compPreviewCSS = d.createElement("style");
@@ -59,9 +60,8 @@ function initializeComponents() {
       compInput.addEventListener("input", () => {calculateComponents()});
 
       compLabel.addEventListener("mouseover", () => {
-        compTitle.textContent = compName;
-        compDesc.textContent = compData.desc;
-        compPreview.innerHTML = compData.sampleHTML;
+        compPreviewSelector.value = compInput.getAttribute("data-comp");
+        setCompInfo(compPreviewSelector.value);
       });
 
       d.getElementById("components-toggles").appendChild(compInput);
@@ -69,11 +69,28 @@ function initializeComponents() {
 
       compInputs.push(compInput);
 
+      const compInfoOpt = d.createElement("option");
+      compInfoOpt.setAttribute("value", comp);
+      compInfoOpt.innerText = compName;
+
+      if (compName === "accordion") compInfoOpt.setAttribute("selected", "");
+
+      compPreviewSelector.appendChild(compInfoOpt);
+
       compPreviewCSS.innerText += compData.css;
     }
   }
+  compPreviewSelector.addEventListener("input", () => {
+    setCompInfo(compPreviewSelector.value);
+  });
 
   document.head.appendChild(compPreviewCSS);
+}
+
+function setCompInfo(comp : string) {
+  compTitle.textContent = componentsData[comp].name.replace(/\-/g, " ");
+  compDesc.textContent = componentsData[comp].desc;
+  compPreview.innerHTML = componentsData[comp].sampleHTML;
 }
 
 compSelectAllBtn.addEventListener("click", () => {
