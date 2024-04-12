@@ -12,6 +12,10 @@ body {
   font-family: "Lato";
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Ubuntu";
+}
+
 .title {
   font-size: 1.6em;
   font-weight: lighter;
@@ -32,14 +36,17 @@ body {
     flex-grow: 1;
 
     // max-width: 400px;
-    min-height: 400px;
+    height: 400px;
 
     & > .components-selector-container {
+      display: flex;
+      flex-direction: column;
       width: 300px;
       padding: 1em .2em;
       border: 1px solid $border-col;
       
       & #components-toggles {
+        flex-grow: 1;
         padding: .6em;
         max-width: 400px;
 
@@ -69,6 +76,7 @@ body {
 
       & > .copy-btn-container {
         padding: 1em;
+        // min-height: 50px;
 
         & > #copy-notification {
           white-space: nowrap;
@@ -94,12 +102,23 @@ body {
     }
 
     & > .component-info {
+      display: flex;
       border: 1px solid $border-col;
+      max-height: 400px;
       flex-grow: 1;
+      flex-direction: column;
 
-      & > div {
+      & > .preview-info {
         padding: 1.5em;
         padding-top: 0;
+
+        & > .component-info-selector-container {
+
+          & > #component-info-selector {
+            text-transform: capitalize;
+          }
+
+        }
 
         & > #component-title {
           text-transform: capitalize;
@@ -109,6 +128,13 @@ body {
           max-width: 500px;
         }
       }
+
+      & > .preview-container {
+        flex-grow: 1;
+        // max-height: 330px;
+        overflow-y: scroll;
+      }  
+
     }
   }
 }
