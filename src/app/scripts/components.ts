@@ -11,37 +11,31 @@ export interface PitchComponentsCollection {
   [key: string]: PitchComponentData,
 }
 
+interface VariableList {
+  [key: string]: string,
+}
+
+const varsList : VariableList = {
+  "b": "itchio_bg_color",
+  "b2": "itchio_bg2_color",
+  "b2s": "itchio_bg2_sub",
+  "t": "itchio_text_color",
+  "l": "itchio_link_color",
+  "br": "itchio_border_color",
+  "btn": "itchio_button_color",
+  "btn_f": "itchio_button_fg_color",
+  "btn_s": "itchio_button_shadow_color",
+};
+
 export function getUsedVariables(css : string): Array<string> {
-  return [
-    "b",
-    "b2",
-    "b2s",
-    "t",
-    "l",
-    "br",
-    "btn",
-    "btn_f",
-    "btn_s",
-  ].filter(vars => {
-    if (new RegExp("(\-\-" + vars + ")").test(css)) return vars
-  })
+  let usedVars : Array<string> = [];
+  for (const n in varsList) {
+    if (new RegExp("(\-\-" + n + ")").test(css)) usedVars.push(n);
+  }
+  return usedVars;
 }
 
 export function compileUsedVariables(vars : Array<string>): string {
-  interface VariableList {
-    [key: string]: string,
-  }
-  const varsList : VariableList = {
-    "b": "itchio_bg_color",
-    "b2": "itchio_bg2_color",
-    "b2s": "itchio_bg2_sub",
-    "t": "itchio_text_color",
-    "l": "itchio_link_color",
-    "br": "itchio_border_color",
-    "btn": "itchio_button_color",
-    "btn_f": "itchio_button_fg_color",
-    "btn_s": "itchio_button_shadow_color",
-  };
   let css = "#wrapper{";
 
   vars.forEach(v => {
@@ -65,36 +59,30 @@ export interface PitchComponentsLibrary {
 
 export const components : PitchComponentsLibrary = {
   "accordion" : {
-    desc: "Turn walls of texts into list of collapsable contents. It's basically just a styled list of <details> elements.",
+    desc: "Turn walls of texts into list of collapsable contents.",
     sampleHTML: `
       <div class="custom-accrd">
 
-        <details>
-          <summary>
-            Accordion Item 1
-          </summary>
-          Accordion content 2
+        <details open>
+          <summary>How do I get access to custom CSS in my game page?</summary>
+          You can contact itch.io support to enable the custom CSS feature.
         </details>
 
         <details>
-          <summary>
-            Accordion Item 2
-          </summary>
-          Accordion content 2
+          <summary>Can I use this in a commercial project?</summary>
+          Yes! The generated CSS codes is licensed under <em>Creative Commons Zero v1.0 Universal</em>.
         </details>
 
         <details>
-          <summary>
-            Accordion Item 3
-          </summary>
-          Accordion content 3
+          <summary>Why can't I use this on profile or jam pages?</summary>
+          All components make use of the page's theme. Unlike project page, profile page and jam page didn't have some of the require color variables needed for the components to be displayed correctly (e.g. button color).
         </details>
 
       </div>
     `,
   },
   "admonition" : {
-    desc: "Inform the visitors about content warnings, additional informations, or a technical issues.",
+    desc: "Inform content warnings, additional informations, or a technical issues.",
     sampleHTML: `
       <blockquote class="custom-adm">
 
@@ -105,11 +93,11 @@ export const components : PitchComponentsLibrary = {
     `,
   },
   "description-list" : {
-    desc: "Modified description list element with a 2 column table layout. Can be repurposed to anything that make use of that layout: credit section, key input guide for a game, etc.",
+    desc: "Modified description list element using 2 column table layout.",
     sampleHTML: `
       <dl>
 
-        <dt>Arts and Visuals</dt>
+        <dt>Arts</dt>
         <dd>
           <a href="#">Amazing artist</a>
         </dd>
@@ -126,16 +114,58 @@ export const components : PitchComponentsLibrary = {
         </dd>
 
       </dl>
+
+      <br>
+
+      <dl>
+
+        <dt>Move</dt>
+        <dd>
+          <kbd>W</kbd>,
+          <kbd>A</kbd>,
+          <kbd>S</kbd>,
+          <kbd>D</kbd>
+        </dd>
+
+        <dt>Jump</dt>
+        <dd>
+          <kbd>Space</kbd>
+        </dd>
+
+        <dt>Interract</dt>
+        <dd>
+          <kbd>F</kbd>,
+          <kbd>E</kbd>
+        </dd>
+
+      </dl>
     `,
   },
   "input" : {
     desc: "Represent the keyboard inputs, controls, or any buttons.",
     sampleHTML: `
+      Select the text, press <kbd>Ctrl</kbd> + <kbd>C</kbd> to copy, and <kbd>Ctrl</kbd> + <kbd>V</kbd> to paste them.
+
+      <kbd>W</kbd>,
+      <kbd>A</kbd>,
+      <kbd>S</kbd>,
+      <kbd>D</kbd>
+
+      <br>
+
+      <kbd>Ctrl</kbd> + <kbd>A</kbd>
+
+      <br>
+
+      <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Del</kbd>
     `,
   },
   "label" : {
     desc: "Highlight genres, tags, tools, or jam. Can be applied to hyperlinks or plain text.",
     sampleHTML: `
+      <i class="custom-lb">
+        #halloween
+      </i>
     `,
   },
   "spoiler" : {
@@ -144,7 +174,7 @@ export const components : PitchComponentsLibrary = {
     `,
   },
   "table" : {
-    desc: "Modified default table element, that takes full width of the page.",
+    desc: "Modified default table element, that takes the full width of the page.",
     sampleHTML: `
     `,
   },
