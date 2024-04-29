@@ -10,11 +10,4 @@
     text-align: right;
     font-weight: 700;
   }
-
-  /* Add commas for every hyperlink elements */
-  & > dd > a:not( :last-child, .custom-lb, .custom-tag, kbd ):after {
-    color: var(--t);
-    content: ",";
-    margin-right: .2em;
-  }
 }
