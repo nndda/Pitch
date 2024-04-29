@@ -17,8 +17,9 @@ const componentsPath : string = path.resolve(__dirname, "src/components");
 
 [
   "dist/components",
+  "dist/components/cosmetics",
   "dist/app",
-].forEach(dir => {
+].forEach((dir : string) => {
   fs.mkdir(
     path.resolve(__dirname, dir),
     { recursive: true },
@@ -28,13 +29,15 @@ const componentsPath : string = path.resolve(__dirname, "src/components");
   );
 });
 
-// let componentObjects : Array<PitchComponentData> = [];
 let componentObjects : PitchComponentsCollection = {};
 
-fs.readdirSync(componentsPath).forEach((component: string) => {
+function buildComponent(component : string) : void {
   console.log(`Processing ${component}...`);
 
-  const compName = component.replace(".scss", "");
+  const compName = component
+  // prob better using regex
+    .replace(".scss", "")
+    .replace("cosmetics\\", "");
 
   let cssStr = compileComponentsCSS(
     sass.compileString(
@@ -45,26 +48,33 @@ fs.readdirSync(componentsPath).forEach((component: string) => {
     ).css
   );
 
-  // console.log(`  ${components[compName]}`);
-
   fs.writeFileSync(
     path.resolve(__dirname, "dist/components/" + component.replace(".scss", ".css")),
     cssStr
   );
 
-  // console.log(`  >${component}`);
-  // console.log(`   ${JSON.stringify(components[compName])}`);
-
   componentObjects[compName] = {
     name: compName,
     css: cssStr,
   };
-  if (component !== "variables")
+  if (component !== "variables") {
     componentObjects[compName].sampleHTML = components[compName].sampleHTML;
     componentObjects[compName].desc = components[compName].desc;
     componentObjects[compName].variables = getUsedVariables(cssStr);
+  }
+}
 
-});
+function processComponents(compPath : string) : void {
+  fs
+    .readdirSync(compPath, {recursive : true})
+    .forEach((component : string) => {
+      if (component.endsWith(".scss")) {
+        buildComponent(component);
+      }
+  });
+}
+
+processComponents(componentsPath);
 
 let cssOut = "";
 for (const i in componentObjects) {
@@ -98,8 +108,8 @@ function compileComponentsCSS(srcCSS : string): string {
         "since 2022",
       ]
     })
-  ]).process(css, {from: undefined}).then((result: any) => {
-    result.warnings().forEach((warn: any) => {
+  ]).process(css, {from: undefined}).then((result : any) => {
+    result.warnings().forEach((warn : any) => {
       console.warn(warn.toString())
     });
     css = result.css;
@@ -114,16 +124,12 @@ function compileComponentsCSS(srcCSS : string): string {
     .replace("@charset \"UTF-8\";", "")
   );
 
-  cssCleaned.errors.forEach((err: any) => {
+  cssCleaned.errors.forEach((err : any) => {
     console.error(err);
   });
-  cssCleaned.warnings.forEach((warn: any) => {
+  cssCleaned.warnings.forEach((warn : any) => {
     console.warn(warn);
   });
 
   return cssCleaned.styles;
-}
-
-function buildObject() {
-
 }
