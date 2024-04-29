@@ -138,3 +138,13 @@ h1, h2, h3, h4, h5, h6 {
     }
   }
 }
+
+#component-preview {
+  margin: 2em;
+
+  & > hr.spacing {
+    margin: 1em 0;
+    background: none;
+    border: none;
+  }
+}
