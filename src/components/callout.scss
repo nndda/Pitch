@@ -1,4 +1,4 @@
-blockquote.custom-adm {
+blockquote.custom-call {
   font-style: normal; /* Remove the italic blockquote font-style */
   border-color: var(--l);
   padding: .05em 1em;
@@ -12,6 +12,11 @@ blockquote.custom-adm {
   // }
 
   & > :first-child {
-    color: var(--l); /* Color the heading for alert box */
+    color: var(--l); /* Color the heading */
+  
+    & > img {
+      vertical-align: middle;
+      max-height: 1em;
+    }
   }
 }
