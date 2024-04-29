@@ -2,11 +2,17 @@
   background: var(--btn);
   color: var(--btn_f);
   text-decoration: none; /* Remove underline for hyperlinks */
-  padding: 0 1ch;
+  padding: .2ch 1ch;
   margin: .15em;
   font-weight: 700;
   border-radius: 4px;
   display: inline-block;
+
+  & > img {
+    max-height: 1.25em;
+    vertical-align: -.4em;
+    padding: .2em .3em;
+  }
 }
 
 small.custom-lb {
