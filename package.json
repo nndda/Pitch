@@ -18,6 +18,7 @@
     "@fontsource/ubuntu": "^5.0.12",
     "autoprefixer": "^10.4.19",
     "clean-css": "^5.3.3",
+    "jquery": "^3.7.1",
     "material-symbols": "^0.17.1",
     "normalize.css": "^8.0.1",
     "postcss": "^8.4.38",
@@ -25,6 +26,7 @@
     "spinkit": "^2.0.1"
   },
   "devDependencies": {
+    "@types/jquery": "^3.5.30",
     "copy-webpack-plugin": "^12.0.2",
     "css-loader": "^7.0.0",
     "css-minimizer-webpack-plugin": "^6.0.0",
