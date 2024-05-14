@@ -78,25 +78,76 @@
           </button>
         </fieldset>
 
-        <fieldset id="components-toggles"></fieldset>
+        <fieldset id="components-toggles">
+          
+        </fieldset>
+
         <div class="copy-btn-container">
+
           <button id="compile-components-btn">
             <span class="btn-icon material-symbols-outlined">
               content_copy
             </span>
             <span class="btn-text">
-              Copy CSS codes
+              Copy CSS
             </span>
           </button>
-          <span id="copy-notification"></span>
+
+          <small id="copy-notification"></small>
+
+          <div class="pick-2-notif">
+            Pick atleast 1 component
+          </div>
+
         </div>
+
       </div>
       <div class="component-info">
-        <div>
-          <h2 id="component-title">Accordion</h2>
+
+        <div class="preview-info">
+          <h2 class="component-info-selector-container">
+            <select id="component-info-selector" name="component-info">
+            </select>
+          </h2>
+          <h2 id="component-title" class="hidden"></h2>
           <p id="component-description">
-            Turn walls of texts into list of collapsable contents. It's basically just a styled list of <code>&lt;details&gt;</code> elements.
           </p>
+          <h4>Preview:</h4>
+        </div>
+
+        <div id="wrapper" class="preview-container">
+          <style type="text/css">
+            #component-preview {
+              --b: #131120;
+              --b2: rgba(19, 17, 32, 0);
+              --b2s: #2a2837;
+              --t: #eaeaea;
+              --l: #fc3a78;
+              --br: #332f4e;
+              --btn: #fc3a78;
+              --btn_f: #ffffff;
+              --btn_s: #ff4d8b;
+            }
+            #component-preview a {
+              color: var(--l);
+            }
+            #component-preview blockquote {
+              border-left: 4px solid var(--l);
+              margin-left: 15px;
+            }
+            #component-preview table {
+              margin: 1em 0;
+              border-collapse: collapse;
+              border: 1px solid var(--br);
+            }
+            #component-preview table tr th {
+              vertical-align: top;
+              text-align: left;
+            }
+          </style>
+          <div id="component-preview">
+            
+          </div>
         </div>
       </div>
     </div>
