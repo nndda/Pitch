@@ -3,6 +3,7 @@ import "normalize.css";
 
 // Icons
 import "material-symbols";
+import "@fortawesome/fontawesome-free/css/all.css";
 
 // Fonts
 import "@fontsource/lato";
