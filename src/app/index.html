@@ -7,87 +7,25 @@
 </head>
 <body>
   <div class="main-app">
-    <h1 class="title">Pitch.CSS Component Selector</h1>
-    <fieldset class="scope-selector-container hidden">
-      <input
-        type="radio"
-        id="scope-project-page"
-        name="comp-scope"
-        value="project"
-        checked>
-      <label for="scope-project-page">
-        <span class="material-symbols-outlined unchecked">
-          radio_button_unchecked
-        </span>
-        <span class="material-symbols-outlined checked">
-          radio_button_checked
-        </span>
-        Project page
-      </label>
-
-      <input
-        type="radio"
-        id="scope-profile-page"
-        name="comp-scope"
-        value="profile">
-      <label for="scope-profile-page">
-        <span class="material-symbols-outlined unchecked">
-          radio_button_unchecked
-        </span>
-        <span class="material-symbols-outlined checked">
-          radio_button_checked
-        </span>
-        Profile page
-      </label>
-
-      <input
-        type="radio"
-        id="scope-jam-page"
-        name="comp-scope"
-        value="jam">
-      <label for="scope-jam-page">
-        <span class="material-symbols-outlined unchecked">
-          radio_button_unchecked
-        </span>
-        <span class="material-symbols-outlined checked">
-          radio_button_checked
-        </span>
-        Project page
-      </label>
-    </fieldset>
+    <!-- <h1 class="title">Pitch.CSS Component Selector</h1> -->
     <div class="components-overview">
       <div class="components-selector-container">
 
-        <fieldset>
-          <button id="btn-select-all" class="light">
-            <span class="btn-icon material-symbols-outlined">
-              grid_view
-            </span>
-            <span class="btn-text">
-              Select all
-            </span>
+        <div class="component-search-container">
+          <input id="component-search" type="text" placeholder="Search components...">
+          <button id="component-search-clear" class="button-general">
+            <i class="fa-solid fa-delete-left"></i>
           </button>
-          &nbsp;
-          <button id="btn-select-none" class="light">
-            <span class="btn-icon material-symbols-outlined">
-              square
-            </span>
-            <span class="btn-text">
-              Select none
-            </span>
-          </button>
-        </fieldset>
+        </div>
 
-        <fieldset id="components-toggles">
-          
-        </fieldset>
+        <dl id="components-list">
+
+        </dl>
 
         <div class="copy-btn-container">
 
-          <button id="compile-components-btn">
-            <span class="btn-icon material-symbols-outlined">
-              content_copy
-            </span>
+          <button id="compile-components-btn" class="button-primary">
+            <i class="fa-solid fa-copy"></i>
             <span class="btn-text">
               Copy CSS
             </span>
@@ -102,24 +40,32 @@
         </div>
 
       </div>
+
       <div class="component-info">
 
         <div class="preview-info">
-          <h2 class="component-info-selector-container">
-            <select id="component-info-selector" name="component-info">
-            </select>
-          </h2>
-          <h2 id="component-title" class="hidden"></h2>
+          <div class="preview-header">
+            <button id="home-button" class="hidden">
+              <i class="fa-solid fa-circle-chevron-left"></i>
+            </button>
+            <h2 id="component-title">
+              Pitch
+            </h2>
+          </div>
           <p id="component-description">
           </p>
-          <h4>Preview:</h4>
+        </div>
+
+        <div id="home-content">
+          Click on any of the components on the right to view it, and tick the checkbox to add it to your components.
+          Click <code>Copy CSS</code> to copy the selected components' CSS codes, and paste it in your project page's theme editor.
         </div>
 
         <div id="wrapper" class="preview-container">
           <style type="text/css">
             #component-preview {
               --b: #131120;
-              --b2: rgba(19, 17, 32, 0);
+              --b2: rgba(19, 17, 32);
               --b2s: #2a2837;
               --t: #eaeaea;
               --l: #fc3a78;

@@ -2,6 +2,9 @@
 @use "input";
 @use "variables" as *;
 @use "modules" as *;
+@use "preview";
+
+@use "components_dev";
 
 html {
   color-scheme: only dark !important;
@@ -10,6 +13,7 @@ html {
 body {
   background: $background;
   font-family: "Lato";
+  font-size: .86em;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -25,52 +29,127 @@ h1, h2, h3, h4, h5, h6 {
 .main-app {
   display: flex;
   flex-direction: column;
-  max-width: 1100px;
-  margin: auto;
-  margin-top: 1em;
+  max-width: 1200px;
+  margin: 0 auto;
 
   & .components-overview {
-    // @include border-light;
     display: flex;
     flex-direction: row;
     flex-grow: 1;
-
-    // max-width: 400px;
-    height: 400px;
+    height: 100vh;
 
     & > .components-selector-container {
       display: flex;
       flex-direction: column;
-      width: 300px;
-      padding: 1em .2em;
-      border: 1px solid $border-col;
-      
-      & #components-toggles {
-        flex-grow: 1;
-        padding: .6em;
-        max-width: 400px;
+      min-width: 210px;
+      padding: 1em;
+      border-right: 1px solid $border-col;
+
+      & > .component-search-container {
+        display: flex;
+        align-items: bottom;
 
         & > input {
-          display: none;
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
         }
 
-        & > input:checked + .component-toggle {
-          color: $background;
-          background: rgba($text-col, 90%);
+        & > #component-search-clear {
+          padding: .15em .5em;
+          border-top-left-radius: 0;
+          border-bottom-left-radius: 0;
+          border-left: 1px solid $border-col;
         }
+      }
 
-        & > .component-toggle {
-          @include border-light;
-          display: inline-block;
-          margin: .25em;
-          padding: .3em .5em;
+      & dl#components-list {
+        $font-size: 1.1em;
+
+        padding: 0;
+        padding-left: .2em;
+
+        & > dt {
+          display: flex;
+          align-items: center;
+          font-size: $font-size * 1.1;
+
+          margin-top: .3em;
+          margin-bottom: .3em;
+
           text-transform: capitalize;
-          cursor: pointer;
-          border-radius: 3px;
+          color: $accent;
 
-          &:hover {
-            background: rgba($text-col, 20%);
+          & > .component-type-title {
+            flex-grow: 1;
           }
+
+          & > button {
+            padding: .15em;
+            line-height: 0;
+            border-radius: 3px;
+            & > span {
+              font-size: 1em;
+            }
+          }
+        }
+
+        & > dd {
+
+          display: flex;
+          margin-bottom: .2em;
+          margin-left: .5em;
+          font-size: $font-size;
+          list-style: none;
+
+          & > label {
+            margin-right: .3em;
+
+            & > .checked-not {
+              color: $accent-light;
+            }
+
+            & > span {
+              font-size: $font-size;
+            }
+
+            &:hover {
+              cursor: pointer;
+              color: $accent-light;
+
+              & ~ .component-toggle {
+                text-decoration: underline;
+                color: $accent-light;
+              }
+            }
+          }
+
+          & > .component-toggle {
+            text-transform: capitalize;
+
+            &:hover {
+              text-decoration: underline;
+              cursor: pointer;
+              color: $accent-light;
+            }
+          }
+
+          & > input {
+            display: none;
+
+            &:checked ~ label > .checked {
+              display: none;
+            }
+
+            &:not(:checked) ~ label > .checked-not {
+              display: none;
+            }
+
+            &:checked ~ button {
+              color: $accent-light;
+            }
+          }
+
+
         }
       }
 
@@ -103,30 +182,57 @@ h1, h2, h3, h4, h5, h6 {
 
     & > .component-info {
       display: flex;
-      border: 1px solid $border-col;
-      max-height: 400px;
+      // border: 1px solid $border-col;
+      // max-height: 400px;
       flex-grow: 1;
       flex-direction: column;
 
       & > .preview-info {
+        font-size: 1.1em;
         padding: 1.5em;
+        background: darken($background, 2.5%);
         padding-top: 0;
+        padding-bottom: 0;
 
-        & > .component-info-selector-container {
+        & > .preview-header {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
 
-          & > #component-info-selector {
-            text-transform: capitalize;
+          & > #home-button {
+            color: $accent;
+            font-size: 1.4em;
+            cursor: pointer;
+            margin-right: .25em;
+            // background: red;
+            // border-radius: 50%;
+            height: min-content;
+
+            & > i {
+              transition: .2s ease-out;
+              transform-origin: right bottom;
+            }
+
+            &:hover {
+              & > i {
+                transform: translateX(-.2em);
+              }
+            }
           }
 
-        }
-
-        & > #component-title {
-          text-transform: capitalize;
+          & > #component-title {
+            text-transform: capitalize;
+          }
         }
 
         & > #component-description {
           max-width: 500px;
         }
+      }
+
+      & > #home-content {
+        padding: 1.5em;
+        padding-top: 0;
       }
 
       & > .preview-container {
