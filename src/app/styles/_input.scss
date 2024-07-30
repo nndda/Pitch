@@ -1,6 +1,24 @@
 @use "variables" as *;
 
 button {
+  &[disabled] {
+    cursor: not-allowed;
+  }
+}
+
+.button-general {
+  display: inline-block;
+  cursor: pointer;
+  background: lighten($background, 8%);
+  padding: .25em 1em;
+  border-radius: 8px;
+
+  &:hover {
+    background: lighten($background, 12%);
+  }
+}
+
+.button-primary {
   display: inline-block;
   color: $text-col;
   background: rgba($accent, 50%);
@@ -8,7 +26,6 @@ button {
   border-radius: 16px;
   cursor: pointer;
   transition: transform .2s ease;
-  // vertical-align: top;
 
   &:disabled {
     cursor: not-allowed;
@@ -16,8 +33,6 @@ button {
 
   &:not(:disabled):hover {
     background: rgba($accent, 70%);
-    transform: translateY(-.15em);
-    // outline: 1px solid $border-col;
   }
 
   &.light {
@@ -44,9 +59,16 @@ button {
   }
 }
 
+input[type="text"] {
+  border-radius: 4px;
+  border: 0;
+  padding: .15em .5em;
+  background: lighten($background, 7%);
+}
+
 input[type="radio"] {
   display: none;
-  // transform: translate(20em);
+
   & + label {
     display: inline-block;
     margin: .05em .5em;
