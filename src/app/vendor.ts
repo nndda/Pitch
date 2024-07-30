@@ -11,3 +11,6 @@ import "@fontsource/ubuntu";
 
 // Spinners
 import "spinkit/spinkit.min.css";
+
+// Syntax highlighter theme
+import "prismjs/themes/prism-dark.min.css";
