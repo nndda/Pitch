@@ -1,0 +1,74 @@
+@use "variables" as *;
+
+#component-preview {
+	& > .component-container-single {
+		$padding: .8em;
+		$bg-main: lighten($background, 1.5%);
+		$bg-code: darken($background, 1%);
+
+		display: grid;
+		grid-template-rows: 50% 50%;
+
+		border: 1px solid rgba($text-col, 0.2);
+		border-radius: 6px;
+		background: $bg-main;
+		padding: $padding 0;
+		padding-top: 0;
+		margin-bottom: 1.25em;
+		overflow: hidden;
+
+		& > div {
+			position: relative;
+			margin: 0 $padding 0;
+			padding: $padding;
+		}
+
+		& > .component-display {
+			border-bottom: 1px solid rgba($text-col, 0.1);
+			padding: $padding * 1.5;
+			padding-bottom: $padding * 2;
+			margin: 0;
+			margin-bottom: .25em;
+			background: var(--b2);
+		}
+
+		& > .component-html {
+			background: $bg-code;
+			border-radius: 6px;
+			height: auto;
+			overflow: auto;
+
+			& > pre {
+				margin-top: 0;
+			}
+		}
+
+		& > details.code-collapse {
+			margin: ($padding * 0.5) $padding;
+
+			& > summary {
+			}
+
+			&:not([open]) {
+
+				& ~ .component-html {
+					max-height: 80px;
+					overflow: hidden;
+
+					&::before {
+						content: "";
+						position: absolute;
+						padding: $padding;
+						width: 100%;
+						height: 100%;
+						background: linear-gradient(
+							180deg, transparent -70%, $bg-code
+						);
+						z-index: 99;
+					}
+
+				}
+			}
+		}
+	}
+}
