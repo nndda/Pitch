@@ -15,7 +15,7 @@
       margin-bottom: .25em;
 
       &:after {
-        content: ("\\25BC");
+        content: ("\25BC");
       }
     }
 
@@ -41,7 +41,7 @@
     &::after {
       text-align: right;
       flex-grow: 1; /* Move the new marker to the most right */
-      content: "\\25BA";
+      content: "\25BA";
     }
 
     /* Remove the default marker on itch app */
