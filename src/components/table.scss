@@ -1,4 +1,4 @@
-:not(.game_info_panel_widget) > table {
+#wrapper :not(.game_info_panel_widget) > table {
   width: 100%;
 
   & td, & th {
