@@ -8,7 +8,7 @@ import {
 } from "./scripts/components";
 
 import { compileComponents } from "./scripts/compile";
-import { copyNotif, copyString } from "./scripts/copy";
+import { copyNotif, copyComponentHTML } from "./scripts/copy";
 import { highlightHTML } from "./scripts/highlighter";
 
 const d = document;
@@ -135,7 +135,9 @@ function setCompInfo(comp : string) {
           </summary>
           <button class="comp-copy button-general" data-html-id="${n}">
             <i class="fa-solid fa-copy"></i>
-            Copy
+            <span class="comp-copy-text">
+              Copy
+            </span>
           </button>
         </details>
 
@@ -145,8 +147,12 @@ function setCompInfo(comp : string) {
       </div>
       <br>
     `));
+
     compPreview.on("click", ".comp-copy", function() {
-      copyString(components[comp].sampleHTML[<number>(<unknown>($(this).attr("data-html-id")))]);
+      copyComponentHTML(
+        components[comp].sampleHTML[<number>(<unknown>($(this).attr("data-html-id")))],
+        $(this).children(".comp-copy-text")[0]
+      );
     });
   }
 
