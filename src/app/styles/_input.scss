@@ -1,0 +1,99 @@
+@use "variables" as *;
+
+button {
+  &[disabled] {
+    cursor: not-allowed;
+  }
+}
+
+.button-general {
+  display: inline-block;
+  cursor: pointer;
+  background: lighten($background, 8%);
+  padding: .25em 1em;
+  border-radius: 8px;
+
+  &:hover {
+    background: lighten($background, 12%);
+  }
+}
+
+.button-primary {
+  display: inline-block;
+  color: $text-col;
+  background: rgba($accent, 50%);
+  padding: .2em .8em;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: transform .2s ease;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  &:not(:disabled):hover {
+    background: rgba($accent, 70%);
+  }
+
+  &.light {
+    font-size: .9em;
+    border-radius: 16px;
+    color: $text-col;
+    background: rgba($text-col, 10%);
+    border: 1px solid $border-col;
+  }
+
+  & > .btn-icon, & > .btn-text {
+    display: inline-block;
+    margin-top: -.5em;
+    vertical-align: middle;
+    vertical-align: -webkit-baseline-middle;
+  }
+
+  & > .btn-icon {
+    font-size: .9em;
+    margin-right: .5em;
+  }
+
+  & > .btn-text {
+  }
+}
+
+input[type="text"] {
+  border-radius: 4px;
+  border: 0;
+  padding: .15em .5em;
+  background: lighten($background, 7%);
+}
+
+input[type="radio"] {
+  display: none;
+
+  & + label {
+    display: inline-block;
+    margin: .05em .5em;
+    cursor: pointer;
+    padding: .5em;
+    padding-bottom: .6em;
+
+    & .unchecked,
+    & .checked {
+      font-size: .85em;
+      margin-right: .5em;
+    }
+  }
+
+  &:checked {
+    & + label {
+      border-bottom: 3px solid $accent;
+      color: $accent;
+
+      & > .unchecked {
+        display: none;
+      }
+    }
+  }
+  &:not(:checked) + label > .checked {
+    display: none;
+  }
+}

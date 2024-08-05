@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pitch.CSS</title>
+</head>
+<body>
+  <div class="main-app">
+    <!-- <h1 class="title">Pitch.CSS Component Selector</h1> -->
+    <div class="components-overview">
+      <div class="components-selector-container">
+
+        <div class="component-search-container">
+          <input id="component-search" type="text" placeholder="Search components...">
+          <button id="component-search-clear" class="button-general">
+            <i class="fa-solid fa-delete-left"></i>
+          </button>
+        </div>
+
+        <dl id="components-list">
+
+        </dl>
+
+        <div class="copy-btn-container">
+
+          <button id="compile-components-btn" class="button-primary">
+            <i class="fa-solid fa-copy"></i>
+            <span class="btn-text">
+              Copy CSS
+            </span>
+          </button>
+
+          <small id="copy-notification"></small>
+
+          <div class="pick-2-notif">
+            Pick atleast 1 component
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="component-info">
+
+        <div class="preview-info">
+          <div class="preview-header">
+            <button id="home-button" class="hidden">
+              <i class="fa-solid fa-circle-chevron-left"></i>
+            </button>
+            <h2 id="component-title">
+              Pitch
+            </h2>
+          </div>
+          <p id="component-description">
+          </p>
+        </div>
+
+        <div id="home-content">
+          Click on any of the components on the right to view it, and tick the checkbox to add it to your components.
+          Click <code>Copy CSS</code> to copy the selected components' CSS codes, and paste it in your project page's theme editor.
+        </div>
+
+        <div id="wrapper" class="preview-container">
+          <style type="text/css">
+            #component-preview {
+              --b: #131120;
+              --b2: rgba(19, 17, 32);
+              --b2s: #2a2837;
+              --t: #eaeaea;
+              --l: #fc3a78;
+              --br: #332f4e;
+              --btn: #fc3a78;
+              --btn_f: #ffffff;
+              --btn_s: #ff4d8b;
+            }
+            #component-preview a {
+              color: var(--l);
+            }
+            #component-preview blockquote {
+              border-left: 4px solid var(--l);
+              margin-left: 15px;
+            }
+            #component-preview table {
+              margin: 1em 0;
+              border-collapse: collapse;
+              border: 1px solid var(--br);
+            }
+            #component-preview table tr th {
+              vertical-align: top;
+              text-align: left;
+            }
+          </style>
+          <div id="component-preview">
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

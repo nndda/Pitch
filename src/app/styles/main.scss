@@ -1,0 +1,256 @@
+@use "reset";
+@use "input";
+@use "variables" as *;
+@use "modules" as *;
+@use "preview";
+
+@use "components_dev";
+
+html {
+  color-scheme: only dark !important;
+}
+
+body {
+  background: $background;
+  font-family: "Lato";
+  font-size: .86em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Ubuntu";
+}
+
+.title {
+  font-size: 1.6em;
+  font-weight: lighter;
+  letter-spacing: .1ch;
+}
+
+.main-app {
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  & .components-overview {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    height: 100vh;
+
+    & > .components-selector-container {
+      display: flex;
+      flex-direction: column;
+      min-width: 210px;
+      padding: 1em;
+      border-right: 1px solid $border-col;
+
+      & > .component-search-container {
+        display: flex;
+        align-items: bottom;
+
+        & > input {
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+        }
+
+        & > #component-search-clear {
+          padding: .15em .5em;
+          border-top-left-radius: 0;
+          border-bottom-left-radius: 0;
+          border-left: 1px solid $border-col;
+        }
+      }
+
+      & dl#components-list {
+        $font-size: 1.1em;
+
+        padding: 0;
+        padding-left: .2em;
+
+        & > dt {
+          display: flex;
+          align-items: center;
+          font-size: $font-size * 1.1;
+
+          margin-top: .3em;
+          margin-bottom: .3em;
+
+          text-transform: capitalize;
+          color: $accent;
+
+          & > .component-type-title {
+            flex-grow: 1;
+          }
+
+          & > button {
+            padding: .15em;
+            line-height: 0;
+            border-radius: 3px;
+            & > span {
+              font-size: 1em;
+            }
+          }
+        }
+
+        & > dd {
+
+          display: flex;
+          margin-bottom: .2em;
+          margin-left: .5em;
+          font-size: $font-size;
+          list-style: none;
+
+          & > label {
+            margin-right: .3em;
+
+            & > .checked-not {
+              color: $accent-light;
+            }
+
+            & > span {
+              font-size: $font-size;
+            }
+
+            &:hover {
+              cursor: pointer;
+              color: $accent-light;
+
+              & ~ .component-toggle {
+                text-decoration: underline;
+                color: $accent-light;
+              }
+            }
+          }
+
+          & > .component-toggle {
+            text-transform: capitalize;
+
+            &:hover {
+              text-decoration: underline;
+              cursor: pointer;
+              color: $accent-light;
+            }
+          }
+
+          & > input {
+            display: none;
+
+            &:checked ~ label > .checked {
+              display: none;
+            }
+
+            &:not(:checked) ~ label > .checked-not {
+              display: none;
+            }
+
+            &:checked ~ button {
+              color: $accent-light;
+            }
+          }
+
+
+        }
+      }
+
+      & > .copy-btn-container {
+        padding: 1em;
+        // min-height: 50px;
+
+        & > #copy-notification {
+          white-space: nowrap;
+          margin-left: .5em;
+        }
+
+        & > .pick-2-notif {
+          color: $accent;
+          opacity: .8;
+          margin-top: .5em;
+        }
+
+        & > #compile-components-btn {
+          &[disabled] {
+            opacity: .7;
+          }
+
+          &:not([disabled]) ~ .pick-2-notif {
+            display: none;
+          }
+        }
+      }
+    }
+
+    & > .component-info {
+      display: flex;
+      // border: 1px solid $border-col;
+      // max-height: 400px;
+      flex-grow: 1;
+      flex-direction: column;
+
+      & > .preview-info {
+        font-size: 1.1em;
+        padding: 1.5em;
+        background: darken($background, 2.5%);
+        padding-top: 0;
+        padding-bottom: 0;
+
+        & > .preview-header {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+
+          & > #home-button {
+            color: $accent;
+            font-size: 1.4em;
+            cursor: pointer;
+            margin-right: .25em;
+            // background: red;
+            // border-radius: 50%;
+            height: min-content;
+
+            & > i {
+              transition: .2s ease-out;
+              transform-origin: right bottom;
+            }
+
+            &:hover {
+              & > i {
+                transform: translateX(-.2em);
+              }
+            }
+          }
+
+          & > #component-title {
+            text-transform: capitalize;
+          }
+        }
+
+        & > #component-description {
+          max-width: 500px;
+        }
+      }
+
+      & > #home-content {
+        padding: 1.5em;
+        padding-top: 0;
+      }
+
+      & > .preview-container {
+        flex-grow: 1;
+        // max-height: 330px;
+        overflow-y: scroll;
+      }  
+
+    }
+  }
+}
+
+#component-preview {
+  margin: 2em;
+
+  & > hr.spacing {
+    margin: 1em 0;
+    background: none;
+    border: none;
+  }
+}
