@@ -1,3 +1,6 @@
+# Transpiled TypeScript
+*.js
+
 # Node gitignore
 # Logs
 logs
