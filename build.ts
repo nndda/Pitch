@@ -20,7 +20,7 @@ const componentsPath : string = path.resolve(__dirname, "src/components");
   "dist/components/cosmetics",
   "dist/app",
 ].forEach((dir : string) => {
-  fs.mkdir(
+  fs.mkdirSync(
     path.resolve(__dirname, dir),
     { recursive: true },
     (err: any) => {
@@ -35,9 +35,7 @@ function buildComponent(component : string) : void {
   console.log(`Processing ${component}...`);
 
   const compName = component
-  // prob better using regex
-    .replace(".scss", "")
-    .replace("cosmetics\\", "");
+    .replace(".scss", "");
 
   let cssStr = compileComponentsCSS(
     sass.compileString(
@@ -57,16 +55,21 @@ function buildComponent(component : string) : void {
     name: compName,
     css: cssStr,
   };
+
   if (component !== "variables") {
-    componentObjects[compName].sampleHTML = components[compName].sampleHTML;
+    componentObjects[compName].sampleHTML = [];
+
+    for (const n in components[compName].sampleHTML) {
+      componentObjects[compName].sampleHTML.push(n);
+    }
     componentObjects[compName].desc = components[compName].desc;
     componentObjects[compName].variables = getUsedVariables(cssStr);
   }
 }
 
-function processComponents(compPath : string) : void {
+export function processComponents() : void {
   fs
-    .readdirSync(compPath, {recursive : true})
+    .readdirSync(componentsPath, {recursive : true})
     .forEach((component : string) => {
       if (component.endsWith(".scss")) {
         buildComponent(component);
@@ -74,7 +77,7 @@ function processComponents(compPath : string) : void {
   });
 }
 
-processComponents(componentsPath);
+processComponents();
 
 let cssOut = "";
 for (const i in componentObjects) {
@@ -95,6 +98,10 @@ fs.writeFileSync(
 // but why
 fs.writeFileSync(
   path.resolve(__dirname, "dist/" + "components.json"),
+  JSON.stringify(componentObjects)
+);
+fs.writeFileSync(
+  path.resolve(__dirname, "src/app/" + "components.json"),
   JSON.stringify(componentObjects)
 );
 
