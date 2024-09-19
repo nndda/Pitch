@@ -1,0 +1,54 @@
+name:
+  Info List
+
+description:
+  Custom class that style description list element to two-column layout.
+
+sampleHTML:
+  - | # ------------------------------------------------------------------------------------------------
+
+    <dl class="custom-info">
+
+      <dt>Arts</dt>
+      <dd>
+        <a href="https://itch.io/">Amazing artist</a>
+      </dd>
+
+      <dt>Story</dt>
+      <dd>
+        <a href="https://itch.io/">Wonderful writer</a>
+      </dd>
+
+      <dt>Codes</dt>
+      <dd>
+        <a href="https://itch.io/">Creative coder</a>,
+        <a href="https://itch.io/">Proficient programmer</a>
+      </dd>
+
+    </dl>
+
+  - | # ------------------------------------------------------------------------------------------------
+
+    <dl class="custom-info">
+
+      <!-- Combined with 'Input' component -->
+      <dt>Move</dt>
+      <dd>
+        <kbd>W</kbd>,
+        <kbd>A</kbd>,
+        <kbd>S</kbd>,
+        <kbd>D</kbd>
+      </dd>
+
+      <dt>Jump</dt>
+      <dd>
+        <kbd>Space</kbd>
+      </dd>
+
+      <dt>Interract</dt>
+      <dd>
+        <kbd>F</kbd>,
+        <kbd>E</kbd>
+      </dd>
+
+    </dl>`

@@ -1,0 +1,23 @@
+name:
+  Input
+
+description:
+  Represent keyboard inputs, controls, or any buttons.
+
+sampleHTML:
+  - | # ------------------------------------------------------------------------------------------------
+
+    Press <kbd>Ctrl</kbd> + <kbd>A</kbd> to select all text.
+
+    Then press <kbd>Ctrl</kbd> + <kbd>C</kbd> to copy them.
+
+  - | # ------------------------------------------------------------------------------------------------
+
+    <kbd>W</kbd>,
+    <kbd>A</kbd>,
+    <kbd>S</kbd>,
+    <kbd>D</kbd>
+
+    <br>
+
+    <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>N</kbd>

@@ -1,30 +1,35 @@
+// Why do I even use TypeScript...
 export interface PitchComponentData {
+  // Name defined in its yaml file.
   name: string,
-  desc?: string,
-  variables?: Array<string>,
-  css?: string,
-  labels?: Array<string>,
+
+  // Description defined in its yaml file.
+  description?: string,
+
+  // HTML previews defined in its yaml file.
   sampleHTML?: Array<string>,
-  // codeHTML?: Array<string>,
+
+  // Type based off its parent's directory name.
+  type?: string,
+
+  // Compiled CSS from its SCSS file.
+  css?: string,
+
+  // itch.io built-in CSS variables from the component's CSS.
+  variables?: Array<string>,
+
+  labels?: Array<string>,
 }
 
 export interface PitchComponentsCollection {
   [key: string]: PitchComponentData,
 }
 
-export interface PitchComponentsLibrary {
-  [key: string]: {
-    desc: string,
-    type: string,
-    labels?: Array<string>,
-    sampleHTML?: Array<string>,
-  }
-}
-
 interface VariableList {
   [key: string]: string,
 }
 
+// Shorthand for itch.io built-in variables
 const varsList : VariableList = {
   "b": "itchio_bg_color",
   "b2": "itchio_bg2_color",
@@ -37,6 +42,7 @@ const varsList : VariableList = {
   "btn_s": "itchio_button_shadow_color",
 };
 
+// Get used itch.io built-in variables from 'css' string.
 export function getUsedVariables(css : string): Array<string> {
   let usedVars : Array<string> = [];
   for (const n in varsList) {
@@ -45,6 +51,7 @@ export function getUsedVariables(css : string): Array<string> {
   return usedVars;
 }
 
+// Create shorthand variables from used built-in variables (from getUsedVariables()).
 export function compileUsedVariables(vars : Array<string>): string {
   let css = "#wrapper{";
 
@@ -58,11 +65,3 @@ export function compileUsedVariables(vars : Array<string>): string {
 
   return css + "}"
 }
-
-import { compBase } from "../components/base"; 
-import { compDecoration } from "../components/decoration"; 
-
-export const components : PitchComponentsLibrary = {
-  ...compBase,
-  ...compDecoration,
-};
