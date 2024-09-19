@@ -2,15 +2,18 @@
   max-width: 553px;
   margin: auto;
   border: 1px solid var(--t);
-  border-color: var(--l);
+  border-color: var(--br);
   border-radius: 3px;
   margin-top: 1.5em;
   margin-bottom: 1.5em;
 
-  & details {
-    background: var(--b2s);
+  & > *, details {
+    // background: var(--b2s);
     padding: .75em 1.2em;
+    margin: 0;
+  }
 
+  & > details {
     &[open] summary {
       margin-bottom: .25em;
 
@@ -22,7 +25,7 @@
     /* Add border inbetween accordion item */
     &:not(:last-child) {
       border-bottom: 1px solid var(--t);
-      border-color: var(--l);
+      border-color: var(--br);
     }
   }
 
