@@ -1,6 +1,7 @@
 const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
@@ -36,6 +37,9 @@ module.exports = {
         },
       ],
     }),
+    new MiniCssExtractPlugin({
+      filename: "[name].css",
+    }),
     new webpack.ProvidePlugin({
         $: 'jquery',
         jQuery: 'jquery',
@@ -57,7 +61,19 @@ module.exports = {
         },
       },
       {
-        test: /\.s?css$/i,
+        test: /\.s?css$/,
+        include: [
+          path.resolve(__dirname, "src/components"),
+        ],
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader",
+          "sass-loader",
+        ],
+      },
+      {
+        test: /\.s?css$/,
+        exclude: path.resolve(__dirname, "src/components"),
         use: ["style-loader", "css-loader", "sass-loader"],
       },
     ]
