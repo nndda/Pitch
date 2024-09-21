@@ -2,7 +2,6 @@ const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
-const NodePolyfillPlugin = require("node-polyfill-webpack-plugin");
 
 module.exports = {
   mode: "development",
@@ -22,7 +21,6 @@ module.exports = {
     clean: true,
   },
   plugins: [
-    new NodePolyfillPlugin(),
     new HtmlWebpackPlugin({
       template: "./src/app/index.html",
     }),

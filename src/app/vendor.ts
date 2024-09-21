@@ -2,8 +2,7 @@
 import "normalize.css";
 
 // Icons
-import "material-symbols";
-import "@fortawesome/fontawesome-free/css/all.css";
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 // Fonts
 import "@fontsource/lato";

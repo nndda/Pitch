@@ -38,15 +38,11 @@ function initializeComponents() {
             </span>
 
             <button class="button-general component-select-all">
-              <span class="btn-icon material-symbols-outlined">
-                grid_view
-              </span>
+              <i class="fa-solid fa-square-check"></i>
             </button>
 
             <button class="button-general component-select-none">
-              <span class="btn-icon material-symbols-outlined">
-                square
-              </span>
+              <i class="fa-regular fa-square-minus"></i>
             </button>
 
           </dt>
