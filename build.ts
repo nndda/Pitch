@@ -1,23 +1,26 @@
+// Build script for the components.
+// Must be ran before building the app,
+// And whenever anything under `src/components/` is modified.
+
 const fs = require("fs");
 const path = require("path");
 const sass = require("sass");
 const CleanCSS = require("clean-css");
 const postcss = require("postcss");
 const autoprefixer = require("autoprefixer");
+import { parse } from 'yaml'
 
 import {
-  components,
-  PitchComponentsLibrary,
+  PitchComponentData,
   PitchComponentsCollection,
   getUsedVariables,
-  PitchComponentData,
 } from "./src/app/scripts/components";
 
-const componentsPath : string = path.resolve(__dirname, "src/components");
+const componentsPath : string = path.resolve(__dirname, "src/components/");
 
+// Create output components directories
 [
   "dist/components",
-  "dist/components/cosmetics",
   "dist/app",
 ].forEach((dir : string) => {
   fs.mkdirSync(
@@ -29,82 +32,173 @@ const componentsPath : string = path.resolve(__dirname, "src/components");
   );
 });
 
-let componentObjects : PitchComponentsCollection = {};
+let componentsCollection : PitchComponentsCollection = {};
 
-function buildComponent(component : string) : void {
-  console.log(`Processing ${component}...`);
+function isValidComponent(compPath : string) : boolean {
+  if (
+    isFileExt(compPath, ".scss") &&
+    // Ignore '_variables.scss' file.
+    path.basename(compPath) !== "_variables.scss"
+  ) {
 
-  const compName = component
-    .replace(".scss", "");
+    // Create absolute path.
+    let compPathAbs : string = path.join(componentsPath, compPath)
 
-  let cssStr = compileComponentsCSS(
+    // Check if there's component's yaml file.
+    let compYAMLPath : string = replaceFileExt(compPathAbs, ".yaml");
+
+    if (!fs.existsSync(compYAMLPath)) {
+      console.error(`${path.basename(compPathAbs)} component's .yaml is missing.`);
+      return false;
+    }
+
+    return isValidCompYAML(
+      parse(fs.readFileSync(
+        compYAMLPath, 
+        { encoding: "utf-8" }
+      ))
+    );
+  }
+  return false;
+}
+
+// Check if 'filename' use 'ext' file extension.
+// 'ext' must includes the dot.
+function isFileExt(filename : string, ext : string) : boolean {
+  return path.extname(filename) === ext;
+}
+
+// Replace the file extension of 'filename' to 'newExt'.
+// 'newExt' must includes the dot.
+function replaceFileExt(filename: string, newExt: string): string {
+  return filename.substring(0, filename.lastIndexOf(".")) + newExt;
+}
+
+// Required property for the component's yaml file.
+const requiredCompData = ["name", "description", "sampleHTML"];
+// Validate component's yaml.
+function isValidCompYAML(parsedData : any) : boolean {
+  for (const property of requiredCompData) {
+    if (!parsedData.hasOwnProperty(property)) {
+      console.error(`Property ${property} is missing.`);
+      return false;
+    }
+  }
+  return true;
+}
+
+// _variables.scss file is processed separately.
+componentsCollection["_variables"] = {
+  name: "_variables",
+  css: compileComponentsCSS(
     sass.compileString(
       fs.readFileSync(
-        path.join(componentsPath, component),
+        path.join(componentsPath, "_variables.scss"),
         { encoding: "utf-8" }
       )
     ).css
-  );
+  ),
+};
+fs.writeFileSync(
+  path.resolve(
+    __dirname, "dist/components/" +
+    replaceFileExt("_variables.scss", ".css")
+  ),
+  componentsCollection["_variables"].css
+);
 
-  fs.writeFileSync(
-    path.resolve(__dirname, "dist/components/" + component.replace(".scss", ".css")),
-    cssStr
-  );
+// Compile and add component to 'componentsCollection'.
+// 'compPath' is the path to the .scss source file.
+function buildComponent(compPath : string) : void {
+  // Validate component.
+  if (isValidComponent(compPath)) {
 
-  componentObjects[compName] = {
-    name: compName,
-    css: cssStr,
-  };
+    console.log(`Processing ${compPath}...`);
 
-  if (component !== "variables") {
-    componentObjects[compName].sampleHTML = [];
+    // Get the absolute filepath of the .scss source file.
+    const compPathAbs : string = path.join(componentsPath, compPath);
 
-    for (const n in components[compName].sampleHTML) {
-      componentObjects[compName].sampleHTML.push(n);
-    }
-    componentObjects[compName].desc = components[compName].desc;
-    componentObjects[compName].variables = getUsedVariables(cssStr);
+    // Get component's yaml data.
+    const compData : any = parse(
+      fs.readFileSync(
+        replaceFileExt(compPathAbs, ".yaml"), 
+        { encoding: "utf-8" }
+      )
+    );
+
+    // Component's type based off its parent's directory name.
+    const compType : string = path.basename(path.dirname(compPathAbs));
+
+    // Compile SCSS file to CSS string 'cssStr'.
+    let cssStr = compileComponentsCSS(
+      sass.compileString(
+        fs.readFileSync(compPathAbs, { encoding: "utf-8" })
+      ).css
+    );
+
+    // Component's 'id' consist of its type, and its name.
+    // i.e. 'components__accordion'
+    const compID : string = compType + "__" + replaceFileExt(path.basename(compPath), "");
+
+    // Save the compiled CSS string 'cssStr' to the output directory.
+    fs.writeFileSync(
+      path.resolve(
+        __dirname, "dist/components/" + compID + ".css"
+      ),
+      cssStr
+    );
+
+    // Define components to the collection.
+    componentsCollection[compID] = <PitchComponentData>({
+      // Component's data. Refer to src/app/components.ts for more info.
+      name: compData["name"],
+      description: compData["description"],
+      sampleHTML: compData["sampleHTML"],
+      css: cssStr,
+      type: compType,
+      variables: getUsedVariables(cssStr),
+    });
   }
 }
 
-export function processComponents() : void {
-  fs
-    .readdirSync(componentsPath, {recursive : true})
-    .forEach((component : string) => {
-      if (component.endsWith(".scss")) {
-        buildComponent(component);
-      }
-  });
-}
+// Crawl through the 'componentsPath' directory and its subdirectories.
+fs
+  .readdirSync(componentsPath, {recursive : true})
+  // Call 'buildComponent()' for each files inside.
+  .forEach((component : string) => {
+    buildComponent(component);
+});
 
-processComponents();
-
+// Log all component's CSS.
 let cssOut = "";
-for (const i in componentObjects) {
-  cssOut += componentObjects[i].css;
+for (const i in componentsCollection) {
+  cssOut += componentsCollection[i].css;
 }
+
 console.log(
   "-".repeat(80),
   "\n",
   cssOut,
   "\n",
-  "-".repeat(80)
+  "-".repeat(80),
 );
 
-fs.writeFileSync(
-  path.resolve(__dirname, "dist/app/" + "components.json"),
-  JSON.stringify(componentObjects)
-);
-// but why
-fs.writeFileSync(
-  path.resolve(__dirname, "dist/" + "components.json"),
-  JSON.stringify(componentObjects)
-);
-fs.writeFileSync(
-  path.resolve(__dirname, "src/app/" + "components.json"),
-  JSON.stringify(componentObjects)
-);
+// Save components collection to JSON.
+const componentsCollectionJSONStr : string = JSON.stringify(componentsCollection);
+// In the following directories.
+[
+  "dist/app/",
+  "dist/",
+  "src/app/",
+].forEach((value) => {
+  fs.writeFileSync(
+    path.resolve(__dirname, value + "components.json"),
+    componentsCollectionJSONStr
+  );
+});
 
+
+// Compress and process CSS string 'srcCSS' with CleanCSS, PostCSS, and Autoprefixer.
 function compileComponentsCSS(srcCSS : string): string {
   let css = srcCSS;
 
