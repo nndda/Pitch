@@ -7,7 +7,7 @@ export interface PitchComponentData {
   description?: string,
 
   // HTML previews defined in its yaml file.
-  sampleHTML?: Array<string>,
+  sampleHTML?: string[],
 
   // Type based off its parent's directory name.
   type?: string,
@@ -16,9 +16,9 @@ export interface PitchComponentData {
   css?: string,
 
   // itch.io built-in CSS variables from the component's CSS.
-  variables?: Array<string>,
+  variables?: string[],
 
-  labels?: Array<string>,
+  labels?: string[],
 }
 
 export interface PitchComponentsCollection {
@@ -42,9 +42,9 @@ const varsList : VariableList = {
   "btn_s": "itchio_button_shadow_color",
 };
 
-// Get used itch.io built-in variables from 'css' string.
-export function getUsedVariables(css : string): Array<string> {
-  let usedVars : Array<string> = [];
+// Get used itch.io built-in variables (in shorthand form) from 'css' string.
+export function getUsedVariables(css : string): string[] {
+  let usedVars : string[] = [];
   for (const n in varsList) {
     if (new RegExp("(\-\-" + n + ")").test(css)) usedVars.push(n);
   }
@@ -52,7 +52,7 @@ export function getUsedVariables(css : string): Array<string> {
 }
 
 // Create shorthand variables from used built-in variables (from getUsedVariables()).
-export function compileUsedVariables(vars : Array<string>): string {
+export function compileUsedVariables(vars : string[]): string {
   let css = "#wrapper{";
 
   vars.forEach(v => {
