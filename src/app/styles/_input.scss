@@ -7,6 +7,7 @@ button {
 }
 
 .button-general {
+  font-family: Ubuntu;
   display: inline-block;
   cursor: pointer;
   background: lighten($background, 8%);
@@ -66,34 +67,95 @@ input[type="text"] {
   background: lighten($background, 7%);
 }
 
-input[type="radio"] {
-  display: none;
+.preview-header-button {
+  color: $accent;
+  font-size: 1.4em;
+  cursor: pointer;
+  margin-right: .25em;
+  height: min-content;
 
-  & + label {
-    display: inline-block;
-    margin: .05em .5em;
+  & > i {
+    transition: .2s ease-out;
+    transform-origin: right bottom;
+  }
+
+  &:hover {
+    & > i {
+      transform: translateX(-.2em);
+    }
+  }
+}
+
+.theme-button {
+  display: inline-block;
+  width: 1.25em !important;
+  height: 1.25em !important;
+  background: linear-gradient(
+    -45deg,
+    var(--a) 49.5%, var(--b) 50%
+  );
+  border: 1px solid $text-col;
+  border-radius: 50%;
+
+  transition: .2s ease;
+
+  &:hover {
+    transform: rotate(180deg);
+  }
+}
+
+.button-group {
+  display: inline-block;
+  white-space: nowrap;
+  padding: .5em .8em;
+
+  & > label {
+    border: 1px solid $border-col;
+    padding: .25em 1em;
+    margin: 0;
     cursor: pointer;
-    padding: .5em;
-    padding-bottom: .6em;
+    transition: .2s ease;
 
-    & .unchecked,
-    & .checked {
-      font-size: .85em;
-      margin-right: .5em;
+    &:hover {
+      border-color: $primary;
     }
   }
 
-  &:checked {
-    & + label {
-      border-bottom: 3px solid $accent;
-      color: $accent;
-
-      & > .unchecked {
-        display: none;
-      }
-    }
-  }
-  &:not(:checked) + label > .checked {
+  & > input[type="radio"] {
     display: none;
+
+    &:checked + label {
+      background: lighten($primary, 5%);
+      color: $background !important;
+    }
+
+    &:first-child + label {
+      border-radius: 1.5em 0 0 1.5em ;
+    }
+  }
+
+  & > label:last-child {
+    border-radius: 0 1.5em 1.5em 0 ;
+  }
+}
+
+input[name="component-theme-preview"] {
+  & + label {
+    & > i {
+      background: linear-gradient(
+        45deg,
+        var(--t) 50%,
+        var(--l) 50%
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: #0000;
+    }
+  }
+
+  &:checked + label {
+    & > i {
+      text-shadow: 0 0 0 $accent;
+    }
   }
 }
