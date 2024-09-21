@@ -1,4 +1,20 @@
+@use "sass:color";
+
+// W H Y   T H O ????????
+@function lighten($color, $n) {
+  @return color.adjust($color, $lightness: $n);
+}
+
+@function darken($color, $n) {
+  @return color.adjust($color, $lightness: -$n);
+}
+
 $background: #131120;
 $text-col: #eaeaea;
 $border-col: #eaeaea50;
+
 $accent: #fc3a78;
+$accent-light: lighten($accent, 12.5%);
+
+$primary: #3ad2fc;
+$primary-light: lighten($primary, 12.5%);
