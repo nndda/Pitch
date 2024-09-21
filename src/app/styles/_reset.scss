@@ -6,3 +6,52 @@ fieldset, button {
 button {
   background: none;
 }
+
+// Simulate itch.io pages
+
+:root {
+  --itchio_bg_color: #131120;
+  --itchio_bg2_color: rgba(19, 17, 32);
+  --itchio_bg2_sub: #2a2837;
+  --itchio_text_color: #eaeaea;
+  --itchio_link_color: #fc3a78;
+  --itchio_border_color: #332f4e;
+  --itchio_button_color: #fc3a78;
+  --itchio_button_fg_color: #ffffff;
+  --itchio_button_shadow_color: #ff4d8b;
+}
+
+a {
+  color: var(--l);
+}
+
+blockquote {
+  border-left: 4px solid var(--l);
+  margin-left: 15px;
+}
+
+table {
+  margin: 1em 0;
+  border-collapse: collapse;
+  border: 1px solid var(--br);
+}
+
+table tr th {
+  vertical-align: top;
+  text-align: left;
+}
+
+hr {
+  margin: 1em 0;
+  border: 0;
+  height: 1px;
+  background-color: var(--br);
+}
+
+.text-right {
+  text-align: right;
+}
+
+.text-center {
+  text-align: center;
+}
