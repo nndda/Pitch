@@ -1,5 +1,5 @@
-const Prism = require("prismjs");
+import Prism = require("prismjs");
 
 export function highlightHTML(HTMLCodes : string) : string {
-	return <string>Prism.highlight(HTMLCodes, Prism.languages.html, "html");
+	return Prism.highlight(HTMLCodes, Prism.languages.html, "html");
 }

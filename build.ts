@@ -2,12 +2,12 @@
 // Must be ran before building the app,
 // And whenever anything under `src/components/` is modified.
 
-const fs = require("fs");
-const path = require("path");
-const sass = require("sass");
-const CleanCSS = require("clean-css");
-const postcss = require("postcss");
-const autoprefixer = require("autoprefixer");
+import fs = require("fs");
+import path = require("path");
+import sass = require("sass");
+import CleanCSS = require("clean-css");
+import postcss = require("postcss");
+import autoprefixer = require("autoprefixer");
 import { parse } from 'yaml'
 
 import {
@@ -25,10 +25,7 @@ const componentsPath : string = path.resolve(__dirname, "src/components/");
 ].forEach((dir : string) => {
   fs.mkdirSync(
     path.resolve(__dirname, dir),
-    { recursive: true },
-    (err: any) => {
-      if (err) throw err;
-    }
+    { recursive: true }
   );
 });
 
@@ -162,10 +159,9 @@ function buildComponent(compPath : string) : void {
 }
 
 // Crawl through the 'componentsPath' directory and its subdirectories.
-fs
-  .readdirSync(componentsPath, {recursive : true})
+(fs.readdirSync(componentsPath, {recursive : true}) as string[])
   // Call 'buildComponent()' for each files inside.
-  .forEach((component : string) => {
+  .forEach((component : string, i : number, a : string[]) => {
     buildComponent(component);
 });
 
