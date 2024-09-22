@@ -121,7 +121,7 @@ function buildComponent(compPath : string) : void {
     const compPathAbs : string = path.join(componentsPath, compPath);
 
     // Get component's yaml data.
-    const compData : any = parse(
+    const compData : PitchComponentData = parse(
       fs.readFileSync(
         replaceFileExt(compPathAbs, ".yaml"), 
         { encoding: "utf-8" }
@@ -205,7 +205,6 @@ const componentsCollectionJSONStr : string = JSON.stringify(componentsCollection
   );
 });
 
-
 // Compress and process CSS string 'srcCSS' with CleanCSS, PostCSS, and Autoprefixer.
 function compileComponentsCSS(srcCSS : string): string {
   let css = srcCSS;
@@ -217,8 +216,8 @@ function compileComponentsCSS(srcCSS : string): string {
         "since 2022",
       ]
     })
-  ]).process(css, {from: undefined}).then((result : any) => {
-    result.warnings().forEach((warn : any) => {
+  ]).process(css, {from: undefined}).then((result : postcss.Result) => {
+    result.warnings().forEach((warn : postcss.Warning) => {
       console.warn(warn.toString())
     });
     css = result.css;
@@ -233,10 +232,10 @@ function compileComponentsCSS(srcCSS : string): string {
     .replace("@charset \"UTF-8\";", "")
   );
 
-  cssCleaned.errors.forEach((err : any) => {
+  cssCleaned.errors.forEach((err : string) => {
     console.error(err);
   });
-  cssCleaned.warnings.forEach((warn : any) => {
+  cssCleaned.warnings.forEach((warn : string) => {
     console.warn(warn);
   });
 
