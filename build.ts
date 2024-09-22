@@ -8,7 +8,12 @@ import sass = require("sass");
 import CleanCSS = require("clean-css");
 import postcss = require("postcss");
 import autoprefixer = require("autoprefixer");
-import { parse } from 'yaml'
+import { parse } from "yaml";
+import createDOMPurify = require('dompurify');
+import { JSDOM } from "jsdom";
+
+const window = new JSDOM("").window;
+const DOMPurify = createDOMPurify(window);
 
 import {
   PitchComponentData,
@@ -145,12 +150,19 @@ function buildComponent(compPath : string) : void {
       cssStr
     );
 
+    compData.sampleHTML.forEach((value : string, index : number) => {
+      compData.sampleHTML[index] = sanitizeHTML(value);
+      if (value.includes("<style>")) {
+        console.log(sanitizeHTML(value));
+      }
+    });
+
     // Define components to the collection.
     componentsCollection[compID] = <PitchComponentData>({
       // Component's data. Refer to src/app/components.ts for more info.
-      name: compData["name"],
-      description: compData["description"],
-      sampleHTML: compData["sampleHTML"],
+      name: compData.name,
+      description: sanitizeHTML(compData.description),
+      sampleHTML: compData.sampleHTML,
       css: cssStr,
       type: compType,
       variables: getUsedVariables(cssStr),
@@ -229,4 +241,35 @@ function compileComponentsCSS(srcCSS : string): string {
   });
 
   return cssCleaned.styles;
+}
+
+
+// Sanitize component's preview HTML
+const DOMPurifyConfig : DOMPurify.Config = {
+  USE_PROFILES: {
+    html: true,
+    svg: false,
+    mathMl: false,
+  },
+  FORBID_TAGS: [
+    "style",
+    "script",
+    "svg",
+    "link",
+  ],
+  ALLOWED_ATTR: [
+    "class",
+    "style",
+    "width",
+    "height",
+  ],
+  ALLOW_ARIA_ATTR: false,
+  ALLOW_DATA_ATTR: false,
+  RETURN_DOM: false,
+  RETURN_DOM_FRAGMENT: false,
+  RETURN_TRUSTED_TYPE: false,
+};
+
+function sanitizeHTML(dirtyHTML : string) : string {
+  return DOMPurify.sanitize(dirtyHTML, DOMPurifyConfig) as string;
 }
