@@ -77,7 +77,7 @@ function replaceFileExt(filename: string, newExt: string): string {
 }
 
 // Required property for the component's yaml file.
-const requiredCompData = ["name", "description", "sampleHTML"];
+const requiredCompData = ["name", "description"];
 // Validate component's yaml.
 function isValidCompYAML(parsedData : any) : boolean {
   for (const property of requiredCompData) {
@@ -138,7 +138,7 @@ function buildComponent(compPath : string) : void {
       ).css
     );
 
-    // Component's 'id' consist of its type, and its name.
+    // Component's 'id' based off its type, and its name.
     // i.e. 'components__accordion'
     const compID : string = compType + "__" + replaceFileExt(path.basename(compPath), "");
 
@@ -150,19 +150,19 @@ function buildComponent(compPath : string) : void {
       cssStr
     );
 
-    compData.sampleHTML.forEach((value : string, index : number) => {
-      compData.sampleHTML[index] = sanitizeHTML(value);
-      if (value.includes("<style>")) {
-        console.log(sanitizeHTML(value));
-      }
-    });
-
     // Define components to the collection.
     componentsCollection[compID] = <PitchComponentData>({
       // Component's data. Refer to src/app/components.ts for more info.
       name: compData.name,
+      // Sanitize component's description.
       description: sanitizeHTML(compData.description),
-      sampleHTML: compData.sampleHTML,
+      // Sanitize component's preview HTML.
+      sampleHTML:
+        compData.sampleHTML !== undefined ?
+        compData.sampleHTML.map((value : string) => sanitizeHTML(value)) : [],
+      sampleIMG:
+        compData.sampleIMG !== undefined ?
+        compData.sampleIMG.map((value : string) => "./components/assets/" + value) : [],
       css: cssStr,
       type: compType,
       variables: getUsedVariables(cssStr),
@@ -173,7 +173,7 @@ function buildComponent(compPath : string) : void {
 // Crawl through the 'componentsPath' directory and its subdirectories.
 (fs.readdirSync(componentsPath, {recursive : true}) as string[])
   // Call 'buildComponent()' for each files inside.
-  .forEach((component : string, i : number, a : string[]) => {
+  .forEach((component : string) => {
     buildComponent(component);
 });
 
@@ -212,13 +212,13 @@ function compileComponentsCSS(srcCSS : string): string {
   postcss([
     autoprefixer({
       overrideBrowserslist: [
-        // "Electron 11.5.0",
+        "Electron 11.5.0",
         "since 2022",
       ]
     })
   ]).process(css, {from: undefined}).then((result : postcss.Result) => {
     result.warnings().forEach((warn : postcss.Warning) => {
-      console.warn(warn.toString())
+      console.warn(warn.toString());
     });
     css = result.css;
   });
@@ -242,8 +242,7 @@ function compileComponentsCSS(srcCSS : string): string {
   return cssCleaned.styles;
 }
 
-
-// Sanitize component's preview HTML
+// Sanitize HTML string
 const DOMPurifyConfig : DOMPurify.Config = {
   USE_PROFILES: {
     html: true,
