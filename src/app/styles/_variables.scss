@@ -18,3 +18,22 @@ $accent-light: lighten($accent, 12.5%);
 
 $primary: #3ad2fc;
 $primary-light: lighten($primary, 12.5%);
+
+@mixin style-scrollbar($col : $primary) {
+  &::-webkit-scrollbar {
+    width: .5em;
+    height: .5em;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $background; 
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $col; 
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: darken($col, 20%); 
+  }
+}

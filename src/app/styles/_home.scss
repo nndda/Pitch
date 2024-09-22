@@ -1,10 +1,14 @@
-.custom-preview {
+@use "variables" as *;
+
+#home-preview {
   transition: .5s ease ;
   background: var(--b2);
   padding: 1.5em 2em;
   color: var(--t);
   display: grid;
   grid-template-columns: 1fr 1fr 2fr;
+
+  border-bottom: 1px solid $border-col;
 
   & > div {
     margin: .5em;

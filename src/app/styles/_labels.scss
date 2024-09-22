@@ -1,0 +1,59 @@
+@use "variables" as *;
+
+@mixin label-style($col, $tooltip) {
+  position: relative;
+  text-transform: capitalize;
+  background: rgba($col, 0.3);
+  border: 1px solid darken($col, 5%);
+  padding: .1em .3em;
+  border-radius: 3px;
+  cursor: help;
+
+  &:hover::after {
+    transform: translateY(.6em);
+    opacity: 1;
+  }
+
+  &::after {
+    pointer-events: none;
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    bottom: -100%;
+    content: $tooltip;
+    white-space: nowrap;
+
+    text-transform: none;
+    background: $text-col;
+    color: $background;
+    box-shadow: 0 0 .2em .3em $background;
+    padding: .1em .5em;
+    border-radius: 4px;
+
+    height: 100%;
+    min-width: 100%;
+
+    transition: .2s ease;
+    transform: translateY(0);
+    opacity: 0;
+  }
+}
+
+#component-labels {
+  & > .label- {
+
+    &profile-and-jam {
+      @include label-style(
+        adjust-hue($accent, 0deg),
+        "This component can be used in profile and jam pages"
+      );
+    }
+
+    &no-custom-class {
+      @include label-style(
+        adjust-hue($accent, -60deg),
+        "This component does not use custom class"
+      );
+    }
+  }
+}

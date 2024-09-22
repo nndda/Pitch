@@ -2,6 +2,9 @@
 @use "input";
 @use "variables" as *;
 @use "modules" as *;
+@use "home";
+
+@use "intro";
 @use "preview";
 
 @use "components_dev";
@@ -14,16 +17,6 @@ body {
   background: $background;
   font-family: "Lato";
   font-size: .86em;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: "Ubuntu";
-}
-
-.title {
-  font-size: 1.6em;
-  font-weight: lighter;
-  letter-spacing: .1ch;
 }
 
 .main-app {
@@ -40,188 +33,212 @@ h1, h2, h3, h4, h5, h6 {
 
     & > .components-selector-container {
       display: flex;
-      flex-direction: column;
-      min-width: 210px;
-      padding: 1em;
+      flex-shrink: 1;
+      min-width: 240px;
       border-right: 1px solid $border-col;
+      overflow: hidden;
 
-      & > .component-search-container {
-        display: flex;
-        align-items: bottom;
-
-        & > input {
-          border-top-right-radius: 0;
-          border-bottom-right-radius: 0;
-        }
-
-        & > #component-search-clear {
-          padding: .15em .5em;
-          border-top-left-radius: 0;
-          border-bottom-left-radius: 0;
-          border-left: 1px solid $border-col;
-        }
+      &.collapsed {
+        width: 0;
+        border: none;
       }
 
-      & dl#components-list {
-        $font-size: 1.1em;
-
-        padding: 0;
-        padding-left: .2em;
-
-        & > dt {
+      & > .components-selector-container-inner {
+        display: flex;
+        flex-direction: column;
+        min-width: 210px;
+        // height: 100% !important;
+        padding: 1em;
+        padding-top: 1em !important;
+      
+        & > .component-search-container {
           display: flex;
-          align-items: center;
-          font-size: $font-size * 1.1;
+          align-items: bottom;
 
-          margin-top: .3em;
-          margin-bottom: .3em;
-
-          text-transform: capitalize;
-          color: $accent;
-
-          & > .component-type-title {
-            flex-grow: 1;
+          & > input {
+            border-radius: 4px;
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+            border: 0;
+            padding: .15em .5em;
+            background: lighten($background, 7%);
           }
 
-          & > button {
-            padding: .15em;
-            line-height: 0;
-            border-radius: 3px;
-            & > span {
-              font-size: 1em;
-            }
+          & > #component-search-clear {
+            padding: .15em .5em;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            border-left: 1px solid $border-col;
           }
         }
 
-        & > dd {
+        & dl#components-list {
+          $font-size: 1.1em;
+          flex-grow: 1;
 
-          display: flex;
-          margin-bottom: .2em;
-          margin-left: .5em;
-          font-size: $font-size;
-          list-style: none;
+          padding: 0;
+          padding-left: .2em;
 
-          & > label {
-            margin-right: .3em;
+          & > dt {
+            display: flex;
+            align-items: center;
+            font-size: $font-size * 1.1;
 
-            & > .checked-not {
-              color: $accent-light;
+            margin-top: .3em;
+            margin-bottom: .3em;
+
+            text-transform: capitalize;
+            color: $accent;
+
+            & > .component-type-title {
+              flex-grow: 1;
             }
 
-            & > span {
-              font-size: $font-size;
-            }
-
-            &:hover {
-              cursor: pointer;
-              color: $accent-light;
-
-              & ~ .component-toggle {
-                text-decoration: underline;
-                color: $accent-light;
+            & > button {
+              padding: .15em;
+              line-height: 0;
+              border-radius: 3px;
+              & > span {
+                font-size: 1em;
               }
             }
           }
 
-          & > .component-toggle {
-            text-transform: capitalize;
+          & > dd {
+            $active-col: lighten($primary, 30%);
+            $active-col: white;
 
-            &:hover {
-              text-decoration: underline;
-              cursor: pointer;
-              color: $accent-light;
+            color: rgba(white, 0.6);
+            display: flex;
+            margin-bottom: .3em;
+            margin-left: .5em;
+            font-size: $font-size;
+            list-style: none;
+
+            &.viewed {
+              & > button {
+                font-weight: bolder;
+                color: $accent !important;
+              }
             }
+
+            & > label {
+              margin-right: .3em;
+
+              & > .checked-not {
+                color: $active-col;
+              }
+
+              & > span {
+                font-size: $font-size;
+              }
+
+              &:hover {
+                cursor: pointer;
+                color: $active-col;
+
+                & ~ .component-toggle {
+                  text-decoration: underline;
+                  color: $active-col;
+                }
+              }
+            }
+
+            & > .component-toggle {
+            color: rgba(white, 0.6);
+              text-transform: capitalize;
+
+              &:hover {
+                text-decoration: underline;
+                cursor: pointer;
+                color: $active-col;
+              }
+            }
+
+            & > input {
+              display: none;
+
+              &:checked ~ label > .checked {
+                display: none;
+              }
+
+              &:not(:checked) ~ label > .checked-not {
+                display: none;
+              }
+
+              &:checked ~ button {
+                color: $active-col;
+              }
+            }
+
+
+          }
+        }
+
+        & > .copy-btn-container {
+          display: flex;
+          flex-direction: column;
+          min-height: 4em;
+          padding: 1em;
+          margin-bottom: 1em;
+
+          & > #copy-notification {
+            font-size: 1.1em;
+            text-align: center;
+            white-space: nowrap;
+            margin-top: .5em;
+
           }
 
-          & > input {
-            display: none;
+          & > .pick-2-notif {
+            text-align: center;
+            color: lighten($accent, 25%);
+            margin-top: .2em;
+            min-height: 1.2em;
+          }
 
-            &:checked ~ label > .checked {
+          & > #compile-components-btn {
+            &[disabled] {
+              opacity: .7;
+            }
+
+            &:not([disabled]) ~ .pick-2-notif {
               display: none;
             }
-
-            &:not(:checked) ~ label > .checked-not {
-              display: none;
-            }
-
-            &:checked ~ button {
-              color: $accent-light;
-            }
           }
-
-
         }
+
       }
 
-      & > .copy-btn-container {
-        padding: 1em;
-        // min-height: 50px;
-
-        & > #copy-notification {
-          white-space: nowrap;
-          margin-left: .5em;
-        }
-
-        & > .pick-2-notif {
-          color: $accent;
-          opacity: .8;
-          margin-top: .5em;
-        }
-
-        & > #compile-components-btn {
-          &[disabled] {
-            opacity: .7;
-          }
-
-          &:not([disabled]) ~ .pick-2-notif {
-            display: none;
-          }
-        }
-      }
     }
 
-    & > .component-info {
+    & > .column-right {
       display: flex;
-      // border: 1px solid $border-col;
-      // max-height: 400px;
       flex-grow: 1;
       flex-direction: column;
+
+      max-width: 960px;
+      min-width: 760px;
 
       & > .preview-info {
         font-size: 1.1em;
         padding: 1.5em;
         background: darken($background, 2.5%);
-        padding-top: 0;
-        padding-bottom: 0;
+        padding-top: .25em;
+        padding-bottom: 1.25em;
 
         & > .preview-header {
           display: flex;
           flex-direction: row;
           align-items: center;
 
-          & > #home-button {
-            color: $accent;
-            font-size: 1.4em;
-            cursor: pointer;
-            margin-right: .25em;
-            // background: red;
-            // border-radius: 50%;
-            height: min-content;
-
-            & > i {
-              transition: .2s ease-out;
-              transform-origin: right bottom;
-            }
-
-            &:hover {
-              & > i {
-                transform: translateX(-.2em);
-              }
-            }
+          & > #component-title {
+            margin: .5em 0 .2em;
           }
 
-          & > #component-title {
-            text-transform: capitalize;
+          & > .right-control {
+            flex-grow: 1;
+            text-align: right;
           }
         }
 
@@ -230,19 +247,38 @@ h1, h2, h3, h4, h5, h6 {
         }
       }
 
-      & > #home-content {
-        padding: 1.5em;
-        padding-top: 0;
-      }
-
       & > .preview-container {
         flex-grow: 1;
-        // max-height: 330px;
         overflow-y: scroll;
       }  
 
     }
   }
+}
+
+#wrapper {
+  @include style-scrollbar($accent);
+}
+
+.non-preview {
+  --t: $text-col;
+  --b: #131120;
+  --b2: rgba(19, 17, 32);
+  --b2s: #2a2837;
+  --t: #eaeaea;
+  --l: #fc3a78;
+  --br: #332f4e;
+  --btn: #fc3a78;
+  --btn_f: #ffffff;
+  --btn_s: #ff4d8b;
+  font-family: Ubuntu;
+}
+
+.home-content {
+  color: $text-col;
+  letter-spacing: .05ch;
+  line-height: 1.6em;
+  padding: 2em;
 }
 
 #component-preview {
@@ -253,4 +289,74 @@ h1, h2, h3, h4, h5, h6 {
     background: none;
     border: none;
   }
+}
+
+.preview-control {
+  display: flex;
+  align-items: center;
+
+  & > div:last-child {
+    text-align: right;
+    flex-grow: 1;
+  }
+}
+
+.css-output-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  min-height: 12em;
+  max-height: 16.5em;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+
+  & > #css-output-textarea {
+    @include style-scrollbar();
+
+    font-family: monospace;
+
+    color: rgba($text-col, 0.8);
+    background: rgba($text-col, 0.05);
+
+    flex-grow: 1;
+
+    margin: auto;
+    margin-top: .5em;
+    margin-bottom: 1em;
+    word-break: break-all;
+    resize: none;
+    width: 100%;
+    border: 0;
+    outline: 0;
+    padding: .8em;
+    box-sizing: border-box;
+
+    &:focus {
+      outline: 3px dashed $primary;
+    }
+  }
+
+  &:before {
+    content: "CSS OUTPUT";
+    font-family: monospace;
+    font-size: 1.5em;
+
+    letter-spacing: .7ch;
+    text-align: center;
+    color: rgba($text-col, 0.7);
+
+    display: block;
+    position: absolute;
+
+    top: 45%;
+    left: 0;
+    width: 100%;
+  }
+}
+
+::selection, ::-moz-selection {
+  color: $background;
+  background: $primary;
 }

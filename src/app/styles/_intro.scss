@@ -1,0 +1,54 @@
+@use "variables" as *;
+
+#components-list {
+  position: relative;
+}
+
+#components-list > .onboard-check-dummy {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 9.5%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.driver-popover {
+  color: $background;
+  background: $text-col;
+}
+
+
+.driver-popover-arrow-side-right {
+  border-right-color: $text-col;
+}
+
+.driver-popover-navigation-btns > button {
+  color: $accent;
+  border-color: $accent;
+  background: lighten($text-col, 50%);
+
+  &.driver-popover-prev-btn {
+    color: $background;
+    border-color: $background;
+  }
+}
+
+
+svg.driver-overlay > path {
+  fill: rgba($background, 92%) !important;
+}
+
+.intro-popover {
+  display: flex;
+  font-size: 1.1em;
+  margin-top: 10px;
+  text-align: center;
+  
+  & > .pitch-logo {
+    display: block;
+    height: 100px;
+    transform: rotate(-35deg);
+    margin-right: -1em;
+  }
+}
