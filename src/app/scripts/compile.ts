@@ -1,4 +1,3 @@
-import { copyComponentsCSS } from "./copy";
 import {
   PitchComponentsCollection,
   compileUsedVariables,
@@ -7,7 +6,7 @@ import {
 export function compileComponents(
   compList : string[],
   compObj: PitchComponentsCollection
-) {
+) : string {
   let usedVars : string[] = [];
   let css = "";
 
@@ -23,5 +22,5 @@ export function compileComponents(
 
   css += compileUsedVariables(usedVars);
 
-  copyComponentsCSS(css);
+  return css;
 }
