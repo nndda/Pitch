@@ -2,7 +2,13 @@ import "./styles/main.scss";
 
 import { PitchComponentsCollection } from "./scripts/components";
 import { compileComponents } from "./scripts/compile";
-import { copyNotif, copyComponentHTML } from "./scripts/copy";
+import {
+  copyNotif,
+  copyComponentsCSS,
+  copyComponentHTML,
+  copyTimeout,
+  CSSCopyOutput
+} from "./scripts/copy";
 import { highlightHTML } from "./scripts/highlighter";
 
 const d = document;
@@ -15,6 +21,8 @@ const compileCompBtn = <HTMLInputElement>d.getElementById("compile-components-bt
 
 const compTitle = d.getElementById("component-title");
 const compDesc = d.getElementById("component-description");
+
+export const wrapper = document.getElementById("wrapper");
 
 const compPreview = $("#component-preview");
 const compLabelsCont = $("#component-labels");
@@ -108,25 +116,28 @@ function initializeComponents() {
 
 const homeButton = $("#home-button");
 const homePreview = $("#home-preview");
+const homeContent = $(".home-content");
 
 homeButton.on("click", function() {
-  setHome()
+  setHome();
 });
 
 function setHome(): void {
-  homePreview.toggleClass("hidden", false);
   homeButton.toggleClass("hidden", true);
+  homePreview.toggleClass("hidden", false);
+  homeContent.toggleClass("hidden", false);
   compPreview.toggleClass("hidden", true);
 
   compPreview.html("");
-  compDesc.textContent = "Small collection of CSS components and tweaks designed specifically for Itch.io project pages";
+  compDesc.textContent = "Collection of CSS components and tweaks designed specifically for itch.io project pages.";
   compTitle.textContent = "Pitch";
+
   if (currViewedComp !== null) {
     currViewedComp.removeClass("viewed");
   }
-}
 
-// const sideBar = $(".components-selector-container");
+  wrapper.scrollTop = 0;
+}
 
 let currViewedComp : JQuery<HTMLElement> = null;
 
@@ -139,76 +150,130 @@ function setCompInfo(comp : string) {
 
   compLabelsCont.html("");
 
+  clearTimeout(copyTimeout);
+
   for (const n in componentsCollection[comp].sampleHTML) {
-    compPreview.append($(`
+    const compHTMLRaw = componentsCollection[comp].sampleHTML[n];
+
+    const compPreviewEl = $(`
       <div class="component-container-single">
         <div class="component-display">
           ${componentsCollection[comp].sampleHTML[n]}
         </div>
 
-        <details class="code-collapse">
-          <summary class="button-general">
-            <i class="fa-solid fa-code"></i> &nbsp;
-            <span class="text-show">Show</span>
-            <span class="text-hide">Hide</span>
-            HTML
-          </summary>
-          <button class="comp-copy button-general" data-html-id="${n}">
-            <i class="fa-solid fa-copy"></i>
-            <span class="comp-copy-text">
-              Copy
+        <div class="component-preview-control">
+          <button class="button-general comp-show-html">
+            <i class="fa-solid fa-eye"></i>
+            <span>
+              Show HTML
             </span>
           </button>
-        </details>
 
-        <div class="component-html">
-          <pre><code>${highlightHTML(componentsCollection[comp].sampleHTML[n])}</code></pre>
+          ${navigator.clipboard ? `
+            <button class="button-general comp-copy">
+              <i class="fa-solid fa-copy"></i>
+              <span class="comp-copy-text">
+                Copy
+              </span>
+            </button>
+          ` : ""}
+        </div>
+
+        <div class="component-html html-hidden">
+          <pre><code>${highlightHTML(compHTMLRaw)}</code></pre>
+        </div>
+      </div>
+      <br>
+    `);
+
+    const componentHTML = compPreviewEl.find(".component-html");
+    compPreviewEl.on("click", ".comp-show-html", () => {
+      if (componentHTML.hasClass("html-hidden")) {
+        componentHTML.removeClass("html-hidden");
+      } else {
+        componentHTML.addClass("html-hidden");
+      };
+    });
+
+    if (navigator.clipboard) {
+      const componentCopyText = compPreviewEl.find(".comp-copy-text")[0];
+      compPreviewEl.on("click", ".comp-copy", () => {
+        copyComponentHTML(compHTMLRaw, componentCopyText);
+      });
+    }
+
+    compPreview.append(compPreviewEl);
+  }
+
+  for (const n in componentsCollection[comp].sampleIMG) {
+    compPreview.append($(`
+      <div class="component-container-single component-container-img">
+        <div class="component-display">
+          <img class="component-sample-img"
+            src="${componentsCollection[comp].sampleIMG[n]}"
+          >
         </div>
       </div>
       <br>
     `));
-
-    compPreview.on("click", ".comp-copy", function() {
-      copyComponentHTML(
-        componentsCollection[comp].sampleHTML[<number>(<unknown>($(this).attr("data-html-id")))],
-        $(this).children(".comp-copy-text")[0]
-      );
-    });
   }
 
   if (componentsCollection[comp].labels !== undefined) {
     compLabelsCont.append($(`${
-      componentsCollection[comp].labels.reduce(function(acc, val) {
-        return acc + `<span class="label-${val}">${val.replace(/\-/g, " ")}</span>`
+      componentsCollection[comp].labels.reduce((accum : string, value : string) => {
+        return accum + `<span class="label-${value}">${value.replace(/\-/g, " ")}</span>`
       }, "")
     }`));
   }
 
   homeButton.toggleClass("hidden", false);
   homePreview.toggleClass("hidden", true);
+  homeContent.toggleClass("hidden", true);
   compPreview.toggleClass("hidden", false);
+
+  wrapper.scrollTop = 0;
 }
 
-compileCompBtn.addEventListener("click", () => {
-  let selectedComps : string[] = [];
+if (navigator.clipboard) {
+  compileCompBtn.addEventListener("click", () => {
+    let selectedComps : string[] = [];
 
-  d.querySelectorAll("input[name='component-toggle']:checked")
-    .forEach(function(el) {
-      selectedComps.push(el.getAttribute("data-comp"));
+    d.querySelectorAll("input[name='component-toggle']:checked")
+      .forEach(function(el) {
+        selectedComps.push(el.getAttribute("data-comp"));
+    });
+
+    copyComponentsCSS(compileComponents(selectedComps, componentsCollection));
   });
+} else {
+  compileCompBtn.disabled = true;
+  compileCompBtn.textContent = "Unable to copy";
+  copyNotif.innerText = "";
 
-  compileComponents(selectedComps, componentsCollection);
-});
+  d.querySelector(".pick-2-notif").textContent = "";
+}
 
 function calculateComponents() {
   const compSelected = d.querySelectorAll("input[name='component-toggle']:checked");
-  compileCompBtn.disabled = compSelected.length <= 0;
-  copyNotif.innerText = "";
 
-  for (let n = compSelected.length - 1; n >= 0; n--) {
-
+  if (navigator.clipboard) {
+    compileCompBtn.disabled = compSelected.length <= 0;
+    copyNotif.innerText = "";
   }
+
+  let selectedComps : string[] = [];
+
+  compSelected.forEach(function(el) {
+      selectedComps.push(el.getAttribute("data-comp"));
+  });
+
+  CSSCopyOutput.val(compileComponents(selectedComps, componentsCollection));
 }
+
+CSSCopyOutput.val("");
+CSSCopyOutput.on("click", () => {
+  CSSCopyOutput[0].select();
+});
 
 calculateComponents();
 
@@ -218,3 +283,7 @@ setHome();
 
 import "./scripts/themes";
 import "./scripts/search";
+
+$(document).on("load", () => {
+  $("components-selector-container-inner").css("height", "100%");
+});
