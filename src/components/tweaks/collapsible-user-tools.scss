@@ -1,0 +1,16 @@
+@media (min-width: 960px) {
+  .user_tools > li > a {
+    width: 100%;
+    transition: .3s ease-out transform;
+
+    &:not(:hover) {
+      opacity: .5;
+      color: #0000;
+      transform: translateX(calc(100% - 2.5em));
+
+      & > span {
+        color: #0000;
+      }
+    }
+  }
+}
