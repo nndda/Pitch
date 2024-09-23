@@ -1,6 +1,6 @@
 dl.custom-info {
   display: grid;
-  grid-template-columns: 25% 60%;
+  grid-template-columns: auto auto;
 
   & > * {
     margin: .2em 8px;
@@ -9,5 +9,13 @@ dl.custom-info {
   & > dt {
     text-align: right;
     font-weight: 700;
+  }
+
+  &.custom-left {
+    grid-template-columns: min-content auto;
+  }
+
+  &.custom-right {
+    grid-template-columns: auto min-content;
   }
 }

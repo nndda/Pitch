@@ -1,9 +1,10 @@
 blockquote.custom-callout {
   font-style: normal; /* Remove the italic blockquote font-style */
-  border-color: var(--l);
+  border: 1px solid var(--l);
+  border-left: 5px solid var(--l);
   padding: .05em 1em;
   padding-bottom: 1em;
-  background: var(--b2s);
+  background: var(--b2);
   border-radius: 4px;
 
   // & > p {
