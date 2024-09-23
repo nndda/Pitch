@@ -2,7 +2,7 @@ name:
   Accordion
 
 description:
-  Turn walls of texts into list of collapsable contents.
+  Turn walls of texts into list of collapsible contents.
 
 sampleHTML:
   - | # ------------------------------------------------------------------------------------------------
@@ -15,12 +15,12 @@ sampleHTML:
 
       <details>
         <summary>Can I use this in a commercial project?</summary>
-        Yes! The generated CSS codes is licensed under <em>Creative Commons Zero v1.0 Universal</em>.
+        Absolutely! The generated CSS codes is licensed under <em>Creative Commons Zero v1.0 Universal</em>.
       </details>
 
       <details>
         <summary>Why can't I use this on profile or jam pages?</summary>
-        All components make use of the page's theme. Unlike project page, profile page and jam page didn't have some of the require color variables needed for the components to be displayed correctly (e.g. button color).
+        Some components make use of the page's theme. Unlike project page, profile page and jam page didn't have some of the required color variables needed for the components to be displayed correctly (e.g. button color).
       </details>
     </div>
 
@@ -28,8 +28,8 @@ sampleHTML:
 
     <div class="custom-accrd">
       <p>
-        This asset pack is licensed under 
-        <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">
+        This &lt;asset pack&gt; is licensed under 
+        <a href="https://creativecommons.org/licenses/by/4.0/">
           CC BY 4.0
         </a>
         <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" width="20px">
@@ -61,10 +61,9 @@ sampleHTML:
         <summary>How to give attribution</summary>
         <p>
           Use my itch.io username
-          <code>nnda</code>
+          <code>&lt;ur name&gt;</code>
           <br>
-          And if possible, provide link to my itch.io
-          <a href="https://nnda.itch.io" target="_blank">profile page</a>.
+          And if possible, provide link to my itch.io profile.
         </p>
       </details>
     </div>

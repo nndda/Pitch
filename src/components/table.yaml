@@ -58,19 +58,19 @@ sampleHTML:
       </thead>
       <tbody>
         <tr>
-          <td>Fire ball</td>
+          <td>Fire Ball</td>
           <td>🔥</td>
           <td>2</td>
           <td>20-25</td>
         </tr>
         <tr>
-          <td>Ice spear</td>
+          <td>Ice Spear</td>
           <td>❄️</td>
           <td>3</td>
           <td>10-25</td>
         </tr>
         <tr>
-          <td>Lightning bolt</td>
+          <td>Lightning Bolt</td>
           <td>⚡</td>
           <td>5</td>
           <td>15-20</td>

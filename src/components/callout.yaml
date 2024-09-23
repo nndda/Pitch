@@ -19,12 +19,12 @@ sampleHTML:
     <blockquote class="custom-callout">
 
       <h3>Note!</h3>
-      This project is still in its alpha stage. And is subject to frequent changes, and bugs.
+      This &lt;project name&gt; is still in its alpha stage. And is subject to frequent changes, and bugs.
 
       <br>
       <br>
 
-      <a href="https://github.com/nndda" class="custom-lb">Report bugs here</a>
+      <a target="_blank" href="https://github.com/nndda" class="custom-lb">Report bugs here</a>
 
       And feel free to share your feedback in the comments!
 

@@ -16,7 +16,7 @@ sampleHTML:
 
       <dt>Story</dt>
       <dd>
-        <a href="https://itch.io/">Wonderful writer</a>
+        <a href="https://itch.io/">Witty writer</a>
       </dd>
 
       <dt>Codes</dt>
@@ -29,7 +29,9 @@ sampleHTML:
 
   - | # ------------------------------------------------------------------------------------------------
 
-    <dl class="custom-info">
+    <h2>Input & Controls</h2>
+
+    <dl class="custom-info custom-left">
 
       <!-- Combined with 'Input' component -->
       <dt>Move</dt>
@@ -51,4 +53,9 @@ sampleHTML:
         <kbd>E</kbd>
       </dd>
 
-    </dl>`
+      <dt>Inventory</dt>
+      <dd>
+        <kbd>Tab</kbd>
+      </dd>
+
+    </dl>
