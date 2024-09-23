@@ -12,9 +12,6 @@ module.exports = {
   },
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
-    fallback: {
-      "fs": false,
-    },
   },
   output: {
     filename: "[name].js",
@@ -28,12 +25,12 @@ module.exports = {
     new CopyPlugin({
       patterns: [
         {
-          from: path.resolve(__dirname, "dist/components"),
-          to: path.resolve(__dirname, "dist/app/components"),
+          from: "./src/components/_assets/",
+          to: "./components/assets/",
         },
         {
-          from: path.resolve(__dirname, "dist/components.json"),
-          to: path.resolve(__dirname, "dist/app/components.json"),
+          from: "./assets/pitch.svg",
+          to: "./pitch-logo.svg",
         },
       ],
     }),
