@@ -9,6 +9,10 @@ export interface PitchComponentData {
   // HTML previews defined in its yaml file.
   sampleHTML?: string[],
 
+  // Image previews defined in its yaml file.
+  // Stored in src/components/_assets/
+  sampleIMG?: string[],
+
   // Type based off its parent's directory name.
   type?: string,
 
@@ -53,15 +57,18 @@ export function getUsedVariables(css : string): string[] {
 
 // Create shorthand variables from used built-in variables (from getUsedVariables()).
 export function compileUsedVariables(vars : string[]): string {
-  let css = "#wrapper{";
+  if (vars.length >= 1) {
+    let css = "#wrapper{";
 
-  vars.forEach(v => {
-    for (const k in varsList) {
-      if (k === v) {
-        css += `--${k}:var(--${varsList[v]});`;
+    vars.forEach(v => {
+      for (const k in varsList) {
+        if (k === v) {
+          css += `--${k}:var(--${varsList[v]});`;
+        }
       }
-    }
-  });
+    });
 
-  return css + "}"
+    return css + "}";
+  }
+  return "";
 }
