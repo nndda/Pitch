@@ -5,29 +5,29 @@ export const searchClearBtn : JQuery<HTMLButtonElement> = $("#component-search-c
 searchClear();
 
 searchClearBtn.on("click", function() {
-	searchClear();
+  searchClear();
 });
 
 searchBox.on("input", function() {
-	searchComp();
+  searchComp();
 });
 
 function searchClear() {
-	searchBox.val("");
-	searchComp();
+  searchBox.val("");
+  searchComp();
 }
 
 function searchComp() {
-	let searchTerm = searchBox.val().toLowerCase();
-	if (searchTerm != "") {
-		searchClearBtn.removeAttr("disabled");
-		searchItems.each(function() {
-			$(this).toggleClass("hidden",
-				!($(this).attr("data-search").indexOf(searchTerm) !== -1)
-			);
-		});
-	} else {
-		searchItems.toggleClass("hidden", false);
-		searchClearBtn.attr("disabled", "");
-	};
+  let searchTerm = searchBox.val().toLowerCase();
+  if (searchTerm != "") {
+    searchClearBtn.removeAttr("disabled");
+    searchItems.each(function() {
+      $(this).toggleClass("hidden",
+        !($(this).attr("data-search").indexOf(searchTerm) !== -1)
+      );
+    });
+  } else {
+    searchItems.toggleClass("hidden", false);
+    searchClearBtn.attr("disabled", "");
+  };
 }
