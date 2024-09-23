@@ -53,7 +53,7 @@ const themes : string[] = [
   `,
 ]
 
-const wrapper = document.getElementById("wrapper");
+import { wrapper } from "../index";
 
 function initializeThemeButtons() : void {
   const themeBtnContainer = $(".theme-selector-container > .theme-buttons");
