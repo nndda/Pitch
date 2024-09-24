@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pitch.CSS</title>
+</head>
+<body>
+  <div class="main-app">
+    <div class="components-overview">
+      <div class="components-selector-container">
+
+        <div class="components-selector-container-inner">
+
+          <div class="component-search-container">
+            <input id="component-search" type="text" placeholder="Search components...">
+            <button id="component-search-clear" class="button-general">
+              <i class="fa-solid fa-delete-left"></i>
+            </button>
+          </div>
+
+          <dl id="components-list">
+            <div class="onboard-check-dummy"></div>
+          </dl>
+
+          <div class="css-output-container">
+            <textarea id="css-output-textarea" readonly></textarea>
+          </div>
+
+          <div class="copy-btn-container">
+
+            <button id="compile-components-btn" class="button-primary">
+              <i class="fa-solid fa-copy"></i>
+              &nbsp;
+              <span class="btn-text">
+                Copy CSS
+              </span>
+            </button>
+
+            <small id="copy-notification"></small>
+
+            <div class="pick-2-notif">
+              Pick at least 1 component
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="column-right">
+
+        <div class="preview-info">
+          <div class="preview-header">
+
+            <button id="home-button" class="preview-header-button hidden">
+              <i class="fa-solid fa-circle-chevron-left"></i>
+            </button>
+
+            <h2 id="component-title">Pitch</h2>
+
+            <div class="right-control">
+            </div>
+          </div>
+
+          <p id="component-labels"></p>
+
+          <div class="component-description-container">
+            <p id="component-description"></p>
+          </div>
+
+          <div class="preview-control">
+            <div class="theme-selector-container">
+              <span>Preview Theme</span>
+              <div class="button-group theme-buttons"></div>
+            </div>
+
+            <div>
+              <button id="help-button" class="button-general">
+                <i class="fa-solid fa-question"></i>
+                &nbsp;
+                Help
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div id="wrapper" class="preview-container">
+          
+<!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+
+          <div id="home-preview" class="custom-preview">
+
+            <div>
+              <h4>Label</h4>
+              <div>
+                <a target="_blank" class="custom-lb" href="https://itch.io/games/tag-cats">Cats</a>
+                <a target="_blank" href="https://itch.io/games/tag-pixel-art" class="custom-lb">Pixel Art</a>
+                <span class="custom-lb">🎃 Spooky</span>
+                <span class="custom-lb">👾 Space</span>
+                <hr>
+                <a target="_blank" class="custom-lb" href="https://itch.io/games/on-sale">On Sale</a>
+                <a target="_blank" class="custom-lb" href="https://itch.io/games/tag-multiplayer">Multiplayer</a>
+                <a target="_blank" class="custom-lb" href="https://itch.io/games/free">Free</a>
+              </div>
+            </div>
+            <div>
+              <h4>Input</h4>
+                <ul>
+                  <li>Use <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> to move around</li>
+                  <br>
+                  <li>Hold down <kbd>RMB</kbd> to aim, Press <kbd>LMB</kbd> to shoot</li>
+                </ul>
+            </div>
+
+            <div>
+              <h4>Accordion</h4>
+              <div>
+                <div class="custom-accrd">
+                  <details>
+                    <summary>How do I get access to custom CSS in my game page?</summary>
+                    You can contact itch.io support to enable the custom CSS feature.
+                  </details>
+
+                  <details>
+                    <summary>Can I use this in a commercial project?</summary>
+                    Absolutely! The generated CSS codes is licensed under <em>Creative Commons Zero v1.0 Universal</em>.
+                  </details>
+
+                  <details>
+                    <summary>Why can't I use this on profile or jam pages?</summary>
+                    Some components make use of the page's theme. Unlike project page, profile page and jam page didn't have some of the required color variables needed for the components to be displayed correctly (e.g. button color).
+                  </details>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h4>Alert Box</h4>
+              <div>
+                <blockquote class="custom-callout">
+                  <h3>⚠ Important Note</h3>
+                  <p><em>(Some)</em> components are not compatible with profile pages and/or jam pages.</p>
+                </blockquote>
+              </div>
+            </div>
+
+            <div>
+              <h4>Info List</h4>
+              <dl class="custom-info">
+
+                <dt>Story</dt>
+                <dd>
+                  <a target="_blank" href="https://itch.io">Witty writer</a>
+                </dd>
+
+                <dt>Arts</dt>
+                <dd>
+                  <a target="_blank" href="https://itch.io">Illustrious illustrator</a>,
+                  <a target="_blank" href="https://itch.io">Adorable assets</a>,
+                </dd>
+
+                <dt>Labels</dt>
+                <dd>
+                  <span class="custom-lb">some</span>
+                  <i class="custom-lb">labels</i>
+                </dd>
+
+                <dt>Shortcut</dt>
+                <dd>
+                  <kbd>CTRL</kbd> + <kbd>F</kbd>
+                </dd>
+
+              </dl>
+            </div>
+
+            <div>
+              <h4>Spoiler</h4>
+              <p>This is a fully visible text. But some part of this text is <span class="custom-hd">hidden</span> (unless you hover over it) (or highlight it). Heres some more <span class="custom-hd">hidden words</span>.<br>
+              </p>
+            </div>
+          </div>
+
+<!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+
+          <div id="component-preview"></div>
+
+          <!--
+          <div class="home-content non-preview">
+
+            <h1>Getting Started</h1>
+
+            Requirement:
+
+            <ul>
+              <li>
+                Custom CSS access on your itch.io account
+              </li>
+              <li>
+                A little bit of HTML and CSS know-how
+              </li>
+            </ul>
+
+            <br>
+            <h2>Getting custom CSS access</h2>
+
+            <p>
+              Contact <a target="_blank" href="https://itch.io/docs/creators/design#the-itchio-theme-editor/custom-css">itch.io support</a> to request the CSS access. Read the <a target="_blank" href="https://itch.io/docs/creators/css-guide">CSS Customization Guide</a> first before proceeding.
+            </p>
+
+            <br>
+            <h2>Working with the components</h2>
+
+            <p>
+              Pick components of your choice on the sidebar. Click on its name to see the live preview of it, and tick the checkbox to add it to your collection. After that, click <b class="custom-lb">Copy CSS</b> button. The CSS codes of the components of your selection should be copied to your clipboard.
+            </p>
+
+            <p>
+              If you're unable to copy it from the button, copy it from the <code class="custom-lb">'CSS OUTPUT'</code> container on the left.
+            </p>
+
+            <p>
+              Paste the copied CSS codes to your page's custom CSS field, and save it. Its located at the bottom of the theme editor sidebar.
+            </p>
+
+            <p>
+              Go to your project's edit page. Edit the content/description in HTML mode. And follow the use example for each components. Copy-paste the sample codes provided in the component's live preview for a quick start.
+            </p>
+
+            <blockquote class="custom-callout">
+              <h3>
+                <i class="fa-solid fa-info-circle"></i>
+                Important Note
+              </h3>
+              Once you edit your page's content in HTML mode, Its best to keep using HTML mode onward to avoid messing up the layout.
+            </blockquote>
+
+            <blockquote class="custom-callout">
+              <h3>
+                <i class="fa-solid fa-warning"></i>
+                Limitations
+              </h3>
+              <p><em>(Some)</em> components are not compatible with profile pages and/or jam pages.</p>
+            </blockquote>
+
+            <br>
+            <h3>
+              <i class="fa-solid fa-info-circle"></i>
+              &nbsp;
+              Best practices &amp; tips
+            </h3>
+
+            <ul>
+              <li>
+                Always back up and save your html codes to a file, everytime you make changes.
+              </li>
+              <li>
+                Use external code editor, like Sublime Text or Visual Studio Code for convenience like syntax highlighting, autocompletion, etc.
+              </li>
+              <li>
+                Test your project's page against multiple screen sizes, and on multiple browsers, including the <a target="_blank" href="https://itch.io/app">itch app</a> before publishing it.
+              </li>
+            </ul>
+          </div>
+          -->
+
+          <div class="home-content non-preview">
+            <i class="fa-solid fa-scale-balanced"></i>
+            &nbsp;
+            The Pitch web app is licensed under MIT license.
+            <br>
+            <i class="fa-brands fa-creative-commons-zero"></i>
+            &nbsp;
+            The CSS components are licensed under CC0.
+            <br>
+            The placeholder content in the HTML preview and/or in the image preview may be subject to different license or copyright restrictions.
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

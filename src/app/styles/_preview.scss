@@ -1,0 +1,74 @@
+@use "variables" as *;
+
+#component-preview {
+  color: var(--t);
+
+  & > .component-container-single {
+    $padding: .8em;
+    $bg-main: lighten($background, 1.5%);
+    $bg-code: darken($background, 1%);
+
+    display: flex;
+    flex-direction: column;
+
+    border: 1px solid rgba($text-col, 0.2);
+    border-radius: 6px;
+    background: $bg-main;
+    padding: $padding 0;
+    padding-top: 0;
+    margin-bottom: 1.25em;
+    overflow: hidden;
+
+    &.component-container-img {
+      --b2: transparent;
+
+      & img {
+        display: block;
+        margin: auto;
+      }
+    }
+
+    & > div {
+      position: relative;
+      margin: 0 $padding 0;
+      padding: $padding;
+    }
+
+    & > .component-display {
+      border-bottom: 1px solid rgba($text-col, 0.1);
+      padding: $padding * 1.5;
+      padding-bottom: $padding * 2;
+      margin: 0;
+      margin-bottom: .25em;
+      background: var(--b2);
+      transition: .5s ease;
+
+      & h1, h2, h3, h4, h5, h6 {
+        font-family: var(--ff, initial);
+      }
+    }
+
+    & > .component-preview-control {
+      font-family: Ubuntu;
+    }
+
+    & > .component-html {
+      font-family: Ubuntu;
+      color: $text-col;
+      background: $bg-code;
+      border-radius: 6px;
+      height: auto;
+      overflow: auto;
+
+      @include style-scrollbar;
+
+      &.html-hidden {
+        display: none;
+      }
+
+      & > pre {
+        margin-top: 0;
+      }
+    }
+  }
+}

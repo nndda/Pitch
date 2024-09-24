@@ -1,0 +1,96 @@
+name:
+  Accordion
+
+description:
+  Turn walls of texts into list of collapsible contents.
+
+sampleHTML:
+  - | # ------------------------------------------------------------------------------------------------
+
+    <div class="custom-accrd">
+      <details>
+        <summary>How do I get access to custom CSS in my game page?</summary>
+        You can contact itch.io support to enable the custom CSS feature.
+      </details>
+
+      <details>
+        <summary>Can I use this in a commercial project?</summary>
+        Absolutely! The generated CSS codes is licensed under <em>Creative Commons Zero v1.0 Universal</em>.
+      </details>
+
+      <details>
+        <summary>Why can't I use this on profile or jam pages?</summary>
+        Some components make use of the page's theme. Unlike project page, profile page and jam page didn't have some of the required color variables needed for the components to be displayed correctly (e.g. button color).
+      </details>
+    </div>
+
+  - | # ------------------------------------------------------------------------------------------------
+
+    <div class="custom-accrd">
+      <p>
+        This &lt;asset pack&gt; is licensed under 
+        <a href="https://creativecommons.org/licenses/by/4.0/">
+          CC BY 4.0
+        </a>
+        <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" width="20px">
+        <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" width="20px">
+      </p>
+
+      <details>
+        <summary>What you can and can't do</summary>
+          <ul>
+            <li>
+              Use in commercial or non-commercial projects
+            </li>
+            <li>
+              Modify, or adapt to your needs
+            </li>
+            <li>
+              Redistribute and share
+              <ul>
+                <li>though, plz redistribute them as a part of a project, and not as an asset pack by itself</li>
+              </ul>
+            </li>
+            <li>
+              No AI or NFTs
+            </li>
+          </ul>
+      </details>
+
+      <details>
+        <summary>How to give attribution</summary>
+        <p>
+          Use my itch.io username
+          <code>&lt;ur name&gt;</code>
+          <br>
+          And if possible, provide link to my itch.io profile.
+        </p>
+      </details>
+    </div>
+
+  - | # ------------------------------------------------------------------------------------------------
+
+    <div class="custom-accrd custom-left">
+      <details>
+        <summary>Left-aligned accordion</summary>
+        This accordion is aligned to the left.
+      </details>
+    </div>
+
+  - | # ------------------------------------------------------------------------------------------------
+
+    <div class="custom-accrd custom-right">
+      <details>
+        <summary>Right-aligned accordion</summary>
+        This accordion is aligned to the right.
+      </details>
+    </div>
+
+  - | # ------------------------------------------------------------------------------------------------
+
+    <div class="custom-accrd custom-full-w">
+      <details>
+        <summary>Full width accordion</summary>
+        This accordion takes full width of the page.
+      </details>
+    </div>

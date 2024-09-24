@@ -1,0 +1,44 @@
+name:
+  Input
+
+description:
+  Represent keyboard inputs, controls, or any buttons.
+
+sampleHTML:
+  - | # ------------------------------------------------------------------------------------------------
+
+    Press <kbd>Ctrl</kbd> + <kbd>A</kbd> to select all text.
+
+    <br>
+    <br>
+
+    Then press <kbd>Ctrl</kbd> + <kbd>C</kbd> to copy them.
+
+  - | # ------------------------------------------------------------------------------------------------
+
+    Use <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> or <kbd>←</kbd> <kbd>→</kbd> <kbd>↑</kbd> <kbd>↓</kbd> to move around.
+
+    <br>
+    <br>
+
+    Hold down <kbd>Shift</kbd> to sprint, and <kbd>C</kbd> to crouch.
+
+    <br>
+    <br>
+
+    Press <kbd>Tab</kbd> to open your inventory.
+
+
+  - | # ------------------------------------------------------------------------------------------------
+
+    <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>N</kbd>
+
+    <br>
+    <br>
+
+    <kbd>Shift</kbd> + <kbd>Tab</kbd>
+
+    <br>
+    <br>
+
+    <kbd>Ctrl</kbd> + <kbd>C</kbd>

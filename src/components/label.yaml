@@ -1,0 +1,57 @@
+name:
+  Label
+
+description:
+  Highlight genres, tags, tools, or jam. Can be applied to hyperlinks or plain text.
+
+sampleHTML:
+  - | # ------------------------------------------------------------------------------------------------
+
+    <i class="custom-lb">
+      🎃 Halloween
+    </i>
+
+    <b class="custom-lb">
+      #OpenSource
+    </b>
+
+    <span class="custom-lb">
+      Made with ☕
+    </span>
+
+  - | # ------------------------------------------------------------------------------------------------
+
+    <h1>
+      Exciting Features
+      <small class="custom-lb">New</small>
+    </h1>
+
+    <h2>
+      Another Features
+      <small class="custom-lb">Beta</small>
+    </h2>
+
+    <h3>
+      New Features?
+      <small class="custom-lb">Alpha</small>
+    </h3>
+
+  - | # ------------------------------------------------------------------------------------------------
+
+    <h1>
+      Some Features
+      <small class="custom-lb">V2.4</small>
+    </h1>
+
+    <p style="max-width: 400px">
+      Hello hello, these are some of the features
+      that everyone have been waiting for!
+      We have added some
+      <i class="custom-lb">brand new</i>
+      and
+      <i class="custom-lb">epic</i>
+      features to the app!!!
+      Don't mind anything after this sentence.
+      I'm just typing whatever to pad this paragraph.
+      You can safely ignore this.
+    </p>

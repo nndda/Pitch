@@ -1,0 +1,10 @@
+@use "variables" as *;
+
+@mixin border-light {
+  border: 1px solid $border-col;
+  border-radius: 3px;
+}
+
+.hidden {
+  display: none !important;
+}

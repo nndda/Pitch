@@ -1,0 +1,23 @@
+blockquote.custom-callout {
+  font-style: normal; /* Remove the italic blockquote font-style */
+  border: 1px solid var(--l);
+  border-left: 5px solid var(--l);
+  padding: .05em 1em;
+  padding-bottom: 1em;
+  background: var(--b2);
+  border-radius: 4px;
+
+  // & > p {
+  //   margin-top: 0;
+  //   margin-bottom: 1em !important; /* Override devlog paragraph margin */
+  // }
+
+  & > :first-child {
+    color: var(--l); /* Color the heading */
+  
+    & > img {
+      vertical-align: middle;
+      max-height: 1em;
+    }
+  }
+}

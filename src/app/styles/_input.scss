@@ -1,0 +1,161 @@
+@use "variables" as *;
+
+button {
+  &[disabled] {
+    cursor: not-allowed;
+  }
+}
+
+.button-general {
+  font-family: Ubuntu;
+  display: inline-block;
+  cursor: pointer;
+  background: lighten($background, 8%);
+  padding: .25em 1em;
+  border-radius: 8px;
+
+  &:hover {
+    background: lighten($background, 12%);
+  }
+}
+
+.button-primary {
+  display: inline-block;
+  color: $text-col;
+  background: rgba($accent, 50%);
+  padding: .2em .8em;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: transform .2s ease;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  &:not(:disabled):hover {
+    background: rgba($accent, 70%);
+  }
+
+  &.light {
+    font-size: .9em;
+    border-radius: 16px;
+    color: $text-col;
+    background: rgba($text-col, 10%);
+    border: 1px solid $border-col;
+  }
+
+  & > .btn-icon, & > .btn-text {
+    display: inline-block;
+    margin-top: -.5em;
+    vertical-align: middle;
+    vertical-align: -webkit-baseline-middle;
+  }
+
+  & > .btn-icon {
+    font-size: .9em;
+    margin-right: .5em;
+  }
+
+  & > .btn-text {
+  }
+}
+
+input[type="text"] {
+  border-radius: 4px;
+  border: 0;
+  padding: .15em .5em;
+  background: lighten($background, 7%);
+}
+
+.preview-header-button {
+  color: $accent;
+  font-size: 1.4em;
+  cursor: pointer;
+  margin-right: .25em;
+  height: min-content;
+
+  & > i {
+    transition: .2s ease-out;
+    transform-origin: right bottom;
+  }
+
+  &:hover {
+    & > i {
+      transform: translateX(-.2em);
+    }
+  }
+}
+
+.theme-button {
+  display: inline-block;
+  width: 1.25em !important;
+  height: 1.25em !important;
+  background: linear-gradient(
+    -45deg,
+    var(--a) 49.5%, var(--b) 50%
+  );
+  border: 1px solid $text-col;
+  border-radius: 50%;
+
+  transition: .2s ease;
+
+  &:hover {
+    transform: rotate(180deg);
+  }
+}
+
+.button-group {
+  display: inline-block;
+  white-space: nowrap;
+  padding: .5em .8em;
+
+  & > label {
+    border: 1px solid $border-col;
+    padding: .25em 1em;
+    margin: 0;
+    cursor: pointer;
+    transition: .2s ease;
+
+    &:hover {
+      border-color: $primary;
+    }
+  }
+
+  & > input[type="radio"] {
+    display: none;
+
+    &:checked + label {
+      background: lighten($primary, 5%);
+      color: $background !important;
+    }
+
+    &:first-child + label {
+      border-radius: 1.5em 0 0 1.5em ;
+    }
+  }
+
+  & > label:last-child {
+    border-radius: 0 1.5em 1.5em 0 ;
+  }
+}
+
+input[name="component-theme-preview"] {
+  & + label {
+    & > i {
+      background: linear-gradient(
+        45deg,
+        var(--t) 50%,
+        var(--l) 50%
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: #0000;
+    }
+  }
+
+  &:checked + label {
+    & > i {
+      text-shadow: 0 0 0 $accent;
+    }
+  }
+}

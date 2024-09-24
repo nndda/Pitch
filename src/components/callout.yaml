@@ -1,0 +1,31 @@
+name:
+  Callout
+
+description:
+  Inform and highlight content warnings, additional informations, or technical issues.
+
+sampleHTML:
+  - | # ------------------------------------------------------------------------------------------------
+
+    <blockquote class="custom-callout">
+
+      <h3>&#9888; Content Warning</h3>
+      Strong language, mild violence, blood, and flashing lights.
+
+    </blockquote>
+
+  - | # ------------------------------------------------------------------------------------------------
+
+    <blockquote class="custom-callout">
+
+      <h3>Note!</h3>
+      This &lt;project name&gt; is still in its alpha stage. And is subject to frequent changes, and bugs.
+
+      <br>
+      <br>
+
+      <a target="_blank" href="https://github.com/nndda" class="custom-lb">Report bugs here</a>
+
+      And feel free to share your feedback in the comments!
+
+    </blockquote>

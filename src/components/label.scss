@@ -1,0 +1,26 @@
+.custom-lb {
+  background: var(--btn);
+  color: var(--btn_f);
+  text-decoration: none; /* Remove underline for hyperlinks */
+  padding: .2ch 1ch;
+  margin: .15em;
+  font-weight: 700;
+  border-radius: 4px;
+  line-height: 1em;
+  display: inline-block;
+
+  & > img {
+    max-height: 1.25em;
+    vertical-align: -.4em;
+    padding: .2em .3em;
+  }
+}
+
+small.custom-lb {
+  font-size: .6em;
+}
+
+/* Override hyperlink font color */
+a.custom-lb {
+  color: var(--btn_f);
+}
