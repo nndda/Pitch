@@ -61,19 +61,8 @@ module.exports = {
       },
       {
         test: /\.s?css$/,
-        include: [
-          path.resolve(__dirname, "src/components"),
-        ],
-        use: [
-          MiniCssExtractPlugin.loader,
-          "css-loader",
-          "sass-loader",
-        ],
-      },
-      {
-        test: /\.s?css$/,
         exclude: path.resolve(__dirname, "src/components"),
-        use: ["style-loader", "css-loader", "sass-loader"],
+        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
       },
     ]
   },
