@@ -10,17 +10,17 @@ export function compileComponents(
   let usedVars : string[] = [];
   let css = "";
 
-  compList.forEach((comp) => {
-    css += compObj[comp].css;
+  compList.forEach((comp : string) => {
+    if (comp !== "") {
+      css += compObj[comp].css;
 
-    compObj[comp].variables.forEach((vars) => {
-      if (!usedVars.includes(vars)) {
-        usedVars.push(vars);
-      }
-    });
+      compObj[comp].variables.forEach((vars : string) => {
+        if (!usedVars.includes(vars)) {
+          usedVars.push(vars);
+        }
+      });
+    }
   });
 
-  css += compileUsedVariables(usedVars);
-
-  return css;
+  return compileUsedVariables(usedVars) + css;
 }
