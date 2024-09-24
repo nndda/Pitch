@@ -27,7 +27,7 @@ export const wrapper = document.getElementById("wrapper");
 const compPreview = $("#component-preview");
 const compLabelsCont = $("#component-labels");
 
-let compGroups : string[] = []
+let compGroups : string[] = [];
 
 function initializeComponents() {
   for (const comp in componentsCollection) {
@@ -52,7 +52,6 @@ function initializeComponents() {
             <button class="button-general component-select-none">
               <i class="fa-regular fa-square-minus"></i>
             </button>
-
           </dt>
         `);
 
@@ -96,15 +95,14 @@ function initializeComponents() {
         </dd>
       `);
 
-      compElemItem.on("input", `input#${compID}`, function() {
+      compElemItem.on("input", `input#${compID}`, () => {
         calculateComponents();
       });
 
-      compElemItem.on("click", "button.component-toggle", function() {
+      compElemItem.on("click", "button.component-toggle", () => {
         setCompInfo(comp);
-        if (currViewedComp !== null) {
-          currViewedComp.removeClass("viewed");
-        }
+
+        currViewedComp?.removeClass("viewed");
         currViewedComp = compElemItem;
         currViewedComp.addClass("viewed");
       });
@@ -132,9 +130,7 @@ function setHome(): void {
   compDesc.textContent = "Collection of CSS components and tweaks designed specifically for itch.io project pages.";
   compTitle.textContent = "Pitch";
 
-  if (currViewedComp !== null) {
-    currViewedComp.removeClass("viewed");
-  }
+  currViewedComp?.removeClass("viewed");
 
   wrapper.scrollTop = 0;
 }
@@ -158,7 +154,7 @@ function setCompInfo(comp : string) {
     const compPreviewEl = $(`
       <div class="component-container-single">
         <div class="component-display">
-          ${componentsCollection[comp].sampleHTML[n]}
+          ${compHTMLRaw}
         </div>
 
         <div class="component-preview-control">
@@ -187,6 +183,7 @@ function setCompInfo(comp : string) {
     `);
 
     const componentHTML = compPreviewEl.find(".component-html");
+
     compPreviewEl.on("click", ".comp-show-html", () => {
       if (componentHTML.hasClass("html-hidden")) {
         componentHTML.removeClass("html-hidden");
@@ -236,14 +233,7 @@ function setCompInfo(comp : string) {
 
 if (navigator.clipboard) {
   compileCompBtn.addEventListener("click", () => {
-    let selectedComps : string[] = [];
-
-    d.querySelectorAll("input[name='component-toggle']:checked")
-      .forEach(function(el) {
-        selectedComps.push(el.getAttribute("data-comp"));
-    });
-
-    copyComponentsCSS(compileComponents(selectedComps, componentsCollection));
+    copyComponentsCSS(CSSCopyOutput.val());
   });
 } else {
   compileCompBtn.disabled = true;
@@ -263,11 +253,14 @@ function calculateComponents() {
 
   let selectedComps : string[] = [];
 
-  compSelected.forEach(function(el) {
+  compSelected.forEach((el) => {
       selectedComps.push(el.getAttribute("data-comp"));
   });
 
-  CSSCopyOutput.val(compileComponents(selectedComps, componentsCollection));
+  CSSCopyOutput.val(compileComponents(
+    selectedComps,
+    componentsCollection
+  ));
 }
 
 CSSCopyOutput.val("");

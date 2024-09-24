@@ -24,22 +24,18 @@ export function copyComponentsCSS(css : string) {
 export let copyTimeout : NodeJS.Timeout;
 
 export function copyComponentHTML(str : string, elCopyNotif : HTMLElement) {
-  // if (navigator.clipboard) {
-    navigator.clipboard.writeText(str).then(() => {
-      elCopyNotif.textContent = "Copied!";
-      copyTimeout = setTimeout(() => {
-        elCopyNotif.textContent = "Copy";
-      }, 2500);
+  navigator.clipboard.writeText(str).then(() => {
+    elCopyNotif.textContent = "Copied!";
+    copyTimeout = setTimeout(() => {
+      elCopyNotif.textContent = "Copy";
+    }, 2500);
 
-    },() => {
-      elCopyNotif.textContent = "Copy failed!";
-      copyTimeout = setTimeout(() => {
-        elCopyNotif.textContent = "Copy";
-      }, 2500);
-    });
-  // } else {
-  //   elCopyNotif.textContent = "Unable to copy!";
-  // }
+  },() => {
+    elCopyNotif.textContent = "Copy failed!";
+    copyTimeout = setTimeout(() => {
+      elCopyNotif.textContent = "Copy";
+    }, 2500);
+  });
 }
 
 export const CSSCopyOutput : JQuery<HTMLTextAreaElement> = $("#css-output-textarea");

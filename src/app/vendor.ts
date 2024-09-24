@@ -7,9 +7,9 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 // Fonts
 import "@fontsource/lato";
 import "@fontsource/ubuntu";
-import "@fontsource/lora"
-import "@fontsource/courgette"
-import "@fontsource/pixelify-sans"
+import "@fontsource/lora";
+import "@fontsource/courgette";
+import "@fontsource/pixelify-sans";
 
 // Spinners
 // import "spinkit/spinkit.min.css";
@@ -18,4 +18,4 @@ import "@fontsource/pixelify-sans"
 import "./styles/prism-duotone-dark.css";
 
 import "driver.js/dist/driver.css";
-import "./scripts/intro"
+import "./scripts/intro";
