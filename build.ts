@@ -269,5 +269,7 @@ const DOMPurifyConfig : DOMPurify.Config = {
 };
 
 function sanitizeHTML(dirtyHTML : string) : string {
-  return DOMPurify.sanitize(dirtyHTML, DOMPurifyConfig) as string;
+  return (DOMPurify.sanitize(dirtyHTML, DOMPurifyConfig) as string)
+    // Wish I didn't have to do this.
+    .replace(/href="[^"]+"/g, `href="#"`);
 }
