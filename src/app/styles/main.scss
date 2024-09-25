@@ -361,7 +361,7 @@ body {
   background: $primary;
 }
 
-code {
+:not(.component-html) code {
   background: lighten($background, 15%);
   padding: 0 .5em;
   border-radius: .2em;
