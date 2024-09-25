@@ -14,3 +14,16 @@ Collection of CSS components and tweaks designed specifically for itch.io projec
 - Automatically match your page's theme
 - Responsive design that adapts to different screen sizes
 - Free and open source under MIT and CC0 license
+
+## Installation
+
+```sh
+# Install the dependencies
+npm install
+
+# Run the development server at localhost:8080
+npm run start
+
+# Build the app to dist/
+npm run build
+```
