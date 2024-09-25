@@ -1,0 +1,14 @@
+.custom-rating {
+  display: inline-flex;
+  color: var(inherit, var(--l));
+  text-decoration: none;
+
+  & > span {
+    transition: .15s ease-out;
+    cursor: pointer;
+
+    &:hover ~ span {
+      color: var(--t);
+    }
+  }
+}

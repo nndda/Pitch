@@ -139,7 +139,7 @@ let currViewedComp : JQuery<HTMLElement> = null;
 
 function setCompInfo(comp : string) {
   compTitle.textContent = componentsCollection[comp].name;
-  compDesc.textContent = componentsCollection[comp].description;
+  compDesc.innerHTML = componentsCollection[comp].description;
 
   compPreview.off("click");
   compPreview.html("");

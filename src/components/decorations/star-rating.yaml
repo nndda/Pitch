@@ -1,0 +1,58 @@
+name:
+  Star Rating
+
+description:
+  This component is pure decoration only. The amount of stars that lights up
+  does not reflect the stars that will be given.
+  Remember to change the <code>href</code> attributes to <code>https://username.itch.io/project-name/rate</code>.
+  Change the URL to your project page.
+
+sampleHTML:
+  - | # ------------------------------------------------------------------------------------------------
+
+    <h1 class="text-center">
+      <a class="custom-rating" href="#">
+        <span>★</span>
+        <span>★</span>
+        <span>★</span>
+        <span>★</span>
+        <span>★</span>
+      </a>
+    </h1>
+
+  - | # ------------------------------------------------------------------------------------------------
+
+    <h2>
+      Rate this project | 
+      <a class="custom-rating" href="#">
+        <span>★</span>
+        <span>★</span>
+        <span>★</span>
+        <span>★</span>
+        <span>★</span>
+      </a>
+    </h2>
+
+  - | # ------------------------------------------------------------------------------------------------
+
+    <h3>
+      <a class="custom-rating" href="#">
+        <span>★</span>
+        <span>★</span>
+        <span>★</span>
+        <span>★</span>
+        <span>★</span>
+      </a>
+    </h3>
+
+  - | # ------------------------------------------------------------------------------------------------
+
+    <h3 >
+      <a class="custom-rating" href="#" style="color: gold">
+        <span>★</span>
+        <span>★</span>
+        <span>★</span>
+        <span>★</span>
+        <span>★</span>
+      </a>
+    </h3>
