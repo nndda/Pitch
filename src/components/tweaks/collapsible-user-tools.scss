@@ -1,15 +1,21 @@
 @media (min-width: 960px) {
-  .user_tools > li > a {
-    width: 100%;
-    transition: .3s ease-out transform;
+  .user_tools {
+    margin: 0;
+    padding: 10px 10px 0 0;
+    overflow: hidden;
 
-    &:not(:hover) {
-      opacity: .5;
-      color: #0000;
-      transform: translateX(calc(100% - 2.5em));
+    & > li > a {
+      width: 100%;
+      transition: .3s ease-out transform;
 
-      & > span {
+      &:not(:hover) {
+        opacity: .5;
         color: #0000;
+        transform: translateX(calc(100% - 2.5em));
+
+        & > span {
+          color: #0000;
+        }
       }
     }
   }
