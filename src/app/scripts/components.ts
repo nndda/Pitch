@@ -50,7 +50,7 @@ const varsList : VariableList = {
 export function getUsedVariables(css : string): string[] {
   let usedVars : string[] = [];
   for (const n in varsList) {
-    if (new RegExp("(\-\-" + n + ")").test(css)) usedVars.push(n);
+    if (new RegExp("(--" + n + ")").test(css)) usedVars.push(n);
   }
   return usedVars;
 }
