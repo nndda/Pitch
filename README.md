@@ -3,11 +3,16 @@
 <br>
 Pitch
 </h1>
+
 <p align="center">
+<a href="https://nnda.itch.io/pitch/" target="_blank"><img src="https://img.shields.io/badge/Available%20on%20itch.io-ff2449?style=flat-square&logo=itchdotio&logoColor=%23ffffff" alt="Available on itch.io" height="20"></a>
+<a href="https://github.com/nndda/Pitch/actions/workflows/codeql.yml" target="_blank"><img src="https://img.shields.io/github/actions/workflow/status/nndda/Pitch/codeql.yml?branch=main&event=push&style=flat-square&logo=github&label=CodeQL&labelColor=%23282e33&color=%2329aa46" alt="CodeQL status" height="20"></a>
+<br>
+<br>
 Collection of CSS components and tweaks designed specifically for itch.io project pages.
 </p>
+
 <img align="center" src="./assets/images/app-preview.png">
-<a align="center" href="https://nnda.itch.io/pitch/" target="_blank"><img height="48" src="https://github.com/user-attachments/assets/5b5616ce-e1f8-4e8f-bcea-7a279e314fba"></a>
 
 ## Features
 
