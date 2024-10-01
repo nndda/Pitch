@@ -16,9 +16,16 @@ on:
     branches:
       - "main"
       - "dev"
+    paths:
+      - "**/*.ts"
+      - "**/*.js"
+      - ".github/workflows/codeql.yml"
   pull_request:
     branches:
       - "main"
+      - "**/*.ts"
+      - "**/*.js"
+      - ".github/workflows/codeql.yml"
   schedule:
     - cron: "0 0 1 * *"
 
