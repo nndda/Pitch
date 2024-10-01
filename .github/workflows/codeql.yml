@@ -17,7 +17,7 @@ on:
       - '**/*.js'
       - '.github/workflows/codeql.yml'
   schedule:
-    - cron: 0 0 1 * *
+    - cron: '0 0 1 * *'
 
 jobs:
   analyze:
