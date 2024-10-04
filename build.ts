@@ -2,14 +2,14 @@
 // Must be ran before building the app,
 // And whenever anything under `src/components/` is modified.
 
-import fs = require("fs");
-import path = require("path");
-import sass = require("sass");
-import CleanCSS = require("clean-css");
-import postcss = require("postcss");
-import autoprefixer = require("autoprefixer");
+import * as fs from "fs";
+import * as path from "path";
+import * as sass from "sass";
+import * as CleanCSS from "clean-css";
+import * as postcss from "postcss";
+import * as autoprefixer from "autoprefixer";
 import { parse } from "yaml";
-import createDOMPurify = require('dompurify');
+import * as createDOMPurify from "dompurify";
 import { JSDOM } from "jsdom";
 
 const window = new JSDOM("").window;
