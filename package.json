@@ -7,14 +7,11 @@
   "scripts": {
     "build_components": "tsc build.ts && node build.js",
     "rebuild_components": "node build.js",
-
     "prestart": "npm run build_components",
     "prebuild": "npm run build_components",
-
     "start": "webpack-dev-server --config webpack.dev.js --port 8080",
     "build": "webpack --config webpack.config.js",
-
-    "lint_scripts": "npx eslint src/**/*.ts build.ts"
+    "lint_scripts": "npx eslint --config eslint.config.mjs ."
   },
   "author": "nnda",
   "license": "MIT",
