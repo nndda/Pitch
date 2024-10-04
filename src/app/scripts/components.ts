@@ -25,13 +25,9 @@ export interface PitchComponentData {
   labels?: string[],
 }
 
-export interface PitchComponentsCollection {
-  [key: string]: PitchComponentData,
-}
+export type PitchComponentsCollection = Record<string, PitchComponentData>
 
-interface VariableList {
-  [key: string]: string,
-}
+export type VariableList = Record<string, string>
 
 // Shorthand for itch.io built-in variables
 const varsList : VariableList = {
