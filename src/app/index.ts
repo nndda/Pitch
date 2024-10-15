@@ -1,5 +1,6 @@
 import "./styles/main.scss";
 
+import { highlightHTML } from "./scripts/highlighter";
 import { PitchComponentsCollection } from "./scripts/components";
 import { compileComponents } from "./scripts/compile";
 import {
@@ -9,11 +10,11 @@ import {
   copyTimeout,
   CSSCopyOutput
 } from "./scripts/copy";
-import { highlightHTML } from "./scripts/highlighter";
 
 const d = document;
 
-const componentsCollection : PitchComponentsCollection = require("./components.json")
+import componentsCollectionJSON from "./components.json";
+const componentsCollection : PitchComponentsCollection = componentsCollectionJSON
 
 const compList = $("#components-list");
 
