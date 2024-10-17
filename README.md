@@ -12,7 +12,7 @@ Pitch
 Collection of CSS components and tweaks designed specifically for itch.io project pages.
 </p>
 
-<img align="center" src="./assets/images/app-preview.png">
+<img align="center" src="https://github.com/user-attachments/assets/e1a8c451-fc1d-48ef-91cc-6139295911b0">
 
 ## Features
 
