@@ -32,3 +32,8 @@ npm run start
 # Build the app to dist/
 npm run build
 ```
+
+## Licenses
+
+- The Pitch web app is licensed under [MIT](LICENSE-MIT).
+- The CSS components are licensed under [CC0](LICENSE-CC0).
