@@ -15,6 +15,9 @@
   },
   "author": "nnda",
   "license": "MIT",
+  "engines": {
+    "node": ">=23.3.0"
+  },
   "dependencies": {
     "@fontsource/courgette": "^5.1.0",
     "@fontsource/lato": "^5.0.20",
