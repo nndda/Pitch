@@ -44,7 +44,7 @@ const varsList : VariableList = {
 
 // Get used itch.io built-in variables (in shorthand form) from 'css' string.
 export function getUsedVariables(css : string): string[] {
-  let usedVars : string[] = [];
+  const usedVars : string[] = [];
   for (const n in varsList) {
     if (new RegExp("(--" + n + ")").test(css)) usedVars.push(n);
   }

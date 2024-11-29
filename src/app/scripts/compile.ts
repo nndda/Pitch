@@ -7,7 +7,7 @@ export function compileComponents(
   compList : string[],
   compObj: PitchComponentsCollection
 ) : string {
-  let usedVars : string[] = [];
+  const usedVars : string[] = [];
   let css = "";
 
   compList.forEach((comp : string) => {
