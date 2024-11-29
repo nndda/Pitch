@@ -18,7 +18,7 @@ const componentsCollection : PitchComponentsCollection = componentsCollectionJSO
 
 const compList = $("#components-list");
 
-const compileCompBtn = <HTMLInputElement>d.getElementById("compile-components-btn");
+const compileCompBtn = d.getElementById("compile-components-btn") as HTMLInputElement;
 
 const compTitle = d.getElementById("component-title");
 const compDesc = d.getElementById("component-description");
@@ -28,11 +28,11 @@ export const wrapper = document.getElementById("wrapper");
 const compPreview = $("#component-preview");
 const compLabelsCont = $("#component-labels");
 
-let compGroups : string[] = [];
+const compGroups : string[] = [];
 
 function initializeComponents() {
   for (const comp in componentsCollection) {
-    let compData = componentsCollection[comp];
+    const compData = componentsCollection[comp];
 
     if (comp !== "_variables") {
       const compName = compData["name"];
@@ -122,6 +122,10 @@ homeButton.on("click", function() {
 });
 
 function setHome(): void {
+  homePreview.addClass("hidden-opac");
+
+  compTransTimer = setTimeout(() => {
+
   homeButton.toggleClass("hidden", true);
   homePreview.toggleClass("hidden", false);
   homeContent.toggleClass("hidden", false);
@@ -134,20 +138,32 @@ function setHome(): void {
   currViewedComp?.removeClass("viewed");
 
   wrapper.scrollTop = 0;
+
+  homePreview.removeClass("hidden-opac");
+
+  }, 200)
 }
 
 let currViewedComp : JQuery<HTMLElement> = null;
+
+let compTransTimer : NodeJS.Timeout;
 
 function setCompInfo(comp : string) {
   compTitle.textContent = componentsCollection[comp].name;
   compDesc.innerHTML = componentsCollection[comp].description;
 
   compPreview.off("click");
+  compPreview.addClass("hidden-opac");
+
+  if (compTransTimer !== null || compTransTimer !== undefined) clearTimeout(compTransTimer);
+
+  compTransTimer = setTimeout(() => {
+
   compPreview.html("");
 
   compLabelsCont.html("");
 
-  clearTimeout(copyTimeout);
+  if (copyTimeout !== null || copyTimeout !== undefined) clearTimeout(copyTimeout);
 
   for (const n in componentsCollection[comp].sampleHTML) {
     const compHTMLRaw = componentsCollection[comp].sampleHTML[n];
@@ -219,7 +235,7 @@ function setCompInfo(comp : string) {
   if (componentsCollection[comp].labels !== undefined) {
     compLabelsCont.append($(`${
       componentsCollection[comp].labels.reduce((accum : string, value : string) => {
-        return accum + `<span class="label-${value}">${value.replace(/\-/g, " ")}</span>`
+        return accum + `<span class="label-${value}">${value.replace(/-/g, " ")}</span>`
       }, "")
     }`));
   }
@@ -229,7 +245,11 @@ function setCompInfo(comp : string) {
   homeContent.toggleClass("hidden", true);
   compPreview.toggleClass("hidden", false);
 
+  compPreview.removeClass("hidden-opac");
+
   wrapper.scrollTop = 0;
+
+  }, 200)
 }
 
 if (navigator.clipboard) {
@@ -252,7 +272,7 @@ function calculateComponents() {
     copyNotif.innerText = "";
   }
 
-  let selectedComps : string[] = [];
+  const selectedComps : string[] = [];
 
   compSelected.forEach((el) => {
       selectedComps.push(el.getAttribute("data-comp"));
