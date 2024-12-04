@@ -283,6 +283,7 @@ body {
 
 #component-preview {
   margin: 2em;
+  transition: .2s ease;
 
   & > hr.spacing {
     margin: 1em 0;
@@ -365,4 +366,8 @@ body {
   background: lighten($background, 15%);
   padding: 0 .5em;
   border-radius: .2em;
+}
+
+.hidden-opac {
+  opacity: 0;
 }

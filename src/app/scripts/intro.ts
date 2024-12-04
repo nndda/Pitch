@@ -1,6 +1,6 @@
 import { driver } from "driver.js";
 
-(<HTMLButtonElement>document.getElementById("help-button")).addEventListener("click", () => {
+document.getElementById("help-button").addEventListener("click", () => {
   driverInitialIntro.drive();
 });
 

@@ -25,13 +25,9 @@ export interface PitchComponentData {
   labels?: string[],
 }
 
-export interface PitchComponentsCollection {
-  [key: string]: PitchComponentData,
-}
+export type PitchComponentsCollection = Record<string, PitchComponentData>
 
-interface VariableList {
-  [key: string]: string,
-}
+export type VariableList = Record<string, string>
 
 // Shorthand for itch.io built-in variables
 const varsList : VariableList = {
@@ -48,7 +44,7 @@ const varsList : VariableList = {
 
 // Get used itch.io built-in variables (in shorthand form) from 'css' string.
 export function getUsedVariables(css : string): string[] {
-  let usedVars : string[] = [];
+  const usedVars : string[] = [];
   for (const n in varsList) {
     if (new RegExp("(--" + n + ")").test(css)) usedVars.push(n);
   }
