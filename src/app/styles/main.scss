@@ -115,6 +115,10 @@ body {
             font-size: $font-size;
             list-style: none;
 
+            &.sub {
+              padding-left: .8em;
+            }
+
             &.viewed {
               & > button {
                 font-weight: bolder;

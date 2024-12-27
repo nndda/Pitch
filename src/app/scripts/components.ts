@@ -22,6 +22,8 @@ export interface PitchComponentData {
   // itch.io built-in CSS variables from the component's CSS.
   variables?: string[],
 
+  sub?: string,
+
   labels?: string[],
 }
 

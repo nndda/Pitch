@@ -76,7 +76,9 @@ function initializeComponents() {
       }
 
       const compElemItem = $(`
-        <dd data-search="${compName}">
+        <dd data-search="${compName}" ${
+          compData.sub != undefined ? "class=\"sub\"" : ""
+          }>
           <input
             type="checkbox"
             name="component-toggle"
