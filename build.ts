@@ -2,14 +2,14 @@
 // Must be ran before building the app,
 // And whenever anything under `src/components/` is modified.
 
-import fs = require("fs");
-import path = require("path");
-import sass = require("sass");
-import CleanCSS = require("clean-css");
-import postcss = require("postcss");
-import autoprefixer = require("autoprefixer");
+import * as fs from "fs";
+import * as path from "path";
+import * as sass from "sass";
+const CleanCSS = require("clean-css");
+import postcss from "postcss";
+const autoprefixer = require("autoprefixer");
 import { parse } from "yaml";
-import createDOMPurify = require('dompurify');
+const createDOMPurify = require("dompurify");
 import { JSDOM } from "jsdom";
 
 const window = new JSDOM("").window;
@@ -34,7 +34,7 @@ const componentsPath : string = path.resolve(__dirname, "src/components/");
   );
 });
 
-let componentsCollection : PitchComponentsCollection = {};
+const componentsCollection : PitchComponentsCollection = {};
 
 function isValidComponent(compPath : string) : boolean {
   if (
@@ -44,10 +44,10 @@ function isValidComponent(compPath : string) : boolean {
   ) {
 
     // Create absolute path.
-    let compPathAbs : string = path.join(componentsPath, compPath)
+    const compPathAbs : string = path.join(componentsPath, compPath)
 
     // Check if there's component's yaml file.
-    let compYAMLPath : string = replaceFileExt(compPathAbs, ".yaml");
+    const compYAMLPath : string = replaceFileExt(compPathAbs, ".yaml");
 
     if (!fs.existsSync(compYAMLPath)) {
       console.error(`${path.basename(compPathAbs)} component's .yaml is missing.`);
@@ -76,12 +76,18 @@ function replaceFileExt(filename: string, newExt: string): string {
   return filename.substring(0, filename.lastIndexOf(".")) + newExt;
 }
 
+export interface CompYAML {
+  name: string,
+  string: string,
+  sampleHTML: string[],
+}
+
 // Required property for the component's yaml file.
 const requiredCompData = ["name", "description"];
 // Validate component's yaml.
-function isValidCompYAML(parsedData : any) : boolean {
+function isValidCompYAML(parsedData : CompYAML) : boolean {
   for (const property of requiredCompData) {
-    if (!parsedData.hasOwnProperty(property)) {
+    if (!Object.prototype.hasOwnProperty.call(parsedData, property)) {
       console.error(`Property ${property} is missing.`);
       return false;
     }
@@ -132,7 +138,7 @@ function buildComponent(compPath : string) : void {
     const compType : string = path.basename(path.dirname(compPathAbs));
 
     // Compile SCSS file to CSS string 'cssStr'.
-    let cssStr = compileComponentsCSS(
+    const cssStr = compileComponentsCSS(
       sass.compileString(
         fs.readFileSync(compPathAbs, { encoding: "utf-8" })
       ).css
@@ -151,7 +157,7 @@ function buildComponent(compPath : string) : void {
     );
 
     // Define components to the collection.
-    componentsCollection[compID] = <PitchComponentData>({
+    componentsCollection[compID] = {
       // Component's data. Refer to src/app/components.ts for more info.
       name: compData.name,
       // Sanitize component's description.
@@ -165,8 +171,9 @@ function buildComponent(compPath : string) : void {
         compData.sampleIMG.map((value : string) => "./components/assets/" + value) : [],
       css: cssStr,
       type: compType,
+      sub: compData.sub,
       variables: getUsedVariables(cssStr),
-    });
+    } as PitchComponentData;
   }
 }
 
@@ -223,7 +230,7 @@ function compileComponentsCSS(srcCSS : string): string {
     css = result.css;
   });
 
-  let cssCleaned = new CleanCSS({
+  const cssCleaned = new CleanCSS({
     level: 2,
   }).minify(
     // but why

@@ -18,7 +18,7 @@ function searchClear() {
 }
 
 function searchComp() {
-  let searchTerm = searchBox.val().toLowerCase();
+  const searchTerm = searchBox.val().toLowerCase();
   if (searchTerm != "") {
     searchClearBtn.removeAttr("disabled");
     searchItems.each(function() {
