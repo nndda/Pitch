@@ -25,6 +25,8 @@ export interface PitchComponentData {
   sub?: string,
 
   labels?: string[],
+
+  elemCheck?: HTMLInputElement,
 }
 
 export type PitchComponentsCollection = Record<string, PitchComponentData>

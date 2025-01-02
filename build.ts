@@ -171,7 +171,11 @@ function buildComponent(compPath : string) : void {
         compData.sampleIMG.map((value : string) => "./components/assets/" + value) : [],
       css: cssStr,
       type: compType,
-      sub: compData.sub,
+
+      sub:
+        compData.sub !== undefined ?
+        compType + "__" + compData.sub : undefined,
+
       variables: getUsedVariables(cssStr),
     } as PitchComponentData;
   }

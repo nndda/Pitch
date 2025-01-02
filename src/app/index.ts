@@ -110,6 +110,16 @@ function initializeComponents() {
         currViewedComp.addClass("viewed");
       });
 
+      componentsCollection[comp].elemCheck = <HTMLInputElement>compElemItem.find("input[name=\"component-toggle\"]")[0];
+
+      if (compData.sub != undefined) {
+        compElemItem.on("input", "input[name=\"component-toggle\"]", () => {
+          if (componentsCollection[comp].elemCheck.checked) {
+            componentsCollection[compData.sub].elemCheck.checked = true;
+          }
+        });
+      }
+
       compList.append(compElemItem);
     }
   }
