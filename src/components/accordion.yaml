@@ -60,10 +60,8 @@ sampleHTML:
       <details>
         <summary>How to give attribution</summary>
         <p>
-          Use my itch.io username
-          <code>&lt;ur name&gt;</code>
-          <br>
-          And if possible, provide link to my itch.io profile.
+          Provide link to my itch.io page: 
+          <code>&lt;username&gt;.itch.io</code>
         </p>
       </details>
     </div>
