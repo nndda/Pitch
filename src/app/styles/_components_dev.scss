@@ -1,11 +1,11 @@
-@import "../../components/variables.scss";
+@use "../../components/variables.scss";
 
-@import "../../components/accordion.scss";
-@import "../../components/callout.scss";
-@import "../../components/info-list.scss";
-@import "../../components/label.scss";
-@import "../../components/spoiler.scss";
-@import "../../components/table.scss";
-@import "../../components/input.scss";
+@use "../../components/accordion.scss";
+@use "../../components/callout.scss";
+@use "../../components/info-list.scss";
+@use "../../components/label.scss";
+@use "../../components/spoiler.scss";
+@use "../../components/table.scss";
+@use "../../components/input.scss";
 
-@import "../../components/decorations/star-rating.scss";
+@use "../../components/decorations/star-rating.scss";
