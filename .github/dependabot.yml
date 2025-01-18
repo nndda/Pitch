@@ -6,7 +6,5 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "weekly"
-    versioning-strategy: increase-if-necessary
-    reviewers:
-      - "nndda"
+    versioning-strategy: auto
     target-branch: "dev"
