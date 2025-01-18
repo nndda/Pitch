@@ -8,3 +8,8 @@ updates:
       interval: "weekly"
     versioning-strategy: auto
     target-branch: "dev"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
