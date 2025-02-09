@@ -5,17 +5,15 @@
 
   & > .component-container-single {
     $padding: .8em;
-    $bg-main: lighten($background, 1.5%);
+    $bg-main: lighten($background, 1%);
     $bg-code: darken($background, 1%);
 
     display: flex;
     flex-direction: column;
 
-    border: 1px solid rgba($text-col, 0.2);
+    border: 1px solid rgba($text-col, 0.1);
     border-radius: 6px;
     background: $bg-main;
-    padding: $padding 0;
-    padding-top: 0;
     margin-bottom: 1.25em;
     overflow: hidden;
 
@@ -39,7 +37,6 @@
       padding: $padding * 1.5;
       padding-bottom: $padding * 2;
       margin: 0;
-      margin-bottom: .25em;
       background: var(--b2);
       transition: .5s ease;
 
@@ -50,10 +47,12 @@
 
     & > .component-preview-control {
       font-family: Ubuntu;
+      padding: .7em 0;
     }
 
     & > .component-html {
       font-family: Ubuntu;
+      margin-bottom: .7em;
       color: $text-col;
       background: $bg-code;
       border-radius: 6px;

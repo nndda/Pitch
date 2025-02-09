@@ -13,27 +13,34 @@
   & > div {
     margin: .5em;
     border: 1px solid var(--br);
+
     & > * {
       margin:0;
       padding: .8em 1em;
     }
+
     & > h4{
-      border-bottom: 1px solid var(--br);
       opacity: .3;
+    }
+
+    & > .table-cont {
+      padding: 0 2em 1em;
     }
 
     &:hover > h4 {
       opacity: 1;
     }
 
-    &:nth-child(4),
-    &:nth-child(6) {
+    &:nth-child(4) {
       grid-column: 1/3;
     }
 
-    &:last-child {
-      box-shadow: none;
-      grid-column: 1/4;
+    &:nth-child(6) {
+      grid-column: 1/1;
+    }
+
+    &:nth-child(7) {
+      grid-column: 2/4;
     }
   }
 

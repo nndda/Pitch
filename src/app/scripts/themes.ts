@@ -1,9 +1,9 @@
 const themes : string[] = [
   `
   --ff: 'Lato', serif;
-  --b: #131120;
-  --b2: rgba(19, 17, 32);
-  --b2s: #2a2837;
+  --b: #16181f;
+  --b2: rgba(22, 24, 31, 1);
+  --b2s: #2d2f36;
   --t: #eaeaea;
   --l: #fc3a78;
   --br: #332f4e;

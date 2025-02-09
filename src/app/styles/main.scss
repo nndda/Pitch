@@ -35,7 +35,7 @@ body {
       display: flex;
       flex-shrink: 1;
       min-width: 240px;
-      border-right: 1px solid $border-col;
+      border-right: 1px solid rgba($border-col, 0.1);
       overflow: hidden;
 
       &.collapsed {
@@ -46,8 +46,7 @@ body {
       & > .components-selector-container-inner {
         display: flex;
         flex-direction: column;
-        min-width: 210px;
-        // height: 100% !important;
+        min-width: 200px;
         padding: 1em;
         padding-top: 1em !important;
       
@@ -78,6 +77,11 @@ body {
 
           padding: 0;
           padding-left: .2em;
+          padding-right: .7em;
+
+          overflow-y: scroll;
+
+          @include style-scrollbar;
 
           & > dt {
             display: flex;
@@ -116,11 +120,12 @@ body {
             list-style: none;
 
             &.sub {
-              padding-left: .8em;
+              padding-left: .9em;
             }
 
             &.viewed {
               & > button {
+                pointer-events: none;
                 font-weight: bolder;
                 color: $accent !important;
               }

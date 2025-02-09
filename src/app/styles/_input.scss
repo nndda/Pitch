@@ -10,12 +10,12 @@ button {
   font-family: Ubuntu;
   display: inline-block;
   cursor: pointer;
-  background: lighten($background, 8%);
+  background: lighten($background, 4.5%);
   padding: .25em 1em;
   border-radius: 8px;
 
   &:hover {
-    background: lighten($background, 12%);
+    background: lighten($background, 9.5%);
   }
 }
 
