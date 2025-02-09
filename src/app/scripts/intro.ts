@@ -36,7 +36,7 @@ const driverInitialIntro = driver({
       side: "right",
       align: "center",
     }},
-    { element: ".copy-btn-container", popover: {
+    { element: "#compile-components-btn", popover: {
       title: "Grab the components",
       description: `
         Copy the CSS codes of your selected components.
@@ -44,13 +44,13 @@ const driverInitialIntro = driver({
       side: "top",
       align: "end",
     }},
-    { element: ".css-output-container", popover: {
+    { element: "#show-css-btn", popover: {
       title: "Grab the components",
       description: `
-        Copy the CSS codes here, if you're unable to copy it via the button.
+        Click here, and copy the CSS codes manually, if you're unable to copy it via the button.
       `,
-      side: "right",
-      align: "center",
+      side: "top",
+      align: "end",
     }},
     { element: ".theme-selector-container", popover: {
       title: "Theme preview",

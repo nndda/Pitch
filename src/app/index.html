@@ -23,19 +23,24 @@
             <div class="onboard-check-dummy"></div>
           </dl>
 
-          <div class="css-output-container">
+          <div id="css-output-container" class="css-output-container hidden">
             <textarea id="css-output-textarea" readonly></textarea>
           </div>
 
           <div class="copy-btn-container">
 
-            <button id="compile-components-btn" class="button-primary">
-              <i class="fa-solid fa-copy"></i>
-              &nbsp;
-              <span class="btn-text">
-                Copy CSS
-              </span>
-            </button>
+            <div class="copy-btn-container-inner">
+              <button id="compile-components-btn" class="button-primary">
+                <i class="fa-solid fa-copy"></i>
+                &nbsp;
+                <span class="btn-text">
+                  Copy CSS
+                </span>
+              </button>
+              <button id="show-css-btn" class="button-primary">
+                <i class="fa-solid fa-eye"></i>
+              </button>
+            </div>
 
             <small id="copy-notification"></small>
 

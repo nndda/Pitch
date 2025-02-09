@@ -1,5 +1,19 @@
 export const copyNotif = document.getElementById("copy-notification");
 
+const copyCSSBtn = document.getElementById("show-css-btn");
+
+export const CSSCopyOutput : JQuery<HTMLTextAreaElement> = $("#css-output-textarea");
+
+const CSSCopyContainerClasses = document.getElementById("css-output-container").classList;
+
+let copyContToggle = false;
+
+copyCSSBtn.addEventListener("click", () => {
+  copyContToggle = !copyContToggle;
+  CSSCopyContainerClasses.toggle("hidden", !copyContToggle);
+  copyCSSBtn.toggleAttribute("data-isvisible", copyContToggle);
+});
+
 export function copyComponentsCSS(css : string) {
   CSSCopyOutput.val("");
   copyNotif.textContent = "Copying...";
@@ -37,5 +51,3 @@ export function copyComponentHTML(str : string, elCopyNotif : HTMLElement) {
     }, 2500);
   });
 }
-
-export const CSSCopyOutput : JQuery<HTMLTextAreaElement> = $("#css-output-textarea");

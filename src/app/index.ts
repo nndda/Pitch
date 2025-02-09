@@ -1,5 +1,7 @@
 import "./styles/main.scss";
 
+const d = document;
+
 import { highlightHTML } from "./scripts/highlighter";
 import { PitchComponentsCollection } from "./scripts/components";
 import { compileComponents } from "./scripts/compile";
@@ -8,13 +10,13 @@ import {
   copyComponentsCSS,
   copyComponentHTML,
   copyTimeout,
-  CSSCopyOutput
+  CSSCopyOutput,
 } from "./scripts/copy";
 
-const d = document;
+const pick2notif = d.querySelector(".pick-2-notif");
 
 import componentsCollectionJSON from "./components.json";
-const componentsCollection : PitchComponentsCollection = componentsCollectionJSON
+const componentsCollection : PitchComponentsCollection = componentsCollectionJSON;
 
 const compList = $("#components-list");
 
@@ -272,12 +274,12 @@ if (navigator.clipboard) {
   compileCompBtn.disabled = true;
   compileCompBtn.textContent = "Unable to copy";
   copyNotif.innerText = "";
-
-  d.querySelector(".pick-2-notif").textContent = "";
 }
 
 function calculateComponents() {
   const compSelected = d.querySelectorAll("input[name='component-toggle']:checked");
+
+  pick2notif.classList.toggle("hidden-opac", compSelected.length > 0);
 
   if (navigator.clipboard) {
     compileCompBtn.disabled = compSelected.length <= 0;

@@ -205,16 +205,6 @@ body {
             margin-top: .2em;
             min-height: 1.2em;
           }
-
-          & > #compile-components-btn {
-            &[disabled] {
-              opacity: .7;
-            }
-
-            &:not([disabled]) ~ .pick-2-notif {
-              display: none;
-            }
-          }
         }
 
       }
@@ -269,6 +259,25 @@ body {
   @include style-scrollbar($accent);
 }
 
+.copy-btn-container-inner {
+  display: flex;
+  margin: auto;
+
+
+  & > button {
+    height: 2em;
+    margin: .1em;
+    border-radius: 0;
+  }
+
+  & > :first-child {
+    border-radius: 2em 0 0 2em;
+  }
+  & > :last-child {
+    border-radius: 0 2em 2em 0;
+  }
+}
+
 .non-preview {
   --t: $text-col;
   --b: #131120;
@@ -317,8 +326,7 @@ body {
   flex-direction: column;
   flex-grow: 1;
 
-  min-height: 12em;
-  max-height: 16.5em;
+  height: 10em;
   width: 100%;
   aspect-ratio: 1 / 1;
 
