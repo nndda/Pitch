@@ -11,7 +11,7 @@
     display: flex;
     flex-direction: column;
 
-    border: 1px solid rgba($text-col, 0.1);
+    border: 1px solid rgba($text-col, 0.065);
     border-radius: 6px;
     background: $bg-main;
     margin-bottom: 1.25em;
@@ -33,7 +33,7 @@
     }
 
     & > .component-display {
-      border-bottom: 1px solid rgba($text-col, 0.1);
+      border-bottom: 1px solid rgba($text-col, 0.065);
       padding: $padding * 1.5;
       padding-bottom: $padding * 2;
       margin: 0;

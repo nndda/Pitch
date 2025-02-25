@@ -67,7 +67,7 @@ body {
             padding: .15em .5em;
             border-top-left-radius: 0;
             border-bottom-left-radius: 0;
-            border-left: 1px solid $border-col;
+            border-left: 1px solid rgba($border-col, .15);
           }
         }
 
@@ -225,6 +225,7 @@ body {
         background: darken($background, 2.5%);
         padding-top: .25em;
         padding-bottom: 1.25em;
+        border-bottom: 1px solid rgba($text-col, 0.075);
 
         & > .preview-header {
           display: flex;

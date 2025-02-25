@@ -110,7 +110,7 @@ input[type="text"] {
   padding: .5em .8em;
 
   & > label {
-    border: 1px solid $border-col;
+    border: 1px solid rgba($border-col, .15);
     padding: .25em 1em;
     margin: 0;
     cursor: pointer;
