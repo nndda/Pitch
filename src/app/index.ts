@@ -28,9 +28,12 @@ const compDesc = d.getElementById("component-description");
 export const wrapper = document.getElementById("wrapper");
 
 const compPreview = $("#component-preview");
+const compInputs = $("#component-inputs");
 const compLabelsCont = $("#component-labels");
 
 const compGroups : string[] = [];
+
+const compInputsData: Record<string, string> = {};
 
 function initializeComponents() {
   for (const comp in componentsCollection) {
@@ -144,8 +147,10 @@ function setHome(): void {
   homePreview.toggleClass("hidden", false);
   homeContent.toggleClass("hidden", false);
   compPreview.toggleClass("hidden", true);
+  compInputs.toggleClass("hidden", true);
 
   compPreview.html("");
+  compInputs.html("");
   compDesc.textContent = "Collection of CSS components and tweaks designed specifically for itch.io project pages.";
   compTitle.textContent = "Pitch";
 
@@ -166,18 +171,45 @@ function setCompInfo(comp : string) {
   compTitle.textContent = componentsCollection[comp].name;
   compDesc.innerHTML = componentsCollection[comp].description;
 
+  const compHasInput: boolean = componentsCollection[comp].inputs.length > 0;
+
   compPreview.off("click");
   compPreview.addClass("hidden-opac");
+  compInputs.addClass("hidden-opac");
 
   if (compTransTimer !== null || compTransTimer !== undefined) clearTimeout(compTransTimer);
 
   compTransTimer = setTimeout(() => {
 
   compPreview.html("");
-
+  compInputs.html("");
   compLabelsCont.html("");
 
   if (copyTimeout !== null || copyTimeout !== undefined) clearTimeout(copyTimeout);
+
+  if (compHasInput) {
+    for (const n in componentsCollection[comp].inputs) {
+      const inpData = componentsCollection[comp].inputs[n];
+      const inpComp = $(`
+        <div class="comp-inp-group">
+          <label class="label" for="${inpData.id}">${inpData.name}</label>
+          <input class="comp-input" id="${inpData.id}" type="text" value="${
+            compInputsData[inpData.id] ?? ""
+          }">
+        </input>
+        </div>
+      `);
+
+      inpComp.on("input", "input.comp-input", ev => {
+        compInputsData[inpData.id] = (ev.target as HTMLInputElement).value;
+        calculateComponents();
+      });
+      compInputs.append(inpComp);
+    }
+
+    compInputs.removeClass("hidden");
+    compInputs.removeClass("hidden-opac");
+  }
 
   for (const n in componentsCollection[comp].sampleHTML) {
     const compHTMLRaw = componentsCollection[comp].sampleHTML[n];
@@ -289,12 +321,13 @@ function calculateComponents() {
   const selectedComps : string[] = [];
 
   compSelected.forEach((el) => {
-      selectedComps.push(el.getAttribute("data-comp"));
+    selectedComps.push(el.getAttribute("data-comp"));
   });
 
   CSSCopyOutput.val(compileComponents(
     selectedComps,
-    componentsCollection
+    componentsCollection,
+    compInputsData
   ));
 }
 

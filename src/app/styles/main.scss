@@ -320,6 +320,32 @@ body {
   }
 }
 
+#component-inputs {
+  position: sticky;
+  top: 0;
+  padding: .8em 1.5em;
+  border-bottom: 1px solid rgba($text-col, 0.075);
+  background: lighten($background, 1%);
+  font-family: Ubuntu;
+  transition: .2s ease;
+  z-index: 3;
+
+  & > .comp-inp-group {
+    display: flex;
+    padding: .3em .5em;
+
+    & > .label {
+      min-width: 10em;
+    }
+
+    & > input {
+      &:focus {
+        outline: 1px solid $primary;
+      }
+    }
+  }
+}
+
 .css-output-container {
   position: relative;
   display: flex;

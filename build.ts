@@ -176,6 +176,8 @@ function buildComponent(compPath : string) : void {
         compData.sub !== undefined ?
         compType + "__" + compData.sub : undefined,
 
+      inputs: compData.inputs ?? [],
+
       variables: getUsedVariables(cssStr),
     } as PitchComponentData;
   }

@@ -5,7 +5,8 @@ import {
 
 export function compileComponents(
   compList : string[],
-  compObj: PitchComponentsCollection
+  compObj: PitchComponentsCollection,
+  compInputs: Record<string, string>,
 ) : string {
   const usedVars : string[] = [];
   let css = "";
@@ -22,5 +23,7 @@ export function compileComponents(
     }
   });
 
-  return compileUsedVariables(usedVars) + css;
+  return compileUsedVariables(usedVars) + Object.keys(compInputs).reduce((result, key) => {
+    return result.replace(new RegExp(key, "g"), compInputs[key]);
+  }, css);
 }
