@@ -48,6 +48,15 @@ function initializeComponents() {
       const compName = compData["name"];
       const compID = "comp-" + comp;
 
+      const updateSelectAllNoneBtn = () => {
+        const hasOneActive: boolean = d.querySelectorAll(`input[data-type="${compData["type"]}"][name="component-toggle"]:checked`).length > 0;
+
+        d.querySelector(`button.component-select-all[data-type="${compData["type"]}"]`)
+          .classList.toggle("hidden", hasOneActive);
+        d.querySelector(`button.component-select-none[data-type="${compData["type"]}"]`)
+          .classList.toggle("hidden", !hasOneActive);
+      }
+
       if (!compGroups.includes(compData["type"])) {
         compGroups.push(compData["type"]);
         const compElemGroup = $(`
@@ -56,11 +65,11 @@ function initializeComponents() {
               ${compData["type"]}
             </span>
 
-            <button class="button-general component-select-all">
+            <button class="button-general component-select-all" data-type="${compData["type"]}">
               <i class="fa-solid fa-square-check"></i>
             </button>
 
-            <button class="button-general component-select-none">
+            <button class="button-general component-select-none hidden" data-type="${compData["type"]}">
               <i class="fa-regular fa-square-minus"></i>
             </button>
           </dt>
@@ -71,6 +80,7 @@ function initializeComponents() {
             .forEach(function(el : HTMLInputElement) {
               el.checked = true;
           });
+          updateSelectAllNoneBtn();
           calculateComponents();
         });
 
@@ -79,6 +89,7 @@ function initializeComponents() {
             .forEach(function(el : HTMLInputElement) {
               el.checked = false;
           });
+          updateSelectAllNoneBtn();
           calculateComponents();
         });
 
@@ -109,6 +120,7 @@ function initializeComponents() {
       `);
 
       compElemItem.on("input", `input#${compID}`, () => {
+        updateSelectAllNoneBtn();
         calculateComponents();
       });
 
