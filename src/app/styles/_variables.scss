@@ -9,9 +9,9 @@
   @return color.adjust($color, $lightness: -$n);
 }
 
-$background: #16181f;
-$text-col: #eaeaea;
-$border-col: #eaeaea50;
+$background: #131120;
+$text-col: #f7f7f6;
+$border-col: #f7f7f650;
 
 $accent: #fc3a78;
 $accent-light: lighten($accent, 12.5%);
