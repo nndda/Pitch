@@ -1,0 +1,31 @@
+.custom-indev {
+  --col: #eca20e;
+  --bg: #1b1b1b;
+
+  display: flex;
+  background-image: repeating-linear-gradient(
+    -45deg,
+    var(--bg), var(--bg) 2rem,
+    var(--col) 2rem, var(--col) 3.5rem
+  );
+  background-size: 200% 200%;
+  border-radius: .5em;
+  font-size: .75em;
+  font-weight: bolder;
+  letter-spacing: .2em;
+  overflow: hidden;
+  animation: indev-anim 30s linear infinite;
+
+  & > div {
+    padding: .2em 3em;
+    margin-left: 2em;
+    background: var(--bg);
+    color: #ecebe8;
+  }
+}
+
+@keyframes indev-anim {
+  100% {
+    background-position: 100% 100%;
+  }
+}
