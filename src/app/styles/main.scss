@@ -321,6 +321,34 @@ body {
   }
 }
 
+#component-tags {
+  background: lighten($background, 1%);
+  font-family: Ubuntu;
+  font-weight: bolder;
+  transition: .2s ease;
+
+  & > .comp-tag {
+    display: flex;
+    align-items: center;
+    padding: .6em 1.1em;
+    border-bottom: 1px solid rgba($text-col, 0.075);
+
+    & > .comp-tag-title {
+      margin-right: 1em;
+      padding: .15em .7em;
+      font-size: 1.1em;
+      border-radius: .3em;
+    }
+
+    &.Experimental {
+      & > .comp-tag-title {
+        background: #ffc721;
+        color: #1c1813;
+      }
+    }
+  }
+}
+
 #component-inputs {
   position: sticky;
   top: 0;

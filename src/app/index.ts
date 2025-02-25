@@ -29,11 +29,16 @@ export const wrapper = document.getElementById("wrapper");
 
 const compPreview = $("#component-preview");
 const compInputs = $("#component-inputs");
+const compTags = $("#component-tags");
 const compLabelsCont = $("#component-labels");
 
 const compGroups : string[] = [];
 
 const compInputsData: Record<string, string> = {};
+
+const compTagsData: Record<string, string> = {
+  Experimental: "Use with caution, and test thoroughly."
+};
 
 function initializeComponents() {
   for (const comp in componentsCollection) {
@@ -148,9 +153,11 @@ function setHome(): void {
   homeContent.toggleClass("hidden", false);
   compPreview.toggleClass("hidden", true);
   compInputs.toggleClass("hidden", true);
+  compTags.toggleClass("hidden", true);
 
   compPreview.html("");
   compInputs.html("");
+  compTags.html("");
   compDesc.textContent = "Collection of CSS components and tweaks designed specifically for itch.io project pages.";
   compTitle.textContent = "Pitch";
 
@@ -176,6 +183,7 @@ function setCompInfo(comp : string) {
   compPreview.off("click");
   compPreview.addClass("hidden-opac");
   compInputs.addClass("hidden-opac");
+  compTags.addClass("hidden-opac");
 
   if (compTransTimer !== null || compTransTimer !== undefined) clearTimeout(compTransTimer);
 
@@ -183,6 +191,9 @@ function setCompInfo(comp : string) {
 
   compPreview.html("");
   compInputs.html("");
+  compInputs.addClass("hidden");
+  compTags.html("");
+  compTags.addClass("hidden");
   compLabelsCont.html("");
 
   if (copyTimeout !== null || copyTimeout !== undefined) clearTimeout(copyTimeout);
@@ -209,6 +220,22 @@ function setCompInfo(comp : string) {
 
     compInputs.removeClass("hidden");
     compInputs.removeClass("hidden-opac");
+  }
+
+  if (componentsCollection[comp].tags.length > 0) {
+    for (const n in componentsCollection[comp].tags) {
+      const tag: string = componentsCollection[comp].tags[n];
+
+      compTags.append($(`
+        <div class="comp-tag ${tag}">
+          <div class="comp-tag-title">${tag}</div>
+          <div class="comp-tag-desc">${compTagsData[tag]}</div>
+        </div>
+      `));
+    }
+
+    compTags.removeClass("hidden");
+    compTags.removeClass("hidden-opac");
   }
 
   for (const n in componentsCollection[comp].sampleHTML) {
