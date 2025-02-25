@@ -1,0 +1,16 @@
+.game_comments_widget .avatar_container[
+  href="https://itch.io/profile/AUTHOR_BADGE_URL"
+] + .post_header > .post_author::after {
+  content: "AUTHOR_BADGE_TITLE";
+}
+
+.game_comments_widget .avatar_container + .post_header > .post_author::after {
+  display: inline-block;
+  background: var(--btn);
+  color: var(--btn_f);
+  padding: .1em .5em;
+  margin-left: .5em;
+  border-radius: 3px;
+  font-size: .9em;
+  font-weight: 700;
+}

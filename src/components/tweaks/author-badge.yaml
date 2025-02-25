@@ -1,0 +1,19 @@
+name:
+  Author Badge
+
+description:
+  Add badge for specified authors/developers comment posts.
+
+inputs:
+  - name: itch.io username
+    id: AUTHOR_BADGE_URL
+
+  - name: Badge title
+    id: AUTHOR_BADGE_TITLE
+
+# Screenshots taken with the following properties on the comment posts:
+# padding: 1.3em;
+# max-width: 27.5em;
+sampleIMG:
+  - author-badge-dev.png
+  - author-badge-illust.png
