@@ -178,7 +178,7 @@ function buildComponent(compPath : string) : void {
 
       inputs: compData.inputs ?? [],
 
-      tags: compData.tags ?? [],
+      notes: compData.notes ?? [],
 
       variables: getUsedVariables(cssStr),
     } as PitchComponentData;

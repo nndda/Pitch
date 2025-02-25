@@ -28,7 +28,7 @@ export interface PitchComponentData {
 
   inputs?: PitchComponentInput[],
 
-  tags?: string[],
+  notes?: string[],
 
   elemCheck?: HTMLInputElement,
 }
