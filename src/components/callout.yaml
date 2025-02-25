@@ -19,7 +19,7 @@ sampleHTML:
     <blockquote class="custom-callout">
 
       <h3>Note!</h3>
-      This &lt;project name&gt; is still in its alpha stage. And is subject to frequent changes, and bugs.
+      This {PROJECT NAME} is still in its alpha stage. And is subject to frequent changes, and bugs.
 
       <br>
       <br>

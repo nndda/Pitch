@@ -23,19 +23,24 @@
             <div class="onboard-check-dummy"></div>
           </dl>
 
-          <div class="css-output-container">
+          <div id="css-output-container" class="css-output-container hidden">
             <textarea id="css-output-textarea" readonly></textarea>
           </div>
 
           <div class="copy-btn-container">
 
-            <button id="compile-components-btn" class="button-primary">
-              <i class="fa-solid fa-copy"></i>
-              &nbsp;
-              <span class="btn-text">
-                Copy CSS
-              </span>
-            </button>
+            <div class="copy-btn-container-inner">
+              <button id="compile-components-btn" class="button-primary">
+                <i class="fa-solid fa-copy"></i>
+                &nbsp;
+                <span class="btn-text">
+                  Copy CSS
+                </span>
+              </button>
+              <button id="show-css-btn" class="button-primary">
+                <i class="fa-solid fa-eye"></i>
+              </button>
+            </div>
 
             <small id="copy-notification"></small>
 
@@ -105,6 +110,7 @@
                 <a target="_blank" class="custom-lb" href="https://itch.io/games/free">Free</a>
               </div>
             </div>
+
             <div>
               <h4>Input</h4>
                 <ul>
@@ -118,19 +124,42 @@
               <h4>Accordion</h4>
               <div>
                 <div class="custom-accrd">
+                  <p>
+                    This {ASSET PACK} is licensed under 
+                    <a href="https://creativecommons.org/licenses/by/4.0/">
+                      CC BY 4.0
+                    </a>
+                    <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" width="20px">
+                    <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" width="20px">
+                  </p>
+
                   <details>
-                    <summary>How do I get access to custom CSS in my game page?</summary>
-                    You can contact itch.io support to enable the custom CSS feature.
+                    <summary>What you can and can't do</summary>
+                      <ul>
+                        <li>
+                          Use in commercial or non-commercial projects
+                        </li>
+                        <li>
+                          Modify, or adapt to your needs
+                        </li>
+                        <li>
+                          Redistribute and share
+                          <ul>
+                            <li>though, plz redistribute them as a part of a project, and not as an asset pack by itself</li>
+                          </ul>
+                        </li>
+                        <li>
+                          No AI or NFTs
+                        </li>
+                      </ul>
                   </details>
 
                   <details>
-                    <summary>Can I use this in a commercial project?</summary>
-                    Absolutely! The generated CSS codes is licensed under <em>Creative Commons Zero v1.0 Universal</em>.
-                  </details>
-
-                  <details>
-                    <summary>Why can't I use this on profile or jam pages?</summary>
-                    Some components make use of the page's theme. Unlike project page, profile page and jam page didn't have some of the required color variables needed for the components to be displayed correctly (e.g. button color).
+                    <summary>How to give attribution</summary>
+                    <p>
+                      Provide link to my itch.io page: 
+                      <code>{USERNAME}.itch.io</code>
+                    </p>
                   </details>
                 </div>
               </div>
@@ -141,7 +170,7 @@
               <div>
                 <blockquote class="custom-callout">
                   <h3>⚠ Important Note</h3>
-                  <p><em>(Some)</em> components are not compatible with profile pages and/or jam pages.</p>
+                  <p>Attention! This is a very important note. Thank you for your attention.</p>
                 </blockquote>
               </div>
             </div>
@@ -158,7 +187,12 @@
                 <dt>Arts</dt>
                 <dd>
                   <a target="_blank" href="https://itch.io">Illustrious illustrator</a>,
-                  <a target="_blank" href="https://itch.io">Adorable assets</a>,
+                  <a target="_blank" href="https://itch.io">Adorable assets</a>
+                </dd>
+
+                <dt>Codes</dt>
+                <dd>
+                  <a href="https://itch.io/">Proficient programmer</a>
                 </dd>
 
                 <dt>Labels</dt>
@@ -180,9 +214,57 @@
               <p>This is a fully visible text. But some part of this text is <span class="custom-hd">hidden</span> (unless you hover over it) (or highlight it). Heres some more <span class="custom-hd">hidden words</span>.<br>
               </p>
             </div>
+
+            <div>
+              <h4>Table</h4>
+              <div class="table-cont">
+              <table>
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Free version</th>
+                    <th>Paid version</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>Animation</th>
+                    <td>❌ None</td>
+                    <td>✅ Animated</td>
+                  </tr>
+                  <tr>
+                    <th>File format</th>
+                    <td>
+                      .png
+                    </td>
+                    <td>
+                      .png<br>
+                      .psd<br>
+                      .aseprite
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>Commercial use</th>
+                    <td>❌ Not allowed</td>
+                    <td>✅ Allowed</td>
+                  </tr>
+                  <tr>
+                    <th>Attribution</th>
+                    <td>❌ Required</td>
+                    <td>✅ Not required</td>
+                  </tr>
+                </tbody>
+              </table>
+              </div>
+            </div>
+
           </div>
 
 <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+
+          <div id="component-notes"></div>
+
+          <div id="component-inputs"></div>
 
           <div id="component-preview"></div>
 

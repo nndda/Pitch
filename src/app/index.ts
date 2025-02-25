@@ -1,5 +1,7 @@
 import "./styles/main.scss";
 
+const d = document;
+
 import { highlightHTML } from "./scripts/highlighter";
 import { PitchComponentsCollection } from "./scripts/components";
 import { compileComponents } from "./scripts/compile";
@@ -8,13 +10,13 @@ import {
   copyComponentsCSS,
   copyComponentHTML,
   copyTimeout,
-  CSSCopyOutput
+  CSSCopyOutput,
 } from "./scripts/copy";
 
-const d = document;
+const pick2notif = d.querySelector(".pick-2-notif");
 
 import componentsCollectionJSON from "./components.json";
-const componentsCollection : PitchComponentsCollection = componentsCollectionJSON
+const componentsCollection : PitchComponentsCollection = componentsCollectionJSON;
 
 const compList = $("#components-list");
 
@@ -26,9 +28,17 @@ const compDesc = d.getElementById("component-description");
 export const wrapper = document.getElementById("wrapper");
 
 const compPreview = $("#component-preview");
+const compInputs = $("#component-inputs");
+const compNotes = $("#component-notes");
 const compLabelsCont = $("#component-labels");
 
 const compGroups : string[] = [];
+
+const compInputsData: Record<string, string> = {};
+
+const compNotesData: Record<string, string> = {
+  Experimental: "Use with caution, and test thoroughly."
+};
 
 function initializeComponents() {
   for (const comp in componentsCollection) {
@@ -38,6 +48,15 @@ function initializeComponents() {
       const compName = compData["name"];
       const compID = "comp-" + comp;
 
+      const updateSelectAllNoneBtn = () => {
+        const hasOneActive: boolean = d.querySelectorAll(`input[data-type="${compData["type"]}"][name="component-toggle"]:checked`).length > 0;
+
+        d.querySelector(`button.component-select-all[data-type="${compData["type"]}"]`)
+          .classList.toggle("hidden", hasOneActive);
+        d.querySelector(`button.component-select-none[data-type="${compData["type"]}"]`)
+          .classList.toggle("hidden", !hasOneActive);
+      }
+
       if (!compGroups.includes(compData["type"])) {
         compGroups.push(compData["type"]);
         const compElemGroup = $(`
@@ -46,11 +65,11 @@ function initializeComponents() {
               ${compData["type"]}
             </span>
 
-            <button class="button-general component-select-all">
+            <button class="button-general component-select-all" data-type="${compData["type"]}">
               <i class="fa-solid fa-square-check"></i>
             </button>
 
-            <button class="button-general component-select-none">
+            <button class="button-general component-select-none hidden" data-type="${compData["type"]}">
               <i class="fa-regular fa-square-minus"></i>
             </button>
           </dt>
@@ -61,6 +80,7 @@ function initializeComponents() {
             .forEach(function(el : HTMLInputElement) {
               el.checked = true;
           });
+          updateSelectAllNoneBtn();
           calculateComponents();
         });
 
@@ -69,6 +89,7 @@ function initializeComponents() {
             .forEach(function(el : HTMLInputElement) {
               el.checked = false;
           });
+          updateSelectAllNoneBtn();
           calculateComponents();
         });
 
@@ -99,6 +120,7 @@ function initializeComponents() {
       `);
 
       compElemItem.on("input", `input#${compID}`, () => {
+        updateSelectAllNoneBtn();
         calculateComponents();
       });
 
@@ -109,6 +131,16 @@ function initializeComponents() {
         currViewedComp = compElemItem;
         currViewedComp.addClass("viewed");
       });
+
+      componentsCollection[comp].elemCheck = <HTMLInputElement>compElemItem.find("input[name=\"component-toggle\"]")[0];
+
+      if (compData.sub != undefined) {
+        compElemItem.on("input", "input[name=\"component-toggle\"]", () => {
+          if (componentsCollection[comp].elemCheck.checked) {
+            componentsCollection[compData.sub].elemCheck.checked = true;
+          }
+        });
+      }
 
       compList.append(compElemItem);
     }
@@ -132,8 +164,12 @@ function setHome(): void {
   homePreview.toggleClass("hidden", false);
   homeContent.toggleClass("hidden", false);
   compPreview.toggleClass("hidden", true);
+  compInputs.toggleClass("hidden", true);
+  compNotes.toggleClass("hidden", true);
 
   compPreview.html("");
+  compInputs.html("");
+  compNotes.html("");
   compDesc.textContent = "Collection of CSS components and tweaks designed specifically for itch.io project pages.";
   compTitle.textContent = "Pitch";
 
@@ -154,18 +190,65 @@ function setCompInfo(comp : string) {
   compTitle.textContent = componentsCollection[comp].name;
   compDesc.innerHTML = componentsCollection[comp].description;
 
+  const compHasInput: boolean = componentsCollection[comp].inputs.length > 0;
+
   compPreview.off("click");
   compPreview.addClass("hidden-opac");
+  compInputs.addClass("hidden-opac");
+  compNotes.addClass("hidden-opac");
 
   if (compTransTimer !== null || compTransTimer !== undefined) clearTimeout(compTransTimer);
 
   compTransTimer = setTimeout(() => {
 
   compPreview.html("");
-
+  compInputs.html("");
+  compInputs.addClass("hidden");
+  compNotes.html("");
+  compNotes.addClass("hidden");
   compLabelsCont.html("");
 
   if (copyTimeout !== null || copyTimeout !== undefined) clearTimeout(copyTimeout);
+
+  if (compHasInput) {
+    for (const n in componentsCollection[comp].inputs) {
+      const inpData = componentsCollection[comp].inputs[n];
+      const inpComp = $(`
+        <div class="comp-inp-group">
+          <label class="label" for="${inpData.id}">${inpData.name}</label>
+          <input class="comp-input" id="${inpData.id}" type="text" value="${
+            compInputsData[inpData.id] ?? ""
+          }">
+        </input>
+        </div>
+      `);
+
+      inpComp.on("input", "input.comp-input", ev => {
+        compInputsData[inpData.id] = (ev.target as HTMLInputElement).value;
+        calculateComponents();
+      });
+      compInputs.append(inpComp);
+    }
+
+    compInputs.removeClass("hidden");
+    compInputs.removeClass("hidden-opac");
+  }
+
+  if (componentsCollection[comp].notes.length > 0) {
+    for (const n in componentsCollection[comp].notes) {
+      const note: string = componentsCollection[comp].notes[n];
+
+      compNotes.append($(`
+        <div class="comp-notes ${note}">
+          <div class="comp-notes-title">${note}</div>
+          <div class="comp-notes-desc">${compNotesData[note]}</div>
+        </div>
+      `));
+    }
+
+    compNotes.removeClass("hidden");
+    compNotes.removeClass("hidden-opac");
+  }
 
   for (const n in componentsCollection[comp].sampleHTML) {
     const compHTMLRaw = componentsCollection[comp].sampleHTML[n];
@@ -262,12 +345,12 @@ if (navigator.clipboard) {
   compileCompBtn.disabled = true;
   compileCompBtn.textContent = "Unable to copy";
   copyNotif.innerText = "";
-
-  d.querySelector(".pick-2-notif").textContent = "";
 }
 
 function calculateComponents() {
   const compSelected = d.querySelectorAll("input[name='component-toggle']:checked");
+
+  pick2notif.classList.toggle("hidden-opac", compSelected.length > 0);
 
   if (navigator.clipboard) {
     compileCompBtn.disabled = compSelected.length <= 0;
@@ -277,12 +360,13 @@ function calculateComponents() {
   const selectedComps : string[] = [];
 
   compSelected.forEach((el) => {
-      selectedComps.push(el.getAttribute("data-comp"));
+    selectedComps.push(el.getAttribute("data-comp"));
   });
 
   CSSCopyOutput.val(compileComponents(
     selectedComps,
-    componentsCollection
+    componentsCollection,
+    compInputsData
   ));
 }
 

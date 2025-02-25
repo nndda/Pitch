@@ -10,12 +10,12 @@ button {
   font-family: Ubuntu;
   display: inline-block;
   cursor: pointer;
-  background: lighten($background, 8%);
+  background: lighten($background, 4.5%);
   padding: .25em 1em;
   border-radius: 8px;
 
   &:hover {
-    background: lighten($background, 12%);
+    background: lighten($background, 9.5%);
   }
 }
 
@@ -110,7 +110,7 @@ input[type="text"] {
   padding: .5em .8em;
 
   & > label {
-    border: 1px solid $border-col;
+    border: 1px solid rgba($border-col, .15);
     padding: .25em 1em;
     margin: 0;
     cursor: pointer;

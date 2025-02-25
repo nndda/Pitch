@@ -25,9 +25,19 @@ export interface PitchComponentData {
   sub?: string,
 
   labels?: string[],
+
+  inputs?: PitchComponentInput[],
+
+  notes?: string[],
+
+  elemCheck?: HTMLInputElement,
 }
 
 export type PitchComponentsCollection = Record<string, PitchComponentData>
+interface PitchComponentInput {
+  name: string,
+  id: string,
+}
 
 export type VariableList = Record<string, string>
 

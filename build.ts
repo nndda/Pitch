@@ -9,11 +9,11 @@ const CleanCSS = require("clean-css");
 import postcss from "postcss";
 const autoprefixer = require("autoprefixer");
 import { parse } from "yaml";
-const createDOMPurify = require("dompurify");
+const DOMPurifyC = require("dompurify");
 import { JSDOM } from "jsdom";
 
 const window = new JSDOM("").window;
-const DOMPurify = createDOMPurify(window);
+const DOMPurify = DOMPurifyC(window);
 
 import {
   PitchComponentData,
@@ -171,7 +171,15 @@ function buildComponent(compPath : string) : void {
         compData.sampleIMG.map((value : string) => "./components/assets/" + value) : [],
       css: cssStr,
       type: compType,
-      sub: compData.sub,
+
+      sub:
+        compData.sub !== undefined ?
+        compType + "__" + compData.sub : undefined,
+
+      inputs: compData.inputs ?? [],
+
+      notes: compData.notes ?? [],
+
       variables: getUsedVariables(cssStr),
     } as PitchComponentData;
   }
@@ -250,7 +258,7 @@ function compileComponentsCSS(srcCSS : string): string {
 }
 
 // Sanitize HTML string
-const DOMPurifyConfig : DOMPurify.Config = {
+DOMPurify.setConfig({
   USE_PROFILES: {
     html: true,
     svg: false,
@@ -273,10 +281,10 @@ const DOMPurifyConfig : DOMPurify.Config = {
   RETURN_DOM: false,
   RETURN_DOM_FRAGMENT: false,
   RETURN_TRUSTED_TYPE: false,
-};
+});
 
 function sanitizeHTML(dirtyHTML : string) : string {
-  return (DOMPurify.sanitize(dirtyHTML, DOMPurifyConfig) as string)
+  return (DOMPurify.sanitize(dirtyHTML) as string)
     // Wish I didn't have to do this.
     .replace(/href="[^"]+"/g, `href="#"`);
 }
