@@ -1,0 +1,20 @@
+.custom-grouped-lb {
+  white-space: nowrap;
+
+  & > .custom-lb {
+    border-radius: 0;
+    margin: 0;
+
+    &:first-child {
+      border-radius: 12px 0 0 12px;
+    }
+
+    &:last-child {
+      border-radius: 0 12px 12px 0;
+    }
+
+    &:not(:last-child) {
+      margin-right: .1em;
+    }
+  }
+}
