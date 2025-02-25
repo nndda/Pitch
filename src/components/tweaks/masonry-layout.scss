@@ -1,0 +1,47 @@
+.columns {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  flex-direction: column;
+  margin: 0;
+
+  & .left_col {
+    width: 100%;
+    -webkit-order: 2;
+    order: 2;
+  }
+
+  & .right_col {
+    width: 100%;
+    -webkit-order: 1;
+    order: 1;
+  }
+}
+
+.view_game_page .header_buy_row {
+  display: block;
+}
+
+.screenshot_list {
+  column-count: 3;
+  column-gap: 0;
+  margin: 0 20px !important;
+
+  & > a {
+    display: block;
+    padding: .3em;
+  }
+}
+
+.view_game_page .screenshot_list img {
+  display: block !important;
+  height: auto !important;
+  max-width: 100%;
+  margin: 0;
+}
+
+@media (max-width: 1000px) {
+  .screenshot_list {
+    column-count: 2;
+  }
+}
