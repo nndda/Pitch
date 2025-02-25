@@ -1,0 +1,11 @@
+name:
+  Masonry Layout
+
+description:
+  Masonry layout for the project page's screenshots. Works best with >6 screenshots, of varying aspect ratio.
+
+notes:
+  - Experimental
+
+sampleIMG:
+  - masonry-layout.png
