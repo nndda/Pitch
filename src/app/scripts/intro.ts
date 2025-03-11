@@ -1,10 +1,10 @@
-import { driver } from "driver.js";
+import { driver, type Driver } from "driver.js";
 
 document.getElementById("help-button").addEventListener("click", () => {
   driverInitialIntro.drive();
 });
 
-const driverInitialIntro = driver({
+const driverInitialIntro: Driver = driver({
   showProgress: true,
   overlayOpacity: 1.0,
   allowClose: false,
@@ -56,7 +56,7 @@ const driverInitialIntro = driver({
       title: "Theme preview",
       description: `
         The components are designed to adapt to your page's theme.
-        Click on these various theme preset to see how they would look on different themes.
+        Click on the various theme preset to see how they would look on different themes.
       `,
       side: "bottom",
       align: "end",
@@ -64,7 +64,7 @@ const driverInitialIntro = driver({
     { element: "#help-button", popover: {
       title: "Help",
       description: `
-        Click on this button to re-run this guides again.
+        Click on this button to re-run this guide again.
       `,
       side: "bottom",
       align: "end",
@@ -72,7 +72,7 @@ const driverInitialIntro = driver({
   ],
 });
 
-const introFlagKey = "userIntroFinished";
+const introFlagKey: string = "userIntroFinished";
 
 if (localStorage.getItem(introFlagKey) === null) {
   driverInitialIntro.drive();
