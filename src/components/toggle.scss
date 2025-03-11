@@ -1,0 +1,32 @@
+.custom-content-b,
+#wrapper:has(a.custom-toggle:target[name="toggle-b"]) .custom-content-a {
+  display: none;
+}
+
+#wrapper:has(a.custom-toggle:target[name="toggle-b"]) .custom-content-b {
+  display: block;
+}
+
+.custom-toggles {
+  display: inline-flex;
+  background: var(--t);
+  border-radius: 24px;
+}
+
+.custom-toggle {
+  padding: .1em .8em;
+  margin: 2px;
+  color: var(--b2);
+  border-radius: inherit;
+  text-decoration: none;
+  transition: .3s;
+}
+
+.custom-toggles {
+  &:has(a.custom-toggle:target[name="toggle-a"]) a.custom-toggle[name="toggle-a"],
+  &:has(a.custom-toggle:target[name="toggle-b"]) a.custom-toggle[name="toggle-b"],
+  &:not(.custom-toggles:has(a.custom-toggle:target[name="toggle-b"])) a.custom-toggle[name="toggle-a"] {
+    color: var(--btn_f);
+    background: var(--btn);
+  }
+}
