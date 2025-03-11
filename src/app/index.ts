@@ -245,12 +245,21 @@ function setCompInfo(comp: string): void {
     for (const n in componentsCollection[comp].notes) {
       const note: string = componentsCollection[comp].notes[n];
 
-      compNotes.append($(`
-        <div class="comp-notes ${note}">
-          <div class="comp-notes-title">${note}</div>
-          <div class="comp-notes-desc">${compNotesData[note]}</div>
-        </div>
-      `));
+      if (!note.startsWith("--custom-- ")) {
+        compNotes.append($(`
+          <div class="comp-notes ${note}">
+            <div class="comp-notes-title">${note}</div>
+            <div class="comp-notes-desc">${compNotesData[note]}</div>
+          </div>
+        `));
+      } else {
+        compNotes.append($(`
+          <div class="comp-notes note-custom">
+            <div class="comp-notes-title">Note</div>
+            <div class="comp-notes-desc">${note.substring(11)}</div>
+          </div>
+        `));
+      }
     }
 
     compNotes.removeClass("hidden");
