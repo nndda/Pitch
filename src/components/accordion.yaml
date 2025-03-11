@@ -29,7 +29,7 @@ sampleHTML:
     <div class="custom-accrd">
       <p>
         This {ASSET PACK} is licensed under 
-        <a href="https://creativecommons.org/licenses/by/4.0/">
+        <a href="#">
           CC BY 4.0
         </a>
         <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" width="20px">
