@@ -334,16 +334,35 @@ body {
     border-bottom: 1px solid rgba($text-col, 0.075);
 
     & > .comp-notes-title {
+      align-self: start;
       margin-right: 1em;
       padding: .15em .7em;
       font-size: 1.1em;
       border-radius: .3em;
     }
 
+    & > .comp-notes-desc {
+      line-height: 1.3em;
+
+      & > code {
+        font-weight: 400;
+        padding: .025em .5em;
+        background: rgba($text-col, 0.125);
+        border-radius: 5px;
+      }
+    }
+
     &.Experimental {
       & > .comp-notes-title {
         background: #ffc721;
         color: #1c1813;
+      }
+    }
+
+    &.note-custom {
+      & > .comp-notes-title {
+        background: rgba($text-col, 0.8);
+        color: $background;
       }
     }
   }
