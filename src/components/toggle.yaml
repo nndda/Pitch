@@ -1,0 +1,48 @@
+name:
+  Toggle
+
+description:
+  Switch between two contents on your page.
+
+notes:
+  - Experimental
+  - --custom-- Only one instance of the component per page.
+  - --custom-- In the HTML, for the <code>.custom-toggle</code>-classed <code>&lt;a&gt;</code> elements, append your page's URL to the <code>href</code> to the front. <br> i.e. from <code>#toggle-a</code> to <code>https://username.itch.io/project-name#toggle-a</code>.
+
+sampleHTML:
+  # - | # ------------------------------------------------------------------------------------------------
+  #   <div class="custom-toggles">
+  #     <a href="#toggle-a" class="custom-toggle" name="toggle-a">Content A</a>
+  #     <a href="#toggle-b" class="custom-toggle" name="toggle-b">Content B</a>
+  #   </div>
+
+  #   <br> <br>
+
+  #   <div class="custom-content-a"> 
+  #     Hi there, this is the content of "Content A."
+  #   </div>
+
+  #   <div class="custom-content-b">
+  #     And this is the content of "Content B."
+  #   </div>
+
+  - | # ------------------------------------------------------------------------------------------------
+    Languages &nbsp;
+    <div class="custom-toggles">
+      <a href="#toggle-a" class="custom-toggle" name="toggle-a">🇬🇧 English</a>
+      <a href="#toggle-b" class="custom-toggle" name="toggle-b">🇯🇵 Japanese</a>
+    </div>
+
+    <br> <hr>
+
+    <div class="custom-content-a"> 
+      Lorem ipsum (/ˌlɔː.rəm ˈɪp.səm/ LOR-əm IP-səm) is a dummy or placeholder text commonly used in graphic design, publishing, and web development to fill empty spaces in a layout that does not yet have content.
+    </div>
+
+    <div class="custom-content-b">
+      lorem ipsum（ロレム・イプサム、略してリプサム lipsum ともいう）とは、出版、ウェブデザイン、グラフィックデザインなどの諸分野において使用されている典型的なダミーテキスト（英語版）。書籍やウェブページや広告などのデザインのプロトタイプを制作したり顧客にプレゼンテーションしたりする際に、まだ正式な文章の出来上がっていないテキスト部分の書体（フォント）、タイポグラフィ、レイアウトなどといった視覚的なデザインを調整したりわかりやすく見せるために用いられる。
+    </div>
+
+    <br>
+
+    <small>Text from Wikipedia, licensed under CC BY-SA 4.0</small>

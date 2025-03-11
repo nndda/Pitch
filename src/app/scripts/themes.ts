@@ -1,4 +1,4 @@
-const themes : string[] = [
+const themes: string[] = [
   `
   --ff: 'Lato', serif;
   --b: #131120;
@@ -55,10 +55,10 @@ const themes : string[] = [
 
 import { wrapper } from "../index";
 
-function initializeThemeButtons() : void {
-  const themeBtnContainer = $(".theme-selector-container > .theme-buttons");
+function initializeThemeButtons(): void {
+  const themeBtnContainer: JQuery<HTMLElement> = $(".theme-selector-container > .theme-buttons");
 
-  themes.forEach((n, i) => {
+  themes.forEach((n: string, i: number) => {
     const btnEl = $(`
       <input
         type="radio"

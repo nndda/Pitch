@@ -1,27 +1,27 @@
-const searchItems = $("#components-list > dd");
-const searchBox : JQuery<HTMLInputElement> = $("#component-search");
-export const searchClearBtn : JQuery<HTMLButtonElement> = $("#component-search-clear");
+const searchItems: JQuery<HTMLInputElement> = $("#components-list > dd");
+const searchBox: JQuery<HTMLInputElement> = $("#component-search");
+export const searchClearBtn: JQuery<HTMLButtonElement> = $("#component-search-clear");
 
 searchClear();
 
-searchClearBtn.on("click", function() {
+searchClearBtn.on("click", () => {
   searchClear();
 });
 
-searchBox.on("input", function() {
+searchBox.on("input", () => {
   searchComp();
 });
 
-function searchClear() {
+function searchClear(): void {
   searchBox.val("");
   searchComp();
 }
 
-function searchComp() {
-  const searchTerm = searchBox.val().toLowerCase();
+function searchComp(): void {
+  const searchTerm: string = searchBox.val().toLowerCase();
   if (searchTerm != "") {
     searchClearBtn.removeAttr("disabled");
-    searchItems.each(function() {
+    searchItems.each(() => {
       $(this).toggleClass("hidden",
         !($(this).attr("data-search").indexOf(searchTerm) !== -1)
       );

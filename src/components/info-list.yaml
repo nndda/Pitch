@@ -11,18 +11,18 @@ sampleHTML:
 
       <dt>Arts</dt>
       <dd>
-        <a href="https://itch.io/">Amazing artist</a>
+        <a href="#">Amazing artist</a>
       </dd>
 
       <dt>Story</dt>
       <dd>
-        <a href="https://itch.io/">Witty writer</a>
+        <a href="#">Witty writer</a>
       </dd>
 
       <dt>Codes</dt>
       <dd>
-        <a href="https://itch.io/">Creative coder</a>,
-        <a href="https://itch.io/">Proficient programmer</a>
+        <a href="#">Creative coder</a>,
+        <a href="#">Proficient programmer</a>
       </dd>
 
     </dl>

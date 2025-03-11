@@ -30,14 +30,19 @@ export interface PitchComponentData {
 
   notes?: string[],
 
+  scope?: PitchComponentScope[],
+
   elemCheck?: HTMLInputElement,
 }
 
 export type PitchComponentsCollection = Record<string, PitchComponentData>
-interface PitchComponentInput {
+
+export interface PitchComponentInput {
   name: string,
   id: string,
 }
+
+export type PitchComponentScope = "project" | "profile" | "jam"
 
 export type VariableList = Record<string, string>
 
