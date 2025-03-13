@@ -123,6 +123,11 @@ function initializeComponents(): void {
 
           <button class="component-toggle">
             ${compName}
+            ${compData["notes"].includes("Experimental") ? `
+              <span class="icon">
+                <i class="fa-solid fa-vial"></i>
+              </span>
+            ` : ""}
           </button>
         </dd>
       `);

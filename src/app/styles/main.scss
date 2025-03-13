@@ -162,6 +162,12 @@ body {
                 cursor: pointer;
                 color: $active-col;
               }
+
+              & > .icon {
+                margin-left: .5em;
+                color: #ecc70e;
+                font-size: .85em;
+              }
             }
 
             & > input {
