@@ -7,7 +7,7 @@ description:
 notes:
   - Experimental
   - --custom-- Only one instance of the component per page.
-  - --custom-- In the HTML, for the <code>.custom-toggle</code>-classed <code>&lt;a&gt;</code> elements, append your page's URL to the <code>href</code> to the front. <br> i.e. from <code>#toggle-a</code> to <code>https://username.itch.io/project-name#toggle-a</code>.
+  - --custom-- In the HTML, for the <code>&lt;a&gt;</code> links with the class <code>.custom-toggle</code>, change the <code>href</code> to includes your project page link before the <code>#</code>. <br> i.e. from <code>#toggle-a</code> to <code>https://username.itch.io/project-name#toggle-a</code>.
 
 sampleHTML:
   # - | # ------------------------------------------------------------------------------------------------
