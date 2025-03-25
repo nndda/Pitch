@@ -35,7 +35,7 @@
     "prismjs": "^1.30.0"
   },
   "devDependencies": {
-    "@eslint/js": "^9.22.0",
+    "@eslint/js": "^9.23.0",
     "@types/clean-css": "^4.2.11",
     "@types/eslint__js": "^9.14.0",
     "@types/jquery": "^3.5.30",
