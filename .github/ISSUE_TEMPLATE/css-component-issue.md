@@ -2,7 +2,7 @@
 name: CSS component issue
 about: Report inconsistencies on CSS components and/or tweaks.
 title: ''
-labels: ''
+labels: ['bug', 'component']
 assignees: nndda
 
 ---

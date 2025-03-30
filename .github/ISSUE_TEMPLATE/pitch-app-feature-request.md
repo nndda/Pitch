@@ -2,7 +2,7 @@
 name: Pitch app feature request
 about: Suggest an idea for this project.
 title: ''
-labels: ''
+labels: ['app', 'enhancement']
 assignees: nndda
 
 ---

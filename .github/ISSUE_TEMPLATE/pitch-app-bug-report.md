@@ -2,7 +2,7 @@
 name: Pitch app bug report
 about: Create a report to help us improve.
 title: ''
-labels: ''
+labels: ['bug', 'app']
 assignees: nndda
 
 ---
