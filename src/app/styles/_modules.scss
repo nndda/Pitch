@@ -8,3 +8,9 @@
 .hidden {
   display: none !important;
 }
+
+.non-interractable {
+  pointer-events: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
