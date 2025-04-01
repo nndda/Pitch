@@ -2,6 +2,7 @@
 export interface PitchComponentData {
   // Name defined in its yaml file.
   name: string,
+  nameDisplay?: string,
 
   // Description defined in its yaml file.
   description?: string,
