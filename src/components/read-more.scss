@@ -1,0 +1,39 @@
+.custom-read-more {
+  &:has(> details:not([open])) > .custom-content {
+    height: 5.5em;
+    --mask: linear-gradient(to bottom, black 50%, transparent);
+    -webkit-mask-image: var(--mask);
+    mask-image: var(--mask);
+  }
+
+  &:has(> details[open]) > .custom-content {
+    height: unset !important;
+  }
+
+  & > details {
+    & > summary {
+      display: flex; /* Remove the default marker */
+      width: min-content;
+      margin-top: .5em;
+      white-space: nowrap;
+      color: var(--l);
+      text-decoration: 1px underline;
+      cursor: pointer;
+
+      /* Remove the default marker on itch app */
+      &::-webkit-details-marker{
+        display: none;
+      }
+
+      &::after {
+        content: "Read more...";
+      }
+    }
+
+    &[open] {
+      & > summary::after {
+        content: "Read less...";
+      }
+    }
+  }
+}
