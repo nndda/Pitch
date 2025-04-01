@@ -180,6 +180,8 @@ function buildComponent(compPath : string) : void {
 
       notes: compData.notes ?? [],
 
+      groupOnly: compData.groupOnly ?? false,
+
       variables: getUsedVariables(cssStr),
     } as PitchComponentData;
   }

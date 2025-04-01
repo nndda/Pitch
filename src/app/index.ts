@@ -105,21 +105,34 @@ function initializeComponents(): void {
       }
 
       const compElemItem: JQuery<HTMLElement> = $(`
-        <dd data-search="${compName}" ${
-          compData.sub != undefined ? "class=\"sub\"" : ""
-          }>
-          <input
-            type="checkbox"
-            name="component-toggle"
-            id="${compID}"
-            data-comp="${comp}"
-            data-type="${compData["type"]}"
-          >
+        <dd data-search="${compName}" class="
+          ${compData.sub != undefined ? "sub" : ""}
+          ${compData.groupOnly ? "non-interractable" : ""}
+          ">
 
-          <label for="${compID}">
-            <i class="fa-solid fa-square-check checked-not"></i>
-            <i class="fa-regular fa-square checked"></i>
-          </label>
+          ${
+            !compData.groupOnly ?
+            `
+              <input
+                type="checkbox"
+                name="component-toggle"
+                id="${compID}"
+                data-comp="${comp}"
+                data-type="${compData["type"]}"
+              >
+
+              <label for="${compID}">
+                <i class="fa-solid fa-square-check checked-not"></i>
+                <i class="fa-regular fa-square checked"></i>
+              </label>
+            `
+            :
+            `
+              <label>
+                <i class="fa-regular fa-square-caret-down"></i>
+              </label>
+            `
+          }
 
           <button class="component-toggle">
             ${compName}
@@ -148,11 +161,13 @@ function initializeComponents(): void {
       componentsCollection[comp].elemCheck = <HTMLInputElement>compElemItem.find("input[name=\"component-toggle\"]")[0];
 
       if (compData.sub != undefined) {
-        compElemItem.on("input", "input[name=\"component-toggle\"]", () => {
-          if (componentsCollection[comp].elemCheck.checked) {
-            componentsCollection[compData.sub].elemCheck.checked = true;
-          }
-        });
+        if (!componentsCollection[compData.sub].groupOnly) {
+          compElemItem.on("input", "input[name=\"component-toggle\"]", () => {
+            if (componentsCollection[comp].elemCheck.checked) {
+              componentsCollection[compData.sub].elemCheck.checked = true;
+            }
+          });
+        }
       }
 
       compList.append(compElemItem);

@@ -32,6 +32,8 @@ export interface PitchComponentData {
 
   scope?: PitchComponentScope[],
 
+  groupOnly?: boolean,
+
   elemCheck?: HTMLInputElement,
 }
 
