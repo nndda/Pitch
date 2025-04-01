@@ -129,7 +129,7 @@ function initializeComponents(): void {
             :
             `
               <label>
-                <i class="fa-regular fa-square-caret-down"></i>
+                <i class="fa-regular fa-circle"></i>
               </label>
             `
           }
