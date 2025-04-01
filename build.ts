@@ -160,6 +160,7 @@ function buildComponent(compPath : string) : void {
     componentsCollection[compID] = {
       // Component's data. Refer to src/app/components.ts for more info.
       name: compData.name,
+      nameDisplay: compData.nameDisplay ?? compData.name,
       // Sanitize component's description.
       description: sanitizeHTML(compData.description),
       // Sanitize component's preview HTML.

@@ -216,7 +216,7 @@ let currViewedComp: JQuery<HTMLElement> = null;
 let compTransTimer: NodeJS.Timeout;
 
 function setCompInfo(comp: string): void {
-  compTitle.textContent = componentsCollection[comp].name;
+  compTitle.textContent = componentsCollection[comp].nameDisplay;
   compDesc.innerHTML = componentsCollection[comp].description;
 
   compPreview.off("click");

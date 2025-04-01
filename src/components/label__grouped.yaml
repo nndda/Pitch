@@ -1,6 +1,9 @@
 name:
   Grouped
 
+nameDisplay:
+  Label — Grouped
+
 sub:
   label
 
