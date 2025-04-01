@@ -1,0 +1,34 @@
+name:
+  On Click
+
+nameDisplay:
+  Spoiler — On Click
+
+sub:
+  spoiler
+
+description:
+  Hide any lines of text. Click it to show the content.
+
+notes:
+  - --custom-- Cannot be placed under <code>&lt;p&gt;</code> HTML tag, as its a block-level element.
+
+sampleHTML:
+  - | # ------------------------------------------------------------------------------------------------
+
+    <div>
+      The one who stole Nina's muffins was
+      <div class="custom-hd-click"><details><summary>
+        Mr. Snuffles.
+      </summary></details></div>
+    </div>
+
+  - | # ------------------------------------------------------------------------------------------------
+
+    <div>
+      The killer is 
+      <div class="custom-hd-click"><details><summary>
+        pretty sus
+      </summary></details></div>.
+      I'm shocked, shocked I say!
+    </div>

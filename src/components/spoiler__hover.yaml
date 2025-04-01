@@ -1,0 +1,31 @@
+name:
+  On Hover
+
+nameDisplay:
+  Spoiler — On Hover
+
+sub:
+  spoiler
+
+description:
+  Hide any lines of text. Hover over it to show the content.
+
+sampleHTML:
+  - | # ------------------------------------------------------------------------------------------------
+
+    <p>
+      The one who stole Nina's muffins was
+      <span class="custom-hd">
+        Mr. Snuffles.
+      </span>
+    </p>
+
+  - | # ------------------------------------------------------------------------------------------------
+
+    <p>
+      The killer is
+      <span class="custom-hd">
+        pretty sus
+      </span>.
+      I'm shocked, shocked I say!
+    </p>

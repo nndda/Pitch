@@ -2,12 +2,5 @@ name:
   Spoiler
 
 description:
-  Hide any lines of text. Hover over it, to show the content. Can be applied to any inline element.
 
-sampleHTML:
-  - | # ------------------------------------------------------------------------------------------------
-
-    <p>
-      The one who stole Nina's muffins was
-      <span class="custom-hd">Mr. Snuffles</span>.
-    </p>
+groupOnly: true
