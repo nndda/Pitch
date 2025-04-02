@@ -165,7 +165,8 @@ body {
 
               & > .icon {
                 margin-left: .5em;
-                color: #ecc70e;
+                // color: #ecc70e;
+                color: $primary;
                 font-size: .85em;
               }
             }
