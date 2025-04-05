@@ -57,8 +57,7 @@ body {
 
     & > .components-selector-container {
       display: flex;
-      flex-shrink: 1;
-      min-width: 240px;
+      width: 240px;
       border-right: 1px solid rgba($border-col, 0.1);
       overflow: hidden;
 
@@ -70,8 +69,9 @@ body {
       & > .components-selector-container-inner {
         display: flex;
         flex-direction: column;
-        min-width: 200px;
-        padding: 1em;
+        width: 100%;
+        padding: 1em .5em;
+        padding-right: .75em !important;
         padding-top: 1em !important;
       
         & > .component-search-container {
@@ -247,8 +247,7 @@ body {
       flex-grow: 1;
       flex-direction: column;
 
-      max-width: 960px;
-      min-width: 760px;
+      width: 960px;
 
       & > .preview-info {
         font-size: 1.1em;
