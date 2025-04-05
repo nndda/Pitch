@@ -9,6 +9,8 @@
 
 @use "components_dev";
 
+@use "sass:color";
+
 html {
   color-scheme: only dark !important;
 }
@@ -17,6 +19,28 @@ body {
   background: $background;
   font-family: "Lato";
   font-size: .86em;
+}
+
+@mixin style-scrollbar($col: $primary) {
+  scrollbar-color: $col $background;
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar {
+    width: .5em;
+    height: .5em;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $background; 
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $col; 
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: color.adjust($col, $lightness: 20%); 
+  }
 }
 
 .main-app {
@@ -414,7 +438,7 @@ body {
   aspect-ratio: 1 / 1;
 
   & > #css-output-textarea {
-    @include style-scrollbar();
+    @include style-scrollbar;
 
     font-family: monospace;
 
