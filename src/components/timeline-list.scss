@@ -1,0 +1,54 @@
+.custom-tl-list {
+  display: grid;
+  grid-template-columns: 6.5em 1fr;
+  padding-left: 1em;
+
+  & > dt, & > dd {
+    margin: .25em 0;
+    padding: 0 .5em;
+  }
+
+  & > dt {
+    position: relative;
+    grid-column: 1;
+    width: fit-content;
+    max-height: 1.25em;
+    font-weight: bold;
+    background: var(--t);
+    color: var(--b2);
+    border-radius: 6px;
+    
+    & > small {
+      position: absolute;
+      left: 0;
+      top: 100%;
+      margin-top: .5em;
+      color: var(--t);
+      font-size: .85em;
+      font-weight: normal;
+      white-space: nowrap;
+      opacity: .8;
+    }
+
+    &:not(:first-child) {
+      margin-top: 1.5em;
+
+      & + dd {
+        margin-top: 1.5em;
+      }
+    }
+    
+  }
+
+  & > dd {
+    display: list-item;
+    grid-column: 2;
+    margin-left: 1em;
+
+    & > .custom-lb {
+      /*  There has to be a better way... */
+      padding: 0 .7ch !important;
+      outline: .35ch solid var(--btn);
+    }
+  }
+}
