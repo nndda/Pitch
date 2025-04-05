@@ -317,7 +317,6 @@ function setCompInfo(comp: string): void {
           <pre><code>${highlightHTML(compHTMLRaw)}</code></pre>
         </div>
       </div>
-      <br>
     `);
 
     const componentHTML: JQuery<HTMLElement> = compPreviewEl.find(".component-html");
