@@ -1,0 +1,18 @@
+name:
+  Profile Page
+
+nameDisplay:
+  Link Decoration — Profile Page
+
+sub:
+  link-decoration
+
+description:
+  Decorate links pointing to itch.io profile page.
+
+notes:
+  - --custom-- Icon provided by <a href="https://fontawesome.com/" target="_blank">Font Awesome</a>. Licensed under CC BY 4.0
+
+sampleHTML:
+  - | # ------------------------------------------------------------------------------------------------
+    Check out my itch.io profile <a class="custom-link-itch" href="https://nnda.itch.io" target="_blank">nnda</a>.
