@@ -16,7 +16,7 @@
     background: $bg-main;
     margin-bottom: 1.25em;
     margin-top: 1.25em;
-    overflow: hidden;
+    // overflow: hidden;
 
     &.component-container-img {
       --b2: transparent;
@@ -47,8 +47,23 @@
     }
 
     & > .component-preview-control {
+      display: flex;
       font-family: Ubuntu;
-      padding: .7em 0;
+      padding: .65em 0;
+
+      & > button {
+        display: flex;
+        align-items: center;
+        margin: 0 .25em;
+
+        &.comp-codepen-edit {
+          & > .fa-solid {
+            font-size: .8em;
+            color: $accent;
+            margin-right: .5em;
+          }
+        }
+      }
     }
 
     & > .component-html {
@@ -70,5 +85,19 @@
         margin-top: 0;
       }
     }
+  }
+}
+
+.component-docs {
+  margin-top: 1.5em;
+  font-family: Lato;
+  font-size: 1.15em;
+  line-height: 1.5em;
+  color: $text-col;
+
+  & code {
+    background: lighten($background, 9%);
+    padding: 0 .5em;
+    border-radius: .2em;
   }
 }

@@ -287,7 +287,13 @@ DOMPurify.setConfig({
 });
 
 function sanitizeHTML(dirtyHTML : string) : string {
-  return (DOMPurify.sanitize(dirtyHTML) as string)
+  if (!dirtyHTML) return "";
+
+  if (dirtyHTML.trimStart().startsWith("<!-- NOTE -->")) {
+    return dirtyHTML.trimStart();
+  }
+
+  return (DOMPurify.sanitize(dirtyHTML) as string);
     // Wish I didn't have to do this.
     // .replace(/href="[^"]+"/g, `href="#"`);
 }

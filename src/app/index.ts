@@ -29,7 +29,7 @@ const compList: JQuery<HTMLElement> = $("#components-list");
 const compileCompBtn: HTMLInputElement = d.getElementById("compile-components-btn") as HTMLInputElement;
 
 const compTitle: HTMLElement = d.getElementById("component-title");
-const compDesc: HTMLElement = d.getElementById("component-description");
+// const compDesc: HTMLElement = d.getElementById("component-description");
 
 export const wrapper: HTMLElement = d.getElementById("wrapper");
 
@@ -200,8 +200,8 @@ function setHome(): void {
     compNotes.html("");
     compTitle.textContent =
       "Pitch";
-    compDesc.textContent =
-      "Collection of CSS components and tweaks designed specifically for itch.io project pages.";
+    // compDesc.textContent =
+    //   "Collection of CSS components and tweaks designed specifically for itch.io project pages.";
 
     currViewedComp?.removeClass("viewed");
 
@@ -217,7 +217,7 @@ let compTransTimer: NodeJS.Timeout;
 
 function setCompInfo(comp: string): void {
   compTitle.textContent = componentsCollection[comp].nameDisplay;
-  compDesc.innerHTML = componentsCollection[comp].description;
+  // compDesc.innerHTML = componentsCollection[comp].description;
 
   compPreview.off("click");
   compPreview.addClass("hidden-opac");
@@ -289,54 +289,87 @@ function setCompInfo(comp: string): void {
   for (const n in componentsCollection[comp].sampleHTML) {
     const compHTMLRaw: string = componentsCollection[comp].sampleHTML[n];
 
-    const compPreviewEl: JQuery<HTMLElement> = $(`
-      <div class="component-container-single">
-        <div class="component-display">
-          ${compHTMLRaw}
-        </div>
+    if (!compHTMLRaw.startsWith("<!-- NOTE -->")) {
 
-        <div class="component-preview-control">
-          <button class="button-general comp-show-html">
-            <i class="fa-solid fa-eye"></i>
-            <span>
-              Show HTML
-            </span>
-          </button>
+      const
+        compPreviewEl: JQuery<HTMLElement> = $(`
+        <div class="component-container-single">
+          <div class="component-display">
+            ${compHTMLRaw}
+          </div>
 
-          ${navigator.clipboard ? `
-            <button class="button-general comp-copy">
-              <i class="fa-solid fa-copy"></i>
-              <span class="comp-copy-text">
-                Copy
+          <div class="component-preview-control">
+            <button class="button-general comp-show-html tooltip">
+              <i class="fa-solid fa-eye"></i>
+              <!--
+              <span>
+                Show HTML
               </span>
+              -->
+              <div class="tooltip-content">
+                Show the HTML codes
+              </div>
             </button>
-          ` : ""}
+
+            ${navigator.clipboard ? `
+              <button class="button-general comp-copy tooltip">
+                <i class="fa-solid fa-copy"></i>
+                <!--
+                <span class="comp-copy-text">
+                  Copy
+                </span>
+                -->
+                <div class="tooltip-content">
+                  Copy the HTML codes
+                </div>
+              </button>
+            ` : ""}
+
+            <div class="flex-space"></div>
+
+            <button class="button-general comp-codepen-edit tooltip">
+              <i class="fa-solid fa-pen-to-square"></i>
+              <i class="fa-brands fa-codepen"></i>
+              <div class="tooltip-content tooltip-r">
+                Edit on CodePen
+              </div>
+            </button>
+          </div>
+
+          <div class="component-html html-hidden">
+            <pre><code>${highlightHTML(compHTMLRaw)}</code></pre>
+          </div>
         </div>
+      `)
+      , componentHTML: JQuery<HTMLElement> = compPreviewEl.find(".component-html")
+      ;
 
-        <div class="component-html html-hidden">
-          <pre><code>${highlightHTML(compHTMLRaw)}</code></pre>
-        </div>
-      </div>
-    `);
-
-    const componentHTML: JQuery<HTMLElement> = compPreviewEl.find(".component-html");
-
-    compPreviewEl.on("click", ".comp-show-html", () => {
-      if (componentHTML.hasClass("html-hidden")) {
-        componentHTML.removeClass("html-hidden");
-      } else {
-        componentHTML.addClass("html-hidden");
-      };
-    });
-
-    if (navigator.clipboard) {
-      const componentCopyText = compPreviewEl.find(".comp-copy-text")[0];
-      compPreviewEl.on("click", ".comp-copy", () => {
-        copyComponentHTML(compHTMLRaw, componentCopyText);
+      compPreviewEl.on("click", ".comp-show-html", () => {
+        componentHTML.toggleClass("html-hidden");
       });
-    }
 
-    compPreview.append(compPreviewEl);
+      if (navigator.clipboard) {
+        const componentCopyText = compPreviewEl.find(".comp-copy-text")[0];
+
+        compPreviewEl.on("click", ".comp-copy", () => {
+          copyComponentHTML(compHTMLRaw, componentCopyText);
+        });
+      }
+
+      compPreview.append(compPreviewEl);
+
+    } else {
+
+      const
+        compDoc: JQuery<HTMLElement> = $(`
+          <div class="component-docs">
+            ${compHTMLRaw}
+          </div>
+        `)
+      ;
+
+      compPreview.append(compDoc);
+    }
   }
 
   for (const n in componentsCollection[comp].sampleIMG) {

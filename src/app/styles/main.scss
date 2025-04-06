@@ -280,7 +280,7 @@ body {
       & > .preview-container {
         flex-grow: 1;
         overflow-y: scroll;
-      }  
+      }
 
     }
   }
@@ -288,6 +288,7 @@ body {
 
 #wrapper {
   @include style-scrollbar($accent);
+  background: darken($background, 2.5%);
 }
 
 .copy-btn-container-inner {
