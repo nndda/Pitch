@@ -83,7 +83,7 @@ export interface CompYAML {
 }
 
 // Required property for the component's yaml file.
-const requiredCompData = ["name", "description"];
+const requiredCompData = ["name"];
 // Validate component's yaml.
 function isValidCompYAML(parsedData : CompYAML) : boolean {
   for (const property of requiredCompData) {
@@ -162,7 +162,7 @@ function buildComponent(compPath : string) : void {
       name: compData.name,
       nameDisplay: compData.nameDisplay ?? compData.name,
       // Sanitize component's description.
-      description: sanitizeHTML(compData.description),
+      // description: sanitizeHTML(compData.description),
       // Sanitize component's preview HTML.
       sampleHTML:
         compData.sampleHTML !== undefined ?

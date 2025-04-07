@@ -5,7 +5,7 @@ export interface PitchComponentData {
   nameDisplay?: string,
 
   // Description defined in its yaml file.
-  description?: string,
+  // description?: string,
 
   // HTML previews defined in its yaml file.
   sampleHTML?: string[],
