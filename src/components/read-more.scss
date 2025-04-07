@@ -36,4 +36,8 @@
       }
     }
   }
+
+  & > .custom-tl-list + details > summary {
+    padding-left: 1em;
+  }
 }
