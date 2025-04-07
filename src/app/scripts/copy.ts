@@ -41,7 +41,7 @@ export function copyComponentHTML(str: string, elCopyNotif: HTMLElement) {
   navigator.clipboard.writeText(str).then(() => {
     elCopyNotif.textContent = "Copied!";
     copyTimeout = setTimeout(() => {
-      elCopyNotif.textContent = "Copy";
+      elCopyNotif.textContent = "";
     }, 2500);
 
   },() => {

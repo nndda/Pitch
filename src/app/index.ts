@@ -323,6 +323,8 @@ function setCompInfo(comp: string): void {
                   Copy the HTML codes
                 </div>
               </button>
+
+              <span class="comp-copy-text"></span>
             ` : ""}
 
             <div class="flex-space"></div>
