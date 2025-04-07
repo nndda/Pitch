@@ -1,3 +1,4 @@
+// @ts-ignore
 import(/* webpackPreload: true */ "./styles/main.scss");
 
 const d: Document = document;
