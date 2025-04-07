@@ -28,6 +28,14 @@
     &:not(:last-child) {
       border-bottom: 1px solid var(--br);
     }
+
+    &:first-of-type:not(:first-child) {
+      border-top: 1px solid var(--br);
+    }
+
+    &:last-of-type:not(:last-child) {
+      border-bottom: 1px solid var(--br);
+    }
   }
 
   & summary {
