@@ -1,4 +1,4 @@
-import "./styles/main.scss";
+import(/* webpackPreload: true */ "./styles/main.scss");
 
 const d: Document = document;
 
