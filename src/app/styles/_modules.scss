@@ -14,3 +14,38 @@
   -webkit-user-select: none;
   user-select: none;
 }
+
+.flex-space {
+  flex-grow: 1;
+}
+
+.tooltip {
+  position: relative;
+
+  & > .tooltip-content {
+    position: absolute;
+    bottom: calc(-100% - .25em);
+    left: 0;
+    padding: .2em .5em;
+    background: inherit;
+    border-radius: 6px;
+    pointer-events: none;
+    white-space: nowrap;
+    z-index: 99;
+
+    opacity: 0;
+    transform: translateY(-35%);
+    transition: .25s ease;
+
+    &.tooltip-r {
+      left: -100%;
+    }
+  }
+
+  &:hover {
+    & > .tooltip-content {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
