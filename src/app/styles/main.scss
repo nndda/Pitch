@@ -71,7 +71,8 @@ body {
         flex-direction: column;
         width: 100%;
         padding: 1em .5em;
-        padding-right: .75em !important;
+        // padding-right: .75em !important;
+        padding-right: 0 !important;
         padding-top: 1em !important;
       
         & > .component-search-container {
@@ -98,6 +99,10 @@ body {
         & dl#components-list {
           $font-size: 1.1em;
           flex-grow: 1;
+
+          margin: 0;
+          margin-left: .75em;
+          margin-right: .75em;
 
           padding: 0;
           padding-left: .2em;
@@ -219,8 +224,10 @@ body {
           display: flex;
           flex-direction: column;
           min-height: 4em;
-          padding: 1em;
-          margin-bottom: 1em;
+          padding: .5em;
+          padding-top: 1.25em;
+          // margin-bottom: 1em;
+          border-top: 1px solid rgba($border-col, 0.1);
 
           & > #copy-notification {
             font-size: 1.1em;
@@ -294,7 +301,7 @@ body {
 .copy-btn-container-inner {
   display: flex;
   margin: auto;
-
+  $border-radius: 6px;
 
   & > button {
     height: 2em;
@@ -303,10 +310,10 @@ body {
   }
 
   & > :first-child {
-    border-radius: 2em 0 0 2em;
+    border-radius: $border-radius 0 0 $border-radius;
   }
   & > :last-child {
-    border-radius: 0 2em 2em 0;
+    border-radius: 0 $border-radius $border-radius 0;
   }
 }
 
