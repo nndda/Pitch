@@ -37,7 +37,7 @@ export const wrapper: HTMLElement = d.getElementById("wrapper");
 const compPreview: JQuery<HTMLElement> = $("#component-preview");
 const compInputs: JQuery<HTMLElement> = $("#component-inputs");
 const compNotes: JQuery<HTMLElement> = $("#component-notes");
-const compLabelsCont: JQuery<HTMLElement> = $("#component-labels");
+// const compLabelsCont: JQuery<HTMLElement> = $("#component-labels");
 
 const compGroups: string[] = [];
 
@@ -234,7 +234,7 @@ function setCompInfo(comp: string): void {
   compInputs.addClass("hidden");
   compNotes.html("");
   compNotes.addClass("hidden");
-  compLabelsCont.html("");
+  // compLabelsCont.html("");
 
   if (copyTimeout !== null || copyTimeout !== undefined) clearTimeout(copyTimeout);
 
@@ -388,13 +388,13 @@ function setCompInfo(comp: string): void {
     `));
   }
 
-  if (componentsCollection[comp].labels !== undefined) {
-    compLabelsCont.append($(`${
-      componentsCollection[comp].labels.reduce((accum : string, value : string) => {
-        return accum + `<span class="label-${value}">${value.replace(/-/g, " ")}</span>`
-      }, "")
-    }`));
-  }
+  // if (componentsCollection[comp].labels !== undefined) {
+  //   compLabelsCont.append($(`${
+  //     componentsCollection[comp].labels.reduce((accum : string, value : string) => {
+  //       return accum + `<span class="label-${value}">${value.replace(/-/g, " ")}</span>`
+  //     }, "")
+  //   }`));
+  // }
 
   homeButton.toggleClass("hidden", false);
   homePreview.toggleClass("hidden", true);

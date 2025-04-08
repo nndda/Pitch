@@ -25,7 +25,7 @@ export interface PitchComponentData {
 
   sub?: string,
 
-  labels?: string[],
+  // labels?: string[],
 
   inputs?: PitchComponentInput[],
 
