@@ -135,7 +135,7 @@ function initializeComponents(): void {
             `
           }
 
-          <button class="component-toggle">
+          <button class="component-toggle" data-comp="${compName}">
             ${compName}
             ${compData["notes"].includes("Experimental") ? `
               <span class="icon">
@@ -369,7 +369,15 @@ function setCompInfo(comp: string): void {
             ${compHTMLRaw}
           </div>
         `)
+      , compButtons: JQuery<HTMLElement> = compDoc.find("button.button-primary")
       ;
+
+      compButtons.each((_, el) => {
+        const compName: string = el.textContent;
+        el.addEventListener("click", () => {
+          (d.querySelector(`button.component-toggle[data-comp="${compName}"]`) as HTMLButtonElement).click();
+        });
+      });
 
       compPreview.append(compDoc);
     }
