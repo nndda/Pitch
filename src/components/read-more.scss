@@ -40,4 +40,8 @@
   & > .custom-tl-list + details > summary {
     padding-left: 1em;
   }
+
+  &.custom-once > details[open] {
+    display: none;
+  }
 }
