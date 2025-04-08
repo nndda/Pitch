@@ -23,8 +23,9 @@ button {
   display: inline-block;
   color: $text-col;
   background: rgba($accent, 50%);
-  padding: .2em .8em;
-  border-radius: 16px;
+  padding: .2em .5em;
+  margin: 0 .2em;
+  border-radius: 9px;
   cursor: pointer;
   transition: transform .2s ease;
 
