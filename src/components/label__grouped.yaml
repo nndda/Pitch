@@ -7,10 +7,13 @@ nameDisplay:
 sub:
   label
 
-description:
-  Container to group a collection of Label components.
-
 sampleHTML:
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <p>
+      Custom class for container to group multiple <button class="button-general">Label</button> components.
+    </p>
+
   - | # ------------------------------------------------------------------------------------------------
 
     <p class="custom-grouped-lb">
@@ -59,9 +62,19 @@ sampleHTML:
 
     </p>
 
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <h2>Examples</h2>
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <p>
+      Centered container using <code>text-center</code> class, and increased <code>font-size</code> of <code>2em</code>:
+    </p>
+
   - | # ------------------------------------------------------------------------------------------------
 
-    <h2 class="custom-grouped-lb text-center">
+    <p class="custom-grouped-lb text-center" style="font-size: 2em;">
       <a href="#" class="custom-lb" style="background: #ff6973; color: #222;">
         <img height="32" src="https://cdn.simpleicons.org/youtube/222" loading="lazy"/>
         YouTube
@@ -76,11 +89,11 @@ sampleHTML:
         <img height="32" src="https://cdn.simpleicons.org/bluesky/eee" loading="lazy"/>
         Bluesky
       </a>
-    </h2>
+    </p>
 
   - | # ------------------------------------------------------------------------------------------------
 
-    <h2 class="custom-grouped-lb text-center">
+    <p class="custom-grouped-lb text-center" style="font-size: 2em;">
       <a href="#" class="custom-lb" style="background: #ff6973; color: #222;">
         <img height="32" src="https://cdn.simpleicons.org/youtube/222" loading="lazy"/>
       </a>
@@ -92,4 +105,4 @@ sampleHTML:
       <a href="#" class="custom-lb" style="background: #15788c; color: #eee;">
         <img height="32" src="https://cdn.simpleicons.org/bluesky/eee" loading="lazy"/>
       </a>
-    </h2>
+    </p>

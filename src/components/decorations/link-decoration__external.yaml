@@ -7,12 +7,15 @@ nameDisplay:
 sub:
   link-decoration
 
-description:
-  Decorate links pointing to external page/site.
-
 notes:
   - --custom-- Icon provided by <a href="https://fontawesome.com/" target="_blank">Font Awesome</a>. Licensed under CC BY 4.0
 
 sampleHTML:
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <p>
+      Decorate links pointing to external page/site.
+    </p>
+
   - | # ------------------------------------------------------------------------------------------------
     The source code for this project is available on the <a class="custom-link-ext" href="https://github.com/nndda/Pitch" target="_blank">GitHub repository</a>! Licensed under MIT and CC0!

@@ -1,10 +1,13 @@
 name:
   Callout
 
-description:
-  Inform and highlight content warnings, additional informations, or technical issues.
-
 sampleHTML:
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <p>
+      Inform and highlight content warnings, additional informations, or technical issues.
+    </p>
+
   - | # ------------------------------------------------------------------------------------------------
 
     <blockquote class="custom-callout">
@@ -13,6 +16,58 @@ sampleHTML:
       Strong language, mild violence, blood, and flashing lights.
 
     </blockquote>
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <h2>Sizing</h2>
+    <p>
+      Callout takes the full width of the page by default. You can adjust the width manually by adjusting its <code>max-width</code> property:
+    </p>
+
+  - | # ------------------------------------------------------------------------------------------------
+
+    <blockquote style="max-width: 500px;" class="custom-callout">
+
+      <h3>500px</h3>
+      This Callout element has a maximum width of 500 pixels.
+
+    </blockquote>
+
+    <blockquote style="max-width: 400px;" class="custom-callout">
+
+      <h3>400px</h3>
+      This Callout element has a maximum width of 400 pixels.
+
+    </blockquote>
+
+    <blockquote style="max-width: 300px;" class="custom-callout">
+
+      <h3>300px</h3>
+      This Callout element has a maximum width of 300 pixels.
+
+    </blockquote>
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <p>
+      For Callout with custom width, center it by adding <code>margin: auto;</code>.
+    </p>
+
+  - | # ------------------------------------------------------------------------------------------------
+
+    <blockquote style="max-width: 300px; margin: auto;" class="custom-callout">
+
+      <h3>Note</h3>
+      This Callout element has a maximum width of 300 pixels, and also is centered.
+
+    </blockquote>
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <h2>Examples</h2>
+    <p>
+      Callout with <button class="button-primary">Label</button> inside it:
+    </p>
 
   - | # ------------------------------------------------------------------------------------------------
 
@@ -27,5 +82,34 @@ sampleHTML:
       <a target="_blank" href="#" class="custom-lb">Report bugs here</a>
 
       And feel free to share your feedback in the comments!
+
+    </blockquote>
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <p>
+      Nested Callout:
+    </p>
+
+  - | # ------------------------------------------------------------------------------------------------
+
+    <blockquote class="custom-callout">
+
+      <h2>A Callout</h2>
+      This is a Callout component
+
+      <blockquote class="custom-callout">
+
+        <h3>Another Callout</h3>
+        This is another Callout component
+
+        <blockquote class="custom-callout">
+
+          <h4>Yet Another Callout</h4>
+          This is yet another Callout component
+          
+        </blockquote>
+        
+      </blockquote>
 
     </blockquote>

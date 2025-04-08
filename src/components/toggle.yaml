@@ -1,13 +1,9 @@
 name:
   Toggle
 
-description:
-  Switch between two contents on your page.
-
 notes:
   - Experimental
   - --custom-- Only one instance of the component per page.
-  - --custom-- In the HTML, for the <code>&lt;a&gt;</code> links with the class <code>.custom-toggle</code>, change the <code>href</code> to includes your project page link before the <code>#</code>. <br> i.e. from <code>#toggle-a</code> to <code>https://username.itch.io/project-name#toggle-a</code>.
 
 sampleHTML:
   # - | # ------------------------------------------------------------------------------------------------
@@ -25,6 +21,15 @@ sampleHTML:
   #   <div class="custom-content-b">
   #     And this is the content of "Content B."
   #   </div>
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <p>
+      Switch between two contents on your page.
+    </p>
+    <p>
+      For each <code>&lt;a&gt;</code> element with the class <code>custom-toggle</code>, change the <code>href</code> to includes your project page link before the <code>#</code>. <br> i.e. from <code>#toggle-a</code> to <code>https://username.itch.io/project-name#toggle-a</code>.
+    </p>
 
   - | # ------------------------------------------------------------------------------------------------
     Languages &nbsp;

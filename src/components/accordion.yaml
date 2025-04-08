@@ -1,13 +1,43 @@
 name:
   Accordion
 
-description:
-  Turn walls of texts into list of collapsible contents.
-
 sampleHTML:
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <p>
+      Turn walls of texts into list of collapsible contents. It’s basically just a styled list of <code>&lt;details&gt;</code> elements.
+    </p>
+
   - | # ------------------------------------------------------------------------------------------------
 
     <div class="custom-accrd">
+      <details>
+        <summary>How do I get access to custom CSS in my game page?</summary>
+        You can contact itch.io support to enable the custom CSS feature.
+      </details>
+
+      <details>
+        <summary>Can I use this in a commercial project?</summary>
+        Absolutely! The generated CSS codes is licensed under <em>Creative Commons Zero v1.0 Universal</em>.
+      </details>
+
+      <details>
+        <summary>Why can't I use this on profile or jam pages?</summary>
+        Some components make use of the page's theme. Unlike project page, profile page and jam page didn't have some of the required color variables needed for the components to be displayed correctly (e.g. button color).
+      </details>
+    </div>
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <p>
+      You can also add elements other than <code>&lt;details&gt;</code> directly inside <code>.custom-accrd</code>. Like a header or footer:
+    </p>
+
+  - | # ------------------------------------------------------------------------------------------------
+
+    <div class="custom-accrd">
+      <h2>Frequently Asked Questions</h2>
+
       <details>
         <summary>How do I get access to custom CSS in my game page?</summary>
         You can contact itch.io support to enable the custom CSS feature.
@@ -28,12 +58,12 @@ sampleHTML:
 
     <div class="custom-accrd">
       <p>
-        This {ASSET PACK} is licensed under 
+        This {PROJECT NAME} is licensed under 
         <a href="#">
           CC BY 4.0
         </a>
-        <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" width="20px">
-        <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" width="20px">
+        <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" width="20">
+        <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" width="20">
       </p>
 
       <details>
@@ -64,7 +94,18 @@ sampleHTML:
           <code>&lt;username&gt;.itch.io</code>
         </p>
       </details>
+
+      <p class="text-right">
+        For more info, <a href="#">click here</a>.
+      </p>
     </div>
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <h2>Aligning</h2>
+    <p>
+      Accordions are center-aligned by default. To align it to left or right, add another class <code>custom-left</code> or <code>custom-right</code>.
+    </p>
 
   - | # ------------------------------------------------------------------------------------------------
 
@@ -75,8 +116,6 @@ sampleHTML:
       </details>
     </div>
 
-  - | # ------------------------------------------------------------------------------------------------
-
     <div class="custom-accrd custom-right">
       <details>
         <summary>Right-aligned accordion</summary>
@@ -84,11 +123,50 @@ sampleHTML:
       </details>
     </div>
 
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <h2>Sizing</h2>
+    <p>
+      Accordion has a default maximum width of 553px.
+    </p>
+    <p>
+      Add <code>custom-full-w</code> class to make it takes up the entire width of the page.
+    </p>
+
   - | # ------------------------------------------------------------------------------------------------
 
     <div class="custom-accrd custom-full-w">
       <details>
         <summary>Full width accordion</summary>
         This accordion takes full width of the page.
+      </details>
+    </div>
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <p>
+      Or adjust the width manually by overriding its <code>max-width</code> property:
+    </p>
+
+  - | # ------------------------------------------------------------------------------------------------
+
+    <div class="custom-accrd" style="max-width: 500px;">
+      <details>
+        <summary>500px Accordion</summary>
+        This accordion has a maximum width of 500px.
+      </details>
+    </div>
+
+    <div class="custom-accrd" style="max-width: 400px;">
+      <details>
+        <summary>400px Accordion</summary>
+        This accordion has a maximum width of 400px.
+      </details>
+    </div>
+
+    <div class="custom-accrd" style="max-width: 300px;">
+      <details>
+        <summary>300px Accordion</summary>
+        This accordion has a maximum width of 300px.
       </details>
     </div>

@@ -1,23 +1,39 @@
 name:
   Timeline List
 
-description:
-  Description list element, specifically styled to represent timeline, changelogs, or update logs.
-
 sampleHTML:
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <p>
+      Description list element, specifically styled to represent timeline, changelogs, or update logs.
+    </p>
+
   - | # ------------------------------------------------------------------------------------------------
     <dl class="custom-tl-list">
-      <dt>v2.5.1</dt>
+      <dt>
+        v2.5.1
+        <small>5 March 2021</small>
+      </dt>
 
       <dd>Dependency updates</dd>
       <dd>Various bug fixes</dd>
 
-      <dt>v2.5</dt>
+      <dt>
+        v2.5
+        <small>20 February 2021</small>
+      </dt>
 
       <dd>Improve core feature</dd>
       <dd>Performance improvements</dd>
       <dd>Minor refactor</dd>
     </dl>
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <h2>Examples</h2>
+    <p>
+      Utilizing <button class="button-primary">Label</button> to indicate the changes' type. And also using <button class="button-primary">Input</button> element:
+    </p>
 
   - | # ------------------------------------------------------------------------------------------------
     <dl class="custom-tl-list">
@@ -89,3 +105,84 @@ sampleHTML:
         Wearing a low, soft felt hat with a curled brim and the crown creased lengthwise will slow the movement down by 156%
       </dd>
     </dl>
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <p>
+      The same example as above, but wrapped in <button class="button-primary">Read More</button> component:
+    </p>
+
+  - | # ------------------------------------------------------------------------------------------------
+    <div class="custom-read-more">
+      <dl class="custom-tl-list custom-content" style="max-height: 12em;">
+        <dt>
+          v1.2.1
+          <small>25 March 2025</small>
+        </dt>
+
+        <dd>
+          <span class="custom-lb">new</span>
+          Introducing various bugs to be fixed on the next update
+        </dd>
+        <dd>
+          <span class="custom-lb">changed</span>
+          Petting cat are now enabled for enterprise edition
+        </dd>
+
+
+        <dt>
+          v1.2
+          <small>21 April 2024</small>
+        </dt>
+
+        <dd>
+          <span class="custom-lb">new</span>
+          Player can now exit the game by pressing <kbd>alt</kbd> + <kbd>f4</kbd>
+        </dd>
+        <dd>
+          <span class="custom-lb">new</span>
+          Added new recipe: bread
+        </dd>
+        <dd>
+          <span class="custom-lb">fixed</span>
+          All cutscenes will now be unskippable
+        </dd>
+        <dd>
+          <span class="custom-lb">fixed</span>
+          Petting a cat will no longer spawn blackholes
+        </dd>
+        <dd>
+          <span class="custom-lb">changed</span>
+          Petting cat are now disabled
+        </dd>
+        <dd>
+          <span class="custom-lb">changed</span>
+          Sets minimum frame-per-seconds to be at least 60
+        </dd>
+
+
+        <dt>
+          v1.1
+          <small>17 April 2024</small>
+        </dt>
+
+        <dd>
+          <span class="custom-lb">new</span>
+          Turning off the device will exit the game
+        </dd>
+        <dd>
+          <span class="custom-lb">new</span>
+          Introducing autosave feature, which save the game's state every 50ms
+        </dd>
+        <dd>
+          <span class="custom-lb">fixed</span>
+          Babies will no longer forced to accept trial by combat
+        </dd>
+        <dd>
+          <span class="custom-lb">changed</span>
+          Wearing a low, soft felt hat with a curled brim and the crown creased lengthwise will slow the movement down by 156%
+        </dd>
+      </dl>
+
+      <details><summary></summary></details>
+    </div>

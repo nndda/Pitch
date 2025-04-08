@@ -7,13 +7,16 @@ nameDisplay:
 sub:
   spoiler
 
-description:
-  Hide any lines of text. Click it to show the content.
-
 notes:
   - --custom-- Cannot be placed under <code>&lt;p&gt;</code> HTML tag, as its a block-level element.
 
 sampleHTML:
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <p>
+      Hide any lines of text. Click it to show the content.
+    </p>
+
   - | # ------------------------------------------------------------------------------------------------
 
     <div>
