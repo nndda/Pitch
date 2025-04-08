@@ -1,13 +1,13 @@
 .custom-read-more {
   &:has(> details:not([open])) > .custom-content {
-    height: 5.5em;
+    max-height: 5.5em;
     --mask: linear-gradient(to bottom, black 50%, transparent);
     -webkit-mask-image: var(--mask);
     mask-image: var(--mask);
   }
 
   &:has(> details[open]) > .custom-content {
-    height: unset !important;
+    max-height: unset !important;
   }
 
   & > details {
@@ -39,6 +39,15 @@
 
   & > .custom-tl-list + details > summary {
     padding-left: 1em;
+  }
+
+  &.custom-center > details > summary {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  &.custom-right > details > summary {
+    margin-left: auto;
   }
 
   &.custom-once > details[open] {
