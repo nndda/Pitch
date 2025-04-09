@@ -74,12 +74,18 @@ function initializeComponents(): void {
               ${compData["type"]}
             </span>
 
-            <button class="button-general component-select-all" data-type="${compData["type"]}">
+            <button class="button-general component-select-all tooltip" data-type="${compData["type"]}">
               <i class="fa-solid fa-square-check"></i>
+              <small class="tooltip-content tooltip-l">
+                Select all
+              </small>
             </button>
 
-            <button class="button-general component-select-none hidden" data-type="${compData["type"]}">
+            <button class="button-general component-select-none tooltip hidden" data-type="${compData["type"]}">
               <i class="fa-regular fa-square-minus"></i>
+              <small class="tooltip-content tooltip-l">
+                Select none
+              </small>
             </button>
           </dt>
         `);
@@ -302,26 +308,16 @@ function setCompInfo(comp: string): void {
           <div class="component-preview-control">
             <button class="button-general comp-show-html tooltip">
               <i class="fa-solid fa-eye"></i>
-              <!--
-              <span>
-                Show HTML
-              </span>
-              -->
               <div class="tooltip-content">
-                Show the HTML codes
+                Show HTML
               </div>
             </button>
 
             ${navigator.clipboard ? `
               <button class="button-general comp-copy tooltip">
                 <i class="fa-solid fa-copy"></i>
-                <!--
-                <span class="comp-copy-text">
-                  Copy
-                </span>
-                -->
-                <div class="tooltip-content">
-                  Copy the HTML codes
+                <div class="tooltip-content tooltip-r">
+                  Copy HTML
                 </div>
               </button>
 
@@ -333,7 +329,7 @@ function setCompInfo(comp: string): void {
             <button class="button-general comp-codepen-edit tooltip">
               <i class="fa-solid fa-pen-to-square"></i>
               <i class="fa-brands fa-codepen"></i>
-              <div class="tooltip-content tooltip-r">
+              <div class="tooltip-content tooltip-l">
                 Edit on CodePen
               </div>
             </button>
