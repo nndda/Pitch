@@ -107,6 +107,7 @@ body {
           padding: 0;
           padding-left: .2em;
           padding-right: .85em;
+          padding-bottom: .75em;
 
           overflow-y: scroll;
 
@@ -267,10 +268,12 @@ body {
         & > .preview-header {
           display: flex;
           flex-direction: row;
+          margin-top: .75em;
+          margin-bottom: .85em;
           align-items: center;
 
           & > #component-title {
-            margin: .5em 0 .2em;
+            margin: 0 .2em;
           }
 
           & > .right-control {
@@ -439,10 +442,13 @@ body {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  align-items: center;
 
-  height: 10em;
+  height: 9em;
   width: 100%;
   aspect-ratio: 1 / 1;
+
+  border-top: 1px solid rgba($border-col, 0.1);
 
   & > #css-output-textarea {
     @include style-scrollbar;
@@ -454,16 +460,14 @@ body {
 
     flex-grow: 1;
 
-    margin: auto;
-    margin-top: .5em;
-    margin-bottom: 1em;
+    margin: 1em;
+    padding: 1em;
     word-break: break-all;
     resize: none;
-    width: 100%;
+    width: calc(100% - 4em);
     border: 0;
     outline: 0;
-    padding: .8em;
-    box-sizing: border-box;
+    // box-sizing: border-box;
 
     &:focus {
       outline: 3px dashed $primary;
@@ -485,6 +489,8 @@ body {
     top: 45%;
     left: 0;
     width: 100%;
+
+    pointer-events: none;
   }
 }
 

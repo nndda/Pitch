@@ -24,10 +24,10 @@
 
   & > .tooltip-content {
     position: absolute;
-    bottom: calc(-100% - .25em);
+    bottom: calc(-100% - .45em);
     left: 0;
     padding: .2em .5em;
-    background: inherit;
+    background: $background;
     border-radius: 6px;
     pointer-events: none;
     white-space: nowrap;
