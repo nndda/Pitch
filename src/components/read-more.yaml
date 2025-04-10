@@ -74,7 +74,7 @@ sampleHTML:
   - | # ================================================================================================
     <!-- NOTE -->
     <h2>Aligning</h2>
-    Read More are left-aligned by default, add class <code>custom-center</code> or <code>custom-right</code> to the <code>.custom-read-more</code> element, to align the "Read more/less..." button to the center or to the right.
+    Read More's button are left-aligned by default, add class <code>custom-center</code> or <code>custom-right</code> to the <code>.custom-read-more</code> element, to align the "Read more/less..." button to the center or to the right.
 
   - | # ------------------------------------------------------------------------------------------------
 
