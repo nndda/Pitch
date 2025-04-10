@@ -1,6 +1,6 @@
 // @ts-ignore
 // CSS reset
-import(/* webpackPreload: true */ "normalize.css");
+import(/* webpackPreload: true */ "../../node_modules/modern-normalize/modern-normalize.css");
 
 // @ts-ignore
 // Icons
