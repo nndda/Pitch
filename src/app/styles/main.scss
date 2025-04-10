@@ -507,12 +507,6 @@ body {
   background: $primary;
 }
 
-#component-description code {
-  background: lighten($background, 15%);
-  padding: 0 .5em;
-  border-radius: .2em;
-}
-
 .hidden-opac {
   opacity: 0;
 }
