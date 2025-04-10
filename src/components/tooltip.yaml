@@ -1,0 +1,157 @@
+name:
+  Tooltip
+
+sampleHTML:
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <p>
+      Little snippet that pops up when hovered.
+    </p>
+
+  - | # ------------------------------------------------------------------------------------------------
+    This project (and 99% of my other web-related projects) are made with
+
+    <abbr class="custom-tip">
+      webpack.
+
+      <span class="custom-tip-content">
+        A module bundler that packs your CSS, JS and other assets neatly.
+      </span>
+    </abbr>
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <h2>Positioning</h2>
+    <p>
+      The Tooltip content is positioned at the bottom by default. To change its position, add one of these class to the <code>.custom-tip-content</code> element:
+    </p>
+    <ul>
+      <li>
+        <code>custom-top</code>
+      </li>
+      <li>
+        <code>custom-left</code>
+      </li>
+      <li>
+        <code>custom-right</code>
+      </li>
+    </ul>
+
+  - | # ------------------------------------------------------------------------------------------------
+
+    <p class="text-center">
+
+      <span class="custom-tip">
+        Tooltip on...
+
+        <span class="custom-tip-content">
+          Bottom
+        </span>
+      </span>
+
+      <br><br><br><br>
+
+      <span class="custom-tip">
+        Tooltip on...
+
+        <span class="custom-tip-content custom-top">
+          Top
+        </span>
+      </span>
+
+      <br><br><br><br>
+
+      <span class="custom-tip">
+        Tooltip on...
+
+        <span class="custom-tip-content custom-left">
+          Left
+        </span>
+      </span>
+
+      <br><br><br><br>
+
+      <span class="custom-tip">
+        Tooltip on...
+
+        <span class="custom-tip-content custom-right">
+          Right
+        </span>
+      </span>
+
+    </p>
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <h2>Multiple Tooltip Contents</h2>
+    <p>
+      You can have multiple Tooltip content on an element, as long as each of its position is different.
+    </p>
+
+  - | # ------------------------------------------------------------------------------------------------
+
+    <p class="text-center">
+
+      <span class="custom-tip">
+        Tooltip on...
+
+        <span class="custom-tip-content">
+          Bottom
+        </span>
+
+        <span class="custom-tip-content custom-left">
+          Left
+        </span>
+      </span>
+
+      <br><br><br><br>
+
+      <span class="custom-tip">
+        Tooltip on...
+
+        <span class="custom-tip-content custom-top">
+          Top
+        </span>
+
+        <span class="custom-tip-content custom-right">
+          Right
+        </span>
+      </span>
+
+    </p>
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <h2>A Note on Spacing and Positioning</h2>
+    <p>
+      Make sure to position and space the Tooltip element correctly among your page's contents and layout, so that the Tooltip content can be seen on any screen size correctly.
+    </p>
+    <p>
+      You might want to set <code>overflow: visible;</code> on <code>.inner_column</code> so that the Tooltip won't get clipped, if it gets out of the page's boundary.
+    </p>
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <h2>Examples</h2>
+    <p>
+      Multiple Tooltip for an image, with custom text alignments for the contents:
+    </p>
+
+  - | # ------------------------------------------------------------------------------------------------
+    <div class="text-center" style="margin: 2em;">
+      <div class="custom-tip">
+        <img src="https://img.itch.zone/aW1nLzIwNjMzMjIwLmpwZw==/original/wWZyvP.jpg" width="250">
+
+        <span class="custom-tip-content custom-left text-right">
+          gamer catgurl <br>
+          🐱 🎮
+        </span>
+
+        <span class="custom-tip-content custom-right" style="text-align: left;">
+          Made by <br>
+          <span class="custom-link-itch">
+            Archeia
+          </span>
+        </span>
+      </div>
+    </div>
