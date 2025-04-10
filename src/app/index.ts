@@ -307,7 +307,7 @@ function setCompInfo(comp: string): void {
 
           <div class="component-preview-control">
             <button class="button-general comp-show-html tooltip">
-              <i class="fa-solid fa-eye"></i>
+              <i class="fa-solid fa-code"></i>
               <div class="tooltip-content">
                 Show HTML
               </div>
