@@ -49,6 +49,9 @@ const compNotesData: Record<string, string> = {
 
 const pick2notif: HTMLElement = d.querySelector(".pick-2-notif");
 
+// CodePen Prefill
+import { constructOptions } from "./scripts/codepen";
+
 function initializeComponents(): void {
   for (const comp in componentsCollection) {
     const compData: PitchComponentData = componentsCollection[comp];
@@ -342,6 +345,21 @@ function setCompInfo(comp: string): void {
       `)
       , componentHTML: JQuery<HTMLElement> = compPreviewEl.find(".component-html")
       ;
+
+      // CodePen Prefills
+      compPreviewEl.on("click", ".comp-codepen-edit", () => {
+        constructOptions(
+          componentsCollection[comp].nameDisplay,
+          compHTMLRaw,
+          // Get fonts and apply current preview theme
+          `
+            @import url(
+              "https://fonts.googleapis.com/css?family=${encodeURI(wrapper.getAttribute("data-font"))}"
+            );
+            :root{${wrapper.getAttribute("style")}}
+          `
+        );
+      });
 
       compPreviewEl.on("click", ".comp-show-html", () => {
         componentHTML.toggleClass("html-hidden");

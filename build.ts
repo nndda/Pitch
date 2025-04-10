@@ -223,6 +223,18 @@ const componentsCollectionJSONStr : string = JSON.stringify(componentsCollection
   );
 });
 
+// CodePen data
+let codepenCSS: string = "";
+for (const comp in componentsCollection) {
+  if (!comp.startsWith("tweaks")) {
+    codepenCSS += componentsCollection[comp].css;
+  }
+}
+fs.writeFileSync(
+  path.resolve(__dirname, "codepen-css.css"),
+  codepenCSS
+);
+
 // Compress and process CSS string 'srcCSS' with CleanCSS, PostCSS, and Autoprefixer.
 function compileComponentsCSS(srcCSS : string): string {
   let css = srcCSS;

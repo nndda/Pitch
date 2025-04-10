@@ -7,7 +7,7 @@ function initializeThemeButtons(): void {
     `
     --thm: #fc3a78;
 
-    --ff: 'Lato', serif;
+    --ff: 'Lato';
     --b: #131120;
     --b2: rgba(19, 17, 32, 1);
     --b2s: #2a2837;
@@ -22,7 +22,7 @@ function initializeThemeButtons(): void {
     `
     --thm: #f7f7f6;
 
-    --ff: 'Lato', serif;
+    --ff: 'Lato';
     --b: #f7f7f6;
     --b2: rgba(247, 247, 246, 1);
     --b2s: #dededd;
@@ -37,7 +37,7 @@ function initializeThemeButtons(): void {
     `
     --thm: #f16f19;
 
-    --ff: 'Lora', serif;
+    --ff: 'Lora';
     --b: #e3e3e3;
     --b2: #3f2832;
     --b2s: #533c46;
@@ -67,7 +67,7 @@ function initializeThemeButtons(): void {
     `
     --thm: #da2acd;
 
-    --ff: 'Pixelify Sans', monospace;
+    --ff: 'Pixelify Sans';
     --b: #000000;
     --b2: rgba(14, 17, 56, 1);
     --b2s: #25284f;
@@ -92,16 +92,20 @@ function initializeThemeButtons(): void {
       }">
         <i class="fa-solid fa-paint-roller"></i>
       </label>
-    `);
+    `)
+    , fontName: string = new RegExp(/--ff:\s*'(.+)'/).exec(n)[1]
+    ;
 
     btnEl.on("input", () => {
       wrapper.setAttribute("style", n);
+      wrapper.setAttribute("data-font", fontName);
     });
 
     themeBtnContainer.append(btnEl);
 
     if (i === 0) {
       wrapper.setAttribute("style", n);
+      wrapper.setAttribute("data-font", fontName);
     }
 
     if (i == 1) {
