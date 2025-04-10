@@ -64,8 +64,13 @@ module.exports = {
       },
       {
         test: /\.s?css$/,
+        resourceQuery: { not: [/raw/] },
         exclude: path.resolve(__dirname, "src/components"),
         use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+      },
+      {
+       resourceQuery: /raw/,
+       type: "asset/source",
       },
     ]
   },
