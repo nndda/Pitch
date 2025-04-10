@@ -16,7 +16,7 @@
   "author": "nnda",
   "license": "MIT",
   "engines": {
-    "node": ">=23.5.0"
+    "node": ">=23.11.0"
   },
   "dependencies": {
     "@fontsource/courgette": "^5.2.5",
