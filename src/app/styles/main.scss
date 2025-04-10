@@ -279,6 +279,14 @@ body {
           & > .right-control {
             flex-grow: 1;
             text-align: right;
+
+            & > .button-general {
+              display: inline-flex;
+              align-items: center;
+              justify-content: center;
+              width: 2em;
+              margin: 0 .1em;
+            }
           }
         }
 
