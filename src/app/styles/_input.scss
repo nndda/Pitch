@@ -87,28 +87,12 @@ input[type="text"] {
   }
 }
 
-.theme-button {
-  display: inline-block;
-  width: 1.25em !important;
-  height: 1.25em !important;
-  background: linear-gradient(
-    -45deg,
-    var(--a) 49.5%, var(--b) 50%
-  );
-  border: 1px solid $text-col;
-  border-radius: 50%;
-
-  transition: .2s ease;
-
-  &:hover {
-    transform: rotate(180deg);
-  }
-}
-
 .button-group {
-  display: inline-block;
+  display: inline-flex;
+  flex-direction: row;
   white-space: nowrap;
   padding: .5em .8em;
+  $border-radius: .5em;
 
   & > label {
     border: 1px solid rgba($border-col, .15);
@@ -120,43 +104,65 @@ input[type="text"] {
     &:hover {
       border-color: $primary;
     }
+
+    &.button-general {
+      border-radius: 0;
+    }
   }
 
   & > input[type="radio"] {
     display: none;
 
     &:checked + label {
-      background: lighten($primary, 5%);
+      background: $background;
       color: $background !important;
     }
 
     &:first-child + label {
-      border-radius: 1.5em 0 0 1.5em ;
+      border-radius: $border-radius 0 0 $border-radius ;
     }
   }
 
   & > label:last-child {
-    border-radius: 0 1.5em 1.5em 0 ;
+    border-radius: 0 $border-radius $border-radius 0 ;
   }
 }
 
 input[name="component-theme-preview"] {
   & + label {
     & > i {
-      background: linear-gradient(
-        45deg,
-        var(--t) 50%,
-        var(--l) 50%
-      );
+      background: var(--thm, $primary);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: #0000;
     }
   }
+}
 
-  &:checked + label {
+.theme-buttons {
+  & > label {
+    padding: .25em .7em;
+  }
+}
+
+label.theme-more {
+  padding: .25em .35em;
+}
+
+.theme-more > i {
+  transition: .1s;
+}
+
+#component-theme-more {
+  &:checked + .theme-more {
+    background: $background;
+
     & > i {
-      text-shadow: 0 0 0 $accent;
+      transform: scaleX(-1.0);
     }
+  }
+
+  &:not(:checked) ~ .theme-ext {
+    display: none;
   }
 }
