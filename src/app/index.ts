@@ -140,6 +140,11 @@ function initializeComponents(): void {
         }
       }
 
+      // Check for the saved ticked/checked local data
+      if (getCompLocalData(comp, "ticked") === null) {
+        setCompLocalData(comp, { "ticked": false });
+      }
+
       const compElemItem: JQuery<HTMLElement> = $(`
         <dd data-search="${compName}" class="
           ${compData.sub != undefined ? "sub" : ""}
@@ -155,6 +160,10 @@ function initializeComponents(): void {
                 id="${compID}"
                 data-comp="${comp}"
                 data-type="${compData["type"]}"
+                ${
+                  // Set ticked/checked status based off the local data
+                  getCompLocalData(comp, "ticked") ? "checked" : ""
+                }
               >
 
               <label for="${compID}">
@@ -188,6 +197,9 @@ function initializeComponents(): void {
       compElemItem.on("input", `input#${compID}`, () => {
         updateSelectAllNoneBtn();
         calculateComponents();
+
+        // Saved ticked/checked state to the local storage
+        setCompLocalData(comp, { "ticked": (d.getElementById(`${compID}`) as HTMLInputElement).checked });
       });
 
       compElemItem.on("click", "button.component-toggle", () => {
