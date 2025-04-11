@@ -204,9 +204,9 @@ for (const i in componentsCollection) {
 console.log(
   "-".repeat(80),
   "\n",
-  cssOut,
+  // cssOut,
   "\n",
-  "-".repeat(80),
+  // "-".repeat(80),
 );
 
 // Save components collection to JSON.
