@@ -12,11 +12,17 @@ export function constructOptions(name: string, html: string, css: string): void 
   codepenInput.value = `${JSON.stringify(
       {
         title: `Pitch: ${name}`,
-        editors: "100",
+        editors: "110",
         layout: "left",
-        css: css
-          + itchCSS
-          + codepenCSS,
+        js: `
+          const i = document.createElement("style");
+          i.textContent = \`
+            ${ css
+              + itchCSS
+              + codepenCSS
+            }\`;
+          document.head.appendChild(i);
+        `,
         html: html,
       }
     )
