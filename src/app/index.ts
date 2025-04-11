@@ -52,6 +52,24 @@ const pick2notif: HTMLElement = d.querySelector(".pick-2-notif");
 // CodePen Prefill
 import { constructOptions } from "./scripts/codepen";
 
+// localStorage components user data
+import {
+  pitchComp,
+  setCompLocalData,
+  getCompLocalData,
+} from "./scripts/storage";
+
+// Favourite
+// Favourite button
+const favBtn: HTMLInputElement = d.getElementById("comp-fav-btn") as HTMLInputElement;
+
+favBtn.addEventListener("click", () => {
+  const compName: string = favBtn.getAttribute("data-comp");
+
+  d.querySelector(`button[data-comp-id="${compName}"]>.icon.fav`).classList.toggle("hidden", !favBtn.checked);
+  setCompLocalData(compName, { "fav": favBtn.checked });
+});
+
 function initializeComponents(): void {
   for (const comp in componentsCollection) {
     const compData: PitchComponentData = componentsCollection[comp];
@@ -114,6 +132,14 @@ function initializeComponents(): void {
         compList.append(compElemGroup);
       }
 
+      // See if the component is marked as favourite on the localStorage
+      let isFaved: boolean = false;
+      if (pitchComp[comp] !== null && pitchComp[comp] !== undefined) {
+        if (pitchComp[comp]["fav"] !== null && pitchComp[comp]["fav"] !== undefined) {
+          isFaved = pitchComp[comp]["fav"];
+        }
+      }
+
       const compElemItem: JQuery<HTMLElement> = $(`
         <dd data-search="${compName}" class="
           ${compData.sub != undefined ? "sub" : ""}
@@ -144,13 +170,17 @@ function initializeComponents(): void {
             `
           }
 
-          <button class="component-toggle" data-comp="${compName}">
+          <button class="component-toggle" data-comp="${compName}" data-comp-id="${comp}">
             ${compName}
             ${compData["notes"].includes("Experimental") ? `
               <span class="icon">
                 <i class="fa-solid fa-vial"></i>
               </span>
             ` : ""}
+
+              <span class="icon fav ${isFaved ? "" : "hidden"}">
+                <i class="fa-solid fa-star"></i>
+              </span>
           </button>
         </dd>
       `);
@@ -233,6 +263,14 @@ function setCompInfo(comp: string): void {
   compPreview.addClass("hidden-opac");
   compInputs.addClass("hidden-opac");
   compNotes.addClass("hidden-opac");
+
+  // Set favourite status on favourite button
+  favBtn.setAttribute("data-comp", comp);
+  if (getCompLocalData(comp, "fav") !== null) {
+    favBtn.checked = getCompLocalData(comp, "fav");
+  } else {
+    favBtn.checked = false;
+  }
 
   if (compTransTimer !== null || compTransTimer !== undefined) clearTimeout(compTransTimer);
 

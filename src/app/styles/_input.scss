@@ -166,3 +166,35 @@ label.theme-more {
     display: none;
   }
 }
+
+#comp-fav-btn {
+  display: none;
+
+  & + label {
+    cursor: pointer;
+    margin: 0 .7em;
+
+    & > i {
+      font-size: 1.25em;
+      transition: .75s ease;
+
+      &:hover {
+        transform: rotate(210deg);
+      }
+    }
+  }
+
+  &:checked + label > .checked {
+    display: none;
+  }
+
+  &:not(:checked) + label > .checked-not {
+    display: none;
+  }
+}
+
+#home-button {
+  &.hidden ~ #comp-fav-btn ~ label {
+    display: none;
+  }
+}

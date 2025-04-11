@@ -197,7 +197,11 @@ body {
                 margin-left: .5em;
                 // color: #ecc70e;
                 color: $primary;
-                font-size: .85em;
+                font-size: .8em;
+
+                &.fav {
+                  color: #fcb930;
+                }
               }
             }
 
