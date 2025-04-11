@@ -37,7 +37,7 @@ const driverInitialIntro: Driver = driver({
       align: "center",
     }},
     { element: "#compile-components-btn", popover: {
-      title: "Grab the components",
+      title: "Copy the CSS",
       description: `
         Copy the CSS codes of your selected components.
       `,
@@ -45,7 +45,7 @@ const driverInitialIntro: Driver = driver({
       align: "end",
     }},
     { element: "#show-css-btn", popover: {
-      title: "Grab the components",
+      title: "Can't copy the CSS?",
       description: `
         Click here, and copy the CSS codes manually, if you're unable to copy it via the button.
       `,
@@ -72,7 +72,7 @@ const driverInitialIntro: Driver = driver({
   ],
 });
 
-const introFlagKey: string = "userIntroFinished";
+const introFlagKey: string = "pitchIntroFinished";
 
 if (localStorage.getItem(introFlagKey) === null) {
   driverInitialIntro.drive();
