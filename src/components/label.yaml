@@ -1,10 +1,13 @@
 name:
   Label
 
-description:
-  Highlight genres, tags, tools, or jam. Can be applied to hyperlinks or plain text.
-
 sampleHTML:
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <p>
+      Highlight genres, tags, tools, or jam. Can be applied to hyperlinks, plain text, or any inline elements, such as <code>&lt;a&gt;</code>, <code>&lt;em&gt;</code>, <code>&lt;strong&gt;</code>, or <code>&lt;span&gt;</code>.
+    </p>
+
   - | # ------------------------------------------------------------------------------------------------
 
     <em class="custom-lb">
@@ -19,7 +22,40 @@ sampleHTML:
       Made with ☕
     </span>
 
-    <br>
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <h2>Images and Icons</h2>
+    <p>
+      Just add <code>&lt;img&gt;</code> of the images or icons. The image's height will be set to the text height.
+    </p>
+
+  - | # ------------------------------------------------------------------------------------------------
+
+    <span class="custom-lb">
+      <img src="https://cdn.jsdelivr.net/gh/nndda/nndda@main/hand_circle.svg">
+      Human Made
+    </span>
+
+    <span class="custom-lb">
+      <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg">
+      <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg">
+      CC BY 4.0
+    </span>
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <small>
+      The "Human Made" icon is created by <a target="_blank" href="https://hinokodo.itch.io/human-made">HINOKODO</a>.
+    </small>
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <h2>Custom Colors</h2>
+    <p>
+      Add and set <code>background</code> and <code>color</code> properties manually.
+    </p>
+
+  - | # ------------------------------------------------------------------------------------------------
 
     <span class="custom-lb" style="background: #46425e; color: #eee;">
       #spooky
@@ -30,7 +66,7 @@ sampleHTML:
     </span>
 
     <span class="custom-lb" style="background: #00b9be; color: #333;">
-      <img height="16" width="16" src="https://cdn.simpleicons.org/godotengine/333" loading="lazy"/>
+      <img src="https://cdn.simpleicons.org/godotengine/333" loading="lazy"/>
       Godot Engine
     </span>
 
@@ -43,9 +79,16 @@ sampleHTML:
     </span>
 
     <span class="custom-lb" style="background: #ff6973; color: #222;">
-      <img height="16" width="16" src="https://cdn.simpleicons.org/itchdotio/222" loading="lazy"/>
+      <img src="https://cdn.simpleicons.org/itchdotio/222" loading="lazy"/>
       itch.io
     </span>
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <h2>Examples</h2>
+    <p>
+      As a heading badge/label, using <code>&lt;small&gt;</code> element:
+    </p>
 
   - | # ------------------------------------------------------------------------------------------------
 
@@ -64,20 +107,21 @@ sampleHTML:
       <small class="custom-lb">Alpha</small>
     </h3>
 
-  - | # ------------------------------------------------------------------------------------------------
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <p>
+      Inline use in a <code>&lt;p&gt;</code> element:
+    </p>
 
-    <h1>
-      Some Features
-      <small class="custom-lb">V2.4</small>
-    </h1>
+  - | # ------------------------------------------------------------------------------------------------
 
     <p style="max-width: 400px">
       Hello hello, these are some of the features
       that everyone have been waiting for!
       We have added some
-      <i class="custom-lb">brand new</i>
+      <em class="custom-lb">brand new</em>
       and
-      <i class="custom-lb">epic</i>
+      <em class="custom-lb">epic</em>
       features to the app!!!
       Don't mind anything after this sentence.
       I'm just typing whatever to pad this paragraph.

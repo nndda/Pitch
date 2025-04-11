@@ -1,15 +1,22 @@
 name:
   Author Badge
 
-description:
-  Add badge for specified authors/developers comment posts.
-
 inputs:
   - name: itch.io username
     id: AUTHOR_BADGE_URL
 
   - name: Badge title
     id: AUTHOR_BADGE_TITLE
+
+sampleHTML:
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <p>
+      Add badge for specified authors/developers comment posts.
+    </p>
+    <p>
+      For now, to add badge for multiple users, refer to <a target="_blank" href="https://nnda.itch.io/pitch/devlog/894529/v120-author-badge-masonry-layout-more">this post</a>, on the "Author Badge" section.
+    </p>
 
 # Screenshots taken with the following properties on the comment posts:
 # padding: 1.3em;

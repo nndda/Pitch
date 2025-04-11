@@ -1,10 +1,16 @@
 name:
   Input
 
-description:
-  Represent keyboard inputs, controls, or any buttons.
-
 sampleHTML:
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <p>
+      Represent the keyboard inputs, controls, or any buttons.
+    </p>
+    <p>
+      Unlike most components, Input doesn’t make use of custom classes, instead it styles the <code>&lt;kbd&gt;</code> HTML tags directly.
+    </p>
+
   - | # ------------------------------------------------------------------------------------------------
 
     Press <kbd>Ctrl</kbd> + <kbd>A</kbd> to select all text.
@@ -13,6 +19,45 @@ sampleHTML:
     <br>
 
     Then press <kbd>Ctrl</kbd> + <kbd>C</kbd> to copy them.
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <h2>Examples</h2>
+
+  - | # ------------------------------------------------------------------------------------------------
+
+    Use <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> or <kbd>←</kbd> <kbd>→</kbd> <kbd>↑</kbd> <kbd>↓</kbd> to move around.
+
+    <br>
+    <br>
+
+    Hold down <kbd>Shift</kbd> to sprint, and <kbd>C</kbd> to crouch.
+
+    <br>
+    <br>
+
+    Press <kbd>Tab</kbd> to open your inventory.
+
+
+  - | # ------------------------------------------------------------------------------------------------
+
+    <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>N</kbd>
+
+    <br>
+    <br>
+
+    <kbd>Shift</kbd> + <kbd>Tab</kbd>
+
+    <br>
+    <br>
+
+    <kbd>Ctrl</kbd> + <kbd>C</kbd>
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <p>
+      Input map display with left-aligned <button class="button-primary">Info List</button> component:
+    </p>
 
   - | # ------------------------------------------------------------------------------------------------
 
@@ -46,32 +91,3 @@ sampleHTML:
       </dd>
 
     </dl>
-
-  - | # ------------------------------------------------------------------------------------------------
-
-    Use <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> or <kbd>←</kbd> <kbd>→</kbd> <kbd>↑</kbd> <kbd>↓</kbd> to move around.
-
-    <br>
-    <br>
-
-    Hold down <kbd>Shift</kbd> to sprint, and <kbd>C</kbd> to crouch.
-
-    <br>
-    <br>
-
-    Press <kbd>Tab</kbd> to open your inventory.
-
-
-  - | # ------------------------------------------------------------------------------------------------
-
-    <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>N</kbd>
-
-    <br>
-    <br>
-
-    <kbd>Shift</kbd> + <kbd>Tab</kbd>
-
-    <br>
-    <br>
-
-    <kbd>Ctrl</kbd> + <kbd>C</kbd>

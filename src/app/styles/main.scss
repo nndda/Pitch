@@ -9,6 +9,8 @@
 
 @use "components_dev";
 
+@use "sass:color";
+
 html {
   color-scheme: only dark !important;
 }
@@ -19,22 +21,41 @@ body {
   font-size: .86em;
 }
 
+@mixin style-scrollbar($col: $primary) {
+  scrollbar-color: $col $background;
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar {
+    width: .5em;
+    height: .5em;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $background; 
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $col; 
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: color.adjust($col, $lightness: 20%); 
+  }
+}
+
 .main-app {
-  display: flex;
-  flex-direction: column;
   max-width: 1200px;
   margin: 0 auto;
 
   & .components-overview {
     display: flex;
     flex-direction: row;
-    flex-grow: 1;
     height: 100vh;
 
     & > .components-selector-container {
       display: flex;
-      flex-shrink: 1;
-      min-width: 240px;
+      flex-grow: 1;
+      width: 250px;
       border-right: 1px solid rgba($border-col, 0.1);
       overflow: hidden;
 
@@ -46,8 +67,10 @@ body {
       & > .components-selector-container-inner {
         display: flex;
         flex-direction: column;
-        min-width: 200px;
-        padding: 1em;
+        width: 100%;
+        padding: 1em .5em;
+        // padding-right: .75em !important;
+        padding-right: 0 !important;
         padding-top: 1em !important;
       
         & > .component-search-container {
@@ -75,9 +98,14 @@ body {
           $font-size: 1.1em;
           flex-grow: 1;
 
+          margin: 0;
+          margin-left: .75em;
+          margin-right: .75em;
+
           padding: 0;
           padding-left: .2em;
-          padding-right: .7em;
+          padding-right: .85em;
+          padding-bottom: .75em;
 
           overflow-y: scroll;
 
@@ -162,6 +190,17 @@ body {
                 cursor: pointer;
                 color: $active-col;
               }
+
+              & > .icon {
+                margin-left: .5em;
+                // color: #ecc70e;
+                color: $primary;
+                font-size: .8em;
+
+                &.fav {
+                  color: #fcb930;
+                }
+              }
             }
 
             & > input {
@@ -188,8 +227,10 @@ body {
           display: flex;
           flex-direction: column;
           min-height: 4em;
-          padding: 1em;
-          margin-bottom: 1em;
+          padding: .5em;
+          padding-top: 1.25em;
+          // margin-bottom: 1em;
+          border-top: 1px solid rgba($border-col, 0.1);
 
           & > #copy-notification {
             font-size: 1.1em;
@@ -216,8 +257,7 @@ body {
       flex-grow: 1;
       flex-direction: column;
 
-      max-width: 960px;
-      min-width: 760px;
+      width: 920px;
 
       & > .preview-info {
         font-size: 1.1em;
@@ -230,15 +270,25 @@ body {
         & > .preview-header {
           display: flex;
           flex-direction: row;
+          margin-top: .75em;
+          margin-bottom: .85em;
           align-items: center;
 
           & > #component-title {
-            margin: .5em 0 .2em;
+            margin: 0 .2em;
           }
 
           & > .right-control {
             flex-grow: 1;
             text-align: right;
+
+            & > .button-general {
+              display: inline-flex;
+              align-items: center;
+              justify-content: center;
+              width: 2em;
+              margin: 0 .1em;
+            }
           }
         }
 
@@ -250,7 +300,7 @@ body {
       & > .preview-container {
         flex-grow: 1;
         overflow-y: scroll;
-      }  
+      }
 
     }
   }
@@ -258,12 +308,13 @@ body {
 
 #wrapper {
   @include style-scrollbar($accent);
+  background: darken($background, 2.5%);
 }
 
 .copy-btn-container-inner {
   display: flex;
   margin: auto;
-
+  $border-radius: 6px;
 
   & > button {
     height: 2em;
@@ -272,10 +323,10 @@ body {
   }
 
   & > :first-child {
-    border-radius: 2em 0 0 2em;
+    border-radius: $border-radius 0 0 $border-radius;
   }
   & > :last-child {
-    border-radius: 0 2em 2em 0;
+    border-radius: 0 $border-radius $border-radius 0;
   }
 }
 
@@ -401,13 +452,16 @@ body {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  align-items: center;
 
-  height: 10em;
+  height: 9em;
   width: 100%;
   aspect-ratio: 1 / 1;
 
+  border-top: 1px solid rgba($border-col, 0.1);
+
   & > #css-output-textarea {
-    @include style-scrollbar();
+    @include style-scrollbar;
 
     font-family: monospace;
 
@@ -416,16 +470,14 @@ body {
 
     flex-grow: 1;
 
-    margin: auto;
-    margin-top: .5em;
-    margin-bottom: 1em;
+    margin: 1em;
+    padding: 1em;
     word-break: break-all;
     resize: none;
-    width: 100%;
+    width: calc(100% - 4em);
     border: 0;
     outline: 0;
-    padding: .8em;
-    box-sizing: border-box;
+    // box-sizing: border-box;
 
     &:focus {
       outline: 3px dashed $primary;
@@ -447,18 +499,14 @@ body {
     top: 45%;
     left: 0;
     width: 100%;
+
+    pointer-events: none;
   }
 }
 
 ::selection, ::-moz-selection {
   color: $background;
   background: $primary;
-}
-
-#component-description code {
-  background: lighten($background, 15%);
-  padding: 0 .5em;
-  border-radius: .2em;
 }
 
 .hidden-opac {

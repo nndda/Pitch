@@ -1,6 +1,10 @@
 .custom-accrd {
   max-width: 553px;
+
+  /* Center the accordion by default */
   margin: auto;
+
+  /* Outer border */
   border: 1px solid var(--br);
   border-radius: 3px;
   margin-top: 1.5em;
@@ -16,12 +20,20 @@
       margin-bottom: .25em;
 
       &:after {
-        content: ("\25BC");
+        content: ("\25BC"); /* Marker when its opened */
       }
     }
 
-    /* Add border inbetween accordion item */
+    /* Add border in between accordion item */
     &:not(:last-child) {
+      border-bottom: 1px solid var(--br);
+    }
+
+    &:first-of-type:not(:first-child) {
+      border-top: 1px solid var(--br);
+    }
+
+    &:last-of-type:not(:last-child) {
       border-bottom: 1px solid var(--br);
     }
   }
@@ -41,7 +53,7 @@
     &::after {
       text-align: right;
       flex-grow: 1; /* Move the new marker to the most right */
-      content: "\25BA";
+      content: "\25BA"; /* Marker when its closed */
     }
 
     /* Remove the default marker on itch app */
@@ -52,11 +64,11 @@
 
   /* Utility classes */
   &.custom-left {
-    margin: 0;
+    margin-left: 0;
   }
 
   &.custom-right {
-    margin: 0 0 0 auto;
+    margin-right: 0;
   }
 
   &.custom-full-w {

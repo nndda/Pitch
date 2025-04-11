@@ -1,14 +1,16 @@
 name:
   Star Rating
 
-description:
-  This component is pure decoration only. The amount of stars that lights up
-  does not reflect the stars that will be given.
-
-notes:
-  - --custom-- In the HTML, change the <code>href</code> attributes to your project's page, i.e. <code>https://username.itch.io/project-name/rate</code>
-
 sampleHTML:
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <p>
+      This component is pure decoration only. The amount of stars that lights up does not reflect the stars that will be given.
+    </p>
+    <p>
+      Change the <code>href</code> attributes to your project's page, i.e. <code>https://username.itch.io/project-name/rate</code>
+    </p>
+
   - | # ------------------------------------------------------------------------------------------------
 
     <h1 class="text-center">

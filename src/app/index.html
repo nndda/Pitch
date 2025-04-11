@@ -12,12 +12,14 @@
 
         <div class="components-selector-container-inner">
 
+          <!--
           <div class="component-search-container">
             <input id="component-search" type="text" placeholder="Search components...">
             <button id="component-search-clear" class="button-general">
               <i class="fa-solid fa-delete-left"></i>
             </button>
           </div>
+           -->
 
           <dl id="components-list">
             <div class="onboard-check-dummy"></div>
@@ -59,20 +61,39 @@
         <div class="preview-info">
           <div class="preview-header">
 
-            <button id="home-button" class="preview-header-button hidden">
-              <i class="fa-solid fa-circle-chevron-left"></i>
+            <button id="home-button" class="preview-header-button hidden tooltip">
+              <i class="fa-solid fa-chevron-left"></i>
+              <span class="tooltip-content">
+                Home
+              </span>
             </button>
 
             <h2 id="component-title">Pitch</h2>
 
+            <input type="checkbox" id="comp-fav-btn">
+            <label for="comp-fav-btn" class="tooltip">
+              <i class="fa-solid fa-star checked-not"></i>
+              <i class="fa-regular fa-star checked"></i>
+              <span class="tooltip-content tooltip-r">
+                Mark as favourite
+              </span>
+            </label>
+
             <div class="right-control">
+              <a class="button-general tooltip" href="https://github.com/nndda/Pitch/issues/new/choose" target="_blank" rel="nofollow noopener" referrerpolicy="origin">
+                <i class="fa-solid fa-bug"></i>
+                <span class="tooltip-content">
+                  Report bug
+                </span>
+              </a>
+
+              <button id="help-button" class="button-general tooltip">
+                <i class="fa-solid fa-question"></i>
+                <span class="tooltip-content">
+                  Help
+                </span>
+              </button>
             </div>
-          </div>
-
-          <p id="component-labels"></p>
-
-          <div class="component-description-container">
-            <p id="component-description"></p>
           </div>
 
           <div class="preview-control">
@@ -81,13 +102,7 @@
               <div class="button-group theme-buttons"></div>
             </div>
 
-            <div>
-              <button id="help-button" class="button-general">
-                <i class="fa-solid fa-question"></i>
-                &nbsp;
-                Help
-              </button>
-            </div>
+            <div></div>
           </div>
         </div>
 
@@ -104,10 +119,29 @@
                 <a target="_blank" href="https://itch.io/games/tag-pixel-art" class="custom-lb">Pixel Art</a>
                 <span class="custom-lb">🎃 Spooky</span>
                 <span class="custom-lb">👾 Space</span>
+                <span class="custom-lb" style="background: #faaa30; color: #060e24;">
+                  <img src="https://cdn.jsdelivr.net/gh/nndda/nndda@main/hand_circle.svg">
+                  Human Made
+                </span>
+                <span class="custom-lb" style="background: white; color: black;">
+                  <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg">
+                  <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg">
+                  CC BY 4.0
+                </span>
                 <hr>
-                <a target="_blank" class="custom-lb" href="https://itch.io/games/on-sale">On Sale</a>
-                <a target="_blank" class="custom-lb" href="https://itch.io/games/tag-multiplayer">Multiplayer</a>
-                <a target="_blank" class="custom-lb" href="https://itch.io/games/free">Free</a>
+                <p class="custom-grouped-lb">
+                  <a href="#" class="custom-lb" style="background: #ff6973; color: #222;">
+                    <img height="32" src="https://cdn.simpleicons.org/youtube/222" loading="lazy"/>
+                  </a>
+
+                  <a href="#" class="custom-lb" style="background: #46425e; color: #eee;">
+                    <img height="32" src="https://cdn.simpleicons.org/mastodon/eee" loading="lazy"/>
+                  </a>
+
+                  <a href="#" class="custom-lb" style="background: #15788c; color: #eee;">
+                    <img height="32" src="https://cdn.simpleicons.org/bluesky/eee" loading="lazy"/>
+                  </a>
+                </p>
               </div>
             </div>
 
@@ -117,6 +151,8 @@
                   <li>Use <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> to move around</li>
                   <br>
                   <li>Hold down <kbd>RMB</kbd> to aim, Press <kbd>LMB</kbd> to shoot</li>
+                  <br>
+                  <li>Press <kbd>Ctrl</kbd> + <kbd>C</kbd> to copy the selected text</li>
                 </ul>
             </div>
 
@@ -125,12 +161,12 @@
               <div>
                 <div class="custom-accrd">
                   <p>
-                    This {ASSET PACK} is licensed under 
-                    <a href="https://creativecommons.org/licenses/by/4.0/">
+                    This {PROJECT NAME} is licensed under 
+                    <a href="#">
                       CC BY 4.0
                     </a>
-                    <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" width="20px">
-                    <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" width="20px">
+                    <img src="https://mirrors.creativecommons.org/presskit/icons/cc.svg" width="20">
+                    <img src="https://mirrors.creativecommons.org/presskit/icons/by.svg" width="20">
                   </p>
 
                   <details>
@@ -158,15 +194,19 @@
                     <summary>How to give attribution</summary>
                     <p>
                       Provide link to my itch.io page: 
-                      <code>{USERNAME}.itch.io</code>
+                      <code>&lt;username&gt;.itch.io</code>
                     </p>
                   </details>
+
+                  <p class="text-right">
+                    For more info, <a href="#">click here</a>.
+                  </p>
                 </div>
               </div>
             </div>
 
             <div>
-              <h4>Alert Box</h4>
+              <h4>Callout</h4>
               <div>
                 <blockquote class="custom-callout">
                   <h3>⚠ Important Note</h3>
@@ -186,7 +226,8 @@
 
                 <dt>Arts</dt>
                 <dd>
-                  <a target="_blank" href="https://itch.io">Illustrious illustrator</a>,
+                  <a target="_blank" href="https://itch.io">Illustrious illustrator</a>
+                    <br>
                   <a target="_blank" href="https://itch.io">Adorable assets</a>
                 </dd>
 
@@ -211,8 +252,90 @@
 
             <div>
               <h4>Spoiler</h4>
-              <p>This is a fully visible text. But some part of this text is <span class="custom-hd">hidden</span> (unless you hover over it) (or highlight it). Heres some more <span class="custom-hd">hidden words</span>.<br>
+              <p>
+                This is a fully visible text. But some part of this text is <span class="custom-hd">hidden</span> (unless you hover over it). Heres some more <span class="custom-hd">hidden words</span>.
               </p>
+              <hr>
+              <div>
+                This is a fully visible text. But some part of this text is <div class="custom-hd-click"><details><summary>hidden</summary></details></div> (unless you click it). Heres some more <div class="custom-hd-click"><details><summary>hidden words</summary></details></div>.
+              </div>
+            </div>
+
+            <div>
+              <h4>Timeline List • Read More</h4>
+              <div class="custom-read-more">
+                <dl class="custom-tl-list custom-content" style="max-height: 12em;">
+                  <dt>
+                    v1.2.1
+                    <small>25 March 2025</small>
+                  </dt>
+
+                  <dd>
+                    <span class="custom-lb">new</span>
+                    Introducing various bugs to be fixed on the next update
+                  </dd>
+                  <dd>
+                    <span class="custom-lb">changed</span>
+                    Petting cat are now enabled for enterprise edition
+                  </dd>
+
+
+                  <dt>
+                    v1.2
+                    <small>21 April 2024</small>
+                  </dt>
+
+                  <dd>
+                    <span class="custom-lb">new</span>
+                    Player can now exit the game by pressing <kbd>alt</kbd> + <kbd>f4</kbd>
+                  </dd>
+                  <dd>
+                    <span class="custom-lb">new</span>
+                    Added new recipe: bread
+                  </dd>
+                  <dd>
+                    <span class="custom-lb">fixed</span>
+                    All cutscenes will now be unskippable
+                  </dd>
+                  <dd>
+                    <span class="custom-lb">fixed</span>
+                    Petting a cat will no longer spawn blackholes
+                  </dd>
+                  <dd>
+                    <span class="custom-lb">changed</span>
+                    Petting cat are now disabled
+                  </dd>
+                  <dd>
+                    <span class="custom-lb">changed</span>
+                    Sets minimum frame-per-seconds to be at least 60
+                  </dd>
+
+
+                  <dt>
+                    v1.1
+                    <small>17 April 2024</small>
+                  </dt>
+
+                  <dd>
+                    <span class="custom-lb">new</span>
+                    Turning off the device will exit the game
+                  </dd>
+                  <dd>
+                    <span class="custom-lb">new</span>
+                    Introducing autosave feature, which save the game's state every 50ms
+                  </dd>
+                  <dd>
+                    <span class="custom-lb">fixed</span>
+                    Babies will no longer forced to accept trial by combat
+                  </dd>
+                  <dd>
+                    <span class="custom-lb">changed</span>
+                    Wearing a low, soft felt hat with a curled brim and the crown creased lengthwise will slow the movement down by 156%
+                  </dd>
+                </dl>
+
+                <details><summary></summary></details>
+              </div>
             </div>
 
             <div>
@@ -268,85 +391,6 @@
 
           <div id="component-preview"></div>
 
-          <!--
-          <div class="home-content non-preview">
-
-            <h1>Getting Started</h1>
-
-            Requirement:
-
-            <ul>
-              <li>
-                Custom CSS access on your itch.io account
-              </li>
-              <li>
-                A little bit of HTML and CSS know-how
-              </li>
-            </ul>
-
-            <br>
-            <h2>Getting custom CSS access</h2>
-
-            <p>
-              Contact <a target="_blank" href="https://itch.io/docs/creators/design#the-itchio-theme-editor/custom-css">itch.io support</a> to request the CSS access. Read the <a target="_blank" href="https://itch.io/docs/creators/css-guide">CSS Customization Guide</a> first before proceeding.
-            </p>
-
-            <br>
-            <h2>Working with the components</h2>
-
-            <p>
-              Pick components of your choice on the sidebar. Click on its name to see the live preview of it, and tick the checkbox to add it to your collection. After that, click <b class="custom-lb">Copy CSS</b> button. The CSS codes of the components of your selection should be copied to your clipboard.
-            </p>
-
-            <p>
-              If you're unable to copy it from the button, copy it from the <code class="custom-lb">'CSS OUTPUT'</code> container on the left.
-            </p>
-
-            <p>
-              Paste the copied CSS codes to your page's custom CSS field, and save it. Its located at the bottom of the theme editor sidebar.
-            </p>
-
-            <p>
-              Go to your project's edit page. Edit the content/description in HTML mode. And follow the use example for each components. Copy-paste the sample codes provided in the component's live preview for a quick start.
-            </p>
-
-            <blockquote class="custom-callout">
-              <h3>
-                <i class="fa-solid fa-info-circle"></i>
-                Important Note
-              </h3>
-              Once you edit your page's content in HTML mode, Its best to keep using HTML mode onward to avoid messing up the layout.
-            </blockquote>
-
-            <blockquote class="custom-callout">
-              <h3>
-                <i class="fa-solid fa-warning"></i>
-                Limitations
-              </h3>
-              <p><em>(Some)</em> components are not compatible with profile pages and/or jam pages.</p>
-            </blockquote>
-
-            <br>
-            <h3>
-              <i class="fa-solid fa-info-circle"></i>
-              &nbsp;
-              Best practices &amp; tips
-            </h3>
-
-            <ul>
-              <li>
-                Always back up and save your html codes to a file, everytime you make changes.
-              </li>
-              <li>
-                Use external code editor, like Sublime Text or Visual Studio Code for convenience like syntax highlighting, autocompletion, etc.
-              </li>
-              <li>
-                Test your project's page against multiple screen sizes, and on multiple browsers, including the <a target="_blank" href="https://itch.io/app">itch app</a> before publishing it.
-              </li>
-            </ul>
-          </div>
-          -->
-
           <div class="home-content non-preview">
             <i class="fa-solid fa-scale-balanced"></i>
             &nbsp;
@@ -357,11 +401,18 @@
             The CSS components are licensed under CC0.
             <br>
             The placeholder content in the HTML preview and/or in the image preview may be subject to different license or copyright restrictions.
+            <hr>
+            Pitch v2.0.0
           </div>
 
         </div>
       </div>
     </div>
   </div>
+
+  <form action="https://codepen.io/pen/define" class="hidden" method="POST" target="_blank">
+    <input id="codepen-inp" type="hidden" name="data" value="">
+    <input id="codepen-btn" type="submit">
+  </form>
 </body>
 </html>

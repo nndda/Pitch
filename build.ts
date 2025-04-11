@@ -83,7 +83,7 @@ export interface CompYAML {
 }
 
 // Required property for the component's yaml file.
-const requiredCompData = ["name", "description"];
+const requiredCompData = ["name"];
 // Validate component's yaml.
 function isValidCompYAML(parsedData : CompYAML) : boolean {
   for (const property of requiredCompData) {
@@ -160,8 +160,9 @@ function buildComponent(compPath : string) : void {
     componentsCollection[compID] = {
       // Component's data. Refer to src/app/components.ts for more info.
       name: compData.name,
+      nameDisplay: compData.nameDisplay ?? compData.name,
       // Sanitize component's description.
-      description: sanitizeHTML(compData.description),
+      // description: sanitizeHTML(compData.description),
       // Sanitize component's preview HTML.
       sampleHTML:
         compData.sampleHTML !== undefined ?
@@ -179,6 +180,8 @@ function buildComponent(compPath : string) : void {
       inputs: compData.inputs ?? [],
 
       notes: compData.notes ?? [],
+
+      groupOnly: compData.groupOnly ?? false,
 
       variables: getUsedVariables(cssStr),
     } as PitchComponentData;
@@ -201,9 +204,9 @@ for (const i in componentsCollection) {
 console.log(
   "-".repeat(80),
   "\n",
-  cssOut,
+  // cssOut,
   "\n",
-  "-".repeat(80),
+  // "-".repeat(80),
 );
 
 // Save components collection to JSON.
@@ -219,6 +222,18 @@ const componentsCollectionJSONStr : string = JSON.stringify(componentsCollection
     componentsCollectionJSONStr
   );
 });
+
+// CodePen data
+let codepenCSS: string = "";
+for (const comp in componentsCollection) {
+  if (!comp.startsWith("tweaks")) {
+    codepenCSS += componentsCollection[comp].css;
+  }
+}
+fs.writeFileSync(
+  path.resolve(__dirname, "codepen-css.css"),
+  codepenCSS
+);
 
 // Compress and process CSS string 'srcCSS' with CleanCSS, PostCSS, and Autoprefixer.
 function compileComponentsCSS(srcCSS : string): string {
@@ -284,7 +299,13 @@ DOMPurify.setConfig({
 });
 
 function sanitizeHTML(dirtyHTML : string) : string {
-  return (DOMPurify.sanitize(dirtyHTML) as string)
+  if (!dirtyHTML) return "";
+
+  if (dirtyHTML.trimStart().startsWith("<!-- NOTE -->")) {
+    return dirtyHTML.trimStart();
+  }
+
+  return (DOMPurify.sanitize(dirtyHTML) as string);
     // Wish I didn't have to do this.
     // .replace(/href="[^"]+"/g, `href="#"`);
 }

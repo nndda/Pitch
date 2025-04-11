@@ -1,8 +1,10 @@
+// @ts-ignore
 // CSS reset
-import "normalize.css";
+import(/* webpackPreload: true */ "../../node_modules/modern-normalize/modern-normalize.css");
 
+// @ts-ignore
 // Icons
-import "@fortawesome/fontawesome-free/css/all.min.css";
+import(/* webpackPreload: true */ "@fortawesome/fontawesome-free/css/all.min.css");
 
 // Fonts
 import "@fontsource/lato";

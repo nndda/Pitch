@@ -1,8 +1,12 @@
 name:
   Collapsible User Tools
 
-description:
-  Make user tools collapsible.
+sampleHTML:
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <p>
+      Make user tools collapsible.
+    </p>
 
 sampleIMG:
   - user-tools-collapsible.png

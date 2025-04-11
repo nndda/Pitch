@@ -1,10 +1,13 @@
 name:
   In Development Sign
 
-description:
-  In development sign for your in development project, to tell that your project is in development.
-
 sampleHTML:
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <p>
+      In development sign for your in development project, to tell that your project is in development.
+    </p>
+
   - | # ------------------------------------------------------------------------------------------------
 
     <div class="custom-indev">

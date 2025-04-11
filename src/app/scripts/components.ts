@@ -2,9 +2,10 @@
 export interface PitchComponentData {
   // Name defined in its yaml file.
   name: string,
+  nameDisplay?: string,
 
   // Description defined in its yaml file.
-  description?: string,
+  // description?: string,
 
   // HTML previews defined in its yaml file.
   sampleHTML?: string[],
@@ -24,13 +25,15 @@ export interface PitchComponentData {
 
   sub?: string,
 
-  labels?: string[],
+  // labels?: string[],
 
   inputs?: PitchComponentInput[],
 
   notes?: string[],
 
   scope?: PitchComponentScope[],
+
+  groupOnly?: boolean,
 
   elemCheck?: HTMLInputElement,
 }

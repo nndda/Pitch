@@ -1,10 +1,13 @@
 name:
   Info List
 
-description:
-  Custom class that style description list element to two-column layout.
-
 sampleHTML:
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <p>
+      Custom class that style description list element to two-column layout.
+    </p>
+
   - | # ------------------------------------------------------------------------------------------------
 
     <dl class="custom-info">
@@ -21,11 +24,89 @@ sampleHTML:
 
       <dt>Codes</dt>
       <dd>
-        <a href="#">Creative coder</a>,
-        <a href="#">Proficient programmer</a>
+        <a href="#">Creative coder</a>
       </dd>
 
     </dl>
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <h2>Line Break</h2>
+    <p>
+      Break new line manually using <code>&lt;br&gt;</code>:
+    </p>
+
+  - | # ------------------------------------------------------------------------------------------------
+
+    <dl class="custom-info">
+
+      <dt>Director</dt>
+      <dd>
+        <a href="#">Dedicated developer</a>
+      </dd>
+
+      <dt>Story</dt>
+      <dd>
+        <a href="#">Witty writer</a>
+      </dd>
+
+      <dt>Arts</dt>
+      <dd>
+        <a href="#">Illustrious illustrator</a>
+          <br>
+        <a href="#">Devoted designer</a>
+          <br>
+        <a href="#">Amazing animator</a>
+      </dd>
+
+      <dt>Programming</dt>
+      <dd>
+        <a href="#">Creative coder</a>
+          <br>
+        <a href="#">Proficient programmer</a>
+      </dd>
+
+      <dt>Sounds</dt>
+      <dd>
+        <a href="#">Classic composer</a>
+          <br>
+        <a href="#">Stunning sound designer</a>
+      </dd>
+
+    </dl>
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <h2>Aligning</h2>
+    Info List are center-aligned by default. Add class <code>custom-left</code> to align it to the left.
+
+  - | # ------------------------------------------------------------------------------------------------
+
+    <dl class="custom-info custom-left">
+
+      <dt>Arts</dt>
+      <dd>
+        <a href="#">Amazing artist</a>
+      </dd>
+
+      <dt>Story</dt>
+      <dd>
+        <a href="#">Witty writer</a>
+      </dd>
+
+      <dt>Codes</dt>
+      <dd>
+        <a href="#">Creative coder</a>
+      </dd>
+
+    </dl>
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <h2>Examples</h2>
+    <p>
+      Input map information with <button class="button-primary">Input</button> components:
+    </p>
 
   - | # ------------------------------------------------------------------------------------------------
 

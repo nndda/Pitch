@@ -1,37 +1,24 @@
-@use "variables" as *;
-
-@mixin border-light {
-  border: 1px solid $border-col;
-  border-radius: 3px;
-}
-
-.hidden {
-  display: none !important;
-}
-
-.non-interractable {
-  pointer-events: none;
-  -webkit-user-select: none;
-  user-select: none;
-}
-
-.flex-space {
-  flex-grow: 1;
-}
-
-.tooltip {
+.custom-tip {
   position: relative;
 
-  & > .tooltip-content {
+  &:has(> img) {
+    display: inline-block;
+
+    & > img {
+      position: relative;
+    }
+  }
+
+  & > .custom-tip-content {
     position: absolute;
     bottom: calc(-100% - .25em);
     left: 50%;
     bottom: 0;
     height: fit-content;
     padding: .2em .5em;
-    background: $background;
+    background: var(--b2);
+    border: 1px solid var(--br);
     border-radius: 6px;
-    line-height: 1em;
     pointer-events: none;
     white-space: nowrap;
     z-index: 99;
@@ -41,18 +28,18 @@
     opacity: 0;
     transform: translate(-50%, 100%);
 
-    &.tooltip-t {
+    &.custom-top {
       bottom: 100%;
       transform: translate(-50%, 0);
     }
 
-    &.tooltip-l {
+    &.custom-left {
       left: 0;
       bottom: 50%;
       transform: translate(-100%, 50%);
     }
 
-    &.tooltip-r {
+    &.custom-right {
       left: 100%;
       bottom: 50%;
       transform: translate(0, 50%);
@@ -62,21 +49,25 @@
   &:hover {
     $offset: .5em;
 
-    & > .tooltip-content {
+    & > .custom-tip-content {
       opacity: 1;
       transform: translate(-50%, calc(100% + $offset));
 
-      &.tooltip-t {
+      &.custom-top {
         transform: translate(-50%, -$offset);
       }
 
-      &.tooltip-l {
+      &.custom-left {
         transform: translate(calc(-100% - $offset), 50%);
       }
 
-      &.tooltip-r {
+      &.custom-right {
         transform: translate($offset, 50%);
       }
     }
   }
+}
+
+abbr.custom-tip {
+  text-decoration: 2px underline dotted var(--l);
 }

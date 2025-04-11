@@ -1,10 +1,23 @@
 name:
   Table
 
-description:
-  Modified default table element, that takes the full width of the page.
-
 sampleHTML:
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <p>
+      Modified default table element, that takes the full width of the page.
+    </p>
+    <p>
+      This is just a redesign of itch's default table element, no custom class or specific HTML structures required.
+    </p>
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <h2>Examples</h2>
+    <p>
+      Table element with table heading cells on the first column and first row:
+    </p>
+
   - | # ------------------------------------------------------------------------------------------------
 
     <table>

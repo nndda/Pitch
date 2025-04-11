@@ -1,3 +1,4 @@
+/*
 const searchItems: JQuery<HTMLInputElement> = $("#components-list > dd");
 const searchBox: JQuery<HTMLInputElement> = $("#component-search");
 export const searchClearBtn: JQuery<HTMLButtonElement> = $("#component-search-clear");
@@ -31,3 +32,4 @@ function searchComp(): void {
     searchClearBtn.attr("disabled", "");
   };
 }
+*/
