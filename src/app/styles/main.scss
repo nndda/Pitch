@@ -44,20 +44,18 @@ body {
 }
 
 .main-app {
-  display: flex;
-  flex-direction: column;
   max-width: 1200px;
   margin: 0 auto;
 
   & .components-overview {
     display: flex;
     flex-direction: row;
-    flex-grow: 1;
     height: 100vh;
 
     & > .components-selector-container {
       display: flex;
-      width: 240px;
+      flex-grow: 1;
+      width: 250px;
       border-right: 1px solid rgba($border-col, 0.1);
       overflow: hidden;
 
@@ -259,7 +257,7 @@ body {
       flex-grow: 1;
       flex-direction: column;
 
-      width: 960px;
+      width: 920px;
 
       & > .preview-info {
         font-size: 1.1em;
