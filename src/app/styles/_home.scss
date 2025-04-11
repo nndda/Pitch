@@ -42,6 +42,10 @@
     &:nth-child(7) {
       grid-column: 2/4;
     }
+
+    &:nth-child(8) {
+      grid-column: 1/4;
+    }
   }
 
   & ul {
