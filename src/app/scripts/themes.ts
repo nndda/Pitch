@@ -108,12 +108,23 @@ function initializeThemeButtons(): void {
       wrapper.setAttribute("data-font", fontName);
     }
 
+    // See if the theme selection is expanded on localStorage
+    const isExpandedKey: string = "pitchIsThemeExpanded";
+
+    if (localStorage.getItem(isExpandedKey) === null) {
+      localStorage.setItem(isExpandedKey, "");
+    }
+
+    const isExpanded: boolean = localStorage.getItem(isExpandedKey) === "-";
+
+    // Create the theme selection expand button
     if (i == 1) {
       const btnThemeCol: JQuery<HTMLElement> = $(`
         <input
           type="checkbox"
           id="component-theme-more"
           class="hidden"
+          ${isExpanded ? "checked" : ""}
         >
         <label class="theme-more button-general tooltip" for="component-theme-more">
           <i class="fa-solid fa-caret-right"></i>
@@ -122,6 +133,15 @@ function initializeThemeButtons(): void {
       `);
 
       themeBtnContainer.append(btnThemeCol);
+      // Set the theme expanded status on localStorage
+      themeBtnContainer.on("input", "#component-theme-more", () => {
+        localStorage.setItem(
+          isExpandedKey,
+          (
+            document.getElementById("component-theme-more") as HTMLInputElement
+          ).checked ? "-" : ""
+        );
+      });
     }
   });
 }
