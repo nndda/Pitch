@@ -145,6 +145,8 @@ function initializeComponents(): void {
         setCompLocalData(comp, { "ticked": false });
       }
 
+      const isTickedLocally: boolean = getCompLocalData(comp, "ticked");
+
       const compElemItem: JQuery<HTMLElement> = $(`
         <dd data-search="${compName}" class="
           ${compData.sub != undefined ? "sub" : ""}
@@ -162,7 +164,7 @@ function initializeComponents(): void {
                 data-type="${compData["type"]}"
                 ${
                   // Set ticked/checked status based off the local data
-                  getCompLocalData(comp, "ticked") ? "checked" : ""
+                  isTickedLocally ? "checked" : ""
                 }
               >
 
@@ -222,9 +224,15 @@ function initializeComponents(): void {
         }
       }
 
+      if (isTickedLocally) {
+        updateSelectAllNoneBtn();
+      }
+
       compList.append(compElemItem);
     }
   }
+
+  calculateComponents();
 }
 
 const homeButton: JQuery<HTMLElement> = $("#home-button");
