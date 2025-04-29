@@ -500,19 +500,19 @@ if (navigator.clipboard) {
 
 function calculateComponents(): void {
   // Get the checkbox input element of the components
-  const compSelected: NodeListOf<HTMLInputElement> = d.querySelectorAll("input[name='component-toggle']");
+  const compInputEl: NodeListOf<HTMLInputElement> = d.querySelectorAll("input[name='component-toggle']");
 
-  pick2notif.classList.toggle("hidden-opac", compSelected.length > 0);
+  pick2notif.classList.toggle("hidden-opac", compInputEl.length > 0);
 
   if (navigator.clipboard) {
-    compileCompBtn.disabled = compSelected.length <= 0;
+    compileCompBtn.disabled = compInputEl.length <= 0;
     copyNotif.innerText = "";
   }
 
   const selectedComps: string[] = [];
 
-  // Iterate over selected components
-  compSelected.forEach((el: HTMLInputElement) => {
+  // Iterate over components' input element
+  compInputEl.forEach((el: HTMLInputElement) => {
     const comp: string = el.getAttribute("data-comp");
 
     if (el.checked) selectedComps.push(comp);
