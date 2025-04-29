@@ -499,7 +499,8 @@ if (navigator.clipboard) {
 }
 
 function calculateComponents(): void {
-  const compSelected: NodeListOf<HTMLInputElement> = d.querySelectorAll("input[name='component-toggle']:checked");
+  // Get the checkbox input element of the components
+  const compSelected: NodeListOf<HTMLInputElement> = d.querySelectorAll("input[name='component-toggle']");
 
   pick2notif.classList.toggle("hidden-opac", compSelected.length > 0);
 
@@ -510,8 +511,14 @@ function calculateComponents(): void {
 
   const selectedComps: string[] = [];
 
-  compSelected.forEach((el) => {
-    selectedComps.push(el.getAttribute("data-comp"));
+  // Iterate over selected components
+  compSelected.forEach((el: HTMLInputElement) => {
+    const comp: string = el.getAttribute("data-comp");
+
+    if (el.checked) selectedComps.push(comp);
+
+    // Save toggle state to localStorage
+    setCompLocalData(comp, { "ticked": el.checked });
   });
 
   CSSCopyOutput.val(compileComponents(
