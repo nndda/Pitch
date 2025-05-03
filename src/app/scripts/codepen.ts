@@ -16,7 +16,7 @@ export function constructOptions(name: string, html: string, css: string): void 
         layout: "left",
         js: `
           const i = document.createElement("style");
-          i.textContent = \`
+          i.textContent = \`@charset "UTF-8";
             ${ css.replace(":root", "body")
               + itchCSS
               + codepenCSS

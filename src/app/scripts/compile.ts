@@ -23,7 +23,7 @@ export function compileComponents(
     }
   });
 
-  return compileUsedVariables(usedVars) + Object.keys(compInputs).reduce((result, key) => {
+  return `@charset "UTF-8";` + compileUsedVariables(usedVars) + Object.keys(compInputs).reduce((result, key) => {
     return result.replace(new RegExp(key, "g"), compInputs[key]);
   }, css);
 }
