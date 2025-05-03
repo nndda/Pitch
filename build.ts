@@ -226,13 +226,18 @@ const componentsCollectionJSONStr : string = JSON.stringify(componentsCollection
 // CodePen data
 let codepenCSS: string = "";
 for (const comp in componentsCollection) {
-  if (!comp.startsWith("tweaks")) {
+  if (
+    !comp.startsWith("tweaks") &&
+    !comp.startsWith("_variables")
+  ) {
     codepenCSS += componentsCollection[comp].css;
   }
 }
 fs.writeFileSync(
   path.resolve(__dirname, "codepen-css.css"),
   codepenCSS
+    .replace(/#wrapper/g, "body")
+    .replace(/:not\(\.game_info_panel_widget\)\s*>\s*/g, "") // Resolve Table component issue
 );
 
 // Compress and process CSS string 'srcCSS' with CleanCSS, PostCSS, and Autoprefixer.

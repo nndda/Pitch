@@ -17,7 +17,7 @@ export function constructOptions(name: string, html: string, css: string): void 
         js: `
           const i = document.createElement("style");
           i.textContent = \`
-            ${ css
+            ${ css.replace(":root", "body")
               + itchCSS
               + codepenCSS
             }\`;
