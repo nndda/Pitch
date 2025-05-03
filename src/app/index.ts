@@ -212,7 +212,7 @@ function initializeComponents(): void {
         currViewedComp.addClass("viewed");
       });
 
-      componentsCollection[comp].elemCheck = <HTMLInputElement>compElemItem.find("input[name=\"component-toggle\"]")[0];
+      componentsCollection[comp].elemCheck = (compElemItem.find(`input#${compID}`)[0] as HTMLInputElement);
 
       if (compData.sub != undefined) {
         if (!componentsCollection[compData.sub].groupOnly) {
@@ -498,28 +498,36 @@ if (navigator.clipboard) {
   copyNotif.innerText = "";
 }
 
+// Cache selectedComps for repeat use in calculateComponents()
+const selectedComps: string[] = [];
+let compHasAtLeast1Selected: boolean = false;
+
+// Calculate and compile the selceted components' CSS codes
 function calculateComponents(): void {
-  // Get the checkbox input element of the components
-  const compInputEl: NodeListOf<HTMLInputElement> = d.querySelectorAll("input[name='component-toggle']");
+  selectedComps.length = 0;
 
-  pick2notif.classList.toggle("hidden-opac", compInputEl.length > 0);
+  // Iterate over the cached componentsCollection
+  // (initialized at initializeComponents())
+  for (const comp in componentsCollection) {
+    if (componentsCollection[comp].elemCheck) {
+      // Get the checkbox input element of the components
+      const compInputEl: HTMLInputElement = componentsCollection[comp].elemCheck;
 
-  if (navigator.clipboard) {
-    compileCompBtn.disabled = compInputEl.length <= 0;
-    copyNotif.innerText = "";
+      if (compInputEl.checked) selectedComps.push(comp);
+
+      // Save toggle state to localStorage
+      setCompLocalData(comp, { "ticked": compInputEl.checked });
+    }
   }
 
-  const selectedComps: string[] = [];
+  compHasAtLeast1Selected = selectedComps.length > 0;
 
-  // Iterate over components' input element
-  compInputEl.forEach((el: HTMLInputElement) => {
-    const comp: string = el.getAttribute("data-comp");
+  pick2notif.classList.toggle("hidden-opac", compHasAtLeast1Selected);
 
-    if (el.checked) selectedComps.push(comp);
-
-    // Save toggle state to localStorage
-    setCompLocalData(comp, { "ticked": el.checked });
-  });
+  if (navigator.clipboard) {
+    compileCompBtn.disabled = !compHasAtLeast1Selected;
+    copyNotif.innerText = "";
+  }
 
   CSSCopyOutput.val(compileComponents(
     selectedComps,
@@ -533,11 +541,11 @@ CSSCopyOutput.on("click", () => {
   CSSCopyOutput[0].select();
 });
 
-calculateComponents();
-
 initializeComponents();
 
 setHome();
+
+calculateComponents();
 
 import "./scripts/themes";
 import "./scripts/search";
