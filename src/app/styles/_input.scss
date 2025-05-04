@@ -68,6 +68,10 @@ input[type="text"] {
   background: lighten($background, 7%);
 }
 
+input[type="checkbox"] {
+  display: none;
+}
+
 .preview-header-button {
   color: $accent;
   font-size: 1.4em;
@@ -121,6 +125,10 @@ input[type="text"] {
     &:first-child + label {
       border-radius: $border-radius 0 0 $border-radius ;
     }
+  }
+
+  & > label:first-child {
+    border-radius: $border-radius 0 0 $border-radius ;
   }
 
   & > label:last-child {
@@ -196,5 +204,27 @@ label.theme-more {
 #home-button {
   &.hidden ~ #comp-fav-btn ~ label {
     display: none;
+  }
+}
+
+.filter-group {
+  display: flex;
+  padding-right: 1.6em;
+
+  & > .filter-title {
+    flex-grow: 1;
+    cursor: default;
+
+    &:hover {
+      border-color: rgba($border-col, .15);
+    }
+  }
+
+  & > input:checked + label {
+    background: $primary;
+
+    & > i {
+      color: $background;
+    }
   }
 }

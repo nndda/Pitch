@@ -59,16 +59,54 @@ import {
   getCompLocalData,
 } from "./scripts/storage";
 
+// To get the 'parent' of a 'sub' component list element
+// TODO: reference the parent in componentsCollection instead
+function getCompParent(compListEl: HTMLElement): HTMLElement | null {
+  if (compListEl.hasAttribute("data-sub")) {
+    return d.querySelector(`dd[data-comp="${compListEl.getAttribute("data-sub")}"]`);
+  }
+
+  return null;
+}
+
+// Check if any 'sub' components is favourited 
+function isSubsHasAnyFaved(subId: string): boolean {
+  for (const el of d.querySelectorAll(`dd[data-sub="${subId}"]`)) {
+    if (el.classList.contains("is-faved")) return true;
+  }
+
+  return false;
+}
+
 // Favourite
 // Favourite button
 const favBtn: HTMLInputElement = d.getElementById("comp-fav-btn") as HTMLInputElement;
 
 favBtn.addEventListener("click", () => {
+  // TODO: this variable name might cause misunderstanding
   const compName: string = favBtn.getAttribute("data-comp");
 
   d.querySelector(`button[data-comp-id="${compName}"]>.icon.fav`).classList.toggle("hidden", !favBtn.checked);
+
+  const compListEl: HTMLElement = d.querySelector(`dd[data-comp="${compName}"]`);
+  compListEl.classList.toggle("is-faved", favBtn.checked);
+
+  // Consider the 'parent' of a sub component list element
+  if (compListEl.hasAttribute("data-sub")) {
+    getCompParent(compListEl).classList.toggle(
+      "is-faved",
+      isSubsHasAnyFaved(
+        compListEl.getAttribute("data-sub")
+      )
+    );
+  }
+
   setCompLocalData(compName, { "fav": favBtn.checked });
+
+  updateCompListFilterState();
 });
+
+const selectAllNoneUpdates: (() => void)[] = [];
 
 function initializeComponents(): void {
   for (const comp in componentsCollection) {
@@ -78,14 +116,16 @@ function initializeComponents(): void {
       const compName: string = compData["name"];
       const compID: string = "comp-" + comp;
 
-      const updateSelectAllNoneBtn = () => {
-        const hasOneActive: boolean = d.querySelectorAll(`input[data-type="${compData["type"]}"][name="component-toggle"]:checked`).length > 0;
+      const updateSelectAllNoneBtn = (): void => {
+        const hasOneActive: boolean = d.querySelectorAll(`dd:not(.hidden) > input[data-type="${compData["type"]}"][name="component-toggle"]:checked`).length > 0;
 
         d.querySelector(`button.component-select-all[data-type="${compData["type"]}"]`)
           .classList.toggle("hidden", hasOneActive);
         d.querySelector(`button.component-select-none[data-type="${compData["type"]}"]`)
           .classList.toggle("hidden", !hasOneActive);
       }
+      // Why am I doing this
+      selectAllNoneUpdates.push(updateSelectAllNoneBtn);
 
       if (!compGroups.includes(compData["type"])) {
         compGroups.push(compData["type"]);
@@ -114,7 +154,7 @@ function initializeComponents(): void {
         compElemGroup.on("click", ".component-select-all", () => {
           d.querySelectorAll(`[data-type="${compData["type"]}"]`)
             .forEach((el: HTMLInputElement) => {
-              el.checked = true;
+              if (!el.parentElement.classList.contains("hidden")) el.checked = true;
           });
           updateSelectAllNoneBtn();
           calculateComponents();
@@ -123,7 +163,7 @@ function initializeComponents(): void {
         compElemGroup.on("click", ".component-select-none", () => {
           d.querySelectorAll(`[data-type="${compData["type"]}"]`)
             .forEach((el: HTMLInputElement) => {
-              el.checked = false;
+              if (!el.parentElement.classList.contains("hidden")) el.checked = false;
           });
           updateSelectAllNoneBtn();
           calculateComponents();
@@ -148,9 +188,15 @@ function initializeComponents(): void {
       const isTickedLocally: boolean = getCompLocalData(comp, "ticked");
 
       const compElemItem: JQuery<HTMLElement> = $(`
-        <dd data-search="${compName}" class="
+        <dd
+          data-comp="${comp}"
+          data-search="${compName}"
+          ${compData.sub != undefined ? `data-sub="${compData.sub}"` : ""}
+          class="
           ${compData.sub != undefined ? "sub" : ""}
           ${compData.groupOnly ? "non-interractable" : ""}
+          ${isFaved ? "is-faved" : ""}
+          ${compData["notes"].includes("Experimental") ? "is-exp" : ""}
           ">
 
           ${
@@ -229,6 +275,29 @@ function initializeComponents(): void {
       }
 
       compList.append(compElemItem);
+    }
+  }
+
+  // TODO optimize this
+  // Account for the 'parent' of the 'sub' components
+  const finished: string[] = [];
+  for (const compListElSub of d.querySelectorAll("dd[data-sub]")) {
+    const subId: string = compListElSub.getAttribute("data-sub");
+
+    if (!finished.includes(subId)) {
+      const compParentClasses: DOMTokenList = getCompParent(compListElSub as HTMLElement).classList;
+
+      // Account for 'toggleable parent'
+      const perserveFave: boolean = compParentClasses.contains("is-faved");
+
+      compParentClasses.toggle(
+        "is-faved",
+        isSubsHasAnyFaved(subId)
+      );
+
+      if (perserveFave) compParentClasses.add("is-faved");
+
+      finished.push(subId);
     }
   }
 
@@ -548,7 +617,16 @@ setHome();
 calculateComponents();
 
 import "./scripts/themes";
-import "./scripts/search";
+
+// Filter system
+import { initSearch } from "./scripts/search";
+const updateCompListFilterState: () => void = initSearch(d, () => {
+  // Account for select all/none button of the components' categories
+  for (const updt of selectAllNoneUpdates) {
+    updt();
+  }
+});
+updateCompListFilterState();
 
 $(document).on("load", () => {
   $("components-selector-container-inner").css("height", "100%");
