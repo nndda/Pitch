@@ -228,3 +228,10 @@ label.theme-more {
     }
   }
 }
+
+#component-inputs {
+  & .input-reset {
+    cursor: pointer;
+    margin-left: .5em;
+  }
+}

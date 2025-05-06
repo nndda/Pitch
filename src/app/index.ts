@@ -41,7 +41,16 @@ const compNotes: JQuery<HTMLElement> = $("#component-notes");
 
 const compGroups: string[] = [];
 
-const compInputsData: Record<string, string> = {};
+// Declare current session input data, and check if ones already stored in localStorage
+const compInputsData: Record<string, string> = JSON.parse(localStorage.getItem("pitchInputData")) ?? {};
+
+// (Should be) called whenever components-specific inputs are made/changed
+function updateInputs(): void {
+  calculateComponents();
+
+  // NOTE: This might be not very performant
+  localStorage.setItem("pitchInputData", JSON.stringify(compInputsData));
+}
 
 const compNotesData: Record<string, string> = {
   Experimental: "Use with caution, and test thoroughly."
@@ -376,21 +385,73 @@ function setCompInfo(comp: string): void {
 
   if (componentsCollection[comp].inputs.length > 0) {
     for (const n in componentsCollection[comp].inputs) {
+
       const inpData: PitchComponentInput = componentsCollection[comp].inputs[n];
+
+      // If input data is not present (from localStorage, or from session), fetch from default value
+      compInputsData[inpData.id] = compInputsData[inpData.id] ?? (componentsCollection[comp].inputs[n].default ?? "");
+
       const inpComp: JQuery<HTMLElement> = $(`
         <div class="comp-inp-group">
           <label class="label" for="${inpData.id}">${inpData.name}</label>
           <input class="comp-input" id="${inpData.id}" type="text" value="${
-            compInputsData[inpData.id] ?? ""
+            compInputsData[inpData.id] ?? (componentsCollection[comp].inputs[n].default ?? "")
           }">
-        </input>
+          ${componentsCollection[comp].inputs[n].default ?
+            `<button class="input-reset tooltip ${
+              compInputsData[inpData.id] === componentsCollection[comp].inputs[n].default ?
+              "hidden-opac" : ""
+              }">
+              <i class="fa-solid fa-arrow-rotate-left"></i>
+              <span class="tooltip-content">
+                Reset
+              </span>
+            </button>`
+          : ""}
         </div>
       `);
 
-      inpComp.on("input", "input.comp-input", ev => {
+
+      // Save input data to localStorage
+      localStorage.setItem("pitchInputData", JSON.stringify(compInputsData));
+
+      const inpEl: JQuery<HTMLInputElement> = inpComp.find("input.comp-input");
+
+      // Default value reset button handling
+      if (componentsCollection[comp].inputs[n].default) {
+        const inpDefaultVal: string = componentsCollection[comp].inputs[n].default;
+        const inpDefaultBtn: JQuery<HTMLButtonElement> = inpComp.find("button.input-reset");
+
+        // Reset default button
+        inpDefaultBtn.on("click", () => {
+          // Set to component's default value:
+          //  input element's (inpEl) value
+              inpEl.val(inpDefaultVal);
+          //  current session input data 
+              compInputsData[inpData.id] = inpDefaultVal;
+
+          // Hide the reset button
+          inpDefaultBtn.addClass("hidden-opac");
+
+          updateInputs();
+        });
+
+        // Toggle reset button visibility, when value isn't equal default
+        inpEl.on("input", () => {
+          inpDefaultBtn.toggleClass("hidden-opac", inpDefaultVal === inpEl.val());
+        });
+      }
+
+      inpEl.on("input", ev => {
         compInputsData[inpData.id] = (ev.target as HTMLInputElement).value;
-        calculateComponents();
+
+        updateInputs();
       });
+
+      // Set the input container attribute, so that components-specific input SCSS styling can be applied
+      // Styling @ styles/_inputs.scss, below #component-inputs
+      compInputs.attr("data-comp", comp);
+
       compInputs.append(inpComp);
     }
 
@@ -554,7 +615,9 @@ function setCompInfo(comp: string): void {
 
   wrapper.scrollTop = 0;
 
-  }, 200)
+  calculateComponents();
+
+  }, 200);
 }
 
 if (navigator.clipboard) {
