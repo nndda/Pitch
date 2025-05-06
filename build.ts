@@ -178,6 +178,7 @@ function buildComponent(compPath : string) : void {
         compType + "__" + compData.sub : undefined,
 
       inputs: compData.inputs ?? [],
+      inputVars: compData.inputVars,
 
       notes: compData.notes ?? [],
 

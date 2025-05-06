@@ -28,6 +28,10 @@ export interface PitchComponentData {
   // labels?: string[],
 
   inputs?: PitchComponentInput[],
+  inputVars?: {
+    selector: string,
+    vars: Record<string, string>,
+  },
 
   notes?: string[],
 
@@ -43,6 +47,8 @@ export type PitchComponentsCollection = Record<string, PitchComponentData>
 export interface PitchComponentInput {
   name: string,
   id: string,
+
+  default?: string,
 }
 
 export type PitchComponentScope = "project" | "profile" | "jam"
