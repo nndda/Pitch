@@ -16,7 +16,7 @@ html {
 }
 
 body {
-  background: $background;
+  background: darken($background, 2.5%);
   font-family: "Lato";
   font-size: .86em;
 }
