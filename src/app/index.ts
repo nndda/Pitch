@@ -41,7 +41,16 @@ const compNotes: JQuery<HTMLElement> = $("#component-notes");
 
 const compGroups: string[] = [];
 
-const compInputsData: Record<string, string> = {};
+// Declare current session input data, and check if ones already stored in localStorage
+const compInputsData: Record<string, string> = JSON.parse(localStorage.getItem("pitchInputData")) ?? {};
+
+// (Should be) called whenever components-specific inputs are made/changed
+function updateInputs(): void {
+  calculateComponents();
+
+  // NOTE: This might be not very performant
+  localStorage.setItem("pitchInputData", JSON.stringify(compInputsData));
+}
 
 const compNotesData: Record<string, string> = {
   Experimental: "Use with caution, and test thoroughly."
@@ -59,16 +68,54 @@ import {
   getCompLocalData,
 } from "./scripts/storage";
 
+// To get the 'parent' of a 'sub' component list element
+// TODO: reference the parent in componentsCollection instead
+function getCompParent(compListEl: HTMLElement): HTMLElement | null {
+  if (compListEl.hasAttribute("data-sub")) {
+    return d.querySelector(`dd[data-comp="${compListEl.getAttribute("data-sub")}"]`);
+  }
+
+  return null;
+}
+
+// Check if any 'sub' components is favourited 
+function isSubsHasAnyFaved(subId: string): boolean {
+  for (const el of d.querySelectorAll(`dd[data-sub="${subId}"]`)) {
+    if (el.classList.contains("is-faved")) return true;
+  }
+
+  return false;
+}
+
 // Favourite
 // Favourite button
 const favBtn: HTMLInputElement = d.getElementById("comp-fav-btn") as HTMLInputElement;
 
 favBtn.addEventListener("click", () => {
+  // TODO: this variable name might cause misunderstanding
   const compName: string = favBtn.getAttribute("data-comp");
 
   d.querySelector(`button[data-comp-id="${compName}"]>.icon.fav`).classList.toggle("hidden", !favBtn.checked);
+
+  const compListEl: HTMLElement = d.querySelector(`dd[data-comp="${compName}"]`);
+  compListEl.classList.toggle("is-faved", favBtn.checked);
+
+  // Consider the 'parent' of a sub component list element
+  if (compListEl.hasAttribute("data-sub")) {
+    getCompParent(compListEl).classList.toggle(
+      "is-faved",
+      isSubsHasAnyFaved(
+        compListEl.getAttribute("data-sub")
+      )
+    );
+  }
+
   setCompLocalData(compName, { "fav": favBtn.checked });
+
+  updateCompListFilterState();
 });
+
+const selectAllNoneUpdates: (() => void)[] = [];
 
 function initializeComponents(): void {
   for (const comp in componentsCollection) {
@@ -78,14 +125,16 @@ function initializeComponents(): void {
       const compName: string = compData["name"];
       const compID: string = "comp-" + comp;
 
-      const updateSelectAllNoneBtn = () => {
-        const hasOneActive: boolean = d.querySelectorAll(`input[data-type="${compData["type"]}"][name="component-toggle"]:checked`).length > 0;
+      const updateSelectAllNoneBtn = (): void => {
+        const hasOneActive: boolean = d.querySelectorAll(`dd:not(.hidden) > input[data-type="${compData["type"]}"][name="component-toggle"]:checked`).length > 0;
 
         d.querySelector(`button.component-select-all[data-type="${compData["type"]}"]`)
           .classList.toggle("hidden", hasOneActive);
         d.querySelector(`button.component-select-none[data-type="${compData["type"]}"]`)
           .classList.toggle("hidden", !hasOneActive);
       }
+      // Why am I doing this
+      selectAllNoneUpdates.push(updateSelectAllNoneBtn);
 
       if (!compGroups.includes(compData["type"])) {
         compGroups.push(compData["type"]);
@@ -114,7 +163,7 @@ function initializeComponents(): void {
         compElemGroup.on("click", ".component-select-all", () => {
           d.querySelectorAll(`[data-type="${compData["type"]}"]`)
             .forEach((el: HTMLInputElement) => {
-              el.checked = true;
+              if (!el.parentElement.classList.contains("hidden")) el.checked = true;
           });
           updateSelectAllNoneBtn();
           calculateComponents();
@@ -123,7 +172,7 @@ function initializeComponents(): void {
         compElemGroup.on("click", ".component-select-none", () => {
           d.querySelectorAll(`[data-type="${compData["type"]}"]`)
             .forEach((el: HTMLInputElement) => {
-              el.checked = false;
+              if (!el.parentElement.classList.contains("hidden")) el.checked = false;
           });
           updateSelectAllNoneBtn();
           calculateComponents();
@@ -148,9 +197,15 @@ function initializeComponents(): void {
       const isTickedLocally: boolean = getCompLocalData(comp, "ticked");
 
       const compElemItem: JQuery<HTMLElement> = $(`
-        <dd data-search="${compName}" class="
+        <dd
+          data-comp="${comp}"
+          data-search="${compName}"
+          ${compData.sub != undefined ? `data-sub="${compData.sub}"` : ""}
+          class="
           ${compData.sub != undefined ? "sub" : ""}
           ${compData.groupOnly ? "non-interractable" : ""}
+          ${isFaved ? "is-faved" : ""}
+          ${compData["notes"].includes("Experimental") ? "is-exp" : ""}
           ">
 
           ${
@@ -212,7 +267,7 @@ function initializeComponents(): void {
         currViewedComp.addClass("viewed");
       });
 
-      componentsCollection[comp].elemCheck = <HTMLInputElement>compElemItem.find("input[name=\"component-toggle\"]")[0];
+      componentsCollection[comp].elemCheck = (compElemItem.find(`input#${compID}`)[0] as HTMLInputElement);
 
       if (compData.sub != undefined) {
         if (!componentsCollection[compData.sub].groupOnly) {
@@ -229,6 +284,29 @@ function initializeComponents(): void {
       }
 
       compList.append(compElemItem);
+    }
+  }
+
+  // TODO optimize this
+  // Account for the 'parent' of the 'sub' components
+  const finished: string[] = [];
+  for (const compListElSub of d.querySelectorAll("dd[data-sub]")) {
+    const subId: string = compListElSub.getAttribute("data-sub");
+
+    if (!finished.includes(subId)) {
+      const compParentClasses: DOMTokenList = getCompParent(compListElSub as HTMLElement).classList;
+
+      // Account for 'toggleable parent'
+      const perserveFave: boolean = compParentClasses.contains("is-faved");
+
+      compParentClasses.toggle(
+        "is-faved",
+        isSubsHasAnyFaved(subId)
+      );
+
+      if (perserveFave) compParentClasses.add("is-faved");
+
+      finished.push(subId);
     }
   }
 
@@ -307,21 +385,73 @@ function setCompInfo(comp: string): void {
 
   if (componentsCollection[comp].inputs.length > 0) {
     for (const n in componentsCollection[comp].inputs) {
+
       const inpData: PitchComponentInput = componentsCollection[comp].inputs[n];
+
+      // If input data is not present (from localStorage, or from session), fetch from default value
+      compInputsData[inpData.id] = compInputsData[inpData.id] ?? (componentsCollection[comp].inputs[n].default ?? "");
+
       const inpComp: JQuery<HTMLElement> = $(`
         <div class="comp-inp-group">
           <label class="label" for="${inpData.id}">${inpData.name}</label>
           <input class="comp-input" id="${inpData.id}" type="text" value="${
-            compInputsData[inpData.id] ?? ""
+            compInputsData[inpData.id] ?? (componentsCollection[comp].inputs[n].default ?? "")
           }">
-        </input>
+          ${componentsCollection[comp].inputs[n].default ?
+            `<button class="input-reset tooltip ${
+              compInputsData[inpData.id] === componentsCollection[comp].inputs[n].default ?
+              "hidden-opac" : ""
+              }">
+              <i class="fa-solid fa-arrow-rotate-left"></i>
+              <span class="tooltip-content">
+                Reset
+              </span>
+            </button>`
+          : ""}
         </div>
       `);
 
-      inpComp.on("input", "input.comp-input", ev => {
+
+      // Save input data to localStorage
+      localStorage.setItem("pitchInputData", JSON.stringify(compInputsData));
+
+      const inpEl: JQuery<HTMLInputElement> = inpComp.find("input.comp-input");
+
+      // Default value reset button handling
+      if (componentsCollection[comp].inputs[n].default) {
+        const inpDefaultVal: string = componentsCollection[comp].inputs[n].default;
+        const inpDefaultBtn: JQuery<HTMLButtonElement> = inpComp.find("button.input-reset");
+
+        // Reset default button
+        inpDefaultBtn.on("click", () => {
+          // Set to component's default value:
+          //  input element's (inpEl) value
+              inpEl.val(inpDefaultVal);
+          //  current session input data 
+              compInputsData[inpData.id] = inpDefaultVal;
+
+          // Hide the reset button
+          inpDefaultBtn.addClass("hidden-opac");
+
+          updateInputs();
+        });
+
+        // Toggle reset button visibility, when value isn't equal default
+        inpEl.on("input", () => {
+          inpDefaultBtn.toggleClass("hidden-opac", inpDefaultVal === inpEl.val());
+        });
+      }
+
+      inpEl.on("input", ev => {
         compInputsData[inpData.id] = (ev.target as HTMLInputElement).value;
-        calculateComponents();
+
+        updateInputs();
       });
+
+      // Set the input container attribute, so that components-specific input SCSS styling can be applied
+      // Styling @ styles/_inputs.scss, below #component-inputs
+      compInputs.attr("data-comp", comp);
+
       compInputs.append(inpComp);
     }
 
@@ -485,7 +615,9 @@ function setCompInfo(comp: string): void {
 
   wrapper.scrollTop = 0;
 
-  }, 200)
+  calculateComponents();
+
+  }, 200);
 }
 
 if (navigator.clipboard) {
@@ -498,21 +630,36 @@ if (navigator.clipboard) {
   copyNotif.innerText = "";
 }
 
+// Cache selectedComps for repeat use in calculateComponents()
+const selectedComps: string[] = [];
+let compHasAtLeast1Selected: boolean = false;
+
+// Calculate and compile the selceted components' CSS codes
 function calculateComponents(): void {
-  const compSelected: NodeListOf<HTMLInputElement> = d.querySelectorAll("input[name='component-toggle']:checked");
+  selectedComps.length = 0;
 
-  pick2notif.classList.toggle("hidden-opac", compSelected.length > 0);
+  // Iterate over the cached componentsCollection
+  // (initialized at initializeComponents())
+  for (const comp in componentsCollection) {
+    if (componentsCollection[comp].elemCheck) {
+      // Get the checkbox input element of the components
+      const compInputEl: HTMLInputElement = componentsCollection[comp].elemCheck;
 
-  if (navigator.clipboard) {
-    compileCompBtn.disabled = compSelected.length <= 0;
-    copyNotif.innerText = "";
+      if (compInputEl.checked) selectedComps.push(comp);
+
+      // Save toggle state to localStorage
+      setCompLocalData(comp, { "ticked": compInputEl.checked });
+    }
   }
 
-  const selectedComps: string[] = [];
+  compHasAtLeast1Selected = selectedComps.length > 0;
 
-  compSelected.forEach((el) => {
-    selectedComps.push(el.getAttribute("data-comp"));
-  });
+  pick2notif.classList.toggle("hidden-opac", compHasAtLeast1Selected);
+
+  if (navigator.clipboard) {
+    compileCompBtn.disabled = !compHasAtLeast1Selected;
+    copyNotif.innerText = "";
+  }
 
   CSSCopyOutput.val(compileComponents(
     selectedComps,
@@ -526,14 +673,23 @@ CSSCopyOutput.on("click", () => {
   CSSCopyOutput[0].select();
 });
 
-calculateComponents();
-
 initializeComponents();
 
 setHome();
 
+calculateComponents();
+
 import "./scripts/themes";
-import "./scripts/search";
+
+// Filter system
+import { initSearch } from "./scripts/search";
+const updateCompListFilterState: () => void = initSearch(d, () => {
+  // Account for select all/none button of the components' categories
+  for (const updt of selectAllNoneUpdates) {
+    updt();
+  }
+});
+updateCompListFilterState();
 
 $(document).on("load", () => {
   $("components-selector-container-inner").css("height", "100%");

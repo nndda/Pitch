@@ -16,7 +16,7 @@ html {
 }
 
 body {
-  background: $background;
+  background: darken($background, 2.5%);
   font-family: "Lato";
   font-size: .86em;
 }
@@ -511,4 +511,9 @@ body {
 
 .hidden-opac {
   opacity: 0;
+  cursor: default !important;
+  
+  pointer-events: none;
+  -webkit-user-select: none;
+  user-select: none;
 }

@@ -1,6 +1,21 @@
 name:
   Read More
 
+inputs:
+  - name: Collapsed text
+    id: READ_MORE_CLOSED
+    default: Read more...
+
+  - name: Expanded text
+    id: READ_MORE_OPENED
+    default: Read less...
+
+inputVars:
+  selector: ".custom-read-more"
+  vars:
+    READ_MORE_CLOSED: read-more-cls
+    READ_MORE_OPENED: read-more-opn
+
 sampleHTML:
   - | # ================================================================================================
     <!-- NOTE -->

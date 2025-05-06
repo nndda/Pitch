@@ -26,13 +26,13 @@
       }
 
       &::after {
-        content: "Read more...";
+        content: var(--read-more-cls, "Read more...");
       }
     }
 
     &[open] {
       & > summary::after {
-        content: "Read less...";
+        content: var(--read-more-opn, "Read less...");
       }
     }
   }

@@ -20,7 +20,7 @@
       margin-bottom: .25em;
 
       &:after {
-        content: ("\25BC"); /* Marker when its opened */
+        content: var(--accrd-opn, "▼"); /* Marker when its opened */
       }
     }
 
@@ -53,7 +53,7 @@
     &::after {
       text-align: right;
       flex-grow: 1; /* Move the new marker to the most right */
-      content: "\25BA"; /* Marker when its closed */
+      content: var(--accrd-cls, "►"); /* Marker when its closed */
     }
 
     /* Remove the default marker on itch app */

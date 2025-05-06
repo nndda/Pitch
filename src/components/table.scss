@@ -1,5 +1,6 @@
 #wrapper :not(.game_info_panel_widget) > table {
   width: 100%;
+  border-color: var(--br);
 
   & td, & th {
     border: none !important;
