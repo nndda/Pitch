@@ -234,4 +234,25 @@ label.theme-more {
     cursor: pointer;
     margin-left: .5em;
   }
+
+  &[data-comp="components__accordion"] {
+    display: flex;
+
+    & > .comp-inp-group {
+      display: flex;
+      align-items: center;
+      max-width: 200px;
+      margin-right: 1em;
+    }
+
+    & label {
+      min-width: 0 !important;
+      margin-right: 1em;
+    }
+
+    & input {
+      width: 3.5em !important;
+      text-align: center;
+    }
+  }
 }

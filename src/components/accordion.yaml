@@ -1,6 +1,21 @@
 name:
   Accordion
 
+inputs:
+  - name: Closed icon
+    id: ACCORDION_CLOSED
+    default: ►
+
+  - name: Opened icon
+    id: ACCORDION_OPENED
+    default: ▼
+
+inputVars:
+  selector: ".custom-accrd"
+  vars:
+    ACCORDION_OPENED: accrd-opn
+    ACCORDION_CLOSED: accrd-cls
+
 sampleHTML:
   - | # ================================================================================================
     <!-- NOTE -->
