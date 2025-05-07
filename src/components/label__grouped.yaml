@@ -94,15 +94,15 @@ sampleHTML:
   - | # ------------------------------------------------------------------------------------------------
 
     <p class="custom-grouped-lb text-center" style="font-size: 2em;">
-      <a href="#" class="custom-lb" style="background: #ff6973; color: #222;">
+      <a href="#" class="custom-lb" style="background: #ff6973;">
         <img height="32" src="https://cdn.simpleicons.org/youtube/222" loading="lazy"/>
       </a>
 
-      <a href="#" class="custom-lb" style="background: #46425e; color: #eee;">
+      <a href="#" class="custom-lb" style="background: #46425e;">
         <img height="32" src="https://cdn.simpleicons.org/mastodon/eee" loading="lazy"/>
       </a>
 
-      <a href="#" class="custom-lb" style="background: #15788c; color: #eee;">
+      <a href="#" class="custom-lb" style="background: #15788c;">
         <img height="32" src="https://cdn.simpleicons.org/bluesky/eee" loading="lazy"/>
       </a>
     </p>
