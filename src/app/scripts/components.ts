@@ -80,17 +80,17 @@ export function getUsedVariables(css : string): string[] {
 // Create shorthand variables from used built-in variables (from getUsedVariables()).
 export function compileUsedVariables(vars : string[]): string {
   if (vars.length >= 1) {
-    let css = "#wrapper{";
+    let css: string = "#wrapper{";
 
-    vars.forEach(v => {
-      for (const k in varsList) {
-        if (k === v) {
-          css += `--${k}:var(--${varsList[v]});`;
-        }
-      }
-    });
+    for (let i: number = vars.length; i-- > 0;) {
+      // shorthand variable:  vars[i];
+      // itch's variable:     varsList[vars[i]];
+
+      css += `--${vars[i]}:var(--${varsList[vars[i]]});`;
+    }
 
     return css + "}";
   }
+
   return "";
 }
