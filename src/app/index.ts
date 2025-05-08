@@ -279,6 +279,17 @@ function initializeComponents(): void {
         }
       }
 
+      // Initialize default user input
+      if (compData.inputVars) {
+        compData.inputs.forEach(val => {
+          if (!Object.prototype.hasOwnProperty.call(compInputsData, val.id)) {
+            if (val.default) {
+              compInputsData[val.id] = val.default;
+            }
+          }
+        });
+      }
+
       if (isTickedLocally) {
         updateSelectAllNoneBtn();
       }
