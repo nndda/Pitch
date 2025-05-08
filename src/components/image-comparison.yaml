@@ -1,0 +1,19 @@
+name:
+  Image Comparison
+
+sampleHTML:
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <p>
+      Compare 2 images together. Slide the handle on the bottom of the images.
+    </p>
+
+  - | # ------------------------------------------------------------------------------------------------
+
+    <div class="custom-img-compare">
+      <div>
+        <img src="https://img.itch.zone/aW1nLzIxMDc4NDIzLnBuZw==/original/l07Whc.png">
+      </div>
+
+      <img src="https://img.itch.zone/aW1nLzIxMDc4NDMxLnBuZw==/original/3W4DMV.png">
+    </div>

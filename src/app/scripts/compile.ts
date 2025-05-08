@@ -3,31 +3,25 @@ import {
   compileUsedVariables,
 } from "./components"
 
+// <style> to apply user-input styling
 const compInputStyleOverride: HTMLStyleElement = document.getElementById("comp-input-override") as HTMLStyleElement;
 
 export function compileComponents(
+  // Selected components
   compList : string[],
+
+  // Components definition object
   compObj: PitchComponentsCollection,
+
+  // User-input
   compInputs: Record<string, string>,
-) : string {
-  const usedVars : string[] = [];
+
+): string {
+
+  // Main CSS
   let css: string = "";
-
-  // TODO: use for-loop instead. Or move it to the loop below.
-  compList.forEach((comp : string) => {
-    if (comp !== "") {
-      css += compObj[comp].css;
-
-      compObj[comp].variables.forEach((vars : string) => {
-        if (!usedVars.includes(vars)) {
-          usedVars.push(vars);
-        }
-      });
-    }
-  });
-
-  // Implement variable-user-inputs
-  // Heavens forgive me for this abomination
+  // Main CSS variables
+  const usedVars : string[] = [];
 
   // User-input variables for all components
   let cssInpPreview: string = "";
@@ -36,6 +30,25 @@ export function compileComponents(
   let cssInp: string = "";
 
   for (const comp in compObj) {
+    // Check if the current component is selected by the user
+    const compIsSelected: boolean = compList.includes(comp);
+
+    // Grab main CSS of the selected components
+    if (compIsSelected) {
+      css += compObj[comp].css;
+
+      for (let i: number = compObj[comp].variables.length; i-- > 0;) {
+
+        if (!usedVars.includes(compObj[comp].variables[i])) {
+          usedVars.push(compObj[comp].variables[i]);
+        }
+
+      }
+    }
+
+    // TODO: if components are using its default value, do not use user-input value
+
+    // Grab the user-input of all components
     if (compObj[comp].inputVars) {
 
       // From variable-based input, create CSS variables declarations
@@ -44,7 +57,7 @@ export function compileComponents(
       compiledInpVars += `${compObj[comp].inputVars.selector}{`;
 
       for (const owo in compObj[comp].inputVars.vars) {
-        compiledInpVars += `--${compObj[comp].inputVars.vars[owo]}: "${owo}";`;
+        compiledInpVars += `--${compObj[comp].inputVars.vars[owo]}:"${owo}";`;
       }
 
       compiledInpVars += "}";
@@ -52,7 +65,7 @@ export function compileComponents(
 
       cssInpPreview += compiledInpVars;
 
-      if (compList.includes(comp)) {
+      if (compIsSelected) {
         cssInp += compiledInpVars;
       }
 
@@ -63,15 +76,15 @@ export function compileComponents(
   for (const inp in compInputs) {
     const RE: RegExp = new RegExp(inp, "g");
 
-    // css = css.replace(RE, compInputs[inp]);
-    // cssInp = cssInp.replace(RE, compInputs[inp]);
-    css = (cssInp + css).replace(RE, compInputs[inp]);
+    css = css.replace(RE, compInputs[inp]);
+    cssInp = cssInp.replace(RE, compInputs[inp]);
+    // css = (cssInp + css).replace(RE, compInputs[inp]); // <-- buggy
 
     cssInpPreview = cssInpPreview.replace(RE, compInputs[inp]);
   }
 
   compInputStyleOverride.textContent = cssInpPreview;
 
-  return `@charset "UTF-8";` + compileUsedVariables(usedVars) + css;
-  // return `@charset "UTF-8";` + compileUsedVariables(usedVars) + cssInp + css;
+  // return `@charset "UTF-8";` + compileUsedVariables(usedVars) + css; // <-- buggy
+  return `@charset "UTF-8";` + compileUsedVariables(usedVars) + cssInp + css;
 }

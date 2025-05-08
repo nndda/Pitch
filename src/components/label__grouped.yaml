@@ -91,18 +91,36 @@ sampleHTML:
       </a>
     </p>
 
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <p>
+      Same as above, but with the text moved inside <button class="button-primary">Tooltip</button> elements.
+    </p>
+
   - | # ------------------------------------------------------------------------------------------------
 
     <p class="custom-grouped-lb text-center" style="font-size: 2em;">
-      <a href="#" class="custom-lb" style="background: #ff6973; color: #222;">
+      <a href="#" class="custom-lb custom-tip" style="background: #ff6973;">
         <img height="32" src="https://cdn.simpleicons.org/youtube/222" loading="lazy"/>
+
+        <span class="custom-tip-content">
+          YouTube
+        </span>
       </a>
 
-      <a href="#" class="custom-lb" style="background: #46425e; color: #eee;">
+      <a href="#" class="custom-lb custom-tip" style="background: #46425e;">
         <img height="32" src="https://cdn.simpleicons.org/mastodon/eee" loading="lazy"/>
+
+        <span class="custom-tip-content">
+          Mastodon
+        </span>
       </a>
 
-      <a href="#" class="custom-lb" style="background: #15788c; color: #eee;">
+      <a href="#" class="custom-lb custom-tip" style="background: #15788c;">
         <img height="32" src="https://cdn.simpleicons.org/bluesky/eee" loading="lazy"/>
+
+        <span class="custom-tip-content">
+          Bluesky
+        </span>
       </a>
     </p>

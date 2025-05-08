@@ -279,8 +279,11 @@ body {
           }
 
           & > .right-control {
+            display: flex;
+
             flex-grow: 1;
-            text-align: right;
+            align-items: center;
+            justify-content: right;
 
             & > .button-general {
               display: inline-flex;
@@ -288,6 +291,12 @@ body {
               justify-content: center;
               width: 2em;
               margin: 0 .1em;
+              margin-right: .5em;
+            }
+
+            & > .pitch-ver {
+              margin-right: 1em;
+              margin-left: 1em;
             }
           }
         }

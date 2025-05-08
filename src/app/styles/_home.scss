@@ -14,7 +14,7 @@
     margin: .5em;
     border: 1px solid var(--br);
 
-    & > * {
+    & > *:not(hr) {
       margin:0;
       padding: .8em 1em;
     }
@@ -44,6 +44,10 @@
     }
 
     &:nth-child(8) {
+      grid-column: 1/4;
+    }
+
+    &:nth-child(9) {
       grid-column: 1/4;
     }
   }
