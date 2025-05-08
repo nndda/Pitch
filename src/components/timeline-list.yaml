@@ -32,7 +32,7 @@ sampleHTML:
     <!-- NOTE -->
     <h2>Examples</h2>
     <p>
-      Utilizing <button class="button-primary">Label</button> to indicate the changes' type. And also using <button class="button-primary">Input</button> element:
+      Using <button class="button-primary">Label</button> to indicate the changes' type. And also using <button class="button-primary">Input</button> element:
     </p>
 
   - | # ------------------------------------------------------------------------------------------------
