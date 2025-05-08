@@ -14,7 +14,7 @@
     margin: .5em;
     border: 1px solid var(--br);
 
-    & > * {
+    & > *:not(hr) {
       margin:0;
       padding: .8em 1em;
     }
