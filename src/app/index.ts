@@ -237,9 +237,11 @@ function initializeComponents(): void {
           }
 
           <button class="component-toggle" data-comp="${compName}" data-comp-id="${comp}">
-            ${compName}
+            <span class="text">
+              ${compName}
+            </span>
             ${compData["notes"].includes("Experimental") ? `
-              <span class="icon">
+              <span class="icon exp">
                 <i class="fa-solid fa-vial"></i>
               </span>
             ` : ""}

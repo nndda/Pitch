@@ -114,12 +114,14 @@ body {
           & > dt {
             display: flex;
             align-items: center;
-            font-size: $font-size * 1.1;
+            font-size: $font-size * 1.25;
+            font-weight: bold;
 
             margin-top: .7em;
             margin-bottom: .3em;
 
             text-transform: capitalize;
+            letter-spacing: .085em;
             color: $accent;
 
             & > .component-type-title {
@@ -130,6 +132,7 @@ body {
               padding: .15em;
               line-height: 0;
               border-radius: 3px;
+
               & > span {
                 font-size: 1em;
               }
@@ -137,12 +140,12 @@ body {
           }
 
           & > dd {
-            $active-col: lighten($primary, 30%);
+            // $active-col: lighten($primary, 80%);
             $active-col: white;
 
-            color: rgba(white, 0.6);
+            color: rgba($text-col, 0.8);
             display: flex;
-            margin-bottom: .3em;
+            margin-bottom: .4em;
             margin-left: .5em;
             font-size: $font-size;
             list-style: none;
@@ -151,11 +154,35 @@ body {
               padding-left: .9em;
             }
 
+            & .text {
+              padding: .1em .3em;
+              border-radius: 6px;
+              transition: .3s ease;
+            }
+
             &.viewed {
               & > button {
                 pointer-events: none;
-                font-weight: bolder;
-                color: $accent !important;
+
+                & > .text {
+                  // font-weight: bolder;
+                  // color: $accent !important;
+
+                  background: lighten($accent, 100%);
+                  color: $background;
+                  // outline: 2px solid lighten($accent, 100%);
+                }
+
+                // & > .icon {
+                //   filter: brightness(0.4);
+
+                //   &.fav {
+                //     filter: none;
+                //       color: $background;
+                //     // & > svg {
+                //     // }
+                //   }
+                // }
               }
             }
 
@@ -172,17 +199,17 @@ body {
 
               &:hover {
                 cursor: pointer;
-                color: $active-col;
+                // color: $active-col;
 
                 & ~ .component-toggle {
                   text-decoration: underline;
-                  color: $active-col;
+                  // color: $active-col;
                 }
               }
             }
 
             & > .component-toggle {
-            color: rgba(white, 0.6);
+              color: rgba($text-col, 0.8);
               text-transform: capitalize;
 
               &:hover {
@@ -214,9 +241,9 @@ body {
                 display: none;
               }
 
-              &:checked ~ button {
-                color: $active-col;
-              }
+              // &:checked ~ button {
+              //   color: $active-col;
+              // }
             }
 
 
