@@ -347,6 +347,58 @@ body {
   background: darken($background, 2.5%);
 }
 
+
+@mixin style-scope-label($col) {
+  background: color.mix($background, $col, 70%);
+
+  & > .icon {
+    color: lighten($col, 15%);
+  }
+
+  & .tooltip-content {
+    width: 100%;
+    padding: .5em;
+    background: color.mix($background, $col, 80%);
+    white-space: wrap;
+
+    & b {
+      display: inline-block;
+      margin-bottom: .5em;
+    }
+  }
+}
+
+.scope-label {
+  display: inline-flex;
+  column-gap: .5em;
+  margin: 0 .3em;
+  padding: .1em .5em;
+  font-size: .85em;
+  border-radius: 6px;
+  cursor: help;
+
+  &.compatible {
+    @include style-scope-label(#21bd19);
+  }
+  &.partial {
+    @include style-scope-label(#ffbe0a);
+  }
+  &.none {
+    @include style-scope-label(#e6071d);
+  }
+  &.only {
+    @include style-scope-label(#3ad2fc);
+  }
+
+  & > span {
+    text-transform: capitalize;
+
+    &:not(:last-child)::after {
+      content: ",";
+    }
+  }
+}
+
 .copy-btn-container-inner {
   display: flex;
   margin: auto;

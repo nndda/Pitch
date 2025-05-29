@@ -184,6 +184,8 @@ function buildComponent(compPath : string) : void {
 
       groupOnly: compData.groupOnly ?? false,
 
+      scopes: compData.scopes,
+
       variables: getUsedVariables(cssStr),
     } as PitchComponentData;
   }

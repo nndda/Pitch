@@ -35,7 +35,7 @@ export interface PitchComponentData {
 
   notes?: string[],
 
-  scope?: PitchComponentScope[],
+  scopes?: PitchComponentScopeStat,
 
   groupOnly?: boolean,
 
@@ -49,6 +49,13 @@ export interface PitchComponentInput {
   id: string,
 
   default?: string,
+}
+
+export type PitchComponentScopeStat = {
+  compatible?: PitchComponentScope[],
+  partial?: PitchComponentScope[],
+  none?: PitchComponentScope[],
+  only?: PitchComponentScope[],
 }
 
 export type PitchComponentScope = "project" | "profile" | "jam"
