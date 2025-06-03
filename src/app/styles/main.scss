@@ -143,7 +143,7 @@ body {
             // $active-col: lighten($primary, 80%);
             $active-col: white;
 
-            color: rgba($text-col, 0.8);
+            color: rgba($text-col, 0.6);
             display: flex;
             margin-bottom: .4em;
             margin-left: .5em;
@@ -156,6 +156,7 @@ body {
 
             & .text {
               padding: .1em .3em;
+              color: rgba($text-col, 0.6);
               border-radius: 6px;
               transition: .3s ease;
             }
@@ -169,7 +170,7 @@ body {
                   // color: $accent !important;
 
                   background: lighten($accent, 100%);
-                  color: $background;
+                  color: $background !important;
                   // outline: 2px solid lighten($accent, 100%);
                 }
 
@@ -199,11 +200,15 @@ body {
 
               &:hover {
                 cursor: pointer;
-                // color: $active-col;
+                color: $active-col;
 
                 & ~ .component-toggle {
+                  color: $active-col;
                   text-decoration: underline;
-                  // color: $active-col;
+
+                  & > .text {
+                    color: $active-col;
+                  }
                 }
               }
             }
@@ -215,12 +220,14 @@ body {
               &:hover {
                 text-decoration: underline;
                 cursor: pointer;
-                color: $active-col;
+
+                & > .text {
+                  color: $active-col;
+                }
               }
 
               & > .icon {
                 margin-left: .5em;
-                // color: #ecc70e;
                 color: $primary;
                 font-size: .8em;
 
@@ -241,9 +248,9 @@ body {
                 display: none;
               }
 
-              // &:checked ~ button {
-              //   color: $active-col;
-              // }
+              &:checked ~ button > .text {
+                color: $active-col;
+              }
             }
 
 
