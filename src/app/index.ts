@@ -137,11 +137,28 @@ function initializeComponents(): void {
       // Why am I doing this
       selectAllNoneUpdates.push(updateSelectAllNoneBtn);
 
+      // Component group/category title
       if (!compGroups.includes(compData["type"])) {
         compGroups.push(compData["type"]);
         const compElemGroup: JQuery<HTMLElement> = $(`
           <dt>
             <span class="component-type-title">
+              <i class="icon fa-solid
+                fa-${
+                    compData["type"] === "components"
+                  ? "bars-progress"
+
+                  : compData["type"] === "decorations"
+                  ? "brush"
+
+                  : compData["type"] === "tweaks"
+                  ? "pen-ruler"
+
+                  : ""
+                }
+                "
+              >
+              </i>
               ${compData["type"]}
             </span>
 

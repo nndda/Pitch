@@ -117,12 +117,16 @@ body {
             font-size: $font-size * 1.25;
             font-weight: bold;
 
-            margin-top: .7em;
-            margin-bottom: .3em;
+            margin-top: .8em;
+            margin-bottom: .5em;
 
             text-transform: capitalize;
             letter-spacing: .085em;
             color: $accent;
+
+            & .icon {
+              margin-right: .45em;
+            }
 
             & > .component-type-title {
               flex-grow: 1;
