@@ -39,5 +39,7 @@ npm run build
 
 ## Licenses
 
-- The Pitch web app is licensed under [MIT](LICENSE-MIT).
+- The Pitch web app is licensed under [AGPLv3](LICENSE).
 - The CSS components are licensed under [CC0](LICENSE-CC0).
+
+Copyright &copy; 2025 nnda
