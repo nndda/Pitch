@@ -46,311 +46,269 @@ body {
 .main-app {
   max-width: 1200px;
   margin: 0 auto;
+}
 
-  & .components-overview {
+.components-overview {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+}
+
+.components-selector-container {
+  display: flex;
+  flex-grow: 1;
+  width: 250px;
+  border-right: 1px solid rgba($border-col, 0.1);
+  overflow: hidden;
+
+  &.collapsed {
+    width: 0;
+    border: none;
+  }
+}
+
+.components-selector-container-inner {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;;
+  padding: 1em .5em;
+  // padding-right: .75em !important;
+  padding-right: 0 !important;
+  padding-top: 1em !important;
+}
+
+$active-col: white;
+#components-list {
+  $font-size: 1.1em;
+  flex-grow: 1;
+
+  margin: 0;
+  margin-left: .75em;
+  margin-right: .75em;
+
+  padding: 0;
+  padding-left: .2em;
+  padding-right: .85em;
+  padding-bottom: .75em;
+
+  overflow-y: scroll;
+
+  @include style-scrollbar;
+
+  & > dt {
     display: flex;
-    flex-direction: row;
-    height: 100vh;
+    align-items: center;
+    font-size: $font-size * 1.25;
+    font-weight: bold;
 
-    & > .components-selector-container {
-      display: flex;
-      flex-grow: 1;
-      width: 250px;
-      border-right: 1px solid rgba($border-col, 0.1);
-      overflow: hidden;
+    margin-top: .8em;
+    margin-bottom: .5em;
 
-      &.collapsed {
-        width: 0;
-        border: none;
-      }
+    text-transform: capitalize;
+    letter-spacing: .085em;
+    color: $accent;
 
-      & > .components-selector-container-inner {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        padding: 1em .5em;
-        // padding-right: .75em !important;
-        padding-right: 0 !important;
-        padding-top: 1em !important;
-      
-        & > .component-search-container {
-          display: flex;
-          align-items: bottom;
-
-          & > input {
-            border-radius: 4px;
-            border-top-right-radius: 0;
-            border-bottom-right-radius: 0;
-            border: 0;
-            padding: .15em .5em;
-            background: lighten($background, 7%);
-          }
-
-          & > #component-search-clear {
-            padding: .15em .5em;
-            border-top-left-radius: 0;
-            border-bottom-left-radius: 0;
-            border-left: 1px solid rgba($border-col, .15);
-          }
-        }
-
-        & dl#components-list {
-          $font-size: 1.1em;
-          flex-grow: 1;
-
-          margin: 0;
-          margin-left: .75em;
-          margin-right: .75em;
-
-          padding: 0;
-          padding-left: .2em;
-          padding-right: .85em;
-          padding-bottom: .75em;
-
-          overflow-y: scroll;
-
-          @include style-scrollbar;
-
-          & > dt {
-            display: flex;
-            align-items: center;
-            font-size: $font-size * 1.25;
-            font-weight: bold;
-
-            margin-top: .8em;
-            margin-bottom: .5em;
-
-            text-transform: capitalize;
-            letter-spacing: .085em;
-            color: $accent;
-
-            & .icon {
-              margin-right: .45em;
-            }
-
-            & > .component-type-title {
-              flex-grow: 1;
-            }
-
-            & > button {
-              padding: .15em;
-              line-height: 0;
-              border-radius: 3px;
-
-              & > span {
-                font-size: 1em;
-              }
-            }
-          }
-
-          & > dd {
-            // $active-col: lighten($primary, 80%);
-            $active-col: white;
-
-            color: rgba($text-col, 0.6);
-            display: flex;
-            margin-bottom: .4em;
-            margin-left: .5em;
-            font-size: $font-size;
-            list-style: none;
-
-            &.sub {
-              padding-left: .9em;
-            }
-
-            & .text {
-              padding: .1em .3em;
-              color: rgba($text-col, 0.6);
-              border-radius: 6px;
-              transition: .3s ease;
-            }
-
-            &.viewed {
-              & > button {
-                pointer-events: none;
-
-                & > .text {
-                  // font-weight: bolder;
-                  // color: $accent !important;
-
-                  background: lighten($accent, 100%);
-                  color: $background !important;
-                  // outline: 2px solid lighten($accent, 100%);
-                }
-
-                // & > .icon {
-                //   filter: brightness(0.4);
-
-                //   &.fav {
-                //     filter: none;
-                //       color: $background;
-                //     // & > svg {
-                //     // }
-                //   }
-                // }
-              }
-            }
-
-            & > label {
-              margin-right: .3em;
-
-              & > .checked-not {
-                color: $active-col;
-              }
-
-              & > span {
-                font-size: $font-size;
-              }
-
-              &:hover {
-                cursor: pointer;
-                color: $active-col;
-
-                & ~ .component-toggle {
-                  color: $active-col;
-                  text-decoration: underline;
-
-                  & > .text {
-                    color: $active-col;
-                  }
-                }
-              }
-            }
-
-            & > .component-toggle {
-              color: rgba($text-col, 0.8);
-              text-transform: capitalize;
-
-              &:hover {
-                text-decoration: underline;
-                cursor: pointer;
-
-                & > .text {
-                  color: $active-col;
-                }
-              }
-
-              & > .icon {
-                margin-left: .5em;
-                color: $primary;
-                font-size: .8em;
-
-                &.fav {
-                  color: #fcb930;
-                }
-              }
-            }
-
-            & > input {
-              display: none;
-
-              &:checked ~ label > .checked {
-                display: none;
-              }
-
-              &:not(:checked) ~ label > .checked-not {
-                display: none;
-              }
-
-              &:checked ~ button > .text {
-                color: $active-col;
-              }
-            }
-
-
-          }
-        }
-
-        & > .copy-btn-container {
-          display: flex;
-          flex-direction: column;
-          min-height: 4em;
-          padding: .5em;
-          padding-top: 1.25em;
-          // margin-bottom: 1em;
-          border-top: 1px solid rgba($border-col, 0.1);
-
-          & > #copy-notification {
-            font-size: 1.1em;
-            text-align: center;
-            white-space: nowrap;
-            margin-top: .5em;
-
-          }
-
-          & > .pick-2-notif {
-            text-align: center;
-            color: lighten($accent, 25%);
-            margin-top: .2em;
-            min-height: 1.2em;
-          }
-        }
-
-      }
-
+    & .icon {
+      margin-right: .45em;
     }
 
-    & > .column-right {
-      display: flex;
-      flex-grow: 1;
-      flex-direction: column;
+    & > button {
+      padding: .15em;
+      line-height: 0;
+      border-radius: 3px;
 
-      width: 920px;
-
-      & > .preview-info {
-        font-size: 1.1em;
-        padding: 1.5em;
-        background: darken($background, 2.5%);
-        padding-top: .25em;
-        padding-bottom: 1.25em;
-        border-bottom: 1px solid rgba($text-col, 0.075);
-
-        & > .preview-header {
-          display: flex;
-          flex-direction: row;
-          margin-top: .75em;
-          margin-bottom: .85em;
-          align-items: center;
-
-          & > #component-title {
-            margin: 0 .2em;
-          }
-
-          & > .right-control {
-            display: flex;
-
-            flex-grow: 1;
-            align-items: center;
-            justify-content: right;
-
-            & > .button-general {
-              display: inline-flex;
-              align-items: center;
-              justify-content: center;
-              width: 2em;
-              margin: 0 .1em;
-              margin-right: .5em;
-            }
-
-            & > .pitch-ver {
-              margin-right: 1em;
-              margin-left: 1em;
-            }
-          }
-        }
-
-        & > #component-description {
-          max-width: 500px;
-        }
+      & > span {
+        font-size: 1em;
       }
-
-      & > .preview-container {
-        flex-grow: 1;
-        overflow-y: scroll;
-      }
-
     }
   }
+
+  & > dd {
+    color: rgba($text-col, 0.6);
+    display: flex;
+    margin-bottom: .4em;
+    margin-left: .5em;
+    font-size: $font-size;
+    list-style: none;
+
+    &.sub {
+      padding-left: .9em;
+    }
+
+    & .text {
+      padding: .1em .3em;
+      color: rgba($text-col, 0.6);
+      border-radius: 6px;
+      transition: .3s ease;
+    }
+
+    &.viewed {
+      & > button {
+        pointer-events: none;
+
+        & > .text {
+          background: lighten($accent, 100%);
+          color: $background !important;
+        }
+      }
+    }
+
+    & > label {
+      margin-right: .3em;
+
+      & > .checked-not {
+        color: $active-col;
+      }
+
+      & > span {
+        font-size: $font-size;
+      }
+
+      &:hover {
+        cursor: pointer;
+        color: $active-col;
+
+        & ~ .component-toggle {
+          color: $active-col;
+          text-decoration: underline;
+
+          & > .text {
+            color: $active-col;
+          }
+        }
+      }
+    }
+
+    & > input {
+      display: none;
+
+      &:checked ~ label > .checked {
+        display: none;
+      }
+
+      &:not(:checked) ~ label > .checked-not {
+        display: none;
+      }
+
+      &:checked ~ button > .text {
+        color: $active-col;
+      }
+    }
+  }
+}
+
+.component-type-title {
+  flex-grow: 1;
+}
+
+.component-toggle {
+  color: rgba($text-col, 0.8);
+  text-transform: capitalize;
+
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
+
+    & > .text {
+      color: $active-col;
+    }
+  }
+
+  & > .icon {
+    margin-left: .5em;
+    color: $primary;
+    font-size: .8em;
+
+    &.fav {
+      color: #fcb930;
+    }
+  }
+}
+
+.copy-btn-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 4em;
+  padding: .5em;
+  padding-top: 1.25em;
+  // margin-bottom: 1em;
+  border-top: 1px solid rgba($border-col, 0.1);
+}
+
+#copy-notification {
+  height: 1.1em;
+  font-size: 1.1em;
+  text-align: center;
+  white-space: nowrap;
+  margin-top: .5em;
+}
+
+.pick-2-notif {
+  text-align: center;
+  color: lighten($accent, 25%);
+  margin-top: .2em;
+  min-height: 1.2em;
+}
+
+.column-right {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+
+  width: 920px;
+}
+
+.preview-info {
+  font-size: 1.1em;
+  padding: 1.5em;
+  background: darken($background, 2.5%);
+  padding-top: .25em;
+  padding-bottom: 1.25em;
+  border-bottom: 1px solid rgba($text-col, 0.075);
+}
+
+.preview-header {
+  display: flex;
+  flex-direction: row;
+  margin-top: .75em;
+  margin-bottom: .85em;
+  align-items: center;
+}
+
+#component-title {
+  margin: 0 .2em;
+}
+
+#component-description {
+  max-width: 500px;
+}
+
+.right-control {
+  display: flex;
+
+  flex-grow: 1;
+  align-items: center;
+  justify-content: right;
+
+  .button-general {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2em;
+    margin: 0 .1em;
+    margin-right: .5em;
+  }
+}
+
+.preview-container {
+  flex-grow: 1;
+  overflow-y: scroll;
+}
+
+.pitch-ver {
+  margin-right: 1em;
+  margin-left: 1em;
 }
 
 #wrapper {
@@ -477,46 +435,46 @@ body {
   font-size: .95em;
   letter-spacing: .025em;
   transition: .2s ease;
+}
 
-  & > .comp-notes {
-    display: flex;
-    align-items: center;
-    padding: .6em 1.1em;
-    border-bottom: 1px solid rgba($text-col, 0.075);
+.comp-notes {
+  display: flex;
+  align-items: center;
+  padding: .6em 1.1em;
+  border-bottom: 1px solid rgba($text-col, 0.075);
 
+  &.Experimental {
     & > .comp-notes-title {
-      align-self: start;
-      margin-right: 1em;
-      padding: .15em .7em;
-      font-size: 1.1em;
-      font-weight: bolder;
-      border-radius: .3em;
+      background: #ffc721;
+      color: #1c1813;
     }
+  }
 
-    & > .comp-notes-desc {
-      line-height: 1.3em;
-
-      & > code {
-        font-weight: 400;
-        padding: .025em .5em;
-        background: rgba($text-col, 0.125);
-        border-radius: 5px;
-      }
+  &.note-custom {
+    & > .comp-notes-title {
+      background: rgba($text-col, 0.8);
+      color: $background;
     }
+  }
+}
 
-    &.Experimental {
-      & > .comp-notes-title {
-        background: #ffc721;
-        color: #1c1813;
-      }
-    }
+.comp-notes-title {
+  align-self: start;
+  margin-right: 1em;
+  padding: .15em .7em;
+  font-size: 1.1em;
+  font-weight: bolder;
+  border-radius: .3em;
+}
 
-    &.note-custom {
-      & > .comp-notes-title {
-        background: rgba($text-col, 0.8);
-        color: $background;
-      }
-    }
+.comp-notes-desc {
+  line-height: 1.3em;
+
+  & > code {
+    font-weight: 400;
+    padding: .025em .5em;
+    background: rgba($text-col, 0.125);
+    border-radius: 5px;
   }
 }
 
@@ -529,19 +487,19 @@ body {
   font-family: Ubuntu;
   transition: .2s ease;
   z-index: 3;
+}
 
-  & > .comp-inp-group {
-    display: flex;
-    padding: .3em .5em;
+.comp-inp-group {
+  display: flex;
+  padding: .3em .5em;
 
-    & > .label {
-      min-width: 10em;
-    }
+  & > .label {
+    min-width: 10em;
+  }
 
-    & > input {
-      &:focus {
-        outline: 1px solid $primary;
-      }
+  & > input {
+    &:focus {
+      outline: 1px solid $primary;
     }
   }
 }
@@ -558,30 +516,6 @@ body {
   aspect-ratio: 1 / 1;
 
   border-top: 1px solid rgba($border-col, 0.1);
-
-  & > #css-output-textarea {
-    @include style-scrollbar;
-
-    font-family: monospace;
-
-    color: rgba($text-col, 0.8);
-    background: rgba($text-col, 0.05);
-
-    flex-grow: 1;
-
-    margin: 1em;
-    padding: 1em;
-    word-break: break-all;
-    resize: none;
-    width: calc(100% - 4em);
-    border: 0;
-    outline: 0;
-    // box-sizing: border-box;
-
-    &:focus {
-      outline: 3px dashed $primary;
-    }
-  }
 
   &:before {
     content: "CSS OUTPUT";
@@ -600,6 +534,30 @@ body {
     width: 100%;
 
     pointer-events: none;
+  }
+}
+
+#css-output-textarea {
+  @include style-scrollbar;
+
+  font-family: monospace;
+
+  color: rgba($text-col, 0.8);
+  background: rgba($text-col, 0.05);
+
+  flex-grow: 1;
+
+  margin: 1em;
+  padding: 1em;
+  word-break: break-all;
+  resize: none;
+  width: calc(100% - 4em);
+  border: 0;
+  outline: 0;
+  // box-sizing: border-box;
+
+  &:focus {
+    outline: 3px dashed $primary;
   }
 }
 

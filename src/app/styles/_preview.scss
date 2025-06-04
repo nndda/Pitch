@@ -2,89 +2,89 @@
 
 #component-preview {
   color: var(--t);
+}
 
-  & > .component-container-single {
-    $padding: .8em;
-    $bg-main: lighten($background, 1%);
-    $bg-code: darken($background, 1%);
+$padding: .8em;
+$bg-main: lighten($background, 1%);
+$bg-code: darken($background, 1%);
 
+.component-container-single {
+
+  display: flex;
+  flex-direction: column;
+
+  border: 1px solid rgba($text-col, 0.065);
+  border-radius: 6px;
+  background: $bg-main;
+  margin-bottom: 1.25em;
+  margin-top: 1.25em;
+
+  & > div {
+    position: relative;
+    margin: 0 $padding 0;
+    padding: $padding;
+  }
+}
+
+.component-container-img {
+  --b2: transparent;
+
+  & img {
+    display: block;
+    margin: auto;
+  }
+}
+
+.component-display {
+  border-bottom: 1px solid rgba($text-col, 0.065);
+  padding: $padding * 1.5;
+  padding-bottom: $padding * 2;
+  margin: 0;
+  background: var(--b2);
+  transition: .5s ease;
+
+  & h1, h2, h3, h4, h5, h6 {
+    font-family: var(--ff, initial);
+  }
+}
+
+.component-preview-control {
+  display: flex;
+  font-family: Ubuntu;
+  padding: .65em 0;
+
+  & > button {
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    margin: 0 .25em;
+  }
+}
 
-    border: 1px solid rgba($text-col, 0.065);
-    border-radius: 6px;
-    background: $bg-main;
-    margin-bottom: 1.25em;
-    margin-top: 1.25em;
-    // overflow: hidden;
+.component-html {
+  font-family: Ubuntu;
+  margin-bottom: .7em;
+  color: $text-col;
+  background: $bg-code;
+  border-radius: 6px;
+  height: auto;
+  overflow: auto;
 
-    &.component-container-img {
-      --b2: transparent;
+  @include style-scrollbar;
 
-      & img {
-        display: block;
-        margin: auto;
-      }
-    }
+  & > pre {
+    margin-top: 0;
+  }
+}
 
-    & > div {
-      position: relative;
-      margin: 0 $padding 0;
-      padding: $padding;
-    }
+.html-hidden {
+  display: none;
+}
 
-    & > .component-display {
-      border-bottom: 1px solid rgba($text-col, 0.065);
-      padding: $padding * 1.5;
-      padding-bottom: $padding * 2;
-      margin: 0;
-      background: var(--b2);
-      transition: .5s ease;
-
-      & h1, h2, h3, h4, h5, h6 {
-        font-family: var(--ff, initial);
-      }
-    }
-
-    & > .component-preview-control {
-      display: flex;
-      font-family: Ubuntu;
-      padding: .65em 0;
-
-      & > button {
-        display: flex;
-        align-items: center;
-        margin: 0 .25em;
-
-        &.comp-codepen-edit {
-          & > .fa-solid {
-            font-size: .8em;
-            color: $accent;
-            margin-right: .5em;
-          }
-        }
-      }
-    }
-
-    & > .component-html {
-      font-family: Ubuntu;
-      margin-bottom: .7em;
-      color: $text-col;
-      background: $bg-code;
-      border-radius: 6px;
-      height: auto;
-      overflow: auto;
-
-      @include style-scrollbar;
-
-      &.html-hidden {
-        display: none;
-      }
-
-      & > pre {
-        margin-top: 0;
-      }
-    }
+.comp-codepen-edit {
+  & > .fa-solid {
+    font-size: .8em;
+    color: $accent;
+    margin-right: .5em;
   }
 }
 

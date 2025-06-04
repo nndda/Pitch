@@ -46,16 +46,6 @@
       border: none;
       border-top: 1px solid var(--br);
     }
-
-    &.col-span-2 {
-      grid-column: span 2;
-    }
-    &.col-span-3 {
-      grid-column: span 3;
-    }
-    &.col-span-4 {
-      grid-column: span 4;
-    }
   }
 
   & ul {
@@ -65,4 +55,16 @@
   & .custom-accrd {
     margin: 0
   }
+}
+
+.col-span-2 {
+  grid-column: span 2;
+}
+
+.col-span-3 {
+  grid-column: span 3;
+}
+
+.col-span-4 {
+  grid-column: span 4;
 }
