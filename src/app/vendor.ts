@@ -17,7 +17,7 @@ import "@fontsource/pixelify-sans";
 // import "spinkit/spinkit.min.css";
 
 // Syntax highlighter theme
-import "./styles/prism-duotone-dark.css";
+import "./styles/prismjs-theme.scss";
 
 import "driver.js/dist/driver.css";
 import "./scripts/intro";

@@ -7,6 +7,7 @@ import type {
   PitchComponentsCollection,
   PitchComponentData,
   PitchComponentInput,
+  PitchComponentScope,
 } from "./scripts/components";
 import { compileComponents } from "./scripts/compile";
 import {
@@ -22,7 +23,7 @@ import { highlightHTML } from "./scripts/highlighter";
 
 // Main compiled components data
 import componentsCollectionJSON from "./components.json";
-const componentsCollection: PitchComponentsCollection = componentsCollectionJSON;
+const componentsCollection: PitchComponentsCollection = componentsCollectionJSON as PitchComponentsCollection;
 
 // Components list
 const compList: JQuery<HTMLElement> = $("#components-list");
@@ -136,11 +137,28 @@ function initializeComponents(): void {
       // Why am I doing this
       selectAllNoneUpdates.push(updateSelectAllNoneBtn);
 
+      // Component group/category title
       if (!compGroups.includes(compData["type"])) {
         compGroups.push(compData["type"]);
         const compElemGroup: JQuery<HTMLElement> = $(`
           <dt>
             <span class="component-type-title">
+              <i class="icon fa-solid
+                fa-${
+                    compData["type"] === "components"
+                  ? "bars-progress"
+
+                  : compData["type"] === "decorations"
+                  ? "brush"
+
+                  : compData["type"] === "tweaks"
+                  ? "pen-ruler"
+
+                  : ""
+                }
+                "
+              >
+              </i>
               ${compData["type"]}
             </span>
 
@@ -237,9 +255,11 @@ function initializeComponents(): void {
           }
 
           <button class="component-toggle" data-comp="${compName}" data-comp-id="${comp}">
-            ${compName}
+            <span class="text">
+              ${compName}
+            </span>
             ${compData["notes"].includes("Experimental") ? `
-              <span class="icon">
+              <span class="icon exp">
                 <i class="fa-solid fa-vial"></i>
               </span>
             ` : ""}
@@ -494,6 +514,83 @@ function setCompInfo(comp: string): void {
     compNotes.removeClass("hidden");
     compNotes.removeClass("hidden-opac");
   }
+
+  // Component scope labelling
+  if (componentsCollection[comp].scopes) {
+    let elStr: string = `<div class="component-docs">`;
+
+    for (const scopeEnv in componentsCollection[comp].scopes) {
+      // @ts-ignore
+      const scopePage: PitchComponentScope = componentsCollection[comp].scopes[scopeEnv][0];
+
+      elStr += `
+        <div class="scope-label ${scopeEnv} tooltip">
+          <div class="tooltip-content">
+            ${
+              scopeEnv === "compatible" 
+              ? `
+                <b>Full compatibility</b>
+                `
+
+              : scopeEnv === "partial"
+              ? `
+                <b>Partial compatibility</b>
+                <br>
+                Appearance may changes when used on the page above.
+                `
+
+              : scopeEnv === "none"
+              ? `
+                <b>Not supported</b>
+                <br>
+                Component will not function or display correctly when used on the page above.
+                `
+
+              : scopeEnv === "only"
+              ? `
+                Component only works on ${scopePage} pages
+                ${
+                  scopePage === "project" ? "and devlog pages" : ""
+                }.
+                `
+
+              : ""
+            }
+          </div>
+
+          <div class="icon">
+            <i class="fa-solid fa-`;
+
+      if (scopeEnv === "compatible") {
+        elStr += "circle-check";
+      } else if (scopeEnv === "partial") {
+        elStr += "triangle-exclamation";
+      } else if (scopeEnv === "none") {
+        elStr += "square-xmark";
+      } else if (scopeEnv === "only") {
+
+        if (scopePage === "project") {
+          elStr += "cube";
+        } else if (scopePage === "profile") {
+          elStr += "id-card-clip";
+        } else if (scopePage === "jam") {
+          elStr += "calendar-days";
+        }
+      }
+
+      elStr += `"></i></div>`;
+
+      // @ts-ignore
+      for (const scopePage of componentsCollection[comp].scopes[scopeEnv]) {
+        elStr += "<span>" + scopePage + " page</span>";
+      }
+
+      elStr += `</div>`
+    }
+
+    compPreview.append($(elStr + "</div>"));
+  }
+
 
   for (const n in componentsCollection[comp].sampleHTML) {
     const compHTMLRaw: string = componentsCollection[comp].sampleHTML[n];

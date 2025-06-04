@@ -19,45 +19,45 @@
   flex-grow: 1;
 }
 
+.tooltip-content {
+  position: absolute;
+  bottom: calc(-100% - .25em);
+  left: 50%;
+  bottom: 0;
+  height: fit-content;
+  padding: .2em .5em;
+  background: $background;
+  border-radius: 6px;
+  line-height: 1em;
+  pointer-events: none;
+  white-space: nowrap;
+  z-index: 99;
+
+  transition: .25s ease;
+
+  opacity: 0;
+  transform: translate(-50%, 100%);
+}
+
+.tooltip-t {
+  bottom: 100%;
+  transform: translate(-50%, 0);
+}
+
+.tooltip-l {
+  left: 0;
+  bottom: 50%;
+  transform: translate(-100%, 50%);
+}
+
+.tooltip-r {
+  left: 100%;
+  bottom: 50%;
+  transform: translate(0, 50%);
+}
+
 .tooltip {
   position: relative;
-
-  & > .tooltip-content {
-    position: absolute;
-    bottom: calc(-100% - .25em);
-    left: 50%;
-    bottom: 0;
-    height: fit-content;
-    padding: .2em .5em;
-    background: $background;
-    border-radius: 6px;
-    line-height: 1em;
-    pointer-events: none;
-    white-space: nowrap;
-    z-index: 99;
-
-    transition: .25s ease;
-
-    opacity: 0;
-    transform: translate(-50%, 100%);
-
-    &.tooltip-t {
-      bottom: 100%;
-      transform: translate(-50%, 0);
-    }
-
-    &.tooltip-l {
-      left: 0;
-      bottom: 50%;
-      transform: translate(-100%, 50%);
-    }
-
-    &.tooltip-r {
-      left: 100%;
-      bottom: 50%;
-      transform: translate(0, 50%);
-    }
-  }
 
   &:hover {
     $offset: .5em;
