@@ -19,7 +19,7 @@
     "node": ">=23.11.0"
   },
   "dependencies": {
-    "@fontsource/courgette": "^5.2.5",
+    "@fontsource/courgette": "^5.2.6",
     "@fontsource/lato": "^5.2.5",
     "@fontsource/lora": "^5.2.5",
     "@fontsource/pixelify-sans": "^5.2.5",
