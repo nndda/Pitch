@@ -9,5 +9,8 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "esModuleInterop": true
-  }
+  },
+  "exclude": [
+    "./src/cdn"
+  ]
 }
