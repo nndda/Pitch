@@ -19,11 +19,11 @@
     "node": ">=23.11.0"
   },
   "dependencies": {
-    "@fontsource/courgette": "^5.2.5",
-    "@fontsource/lato": "^5.2.5",
-    "@fontsource/lora": "^5.2.5",
-    "@fontsource/pixelify-sans": "^5.2.5",
-    "@fontsource/ubuntu": "^5.2.5",
+    "@fontsource/courgette": "^5.2.6",
+    "@fontsource/lato": "^5.2.6",
+    "@fontsource/lora": "^5.2.6",
+    "@fontsource/pixelify-sans": "^5.2.6",
+    "@fontsource/ubuntu": "^5.2.6",
     "@fortawesome/fontawesome-free": "^6.6.0",
     "@types/dompurify": "^3.2.0",
     "autoprefixer": "^10.4.21",
@@ -31,7 +31,7 @@
     "driver.js": "^1.3.6",
     "jquery": "^3.7.1",
     "modern-normalize": "^3.0.1",
-    "postcss": "^8.5.4",
+    "postcss": "^8.5.5",
     "prismjs": "^1.30.0"
   },
   "devDependencies": {
@@ -50,16 +50,16 @@
     "js-beautify": "^1.15.4",
     "jsdom": "^26.1.0",
     "mini-css-extract-plugin": "^2.9.0",
-    "sass": "^1.89.1",
+    "sass": "^1.89.2",
     "sass-loader": "^16.0.5",
     "style-loader": "^4.0.0",
     "terser-webpack-plugin": "^5.3.14",
     "ts-loader": "^9.5.2",
     "typescript": "^5.8.2",
-    "typescript-eslint": "^8.33.1",
+    "typescript-eslint": "^8.34.0",
     "webpack": "^5.99.9",
     "webpack-cli": "^6.0.1",
-    "webpack-dev-server": "^5.2.1",
+    "webpack-dev-server": "^5.2.2",
     "yaml": "^2.8.0"
   }
 }
