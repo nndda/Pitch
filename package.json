@@ -18,6 +18,9 @@
   "engines": {
     "node": ">=23.11.0"
   },
+  "workspaces": [
+    "src/pitch-cdn"
+  ],
   "dependencies": {
     "@fontsource/courgette": "^5.2.6",
     "@fontsource/lato": "^5.2.6",
