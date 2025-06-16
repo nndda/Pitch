@@ -4,7 +4,18 @@ const
 
 	compsCDN: Record<string, string> = compsCDNRaw /* why */
 
-,	CSSCharset: string = `@charset "UTF-8";`
+,	CSSPre: string = `@charset "UTF-8";
+#wrapper{
+  --b: var(--itchio_bg_color);
+  --b2: var(--itchio_bg2_color);
+  --b2s: var(--itchio_bg2_sub);
+  --t: var(--itchio_text_color);
+  --l: var(--itchio_link_color);
+  --br: var(--itchio_border_color);
+  --btn: var(--itchio_button_color);
+  --btn_f: var(--itchio_button_fg_color);
+  --btn_s: var(--itchio_button_shadow_color)
+}`
 
 ,	Stat404: ResponseInit = {
 		status: 404,
@@ -38,7 +49,7 @@ export default {
 			);
 
 			return new Response(
-				CSSCharset + output.join(""),
+				CSSPre + output.join(""),
 				StatGud,
 			);
 		}
