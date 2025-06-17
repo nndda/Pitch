@@ -27,6 +27,7 @@ const componentsPath : string = path.resolve(__dirname, "src/components/");
 [
   "dist/components",
   "dist/app",
+  "src/pitch-cdn/assets",
 ].forEach((dir : string) => {
   fs.mkdirSync(
     path.resolve(__dirname, dir),
@@ -115,6 +116,21 @@ fs.writeFileSync(
   componentsCollection["_variables"].css
 );
 
+const CDNComps: string[] = [
+  "Accordion",
+  "Callout",
+  "Image Comparison",
+  "Info List",
+  "Input",
+  "Label",
+  "Read More",
+  "Table",
+  "Timeline List",
+  "Tooltip",
+];
+const CDNCompsCompiled: Record<string, string> = {};
+const CDNCompsAll: string[] = [];
+
 // Compile and add component to 'componentsCollection'.
 // 'compPath' is the path to the .scss source file.
 function buildComponent(compPath : string) : void {
@@ -155,6 +171,11 @@ function buildComponent(compPath : string) : void {
       ),
       cssStr
     );
+
+    if (CDNComps.includes(compData.name)) {
+      CDNCompsCompiled[compData.name.replace(" ", "-").toLowerCase()] = cssStr;
+      CDNCompsAll.push(cssStr);
+    }
 
     // Define components to the collection.
     componentsCollection[compID] = {
@@ -279,6 +300,16 @@ function compileComponentsCSS(srcCSS : string): string {
 
   return cssCleaned.styles;
 }
+
+fs.writeFileSync(
+  path.resolve(__dirname, "./src/pitch-cdn/components-cdn.json"),
+  JSON.stringify(CDNCompsCompiled)
+);
+
+fs.writeFileSync(
+  path.resolve(__dirname, "./src/pitch-cdn/assets/all.css"),
+  CDNCompsAll.join("")
+);
 
 // Sanitize HTML string
 DOMPurify.setConfig({
