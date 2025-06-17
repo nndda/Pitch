@@ -24,6 +24,7 @@ const
 , StatGud: ResponseInit = {
 		headers: {
 			"Content-Type": "text/css; charset=utf-8",
+			"Cache-Control": "max-age=172800, public",
 		},
 	}
 
