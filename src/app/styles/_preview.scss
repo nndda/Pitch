@@ -19,10 +19,12 @@ $bg-code: darken($background, 1%);
   margin-bottom: 1.25em;
   margin-top: 1.25em;
 
-  & > div {
-    position: relative;
-    margin: 0 $padding 0;
-    padding: $padding;
+  &.css-cont {
+    padding-top: $padding;
+
+    & > div {
+      margin: 0 $padding 0;
+    }
   }
 }
 
@@ -51,7 +53,8 @@ $bg-code: darken($background, 1%);
 .component-preview-control {
   display: flex;
   font-family: Ubuntu;
-  padding: .65em 0;
+  padding: $padding;
+  margin: 0 !important;
 
   & > button {
     display: flex;
@@ -63,6 +66,7 @@ $bg-code: darken($background, 1%);
 .component-html {
   font-family: Ubuntu;
   margin-bottom: .7em;
+  padding: $padding 1em !important;
   color: $text-col;
   background: $bg-code;
   border-radius: 6px;
