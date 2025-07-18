@@ -8,5 +8,4 @@ sampleHTML:
       Make user tools collapsible.
     </p>
 
-sampleIMG:
-  - user-tools-collapsible.png
+  - <!-- IMG --> user-tools-collapsible.png

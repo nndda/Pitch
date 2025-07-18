@@ -602,11 +602,23 @@ function setCompInfo(comp: string): void {
 
       // I know the vars are named with 'HTML'
       // But it also used to store possible CSS chunks
-      const isCSS: boolean = compHTMLRaw.startsWith("<!-- CSS -->");
+      const
+        isCSS: boolean = compHTMLRaw.startsWith("<!-- CSS -->")
+      , isIMG: boolean = compHTMLRaw.startsWith("<!-- IMG -->")
+      ;
 
       const
-        // HTML/CSS preview block
-        compPreviewEl: JQuery<HTMLElement> = $(`
+        // HTML/CSS/IMG preview block
+        compPreviewEl: JQuery<HTMLElement> = $(isIMG ? `
+        <div class="component-container-single component-container-img">
+          <div class="component-display">
+            <img class="component-sample-img"
+              src="./components/assets/${compHTMLRaw.replace("<!-- IMG -->", "").trim()}"
+            >
+          </div>
+        </div>
+        <br>
+      ` : `
         <div class="component-container-single ${ isCSS ? "css-cont" : "" }">
           ${
             isCSS ? "" : `
@@ -679,7 +691,7 @@ function setCompInfo(comp: string): void {
       ;
 
       // CodePen Prefills
-      if (!isCSS) {
+      if (!isCSS && !isIMG) {
         compPreviewEl.on("click", ".comp-codepen-edit", () => {
           constructOptions(
             componentsCollection[comp].nameDisplay,
@@ -731,18 +743,18 @@ function setCompInfo(comp: string): void {
     }
   }
 
-  for (const n in componentsCollection[comp].sampleIMG) {
-    compPreview.append($(`
-      <div class="component-container-single component-container-img">
-        <div class="component-display">
-          <img class="component-sample-img"
-            src="${componentsCollection[comp].sampleIMG[n]}"
-          >
-        </div>
-      </div>
-      <br>
-    `));
-  }
+  // for (const n in componentsCollection[comp].sampleIMG) {
+  //   compPreview.append($(`
+  //     <div class="component-container-single component-container-img">
+  //       <div class="component-display">
+  //         <img class="component-sample-img"
+  //           src="${componentsCollection[comp].sampleIMG[n]}"
+  //         >
+  //       </div>
+  //     </div>
+  //     <br>
+  //   `));
+  // }
 
   // if (componentsCollection[comp].labels !== undefined) {
   //   compLabelsCont.append($(`${

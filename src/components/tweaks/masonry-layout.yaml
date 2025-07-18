@@ -11,5 +11,4 @@ sampleHTML:
       Masonry layout for the project page's screenshots. Works best with >6 screenshots, of varying aspect ratio.
     </p>
 
-sampleIMG:
-  - masonry-layout.png
+  - <!-- IMG --> masonry-layout.png

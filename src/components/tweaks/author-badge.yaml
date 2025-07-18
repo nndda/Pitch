@@ -18,9 +18,9 @@ sampleHTML:
       For now, to add badge for multiple users, refer to <a target="_blank" href="https://nnda.itch.io/pitch/devlog/894529/v120-author-badge-masonry-layout-more">this post</a>, on the "Author Badge" section.
     </p>
 
+  - <!-- IMG --> author-badge-dev.png
+  - <!-- IMG --> author-badge-illust.png
+
 # Screenshots taken with the following properties on the comment posts:
 # padding: 1.3em;
 # max-width: 27.5em;
-sampleIMG:
-  - author-badge-dev.png
-  - author-badge-illust.png
