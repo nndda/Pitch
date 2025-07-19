@@ -617,7 +617,6 @@ function setCompInfo(comp: string): void {
             >
           </div>
         </div>
-        <br>
       ` : `
         <div class="component-container-single ${ isCSS ? "css-cont" : "" }">
           ${
