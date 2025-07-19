@@ -8,12 +8,12 @@ function initializeThemeButtons(): void {
     --thm: #fc3a78;
 
     --ff: 'Lato';
-    --b: #131120;
-    --b2: rgba(19, 17, 32, 1);
-    --b2s: #2a2837;
+    --b: #121118;
+    --b2: rgba(18, 17, 24, 1);
+    --b2s: #29282f;
     --t: #eaeaea;
     --l: #fc3a78;
-    --br: #332f4e;
+    --br: #353242;
     --btn: #fc3a78;
     --btn_f: #ffffff;
     --btn_s: #ff4d8b;
