@@ -1,6 +1,13 @@
 name:
   Collapsible User Tools
 
+scopes:
+  compatible:
+    - project
+  none:
+    - profile
+    - jam
+
 sampleHTML:
   - | # ================================================================================================
     <!-- NOTE -->
@@ -8,5 +15,4 @@ sampleHTML:
       Make user tools collapsible.
     </p>
 
-sampleIMG:
-  - user-tools-collapsible.png
+  - <!-- IMG --> user-tools-collapsible.png

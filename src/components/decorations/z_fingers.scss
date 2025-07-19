@@ -1,0 +1,30 @@
+ .custom-plzzz {
+  &::before, &::after {
+    content: "👉";
+
+    display: inline-block;
+    margin: 0 2px;
+    transform-origin: center;
+
+    animation: u 1.25s ease-out infinite;
+  }
+
+  &::after {
+    content: "👈";
+    --d: -1;
+  }
+}
+
+@keyframes u {
+  0%, 30%, 70%, 100% {
+    transform:
+      translateX(0)
+      rotate(0deg);
+  }
+
+  10%, 50%  {
+    transform:
+      translateX( calc( 5px * var(--d, 1) ) )
+      rotate( calc( 7.5deg * var(--d, 1) ) );
+  }
+}

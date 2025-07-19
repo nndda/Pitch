@@ -19,7 +19,10 @@ import {
 } from "./scripts/copy";
 
 // HTML syntax highlighter
-import { highlightHTML } from "./scripts/highlighter";
+import {
+  highlightHTML,
+  highlightCSS,
+} from "./scripts/highlighter";
 
 // Main compiled components data
 import componentsCollectionJSON from "./components.json";
@@ -597,75 +600,121 @@ function setCompInfo(comp: string): void {
 
     if (!compHTMLRaw.startsWith("<!-- NOTE -->")) {
 
+      // I know the vars are named with 'HTML'
+      // But it also used to store possible CSS chunks
       const
-        compPreviewEl: JQuery<HTMLElement> = $(`
-        <div class="component-container-single">
+        isCSS: boolean = compHTMLRaw.startsWith("<!-- CSS -->")
+      , isIMG: boolean = compHTMLRaw.startsWith("<!-- IMG -->")
+      ;
+
+      const
+        // HTML/CSS/IMG preview block
+        compPreviewEl: JQuery<HTMLElement> = $(isIMG ? `
+        <div class="component-container-single component-container-img">
           <div class="component-display">
-            ${compHTMLRaw}
+            <img class="component-sample-img"
+              src="./components/assets/${compHTMLRaw.replace("<!-- IMG -->", "").trim()}"
+            >
           </div>
-
-          <div class="component-preview-control">
-            <button class="button-general comp-show-html tooltip">
-              <i class="fa-solid fa-code"></i>
-              <div class="tooltip-content">
-                Show HTML
+        </div>
+      ` : `
+        <div class="component-container-single ${ isCSS ? "css-cont" : "" }">
+          ${
+            isCSS ? "" : `
+              <div class="component-display">
+                ${compHTMLRaw}
               </div>
-            </button>
 
-            ${navigator.clipboard ? `
-              <button class="button-general comp-copy tooltip">
-                <i class="fa-solid fa-copy"></i>
-                <div class="tooltip-content tooltip-r">
-                  Copy HTML
-                </div>
-              </button>
+              <div class="component-preview-control">
+                <button class="button-general comp-show-html tooltip">
+                  <i class="fa-solid fa-code"></i>
+                  <div class="tooltip-content">
+                    Show HTML
+                  </div>
+                </button>
 
-              <span class="comp-copy-text"></span>
-            ` : ""}
+                ${
+                  !navigator.clipboard ? "" : `
+                    <button class="button-general comp-copy tooltip">
+                      <i class="fa-solid fa-copy"></i>
+                      <div class="tooltip-content tooltip-r">
+                        Copy HTML
+                      </div>
+                    </button>
 
-            <div class="flex-space"></div>
+                    <span class="comp-copy-text"></span>
+                  `
+                }
 
-            <button class="button-general comp-codepen-edit tooltip">
-              <i class="fa-solid fa-pen-to-square"></i>
-              <i class="fa-brands fa-codepen"></i>
-              <div class="tooltip-content tooltip-l">
-                Edit on CodePen
+                <div class="flex-space"></div>
+
+                <button class="button-general comp-codepen-edit tooltip">
+                  <i class="fa-solid fa-pen-to-square"></i>
+                  <i class="fa-brands fa-codepen"></i>
+                  <div class="tooltip-content tooltip-l">
+                    Edit on CodePen
+                  </div>
+                </button>
               </div>
-            </button>
+          `}
+
+          <div class="component-html ${isCSS ? "" : "html-hidden"}">
+            <pre><code>${
+              isCSS ?
+                highlightCSS(compHTMLRaw.replace("<!-- CSS -->", "")) :
+                highlightHTML(compHTMLRaw)
+            }</code></pre>
           </div>
 
-          <div class="component-html html-hidden">
-            <pre><code>${highlightHTML(compHTMLRaw)}</code></pre>
-          </div>
+          ${
+            isCSS ? `
+              <div class="component-preview-control">
+                ${
+                  !navigator.clipboard ? "" : `
+                    <button class="button-general comp-copy tooltip">
+                      <i class="fa-solid fa-copy"></i>
+                      <div class="tooltip-content tooltip-r">
+                        Copy CSS
+                      </div>
+                    </button>
+
+                    <span class="comp-copy-text"></span>
+                  `
+                }
+              </div>
+            ` : ""
+          }
         </div>
       `)
       , componentHTML: JQuery<HTMLElement> = compPreviewEl.find(".component-html")
       ;
 
       // CodePen Prefills
-      compPreviewEl.on("click", ".comp-codepen-edit", () => {
-        constructOptions(
-          componentsCollection[comp].nameDisplay,
-          compHTMLRaw,
-          // Get fonts and apply current preview theme
-          `
-            @import url(
-              "https://fonts.googleapis.com/css?family=${encodeURI(wrapper.getAttribute("data-font"))}"
-            );
-            :root{${wrapper.getAttribute("style")}}
-          `
-        );
-      });
+      if (!isCSS && !isIMG) {
+        compPreviewEl.on("click", ".comp-codepen-edit", () => {
+          constructOptions(
+            componentsCollection[comp].nameDisplay,
+            compHTMLRaw,
+            // Get fonts and apply current preview theme
+            `
+              @import url(
+                "https://fonts.googleapis.com/css?family=${encodeURI(wrapper.getAttribute("data-font"))}"
+              );
+              :root{${wrapper.getAttribute("style")}}
+            `
+          );
+        });
 
-      compPreviewEl.on("click", ".comp-show-html", () => {
-        componentHTML.toggleClass("html-hidden");
-      });
+        compPreviewEl.on("click", ".comp-show-html", () => {
+          componentHTML.toggleClass("html-hidden");
+        });
+      }
 
       if (navigator.clipboard) {
         const componentCopyText = compPreviewEl.find(".comp-copy-text")[0];
 
         compPreviewEl.on("click", ".comp-copy", () => {
-          copyComponentHTML(compHTMLRaw, componentCopyText);
+          copyComponentHTML(compHTMLRaw.replace("<!-- CSS -->", ""), componentCopyText);
         });
       }
 
@@ -691,20 +740,67 @@ function setCompInfo(comp: string): void {
 
       compPreview.append(compDoc);
     }
+
+    const compatNote: HTMLElement = compPreview[0].querySelector(".compatibility-note") as HTMLElement;
+
+    if (compatNote) {
+      const
+        compatNoteType: string = compatNote.getAttribute("data-type")
+      , compatNotePage: string[] = compatNote.getAttribute("data-page").split(",")
+      , compatNoteVars: string[] = compatNote.getAttribute("data-vars").split(",")
+      ;
+
+      compatNote.innerHTML = `
+        <br>
+        <hr>
+        <h2>Compatibility</h2>
+        <p>
+          This ${compatNoteType} relies on the following CSS variable${compatNoteVars.length > 1 ? "s" : ""}:
+        </p>
+        <ul>
+          ${
+            compatNoteVars.map((valr: string) => {
+              return `
+                <li><code>
+                  --${valr.trim()}
+                </code></li>
+              `;
+            }).join("")
+          }
+        </ul>
+        <p>
+          Which are <b>not present</b> on 
+          ${
+            compatNotePage.map((page: string, i: number) => {
+              return `
+                ${
+                  (i === (compatNotePage.length - 1)) ? "and " : ""
+                }
+                <b>
+                  ${page.trim()} page
+                </b>
+              `;
+            }).join("")
+          }.
+          <br>
+          Add and set them manually to make this ${compatNoteType} fully compatible with the above page${compatNotePage.length > 1 ? "s" : ""}.
+        </p>
+      `;
+    }
   }
 
-  for (const n in componentsCollection[comp].sampleIMG) {
-    compPreview.append($(`
-      <div class="component-container-single component-container-img">
-        <div class="component-display">
-          <img class="component-sample-img"
-            src="${componentsCollection[comp].sampleIMG[n]}"
-          >
-        </div>
-      </div>
-      <br>
-    `));
-  }
+  // for (const n in componentsCollection[comp].sampleIMG) {
+  //   compPreview.append($(`
+  //     <div class="component-container-single component-container-img">
+  //       <div class="component-display">
+  //         <img class="component-sample-img"
+  //           src="${componentsCollection[comp].sampleIMG[n]}"
+  //         >
+  //       </div>
+  //     </div>
+  //     <br>
+  //   `));
+  // }
 
   // if (componentsCollection[comp].labels !== undefined) {
   //   compLabelsCont.append($(`${

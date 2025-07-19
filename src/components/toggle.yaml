@@ -1,6 +1,13 @@
 name:
   Toggle
 
+scopes:
+  compatible:
+    - project
+  none:
+    - profile
+    - jam
+
 notes:
   - Experimental
   - --custom-- Only one instance of the component per page.

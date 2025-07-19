@@ -1,6 +1,13 @@
 name:
   Table
 
+scopes:
+  compatible:
+    - project
+  none:
+    - profile
+    - jam
+
 sampleHTML:
   - | # ================================================================================================
     <!-- NOTE -->
@@ -90,3 +97,21 @@ sampleHTML:
         </tr>
       </tbody>
     </table>
+
+  # - | # ================================================================================================
+  #   <!-- NOTE -->
+  #   <div
+  #     class="compatibility-note"
+  #     data-type="component"
+  #     data-vars="itchio_border_color, itchio_bg2_sub"
+  #     data-page="profile, jam"
+  #   ></div>
+
+  # - | # ------------------------------------------------------------------------------------------------
+  #   <!-- CSS -->
+  #   :root {
+  #     /* Border color */
+  #     --itchio_border_color: #39374a;
+  #     /* Backround color for header cells */
+  #     --itchio_bg2_sub: #2e2d37;
+  #   }

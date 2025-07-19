@@ -1,32 +1,57 @@
-.custom-content-b,
-#wrapper:has(a.custom-toggle:target[name="toggle-b"]) .custom-content-a {
-  display: none;
-}
-
-#wrapper:has(a.custom-toggle:target[name="toggle-b"]) .custom-content-b {
-  display: block;
-}
-
+/* Styling for the toggles container */
 .custom-toggles {
   display: inline-flex;
-  background: var(--t);
+  background: var(--b2);
+  border: 1px solid var(--b2s, currentColor);
   border-radius: 24px;
 }
 
+
+/* Styling for the individual toggle */
 .custom-toggle {
   padding: .1em .8em;
   margin: 2px;
-  color: var(--b2);
   border-radius: inherit;
-  text-decoration: none;
   transition: .3s;
+
+  &:not(:hover) {
+    text-decoration: none;
+  }
 }
 
-.custom-toggles {
-  &:has(a.custom-toggle:target[name="toggle-a"]) a.custom-toggle[name="toggle-a"],
-  &:has(a.custom-toggle:target[name="toggle-b"]) a.custom-toggle[name="toggle-b"],
-  &:not(.custom-toggles:has(a.custom-toggle:target[name="toggle-b"])) a.custom-toggle[name="toggle-a"] {
-    color: var(--btn_f);
-    background: var(--btn);
-  }
+
+/* Initial state of the content (hidden) */
+[class^="custom-content-"] {
+  display: none;
+}
+
+
+#wrapper:not(:has(a.custom-toggle:target))
+
+/* Default visible content ( .custom-content-a ) */
+.custom-content-a,
+/* Make sure to match the rule below */
+
+  #wrapper:has(a.custom-toggle:target[name="toggle-a"]) .custom-content-a
+, #wrapper:has(a.custom-toggle:target[name="toggle-b"]) .custom-content-b
+// , #wrapper:has(a.custom-toggle:target[name="toggle-c"]) .custom-content-c
+// , #wrapper:has(a.custom-toggle:target[name="toggle-d"]) .custom-content-d
+// , #wrapper:has(a.custom-toggle:target[name="toggle-e"]) .custom-content-e
+  /* Add as much as you want. Just change the toggle-* and the .custom-content-* accordingly */
+{
+  display: block;
+}
+
+
+.custom-toggles:not(:has(a.custom-toggle:target))
+
+/* Default clicked button ( toggle-a ) */
+a.custom-toggle[name="toggle-a"],
+/* Make sure to match the rule above */
+
+/* Styling for the individual toggle when clicked/activated */
+.custom-toggles > a.custom-toggle:target
+{
+  color: var(--btn_f);
+  background: var(--btn);
 }

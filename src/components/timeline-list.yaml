@@ -1,6 +1,13 @@
 name:
   Timeline List
 
+scopes:
+  compatible:
+    - project
+  partial:
+    - profile
+    - jam
+
 sampleHTML:
   - | # ================================================================================================
     <!-- NOTE -->
@@ -186,3 +193,21 @@ sampleHTML:
 
       <details><summary></summary></details>
     </div>
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <div
+      class="compatibility-note"
+      data-type="component"
+      data-vars="itchio_text_color, itchio_bg2_color"
+      data-page="profile, jam"
+    ></div>
+
+  - | # ------------------------------------------------------------------------------------------------
+    <!-- CSS -->
+    :root {
+      /* Background color for heading text */
+      --itchio_text_color: #fefefe;
+      /* Text color */
+      --itchio_bg2_color: #121118;
+    }

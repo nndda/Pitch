@@ -1,6 +1,12 @@
 name:
   Profile Page
 
+scopes:
+  compatible:
+    - project
+    - profile
+    - jam
+
 nameDisplay:
   Link Decoration — Profile Page
 

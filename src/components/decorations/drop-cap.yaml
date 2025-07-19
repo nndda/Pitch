@@ -1,6 +1,12 @@
 name:
   Drop Cap
 
+scopes:
+  compatible:
+    - project
+    - profile
+    - jam
+
 sampleHTML:
   - | # ================================================================================================
     <!-- NOTE -->

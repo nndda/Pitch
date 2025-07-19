@@ -1,6 +1,13 @@
 name:
   Accordion
 
+scopes:
+  compatible:
+    - project
+  partial:
+    - profile
+    - jam
+
 inputs:
   - name: Closed icon
     id: ACCORDION_CLOSED
@@ -185,3 +192,21 @@ sampleHTML:
         This accordion has a maximum width of 300px.
       </details>
     </div>
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <div
+      class="compatibility-note"
+      data-type="component"
+      data-vars="itchio_link_color, itchio_border_color"
+      data-page="profile, jam"
+    ></div>
+
+  - | # ------------------------------------------------------------------------------------------------
+    <!-- CSS -->
+    :root {
+      /* Border color */
+      --itchio_border_color: #fefefe;
+      /* Item/heading text color */
+      --itchio_link_color: #fc3a78;
+    }

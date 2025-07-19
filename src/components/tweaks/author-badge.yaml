@@ -1,6 +1,13 @@
 name:
   Author Badge
 
+scopes:
+  compatible:
+    - project
+  none:
+    - profile
+    - jam
+
 inputs:
   - name: itch.io username
     id: AUTHOR_BADGE_URL
@@ -14,13 +21,88 @@ sampleHTML:
     <p>
       Add badge for specified authors/developers comment posts.
     </p>
+
+  - <!-- IMG --> author-badge-dev.png
+  - <!-- IMG --> author-badge-illust.png
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <h2>Multiple Users</h2>
     <p>
-      For now, to add badge for multiple users, refer to <a target="_blank" href="https://nnda.itch.io/pitch/devlog/894529/v120-author-badge-masonry-layout-more">this post</a>, on the "Author Badge" section.
+      To add badge for multiple users, add the following CSS, and set the following variables appropriately:
     </p>
+    <ul>
+      <li>
+        <code>USERNAME</code> to the itch.io username.
+      </li>
+      <li>
+        <code>BADGE_TITLE</code> to the badge title you want.
+      </li>
+    </ul>
+
+  - | # ------------------------------------------------------------------------------------------------
+    <!-- CSS -->
+    .game_comments_widget .avatar_container[
+
+      href="https://itch.io/profile/USERNAME"
+
+    ] + .post_header > .post_author::after {
+      content: "BADGE_TITLE";
+    }
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <h2>Multiple Badges</h2>
+    <p>
+      You can have <b>at most</b> 2 badges for <b>each</b> users.
+      <br>
+      To do so, replace <code>::after</code> part of the CSS, with <code>::before</code>:
+    </p>
+
+  - <!-- IMG --> author-badge-multi.png
+
+  - | # ------------------------------------------------------------------------------------------------
+    <!-- CSS -->
+    /* First badge */
+    .game_comments_widget .avatar_container[
+
+      href="https://itch.io/profile/nnda"
+
+    ] + .post_header > .post_author::after {
+      content: "Writer";
+    }
+
+    /* Second badge */
+    .game_comments_widget .avatar_container[
+
+      href="https://itch.io/profile/nnda"
+
+    ] + .post_header > .post_author::before {
+      content: "Artist";
+    }
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <h2>Customization</h2>
+    <p>
+      The CSS rules/selector above, can also be used to tweak the badges they represent:
+    </p>
+
+  - <!-- IMG --> author-badge-multi-col.png
+
+  - | # ------------------------------------------------------------------------------------------------
+    <!-- CSS -->
+    .game_comments_widget .avatar_container[
+
+      href="https://itch.io/profile/nnda"
+
+    ] + .post_header > .post_author::after {
+      content: "Writer";
+      color: darkblue;
+      background: cyan;
+    }
+
 
 # Screenshots taken with the following properties on the comment posts:
 # padding: 1.3em;
 # max-width: 27.5em;
-sampleIMG:
-  - author-badge-dev.png
-  - author-badge-illust.png

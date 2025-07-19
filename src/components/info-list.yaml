@@ -1,6 +1,12 @@
 name:
   Info List
 
+scopes:
+  compatible:
+    - project
+    - profile
+    - jam
+
 sampleHTML:
   - | # ================================================================================================
     <!-- NOTE -->

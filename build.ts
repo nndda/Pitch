@@ -340,7 +340,11 @@ DOMPurify.setConfig({
 function sanitizeHTML(dirtyHTML : string) : string {
   if (!dirtyHTML) return "";
 
-  if (dirtyHTML.trimStart().startsWith("<!-- NOTE -->")) {
+  if (
+    dirtyHTML.trimStart().startsWith("<!-- NOTE -->") ||
+    dirtyHTML.trimStart().startsWith("<!-- IMG -->") ||
+    dirtyHTML.trimStart().startsWith("<!-- CSS -->")
+  ) {
     return dirtyHTML.trimStart();
   }
 

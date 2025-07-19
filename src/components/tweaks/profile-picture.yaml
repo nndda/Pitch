@@ -1,0 +1,48 @@
+name:
+  Profile Picture
+
+scopes:
+  compatible:
+    - profile
+  none:
+    - project
+    - jam
+
+inputs:
+  - name: Profile picture URL
+    id: PFP_URL
+    default: https://cdn.jsdelivr.net/gh/nndda/itchio-profile/assets/profile.webp
+
+sampleHTML:
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <p>
+      Profile picture on your profile page.
+    </p>
+
+  - <!-- IMG --> profile-picture-1.png
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <p>
+      On profile pages without banner, it shows your display name besides the profile picture.
+    </p>
+
+  - <!-- IMG --> profile-picture-2.png
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <h2>Customization</h2>
+    <p>
+      Add the following CSS variables to adjust the tweak manually.
+    </p>
+
+  - | # ------------------------------------------------------------------------------------------------
+    <!-- CSS -->
+    :root {
+      /* Default: 6em or ~96px */
+      --pfp-size: 96px;
+
+      /* Default: 'B. Radius' theme setting */
+      --pfp-border-radius: 9px;
+    }

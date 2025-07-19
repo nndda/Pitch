@@ -1,6 +1,13 @@
 name:
   Read More
 
+scopes:
+  compatible:
+    - project
+  partial:
+    - profile
+    - jam
+
 inputs:
   - name: Collapsed text
     id: READ_MORE_CLOSED
@@ -235,3 +242,18 @@ sampleHTML:
       <details><summary></summary></details>
     </div>
 
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <div
+      class="compatibility-note"
+      data-type="component"
+      data-vars="itchio_link_color"
+      data-page="profile, jam"
+    ></div>
+
+  - | # ------------------------------------------------------------------------------------------------
+    <!-- CSS -->
+    :root {
+      /* Expand/collapse text color */
+      --itchio_link_color: #fc3a78;
+    }

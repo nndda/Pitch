@@ -1,6 +1,13 @@
 name:
   Label
 
+scopes:
+  compatible:
+    - project
+  partial:
+    - profile
+    - jam
+
 sampleHTML:
   - | # ================================================================================================
     <!-- NOTE -->
@@ -127,3 +134,24 @@ sampleHTML:
       I'm just typing whatever to pad this paragraph.
       You can safely ignore this.
     </p>
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <div
+      class="compatibility-note"
+      data-type="component"
+      data-vars="itchio_button_color, itchio_button_fg_color"
+      data-page="profile, jam"
+    ></div>
+    <p>
+      Or, you can also set the custom color manually on each Label elements in the HTML.
+    </p>
+
+  - | # ------------------------------------------------------------------------------------------------
+    <!-- CSS -->
+    :root {
+      /* Background color */
+      --itchio_button_color: #fefefe;
+      /* Text color */
+      --itchio_button_fg_color: #fc3a78;
+    }

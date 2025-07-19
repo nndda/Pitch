@@ -1,6 +1,13 @@
 name:
   Star Rating
 
+scopes:
+  compatible:
+    - project
+  none:
+    - profile
+    - jam
+
 sampleHTML:
   - | # ================================================================================================
     <!-- NOTE -->
