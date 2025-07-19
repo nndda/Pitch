@@ -741,6 +741,53 @@ function setCompInfo(comp: string): void {
 
       compPreview.append(compDoc);
     }
+
+    const compatNote: HTMLElement = compPreview[0].querySelector(".compatibility-note") as HTMLElement;
+
+    if (compatNote) {
+      const
+        compatNoteType: string = compatNote.getAttribute("data-type")
+      , compatNotePage: string[] = compatNote.getAttribute("data-page").split(",")
+      , compatNoteVars: string[] = compatNote.getAttribute("data-vars").split(",")
+      ;
+
+      compatNote.innerHTML = `
+        <br>
+        <hr>
+        <h2>Compatibility</h2>
+        <p>
+          This ${compatNoteType} relies on the following CSS variable${compatNoteVars.length > 1 ? "s" : ""}:
+        </p>
+        <ul>
+          ${
+            compatNoteVars.map((valr: string) => {
+              return `
+                <li><code>
+                  --${valr.trim()}
+                </code></li>
+              `;
+            }).join("")
+          }
+        </ul>
+        <p>
+          Which are <b>not present</b> on 
+          ${
+            compatNotePage.map((page: string, i: number) => {
+              return `
+                ${
+                  (i === (compatNotePage.length - 1)) ? "and " : ""
+                }
+                <b>
+                  ${page.trim()} page
+                </b>
+              `;
+            }).join("")
+          }.
+          <br>
+          Add and set them manually to make this ${compatNoteType} fully compatible with the above page${compatNotePage.length > 1 ? "s" : ""}.
+        </p>
+      `;
+    }
   }
 
   // for (const n in componentsCollection[comp].sampleIMG) {
