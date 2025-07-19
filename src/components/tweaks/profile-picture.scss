@@ -24,7 +24,7 @@
   content: "";
   background: url("PFP_URL");
 
-  top: calc(var(--pfp-width, 6em) * -1 + 20px + .5em);
+  top: calc(var(--pfp-size, 6em) * -1 + 20px + .5em);
 
   height: var(--pfp-size, 6em);
   width: var(--pfp-size, 6em);
