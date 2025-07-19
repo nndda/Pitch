@@ -1,6 +1,13 @@
 name:
   Collapsible User Tools
 
+scopes:
+  compatible:
+    - project
+  none:
+    - profile
+    - jam
+
 sampleHTML:
   - | # ================================================================================================
     <!-- NOTE -->

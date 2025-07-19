@@ -1,6 +1,13 @@
 name:
   Image Comparison
 
+scopes:
+  compatible:
+    - project
+  partial:
+    - profile
+    - jam
+
 sampleHTML:
   - | # ================================================================================================
     <!-- NOTE -->
@@ -17,3 +24,19 @@ sampleHTML:
 
       <img src="https://img.itch.zone/aW1nLzIxMDc4NDMxLnBuZw==/original/3W4DMV.png">
     </div>
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <div
+      class="compatibility-note"
+      data-type="component"
+      data-vars="itchio_link_color"
+      data-page="profile, jam"
+    ></div>
+
+  - | # ------------------------------------------------------------------------------------------------
+    <!-- CSS -->
+    :root {
+      /* Slider handle and border color */
+      --itchio_link_color: #fc3a78;
+    }

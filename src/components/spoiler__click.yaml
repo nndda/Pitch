@@ -1,6 +1,12 @@
 name:
   On Click
 
+scopes:
+  compatible:
+    - project
+    - profile
+    - jam
+
 nameDisplay:
   Spoiler — On Click
 
@@ -8,6 +14,7 @@ sub:
   spoiler
 
 notes:
+  - Experimental
   - --custom-- Cannot be placed under <code>&lt;p&gt;</code> HTML tag, as its a block-level element.
 
 sampleHTML:
@@ -35,3 +42,19 @@ sampleHTML:
       </summary></details></div>.
       I'm shocked, shocked I say!
     </div>
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <div
+      class="compatibility-note"
+      data-type="component"
+      data-vars="itchio_text_color"
+      data-page="profile, jam"
+    ></div>
+
+  - | # ------------------------------------------------------------------------------------------------
+    <!-- CSS -->
+    :root {
+      /* Text color */
+      --itchio_text_color: #fefefe;
+    }

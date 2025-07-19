@@ -1,6 +1,13 @@
 name:
   Masonry Layout
 
+scopes:
+  compatible:
+    - project
+  none:
+    - profile
+    - jam
+
 notes:
   - Experimental
 

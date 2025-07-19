@@ -1,6 +1,13 @@
 name:
   Grouped
 
+scopes:
+  compatible:
+    - project
+  partial:
+    - profile
+    - jam
+
 nameDisplay:
   Label — Grouped
 

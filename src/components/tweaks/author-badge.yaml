@@ -1,6 +1,13 @@
 name:
   Author Badge
 
+scopes:
+  compatible:
+    - project
+  none:
+    - profile
+    - jam
+
 inputs:
   - name: itch.io username
     id: AUTHOR_BADGE_URL

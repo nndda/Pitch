@@ -1,11 +1,13 @@
 .custom-accrd {
-  max-width: 553px;
+  --br-accrd: var(--accordion-border-col, var(--br));
+
+  max-width: var(--accordion-width, 553px);
 
   /* Center the accordion by default */
   margin: auto;
 
   /* Outer border */
-  border: 1px solid var(--br);
+  border: 1px solid var(--br-accrd);
   border-radius: 3px;
   margin-top: 1.5em;
   margin-bottom: 1.5em;
@@ -26,27 +28,29 @@
 
     /* Add border in between accordion item */
     &:not(:last-child) {
-      border-bottom: 1px solid var(--br);
+      border-bottom: 1px solid var(--br-accrd);
     }
 
     &:first-of-type:not(:first-child) {
-      border-top: 1px solid var(--br);
+      border-top: 1px solid var(--br-accrd);
     }
 
     &:last-of-type:not(:last-child) {
-      border-bottom: 1px solid var(--br);
+      border-bottom: 1px solid var(--br-accrd);
     }
   }
 
   & summary {
     font-size: 105%;
     cursor: pointer;
-    color: var(--l);
+    // color: var(--l);
     display: flex; /* Remove the default marker */
+    text-decoration: underline;
 
-    &:hover {
-      color: var(--t);
-      text-decoration: underline;
+    &:not(:hover) {
+      color: var(--accordion-item-col, var(--l));
+      // color: var(--t);
+      text-decoration: none;
     }
 
     /* Change the default marker */

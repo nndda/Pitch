@@ -1,6 +1,12 @@
 name:
   On Hover
 
+scopes:
+  compatible:
+    - project
+    - profile
+    - jam
+
 nameDisplay:
   Spoiler — On Hover
 
@@ -32,3 +38,19 @@ sampleHTML:
       </span>.
       I'm shocked, shocked I say!
     </p>
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <div
+      class="compatibility-note"
+      data-type="component"
+      data-vars="itchio_text_color"
+      data-page="profile, jam"
+    ></div>
+
+  - | # ------------------------------------------------------------------------------------------------
+    <!-- CSS -->
+    :root {
+      /* Text color */
+      --itchio_text_color: #fefefe;
+    }

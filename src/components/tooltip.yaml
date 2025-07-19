@@ -1,6 +1,13 @@
 name:
   Tooltip
 
+scopes:
+  compatible:
+    - project
+  partial:
+    - profile
+    - jam
+
 sampleHTML:
   - | # ================================================================================================
     <!-- NOTE -->
@@ -189,3 +196,23 @@ sampleHTML:
         </span>
       </a>
     </p>
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <div
+      class="compatibility-note"
+      data-type="component"
+      data-vars="itchio_text_color, itchio_bg2_color, itchio_border_color"
+      data-page="profile, jam"
+    ></div>
+
+  - | # ------------------------------------------------------------------------------------------------
+    <!-- CSS -->
+    :root {
+      /* Text color */
+      --itchio_text_color: #fefefe;
+      /* Background color */
+      --itchio_bg2_color: #121118;
+      /* Border color */
+      --itchio_border_color: #39374a;
+    }

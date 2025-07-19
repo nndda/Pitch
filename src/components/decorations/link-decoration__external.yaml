@@ -1,6 +1,12 @@
 name:
   External
 
+scopes:
+  compatible:
+    - project
+    - profile
+    - jam
+
 nameDisplay:
   Link Decoration — External
 
