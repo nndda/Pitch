@@ -19,6 +19,12 @@
   flex-grow: 1;
 }
 
+ul.nostyle {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
 .tooltip-content {
   position: absolute;
   bottom: calc(-100% - .25em);
