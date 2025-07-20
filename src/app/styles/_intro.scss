@@ -37,7 +37,7 @@
 
 
 svg.driver-overlay > path {
-  fill: rgba($background, 92%) !important;
+  fill: rgba(darken($background, 2.5%), 92%) !important;
 }
 
 .intro-popover {
