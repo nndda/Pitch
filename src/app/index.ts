@@ -128,9 +128,19 @@ favBtn.addEventListener("click", () => {
 const selectAllNoneUpdates: (() => void)[] = [];
 
 function initializeComponents(): void {
+  // i hate js/ts
+  let currentIteratedCompType: string = ""; // <- dangewous
+  let compListItems: JQuery<HTMLElement> = $(`<ul class="nostyle"></ul>`);
+
+  // should've used traditional for-loop huh...
+  const totalComps: number = (
+    Object.keys(componentsCollection) as Array<keyof typeof componentsCollection>
+  ).length;
+  let currentIteratedCompN: number = 0;
+
   for (const comp in componentsCollection) {
     const compData: PitchComponentData = componentsCollection[comp];
-    const compListItems: JQuery<HTMLElement> = $(`<ul class="nostyle"></ul>`);
+    currentIteratedCompN++;
 
     if (comp !== "_variables") {
       const compName: string = compData["name"];
@@ -148,6 +158,7 @@ function initializeComponents(): void {
       selectAllNoneUpdates.push(updateSelectAllNoneBtn);
 
       // Component group/category title
+      function createCompCatTitle(): void {
       if (!compGroups.includes(compData["type"])) {
         compGroups.push(compData["type"]);
         const compElemGroup: JQuery<HTMLElement> = $(`
@@ -210,6 +221,7 @@ function initializeComponents(): void {
 
         compList.append(compElemGroup);
       }
+      };
 
       // See if the component is marked as favourite on the localStorage
       let isFaved: boolean = false;
@@ -322,14 +334,25 @@ function initializeComponents(): void {
         });
       }
 
+      if (
+        currentIteratedCompType !== compData["type"] ||
+        currentIteratedCompN === totalComps
+      ) {
+        compList.append(compListItems);
+        // compListItems = null;
+        compListItems = $(`<ul class="nostyle"></ul>`);
+      }
+
+      createCompCatTitle();
+
       if (isTickedLocally) {
         updateSelectAllNoneBtn();
       }
 
       compListItems.append(compElemItem);
-    }
 
-    compList.append(compListItems);
+      currentIteratedCompType = compData["type"];
+    }
   }
 
   // TODO optimize this
