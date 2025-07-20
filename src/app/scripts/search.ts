@@ -11,7 +11,7 @@ export function initSearch(d: Document, cb: () => void): () => void {
   // This doesn't feels right...
   const updateState: () => void = (): void => {
     search(
-      d.querySelectorAll("#components-list>dd"),
+      d.querySelectorAll("#components-list li"),
       filterFave.checked,
       filterExp.checked,
     );
