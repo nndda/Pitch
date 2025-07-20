@@ -24,6 +24,12 @@ import {
   highlightCSS,
 } from "./scripts/highlighter";
 
+// Version field
+import packageJSON from "../../package.json";
+d.querySelectorAll(".version-field").forEach((verEl: HTMLElement): void => {
+  verEl.textContent = packageJSON.version;
+});
+
 // Main compiled components data
 import componentsCollectionJSON from "./components.json";
 const componentsCollection: PitchComponentsCollection = componentsCollectionJSON as PitchComponentsCollection;
