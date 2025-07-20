@@ -175,6 +175,24 @@ label.theme-more {
   }
 }
 
+.tooltip.theme-wat {
+  padding: .5em;
+  margin-right: -.8em;
+  cursor: help;
+
+  & .tooltip-content {
+    width: 17em;
+    padding: .8em;
+    border: 1px solid $border-col;
+    line-height: 1.35em;
+    white-space: wrap;
+
+    & > hr {
+      margin: .5em 0;
+    }
+  }
+}
+
 #comp-fav-btn {
   display: none;
 
