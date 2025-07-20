@@ -82,7 +82,7 @@ import {
 // TODO: reference the parent in componentsCollection instead
 function getCompParent(compListEl: HTMLElement): HTMLElement | null {
   if (compListEl.hasAttribute("data-sub")) {
-    return d.querySelector(`dd[data-comp="${compListEl.getAttribute("data-sub")}"]`);
+    return d.querySelector(`li[data-comp="${compListEl.getAttribute("data-sub")}"]`);
   }
 
   return null;
@@ -90,7 +90,7 @@ function getCompParent(compListEl: HTMLElement): HTMLElement | null {
 
 // Check if any 'sub' components is favourited 
 function isSubsHasAnyFaved(subId: string): boolean {
-  for (const el of d.querySelectorAll(`dd[data-sub="${subId}"]`)) {
+  for (const el of d.querySelectorAll(`li[data-sub="${subId}"]`)) {
     if (el.classList.contains("is-faved")) return true;
   }
 
@@ -107,7 +107,7 @@ favBtn.addEventListener("click", () => {
 
   d.querySelector(`button[data-comp-id="${compName}"]>.icon.fav`).classList.toggle("hidden", !favBtn.checked);
 
-  const compListEl: HTMLElement = d.querySelector(`dd[data-comp="${compName}"]`);
+  const compListEl: HTMLElement = d.querySelector(`li[data-comp="${compName}"]`);
   compListEl.classList.toggle("is-faved", favBtn.checked);
 
   // Consider the 'parent' of a sub component list element
@@ -130,13 +130,14 @@ const selectAllNoneUpdates: (() => void)[] = [];
 function initializeComponents(): void {
   for (const comp in componentsCollection) {
     const compData: PitchComponentData = componentsCollection[comp];
+    const compListItems: JQuery<HTMLElement> = $(`<ul class="nostyle"></ul>`);
 
     if (comp !== "_variables") {
       const compName: string = compData["name"];
       const compID: string = "comp-" + comp;
 
       const updateSelectAllNoneBtn = (): void => {
-        const hasOneActive: boolean = d.querySelectorAll(`dd:not(.hidden) > input[data-type="${compData["type"]}"][name="component-toggle"]:checked`).length > 0;
+        const hasOneActive: boolean = d.querySelectorAll(`li:not(.hidden) > input[data-type="${compData["type"]}"][name="component-toggle"]:checked`).length > 0;
 
         d.querySelector(`button.component-select-all[data-type="${compData["type"]}"]`)
           .classList.toggle("hidden", hasOneActive);
@@ -150,7 +151,7 @@ function initializeComponents(): void {
       if (!compGroups.includes(compData["type"])) {
         compGroups.push(compData["type"]);
         const compElemGroup: JQuery<HTMLElement> = $(`
-          <dt>
+          <h2>
             <span class="component-type-title">
               <i class="icon fa-solid
                 fa-${
@@ -173,6 +174,7 @@ function initializeComponents(): void {
 
             <button class="button-general component-select-all tooltip" data-type="${compData["type"]}">
               <i class="fa-solid fa-square-check"></i>
+
               <small class="tooltip-content tooltip-l">
                 Select all
               </small>
@@ -180,11 +182,12 @@ function initializeComponents(): void {
 
             <button class="button-general component-select-none tooltip hidden" data-type="${compData["type"]}">
               <i class="fa-regular fa-square-minus"></i>
+
               <small class="tooltip-content tooltip-l">
                 Select none
               </small>
             </button>
-          </dt>
+          </h2>
         `);
 
         compElemGroup.on("click", ".component-select-all", () => {
@@ -224,7 +227,7 @@ function initializeComponents(): void {
       const isTickedLocally: boolean = getCompLocalData(comp, "ticked");
 
       const compElemItem: JQuery<HTMLElement> = $(`
-        <dd
+        <li
           data-comp="${comp}"
           data-search="${compName}"
           ${compData.sub != undefined ? `data-sub="${compData.sub}"` : ""}
@@ -277,7 +280,7 @@ function initializeComponents(): void {
                 <i class="fa-solid fa-star"></i>
               </span>
           </button>
-        </dd>
+        </li>
       `);
 
       compElemItem.on("input", `input#${compID}`, () => {
@@ -323,14 +326,16 @@ function initializeComponents(): void {
         updateSelectAllNoneBtn();
       }
 
-      compList.append(compElemItem);
+      compListItems.append(compElemItem);
     }
+
+    compList.append(compListItems);
   }
 
   // TODO optimize this
   // Account for the 'parent' of the 'sub' components
   const finished: string[] = [];
-  for (const compListElSub of d.querySelectorAll("dd[data-sub]")) {
+  for (const compListElSub of d.querySelectorAll("li[data-sub]")) {
     const subId: string = compListElSub.getAttribute("data-sub");
 
     if (!finished.includes(subId)) {

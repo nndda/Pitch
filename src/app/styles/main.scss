@@ -90,24 +90,39 @@ $active-col: white;
   padding: 0;
   padding-left: .2em;
   padding-right: .85em;
-  padding-bottom: .75em;
 
   overflow-y: scroll;
 
   @include style-scrollbar;
 
-  & > dt {
+  & > h2 {
+    position: sticky;
+    bottom: 0;
+
     display: flex;
     align-items: center;
     font-size: $font-size * 1.25;
     font-weight: bold;
 
-    margin-top: .8em;
-    margin-bottom: .5em;
+    margin: 0;
+
+    padding-top: .8em;
+    padding-bottom: .5em;
+
+    background: darken($background, 2.5%);
 
     text-transform: capitalize;
     letter-spacing: .085em;
     color: $accent;
+
+    // why...
+    &:nth-of-type(2) {
+      z-index: 2;
+    }
+
+    &:nth-of-type(3) {
+      z-index: 1;
+    }
 
     & .icon {
       margin-right: .45em;
@@ -124,7 +139,7 @@ $active-col: white;
     }
   }
 
-  & > dd {
+  & > ul > li {
     color: rgba($text-col, 0.6);
     display: flex;
     margin-bottom: .4em;
