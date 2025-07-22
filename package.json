@@ -1,6 +1,6 @@
 {
   "name": "pitch-css",
-  "version": "3.0.0-alpha.1",
+  "version": "3.0.0-alpha.2",
   "private": true,
   "description": "A small collection of CSS components and tweaks designed specifically for itch.io project pages.",
   "main": "build.js",

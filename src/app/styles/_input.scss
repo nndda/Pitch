@@ -70,6 +70,31 @@ input[type="text"] {
 
 input[type="checkbox"] {
   display: none;
+
+  & + label {
+    cursor: pointer;
+  }
+
+  &:checked + label > .checked {
+    display: none;
+  }
+
+  &:not(:checked) + label > .checked-not {
+    display: none;
+  }
+}
+
+#auto-copy-check + label {
+  margin: auto;
+  // margin-top: .25em;
+  padding: .2em .5em;
+  font-size: 1.1em;
+
+  & > .tooltip-content {
+    text-align: left;
+    width: 13em;
+    left: .25em;
+  }
 }
 
 .preview-header-button {
@@ -175,21 +200,20 @@ label.theme-more {
   }
 }
 
-.tooltip.theme-wat {
+.tooltip.theme-hint {
   padding: .5em;
   margin-right: -.8em;
   cursor: help;
+}
 
-  & .tooltip-content {
-    width: 17em;
-    padding: .8em;
-    border: 1px solid $border-col;
-    line-height: 1.35em;
-    white-space: wrap;
+.tooltip-content.long {
+  padding: .8em;
+  border: 1px solid $border-col;
+  line-height: 1.35em;
+  white-space: wrap;
 
-    & > hr {
-      margin: .5em 0;
-    }
+  & > hr {
+    margin: .5em 0;
   }
 }
 
@@ -210,13 +234,13 @@ label.theme-more {
     }
   }
 
-  &:checked + label > .checked {
-    display: none;
-  }
+  // &:checked + label > .checked {
+  //   display: none;
+  // }
 
-  &:not(:checked) + label > .checked-not {
-    display: none;
-  }
+  // &:not(:checked) + label > .checked-not {
+  //   display: none;
+  // }
 }
 
 #home-button {
