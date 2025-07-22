@@ -895,7 +895,7 @@ function calculateComponents(): void {
 
   compHasAtLeast1Selected = selectedComps.length > 0;
 
-  pick2notif.classList.toggle("hidden-opac", compHasAtLeast1Selected);
+  pick2notif.classList.toggle("hidden", compHasAtLeast1Selected);
 
   if (navigator.clipboard) {
     compileCompBtn.disabled = !compHasAtLeast1Selected;
