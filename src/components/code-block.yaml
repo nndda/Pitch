@@ -1,0 +1,63 @@
+name:
+  Code Block
+
+scopes:
+  compatible:
+    - project
+  none:
+    - profile
+    - jam
+
+notes:
+  - Experimental
+  - --custom-- Difficult to maintain and work with
+
+sampleHTML:
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <p>
+      Code block component with number lines on the side.
+    </p>
+    <p>
+      <b>NOTE:</b>
+      <br>
+      This component is rather difficult and finnicky to work with.
+      <br>
+      Everytime time you open your itch.io project edit page with this component,
+      it will somehow ruins the HTML markup.
+      <br>
+      Always backup and save your HTML to a file, and then copy-paste it to mitigate this problem.
+    </p>
+
+  - | # ------------------------------------------------------------------------------------------------
+    <pre class="custom-code">
+    <code>
+    </code><code>.custom-uwu {
+    </code><code>  color: darkblue;
+    </code><code>  background: cyan;
+    </code><code>}
+    </code><code>
+    </code></pre>
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <p>
+      Highlight lines by adding <code>custom-hl</code> class to the <code>&lt;code&gt;</code> line.
+    </p>
+
+  - | # ------------------------------------------------------------------------------------------------
+    <pre class="custom-code">
+    <code>extends Control
+    </code><code>
+    </code><code class="custom-hl">var epic_dialogue = Dialogue.load('res://intro.dlg')
+    </code><code>
+    </code><code>@export var my_stage : Stage
+    </code><code>
+    </code><code>func _ready():
+    </code><code>    my_stage.start(epic_dialogue)
+    </code><code>
+    </code><code>func _input(event):
+    </code><code>    if event.is_action_pressed('ui_accept'):
+    </code><code>        my_stage.progress()
+    </code><code>
+    </code></pre>
