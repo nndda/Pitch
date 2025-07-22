@@ -135,7 +135,7 @@ function initializeComponents(): void {
   // should've used traditional for-loop huh...
   const totalComps: number = (
     Object.keys(componentsCollection) as Array<keyof typeof componentsCollection>
-  ).length;
+  ).length - 1;
   let currentIteratedCompN: number = 0;
 
   for (const comp in componentsCollection) {
@@ -158,6 +158,7 @@ function initializeComponents(): void {
       selectAllNoneUpdates.push(updateSelectAllNoneBtn);
 
       // Component group/category title
+      // TODO: optimize this
       function createCompCatTitle(): void {
       if (!compGroups.includes(compData["type"])) {
         compGroups.push(compData["type"]);
@@ -339,17 +340,19 @@ function initializeComponents(): void {
         currentIteratedCompN === totalComps
       ) {
         compList.append(compListItems);
-        // compListItems = null;
-        compListItems = $(`<ul class="nostyle"></ul>`);
+
+        if (currentIteratedCompN !== totalComps) {
+          compListItems = $(`<ul class="nostyle"></ul>`);
+        }
+
+        createCompCatTitle();
       }
 
-      createCompCatTitle();
+      compListItems.append(compElemItem);
 
       if (isTickedLocally) {
         updateSelectAllNoneBtn();
       }
-
-      compListItems.append(compElemItem);
 
       currentIteratedCompType = compData["type"];
     }
