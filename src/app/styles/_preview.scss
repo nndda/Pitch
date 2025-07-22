@@ -48,6 +48,16 @@ $bg-code: darken($background, 1%);
   & h1, h2, h3, h4, h5, h6 {
     font-family: var(--ff, initial);
   }
+
+  pre {
+    background: var(--b2s);
+    word-wrap: normal;
+    overflow: auto;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 3px;
+    white-space: pre-wrap;
+  }
 }
 
 .component-preview-control {
