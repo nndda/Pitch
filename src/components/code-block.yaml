@@ -41,6 +41,7 @@ sampleHTML:
 
   - | # ================================================================================================
     <!-- NOTE -->
+    <h2>Highlight Lines</h2>
     <p>
       Highlight lines by adding <code>custom-hl</code> class to the <code>&lt;code&gt;</code> line.
     </p>
