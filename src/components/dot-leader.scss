@@ -1,0 +1,25 @@
+ul.custom-dot-leader {
+  list-style: none;
+  max-width: 100%;
+  padding: 0;
+  margin-left: 1em;
+
+  & > li:not(:has(.custom-dot-leaders)):has(> :nth-child(2):last-child) { // bruh
+    display: flex;
+    justify-content: space-between;
+
+    & > :last-child {
+      display: flex;
+      flex-grow: 1;
+
+      &::before {
+        content: "";
+        flex-grow: 1;
+        height: 1em;
+        margin: 0 .3em;
+        border-bottom: .2em dotted currentColor;
+        opacity: .8;
+      }
+    }
+  }
+}

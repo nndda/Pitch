@@ -1,0 +1,73 @@
+name:
+  Dot Leader
+
+scopes:
+  compatible:
+    - project
+    - profile
+    - jam
+
+sampleHTML:
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <p>
+      Connect long, horizontally separated texts with dots to guide the reader's eyes.
+    </p>
+
+  - | # ------------------------------------------------------------------------------------------------
+    <ul class="custom-dot-leader">
+      <li>
+        <span>Base game</span>
+        <span>$5</span>
+      </li>
+      <li>
+        <span>Base game + bonus content</span>
+        <span>$12.5</span>
+      </li>
+      <li>
+        <span>Supporter Pack</span>
+        <span>$16</span>
+      </li>
+    </ul>
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <h2>Examples</h2>
+    <p>
+      Nested Dot Leader list with heading.
+    </p>
+
+  - | # ------------------------------------------------------------------------------------------------
+    <ul class="custom-dot-leader">
+      <li>
+        <span>Base game</span>
+        <span>$5</span>
+      </li>
+      <li>
+        <span>Base game + bonus content</span>
+        <span>$12.5</span>
+      </li>
+
+      <li>
+        <h3 style="margin: 0.5em 0;">
+          Supporter pack
+        </h3>
+      </li>
+
+      <li>
+        <ul class="custom-dot-leader">
+          <li>
+            <span>Original soundtracks</span>
+            <span>$6.5</span>
+          </li>
+          <li>
+            <span>Hi-res wallpapers</span>
+            <span>$7.5</span>
+          </li>
+          <li>
+            <span>Hot dog</span>
+            <span>$2</span>
+          </li>
+        </ul>
+      </li>
+    </ul>
