@@ -18,6 +18,8 @@ import {
   CSSCopyOutput,
 } from "./scripts/copy";
 
+const CSSAutoCopyToggle: HTMLInputElement = document.getElementById("auto-copy-check") as HTMLInputElement;
+
 // HTML syntax highlighter
 import {
   highlightHTML,
@@ -902,11 +904,17 @@ function calculateComponents(): void {
     copyNotif.innerText = "";
   }
 
-  CSSCopyOutput.val(compileComponents(
+  const CSSOut: string = compileComponents(
     selectedComps,
     componentsCollection,
     compInputsData
-  ));
+  );
+
+  CSSCopyOutput.val(CSSOut);
+
+  if (CSSAutoCopyToggle.checked) {
+    copyComponentsCSS(CSSOut);
+  }
 }
 
 CSSCopyOutput.val("");
