@@ -71,9 +71,24 @@
                   Pick at least<br>1 component
                 </div>
               </button>
+
               <button id="show-css-btn" class="button-primary">
                 <i class="fa-solid fa-eye"></i>
               </button>
+
+              <input type="checkbox" id="auto-copy-check">
+              <label for="auto-copy-check" class="tooltip">
+                <i class="fa-solid fa-square-check checked-not"></i>
+                <i class="fa-regular fa-square checked"></i>
+
+                &nbsp;Auto-copy
+
+                <span class="tooltip-content tooltip-t long">
+                  Automatically copy<br>
+                  components' CSS codes<br>
+                  when you tick them.
+                </span>
+              </label>
             </div>
 
             <small id="copy-notification"></small>
@@ -139,10 +154,10 @@
           <div class="preview-control">
             <div class="theme-selector-container">
               <span>Preview Theme</span>
-              <span class="tooltip theme-wat">
+              <span class="tooltip theme-hint">
                 <i class="fa-solid fa-circle-question"></i>
 
-                <div class="tooltip-content">
+                <div class="tooltip-content long" style="width: 17em;">
                   <b>
                     The components make use of your page's theme settings!!
                   </b>
