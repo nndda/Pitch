@@ -1,0 +1,31 @@
+name:
+  Fade Out Collection
+
+scopes:
+  compatible:
+    - profile
+  none:
+    - project
+    - jam
+
+sampleHTML:
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <p>
+      Subtle, adjustable fade out effect for your collection carousels in your profile page.
+    </p>
+
+  - <!-- IMG --> fade-out-collection.png
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <h2>Customization</h2>
+    <p>
+      Adjust the <code>--collection-fade-length</code> CSS property to adjust the fade out length.
+    </p>
+
+  - | # ------------------------------------------------------------------------------------------------
+    <!-- CSS -->
+    :root {
+      --collection-fade-length: 30%; /* default */
+    }

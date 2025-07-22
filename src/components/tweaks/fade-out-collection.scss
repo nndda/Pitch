@@ -1,0 +1,6 @@
+.carousel_wrapper {
+  --l: linear-gradient(90deg, #fff calc(100% - var(--collection-fade-length, 30%)), #0000);
+
+  -webkit-mask-image: var(--l);
+  mask: alpha var(--l);
+}
