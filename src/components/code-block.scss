@@ -1,7 +1,17 @@
-pre.custom-code {
+.custom-code {
   position: relative;
   padding: .5em;
   // padding-top: 2.5em;
+
+  background: var(--b2s);
+
+  font-size: 14px;
+
+  word-wrap: normal;
+  white-space: pre-wrap;
+  overflow: auto;
+
+  border-radius: 3px;
 
   counter-reset: ln;
 
@@ -21,10 +31,13 @@ pre.custom-code {
   // }
 
   & > code {
+    // --lw: 3.5em;
     position: relative;
     display: block;
 
+    // padding-left: var(--lw);
     padding-left: 3em;
+    // margin-left: 2em;
 
     &::after {
       counter-increment: ln;
@@ -35,11 +48,16 @@ pre.custom-code {
       left: 0;
       top: 0;
 
-      width: 3em;
+      width: 2em;
 
-      padding-left: .75em;
-      padding-right: 1em;
-      margin-left: -.5em;
+      padding-right: .5em;
+
+      // what the fu
+      // width: calc(var(--lw) * 2);
+
+      // padding-left: var(--lw);
+      // padding-right: 1em;
+      // margin-left: calc(-1.25 * var(--lw));
 
       text-align: right;
       font-family: monospace;
