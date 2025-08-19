@@ -1,9 +1,39 @@
 {
-  "name": "pitch-css",
+  "name": "@nnda/pitch",
   "version": "3.0.0-alpha.2",
-  "private": true,
-  "description": "A small collection of CSS components and tweaks designed specifically for itch.io project pages.",
-  "main": "build.js",
+  "homepage": "https://nnda.itch.io/pitch",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nndda/Pitch.git"
+  },
+  "private": false,
+  "description": "A collection of CSS components and tweaks, designed specifically for itch.io pages.",
+  "author": {
+    "name": "nnda",
+    "url": "https://nnda.dev"
+  },
+  "funding": [
+    "https://nnda.itch.io/pitch/donate",
+    {
+      "type": "ko-fi",
+      "url": "https://ko-fi.com/nnda"
+    },
+    {
+      "type": "patreon",
+      "url": "https://patreon.com/nnda"
+    },
+    {
+      "type": "liberapay",
+      "url": "https://liberapay.com/nnda"
+    }
+  ],
+  "license": "(CC0-1.0 OR AGPL-3.0-or-later)",
+  "engines": {
+    "node": ">=23.11.1"
+  },
+  "files": [
+    "css/"
+  ],
   "scripts": {
     "build_components": "tsc build.ts && node build.js",
     "rebuild_components": "node build.js",
@@ -12,11 +42,6 @@
     "start": "webpack-dev-server --config webpack.dev.js --port 8080",
     "build": "webpack --config webpack.config.js",
     "lint_scripts": "npx eslint --config eslint.config.mjs ."
-  },
-  "author": "nnda",
-  "license": "AGPL-3.0-or-later",
-  "engines": {
-    "node": ">=23.11.0"
   },
   "dependencies": {
     "@fontsource/courgette": "^5.2.6",
