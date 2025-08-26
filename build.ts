@@ -119,13 +119,20 @@ fs.writeFileSync(
 const CDNComps: string[] = [
   "Accordion",
   "Callout",
+  "Code Block",
+  "Dot Leader",
   "Image Comparison",
   "Info List",
   "Input",
   "Label",
+    "Grouped",
   "Read More",
+  // Spoiler
+    "On Hover",
+    "On Click",
   "Table",
   "Timeline List",
+  "Toggle",
   "Tooltip",
 ];
 const CDNCompsCompiled: Record<string, string> = {};
@@ -220,10 +227,10 @@ function buildComponent(compPath : string) : void {
 });
 
 // Log all component's CSS.
-let cssOut = "";
-for (const i in componentsCollection) {
-  cssOut += componentsCollection[i].css;
-}
+// let cssOut = "";
+// for (const i in componentsCollection) {
+//   cssOut += componentsCollection[i].css;
+// }
 
 console.log(
   "-".repeat(80),
@@ -306,9 +313,16 @@ fs.writeFileSync(
   JSON.stringify(CDNCompsCompiled)
 );
 
+// fs.writeFileSync(
+//   path.resolve(__dirname, "./src/pitch-cdn/assets/all.css"),
+//   CDNCompsAll.join("")
+// );
+
+fs.mkdirSync(path.resolve(__dirname, "./css"), { recursive: true });
+
 fs.writeFileSync(
-  path.resolve(__dirname, "./src/pitch-cdn/assets/all.css"),
-  CDNCompsAll.join("")
+  path.resolve(__dirname, "./css/components.css"),
+  `@charset "UTF-8";` + componentsCollection["_variables"].css + CDNCompsAll.join("")
 );
 
 // Sanitize HTML string

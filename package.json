@@ -1,9 +1,39 @@
 {
-  "name": "pitch-css",
+  "name": "@nnda/pitch",
   "version": "3.0.0-alpha.2",
-  "private": true,
-  "description": "A small collection of CSS components and tweaks designed specifically for itch.io project pages.",
-  "main": "build.js",
+  "homepage": "https://nnda.itch.io/pitch",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nndda/Pitch.git"
+  },
+  "private": false,
+  "description": "A collection of CSS components and tweaks, designed specifically for itch.io pages.",
+  "author": {
+    "name": "nnda",
+    "url": "https://nnda.dev"
+  },
+  "funding": [
+    "https://nnda.itch.io/pitch/donate",
+    {
+      "type": "ko-fi",
+      "url": "https://ko-fi.com/nnda"
+    },
+    {
+      "type": "patreon",
+      "url": "https://patreon.com/nnda"
+    },
+    {
+      "type": "liberapay",
+      "url": "https://liberapay.com/nnda"
+    }
+  ],
+  "license": "(CC0-1.0 OR AGPL-3.0-or-later)",
+  "engines": {
+    "node": ">=23.11.1"
+  },
+  "files": [
+    "css/"
+  ],
   "scripts": {
     "build_components": "tsc build.ts && node build.js",
     "rebuild_components": "node build.js",
@@ -13,21 +43,13 @@
     "build": "webpack --config webpack.config.js",
     "lint_scripts": "npx eslint --config eslint.config.mjs ."
   },
-  "author": "nnda",
-  "license": "AGPL-3.0-or-later",
-  "engines": {
-    "node": ">=23.11.0"
-  },
-  "workspaces": [
-    "src/pitch-cdn"
-  ],
   "dependencies": {
     "@fontsource/courgette": "^5.2.6",
     "@fontsource/lato": "^5.2.6",
     "@fontsource/lora": "^5.2.6",
     "@fontsource/pixelify-sans": "^5.2.6",
     "@fontsource/ubuntu": "^5.2.6",
-    "@fortawesome/fontawesome-free": "^6.6.0",
+    "@fortawesome/fontawesome-free": "^7.0.0",
     "@types/dompurify": "^3.0.5",
     "autoprefixer": "^10.4.21",
     "clean-css": "^5.3.3",
@@ -35,37 +57,35 @@
     "jquery": "^3.7.1",
     "modern-normalize": "^3.0.1",
     "postcss": "^8.5.6",
-    "prismjs": "^1.30.0",
-    "wrangler": "^4.23.0"
+    "prismjs": "^1.30.0"
   },
   "devDependencies": {
-    "@cloudflare/vitest-pool-workers": "^0.8.55",
-    "@eslint/js": "^9.31.0",
+    "@eslint/js": "^9.34.0",
     "@types/clean-css": "^4.2.11",
     "@types/jquery": "^3.5.30",
     "@types/jsdom": "^21.1.7",
     "@types/prismjs": "^1.26.4",
-    "copy-webpack-plugin": "^13.0.0",
+    "copy-webpack-plugin": "^13.0.1",
     "css-loader": "^7.0.0",
     "css-minimizer-webpack-plugin": "^7.0.2",
     "dompurify": "^3.2.6",
-    "eslint": "^9.31.0",
+    "eslint": "^9.34.0",
     "file-loader": "^6.2.0",
-    "html-webpack-plugin": "^5.6.0",
+    "html-webpack-plugin": "^5.6.4",
     "js-beautify": "^1.15.4",
     "jsdom": "^26.1.0",
-    "mini-css-extract-plugin": "^2.9.0",
-    "sass": "^1.89.2",
+    "mini-css-extract-plugin": "^2.9.4",
+    "sass": "^1.91.0",
     "sass-loader": "^16.0.5",
     "style-loader": "^4.0.0",
     "terser-webpack-plugin": "^5.3.14",
-    "ts-loader": "^9.5.2",
-    "typescript": "^5.8.3",
-    "typescript-eslint": "^8.37.0",
+    "ts-loader": "^9.5.4",
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.41.0",
     "vitest": "^3.2.4",
-    "webpack": "^5.100.2",
+    "webpack": "^5.101.3",
     "webpack-cli": "^6.0.1",
     "webpack-dev-server": "^5.2.2",
-    "yaml": "^2.8.0"
+    "yaml": "^2.8.1"
   }
 }
