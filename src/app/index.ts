@@ -64,8 +64,11 @@ function updateInputs(): void {
   localStorage.setItem("pitchInputData", JSON.stringify(compInputsData));
 }
 
-const compNotesData: Record<string, string> = {
-  Experimental: "Use with caution, and test thoroughly."
+const compNotesData: Record<string, {icon?: string, desc: string}> = {
+  Experimental: {
+    icon: `<i class="fa-solid fa-vial"></i>`,
+    desc: `Use with caution, and test thoroughly.`,
+  },
 };
 
 const pick2notif: HTMLElement = d.querySelector(".pick-2-notif");
@@ -539,8 +542,11 @@ function setCompInfo(comp: string): void {
       if (!note.startsWith("--custom-- ")) {
         compNotes.append($(`
           <div class="comp-notes ${note}">
-            <div class="comp-notes-title">${note}</div>
-            <div class="comp-notes-desc">${compNotesData[note]}</div>
+            <div class="comp-notes-title">
+              ${"icon" in compNotesData[note] ? compNotesData[note].icon : ""}
+              ${note}
+            </div>
+            <div class="comp-notes-desc">${compNotesData[note].desc}</div>
           </div>
         `));
       } else {
