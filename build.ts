@@ -100,12 +100,10 @@ function isValidCompYAML(parsedData : CompYAML) : boolean {
 componentsCollection["_variables"] = {
   name: "_variables",
   css: compileComponentsCSS(
-    sass.compileString(
-      fs.readFileSync(
-        path.join(componentsPath, "_variables.scss"),
-        { encoding: "utf-8" }
-      )
-    ).css
+    fs.readFileSync(
+      path.join(componentsPath, "_variables.scss"),
+      { encoding: "utf-8" }
+    )
   ),
 };
 fs.writeFileSync(
@@ -160,12 +158,10 @@ function buildComponent(compPath : string) : void {
     // Component's type based off its parent's directory name.
     const compType : string = path.basename(path.dirname(compPathAbs));
 
+    const scssRaw: string = fs.readFileSync(compPathAbs, { encoding: "utf-8" });
+
     // Compile SCSS file to CSS string 'cssStr'.
-    const cssStr = compileComponentsCSS(
-      sass.compileString(
-        fs.readFileSync(compPathAbs, { encoding: "utf-8" })
-      ).css
-    );
+    const cssStr: string = compileComponentsCSS(scssRaw);
 
     // Component's 'id' based off its type, and its name.
     // i.e. 'components__accordion'
@@ -199,6 +195,7 @@ function buildComponent(compPath : string) : void {
         compData.sampleIMG !== undefined ?
         compData.sampleIMG.map((value : string) => "./components/assets/" + value) : [],
       css: cssStr,
+      cssRaw: compileComponentsCSS(scssRaw, false),
       type: compType,
 
       sub:
@@ -271,9 +268,11 @@ fs.writeFileSync(
     .replace(/:not\(\.game_info_panel_widget\)\s*>\s*/g, "") // Resolve Table component issue
 );
 
+// import { varsList } from "./src/app/scripts/components"; Doesn't work for some reason :/
+
 // Compress and process CSS string 'srcCSS' with CleanCSS, PostCSS, and Autoprefixer.
-function compileComponentsCSS(srcCSS : string): string {
-  let css = srcCSS;
+function compileComponentsCSS(srcCSS : string, minified: boolean = true): string {
+  let css: string = sass.compileString(srcCSS).css;
 
   postcss([
     autoprefixer({
@@ -288,24 +287,60 @@ function compileComponentsCSS(srcCSS : string): string {
     });
     css = result.css;
   });
-
-  const cssCleaned = new CleanCSS({
-    level: 2,
-  }).minify(
+  css = css
     // but why
-    css
     .replace(/"\\\\/g, "\"\\")
     .replace("@charset \"UTF-8\";", "")
-  );
+    ;
 
-  cssCleaned.errors.forEach((err : string) => {
-    console.error(err);
-  });
-  cssCleaned.warnings.forEach((warn : string) => {
-    console.warn(warn);
-  });
+  if (minified) {
+    const cssCleaned = new CleanCSS({
+      level: 2,
+    }).minify(css);
 
-  return cssCleaned.styles;
+    cssCleaned.errors.forEach((err : string) => {
+      console.error(err);
+    });
+    cssCleaned.warnings.forEach((warn : string) => {
+      console.warn(warn);
+    });
+
+    return cssCleaned.styles;
+  }
+
+  // I have to define this here for it to be recognized for some reason ://
+  // TODO: this
+  const varsList: Record<string, string> = {
+    "btn_f": "itchio_button_fg_color",
+    "btn_s": "itchio_button_shadow_color",
+    "btn": "itchio_button_color",
+    "b2s": "itchio_bg2_sub",
+    "b2": "itchio_bg2_color",
+    "br": "itchio_border_color",
+    "b": "itchio_bg_color",
+    "t": "itchio_text_color",
+    "l": "itchio_link_color",
+  };
+
+  // This is not good
+  for (const varShort of [
+    "btn_f",
+    "btn_s",
+    "btn",
+    "b2s",
+    "b2",
+    "br",
+    "b",
+    "t",
+  ]) {
+    css = css.replace(
+      // This is also not good
+      new RegExp(`--${varShort}`, "gm"),
+      `--${varsList[varShort]}`,
+    );
+  }
+
+  return css;
 }
 
 fs.writeFileSync(

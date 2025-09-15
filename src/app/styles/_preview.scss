@@ -8,6 +8,25 @@ $padding: .8em;
 $bg-main: lighten($background, 1%);
 $bg-code: darken($background, 1%);
 
+.component-docs.top {
+  display: flex;
+}
+
+button.copy-raw-css {
+  padding: .45em .7em;
+  font-size: 0.85em;
+
+  & > i {
+    margin-right: .5em;
+  }
+
+  & > .tooltip-content {
+    width: 12em;
+    padding: .5em;
+    white-space: wrap;
+  }
+}
+
 .component-container-single {
 
   display: flex;
