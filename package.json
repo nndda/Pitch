@@ -35,8 +35,7 @@
     "css/"
   ],
   "scripts": {
-    "build_components": "tsc build.ts && node build.js",
-    "rebuild_components": "node build.js",
+    "build_components": "tsx build.ts",
     "prestart": "npm run build_components",
     "prebuild": "npm run build_components",
     "start": "webpack-dev-server --config webpack.dev.js --port 8080",
@@ -79,6 +78,7 @@
     "style-loader": "^4.0.0",
     "terser-webpack-plugin": "^5.3.14",
     "ts-loader": "^9.5.4",
+    "tsx": "^4.20.5",
     "typescript": "^5.9.2",
     "typescript-eslint": "^8.43.0",
     "webpack": "^5.101.3",
