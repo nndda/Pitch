@@ -11,6 +11,6 @@
     "esModuleInterop": true
   },
   "exclude": [
-    "./src/cdn"
+    "./src/pitch-cdn"
   ]
 }
