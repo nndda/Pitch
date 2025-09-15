@@ -236,6 +236,10 @@ $active-col: white;
     color: $primary;
     font-size: .8em;
 
+    &.exp {
+      color: $primary;
+    }
+
     &.fav {
       color: #fcb930;
     }
@@ -459,7 +463,7 @@ $active-col: white;
 
   &.Experimental {
     & > .comp-notes-title {
-      background: #ffc721;
+      background: $primary;
       color: #1c1813;
     }
   }

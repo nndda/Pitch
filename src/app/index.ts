@@ -64,8 +64,11 @@ function updateInputs(): void {
   localStorage.setItem("pitchInputData", JSON.stringify(compInputsData));
 }
 
-const compNotesData: Record<string, string> = {
-  Experimental: "Use with caution, and test thoroughly."
+const compNotesData: Record<string, {icon?: string, desc: string}> = {
+  Experimental: {
+    icon: `<i class="fa-solid fa-vial"></i>`,
+    desc: `Use with caution, and test thoroughly.`,
+  },
 };
 
 const pick2notif: HTMLElement = d.querySelector(".pick-2-notif");
@@ -539,8 +542,11 @@ function setCompInfo(comp: string): void {
       if (!note.startsWith("--custom-- ")) {
         compNotes.append($(`
           <div class="comp-notes ${note}">
-            <div class="comp-notes-title">${note}</div>
-            <div class="comp-notes-desc">${compNotesData[note]}</div>
+            <div class="comp-notes-title">
+              ${"icon" in compNotesData[note] ? compNotesData[note].icon : ""}
+              ${note}
+            </div>
+            <div class="comp-notes-desc">${compNotesData[note].desc}</div>
           </div>
         `));
       } else {
@@ -558,8 +564,8 @@ function setCompInfo(comp: string): void {
   }
 
   // Component scope labelling
-  if (componentsCollection[comp].scopes) {
-    let elStr: string = `<div class="component-docs">`;
+  // if (componentsCollection[comp].scopes) {
+    let elStr: string = `<div class="component-docs top">`;
 
     for (const scopeEnv in componentsCollection[comp].scopes) {
       // @ts-ignore
@@ -631,8 +637,25 @@ function setCompInfo(comp: string): void {
     }
 
     compPreview.append($(elStr + "</div>"));
-  }
+  // }
 
+  // Raw/source CSS copy button
+  compPreview.find(".component-docs.top")
+    .append(`<div class="flex-space"></div>`)
+    .append($(`
+      <div class="copy-raw-css-cont">
+        <button class="copy-raw-css button-general tooltip">
+          <i class="fa-solid fa-copy"></i>
+          Copy CSS source
+          <div class="tooltip-content">
+            Copy <b>'${componentsCollection[comp].nameDisplay}'</b> CSS source code.
+          </div>
+        </button>
+      </div>
+    `).on("click", "button.copy-raw-css", (): void => {
+      copyComponentsCSS(componentsCollection[comp].cssRaw);
+    }))
+  ;
 
   for (const n in componentsCollection[comp].sampleHTML) {
     const compHTMLRaw: string = componentsCollection[comp].sampleHTML[n];

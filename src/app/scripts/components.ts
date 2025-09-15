@@ -19,6 +19,7 @@ export interface PitchComponentData {
 
   // Compiled CSS from its SCSS file.
   css?: string,
+  cssRaw?: string,
 
   // itch.io built-in CSS variables from the component's CSS.
   variables?: string[],
@@ -63,7 +64,7 @@ export type PitchComponentScope = "project" | "profile" | "jam"
 export type VariableList = Record<string, string>
 
 // Shorthand for itch.io built-in variables
-const varsList : VariableList = {
+export const varsList : VariableList = {
   "b": "itchio_bg_color",
   "b2": "itchio_bg2_color",
   "b2s": "itchio_bg2_sub",
