@@ -1,4 +1,5 @@
 @use "variables" as *;
+@use "sass:color";
 
 @mixin border-light {
   border: 1px solid $border-col;
@@ -85,4 +86,76 @@ ul.nostyle {
       }
     }
   }
+}
+
+.toast-cont {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+#toast {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 13em;
+  height: 4.5em;
+  margin: 2em;
+  padding-right: 1.5em;
+  font-size: 1.2em;
+  background: $background;
+  // background: color.mix($background, $text-col, 96.5%);
+  border: 1px solid $border-col;
+  // border: 1px solid #353242;
+  border-radius: 8px;
+  box-shadow: 0 0 2em 1em #121118;
+  pointer-events: auto;
+  overflow: hidden;
+}
+
+#toast-close-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0;
+  margin: .35em;
+  font-size: 1.2em;
+  color: $accent;
+}
+
+.toast-content {
+  display: grid;
+  grid-template-columns: 25% auto;
+  column-gap: .5em;
+  align-items: center;
+  justify-items: center;
+  width: 100%;
+  height: 100%;
+  padding: .65em;
+}
+
+.toast-icon-cont {
+  font-size: 2em;
+  color: $primary;
+}
+
+.toast-desc-cont {
+  font-size: 1em;
+}
+
+#toast-desc {
+  margin: 0;
+}
+
+#toast-timeout-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: $primary;
 }
