@@ -45,7 +45,7 @@
   "dependencies": {
     "@fontsource/courgette": "^5.2.6",
     "@fontsource/lato": "^5.2.6",
-    "@fontsource/lora": "^5.2.7",
+    "@fontsource/lora": "^5.2.8",
     "@fontsource/pixelify-sans": "^5.2.6",
     "@fontsource/ubuntu": "^5.2.7",
     "@fortawesome/fontawesome-free": "^7.0.1",
