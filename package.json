@@ -43,7 +43,7 @@
     "lint_scripts": "npx eslint --config eslint.config.mjs ."
   },
   "dependencies": {
-    "@fontsource/courgette": "^5.2.6",
+    "@fontsource/courgette": "^5.2.7",
     "@fontsource/lato": "^5.2.6",
     "@fontsource/lora": "^5.2.7",
     "@fontsource/pixelify-sans": "^5.2.6",
