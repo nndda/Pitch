@@ -15,7 +15,6 @@ updates:
     directory: /
     schedule:
       interval: weekly
-    versioning-strategy: auto
     target-branch: main
     cooldown:
       default-days: 7
