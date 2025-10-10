@@ -69,6 +69,10 @@ const compNotesData: Record<string, {icon?: string, desc: string}> = {
     icon: `<i class="fa-solid fa-vial"></i>`,
     desc: `Use with caution, and test thoroughly.`,
   },
+  Hacky: {
+    icon: `<i class="fa-solid fa-flask"></i>`,
+    desc: `Contains unconventional and/or hacky CSS/HTML codes.`,
+  },
 };
 
 const pick2notif: HTMLElement = d.querySelector(".pick-2-notif");

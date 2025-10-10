@@ -468,6 +468,13 @@ $active-col: white;
     }
   }
 
+  &.Hacky {
+    & > .comp-notes-title {
+      background: #18f08b;
+      color: #1c1813;
+    }
+  }
+
   &.note-custom {
     & > .comp-notes-title {
       background: rgba($text-col, 0.8);
