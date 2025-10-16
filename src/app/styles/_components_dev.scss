@@ -9,6 +9,7 @@
 @use "../../components/label.scss";
 @use "../../components/label__grouped.scss";
 @use "../../components/read-more.scss";
+@use "../../components/speed-dial.scss";
 @use "../../components/spoiler__hover.scss";
 @use "../../components/spoiler__click.scss";
 @use "../../components/table.scss";
@@ -23,3 +24,24 @@
 @use "../../components/decorations/link-decoration__profile-page.scss";
 @use "../../components/decorations/star-rating.scss";
 @use "../../components/decorations/z_fingers.scss";
+
+.custom-speed-dial {
+  position: absolute !important;
+  bottom: 1.6em !important;
+  right: 1.6em !important;
+  margin-left: auto !important;
+}
+.custom-speed-dial-home {
+  position: relative !important;
+  bottom: unset !important;
+  right: unset !important;
+  padding: 0 !important;
+  padding-right: .5em !important;
+}
+.custom-speed-dial-home ul {
+  padding: 0 !important;
+}
+.component-display:has(> .custom-speed-dial) {
+  position: relative;
+  min-height: 230px;
+}
