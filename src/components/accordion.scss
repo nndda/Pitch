@@ -46,9 +46,9 @@
     // color: var(--l);
     display: flex; /* Remove the default marker */
     text-decoration: underline;
+    color: var(--accordion-item-col, var(--l));
 
     &:not(:hover) {
-      color: var(--accordion-item-col, var(--l));
       // color: var(--t);
       text-decoration: none;
     }
