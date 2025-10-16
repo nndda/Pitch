@@ -71,7 +71,7 @@ const compNotesData: Record<string, {icon?: string, desc: string}> = {
   },
   Hacky: {
     icon: `<i class="fa-solid fa-flask"></i>`,
-    desc: `Contains unconventional and/or hacky CSS/HTML codes.`,
+    desc: `Contains unconventional CSS/HTML codes and/or implementation.`,
   },
 };
 
