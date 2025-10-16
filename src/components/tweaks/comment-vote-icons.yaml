@@ -1,0 +1,38 @@
+name:
+  Comment Vote Icons
+
+scopes:
+  compatible:
+    - project
+  none:
+    - profile
+    - jam
+
+inputs:
+  - name: Upvote icon URL
+    id: UPVOTE_ICON_URL
+    default: https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome@7.1.0/svgs/solid/heart.svg
+
+  - name: Downvote icon URL
+    id: DOWNVOTE_ICON_URL
+    default: https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome@7.1.0/svgs/solid/thumbs-down.svg
+
+sampleHTML:
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <p>
+      Add icons for upvotes and downvotes on comment posts.
+    </p>
+
+  - <!-- IMG --> comment-votes-2.png
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <blockquote class="custom-callout">
+      <h4 style="margin: .5em 0;">Icon Color</h4>
+      The 'Link' color from your project page's theme will be used to fill the icon. Overriding any color on it.
+    </blockquote>
+
+  - <!-- IMG --> comment-votes-up.png
+  # - <!-- IMG --> comment-votes-up-down.png
+  - <!-- IMG --> comment-votes-down.png
