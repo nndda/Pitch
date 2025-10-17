@@ -298,7 +298,9 @@ label.theme-more {
     }
   }
 
-  &[data-comp="tweaks__profile-picture"] {
+  &[data-comp="tweaks__profile-picture"],
+  &[data-comp="tweaks__comment-vote-icons"]
+  {
     & input {
       flex-grow: 1;
     }
