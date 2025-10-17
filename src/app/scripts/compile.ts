@@ -86,5 +86,13 @@ export function compileComponents(
   compInputStyleOverride.textContent = cssInpPreview;
 
   // return `@charset "UTF-8";` + compileUsedVariables(usedVars) + css; // <-- buggy
-  return `@charset "UTF-8";` + compileUsedVariables(usedVars) + cssInp + css;
+  return compileUsedVariables(usedVars) + cssInp + css;
+  // return `@charset "UTF-8";` + compileUsedVariables(usedVars) + cssInp + css;
+//   return `@layer pitch-css{@layer b,u;@layer u{
+
+
+// /*   YOUR CSS HERE   */
+
+
+// }@layer b{` + compileUsedVariables(usedVars) + cssInp + css + `}}`;
 }
