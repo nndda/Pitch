@@ -204,6 +204,16 @@ label.theme-more {
   padding: .5em;
   margin-right: -.8em;
   cursor: help;
+
+  & > .fa-solid {
+    transition: .3s ease;
+  }
+
+  &:not(:hover) {
+    & > .fa-solid {
+      color: $border-col;
+    }
+  }
 }
 
 .tooltip-content.long {

@@ -180,7 +180,7 @@ function initializeComponents(): void {
                   ? "bars-progress"
 
                   : compData["type"] === "decorations"
-                  ? "brush"
+                  ? "paint-roller"
 
                   : compData["type"] === "tweaks"
                   ? "pen-ruler"

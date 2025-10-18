@@ -19,7 +19,10 @@ $accent-light: lighten($accent, 12.5%);
 $primary: #3ad2fc;
 $primary-light: lighten($primary, 12.5%);
 
-@mixin style-scrollbar($col : $primary) {
+@mixin style-scrollbar($col : $border-col) {
+  scrollbar-color: $col $background;
+  scrollbar-width: thin;
+
   &::-webkit-scrollbar {
     width: .5em;
     height: .5em;
