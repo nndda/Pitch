@@ -133,4 +133,10 @@ button.copy-raw-css {
     padding: 0 .5em;
     border-radius: .2em;
   }
+
+  & > .custom-callout {
+    --l: #{$accent};
+    --br: #{rgba($text-col, 0.065)};
+    --b2: #{$background};
+  }
 }
