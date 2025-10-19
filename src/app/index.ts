@@ -416,8 +416,8 @@ function setHome(): void {
     compPreview.html("");
     compInputs.html("");
     compNotes.html("");
-    compTitle.textContent =
-      "Pitch";
+    compTitle.innerHTML =
+      `<img src="./pitch-logo.svg" class="pitch-title-logo"> <span class="pitch-title-text">Pitch</span><code class="pitch-title-css">.css</code>`;
     // compDesc.textContent =
     //   "Collection of CSS components and tweaks designed specifically for itch.io project pages.";
 

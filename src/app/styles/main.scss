@@ -280,6 +280,22 @@ $active-col: white;
   margin: 0 .2em;
 }
 
+.pitch-title-logo {
+  max-height: 2em;
+  margin: -.35em;
+  // transform: rotate(-15deg);
+}
+
+.pitch-title-text {
+  margin-left: .5em;
+  // font-weight: bold;
+  letter-spacing: .1ch;
+}
+.pitch-title-css {
+  color: $accent;
+  // text-transform: uppercase;
+}
+
 #component-description {
   max-width: 500px;
 }
