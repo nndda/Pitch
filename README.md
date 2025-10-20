@@ -4,7 +4,6 @@
 Pitch
 </h1>
 
-
 <p align="center">
 <a href="https://nnda.itch.io/pitch/" target="_blank"><img src="https://img.shields.io/badge/Available%20on%20itch.io-ff2449?style=flat-square&logo=itchdotio&logoColor=%23ffffff" alt="Available on itch.io" height="20"></a>
 <br>
@@ -12,8 +11,7 @@ Pitch
 Collection of CSS components and tweaks designed specifically for itch.io project pages.
 </p>
 
-<img align="center" src="https://github.com/user-attachments/assets/78da25ea-78b9-48f9-a657-8628d130cbd5">
-
+<img align="center" src="https://github.com/user-attachments/assets/2d76ee0c-a243-468a-9794-8d4b1cda7ce3">
 
 ## Features
 

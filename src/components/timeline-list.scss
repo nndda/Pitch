@@ -1,6 +1,6 @@
 .custom-tl-list {
   display: grid;
-  grid-template-columns: 7.5em 1fr;
+  grid-template-columns: 8.25em 1fr;
   padding-left: 1em;
 
   & > dt, & > dd {
@@ -16,7 +16,7 @@
     font-weight: bold;
     background: var(--t);
     color: var(--b2);
-    border-radius: 6px;
+    border-radius: 4px;
     
     & > small {
       position: absolute;
@@ -41,9 +41,33 @@
   }
 
   & > dd {
-    display: list-item;
+    position: relative;
     grid-column: 2;
     margin-left: 1em;
+
+    &::before, &::after {
+      content: "";
+      position: absolute;
+      left: -1.25em;
+    }
+
+    &::before {
+      top: .5em;
+      height: 100%;
+      padding: 1em 0;
+      border-left: 1px dashed var(--l);
+      transform: translate(-50%, 0);
+      // opacity: .8;
+    }
+
+    &::after {
+      top: 50%;
+      height: .5em;
+      width: .5em;
+      background: var(--l);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+    }
 
     & > .custom-lb {
       /*  There has to be a better way... */

@@ -69,6 +69,10 @@ const compNotesData: Record<string, {icon?: string, desc: string}> = {
     icon: `<i class="fa-solid fa-vial"></i>`,
     desc: `Use with caution, and test thoroughly.`,
   },
+  Hacky: {
+    icon: `<i class="fa-solid fa-flask"></i>`,
+    desc: `Contains unconventional CSS/HTML codes and/or implementation.`,
+  },
 };
 
 const pick2notif: HTMLElement = d.querySelector(".pick-2-notif");
@@ -176,7 +180,7 @@ function initializeComponents(): void {
                   ? "bars-progress"
 
                   : compData["type"] === "decorations"
-                  ? "brush"
+                  ? "paint-roller"
 
                   : compData["type"] === "tweaks"
                   ? "pen-ruler"
@@ -412,8 +416,8 @@ function setHome(): void {
     compPreview.html("");
     compInputs.html("");
     compNotes.html("");
-    compTitle.textContent =
-      "Pitch";
+    compTitle.innerHTML =
+      `<img src="./pitch-logo.svg" class="pitch-title-logo"> <span class="pitch-title-text">Pitch</span><code class="pitch-title-css">.css</code>`;
     // compDesc.textContent =
     //   "Collection of CSS components and tweaks designed specifically for itch.io project pages.";
 

@@ -21,28 +21,6 @@ body {
   font-size: .86em;
 }
 
-@mixin style-scrollbar($col: $primary) {
-  scrollbar-color: $col $background;
-  scrollbar-width: thin;
-
-  &::-webkit-scrollbar {
-    width: .5em;
-    height: .5em;
-  }
-
-  &::-webkit-scrollbar-track {
-    background: $background; 
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: $col; 
-  }
-
-  &::-webkit-scrollbar-thumb:hover {
-    background: color.adjust($col, $lightness: 20%); 
-  }
-}
-
 .main-app {
   max-width: 1200px;
   margin: 0 auto;
@@ -56,8 +34,8 @@ body {
 
 .components-selector-container {
   display: flex;
-  flex-grow: 1;
-  width: 250px;
+  // flex-grow: 1;
+  min-width: 290px;
   border-right: 1px solid rgba($border-col, 0.1);
   overflow: hidden;
 
@@ -78,7 +56,7 @@ body {
   padding-top: 1em !important;
 }
 
-$active-col: white;
+$active-col: #eee;
 #components-list {
   $font-size: 1.1em;
   flex-grow: 1;
@@ -133,17 +111,22 @@ $active-col: white;
       padding: .15em;
       line-height: 0;
       border-radius: 3px;
+      background: 0;
 
-      & > span {
-        font-size: 1em;
+      &:not(:hover) > i {
+        opacity: .5;
       }
+
+      // & > span {
+      //   font-size: 1em;
+      // }
     }
   }
 
   & > ul > li {
     color: rgba($text-col, 0.6);
     display: flex;
-    margin-bottom: .4em;
+    margin-bottom: .5em;
     margin-left: .5em;
     font-size: $font-size;
     list-style: none;
@@ -155,7 +138,8 @@ $active-col: white;
     & .text {
       padding: .1em .3em;
       color: rgba($text-col, 0.6);
-      border-radius: 6px;
+      // font-weight: bold;
+      border-radius: 4px;
       transition: .3s ease;
     }
 
@@ -273,7 +257,7 @@ $active-col: white;
   flex-grow: 1;
   flex-direction: column;
 
-  width: 920px;
+  max-width: 920px;
 }
 
 .preview-info {
@@ -295,6 +279,22 @@ $active-col: white;
 
 #component-title {
   margin: 0 .2em;
+}
+
+.pitch-title-logo {
+  max-height: 2em;
+  margin: -.35em;
+  // transform: rotate(-15deg);
+}
+
+.pitch-title-text {
+  margin-left: .5em;
+  // font-weight: bold;
+  letter-spacing: .1ch;
+}
+.pitch-title-css {
+  color: $accent;
+  // text-transform: uppercase;
 }
 
 #component-description {
@@ -329,7 +329,7 @@ $active-col: white;
 }
 
 #wrapper {
-  @include style-scrollbar($accent);
+  @include style-scrollbar;
   background: darken($background, 2.5%);
 }
 
@@ -464,6 +464,13 @@ $active-col: white;
   &.Experimental {
     & > .comp-notes-title {
       background: $primary;
+      color: #1c1813;
+    }
+  }
+
+  &.Hacky {
+    & > .comp-notes-title {
+      background: #18f08b;
       color: #1c1813;
     }
   }

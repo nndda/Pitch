@@ -8,6 +8,9 @@ scopes:
     - profile
     - jam
 
+notes:
+  - Hacky
+
 inputs:
   - name: Collapsed text
     id: READ_MORE_CLOSED

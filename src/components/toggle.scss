@@ -26,17 +26,17 @@
 }
 
 
-#wrapper:not(:has(a.custom-toggle:target))
+:is(#wrapper, .primary_column):not(:has(a.custom-toggle:target))
 
 /* Default visible content ( .custom-content-a ) */
 .custom-content-a,
 /* Make sure to match the rule below */
 
-  #wrapper:has(a.custom-toggle:target[name="toggle-a"]) .custom-content-a
-, #wrapper:has(a.custom-toggle:target[name="toggle-b"]) .custom-content-b
-// , #wrapper:has(a.custom-toggle:target[name="toggle-c"]) .custom-content-c
-// , #wrapper:has(a.custom-toggle:target[name="toggle-d"]) .custom-content-d
-// , #wrapper:has(a.custom-toggle:target[name="toggle-e"]) .custom-content-e
+  :is(#wrapper, .primary_column):has(a.custom-toggle:target[name="toggle-a"]) .custom-content-a
+, :is(#wrapper, .primary_column):has(a.custom-toggle:target[name="toggle-b"]) .custom-content-b
+, :is(#wrapper, .primary_column):has(a.custom-toggle:target[name="toggle-c"]) .custom-content-c
+, :is(#wrapper, .primary_column):has(a.custom-toggle:target[name="toggle-d"]) .custom-content-d
+, :is(#wrapper, .primary_column):has(a.custom-toggle:target[name="toggle-e"]) .custom-content-e
   /* Add as much as you want. Just change the toggle-* and the .custom-content-* accordingly */
 {
   display: block;
@@ -52,6 +52,6 @@ a.custom-toggle[name="toggle-a"],
 /* Styling for the individual toggle when clicked/activated */
 .custom-toggles > a.custom-toggle:target
 {
-  color: var(--btn_f);
+  color: var(--btn_f) !important;
   background: var(--btn);
 }

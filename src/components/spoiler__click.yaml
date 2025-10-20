@@ -14,7 +14,7 @@ sub:
   spoiler
 
 notes:
-  - Experimental
+  - Hacky
   - --custom-- Cannot be placed under <code>&lt;p&gt;</code> HTML tag, as its a block-level element.
 
 sampleHTML:
