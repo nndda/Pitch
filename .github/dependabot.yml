@@ -9,7 +9,7 @@ updates:
     versioning-strategy: auto
     target-branch: dev
     cooldown:
-      default-days: 7
+      default-days: 15
     groups:
       minor-and-patch-updates:
         update-types:
@@ -25,4 +25,4 @@ updates:
       interval: weekly
     target-branch: main
     cooldown:
-      default-days: 7
+      default-days: 15
