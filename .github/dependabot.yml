@@ -10,6 +10,14 @@ updates:
     target-branch: dev
     cooldown:
       default-days: 7
+    groups:
+      minor-and-patch-updates:
+        update-types:
+          - minor
+          - patch
+      major-updates:
+        update-types:
+          - major
 
   - package-ecosystem: github-actions
     directory: /
