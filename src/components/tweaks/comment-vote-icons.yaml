@@ -11,11 +11,11 @@ scopes:
 inputs:
   - name: Upvote icon URL
     id: UPVOTE_ICON_URL
-    default: https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome@7.1.0/svgs/solid/heart.svg
+    default: https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7/svgs/solid/heart.svg
 
   - name: Downvote icon URL
     id: DOWNVOTE_ICON_URL
-    default: https://cdn.jsdelivr.net/gh/FortAwesome/Font-Awesome@7.1.0/svgs/solid/thumbs-down.svg
+    default: https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7/svgs/solid/thumbs-down.svg
 
 sampleHTML:
   - | # ================================================================================================
