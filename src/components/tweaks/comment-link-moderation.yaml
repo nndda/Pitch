@@ -1,0 +1,89 @@
+name:
+  Comment Link Moderation
+
+scopes:
+  compatible:
+    - project
+  none:
+    - profile
+    - jam
+
+notes:
+  - Experimental
+  - --custom-- <b>Require</b> additional configuration in the CSS
+
+sampleHTML:
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <p>
+      Hide comment posts containing links, while allowing links only from the whitelist defined.
+    </p>
+
+  - <!-- IMG --> comment-mod.png
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <p>
+      Comment post containing link that is not in the defined whitelist will have:
+    </p>
+    <ul>
+      <li>The comment body replaced with the notice text (Which you can change. More info below).</li>
+      <li>The poster's account link, name, and profile picture replaced with placeholder.</li>
+      <li>The vote buttons disabled.</li>
+    </ul>
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <h2>Whitelist</h2>
+    <p>
+      The tweak require the whitelist, written as the following CSS block:
+    </p>
+
+  - | # ================================================================================================
+    <!-- CSS -->
+    .community_post:has(.post_body a:not(
+
+      [href^="https://nnda.itch.io" i],  /* Allow links to nnda.itch.io */
+      [href^="https://youtube.com" i]    /* Allow links to youtube.com */
+
+    )){width:0}
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <h3>Disallow All Links</h3>
+    <p>
+      If you don't want whitelist, and want to block all comments that contain <b><i>any</i></b> links, use the following instead:
+    </p>
+
+  - | # ================================================================================================
+    <!-- CSS -->
+    .community_post:has(.post_body a){width:0}
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <blockquote class="custom-callout">
+      <h4 style="margin: .5em 0;">CSS Syntax</h4>
+      <ul>
+        <li>The CSS will match the <b>start</b> of the URL.<br>So you have to include the <code>https://</code> in the start.</li>
+        <li>Trailing comma is not allowed.<br>The last item in the list should not have comma in the end.</li>
+      </ul>
+    </blockquote>
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <h2>Customization</h2>
+    <p>
+      Add the following CSS variables to change the notice text, and the profile name placeholder:
+    </p>
+
+  - | # ------------------------------------------------------------------------------------------------
+    <!-- CSS -->
+    :root {
+      /* Default: "Post blocked" */
+      --comment-link-profile: "⚠️ SUS ACCOUNT ⚠️";
+
+      /* Default: "Post contains blocked link" */
+      --comment-link-text: "🚨 THIS POST HAS BEEN BLOCKED, BECAUSE IT CONTAINS DISALLOWED LINKS!! 🚨";
+    }
+
+  - <!-- IMG --> comment-mod-custom.png

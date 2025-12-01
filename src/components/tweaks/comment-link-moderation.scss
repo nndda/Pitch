@@ -1,0 +1,54 @@
+/* Container query definition */
+.community_post {
+  container-type: inline-size;
+  container-name: trig;
+}
+
+/* Container query trigger */
+@container trig (width < 1px) {
+  /*
+    'Visibly restore' back the inner comment container,
+    so that it won't get squished by `width: 0` set previously
+  */
+  .post_grid {
+    width: max-content;
+  }
+
+  .community_post {
+    /* Disable click on comment votes, profile link, and comment body */
+    & .community_post_voter_widget, .post_header, .avatar_container, .post_content::before {
+      pointer-events: none;
+      opacity: .5;
+    }
+
+    & .avatar_container {
+      background: url(https://static.itch.io/images/frog-sad.svg);
+
+      & img {
+        display: none !important; /* itch.io forces me to use !important */
+      }
+    }
+
+    /* Hides the actual comment, the account, and replace with notice placeholder */
+    & .post_author {
+      & a {
+        display: none;
+      }
+
+      &::after {
+        content: var(--comment-link-profile, "Post blocked");
+        font-weight: bold;
+      }
+    }
+
+    & .post_content::before {
+      content: var(--comment-link-text, "Post contains blocked link");
+    }
+
+    & .post_body {
+      & > * {
+        display: none;
+      }
+    }
+  }
+}
