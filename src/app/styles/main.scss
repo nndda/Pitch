@@ -276,6 +276,8 @@ $active-col: #eee;
   flex-direction: column;
 
   max-width: 920px;
+
+  overflow: auto;
 }
 
 .preview-info {
