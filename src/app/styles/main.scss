@@ -126,7 +126,8 @@ $active-col: #eee;
   & > ul > li {
     color: rgba($text-col, 0.6);
     display: flex;
-    margin-bottom: .5em;
+    align-items: center;
+    margin-bottom: .3em;
     margin-left: .5em;
     font-size: $font-size;
     list-style: none;
@@ -155,7 +156,11 @@ $active-col: #eee;
     }
 
     & > label {
-      margin-right: .3em;
+      margin-right: .25em;
+
+      & > .checked {
+        opacity: .75;
+      }
 
       & > .checked-not {
         color: $active-col;
@@ -203,6 +208,8 @@ $active-col: #eee;
 }
 
 .component-toggle {
+  display: inline-flex;
+  align-items: center;
   color: rgba($text-col, 0.8);
   text-transform: capitalize;
 
@@ -213,6 +220,17 @@ $active-col: #eee;
     & > .text {
       color: $active-col;
     }
+  }
+
+  & > .text {
+    display: inline-block;
+    // flex-wrap: wrap;
+    max-width: 160px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    // margin: 0;
+    // padding: 0;
   }
 
   & > .icon {
