@@ -1,4 +1,7 @@
 name:
+  Link Moderation
+
+nameDisplay:
   Comment Link Moderation
 
 scopes:
@@ -7,6 +10,9 @@ scopes:
   none:
     - profile
     - jam
+
+sub:
+  comment-0
 
 notes:
   - Experimental
