@@ -22,3 +22,35 @@ sampleHTML:
     <br>
 
     <small>Text from Wikipedia, licensed under CC BY-SA 4.0</small>
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <h2>Customization</h2>
+    <p>
+      Change the font of the Drop Cap letter, by setting <code>--drop-cap-font</code> to the desired font family name:
+    </p>
+
+  - | # ------------------------------------------------------------------------------------------------
+    <!-- CSS -->
+    :root {
+      --drop-cap-font: 'Updock';
+    }
+
+    /* Font provided by Fontsource */
+    @font-face {
+      font-family: 'Updock';
+      font-style: normal;
+      font-display: swap;
+      font-weight: 400;
+      src: url(https://cdn.jsdelivr.net/fontsource/fonts/updock@latest/latin-400-normal.woff2) format('woff2'), url(https://cdn.jsdelivr.net/fontsource/fonts/updock@latest/latin-400-normal.woff) format('woff');
+      unicode-range: U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;
+    }
+
+  - | # ------------------------------------------------------------------------------------------------
+    <p style="font-size: 2em;" class="custom-drop-cap text-justify">
+      CSS is designed to enable the separation of content and presentation, including layout, colors, and fonts. This separation can improve content accessibility, since the content can be written without concern for its presentation; provide more flexibility and control in the specification of presentation characteristics; enable multiple web pages to share formatting by specifying the relevant CSS in a separate .css file, which reduces complexity and repetition in the structural content; and enable the .css file to be cached to improve the page load speed between the pages that share the file and its formatting.
+    </p>
+
+    <br>
+
+    <small>Text from Wikipedia, licensed under CC BY-SA 4.0</small>
