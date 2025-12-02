@@ -32,6 +32,58 @@ sampleHTML:
 
   - | # ================================================================================================
     <!-- NOTE -->
+    <h2>Helper Classes</h2>
+    <p>
+      Add <code>custom-no-dot</code> class to the <code>&lt;li&gt;</code> element to disable the dotted line.
+    </p>
+
+  - | # ------------------------------------------------------------------------------------------------
+    <ul class="custom-dot-leader">
+      <li>
+        <span>Base game</span>
+        <span>$5</span>
+      </li>
+      <li class="custom-no-dot">
+        <span>Base game + bonus content</span>
+        <span>$12.5</span>
+      </li>
+      <li>
+        <span>Supporter Pack</span>
+        <span>$16</span>
+      </li>
+    </ul>
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <p>
+      Add <code>custom-dot-leader-item</code> class to any element containing 2 inline elements,
+      to style it to the Dot Leader item styling, without having the whole <code>&lt;ul&gt;</code> and <code>&lt;li&gt;</code>.
+    </p>
+
+  - | # ------------------------------------------------------------------------------------------------
+    
+    <h3 class="custom-dot-leader-item custom-no-dot">
+      <span>Item</span>
+      <span>Price</span>
+    </h3>
+
+    <ul class="custom-dot-leader">
+      <li>
+        <span>Base game</span>
+        <span>$5</span>
+      </li>
+      <li>
+        <span>Base game + bonus content</span>
+        <span>$12.5</span>
+      </li>
+      <li>
+        <span>Supporter Pack</span>
+        <span>$16</span>
+      </li>
+    </ul>
+
+  - | # ================================================================================================
+    <!-- NOTE -->
     <h2>Examples</h2>
     <p>
       Nested Dot Leader list with heading.
@@ -67,6 +119,101 @@ sampleHTML:
           <li>
             <span>Hot dog</span>
             <span>$2</span>
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <p>
+      Combined with <button class="button-primary">Tree List</button> component.
+    </p>
+
+  - | # ------------------------------------------------------------------------------------------------
+    <h2>"Dvorakh the Cyberdevourer"</h2>
+    <ul class="custom-tree custom-dot-leader">
+      <li>
+        <h3 class="custom-dot-leader-item custom-no-dot">
+          <span>Chapter 0</span>
+          <span>1</span>
+        </h3>
+        <ul class="custom-dot-leader">
+          <li>
+            <span>Million Eon Slumber</span>
+            <span>3</span>
+          </li>
+          <li>
+            <div class="custom-dot-leader-item">
+              <span>First Feast of The Dawn</span>
+              <span>5</span>
+            </div>
+            <ul class="custom-dot-leader">
+              <li>
+                <span>Tuna Flavour</span>
+                <span>6</span>
+              </li>
+              <li>
+                <span>Chicken Flavour</span>
+                <span>7</span>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <h3 class="custom-dot-leader-item custom-no-dot">
+          <span>Chapter 1</span>
+          <span>9</span>
+        </h3>
+        <ul class="custom-dot-leader">
+          <li>
+            <span>Excess Energy Overload</span>
+            <span>10</span>
+          </li>
+          <li>
+            <div class="custom-dot-leader-item">
+              <span>Demise of The Hardware</span>
+              <span>12</span>
+            </div>
+            <ul class="custom-dot-leader">
+              <li>
+                <span>The End of The Type-C</span>
+                <span>13</span>
+              </li>
+              <li>
+                <span>The Fall of The Optical Mouse</span>
+                <span>15</span>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <h3 class="custom-dot-leader-item custom-no-dot">
+          <span>Chapter 10</span>
+          <span>16</span>
+        </h3>
+        <ul class="custom-dot-leader">
+          <li>
+            <div class="custom-dot-leader-item">
+              <span>Unending Untiring Importunity</span>
+              <span>17</span>
+            </div>
+            <ul class="custom-dot-leader">
+              <li>
+                <span>Of Treats</span>
+                <span>18</span>
+              </li>
+              <li>
+                <span>Of Wet Food</span>
+                <span>19</span>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <span>Million Eon Slumber</span>
+            <span>21</span>
           </li>
         </ul>
       </li>
