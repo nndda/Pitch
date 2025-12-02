@@ -1,5 +1,5 @@
 name:
-  Dot Leader
+  Tree List
 
 scopes:
   compatible:
@@ -11,22 +11,36 @@ sampleHTML:
   - | # ================================================================================================
     <!-- NOTE -->
     <p>
-      Connect long, horizontally separated texts with dots to guide the reader's eyes.
+      Unordered list element, styled as tree view structure.
     </p>
 
   - | # ------------------------------------------------------------------------------------------------
-    <ul class="custom-dot-leader">
+    <ul class="custom-tree">
       <li>
-        <span>Base game</span>
-        <span>$5</span>
+        Plant-based
+        <ul>
+          <li>
+            Fruits
+            <ul>
+              <li>Salak</li>
+              <li>Mangosteen</li>
+            </ul>
+          </li>
+          <li>
+            Veggies
+            <ul>
+              <li>Salsify</li>
+              <li>Kohlrabi</li>
+            </ul>
+          </li>
+        </ul>
       </li>
       <li>
-        <span>Base game + bonus content</span>
-        <span>$12.5</span>
-      </li>
-      <li>
-        <span>Supporter Pack</span>
-        <span>$16</span>
+        Animal-based
+        <ul>
+          <li>Beef</li>
+          <li>Jellyfish</li>
+        </ul>
       </li>
     </ul>
 
@@ -34,51 +48,36 @@ sampleHTML:
     <!-- NOTE -->
     <h2>Helper Classes</h2>
     <p>
-      Add <code>custom-no-dot</code> class to the <code>&lt;li&gt;</code> element to disable the dotted line.
+      Add <code>custom-tree-dashed</code> or <code>custom-tree-dotted</code> class to the <code>&lt;ul&gt;</code> element to change the style of the outline.
     </p>
 
   - | # ------------------------------------------------------------------------------------------------
-    <ul class="custom-dot-leader">
+    <ul class="custom-tree">
       <li>
-        <span>Base game</span>
-        <span>$5</span>
-      </li>
-      <li class="custom-no-dot">
-        <span>Base game + bonus content</span>
-        <span>$12.5</span>
-      </li>
-      <li>
-        <span>Supporter Pack</span>
-        <span>$16</span>
-      </li>
-    </ul>
-
-  - | # ================================================================================================
-    <!-- NOTE -->
-    <p>
-      Add <code>custom-dot-leader-item</code> class to any element containing 2 inline elements,
-      to style it to the Dot Leader item styling, without having the whole <code>&lt;ul&gt;</code> and <code>&lt;li&gt;</code>.
-    </p>
-
-  - | # ------------------------------------------------------------------------------------------------
-    
-    <h3 class="custom-dot-leader-item custom-no-dot">
-      <span>Item</span>
-      <span>Price</span>
-    </h3>
-
-    <ul class="custom-dot-leader">
-      <li>
-        <span>Base game</span>
-        <span>$5</span>
+        Plant-based
+        <ul class="custom-tree-dashed">
+          <li>
+            Fruits
+            <ul>
+              <li>Salak</li>
+              <li>Mangosteen</li>
+            </ul>
+          </li>
+          <li>
+            Veggies
+            <ul>
+              <li>Salsify</li>
+              <li>Kohlrabi</li>
+            </ul>
+          </li>
+        </ul>
       </li>
       <li>
-        <span>Base game + bonus content</span>
-        <span>$12.5</span>
-      </li>
-      <li>
-        <span>Supporter Pack</span>
-        <span>$16</span>
+        Animal-based
+        <ul class="custom-tree-dotted">
+          <li>Beef</li>
+          <li>Jellyfish</li>
+        </ul>
       </li>
     </ul>
 
@@ -86,39 +85,34 @@ sampleHTML:
     <!-- NOTE -->
     <h2>Examples</h2>
     <p>
-      Nested Dot Leader list with heading.
+      As directory structure view. With <button class="button-primary">Label</button> component.
     </p>
 
   - | # ------------------------------------------------------------------------------------------------
-    <ul class="custom-dot-leader">
+    <ul class="custom-tree">
       <li>
-        <span>Base game</span>
-        <span>$5</span>
-      </li>
-      <li>
-        <span>Base game + bonus content</span>
-        <span>$12.5</span>
-      </li>
-
-      <li>
-        <h3 style="margin: 0.5em 0;">
-          Supporter pack
-        </h3>
-      </li>
-
-      <li>
-        <ul class="custom-dot-leader">
+        TotallyARealVN-pc.zip
+        <ul>
+          <li>renpy/</li>
+          <li>lib/</li>
+          <li>game/</li>
           <li>
-            <span>Original soundtracks</span>
-            <span>$6.5</span>
+            bonus/
+            <ul>
+              <li>art pack/</li>
+              <li>soundtracks/</li>
+            </ul>
           </li>
           <li>
-            <span>Hi-res wallpapers</span>
-            <span>$7.5</span>
+            TotallyARealVN.sh
+            <span class="custom-lb">Linux</span>
           </li>
           <li>
-            <span>Hot dog</span>
-            <span>$2</span>
+            TotallyARealVN.exe
+            <span class="custom-lb">Windows</span>
+          </li>
+          <li>
+            TotallyARealVN.py
           </li>
         </ul>
       </li>
@@ -127,7 +121,43 @@ sampleHTML:
   - | # ================================================================================================
     <!-- NOTE -->
     <p>
-      Combined with <button class="button-primary">Tree List</button> component.
+      Tree List with headings.
+    </p>
+
+  - | # ------------------------------------------------------------------------------------------------
+    <ul class="custom-tree">
+      <li>
+        <h2>Plant-based</h2>
+        <ul>
+          <li>
+            <h3>Fruits</h3>
+            <ul>
+              <li>Salak</li>
+              <li>Mangosteen</li>
+            </ul>
+          </li>
+          <li>
+            <h3>Veggies</h3>
+            <ul>
+              <li>Salsify</li>
+              <li>Kohlrabi</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <h2>Animal-based</h2>
+        <ul>
+          <li>Beef</li>
+          <li>Jellyfish</li>
+        </ul>
+      </li>
+    </ul>
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <p>
+      Combined with <button class="button-primary">Dot Leader</button> component.
     </p>
 
   - | # ------------------------------------------------------------------------------------------------
@@ -218,3 +248,20 @@ sampleHTML:
         </ul>
       </li>
     </ul>
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <h2>Customization</h2>
+    <p>
+      Add the following CSS variables to adjust the tweak manually.
+    </p>
+
+  - | # ------------------------------------------------------------------------------------------------
+    <!-- CSS -->
+    :root {
+      /* Tree item's indentation */
+      --tree-list-indent: 1em;
+
+      /* Outline color */
+      --tree-outline-color: white; /* Default: current color of the text */
+    }
