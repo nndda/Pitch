@@ -1,0 +1,6 @@
+body:not(:has(.game_page_apperance_columns))
+  #user_tools:not(:has(.is_following))
+    ~ #wrapper .custom-follower-exclusive-hidden
+{
+  display: none !important;
+}

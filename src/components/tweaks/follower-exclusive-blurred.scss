@@ -1,0 +1,12 @@
+body:not(:has(.game_page_apperance_columns))
+  #user_tools:not(:has(.is_following))
+    ~ #wrapper .custom-follower-exclusive-blurred
+{
+  filter: blur(10px);
+
+  pointer-events: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  user-select: none;
+}

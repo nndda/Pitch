@@ -255,7 +255,7 @@ function initializeComponents(): void {
           ${compData.sub != undefined ? `data-sub="${compData.sub}"` : ""}
           class="
           ${compData.sub != undefined ? "sub" : ""}
-          ${compData.groupOnly ? "non-interractable" : ""}
+          ${compData.groupOnly ? "non-interractable group-only" : ""}
           ${isFaved ? "is-faved" : ""}
           ${compData["notes"].includes("Experimental") ? "is-exp" : ""}
           ">

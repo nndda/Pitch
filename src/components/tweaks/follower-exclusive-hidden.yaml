@@ -1,0 +1,33 @@
+name:
+  Hidden
+
+nameDisplay:
+  Follower Exclusive — Hidden
+
+scopes:
+  compatible:
+    - project
+  none:
+    - profile
+    - jam
+
+sub:
+  follower-exclusive-0
+
+notes:
+  - Experimental
+
+sampleHTML:
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <p>
+      Custom class <code>custom-follower-exclusive-hidden</code> that hides content for viewer that is not a follower of the creator.
+    </p>
+
+  - | # ================================================================================================
+    <!-- NOTE -->
+    <blockquote class="custom-callout">
+      <h4 style="margin: .5em 0;">Important Notes</h4>
+      This tweak just hides/blurs the content <b><i>visually</i></b>.<br>
+      Anyone that's able to view/modify the HTML directly (like via the browser's developer tool) can toggle back the content without following the creator.
+    </blockquote>
