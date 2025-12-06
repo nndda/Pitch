@@ -8,6 +8,9 @@ scopes:
     - profile
     - jam
 
+sub:
+  comment-0
+
 inputs:
   - name: itch.io username
     id: AUTHOR_BADGE_URL

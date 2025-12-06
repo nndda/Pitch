@@ -619,3 +619,7 @@ $active-col: #eee;
   -webkit-user-select: none;
   user-select: none;
 }
+
+.group-only .icon.exp {
+  display: none;
+}
