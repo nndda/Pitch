@@ -19,6 +19,23 @@ updates:
         update-types:
           - major
 
+  - package-ecosystem: npm # See documentation for possible values
+    directory: /src/pitch-cdn/ # Location of package manifests
+    schedule:
+      interval: weekly
+    versioning-strategy: auto
+    target-branch: dev
+    cooldown:
+      default-days: 15
+    groups:
+      minor-and-patch-updates:
+        update-types:
+          - minor
+          - patch
+      major-updates:
+        update-types:
+          - major
+
   - package-ecosystem: github-actions
     directory: /
     schedule:
