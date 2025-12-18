@@ -20,4 +20,3 @@ import "@fontsource/pixelify-sans";
 import "./styles/prismjs-theme.scss";
 
 import "driver.js/dist/driver.css";
-import "./scripts/intro";

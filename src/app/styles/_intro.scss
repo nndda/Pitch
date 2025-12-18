@@ -53,3 +53,23 @@ svg.driver-overlay > path {
     margin-right: -1em;
   }
 }
+
+
+#driver-popover-content:has(.tweaks-intro) {
+
+  max-width: 35em !important;
+
+  & .driver-popover-prev-btn {
+    display: none !important;
+  }
+}
+
+.tweaks-intro {
+  & h1 {
+    font-family: "Courgette";
+  }
+
+  & p {
+    font-size: 1.25em;
+  }
+}
