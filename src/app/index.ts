@@ -316,6 +316,14 @@ function initializeComponents(): void {
       compElemItem.on("click", "button.component-toggle", () => {
         setCompInfo(comp);
 
+        if (!isTweaksWarned) {
+          if (comp.startsWith("tweak")) {
+            driverTweaksfirsttimeGet().drive();
+            localStorage.setItem(flagKeyTweaksfirsttime, "");
+            isTweaksWarned = true;
+          }
+        }
+
         currViewedComp?.removeClass("viewed");
         currViewedComp = compElemItem;
         currViewedComp.addClass("viewed");
@@ -967,6 +975,17 @@ const updateCompListFilterState: () => void = initSearch(d, () => {
 });
 updateCompListFilterState();
 
+import {
+  introFirsttimeInit,
+
+  flagKeyTweaksfirsttime,
+  driverTweaksfirsttimeGet,
+} from "./scripts/intro";
+
+let isTweaksWarned: boolean = localStorage.getItem(flagKeyTweaksfirsttime) !== null;
+
 $(document).on("load", () => {
   $("components-selector-container-inner").css("height", "100%");
 });
+
+introFirsttimeInit();
