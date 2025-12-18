@@ -126,3 +126,9 @@
   width: 100%;
   height: 100%;
 } */
+
+@media (max-width: 650px) {
+  .custom-speed-dial {
+    bottom: calc(50px + 1em);
+  }
+}
