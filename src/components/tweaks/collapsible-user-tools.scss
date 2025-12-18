@@ -1,22 +1,36 @@
 @media (min-width: 960px) {
   .user_tools {
     margin: 0;
-    padding: 10px 10px 0 0;
+    padding: 10px 10px 1px 1px;
     overflow: hidden;
+    pointer-events: none;
 
     & > li > a {
       width: 100%;
-      transition: .3s ease-out transform;
+      padding: .3em !important;
+      transition: .3s ease-out all;
+
+      border-radius: 4px 0 0 4px !important;
+
+      pointer-events: all;
+      
+      &:hover {
+        background: var(--itchio_ui_bg_dark, black) !important;
+      }
 
       &:not(:hover) {
         opacity: .5;
         color: #0000;
-        transform: translateX(calc(100% - 2.5em));
+        transform: translateX(calc(100% - 2.35em));
 
         & > span {
           color: #0000;
         }
       }
+    }
+
+    & > .jam_entry:not(.jam_entry + .jam_entry) {
+      margin-top: 2em !important;
     }
   }
 }
