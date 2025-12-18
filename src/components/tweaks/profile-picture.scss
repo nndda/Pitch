@@ -6,7 +6,7 @@
 }
 
 #profile_header > .text_header {
-  margin-left: calc(var(--pfp-size, 6em) + 1.2em);
+  margin-left: calc(var(--pfp-size, 6rem) + 1.2rem);
 /*   margin-left: calc(var(--pfp-size, 6em) + .75em); */
   padding: 0 !important;
 }
@@ -17,7 +17,7 @@
 }
 
 .link_group:first-child {
-  margin-left: calc(var(--pfp-size, 6em) + 1.2em);
+  margin-left: calc(var(--pfp-size, 6rem) + 1.2rem);
 }
 
 .user_links:before {
@@ -25,10 +25,10 @@
   content: "";
   background: url("PFP_URL");
 
-  top: calc(var(--pfp-size, 6em) * -1 + 20px + .5em);
+  top: calc(var(--pfp-size, 6rem) * -1 + 20px + .5rem);
 
-  height: var(--pfp-size, 6em);
-  width: var(--pfp-size, 6em);
+  height: var(--pfp-size, 6rem);
+  width: var(--pfp-size, 6rem);
 
 /*   border-radius: 9px; */
   border-radius: var(--pfp-border-radius, var(--itchio_border_radius));
