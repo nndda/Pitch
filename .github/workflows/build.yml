@@ -28,12 +28,13 @@ jobs:
         run: npm ci
 
       - name: Build app
-        run: npm run build && zip -r pitch-dist.zip ./dist/
+        run: npm run build
 
-      - uses: actions/upload-artifact@v6
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v6
         with:
-          name: Pitch build artifact
-          path: ./pitch-dist.zip
+          name: pitch-build-${{ github.sha }}
+          path: ./dist/
           if-no-files-found: error
           retention-days: 3
           compression-level: 9
