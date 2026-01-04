@@ -1,0 +1,39 @@
+name: Build app
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'src/'
+      - '**/*.ts'
+      - '**/*.js'
+      - '**/*.json'
+      - '.github/workflows/build.yml'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version-file: '.nvmrc'
+      - name: Install Node.js dependencies
+        run: npm ci
+
+      - name: Build app
+        run: npm run build && zip -r pitch-dist.zip ./dist/
+
+      - uses: actions/upload-artifact@v6
+        with:
+          name: Pitch build artifact
+          path: ./pitch-dist.zip
+          if-no-files-found: error
+          retention-days: 3
+          compression-level: 9
