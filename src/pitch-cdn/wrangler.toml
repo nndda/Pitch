@@ -1,6 +1,0 @@
-name = "pitch-cdn"
-main = "src/index.ts"
-
-compatibility_date = "2025-05-31"
-
-assets = { directory = "./assets", binding = "ASSETS" }
