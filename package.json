@@ -18,5 +18,8 @@
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.app.json && tsc -p tsconfig.node.json"
   },
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "modern-normalize": "^3.0.1"
+  }
 }
