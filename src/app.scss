@@ -1,6 +1,14 @@
 @use "../node_modules/modern-normalize/modern-normalize.css";
 @use "../node_modules/@fortawesome/fontawesome-free/css/all.min.css";
 
+@use "@fontsource/lato";
+@use "@fontsource/ubuntu";
+@use "@fontsource/lora";
+@use "@fontsource/courgette";
+@use "@fontsource/pixelify-sans";
+
 html { 
   color-scheme: dark only;
+
+  font-family: Lato;
 }

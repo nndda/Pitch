@@ -4,9 +4,9 @@
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^7.0.0",
     "@tsconfig/svelte": "^5.0.8",
-    "@types/node": "^24.12.0",
+    "@types/node": "^25.5.0",
     "sass": "^1.98.0",
-    "svelte": "^5.53.12",
+    "svelte": "^5.54.1",
     "svelte-check": "^4.4.5",
     "typescript": "~5.9.3",
     "vite": "^8.0.1"
@@ -20,6 +20,11 @@
   },
   "type": "module",
   "dependencies": {
+    "@fontsource/courgette": "^5.2.7",
+    "@fontsource/lato": "^5.2.7",
+    "@fontsource/lora": "^5.2.8",
+    "@fontsource/pixelify-sans": "^5.2.7",
+    "@fontsource/ubuntu": "^5.2.8",
     "@fortawesome/fontawesome-free": "^7.2.0",
     "modern-normalize": "^3.0.1"
   }
