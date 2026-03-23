@@ -1,0 +1,115 @@
+@use "../styles/variables" as *;
+
+input {
+  &[type="checkbox"] {
+    display: none;
+
+    & + label {
+      cursor: pointer;
+    }
+
+    &:not(:checked) {
+      & + label {
+        & > :is(.fa-square-check, .checked) {
+          display: none;
+        }
+      }
+    }
+
+    &:checked {
+      & + label {
+        & > :is(.fa-square, .checked-not) {
+          display: none;
+        }
+
+        &.caret-toggle {
+          transform: rotate(90deg);
+        }
+
+        &.button-check {
+          background: $text-col;
+          color: $background;
+        }
+      }
+    }
+  }
+}
+
+.button-check {
+  transition: background .3s, color .3s;
+}
+
+.caret-toggle {
+  transition: .3s;
+  transform-origin: center;
+}
+
+:is(button, .button) {
+  display: inline-flex;
+  align-content: center;
+  justify-items: center;
+  align-items: center;
+  justify-content: center;
+
+  font-family: Ubuntu;
+  background: lighten($background, 5.5%);
+  // border: 1px solid $border-col-light;
+  border: 0;
+  border-radius: 6px;
+
+  cursor: pointer;
+
+  &:hover {
+    background: lighten($background, 9.5%);
+  }
+
+  &.icon-only {
+    border: 0;
+    outline: 0;
+    background: 0;
+  }
+
+  &:not(.icon-only) {
+    padding: .25em .65em;
+  }
+
+  & > .icon {
+    font-size: .8em;
+    margin-right: .5em;
+  }
+}
+
+button {
+  transition: opacity .3s;
+
+  &[disabled] {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+.btn-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: .25em;
+
+  background: $background;
+  border-radius: 6px;
+
+  & > span {
+    flex-grow: 1;
+    margin-inline: .5em;
+  }
+
+  & > button {
+    &:first-of-type {
+      border-radius: 6px 0 0 6px;
+      border-right: 0;
+    }
+    &:last-of-type {
+      border-radius: 0 6px 6px 0;
+    }
+  }
+}
