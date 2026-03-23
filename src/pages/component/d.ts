@@ -1,7 +1,22 @@
 declare global {
 
-  type Scope = "project" | "profile" | "jam" | "devlog";
+  type Scope =
+    "project"
+  | "profile"
+  | "jam"
+  | "devlog"
+  ;
+  type ScopeStatus =
+    "compatible"
+  | "partial"
+  | "none"
+  ;
   type Scopes = Scope | Scope[];
+
+  type ComponentTags =
+    "hacky"
+  | "experimental"
+  ;
 
   interface ComponentUserInput {
     name: string,
@@ -19,14 +34,13 @@ declare global {
     name: string,
     nameDisplay?: string,
 
-    scopes: {
-      compatible?: Scopes,
-      partial?: Scopes,
-      none?: Scopes,
-    },
+    scopes: Record<ScopeStatus | string, Scopes>;
 
     input?: ComponentUserInput[],
     inputVars?: ComponentUserInputVarsModifier[],
+
+    tags?: ComponentTags[],
+    notes?: string[],
   }
 
 }
