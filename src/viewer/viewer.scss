@@ -1,0 +1,38 @@
+@use "../styles/variables";
+
+@use "./components/scopes";
+
+#viewer {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  height: 100vh;
+
+  padding-top: .5em;
+
+  & > header, > section {
+    // padding: .5em;
+    padding-inline: 2em;
+  }
+
+  & > header {
+    display: flex;
+  }
+}
+
+.page-heading {
+  margin: .3em .5em;
+}
+
+#btn-home {
+  & > i {
+    font-size: 1.5em;
+  }
+}
+
+#wrapper {
+  // display: flex;
+  // flex-direction: column;
+  overflow-y: scroll;
+}

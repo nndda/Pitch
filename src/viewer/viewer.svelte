@@ -2,15 +2,27 @@
   import { state, backToHome } from "../states/components.svelte";
 </script>
 
-<main>
+<main id=viewer>
   <header>
-    <button onclick={backToHome}>Home</button>
-    <h1>{state.currentId}</h1>
+    <button
+      id=btn-home
+      class=icon-only
+      onclick={backToHome}
+      aria-label=Home
+    >
+      <i class="fa-solid fa-house"></i>
+    </button>
+    <h1 class=page-heading>{state.currentId}</h1>
   </header>
 
-  <section>
-    
+  <section id=toolbar>
+    <input type=radio>
+    <input type=radio>
+    <input type=radio>
+    <input type=radio>
   </section>
+
+  <hr>
 
   <section id=wrapper>
     {#if state.currentPage}

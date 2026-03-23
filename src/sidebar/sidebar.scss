@@ -1,0 +1,156 @@
+@use "../styles/variables" as *;
+
+#sidebar {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 17.5em;
+  width: 17.5em;
+
+  padding: .5em;
+
+  border-right: 1px solid $border-col;
+
+  & ul {
+    list-style: none;
+
+    padding-left: 1em;
+    margin: 0;
+
+    overflow-y: hidden;
+  }
+}
+
+.page-lists {
+  flex-grow: 1;
+  padding-right: .75em;
+  overflow-y: scroll;
+
+  scrollbar-width: thin;
+
+  & > hr {
+    opacity: .6;
+    margin-block: 1em;
+  }
+
+  & > p {
+    padding: 1em;
+  }
+}
+
+.cat-heading {
+  display: flex;
+  align-items: center;
+  gap: .5em;
+
+  padding-left: .5em;
+  margin-block: .5em;
+
+  letter-spacing: .1ch;
+
+  & > .text, > .icon {
+    color: $accent;
+  }
+
+  & > .text {
+    flex-grow: 1;
+  }
+
+  &:has(.toggle:checked) {
+    & + ul {
+      height: 0;
+    }
+  }
+}
+
+h1.cat-heading {
+  font-size: 1.6em;
+}
+
+h2.cat-heading {
+  font-size: 1.25em;
+}
+
+.pitch-title {
+  margin-bottom: .5em;
+
+  & > .logo {
+    width: 1.5em;
+  }
+
+  & > .text > small {
+    font-size: .6em;
+    color: $text-col;
+  }
+}
+
+.comp-item {
+  padding-block: .35em;
+
+  & .checkbox {
+    margin-right: .2em;
+  }
+
+  & label {
+    white-space: nowrap;
+    cursor: pointer;
+
+    opacity: .75;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  & input {
+    &[type="radio"] {
+      display: none;
+
+      &:checked {
+        & + label {
+          font-weight: bold;
+          opacity: 1;
+
+          text-decoration: underline 1px solid;
+        }
+      }
+    }
+
+    &[type="checkbox"] {
+      &:checked {
+        & ~ label {
+          font-weight: bold;
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  & .fave {
+    opacity: 0;
+    font-size: .9em;
+
+    & .fa-solid {
+      color: #fcb930;
+    }
+  }
+
+  &:hover {
+    & .fave {
+      opacity: 1;
+    }
+  }
+}
+
+.comp-name-label {
+  padding: .1em .35em;
+  border-radius: 4px;
+}
+
+.tags {
+  font-size: .9em;
+
+  & .experimental {
+    color: $primary;
+  }
+}

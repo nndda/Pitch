@@ -17,3 +17,7 @@ export function getPages(
     comp: mod,
   }));
 }
+
+import pkg from "../../package.json";
+
+export const pitchVer: string = pkg.version;

@@ -1,0 +1,35 @@
+@use "../../../styles/variables" as *;
+
+.codes-container {
+  // max-width: 100%;
+  max-width: 945px; // TODO
+  // width: 100%;
+  margin: auto;
+  margin-block: 1.5em;
+  border: 1px solid $border-col-light;
+  border-radius: 6px;
+
+  overflow: hidden;
+}
+
+.codes-toolbar {
+  display: flex;
+  gap: 1em;
+  padding: .5em 1em;
+  background: $background;
+
+  & button, .button {
+    font-size: .8em;
+  }
+}
+
+.html-view {
+  padding: .5em 1em;
+}
+
+.html-editor {
+  max-width: 100%;
+}
+.button-reset[disabled] {
+  filter: blur(5px);
+}

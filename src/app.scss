@@ -6,9 +6,45 @@
 @use "@fontsource/lora";
 @use "@fontsource/courgette";
 @use "@fontsource/pixelify-sans";
+@use "@fontsource/roboto-mono";
+
+@use "./styles/variables" as *;
+
+@use "./styles/input";
+
+@use "./styles/components_dev";
+
+@use "./sidebar/sidebar.scss";
+@use "./viewer/viewer.scss";
 
 html { 
   color-scheme: dark only;
 
   font-family: Lato;
+}
+
+body {
+  display: flex;
+  flex-direction: row;
+
+  max-height: 100dvh;
+  overflow: hidden;
+
+  color: $text-col;
+  background: $background-dark;
+
+  @include style-scrollbar();
+}
+
+hr {
+  width: 100%;
+  color: $border-col;
+}
+
+a {
+  color: $accent;
+}
+
+.flex-space {
+  flex-grow: 1;
 }
