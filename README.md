@@ -23,13 +23,13 @@ Collection of CSS components and tweaks designed specifically for itch.io projec
 
 ```sh
 # Install the dependencies
-npm install
+bun install
 
-# Run the development server at localhost:8080
-npm run start
+# Run the development server at localhost:5173
+bun run dev
 
 # Build the app to dist/
-npm run build
+bun run build
 ```
 
 ## Licenses
