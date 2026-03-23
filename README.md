@@ -37,4 +37,4 @@ bun run build
 - The Pitch web app is licensed under [AGPLv3](LICENSE).
 - The CSS components are licensed under [CC0](LICENSE-CC0).
 
-Copyright &copy; 2025 nnda
+Copyright &copy; 2026 nnda
