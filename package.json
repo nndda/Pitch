@@ -84,6 +84,6 @@
     "webpack": "^5.105.4",
     "webpack-cli": "^7.0.0",
     "webpack-dev-server": "^5.2.3",
-    "yaml": "^2.8.2"
+    "yaml": "^2.8.3"
   }
 }
