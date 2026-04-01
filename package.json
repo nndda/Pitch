@@ -7,10 +7,10 @@
     "@types/lodash": "^4.17.24",
     "@types/node": "^25.5.0",
     "sass": "^1.98.0",
-    "svelte": "^5.55.0",
-    "svelte-check": "^4.4.5",
-    "typescript": "~5.9.3",
-    "vite": "^8.0.2"
+    "svelte": "^5.55.1",
+    "svelte-check": "^4.4.6",
+    "typescript": "^6.0.2",
+    "vite": "^8.0.3"
   },
   "private": true,
   "scripts": {
@@ -34,6 +34,7 @@
     "dedent": "^1.7.2",
     "dompurify": "^3.3.3",
     "lodash": "^4.17.23",
-    "modern-normalize": "^3.0.1"
+    "modern-normalize": "^3.0.1",
+    "slugify": "^1.6.8"
   }
 }
