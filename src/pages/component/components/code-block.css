@@ -1,0 +1,59 @@
+.custom-code {
+  position: relative;
+  padding: .5em;
+
+  background: var(--b2s);
+
+  font-size: 14px;
+
+  word-wrap: normal;
+  white-space: pre-wrap;
+  overflow: auto;
+
+  border-radius: 3px;
+
+  counter-reset: ln;
+
+  & > code {
+    position: relative;
+    display: block;
+
+    padding-left: 3em;
+
+    &::after {
+      counter-increment: ln;
+      content: counter(ln);
+
+      position: absolute;
+      display: inline-block;
+      left: 0;
+      top: 0;
+
+      width: 2em;
+
+      padding-right: .5em;
+
+      text-align: right;
+      font-family: monospace;
+
+      opacity: .6;
+
+      border-right: 2px solid var(--br);
+    }
+  }
+}
+
+.custom-hl::before {
+  content: "-";
+
+  position: absolute;
+  left: -.5em;
+  width: 100%;
+
+  padding-left: 1em;
+
+  color: #0000;
+  background: var(--l);
+
+  opacity: .25;
+}

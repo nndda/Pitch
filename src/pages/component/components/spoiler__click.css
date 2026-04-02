@@ -1,0 +1,33 @@
+.custom-hd-click {
+  display: inline-block;
+  height: 1em;
+
+  & > details {
+    display: flex;
+
+    & > summary {
+      display: flex; /* Remove the default marker */
+      
+      &::selection {
+        color: var(--t);
+        background: var(--t);
+      }
+
+      /* Remove the default marker on itch app */
+      &::-webkit-details-marker{
+        display: none;
+      }
+    }
+
+    &:not([open]) > summary {
+      color: #0000;
+      background: var(--t);
+      cursor: pointer;
+    }
+
+    &[open] > summary {
+      background: #0000;
+      transition: background .5s ease;
+    }
+  }
+}

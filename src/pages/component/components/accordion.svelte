@@ -1,4 +1,4 @@
-<script lang=ts module>
+<script lang="ts" module>
   export const data: ComponentData = {
 
     name: "Accordion",
@@ -34,7 +34,8 @@
           "ACCORDION_CLOSED": "accrd-cls",
         },
       }
-    ], 
+    ],
+
   };
 
   import { CodeHTML, ComponentPage } from "../_template/components";
@@ -47,7 +48,7 @@
     Turn walls of texts into list of collapsible contents. It’s basically just a styled list of <code>&lt;details&gt;</code> elements.
   </p>
 
-  <CodeHTML>
+  <CodeHTML html={`
 
     <div class="custom-accrd">
       <details>
@@ -66,14 +67,14 @@
       </details>
     </div>
 
-  </CodeHTML>
+  `}/>
 
   <p>
     You can also add elements other than <code>&lt;details&gt;</code> directly inside <code>.custom-accrd</code>. Like a header or footer:
   </p>
 
-  <CodeHTML>
-    
+  <CodeHTML html={`
+  
     <div class="custom-accrd">
       <h2>Frequently Asked Questions</h2>
 
@@ -96,9 +97,9 @@
       </details>
     </div>
 
-  </CodeHTML>
+  `}/>
 
-  <CodeHTML>
+  <CodeHTML html={`
 
     <div class="custom-accrd">
       <p>
@@ -146,7 +147,7 @@
       </p>
     </div>
 
-  </CodeHTML>
+  `}/>
 
   <h2>Aligning</h2>
 
@@ -154,8 +155,8 @@
     Accordions are center-aligned by default. To align it to left or right, add another class <code>custom-left</code> or <code>custom-right</code>.
   </p>
 
-  <CodeHTML>
-    
+  <CodeHTML html={`
+  
     <div class="custom-accrd custom-left">
       <details>
         <summary>Left-aligned accordion</summary>
@@ -172,7 +173,7 @@
       </details>
     </div>
 
-  </CodeHTML>
+  `}/>
 
   <h2>Sizing</h2>
   <p>
@@ -181,8 +182,8 @@
     Add <code>custom-full-w</code> class to make it takes up the entire width of the page.
   </p>
 
-  <CodeHTML>
-    
+  <CodeHTML html={`
+
     <div class="custom-accrd custom-full-w">
       <details>
         <summary>Full width accordion</summary>
@@ -191,13 +192,13 @@
       </details>
     </div>
 
-  </CodeHTML>
+  `}/>
 
   <p>
     Or adjust the width manually by overriding its <code>max-width</code> property.
   </p>
 
-  <CodeHTML>
+  <CodeHTML html={`
 
     <div class="custom-accrd" style="max-width: 500px;">
       <details>
@@ -223,6 +224,6 @@
       </details>
     </div>
 
-  </CodeHTML>
+  `}/>
 
 </ComponentPage>

@@ -1,0 +1,56 @@
+.custom-tree, .custom-tree :where(ul, li) {
+  position: relative;
+}
+
+.custom-tree, .custom-tree ul {
+  line-height: 1.5em;
+  list-style: none;
+  padding-left: var(--tree-list-indent, 1em);
+  margin-left: 1em;
+
+  &.custom-tree-dotted {
+    --tree-b-style: dotted;
+  }
+
+  &.custom-tree-dashed {
+    --tree-b-style: dashed;
+  }
+}
+
+ul.custom-dot-leader.custom-tree {
+  padding-left: 1em;
+}
+
+.custom-tree {
+  & li {
+    & > :where(h1, h2, h3, h4, h5, h6) {
+      padding-bottom: .3lh;
+      margin: 0;
+    }
+
+    &:last-child::after {
+      height: .5lh;
+    }
+
+    &::before,
+    &::after {
+      content: "";
+      display: inline-block;
+      position: absolute;
+      left: -1em;
+
+      border-top: .0625em var(--tree-b-style, solid);
+      border-color: var(--tree-outline-color, currentColor) !important;
+      width: .6em;
+      height: 0;
+      top: .5lh;
+    }
+
+    &::after {
+      border-left: .0625em var(--tree-b-style, solid);
+      width: 0px;
+      height: 100%;
+      top: .05lh;
+    }
+  }
+}

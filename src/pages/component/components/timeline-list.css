@@ -1,0 +1,77 @@
+.custom-tl-list {
+  display: grid;
+  grid-template-columns: 8.25em 1fr;
+  padding-left: 1em;
+
+  & > dt, & > dd {
+    margin: .25em 0;
+    padding: 0 .5em;
+  }
+
+  & > dt {
+    position: relative;
+    grid-column: 1;
+    width: fit-content;
+    max-height: 1.25em;
+    font-weight: bold;
+    background: var(--t);
+    color: var(--b2);
+    border-radius: 4px;
+    
+    & > small {
+      position: absolute;
+      left: 0;
+      top: 100%;
+      margin-top: .5em;
+      color: var(--t);
+      font-size: .85em;
+      font-weight: normal;
+      white-space: nowrap;
+      opacity: .8;
+    }
+
+    &:not(:first-child) {
+      margin-top: 1.5em;
+
+      & + dd {
+        margin-top: 1.5em;
+      }
+    }
+    
+  }
+
+  & > dd {
+    position: relative;
+    grid-column: 2;
+    margin-left: 1em;
+
+    &::before, &::after {
+      content: "";
+      position: absolute;
+      left: -1.25em;
+    }
+
+    &::before {
+      top: .5em;
+      height: 100%;
+      padding: 1em 0;
+      border-left: 1px dashed var(--l);
+      transform: translate(-50%, 0);
+    }
+
+    &::after {
+      top: 50%;
+      height: .5em;
+      width: .5em;
+      background: var(--l);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    & > .custom-lb {
+      /*  There has to be a better way... */
+      padding: 0 .7ch !important;
+      outline: .35ch solid var(--btn);
+    }
+  }
+}

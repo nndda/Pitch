@@ -1,0 +1,35 @@
+.custom-heading-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+
+  &::before,
+  &::after {
+    flex-grow: 1;
+    content: "";
+    border-bottom: var(--heading-divider-widtb, .065em) var(--heading-divider-style, solid) var(--heading-divider-color, currentColor);
+    height: .065em;
+  }
+
+  &::before {
+    margin-right: .5em;
+  }
+
+  &::after {
+    margin-left: .5em;
+  }
+
+  &.custom-left::before,
+  &.custom-right::after {
+    display: none;
+  }
+
+  &.custom-dashed {
+    --heading-divider-style: dashed;
+  }
+  &.custom-dotted {
+    --heading-divider-style: dotted;
+  }
+}
