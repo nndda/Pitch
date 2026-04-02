@@ -1,0 +1,40 @@
+@use "../styles/variables" as *;
+
+@use "./components/scopes";
+
+#viewer {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  height: 100vh;
+
+  padding-top: .5em;
+
+  & > header, > section {
+    // padding: .5em;
+    padding-inline: 2em;
+  }
+
+  & > header {
+    display: flex;
+    padding-block: .5em;
+    padding-bottom: 1em;
+    border-bottom: 1px solid $border-col;
+  }
+}
+
+.page-heading {
+  margin: .3em .5em;
+  margin: 0 .5em;
+}
+
+#btn-home {
+  & > i {
+    font-size: 1.5em;
+  }
+}
+
+#wrapper {
+  overflow-y: scroll;
+}

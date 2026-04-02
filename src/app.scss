@@ -1,0 +1,68 @@
+@use "../node_modules/modern-normalize/modern-normalize.css";
+@use "../node_modules/@fortawesome/fontawesome-free/css/all.min.css";
+
+@use "@fontsource/lato";
+@use "@fontsource/ubuntu";
+// @use "@fontsource/lora";
+// @use "@fontsource/courgette";
+// @use "@fontsource/pixelify-sans";
+@use "@fontsource/roboto-mono";
+
+@use "./styles/variables" as *;
+
+@use "./styles/input";
+
+@use "./styles/itchio";
+
+@use "./sidebar/sidebar.scss";
+@use "./viewer/viewer.scss";
+
+html {
+  color-scheme: dark only;
+
+  font-family: Lato;
+}
+
+body {
+  display: flex;
+  flex-direction: row;
+
+  max-height: 100dvh;
+  overflow: hidden;
+
+  color: $text-col;
+  background: $background-dark;
+
+  @include style-scrollbar();
+}
+
+#sidebar,
+#viewer > :where(header),
+#wrapper > :where(p, ul, ol) {
+
+  & hr {
+    width: 100%;
+    color: $border-col;
+  }
+
+  & a {
+    color: $primary;
+  }
+
+  & code {
+    font-family: "Roboto Mono";
+    color: $primary;
+    background: $background-light;
+    padding-inline: .5em;
+  }
+}
+
+.flex-space {
+  flex-grow: 1;
+}
+
+.hr-v {
+  border-right: 2px solid $border-col;
+  margin: 0 1em;
+  // width: 1px;
+}

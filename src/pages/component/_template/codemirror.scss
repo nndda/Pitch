@@ -1,0 +1,80 @@
+@use "../../../styles/variables" as *;
+
+// CodeMirror Editor
+
+.cm-editor {
+  // contain: layout content;
+  & .cm-gutters {
+    // filter: blur(5px);
+    background: $background;
+    border-right-color: $border-col;
+    // padding-right: .5em;
+  }
+
+  & .cm-activeLineGutter {
+    // color: $background;
+    background: rgba($primary, 0.075);
+    // background: $primary;
+  }
+  & .cm-foldPlaceholder {
+    background: $primary;
+    color: $background;
+  }
+  & .cm-foldPlaceholder {
+    border: 0;
+    padding-inline: .25em;
+  }
+
+  & .cm-activeLine {
+    background: rgba($primary, 0.075);
+  }
+
+  & .cm-selectionMatch {
+    background: rgba($primary, 0.25);
+    // background: $primary;
+  }
+
+
+  // SynHiLi
+
+  & .cm-matchingBracket {
+    color: $primary;
+  }
+
+  & .ͼi {
+    color: #74dfc4;
+  }
+  & .ͼe {
+    color: #b4dce7;
+  }
+
+  & .cm-tooltip {
+    background: $background;
+
+    & [aria-selected="true"] {
+      background: rgba($primary, 0.1) !important;
+    }
+  }
+}
+
+
+.cm-scroller {
+  // max-width: 100%;
+}
+.cm-lineNumbers {
+  & .cm-gutterElement {
+    // padding-left: 1em !important;
+  }
+}
+.cm-foldGutter {
+  width: 1.5em;
+}
+
+.cm-gutterElement {
+  text-align: center;
+}
+
+.cm-scroller {
+  font-family: Roboto Mono;
+  // font-size: .85em;
+}
