@@ -1,6 +1,7 @@
 @use "../styles/variables" as *;
 
 @use "./components/scopes";
+@use "./toc.scss";
 
 #viewer {
   display: flex;
@@ -11,7 +12,7 @@
 
   padding-top: .5em;
 
-  & > header, > section {
+  & > header, & #wrapper {
     // padding: .5em;
     padding-inline: 2em;
   }
@@ -37,4 +38,11 @@
 
 #wrapper {
   overflow-y: scroll;
+  flex-grow: 1;
+}
+
+.split {
+  display: flex;
+  overflow-y: scroll;
+  // display: grid;
 }

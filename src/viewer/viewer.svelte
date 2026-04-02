@@ -1,5 +1,14 @@
-<script lang=ts>
+<script lang="ts">
+
   import { state, backToHome } from "../states/components.svelte";
+  import { generateToC } from "./toc";
+
+  let tocContent: HTMLUListElement;
+
+  $effect((): void => {
+    generateToC(tocContent, state.currentId);
+  });
+
 </script>
 
 <main id="viewer">
@@ -62,9 +71,33 @@
  -->
   <!-- <hr> -->
 
-  <section id="wrapper">
-    {#if state.currentPage}
-      <svelte:component this={state.currentPage} />
-    {/if}
-  </section>
+  <div class="split">
+
+    <section id="wrapper">
+      {#if state.currentPage}
+        <svelte:component this={state.currentPage} />
+      {/if}
+    </section>
+
+    <nav id="toc">
+
+      <!--
+      <button aria-label="Collapes table of content" id="toc-collapse">
+        <i class="fa-solid fa-caret-right"></i>
+      </button>
+      -->
+
+      <h1>Table of content</h1>
+
+      <hr>
+
+      <h2>{state.currentId}</h2>
+
+      <ul id="toc-content" bind:this={tocContent}>
+
+      </ul>
+
+    </nav>
+
+  </div>
 </main>
