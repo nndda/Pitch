@@ -1,0 +1,18 @@
+.intro {
+  display: grid;
+  grid-template-columns: auto auto;
+}
+.pitch-logo {
+  grid-row: span 3;
+}
+
+.pitch-title {
+  // margin: 0;
+  font-family: Ubuntu;
+  font-size: 2em;
+  font-weight: 300;
+}
+
+.labels {
+  margin: 0;
+}

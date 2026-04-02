@@ -1,0 +1,77 @@
+@use "../../styles/variables" as *;
+
+@use "sass:math";
+@use "sass:color";
+
+.showcase-grid {
+  $gap: .75em;
+  $col: 3;
+  display: grid;
+  grid-template-columns: repeat($col, calc(math.div(100%, $col) - $gap));
+  grid-gap: $gap;
+}
+
+.entry {
+  // background: $background;
+  padding: .5em;
+
+  // border: 1px solid $border-col;
+  // border-radius: 6px;
+
+  // overflow: hidden;
+
+  & .title {
+    margin: 0;
+    margin: .5em;
+    font-size: 1.2em;
+
+    // min-height: 1em + 1.2em + 1em;
+  }
+  & .author {
+    display: block;
+    // margin: .5em;
+    // margin-left: .5em;
+    margin-top: .5em;
+    margin-bottom: .7em;
+    font-size: .8em;
+    font-weight: lighter;
+  }
+
+  & .thumb {
+    max-height: 300px;
+    border-radius: 7px 7px 0 0;
+    --l: linear-gradient(180deg, #fff 60%, #0000);
+    -webkit-mask-image: var(--l);
+    mask: alpha var(--l);
+  border: 1px solid $border-col;
+
+    // border-radius: 12px;
+
+    overflow: hidden;
+    & img {
+      display: block;
+      width: 100%;
+    }
+  }
+
+  & .type {
+    display: flex;
+    align-items: center;
+  }
+
+  & .info {
+    color: color.mix($text-col, $background-dark, 75%);
+    transform: translate(1em, -1.5em);
+    // margin-bottom: .5em;
+    font-size: .8em;
+
+    & .icon {
+      margin-right: .5em;
+    }
+  }
+}
+
+.profile-page-tag {
+  display: inline-block;
+  font-family: "Roboto Mono";
+}
