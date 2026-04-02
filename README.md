@@ -1,5 +1,5 @@
 <h1 align="center">
-<img src="./assets/pitch.svg" alt="Pitch Logo" width="120">
+<img src="./src/assets/pitch.svg" alt="Pitch Logo" width="120">
 <br>
 Pitch
 </h1>
