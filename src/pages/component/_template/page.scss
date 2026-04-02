@@ -1,0 +1,15 @@
+.heading-note {
+  // display: flex;
+
+  & > .note {
+    display: flex;
+
+    & p {
+      margin: 0;
+    }
+  }
+
+  & .label {  
+    margin-right: 1em;  
+  }
+}
