@@ -23,7 +23,7 @@ input {
         }
 
         &.caret-toggle {
-          transform: rotate(90deg);
+          transform: rotate(var(--deg, 90deg));
         }
 
         &.button-check {
@@ -40,8 +40,12 @@ input {
 }
 
 .caret-toggle {
+  display: inline-block;
   transition: .3s;
   transform-origin: center;
+}
+.caret-toggle.right {
+  --deg: -90deg;
 }
 
 :is(button, .button) {
@@ -103,13 +107,16 @@ button {
     margin-inline: .5em;
   }
 
-  & > button {
+  & > button, .button {
+    $br: 9px;
+    border-radius: 0;
+
     &:first-of-type {
-      border-radius: 6px 0 0 6px;
+      border-radius: $br 0 0 $br;
       border-right: 0;
     }
     &:last-of-type {
-      border-radius: 0 6px 6px 0;
+      border-radius: 0 $br $br 0;
     }
   }
 }

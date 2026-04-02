@@ -3,21 +3,21 @@
 
 @use "@fontsource/lato";
 @use "@fontsource/ubuntu";
-@use "@fontsource/lora";
-@use "@fontsource/courgette";
-@use "@fontsource/pixelify-sans";
+// @use "@fontsource/lora";
+// @use "@fontsource/courgette";
+// @use "@fontsource/pixelify-sans";
 @use "@fontsource/roboto-mono";
 
 @use "./styles/variables" as *;
 
 @use "./styles/input";
 
-@use "./styles/components_dev";
+@use "./styles/itchio";
 
 @use "./sidebar/sidebar.scss";
 @use "./viewer/viewer.scss";
 
-html { 
+html {
   color-scheme: dark only;
 
   font-family: Lato;
@@ -36,15 +36,33 @@ body {
   @include style-scrollbar();
 }
 
-hr {
-  width: 100%;
-  color: $border-col;
-}
+#sidebar,
+#viewer > :where(header),
+#wrapper > :where(p, ul, ol) {
 
-a {
-  color: $accent;
+  & hr {
+    width: 100%;
+    color: $border-col;
+  }
+
+  & a {
+    color: $primary;
+  }
+
+  & code {
+    font-family: "Roboto Mono";
+    color: $primary;
+    background: $background-light;
+    padding-inline: .5em;
+  }
 }
 
 .flex-space {
   flex-grow: 1;
+}
+
+.hr-v {
+  border-right: 2px solid $border-col;
+  margin: 0 1em;
+  // width: 1px;
 }

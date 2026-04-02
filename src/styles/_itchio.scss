@@ -1,1 +1,148 @@
 @use "./components_dev";
+
+/* This stylesheet attempts to mimic itch.io project page environment */
+
+body {
+  word-wrap: break-word;
+  color: var(--t);
+  background: var(--b2);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: inherit;
+  font-weight: 900;
+  color: inherit;
+}
+
+h1, h2, h3, h4 {
+  margin: 0.5em 0;
+}
+
+a {
+  color: var(--l);
+}
+
+p, ul, ol {
+  line-height: 1.4;
+}
+
+blockquote {
+  font-style: italic;
+  border-left: 4px solid;
+  border-color: var(--b2s);
+  padding-left: 15px;
+  margin-left: 15px;
+}
+
+pre {
+  background: var(--b2s);
+  word-wrap: normal;
+  overflow: auto;
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 3px;
+  white-space: pre-wrap;
+}
+
+ul, ol {
+  padding-left: 2.0em;
+}
+
+img {
+  max-width: 100%;
+  border: 0;
+}
+
+figure {
+  margin: 1em 0;
+}
+
+figure > img {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+figure figcaption {
+  margin-top: 0.5em;
+  font-size: 80%;
+  opacity: 0.8;
+  font-style: italic;
+}
+
+table {
+  margin: 1em 0;
+  border-collapse: collapse;
+  border: 1px solid;
+}
+
+table tr th,
+table tr td {
+  padding: 0.5em;
+  vertical-align: top;
+  text-align: left;
+  border: 1px solid;
+  border-color: inherit;
+}
+
+.text-center {
+  text-align:center
+}
+
+.text-right {
+  text-align:right
+}
+
+.text-justify {
+  text-align:justify
+}
+
+:root {
+  --thm: #fc3a78;
+
+  --ff: 'Lato';
+  --b: #121118;
+  --b2: rgba(18, 17, 24, 1);
+  --b2s: #29282f;
+  --t: #eaeaea;
+  --l: #fc3a78;
+  --br: #353242;
+  --btn: #fc3a78;
+  --btn_f: #ffffff;
+  --btn_s: #ff4d8b;
+}
+
+// Shorthand for itch.io built-in variables.
+#wrapper {
+  // --itchio_bg_color: #121118;
+  // --itchio_bg2_color: rgba(18, 17, 24, 1);
+  // --itchio_bg2_sub: #29282f;
+  // --itchio_text_color: #eaeaea;
+  // --itchio_link_color: #fc3a78;
+  // --itchio_border_color: #353242;
+  // --itchio_button_color: #d41c56;
+  // --itchio_button_fg_color: #ffffff;
+  // --itchio_button_shadow_color: #ec346e;
+  // --b: var(--itchio_bg_color);
+  // --b2: var(--itchio_bg2_color);
+  // --b2s: var(--itchio_bg2_sub);
+  // --t: var(--itchio_text_color);
+  // --l: var(--itchio_link_color);
+  // --br: var(--itchio_border_color);
+  // --btn: var(--itchio_button_color);
+  // --btn_f: var(--itchio_button_fg_color);
+  // --btn_s: var(--itchio_button_shadow_color);
+
+  // --thm: #fc3a78;
+
+  // --ff: 'Lato';
+  // --b: #121118;
+  // --b2: rgba(18, 17, 24, 1);
+  // --b2s: #29282f;
+  // --t: #eaeaea;
+  // --l: #fc3a78;
+  // --br: #353242;
+  // --btn: #fc3a78;
+  // --btn_f: #ffffff;
+  // --btn_s: #ff4d8b;
+  // font-family: var(--ff);
+}
