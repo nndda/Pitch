@@ -13,6 +13,13 @@ Collection of CSS components and tweaks designed specifically for itch.io projec
 
 <img align="center" src="https://github.com/user-attachments/assets/2d76ee0c-a243-468a-9794-8d4b1cda7ce3">
 
+<br><br>
+
+> [!CAUTION]
+> Pitch is currently migrating to the Svelte framework and Vite build system.
+> There will be breaking changes and bugs in the `main` and `dev` branch.
+
+
 ## Features
 
 - Automatically match your page's theme
