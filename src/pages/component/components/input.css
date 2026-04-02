@@ -1,0 +1,7 @@
+#wrapper kbd {
+  font-size: .8em;
+  background: var(--br);
+  border-radius: 5px;
+  border-bottom: 3px solid var(--b2s);
+  padding: .1ch .8ch;
+}

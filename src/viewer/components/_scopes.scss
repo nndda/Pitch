@@ -1,0 +1,55 @@
+@use "sass:color";
+
+@use "../../styles/variables" as *;
+
+.scopes {
+  padding: 0;
+  font-size: .9em;
+
+  & ul {
+    // margin: .5em 1em;
+  }
+  & ul, li {
+    display: inline-flex;
+    align-items: center;
+    gap: .5em;
+    padding: 0;
+  }
+
+  & > li {
+    margin: .2em .5em;
+    padding: .3em .5em;
+    border-radius: 6px;
+    // background: red;
+  }
+
+  & .text {
+    text-transform: capitalize;
+  }
+
+}
+
+@mixin style-scope-label($col) {
+  background: color.mix($background, $col, 70%);
+
+  & > .icon {
+    color: lighten($col, 15%);
+  }
+
+  // & .tooltip-content {
+  //   width: 100%;
+  //   padding: .5em;
+  //   background: color.mix($background, $col, 80%);
+  //   white-space: wrap;
+  // }
+}
+
+.compatible {
+  @include style-scope-label(#21bd19);
+}
+.partial {
+  @include style-scope-label(#ffbe0a);
+}
+.none {
+  @include style-scope-label(#e6071d);
+}

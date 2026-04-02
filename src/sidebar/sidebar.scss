@@ -1,0 +1,252 @@
+@use "../styles/variables" as *;
+@use "sass:color";
+
+#sidebar {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 17.5em;
+  width: 17.5em;
+
+  padding: .5em;
+
+  border-right: 1px solid $border-col;
+
+  & ul {
+    list-style: none;
+
+    padding-left: 1em;
+    margin: 0;
+
+    overflow-y: hidden;
+  }
+
+  & .custom-tip-content {
+    background: $text-col;
+    // background: $primary;
+    color: $background-dark;
+  }
+}
+
+.page-lists {
+  flex-grow: 1;
+  padding-right: .75em;
+  overflow-y: scroll;
+
+  scrollbar-width: thin;
+
+  & > hr {
+    opacity: .6;
+    margin-block: 1em;
+  }
+
+  & > p {
+    padding: 1em;
+  }
+}
+
+.cat-heading {
+  display: flex;
+  align-items: center;
+  gap: .5em;
+
+  margin: 0;
+
+  padding-block: .5em;
+  padding-left: .5em;
+
+  letter-spacing: .1ch;
+
+  & > .text, > .icon {
+    color: $accent;
+  }
+
+  & > .text {
+    flex-grow: 1;
+  }
+
+  &:has(.toggle:checked) {
+    & + ul {
+      height: 0;
+    }
+  }
+}
+
+h1.cat-heading {
+  font-size: 1.6em;
+}
+
+h2.cat-heading {
+  font-size: 1.25em;
+}
+
+// .cat-comp {
+//   position: sticky;
+//   // top: 2.5em;
+//   bottom: .5em;
+//   z-index: 9;
+
+//   background: $background-dark;
+// }
+
+.pitch-title {
+  margin-bottom: .5em;
+
+  & > .logo {
+    width: 1.5em;
+  }
+
+  & > .text {
+    font-family: Ubuntu;
+  }
+
+  & > .text > small {
+    font-size: .6em;
+    color: $text-col;
+  }
+}
+
+.comp-item {
+  padding-block: .35em;
+
+  & .checkbox {
+    margin-right: .2em;
+  }
+
+  & label {
+    white-space: nowrap;
+    cursor: pointer;
+
+    // opacity: .75;
+    color: color.mix($text-col, $background-dark, 70%);
+
+    &:hover {
+      // opacity: 1;
+      color: $text-col;
+    }
+  }
+
+  & input {
+    &[type="radio"] {
+      display: none;
+
+      &:checked {
+        & + label {
+          font-weight: bold;
+          // opacity: 1;
+          color: $text-col;
+          // color: $primary;
+
+          text-decoration: underline 1px solid;
+        }
+      }
+    }
+
+    &[type="checkbox"] {
+      &:checked {
+        & + label {
+          opacity: 1;
+
+          & ~ .comp-name-label {
+            opacity: 1;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+
+  &.sub {
+    margin-left: 1em;
+  }
+
+  & .fave {
+    opacity: 0;
+    font-size: .9em;
+
+    & .fa-solid {
+      color: #fcb930;
+    }
+  }
+
+  &:hover {
+    & .fave {
+      opacity: 1;
+    }
+  }
+}
+
+.comp-name-label {
+  padding: .1em .35em;
+  border-radius: 4px;
+}
+
+.tags {
+  font-size: .9em;
+
+  & .experimental {
+    color: $primary;
+  }
+}
+
+.css-copy {
+  box-shadow: 0 0 1em $background-dark;
+}
+
+.cat-toggle {
+  & > i {
+    display: none;
+
+    & > span {
+      font-family: Lato;
+    }
+  }
+
+  &[data-icon="fa-square"] {
+    & > .fa-square { display: inline-block; }
+  }
+  &[data-icon="fa-square-check"] {
+    & > .fa-square-check { display: inline-block; }
+  }
+  &[data-icon="fa-square-minus"] {
+    & > .fa-square-minus { display: inline-block; }
+  }
+}
+
+.filter-group {
+  position: sticky;
+  top: .5em;
+  z-index: 9;
+
+  & label {
+    position: relative;
+
+    & .fa-ban, .fa-slash {
+      position: absolute;
+
+      font-size: 1.1em;
+
+      color: #f82727;
+    }
+
+    &.custom-tip {
+      & > .custom-tip-content {
+        // left: -100%;
+        bottom: -50%;
+        transform: translate(-75%, -5%);
+      }
+
+      &:hover {
+        & > .custom-tip-content {
+          // left: -50%;
+          transform: translate(calc(-140% - -50%), calc(100% - .5em));
+        }
+      }
+    }
+  }
+
+  & > input[type="checkbox"]:checked + label.button-check {
+    background: $primary;
+  }
+}
+
