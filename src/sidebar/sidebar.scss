@@ -1,4 +1,5 @@
 @use "../styles/variables" as *;
+@use "sass:color";
 
 #sidebar {
   display: flex;
@@ -18,6 +19,12 @@
     margin: 0;
 
     overflow-y: hidden;
+  }
+
+  & .custom-tip-content {
+    background: $text-col;
+    // background: $primary;
+    color: $background-dark;
   }
 }
 
@@ -43,8 +50,10 @@
   align-items: center;
   gap: .5em;
 
+  margin: 0;
+
+  padding-block: .5em;
   padding-left: .5em;
-  margin-block: .5em;
 
   letter-spacing: .1ch;
 
@@ -71,11 +80,24 @@ h2.cat-heading {
   font-size: 1.25em;
 }
 
+// .cat-comp {
+//   position: sticky;
+//   // top: 2.5em;
+//   bottom: .5em;
+//   z-index: 9;
+
+//   background: $background-dark;
+// }
+
 .pitch-title {
   margin-bottom: .5em;
 
   & > .logo {
     width: 1.5em;
+  }
+
+  & > .text {
+    font-family: Ubuntu;
   }
 
   & > .text > small {
@@ -95,10 +117,12 @@ h2.cat-heading {
     white-space: nowrap;
     cursor: pointer;
 
-    opacity: .75;
+    // opacity: .75;
+    color: color.mix($text-col, $background-dark, 70%);
 
     &:hover {
-      opacity: 1;
+      // opacity: 1;
+      color: $text-col;
     }
   }
 
@@ -109,7 +133,9 @@ h2.cat-heading {
       &:checked {
         & + label {
           font-weight: bold;
-          opacity: 1;
+          // opacity: 1;
+          color: $text-col;
+          // color: $primary;
 
           text-decoration: underline 1px solid;
         }
@@ -118,12 +144,20 @@ h2.cat-heading {
 
     &[type="checkbox"] {
       &:checked {
-        & ~ label {
-          font-weight: bold;
+        & + label {
           opacity: 1;
+
+          & ~ .comp-name-label {
+            opacity: 1;
+            font-weight: bold;
+          }
         }
       }
     }
+  }
+
+  &.sub {
+    margin-left: 1em;
   }
 
   & .fave {
@@ -154,3 +188,65 @@ h2.cat-heading {
     color: $primary;
   }
 }
+
+.css-copy {
+  box-shadow: 0 0 1em $background-dark;
+}
+
+.cat-toggle {
+  & > i {
+    display: none;
+
+    & > span {
+      font-family: Lato;
+    }
+  }
+
+  &[data-icon="fa-square"] {
+    & > .fa-square { display: inline-block; }
+  }
+  &[data-icon="fa-square-check"] {
+    & > .fa-square-check { display: inline-block; }
+  }
+  &[data-icon="fa-square-minus"] {
+    & > .fa-square-minus { display: inline-block; }
+  }
+}
+
+.filter-group {
+  position: sticky;
+  top: .5em;
+  z-index: 9;
+
+  & label {
+    position: relative;
+
+    & .fa-ban, .fa-slash {
+      position: absolute;
+
+      font-size: 1.1em;
+
+      color: #f82727;
+    }
+
+    &.custom-tip {
+      & > .custom-tip-content {
+        // left: -100%;
+        bottom: -50%;
+        transform: translate(-75%, -5%);
+      }
+
+      &:hover {
+        & > .custom-tip-content {
+          // left: -50%;
+          transform: translate(calc(-140% - -50%), calc(100% - .5em));
+        }
+      }
+    }
+  }
+
+  & > input[type="checkbox"]:checked + label.button-check {
+    background: $primary;
+  }
+}
+

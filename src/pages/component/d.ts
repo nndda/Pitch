@@ -18,11 +18,24 @@ declare global {
   | "experimental"
   ;
 
+  type ComponentUserInputValue = string | number;
+
   interface ComponentUserInput {
     name: string,
     id: string,
-    default?: string,
-    type: "string",
+    default?: string | number,
+    type: 
+      "string"
+    | "int"
+    | "color"
+    | {
+      min: number,
+      max: number,
+    }
+    ,
+
+    cssInject?: (inputValue: ComponentUserInputValue) => string,
+    required?: true,
   }
 
   interface ComponentUserInputVarsModifier {
@@ -30,17 +43,26 @@ declare global {
     vars: Record<string, string>,
   }
 
+  interface CSSData {
+    raw: string,
+    rawCompressed: string,
+  }
+
   interface ComponentData {
     name: string,
     nameDisplay?: string,
 
-    scopes: Record<ScopeStatus | string, Scopes>;
+    // css: CSSData,
+
+    scopes: Record<ScopeStatus | string, Scopes> | "group-only";
 
     input?: ComponentUserInput[],
     inputVars?: ComponentUserInputVarsModifier[],
 
     tags?: ComponentTags[],
     notes?: string[],
+
+    sub?: string,
   }
 
 }
