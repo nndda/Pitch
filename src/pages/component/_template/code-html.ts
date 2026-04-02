@@ -16,16 +16,54 @@ DOMPurify.setConfig({
   },
 
   FORBID_TAGS: [
-    "style",
-    "script",
-    "svg",
-    "link",
-
-    "body",
-    "section",
     "article",
-    "main",
+    "section",
     "aside",
+    "nav",
+    "main",
+    "header",
+    "footer",
+
+    "video",
+    "track",
+
+    "audio",
+    "picture",
+    "source",
+    "map",
+    "area",
+    "form",
+    "input",
+    "label",
+    "embed",
+    "object",
+    "iframe",
+    "script",
+    "noscript",
+    "canvas",
+    "template",
+    "slot",
+    "svg",
+    "math",
+    "portal",
+    "dialog",
+    "caption",
+    "colgroup",
+    "col",
+    "menu",
+    "data",
+    "bdi",
+    "bdo",
+    "ins",
+    "address",
+
+    "html",
+    "head",
+    "body",
+    "title",
+    "style",
+    "meta",
+    "link",
   ],
 
   ALLOWED_ATTR: [
@@ -61,6 +99,8 @@ export function instatiateEditor(
   HTMLEditor: HTMLElement,
   HTMLEditorToggle: HTMLInputElement,
   HTMLEditorResetButton: HTMLButtonElement,
+  HTMLCopyButton: HTMLButtonElement,
+  HTMLCopyStatus: HTMLElement,
 ): void {
 
   function updatePreview(html: string): void {
@@ -70,34 +110,74 @@ export function instatiateEditor(
     ;
 
     HTMLEditorResetButton.disabled = !modified;
+    HTMLView.innerHTML = HTMLNew;
+  }
 
-    if (modified) {
-      HTMLView.innerHTML = HTMLNew;
+  function resetEditor(): void {
+    updateEditor(htmlInit, HTMLView);
+    HTMLEditorResetButton.disabled = true;
+  }
+
+  function handleCopyError(err: any | DOMException): void {
+    HTMLCopyStatus.innerHTML = `unable to copy: ${
+      ( err.name || "error" ) + " - " +
+      ( err.cause || "unknown" )
+    }`;
+  }
+
+  function copyHTML(): void {
+
+    HTMLCopyStatus.innerHTML = "copying...";
+
+    try {
+
+      navigator.clipboard.writeText(
+        view 
+        ? view.state.doc.toString()
+        : sanitizeHTML(HTMLView.innerHTML)
+      )
+      .then((): void => {
+
+        HTMLCopyStatus.innerHTML = "copied!";
+
+      })
+      .catch(handleCopyError);
+
+    } catch (err: any) {
+      handleCopyError(err);
     }
   }
 
+  HTMLEditorResetButton.addEventListener("click", resetEditor);
+  HTMLCopyButton.addEventListener("click", copyHTML);
+
   const debouncedUpdatePreview = debounce(updatePreview, 550);
 
-  if (HTMLEditorToggle.checked) {
+  HTMLEditorToggle.addEventListener("change", (): void => {
 
-    view = new EditorView({
-      extensions: [
-        basicSetup,
-        codemirrorHTML(),
+    if (HTMLEditorToggle.checked) {
 
-        EditorView.theme({}, {dark: true}),
+      view = new EditorView({
+        extensions: [
+          basicSetup,
+          codemirrorHTML(),
 
-        EditorView.updateListener.of((update): void => {
-          debouncedUpdatePreview(update.state.doc.toString());
-        }),
-      ],
-      parent: HTMLEditor,
-      doc: htmlInit,
-    });
+          EditorView.theme({}, {dark: true}),
 
-  } else {
-    view.destroy();
-  }
+          EditorView.updateListener.of((update): void => {
+            debouncedUpdatePreview(update.state.doc.toString());
+          }),
+        ],
+        parent: HTMLEditor,
+        doc: htmlInit,
+      });
+
+    } else {
+      view.destroy();
+    }
+
+  });
+
 }
 
 export function updateEditor(
@@ -113,15 +193,4 @@ export function updateEditor(
       insert: html,
     }
   });
-}
-
-export function copyToClipboard(
-  html: string,
-): void {
-  
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(html).then(() => {
-
-    });
-  }
 }

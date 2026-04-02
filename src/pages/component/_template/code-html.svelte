@@ -1,14 +1,10 @@
-<script lang=ts>
+<script lang="ts">
 
   import { onMount } from "svelte";
 
   import {
     instatiateEditor,
-    updateEditor,
-    // sanitizeHTML,
     initializeHTML,
-
-    view,
   } from "./code-html";
 
   const
@@ -26,11 +22,23 @@
   , HTMLEditor: HTMLElement
   , HTMLEditorToggle: HTMLInputElement
   , HTMLEditorResetButton: HTMLButtonElement
+  , HTMLCopyButton: HTMLButtonElement
+  , HTMLCopyStatusLabel: HTMLElement
   ;
 
   onMount((): void => {
     // TODO: maybe use shadow DOM instead?
     HTMLView.innerHTML = htmlStr;
+
+    instatiateEditor(
+      htmlStr,
+      HTMLView,
+      HTMLEditor,
+      HTMLEditorToggle,
+      HTMLEditorResetButton,
+      HTMLCopyButton,
+      HTMLCopyStatusLabel,
+    );
   });
 </script>
 
@@ -47,34 +55,26 @@
       type="checkbox"
       id="html-edit-{uid}"
 
-      onchange={(): void => instatiateEditor(
-        htmlStr,
-        HTMLView,
-        HTMLEditor,
-        HTMLEditorToggle,
-        HTMLEditorResetButton,
-      )}
-
       bind:this={HTMLEditorToggle}
     >
     <label class="button button-check" for="html-edit-{uid}" aria-label="Edit HTML">
       <i class="fa-solid fa-code"></i>
     </label>
 
-    <button aria-label="Copy HTML">
+    <button aria-label="Copy HTML" bind:this={HTMLCopyButton}>
       <i class="fa-solid fa-copy"></i>
     </button>
+
+    <span class="copy-status" bind:this={HTMLCopyStatusLabel}>
+      <!-- copied! -->
+    </span>
 
     <div class="flex-space"></div>
 
     <button
       class="icon is-modified button-reset"
       aria-label="Reset HTML"
-
-      onclick={(): void => {
-        updateEditor(htmlInitStr, HTMLView);
-        HTMLEditorResetButton.disabled = true;
-      }}
+      disabled
 
       bind:this={HTMLEditorResetButton}
     >
