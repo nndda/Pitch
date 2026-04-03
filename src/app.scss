@@ -51,6 +51,7 @@ body {
   }
 
   & code {
+    display: inline-block;
     font-family: "Roboto Mono";
     color: $primary;
     background: $background-light;

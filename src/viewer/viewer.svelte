@@ -51,6 +51,7 @@
 
     <div class="hr-v"></div>
 
+    <!--
     <button
       id="fave-toggle"
       class="icon-onlyb"
@@ -58,6 +59,7 @@
     >
       <i class="fa-solid fa-star"></i>
     </button>
+    -->
 
     <div class="flex-space"></div>
 

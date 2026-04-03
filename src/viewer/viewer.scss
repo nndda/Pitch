@@ -10,8 +10,6 @@
 
   height: 100vh;
 
-  padding-top: .5em;
-
   & > header, & #wrapper {
     // padding: .5em;
     padding-inline: 2em;
@@ -19,8 +17,9 @@
 
   & > header {
     display: flex;
-    padding-block: .5em;
+    padding: 1em;
     padding-bottom: 1em;
+    background: $background;
     border-bottom: 1px solid $border-col;
   }
 }
@@ -44,5 +43,6 @@
 .split {
   display: flex;
   overflow-y: scroll;
+  overflow-x: hidden;
   // display: grid;
 }
