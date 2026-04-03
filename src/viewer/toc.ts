@@ -14,11 +14,19 @@ function createLi(hEl: HTMLHeadingElement, idPref: string): HTMLLIElement {
   , id: string = slugify( `${idPref}-${hEl.textContent}`, { lower: true, strict: true, }, )
   ;
 
-  hEl.id = id;
+  // hEl.id = id;
+  hEl.setAttribute("toc-id", id);
 
   liLink.href = "#" + id;
   liLink.classList.add("button");
   liLink.textContent = hEl.textContent;
+  liLink.addEventListener("click", (): void => {
+
+    hEl.scrollIntoView({
+      behavior: "smooth",
+    });
+
+  });
 
   li.classList.add(hEl.tagName);
   li.appendChild(liLink);
