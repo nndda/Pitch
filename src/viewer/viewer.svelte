@@ -3,11 +3,19 @@
   import { state, backToHome } from "../states/components.svelte";
   import { generateToC } from "./toc";
 
-  let tocContent: HTMLUListElement;
+  let
+    tocContent: HTMLUListElement
+  , tocWrapper: HTMLElement
+  ;
 
   $effect((): void => {
     generateToC(tocContent, state.currentId);
+    tocWrapper.classList.toggle("collapsed", !uiState.state["toc-toggle"]);
   });
+
+  import { initiateBooleanStorageAPI } from "../states/storage.svelte";
+
+  const uiState = initiateBooleanStorageAPI("pitchv3-uistate");
 
 </script>
 
@@ -53,13 +61,25 @@
 
     <div class="flex-space"></div>
 
-    <button
+    <input
+      type="checkbox"
+      class="toggle"
       id="toc-toggle"
-      class="icon-onlyb"
       aria-label="Table of Content"
+
+      checked={uiState.state["toc-toggle"] ?? false}
+
+      onchange={(ev) => {
+        uiState.update("toc-toggle", ev.currentTarget.checked);
+      }}
     >
+    <label class="button button-check custom-tip" for="toc-toggle">
       <i class="fa-solid fa-table-list"></i>
-    </button>
+
+      <span class="custom-tip-content custom-left">
+        Table of content
+      </span>
+    </label>
   </header>
 <!-- 
   <section id=toolbar>
@@ -75,28 +95,28 @@
 
     <section id="wrapper">
       {#if state.currentPage}
-        <svelte:component this={state.currentPage} />
+        <state.currentPage/>
       {/if}
     </section>
 
-    <nav id="toc">
+    <nav id="toc" bind:this={tocWrapper}>
+      <div class="toc-inner">
+        <!--
+        <button aria-label="Collapes table of content" id="toc-collapse">
+          <i class="fa-solid fa-caret-right"></i>
+        </button>
+        -->
 
-      <!--
-      <button aria-label="Collapes table of content" id="toc-collapse">
-        <i class="fa-solid fa-caret-right"></i>
-      </button>
-      -->
+        <h1>Table of content</h1>
 
-      <h1>Table of content</h1>
+        <hr>
 
-      <hr>
+        <h2>{state.currentId}</h2>
 
-      <h2>{state.currentId}</h2>
+        <ul id="toc-content" bind:this={tocContent}>
 
-      <ul id="toc-content" bind:this={tocContent}>
-
-      </ul>
-
+        </ul>
+      </div>
     </nav>
 
   </div>
