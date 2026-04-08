@@ -379,8 +379,9 @@
       <ul id="{catComponentList}">
         {#each pages[cat] as {src, comp}, i}
 
-          {@const compData: ComponentData = comp.data}
-          {@const compPage: Component = comp.default}
+          //                                      👇 this is so dumb
+          {@const compData: ComponentData = (comp as any).data}
+          {@const compPage: Component = (comp as any).default}
 
           {@const compId: string = catId + slugify("--" + compData.name, { lower: true, })}
 
