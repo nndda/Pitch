@@ -47,11 +47,10 @@ export function generateToC(tocContentContainer: HTMLUListElement, pageTitle: st
   (
     document
       .querySelectorAll("#wrapper > :is(h1, h2, h3, h4, h5, h6)") as NodeListOf<HTMLHeadingElement>
-  ).forEach((hEl: HTMLHeadingElement, i: number): void => {
+  ).forEach((hEl: HTMLHeadingElement): void => {
     tocContentContainer.appendChild(createLi(hEl, pageTitle));
   });
 
 
   // return ToCDataArr;
 }
-

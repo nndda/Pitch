@@ -21,14 +21,6 @@
 
 <main id="viewer">
   <header>
-<!--     <button
-      id=btn-home
-      class=icon-only
-      onclick={backToHome}
-      aria-label=Home
-    >
-      <i class="fa-solid fa-house"></i>
-    </button> -->
     <button
       id="page-prev"
       class="icon-onlyb"
@@ -51,16 +43,6 @@
 
     <div class="hr-v"></div>
 
-    <!--
-    <button
-      id="fave-toggle"
-      class="icon-onlyb"
-      aria-label="Favourite"
-    >
-      <i class="fa-solid fa-star"></i>
-    </button>
-    -->
-
     <div class="flex-space"></div>
 
     <input
@@ -69,7 +51,7 @@
       id="toc-toggle"
       aria-label="Table of Content"
 
-      checked={uiState.state["toc-toggle"] ?? false}
+      checked={uiState.state["toc-toggle"] ?? true}
 
       onchange={(ev) => {
         uiState.update("toc-toggle", ev.currentTarget.checked);
@@ -83,14 +65,7 @@
       </span>
     </label>
   </header>
-<!-- 
-  <section id=toolbar>
-    <input type=radio>
-    <input type=radio>
-    <input type=radio>
-    <input type=radio>
-  </section>
- -->
+
   <!-- <hr> -->
 
   <div class="split">
@@ -103,12 +78,6 @@
 
     <nav id="toc" bind:this={tocWrapper}>
       <div class="toc-inner">
-        <!--
-        <button aria-label="Collapes table of content" id="toc-collapse">
-          <i class="fa-solid fa-caret-right"></i>
-        </button>
-        -->
-
         <h1>Table of content</h1>
 
         <hr>

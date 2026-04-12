@@ -1,3 +1,5 @@
+export {};
+
 declare global {
 
   type Scope =
@@ -45,14 +47,14 @@ declare global {
 
   interface CSSData {
     raw: string,
-    rawCompressed: string,
+    compressed: string,
   }
 
   interface ComponentData {
     name: string,
     nameDisplay?: string,
 
-    // css: CSSData,
+    css?: CSSData,
 
     scopes: Record<ScopeStatus | string, Scopes> | "group-only";
 

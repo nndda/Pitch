@@ -158,6 +158,8 @@
 <hr>
 <br>
 
+<h2>Submit Your Page!</h2>
+
 <blockquote class="custom-callout">
 
   <h3>Want to see your page here??</h3>

@@ -1,6 +1,6 @@
 const pref: string = "pitchv3__";
 
-export interface StorageApi<T> {
+export interface StorageAPI<T> {
   state: Record<string, T>,
   update: (
     id: string,
@@ -11,7 +11,7 @@ export interface StorageApi<T> {
 
 export function initiateStorageAPI<T>(
   storageId: string,
-): StorageApi<T> {
+): StorageAPI<T> {
 
   storageId = pref + storageId;
 

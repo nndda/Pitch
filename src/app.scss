@@ -43,7 +43,7 @@ body {
 
   & hr {
     width: 100%;
-    color: $border-col;
+    border-color: $border-col;
   }
 
   & a {
@@ -67,4 +67,8 @@ body {
   border-right: 2px solid $border-col;
   margin: 0 1em;
   // width: 1px;
+}
+
+.hidden {
+  display: none !important;
 }
