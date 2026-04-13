@@ -1,7 +1,7 @@
 @use "../styles/variables" as *;
 @use "sass:color";
 
-#sidebar {
+:global #sidebar {
   display: flex;
   flex-direction: column;
 
@@ -27,6 +27,26 @@
     background: $text-col;
     // background: $primary;
     color: $background-dark;
+    font-family: Lato;
+  }
+  
+  & .cat-heading .custom-tip-content {
+    font-size: .8em;
+    font-weight: 400;
+  }
+  
+  /*
+    Filter system
+    ain't using JS for this
+  */
+  &.faves-only .comp-list .comp-item:not(.is-faved, .has-faved) {
+    display: none;
+  }
+  &.no-hacky .comp-list .comp-item.is-hacky {
+    display: none;
+  }
+  &.no-experimental .comp-list .comp-item.is-experimental {
+    display: none;
   }
 }
 
@@ -39,7 +59,7 @@
   scrollbar-width: thin;
 
   & > hr {
-    opacity: .6;
+    // opacity: .6;
     margin-block: 1em;
   }
 
@@ -73,6 +93,26 @@
   &:has(.toggle:checked) {
     & + ul {
       height: 0;
+    }
+  }
+
+  &.cat-comp {
+    margin-bottom: .8em;
+
+    & > .text {
+      position: relative;
+      
+      & > small {
+        display: block;
+        position: absolute;
+  
+        color: color.mix($text-col, $background-dark, 70%);
+  
+        font-weight: 300;
+        font-size: .65em;
+  
+        margin-top: .35em;
+      }
     }
   }
 }
@@ -200,7 +240,7 @@ h2.cat-heading {
   background: $background-dark;
 }
 
-.cat-toggle {
+:global .cat-toggle {
   & > i {
     display: none;
 
@@ -228,7 +268,7 @@ h2.cat-heading {
   & label {
     position: relative;
 
-    & .fa-ban, .fa-slash {
+    & .fa-slash {
       position: absolute;
 
       font-size: 1.1em;
@@ -256,4 +296,3 @@ h2.cat-heading {
     background: $primary;
   }
 }
-
