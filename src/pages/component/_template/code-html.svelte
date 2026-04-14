@@ -2,43 +2,37 @@
 
   import { onMount } from "svelte";
 
-  import {
-    instatiateEditor,
-    initializeHTML,
-  } from "./code-html";
-
   const
     { html } = $props()
   , uid: string = $props.id()
-
-  // svelte-ignore state_referenced_locally
-  , htmlInitStr: string = initializeHTML(html)
   ;
 
-  let 
-    htmlStr: string = htmlInitStr
-
-  , HTMLView: HTMLElement
+  let
+    HTMLView: HTMLElement
   , HTMLEditor: HTMLElement
   , HTMLEditorToggle: HTMLInputElement
   , HTMLEditorResetButton: HTMLButtonElement
   , HTMLCopyButton: HTMLButtonElement
-  , HTMLCopyStatusLabel: HTMLElement
   ;
 
   onMount((): void => {
-    // TODO: maybe use shadow DOM instead?
-    HTMLView.innerHTML = htmlStr;
+    import("./code-html").then(val => {
+      const
+        htmlStr = val.initializeHTML(html)
+      ;
 
-    instatiateEditor(
-      htmlStr,
-      HTMLView,
-      HTMLEditor,
-      HTMLEditorToggle,
-      HTMLEditorResetButton,
-      HTMLCopyButton,
-      HTMLCopyStatusLabel,
-    );
+      // TODO: maybe use shadow DOM instead?
+      HTMLView.innerHTML = htmlStr;
+
+      val.instatiateEditor(
+        htmlStr,
+        HTMLView,
+        HTMLEditor,
+        HTMLEditorToggle,
+        HTMLEditorResetButton,
+        HTMLCopyButton,
+      );
+    });
   });
 </script>
 
@@ -57,17 +51,27 @@
 
       bind:this={HTMLEditorToggle}
     >
-    <label class="button button-check" for="html-edit-{uid}" aria-label="Edit HTML">
+    <label
+      class="button button-check custom-tip"
+      for="html-edit-{uid}"
+      aria-label="Edit HTML"
+    >
       <i class="fa-solid fa-code"></i>
+      <span class="custom-tip-content">
+        Edit HTML
+      </span>
     </label>
 
-    <button aria-label="Copy HTML" bind:this={HTMLCopyButton}>
+    <button
+      class="custom-tip"
+      aria-label="Copy HTML"
+      bind:this={HTMLCopyButton}
+    >
       <i class="fa-solid fa-copy"></i>
+      <span class="custom-tip-content custom-right">
+        Copy HTML
+      </span>
     </button>
-
-    <span class="copy-status" bind:this={HTMLCopyStatusLabel}>
-      <!-- copied! -->
-    </span>
 
     <div class="flex-space"></div>
 

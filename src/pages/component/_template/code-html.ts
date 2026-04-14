@@ -2,6 +2,8 @@ import { EditorView, basicSetup } from "codemirror";
 import { html as codemirrorHTML } from "@codemirror/lang-html";
 import "./codemirror.scss";
 
+import { copyStr } from "../../../scripts/copy";
+
 export let
   view: EditorView
 ;
@@ -100,7 +102,6 @@ export function instatiateEditor(
   HTMLEditorToggle: HTMLInputElement,
   HTMLEditorResetButton: HTMLButtonElement,
   HTMLCopyButton: HTMLButtonElement,
-  HTMLCopyStatus: HTMLElement,
 ): void {
 
   function updatePreview(html: string): void {
@@ -118,34 +119,12 @@ export function instatiateEditor(
     HTMLEditorResetButton.disabled = true;
   }
 
-  function handleCopyError(err: any | DOMException): void {
-    HTMLCopyStatus.innerHTML = `unable to copy: ${
-      ( err.name || "error" ) + " - " +
-      ( err.cause || "unknown" )
-    }`;
-  }
-
   function copyHTML(): void {
-
-    HTMLCopyStatus.innerHTML = "copying...";
-
-    try {
-
-      navigator.clipboard.writeText(
-        view 
-        ? view.state.doc.toString()
-        : sanitizeHTML(HTMLView.innerHTML)
-      )
-      .then((): void => {
-
-        HTMLCopyStatus.innerHTML = "copied!";
-
-      })
-      .catch(handleCopyError);
-
-    } catch (err: any) {
-      handleCopyError(err);
-    }
+    copyStr(
+      view
+      ? view.state.doc.toString()
+      : sanitizeHTML(HTMLView.innerHTML)
+    );
   }
 
   HTMLEditorResetButton.addEventListener("click", resetEditor);
