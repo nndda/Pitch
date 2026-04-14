@@ -9,9 +9,9 @@ import slugify from "slugify";
 
 function createLi(hEl: HTMLHeadingElement, idPref: string): HTMLLIElement {
   const
-    li: HTMLLIElement = document.createElement("li")
-  , liLink: HTMLAnchorElement = document.createElement("a")
-  , id: string = slugify( `${idPref}-${hEl.textContent}`, { lower: true, strict: true, }, )
+    li = document.createElement("li")
+  , liLink = document.createElement("a")
+  , id = slugify( `${idPref}-${hEl.textContent}`, { lower: true, strict: true, }, )
   ;
 
   // hEl.id = id;
@@ -46,7 +46,7 @@ export function generateToC(tocContentContainer: HTMLUListElement, pageTitle: st
 
   (
     document
-      .querySelectorAll("#wrapper > :is(h1, h2, h3, h4, h5, h6)") as NodeListOf<HTMLHeadingElement>
+      .querySelectorAll(":is(#wrapper, #wrapper > article) > :is(h1, h2, h3, h4, h5, h6)") as NodeListOf<HTMLHeadingElement>
   ).forEach((hEl: HTMLHeadingElement): void => {
     tocContentContainer.appendChild(createLi(hEl, pageTitle));
   });
