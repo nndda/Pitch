@@ -29,7 +29,7 @@
   <ul class="heading-note">
     {#each compData.tags as tag}
       <li class="note">
-        <b class="label">
+        <b class="label {tag}">
           <i class="{tagsData[tag].icon}"></i>
           <span>
             {tag}
@@ -43,7 +43,18 @@
 
 {#if compData.notes}
   <ul class="heading-note">
-    <li></li>
+    {#each compData.notes as note}
+      <li class="note">
+        <b class="label note">
+          <span>
+            Note
+          </span>
+        </b>
+        <p>
+          {note}
+        </p>
+      </li>
+    {/each}
   </ul>
 {/if}
 
@@ -67,9 +78,9 @@
       <li class={scopeType}>
         <i class="icon {scopesIcons[scopeStatus]}"></i>
         <ul>
-          {#each scopes as scope}
+          {#each scopes as scope, n}
             <li class="text {scopeType}">
-              {scope} pages
+              {scope} pages{#if n < scopes.length - 1},{/if}
             </li>
           {/each}
         </ul>

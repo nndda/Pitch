@@ -1,5 +1,13 @@
+@use "../../../styles/variables" as *;
+@use "sass:color";
+
 .heading-note {
-  // display: flex;
+  position: relative;
+  margin: 0;
+  padding-block: .7em;
+  background: $background-light;
+  left: -2em;
+  width: calc(100% + 4em);
 
   & > .note {
     display: flex;
@@ -9,7 +17,25 @@
     }
   }
 
-  & .label {  
-    margin-right: 1em;  
+  & .label {
+    margin-right: 1em;
+    text-transform: capitalize;
+    padding: 0 .5em;
+    border-radius: 4px;
+
+    &.hacky {
+      background: #18f08b;
+      color: #1c1813;
+    }
+    
+    &.experimental {
+      background: $primary;
+      color: #1c1813;
+    }
+
+    &.note {
+      background: rgba($text-col, 0.8);
+      color: $background;
+    }
   }
 }
