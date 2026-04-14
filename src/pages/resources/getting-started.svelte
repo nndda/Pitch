@@ -37,9 +37,9 @@
     <li>
       Custom CSS access on your itch.io account.
       <ul>
-        <li>Contact <a href="https://itch.io/docs/creators/design#the-itchio-theme-editor/custom-css" target="_blank" rel="me nofollow noopener noreferrer" referrerpolicy="no-referrer">itch.io support</a> to request the CSS access.
+        <li>Contact <a href="https://itch.io/docs/creators/design#the-itchio-theme-editor/custom-css" target="_blank" rel="nofollow noopener noreferrer" referrerpolicy="no-referrer">itch.io support</a> to request the CSS access.
           <br>
-          Please read the <a href="https://itch.io/docs/creators/css-guide" target="_blank" rel="me nofollow noopener noreferrer" referrerpolicy="no-referrer">CSS Customization Guide</a> first before proceeding. </li>
+          Please read the <a href="https://itch.io/docs/creators/css-guide" target="_blank" rel="nofollow noopener noreferrer" referrerpolicy="no-referrer">CSS Customization Guide</a> first before proceeding. </li>
       </ul>
     </li>
   </ul>
@@ -111,7 +111,7 @@
     <li> Always back up and save your HTML &amp; CSS codes to a file, everytime you make changes. </li>
     <li>Utilize your browser's developer tools.</li>
     <li> Use external code editor, like Neovim, Sublime Text, or Visual Studio Code to get the advantages like syntax highlighting, autocompletion, etc. </li>
-    <li> Test your project's page against multiple screen sizes, and on multiple browsers, including the <a href="https://itch.io/app" target="_blank" rel="me nofollow noopener noreferrer" referrerpolicy="no-referrer">itch app</a> before publishing it. </li>
+    <li> Test your project's page against multiple screen sizes, and on multiple browsers, including the <a href="https://itch.io/app" target="_blank" rel="nofollow noopener noreferrer" referrerpolicy="no-referrer">itch app</a> before publishing it. </li>
   </ul>
 
 </article>

@@ -1,5 +1,5 @@
 <script lang="ts">
-  import _ from "lodash";
+  import {shuffle} from "lodash";
 
   interface ShowcaseEntry {
     title?: string,
@@ -22,7 +22,7 @@
   }
 
   // TODO: separate data to its own file
-  const entries: ShowcaseEntry[] = _.shuffle([
+  const entries: ShowcaseEntry[] = shuffle([
 
     {
       author: authorNnda,
@@ -84,97 +84,133 @@
   @use "./showcase.scss";
 </style>
 
-<h2>Page Showcase</h2>
+<article>
 
-<p>
-  Below are some of the coolest &amp; most epic itch.io's pages that make use of Pitch to draw inspiration from!
-</p>
+  <h2>Page Showcase</h2>
 
-<p>
-  The items displayed are randomly sorted each time you open this page.
-</p>
+  <p>
+    Below are some of the coolest &amp; most epic itch.io's pages that make use of Pitch to draw inspiration from!
+  </p>
 
-<div class="showcase-grid">
+  <p>
+    The items displayed are randomly sorted every time you open this page.
+  </p>
 
-{#each entries as {title, desc, author, itchioSlug, image, type}}
-  
-  <div class="entry">
-    <h4 class="title">
+  <div class="showcase-grid">
 
-      {#if type === "project"}
+  {#each entries as {title, desc, author, itchioSlug, image, type}}
 
-        <a href="https://{itchioSlug}/">
-          {title}
-        </a>
+    <div class="entry">
+      <h4 class="title">
 
-        <span class="author">
-          by
-          <a href="https://{author.username}.itch.io/">
+        {#if type === "project"}
+
+          <a href="https://{itchioSlug}/" target="_blank" rel="nofollow noopener">
+            {title}
+          </a>
+
+          <span class="author">
+            by
+            <a href="https://{author.username}.itch.io/" target="_blank" rel="nofollow noopener">
+              {author.name}
+            </a>
+          </span>
+
+        {:else if type === "profile"}
+
+          <a href="https://{author.username}.itch.io/" target="_blank" rel="nofollow noopener">
             {author.name}
           </a>
-        </span>
 
-      {:else if type === "profile"}
+          <span class="author profile-page-tag">
+            {author.username}.itch.io
+          </span>
 
-        <a href="https://{author.username}.itch.io/">
-          {author.name}
-        </a>
+        {/if}
 
-        <span class="author profile-page-tag">
-          {author.username}.itch.io
-        </span>
+      </h4>
 
-      {/if}
-
-    </h4>
-
-    <div class="thumb">
-      <img src="/assets/showcase/{image}" alt="">
-    </div>
-
-    <div class="info">
-      <div class="type">
-        <i class="icon fa-solid
-          {
-            type === "project" ? "fa-gamepad" :
-            type === "profile" ? "fa-user" : 
-            type === "jam" ? "fa-ranking-star" :
-            ""
-          }
-        "></i>
-
-        {type} page
-        
+      <div class="thumb">
+        <img src="/assets/showcase/{image}" alt="">
       </div>
+
+      <div class="info">
+        <div class="type">
+          <i class="icon fa-solid
+            {
+              type === "project" ? "fa-gamepad" :
+              type === "profile" ? "fa-user" :
+              type === "jam" ? "fa-ranking-star" :
+              ""
+            }
+          "></i>
+
+          {type} page
+
+        </div>
+      </div>
+
     </div>
+
+  {/each}
 
   </div>
 
-{/each}
+  <br>
+  <hr>
+  <br>
 
-</div>
+  <h2>Submit Your Page!</h2>
 
-<br>
-<hr>
-<br>
+  <p>
+    Want to see your page here??
+    <br>
+    Submit one via:
+  </p>
 
-<h2>Submit Your Page!</h2>
-
-<blockquote class="custom-callout">
-
-  <h3>Want to see your page here??</h3>
-
-  Submit one via:
-
-  <ul>
+  <ul class="custom-ul">
     <li>
-      Pitch's GitHub repository Issues tab
+      Pitch's <a href="https://github.com/nndda/Pitch/issues" target="_blank" rel="nofollow noopener">GitHub repository issues tab</a>.
     </li>
     <li>
-      Pitch's itch.io page comment
+      Pitch's <a href="https://nnda.itch.io/pitch/comments" target="_blank" rel="nofollow noopener">itch.io page comment</a>.
+    </li>
+    <li>
+      Message me directly:
+      <ul>
+        <li>
+          <i class="fa-solid fa-envelope"></i>
+          <a href="mailto:talk@nnda.dev" target="_blank" rel="nofollow noopener">talk@nnda.dev</a>
+        </li>
+        <li>
+          <i class="fa-brands fa-bluesky"></i>
+          <a href="https://bsky.app/profile/nnda.dev" target="_blank" rel="nofollow noopener">@nnda.dev</a>
+        </li>
+      </ul>
     </li>
   </ul>
 
-</blockquote>
+  <h3>Submission Criteria</h3>
 
-<br>
+  <p>
+    Your page must follows these criteria to be accepted in the showcase page:
+  </p>
+
+  <ul class="custom-ul">
+    <li>
+      The page must use at least 3 Pitch's components/tweaks/decorations.
+      <ul>
+        <li>
+          The CSS components may be modified to your taste.
+        </li>
+      </ul>
+    </li>
+    <li>
+      The page must not contain NSFW content.
+    </li>
+    <li>
+      The page must follow <a href="https://itch.io/docs/creators/quality-guidelines" target="_blank" rel="me nofollow noopener noreferrer" referrerpolicy="no-referrer">itch.io Creator Guidelines.</a>
+    </li>
+  </ul>
+
+</article>
