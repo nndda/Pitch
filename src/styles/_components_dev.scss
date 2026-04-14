@@ -23,3 +23,24 @@
 @use "../pages/component/decorations/link-decoration__external.css";
 @use "../pages/component/decorations/link-decoration__profile-page.css";
 @use "../pages/component/decorations/z_fingers.css";
+
+.custom-speed-dial {
+  position: absolute !important;
+  bottom: 1.6em !important;
+  right: 1.6em !important;
+  margin-left: auto !important;
+}
+.custom-speed-dial-home {
+  position: relative !important;
+  bottom: unset !important;
+  right: unset !important;
+  padding: 0 !important;
+  padding-right: .5em !important;
+}
+.custom-speed-dial-home ul {
+  padding: 0 !important;
+}
+.html-view:has(> .custom-speed-dial) {
+  position: relative;
+  min-height: 230px;
+}
