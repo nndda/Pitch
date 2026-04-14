@@ -51,7 +51,8 @@
           </span>
         </b>
         <p>
-          {note}
+          <!-- {note} -->
+          {@html note}
         </p>
       </li>
     {/each}
