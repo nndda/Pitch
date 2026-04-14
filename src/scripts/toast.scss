@@ -1,0 +1,7 @@
+@use "../styles/variables" as *;
+
+.notAToastcustomTheme {
+  background: $text-col;
+  color: $background-dark;
+  border-radius: 7px;
+}
