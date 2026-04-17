@@ -9,11 +9,11 @@
     "autoprefixer": "^10.5.0",
     "cssnano": "^7.1.5",
     "cssnano-preset-advanced": "^7.0.13",
-    "postcss": "^8.5.9",
+    "postcss": "^8.5.10",
     "sass": "^1.99.0",
     "svelte": "^5.55.4",
     "svelte-check": "^4.4.6",
-    "typescript": "^6.0.2",
+    "typescript": "^6.0.3",
     "vite": "^8.0.8"
   },
   "private": true,
