@@ -81,6 +81,15 @@ input {
     font-size: .8em;
     margin-right: .5em;
   }
+
+  &.no-style {
+    cursor: default;
+    background: none;
+
+    &:hover {
+      background: none;
+    }
+  }
 }
 
 button {
