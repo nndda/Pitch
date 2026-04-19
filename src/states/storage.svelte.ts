@@ -1,11 +1,13 @@
 const pref: string = "pitchv3__";
 
+type StorageAPIUpdate<T> = (
+  id: string,
+  is: T,
+) => void
+
 export interface StorageAPI<T> {
   state: Record<string, T>,
-  update: (
-    id: string,
-    is: T,
-  ) => void,
+  update: StorageAPIUpdate<T>,
   flush: () => void,
 }
 
