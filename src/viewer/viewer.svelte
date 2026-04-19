@@ -1,47 +1,60 @@
 <script lang="ts">
+  import {
+    onMount,
+  } from "svelte";
 
-  import { state, backToHome } from "../states/components.svelte";
-  import { generateToC } from "./toc";
+  import {
+    state,
+  } from "../states/components.svelte";
+  import {
+    initiateStorageAPI,
+  } from "../states/storage.svelte";
+  import {
+    generateToC,
+  } from "./toc";
 
   let
     tocContent: HTMLUListElement
   , tocWrapper: HTMLElement
   ;
 
-  $effect((): void => {
+  const
+    uiState = initiateStorageAPI<boolean>("uistate")
+  ;
+
+  $effect(() => {
     generateToC(tocContent, state.currentId);
-    tocWrapper.classList.toggle("collapsed", !uiState.state["toc-toggle"]);
   });
 
-  import { initiateBooleanStorageAPI } from "../states/storage.svelte";
-
-  const uiState = initiateBooleanStorageAPI("pitchv3-uistate");
-
+  onMount(() => {
+    (document.getElementById("toc-toggle") as HTMLInputElement).checked = !uiState.state["toc-collapsed"];
+    tocWrapper.classList.toggle("collapsed", uiState.state["toc-collapsed"] ?? false);
+  });
 </script>
 
 <main id="viewer">
   <header>
-    <button
+    <!-- <button
       id="page-prev"
       class="icon-onlyb"
       aria-label="Previous page"
     >
       <i class="fa-solid fa-chevron-left"></i>
-    </button>
+    </button> -->
 
     <h1 class="page-heading">{state.currentId}</h1>
 
-    <button
+    <!-- <button
       id="page-prev"
       class="icon-onlyb"
       aria-label="Previous page"
     >
       <i class="fa-solid fa-chevron-right"></i>
-    </button>
+    </button> -->
 
     <!-- <div class="flex-space"></div> -->
 
-    <div class="hr-v"></div>
+    <!-- <div class="hr-v"></div> -->
 
     <div class="flex-space"></div>
 
@@ -51,10 +64,10 @@
       id="toc-toggle"
       aria-label="Table of Content"
 
-      checked={uiState.state["toc-toggle"] ?? true}
 
-      onchange={(ev) => {
-        uiState.update("toc-toggle", ev.currentTarget.checked);
+      onchange={ev => {
+        uiState.update("toc-collapsed", !ev.currentTarget.checked);
+        tocWrapper.classList.toggle("collapsed", uiState.state["toc-collapsed"]);
       }}
     >
     <label class="button button-check custom-tip" for="toc-toggle">
@@ -76,7 +89,10 @@
       {/if}
     </section>
 
-    <nav id="toc" bind:this={tocWrapper}>
+    <nav
+      id="toc"
+      bind:this={tocWrapper}
+    >
       <div class="toc-inner">
         <h1>Table of content</h1>
 
