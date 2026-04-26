@@ -1,5 +1,8 @@
 <script lang="ts" module>
+  import css from "./tree-list?css-component";
+
   export const data: ComponentData = {
+    css: css,
 
     name: "Tree List",
 

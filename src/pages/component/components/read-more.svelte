@@ -1,5 +1,8 @@
 <script lang="ts" module>
+  import css from "./read-more?css-component";
+
   export const data: ComponentData = {
+    css: css,
 
     name: "Read More",
 

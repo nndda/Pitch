@@ -1,3 +1,9 @@
+# Pitch-specific components
+src/pages/component/components/*
+!src/pages/component/components/*.*
+src/pages/component/decorations/*
+!src/pages/component/decorations/*.*
+
 # Logs
 logs
 *.log

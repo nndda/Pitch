@@ -1,5 +1,8 @@
 <script lang="ts" module>
+  import css from "./label?css-component";
+
   export const data: ComponentData = {
+    css: css,
 
     name: "Label",
 
@@ -10,7 +13,6 @@
         "jam",
       ],
     },
-
   };
 
   import { CodeHTML, ComponentPage } from "../_template/components";

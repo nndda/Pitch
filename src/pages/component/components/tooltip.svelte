@@ -1,5 +1,8 @@
 <script lang="ts" module>
+  import css from "./tooltip?css-component";
+
   export const data: ComponentData = {
+    css: css,
 
     name: "Tooltip",
 

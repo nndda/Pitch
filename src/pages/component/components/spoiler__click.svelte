@@ -1,5 +1,8 @@
 <script lang="ts" module>
+  import css from "./spoiler__click?css-component";
+
   export const data: ComponentData = {
+    css: css,
 
     name: "On Click",
     nameDisplay: "Spoiler — On Click",

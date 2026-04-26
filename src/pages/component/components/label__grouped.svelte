@@ -1,5 +1,8 @@
 <script lang="ts" module>
+  import css from "./label__grouped?css-component";
+
   export const data: ComponentData = {
+    css: css,
 
     name: "Grouped",
     nameDisplay: "Label — Grouped",
@@ -22,9 +25,9 @@
 
 <ComponentPage data={data}>
 
-    <p>
-      Custom class for container to group multiple <button class="button-general">Label</button> components.
-    </p>
+  <p>
+    Custom class for container to group multiple <button class="button-general">Label</button> components.
+  </p>
 
   <CodeHTML html={`
 

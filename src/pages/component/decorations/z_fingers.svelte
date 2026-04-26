@@ -1,5 +1,8 @@
 <script lang="ts" module>
+  import css from "./z_fingers?css-component";
+
   export const data: ComponentData = {
+    css: css,
 
     name: "👉👈",
 

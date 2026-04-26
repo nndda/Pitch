@@ -28,6 +28,7 @@
 
   interface ComponentRuntimeItem {
     type: "item" | "item+group", // not very sure abt the "item+group" implementation tbh...
+    css: CSSData,
 
     name: string,
     nameDisplay?: string,
@@ -263,6 +264,7 @@
 
         compsRuntimeData[catId].components[compId] = {
           type: "item",
+          css: compData.css,
 
           name: compData.name,
           nameDisplay: compData?.nameDisplay,
@@ -363,6 +365,38 @@
     );
   }
 
+  // TODO: move compiler to its own module
+  interface CSSCompilerOption {
+    compressed?: boolean,
+    layer?: boolean,
+  }
+
+  function compileComponent(option: CSSCompilerOption = {}): string {
+    const
+      cssOut: string[] = []
+    ;
+
+    for (const catId in compsRuntimeData) {
+      const
+        compCatData = compsRuntimeData[catId].components
+      ;
+
+      for (const compId in compCatData) {
+        if (compCatData[compId].type === "item") {
+          const
+            compData = compCatData[compId] as ComponentRuntimeItem
+          ;
+
+          if (compData.chkBox!.checked) {
+            cssOut.push(compData.css.compressed);
+          }
+        }
+      }
+    }
+
+    return cssOut.join("");
+  }
+
   // TODO ...
   onMount(() => {
     for (const catId of pagesCatIdSlug) {
@@ -407,7 +441,13 @@
 
       updateCatSelectionState(catId);
     }
+
+    CSSCopyBtn.disabled = false;
   });
+
+  let
+    CSSCopyBtn: HTMLButtonElement
+  ;
 
 </script>
 
@@ -869,7 +909,17 @@
         CSS
       </span>
 
-      <button>
+      <button
+        disabled
+        bind:this={CSSCopyBtn}
+        onclick={() => {
+          import("../scripts/copy").then(val => {
+            val.copyStr(
+              compileComponent()
+            );
+          });
+        }}
+      >
         <i class="icon fa-solid fa-copy"></i>
         Copy
       </button>
