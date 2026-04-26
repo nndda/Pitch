@@ -24,25 +24,21 @@ declare global {
 
   interface ComponentUserInput {
     name: string,
-    id: string,
+    var: string,
     default?: string | number,
-    type: 
+    type:
       "string"
     | "int"
     | "color"
     | {
-      min: number,
-      max: number,
-    }
+        min: number,
+        max: number,
+      }
     ,
 
     cssInject?: (inputValue: ComponentUserInputValue) => string,
     required?: true,
-  }
-
-  interface ComponentUserInputVarsModifier {
-    selector: string,
-    vars: Record<string, string>,
+    hardcoded?: true,
   }
 
   interface CSSData {
@@ -59,7 +55,6 @@ declare global {
     scopes: Record<ScopeStatus | string, Scopes> | "group-only";
 
     input?: ComponentUserInput[],
-    inputVars?: ComponentUserInputVarsModifier[],
 
     tags?: ComponentTags[],
     notes?: string[],

@@ -17,28 +17,17 @@
     input: [
       {
         name: "Opened icon",
-        id: "ACCORDION_OPENED",
+        var: "accrd-opn",
         default: "▼",
         type: "string",
       },
       {
         name: "Closed icon",
-        id: "ACCORDION_CLOSED",
+        var: "accrd-cls",
         default: "►",
         type: "string",
       },
     ],
-
-    inputVars: [
-      {
-        selector: ".custom-accrd",
-        vars: {
-          "ACCORDION_OPENES": "accrd-opn",
-          "ACCORDION_CLOSED": "accrd-cls",
-        },
-      }
-    ],
-
   };
 
   import { CodeHTML, ComponentPage } from "../_template/components";
@@ -77,7 +66,7 @@
   </p>
 
   <CodeHTML html={`
-  
+
     <div class="custom-accrd">
       <h2>Frequently Asked Questions</h2>
 
@@ -106,7 +95,7 @@
 
     <div class="custom-accrd">
       <p>
-        This [PROJECT NAME] is licensed under 
+        This [PROJECT NAME] is licensed under
         <a href="">
           CC BY 4.0
         </a>
@@ -140,7 +129,7 @@
         <summary>How to give attribution</summary>
 
         <p>
-          Provide link to my itch.io page: 
+          Provide link to my itch.io page:
           <code>&lt;username&gt;.itch.io</code>
         </p>
       </details>
@@ -159,7 +148,7 @@
   </p>
 
   <CodeHTML html={`
-  
+
     <div class="custom-accrd custom-left">
       <details>
         <summary>Left-aligned accordion</summary>

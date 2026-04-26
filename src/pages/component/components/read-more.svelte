@@ -21,28 +21,17 @@
     input: [
       {
         name: "Collapsed text",
-        id: "READ_MORE_CLOSED",
+        var: "read-more-cls",
         default: "Read more...",
         type: "string",
       },
       {
         name: "Expanded text",
-        id: "READ_MORE_OPENED",
+        var: "read-more-opn",
         default: "Read less...",
         type: "string",
       },
     ],
-
-    inputVars: [
-      {
-        selector: ".custom-read-more",
-        vars: {
-          "READ_MORE_OPENED": "read-more-opn",
-          "READ_MORE_CLOSED": "read-more-cls",
-        },
-      }
-    ],
-
   };
 
   import { CodeHTML, ComponentPage } from "../_template/components";

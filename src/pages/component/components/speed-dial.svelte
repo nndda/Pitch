@@ -22,14 +22,14 @@
       "Only one instance of the component per page.",
     ],
 
-    input: [
-      {
-        name: "Button count",
-        id: "SPEED_DIAL_BUTTON_COUNT",
-        default: 6,
-        type: "int",
-      },
-    ],
+    // input: [
+    //   {
+    //     name: "Button count",
+    //     id: "SPEED_DIAL_BUTTON_COUNT",
+    //     default: 6,
+    //     type: "int",
+    //   },
+    // ],
 
   };
 

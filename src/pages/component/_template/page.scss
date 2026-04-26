@@ -1,13 +1,17 @@
 @use "../../../styles/variables" as *;
 @use "sass:color";
 
-.heading-note {
+:global .page-header-list {
+  $block-spacing: 2em;
+
   position: relative;
   margin: 0;
-  padding-block: .7em;
+  padding-block: .75em;
+  padding-right: $block-spacing;
   background: $background-light;
-  left: -2em;
-  width: calc(100% + 4em);
+  border-bottom: 1px solid $border-col;
+  left: -$block-spacing;
+  width: calc(100% + ($block-spacing * 2));
 
   & > .note {
     display: flex;

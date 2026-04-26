@@ -19,6 +19,8 @@
       desc: "Contains unconventional CSS/HTML codes and/or implementation.",
     },
   };
+
+  import ComponentInput from "./input.svelte";
 </script>
 
 <style lang="scss">
@@ -26,7 +28,7 @@
 </style>
 
 {#if compData.tags}
-  <ul class="heading-note">
+  <ul class="page-header-list">
     {#each compData.tags as tag}
       <li class="note">
         <b class="label {tag}">
@@ -42,7 +44,7 @@
 {/if}
 
 {#if compData.notes}
-  <ul class="heading-note">
+  <ul class="page-header-list">
     {#each compData.notes as note}
       <li class="note">
         <b class="label note">
@@ -57,6 +59,10 @@
       </li>
     {/each}
   </ul>
+{/if}
+
+{#if compData.input}
+  <ComponentInput data={data}/>
 {/if}
 
 <ul class=scopes>
