@@ -69,7 +69,7 @@ export function initiateStorageAPI<T>(
   };
 }
 
-
+export const compsUserInputStorage = initiateStorageAPI<ComponentUserInputValue>("comp-user-input");
 
 export type BooleanRecord = Record<string, boolean>
 

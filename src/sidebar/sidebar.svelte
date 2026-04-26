@@ -65,7 +65,7 @@
 
     items: HTMLLIElement[],
   }
-  
+
   interface ComponentCategoryData {
     name: string,
     components: {
@@ -75,11 +75,11 @@
     selectedCountEl: HTMLElement | null,
     catSelectBtn: HTMLButtonElement | null,
   }
-  
+
   interface ComponentRuntimeData {
     [catId: string]: ComponentCategoryData,
   }
-  
+
   // TODO: move everything that can be moved to script
 
   import {
@@ -95,23 +95,30 @@
 
   import {
     initiateStorageAPI,
+    compsUserInputStorage,
 
     type StorageAPI,
   } from "../states/storage.svelte";
 
-  import slugify from "slugify";
-  const slugifyOpt = {
-    strict: true,
-    lower: true,
-  };
-  slugify.extend({
-    "👉": "uw",
-    "👈": "wu",
-  });
+  import {
+    // applyUserInput,
+    constructRule,
+  } from "../pages/component/_template/input";
+
+  document.documentElement.setAttribute(
+    "style",
+    constructRule(compsUserInputStorage.state),
+  );
+
+  import {
+    slug,
+    createCompIdFunc,
+  } from "../scripts/slugify";
 
   // TODO: pile all page-type component to a single entry
   // Pages
   // Resources
+  import GettingStarted from "../pages/resources/getting-started.svelte";
   import OtherResources from "../pages/resources/other-resources.svelte";
   import Showcase from "../pages/resources/showcase.svelte";
 
@@ -143,16 +150,13 @@
     } = initiateStorageAPI<boolean>("faves")
 
   , compsRuntimeData: ComponentRuntimeData = {}
-  , compsCachedLiHacky: HTMLLIElement[] = []
-  , compsCachedLiExperimental: HTMLLIElement[] = []
 
   , compCheckboxCache: Record<string, Record<string, HTMLInputElement>> = {}
-  
+
   , compElCache: Record<string, Record<string, HTMLLIElement>> = {}
 
   , uiState = initiateStorageAPI<boolean>("uistate")
 
-  , catSelectionButtonCache: Record<string, HTMLButtonElement> = {}
   ;
 
   function updateCatSelectionState(catId: string): void {
@@ -227,7 +231,7 @@
   for (const cat in pages) {
 
     const
-      catId = "cat-" + slugify(cat, slugifyOpt)
+      catId = "cat-" + slug(cat)
     ;
 
     compsRuntimeData[catId] = {
@@ -243,9 +247,10 @@
 
     pagesCatIdSlug.push(catId);
 
-    function slugifyId(compName: string): string {
-      return slugify(catId + "__" + compName, slugifyOpt)
-    }
+    const slugifyId = createCompIdFunc(catId);
+    // function slugifyId(compName: string): string {
+    //   return slugify(catId + "__" + compName, slugifyOpt)
+    // }
 
     for (const page in pages[cat].data) {
       const
@@ -293,6 +298,20 @@
           compsRuntimeData[catId].components[compId].group = slugifyId(compData.sub);
         }
 
+        // for (const input of compData.input ?? []) {
+        //   if (compsUserInputStorage.state[input.var]) {
+
+        //   } else {
+        //     if (input.default) {
+        //       if (input.type === "string") {
+        //         compsUserInputStorage.state[input.var] = '"' + input.default + '"';
+        //       } else {
+        //         compsUserInputStorage.state[input.var] = input.default;
+        //       }
+        //     }
+        //   }
+        // }
+
       } else {
 
         compsRuntimeData[catId].components[compId] = {
@@ -317,6 +336,7 @@
     }
 
     compsRuntimeData[catId].selection.flush();
+    compsUserInputStorage.flush();
   }
 
 
@@ -326,7 +346,7 @@
     checked: boolean,
   ): void {
     if ("group" in compRuntimeData && compRuntimeData.group) {
-      const 
+      const
         compGroupData = compsRuntimeData[catId].components[compRuntimeData.group]
       ;
       if (compGroupData.type === "item") {
@@ -414,7 +434,7 @@
             const
               compParent = catComps[compData.group]
             ;
-  
+
             compParent.items ??= [];
             compParent.items.push( compData.li! );
         }
@@ -462,7 +482,7 @@
   onchange: any = null,
 )}
 
-  {@const chkId = slugify(`chk-${label}`, slugifyOpt)}
+  {@const chkId = slug(`chk-${label}`)}
 
   <li class="comp-item">
     <i class={icon}></i>
@@ -508,7 +528,7 @@
     >
     <label class="caret-toggle custom-tip" for={catId}>
       <i class="fa-solid fa-caret-down"></i>
-      <!-- 
+      <!--
       <span class="custom-tip-content custom-left collapse">
         Collapse
       </span>
@@ -547,12 +567,13 @@
         "fa-solid fa-heart",
         backToHome,
       )}
-
+      <!--
       {@render PageListItem(
         "Settings",
         "fa-solid fa-gear",
         backToHome,
       )}
+      -->
     </ul>
 
     <h2 class="cat-heading">
@@ -569,14 +590,14 @@
         {
           title: "Getting Started",
           icon: "fa-solid fa-book-bookmark",
-          page: null,
+          page: GettingStarted,
         },
 
-        {
-          title: "itch.io's HTML quirks",
-          icon: "fa-solid fa-book-bookmark",
-          page: null
-        },
+        // {
+        //   title: "itch.io's HTML quirks",
+        //   icon: "fa-solid fa-book-bookmark",
+        //   page: null
+        // },
 
         {
           title: "Other Resources",
