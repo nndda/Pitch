@@ -11,9 +11,82 @@
     <meta name="author" content="nnda">
 
     <meta name="theme-color" content="#FC3A78">
+    <meta name="color-scheme" content="dark only">
+
+    <link rel="preload" as="image" fetchpriority="high" href="/icon.svg" type="image/svg+xml">
+
+    <style>
+      html {
+        color-scheme: dark only;
+
+        font-family: Lato;
+      }
+
+      body {
+        display: flex;
+        flex-direction: row;
+
+        max-height: 100dvh;
+        overflow: hidden;
+      }
+
+      #placeholder {
+        position: absolute;
+        width: 100vw;
+        height: 100vh;
+        /*overflow: hidden;*/
+      }
+
+      .logo {
+        text-align: center;
+
+        & > img {
+          display: block;
+          position: relative;
+          margin: auto;
+        }
+      }
+
+      .brush {
+        margin: auto;
+        transform:
+          rotate(90deg)
+          translateY(3.5em)
+          translateX(-.5em)
+        ;
+        background: url(https://s2.svgbox.net/pen-brushes.svg?ic=brush-2&color=FC3A78);
+        background-repeat: repeat-x;
+        animation: brush-rolling 4s linear infinite;
+        width: 19em;
+        height: 12em;
+      }
+
+      @keyframes brush-rolling {
+        0% {
+          background-position-x: 0;
+        }
+        100% {
+          background-position-x: -19em;
+        }
+      }
+
+      .loading {
+        font-family: Ubuntu;
+        font-size: 1.5em;
+      }
+    </style>
   </head>
 
   <body>
+    <div id="placeholder">
+      <div class="logo">
+        <div class="brush"></div>
+        <img src="/icon.svg" alt="Pitch logo" fetchpriority="high" width="200" height="200">
+        <div class="loading">
+          Loading <span id="loading-text"></span>...
+        </div>
+      </div>
+    </div>
     <script type="module" src="/main.ts"></script>
   </body>
 </html>
