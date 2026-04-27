@@ -32,14 +32,14 @@ $primary-light: lighten($primary, 12.5%);
   }
 
   &::-webkit-scrollbar-track {
-    background: $background; 
+    background: $background;
   }
 
   &::-webkit-scrollbar-thumb {
-    background: $col; 
+    background: $col;
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    background: darken($col, 20%); 
+    background: darken($col, 20%);
   }
 }
