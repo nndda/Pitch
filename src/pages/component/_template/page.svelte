@@ -2,7 +2,7 @@
   const { children, data } = $props();
 
   // svelte-ignore state_referenced_locally
-    const compData: ComponentData = data;
+  const compData: ComponentData = data;
 
   const scopesIcons: Record<ScopeStatus, string> = {
     compatible: "fa-solid fa-circle-check",
@@ -65,37 +65,41 @@
   <ComponentInput data={data}/>
 {/if}
 
-<ul class=scopes>
-  {#each Object.entries((data as ComponentData).scopes) as [scopeType, scopes]}
+<div class="heading">
 
-    {@const scopeStatus: ScopeStatus = scopeType as ScopeStatus}
+  <ul class=scopes>
+    {#each Object.entries((data as ComponentData).scopes) as [scopeType, scopes]}
 
-    {#if typeof scopes === "string"}
+      {@const scopeStatus: ScopeStatus = scopeType as ScopeStatus}
 
-      <li class={scopeType}>
-        <i class="icon {scopesIcons[scopeStatus]}"></i>
-        <ul>
-          <li class=text>{scopes} pages</li>
-        </ul>
+      {#if typeof scopes === "string"}
 
-      </li>
+        <li class={scopeType}>
+          <i class="icon {scopesIcons[scopeStatus]}"></i>
+          <ul>
+            <li class=text>{scopes} pages</li>
+          </ul>
 
-    {:else}
+        </li>
 
-      <li class={scopeType}>
-        <i class="icon {scopesIcons[scopeStatus]}"></i>
-        <ul>
-          {#each scopes as scope, n}
-            <li class="text {scopeType}">
-              {scope} pages{#if n < scopes.length - 1},{/if}
-            </li>
-          {/each}
-        </ul>
-      </li>
+      {:else}
 
-    {/if}
+        <li class={scopeType}>
+          <i class="icon {scopesIcons[scopeStatus]}"></i>
+          <ul>
+            {#each scopes as scope, n}
+              <li class="text {scopeType}">
+                {scope} pages{#if n < scopes.length - 1},{/if}
+              </li>
+            {/each}
+          </ul>
+        </li>
 
-  {/each}
-</ul>
+      {/if}
+
+    {/each}
+  </ul>
+
+</div>
 
 {@render children()}
