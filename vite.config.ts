@@ -7,7 +7,15 @@ function abs(path: string): string {
 }
 
 // Pitch CSS components tooling
-import { readFile } from "fs/promises";
+// TODO: make the whole components/decorations/tweaks programmable/DRY
+import {
+  readFile,
+  copyFile,
+} from "fs/promises";
+
+import {
+  readdirSync,
+} from "fs";
 
 import postcss from "postcss";
 import autoprefixer from "autoprefixer";
@@ -15,14 +23,45 @@ import autoprefixer from "autoprefixer";
 import cssnano from "cssnano";
 import cssnanoPresetAdvanced from "cssnano-preset-advanced";
 
-const postcsssssss = postcss([
-  cssnano(cssnanoPresetAdvanced({
-    discardOverridden: false,
-    discardUnused: false,
-    reduceIdents: false,
-  })),
-  autoprefixer(),
-]);
+// i hate life
+import fg from "fast-glob";
+
+const
+  postcsssssss = postcss([
+    cssnano(cssnanoPresetAdvanced({
+      discardOverridden: false,
+      discardUnused: false,
+      reduceIdents: false,
+    })),
+    autoprefixer(),
+  ])
+, CSSCompsBaseDir = "src/pages/component/"
+, reCSSCompsSrc = /src\/pages\/component\/(components|decorations)\/.+\.css$/
+, reCSSExt = /\.css$/
+;
+
+console.log(
+  "Pitch: dev server started",
+  "\n",
+  "Pitch: copying components' CSS...",
+);
+
+for (const compType of ["components", "decorations",]) {
+  for (const path of readdirSync(CSSCompsBaseDir + compType)) {
+
+    if (reCSSExt.test(path)) {
+      // console.log(`Pitch: copying ${compType}/${path}...`);
+
+      const absPath = CSSCompsBaseDir + compType + "/" + path;
+
+      copyFile(absPath, absPath.replace(reCSSExt, "")).then(() => {
+        console.log(`Pitch: ${compType}/${path} copied!`)
+      });
+    }
+
+  }
+}
+
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -30,6 +69,8 @@ export default defineConfig({
 
   plugins: [
     svelte(),
+
+    // TODO: add error handling, maybe
 
     // TODO:
     // WHAT. THE. FUCK. VITE???? LET ME HAVE MY CUSTOM CSS MODULE!!!!!!!!!!!!!
@@ -68,6 +109,30 @@ export default defineConfig({
         };
       }
     },
+
+    {
+      name: "css-copy",
+
+      configureServer(server) {
+        server.watcher
+          .add(fg.sync([
+              "src/pages/component/components/*.css",
+              "src/pages/component/decorations/*.css",
+          ]))
+          .on("change", path => {
+            if (reCSSCompsSrc.test(path)) {
+
+              console.log(`Pitch: ${path} changed, copying...`);
+
+              copyFile(path, path.replace(reCSSExt, "")).then(() => {
+                console.log(`Pitch: ${path} copied!`);
+
+                // server.hot.send({ type: "full-reload", });
+              });
+            }
+          });
+      }
+    }
   ],
 
   publicDir: abs("./src/public/"),
