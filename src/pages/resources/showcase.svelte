@@ -209,7 +209,7 @@
       The page must not contain NSFW content.
     </li>
     <li>
-      The page must follow <a href="https://itch.io/docs/creators/quality-guidelines" target="_blank" rel="me nofollow noopener noreferrer" referrerpolicy="no-referrer">itch.io Creator Guidelines.</a>
+      The page must follow <a href="https://itch.io/docs/creators/quality-guidelines" target="_blank" rel="nofollow noopener">itch.io Creator Guidelines.</a>
     </li>
   </ul>
 
