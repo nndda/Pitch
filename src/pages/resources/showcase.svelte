@@ -198,7 +198,7 @@
 
   <ul class="custom-ul">
     <li>
-      The page must use at least 3 Pitch's components/tweaks/decorations.
+      The page must use at least <strong>3 Pitch's components, tweaks, or decorations</strong>.
       <ul>
         <li>
           The CSS components may be modified to your taste.
