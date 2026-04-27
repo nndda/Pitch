@@ -771,6 +771,7 @@
 
               bind:this={compsRuntimeData[catId].components[compId].li}
             >
+              <!--
               <input
                 type="checkbox"
                 id={chkId}
@@ -789,6 +790,16 @@
               >
                 {compData.name}
               </b>
+              -->
+
+              <div>
+                <i class="fa-regular fa-square-caret-down"></i>
+                <b
+                  class="comp-name-label"
+                >
+                  {compData.name}
+                </b>
+              </div>
             </li>
 
           {:else}
