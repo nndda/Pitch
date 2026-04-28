@@ -158,6 +158,10 @@ h2.cat-heading {
     margin-right: .2em;
   }
 
+  &.wip, &.group {
+    color: color.mix($text-col, $background-dark, 70%);
+  }
+
   & label {
     white-space: nowrap;
     cursor: pointer;
@@ -232,6 +236,11 @@ h2.cat-heading {
   & .experimental {
     color: $primary;
   }
+}
+
+.wip-badge {
+  color: $background-dark;
+  background: $primary;
 }
 
 .css-copy,

@@ -48,6 +48,8 @@
     isExperimental: boolean,
 
     tags?: ComponentTags[],
+
+    wip?: true,
   }
 
   interface ComponentRuntimeItemGroup {
@@ -298,6 +300,10 @@
           compsRuntimeData[catId].components[compId].group = slugifyId(compData.sub);
         }
 
+        if (compData.wip) {
+          compsRuntimeData[catId].components[compId].wip = true;
+        }
+
         // for (const input of compData.input ?? []) {
         //   if (compsUserInputStorage.state[input.var]) {
 
@@ -430,14 +436,29 @@
           compData = catComps[compId]
         ;
 
-        if (compData.type === "item" && compData.group) {
+        if (compData.type === "item") {
+          if (compData.wip) {
+            delete catComps[compId];
+          } else if (compData.group) {
             const
               compParent = catComps[compData.group]
             ;
 
             compParent.items ??= [];
             compParent.items.push( compData.li! );
+          }
         }
+
+        // if ("wip" in compData) {
+        //   delete catComps[compId];
+        // } else if (compData.type === "item" && compData.group) {
+        //     const
+        //       compParent = catComps[compData.group]
+        //     ;
+
+        //     compParent.items ??= [];
+        //     compParent.items.push( compData.li! );
+        // }
       }
 
       // bruh
@@ -802,7 +823,28 @@
               </div>
             </li>
 
-          {:else}
+          {:else if compData.wip}
+
+            <li
+              class="comp-item wip"
+            >
+              <div>
+                <i class="icon fa-regular fa-calendar"></i>
+                <span
+                  class="comp-name-label"
+                >
+                  {compData.name}
+                </span>
+
+                <span class="tags">
+                    <span class="custom-lb wip-badge">
+                      WIP
+                    </span>
+                </span>
+              </div>
+            </li>
+
+          {:else if compData.type === "item" || compData.type === "item+group"}
 
             {@const idIncl = `incl-${compId}`}
             {@const idView = `view-${compId}`}

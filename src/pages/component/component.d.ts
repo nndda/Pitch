@@ -60,6 +60,8 @@ declare global {
     notes?: string[],
 
     sub?: string,
+
+    wip?: true,
   }
 
 }
