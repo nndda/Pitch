@@ -29,12 +29,12 @@
     color: $background-dark;
     font-family: Lato;
   }
-  
+
   & .cat-heading .custom-tip-content {
     font-size: .8em;
     font-weight: 400;
   }
-  
+
   /*
     Filter system
     ain't using JS for this
@@ -48,6 +48,10 @@
   &.no-experimental .comp-list .comp-item.is-experimental {
     display: none;
   }
+}
+
+.comp-list {
+  padding-bottom: 1.25em;
 }
 
 .page-lists {
@@ -101,16 +105,16 @@
 
     & > .text {
       position: relative;
-      
+
       & > small {
         display: block;
         position: absolute;
-  
+
         color: color.mix($text-col, $background-dark, 70%);
-  
+
         font-weight: 300;
         font-size: .65em;
-  
+
         margin-top: .35em;
       }
     }
@@ -272,6 +276,7 @@ h2.cat-heading {
 .filter-group {
   position: sticky;
   top: .5em;
+  margin-bottom: .6em;
   z-index: 9;
 
   & label {
