@@ -13,8 +13,8 @@ $background: #171620;
 $background-light: lighten($background, 1.5%);
 $background-dark: darken($background, 2.5%);
 $text-col: #f7f7f6;
-$border-col: #f7f7f630;
-$border-col-light: #f7f7f630;
+$border-col: #f7f7f620;
+$border-col-light: #f7f7f620;
 
 $accent: #fc3a78;
 $accent-light: lighten($accent, 12.5%);
@@ -32,14 +32,14 @@ $primary-light: lighten($primary, 12.5%);
   }
 
   &::-webkit-scrollbar-track {
-    background: $background; 
+    background: $background;
   }
 
   &::-webkit-scrollbar-thumb {
-    background: $col; 
+    background: $col;
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    background: darken($col, 20%); 
+    background: darken($col, 20%);
   }
 }

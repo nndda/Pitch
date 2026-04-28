@@ -2,7 +2,7 @@
   const { children, data } = $props();
 
   // svelte-ignore state_referenced_locally
-    const compData: ComponentData = data;
+  const compData: ComponentData = data;
 
   const scopesIcons: Record<ScopeStatus, string> = {
     compatible: "fa-solid fa-circle-check",
@@ -19,6 +19,8 @@
       desc: "Contains unconventional CSS/HTML codes and/or implementation.",
     },
   };
+
+  import ComponentInput from "./input.svelte";
 </script>
 
 <style lang="scss">
@@ -26,10 +28,10 @@
 </style>
 
 {#if compData.tags}
-  <ul class="heading-note">
+  <ul class="page-header-list">
     {#each compData.tags as tag}
       <li class="note">
-        <b class="label">
+        <b class="label {tag}">
           <i class="{tagsData[tag].icon}"></i>
           <span>
             {tag}
@@ -42,42 +44,62 @@
 {/if}
 
 {#if compData.notes}
-  <ul class="heading-note">
-    <li></li>
+  <ul class="page-header-list">
+    {#each compData.notes as note}
+      <li class="note">
+        <b class="label note">
+          <span>
+            Note
+          </span>
+        </b>
+        <p>
+          <!-- {note} -->
+          {@html note}
+        </p>
+      </li>
+    {/each}
   </ul>
 {/if}
 
-<ul class=scopes>
-  {#each Object.entries((data as ComponentData).scopes) as [scopeType, scopes]}
+{#if compData.input}
+  <ComponentInput data={data}/>
+{/if}
 
-    {@const scopeStatus: ScopeStatus = scopeType as ScopeStatus}
+<div class="heading">
 
-    {#if typeof scopes === "string"}
+  <ul class=scopes>
+    {#each Object.entries((data as ComponentData).scopes) as [scopeType, scopes]}
 
-      <li class={scopeType}>
-        <i class="icon {scopesIcons[scopeStatus]}"></i>
-        <ul>
-          <li class=text>{scopes} pages</li>
-        </ul>
+      {@const scopeStatus: ScopeStatus = scopeType as ScopeStatus}
 
-      </li>
+      {#if typeof scopes === "string"}
 
-    {:else}
+        <li class={scopeType}>
+          <i class="icon {scopesIcons[scopeStatus]}"></i>
+          <ul>
+            <li class=text>{scopes} pages</li>
+          </ul>
 
-      <li class={scopeType}>
-        <i class="icon {scopesIcons[scopeStatus]}"></i>
-        <ul>
-          {#each scopes as scope}
-            <li class="text {scopeType}">
-              {scope} pages
-            </li>
-          {/each}
-        </ul>
-      </li>
+        </li>
 
-    {/if}
+      {:else}
 
-  {/each}
-</ul>
+        <li class={scopeType}>
+          <i class="icon {scopesIcons[scopeStatus]}"></i>
+          <ul>
+            {#each scopes as scope, n}
+              <li class="text {scopeType}">
+                {scope} pages{#if n < scopes.length - 1},{/if}
+              </li>
+            {/each}
+          </ul>
+        </li>
+
+      {/if}
+
+    {/each}
+  </ul>
+
+</div>
 
 {@render children()}

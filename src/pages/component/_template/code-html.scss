@@ -1,17 +1,13 @@
 @use "../../../styles/variables" as *;
 
 .codes-container {
-  max-width: 945px;
-  // TODO: layout is a mess.
-  // CodeMirror force the HTML editor to be very wide.
-
   margin: auto;
   margin-block: 1.5em;
 
   border: 1px solid $border-col-light;
   border-radius: 6px;
 
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .codes-toolbar {
@@ -30,7 +26,7 @@
 }
 
 .html-editor {
-  max-width: 100%;
+  contain: inline-size;
 }
 
 .copy-status {

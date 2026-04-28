@@ -1,7 +1,7 @@
 @use "../styles/variables" as *;
 @use "sass:color";
 
-#sidebar {
+:global #sidebar {
   display: flex;
   flex-direction: column;
 
@@ -12,31 +12,58 @@
 
   border-right: 1px solid $border-col;
 
+  background: $background;
+
   & ul {
     list-style: none;
 
     padding-left: 1em;
     margin: 0;
 
-    overflow-y: hidden;
+    overflow: hidden;
   }
 
   & .custom-tip-content {
     background: $text-col;
     // background: $primary;
     color: $background-dark;
+    font-family: Lato;
   }
+
+  & .cat-heading .custom-tip-content {
+    font-size: .8em;
+    font-weight: 400;
+  }
+
+  /*
+    Filter system
+    ain't using JS for this
+  */
+  &.faves-only .comp-list .comp-item:not(.is-faved, .has-faved) {
+    display: none;
+  }
+  &.no-hacky .comp-list .comp-item.is-hacky {
+    display: none;
+  }
+  &.no-experimental .comp-list .comp-item.is-experimental {
+    display: none;
+  }
+}
+
+.comp-list {
+  padding-bottom: 1.25em;
 }
 
 .page-lists {
   flex-grow: 1;
   padding-right: .75em;
   overflow-y: scroll;
+  overflow-x: hidden;
 
   scrollbar-width: thin;
 
   & > hr {
-    opacity: .6;
+    // opacity: .6;
     margin-block: 1em;
   }
 
@@ -55,6 +82,8 @@
   padding-block: .5em;
   padding-left: .5em;
 
+  font-family: Ubuntu;
+
   letter-spacing: .1ch;
 
   & > .text, > .icon {
@@ -68,6 +97,26 @@
   &:has(.toggle:checked) {
     & + ul {
       height: 0;
+    }
+  }
+
+  &.cat-comp {
+    margin-bottom: .8em;
+
+    & > .text {
+      position: relative;
+
+      & > small {
+        display: block;
+        position: absolute;
+
+        color: color.mix($text-col, $background-dark, 70%);
+
+        font-weight: 300;
+        font-size: .65em;
+
+        margin-top: .35em;
+      }
     }
   }
 }
@@ -109,8 +158,12 @@ h2.cat-heading {
 .comp-item {
   padding-block: .35em;
 
-  & .checkbox {
+  & .checkbox, .icon {
     margin-right: .2em;
+  }
+
+  &.wip, &.group {
+    color: color.mix($text-col, $background-dark, 70%);
   }
 
   & label {
@@ -189,11 +242,18 @@ h2.cat-heading {
   }
 }
 
-.css-copy {
-  box-shadow: 0 0 1em $background-dark;
+.wip-badge {
+  color: $background-dark;
+  background: $primary;
 }
 
-.cat-toggle {
+.css-copy,
+.filter-group {
+  box-shadow: 0 0 1em .5em $background;
+  background: $background-dark;
+}
+
+:global .cat-toggle {
   & > i {
     display: none;
 
@@ -216,12 +276,13 @@ h2.cat-heading {
 .filter-group {
   position: sticky;
   top: .5em;
+  margin-bottom: .6em;
   z-index: 9;
 
   & label {
     position: relative;
 
-    & .fa-ban, .fa-slash {
+    & .fa-slash {
       position: absolute;
 
       font-size: 1.1em;
@@ -249,4 +310,3 @@ h2.cat-heading {
     background: $primary;
   }
 }
-

@@ -1,5 +1,8 @@
 <script lang="ts" module>
+  import css from "./in-development-sign?css-component";
+
   export const data: ComponentData = {
+    css: css,
 
     name: "In Development Sign",
 

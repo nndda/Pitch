@@ -1,5 +1,8 @@
 <script lang="ts" module>
+  import css from "./list__tree-list?css-component";
+
   export const data: ComponentData = {
+    css: css,
 
     name: "Tree List",
 
@@ -11,6 +14,7 @@
       ],
     },
 
+    sub: "List",
   };
 
   import { CodeHTML, ComponentPage } from "../_template/components";

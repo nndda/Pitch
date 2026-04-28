@@ -1,5 +1,8 @@
 <script lang="ts" module>
+  import css from "./list__info-list?css-component";
+
   export const data: ComponentData = {
+    css: css,
 
     name: "Info List",
 
@@ -11,6 +14,7 @@
       ],
     },
 
+    sub: "List",
   };
 
   import { CodeHTML, ComponentPage } from "../_template/components";

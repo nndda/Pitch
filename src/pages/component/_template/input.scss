@@ -1,0 +1,91 @@
+@use "../../../styles/variables" as *;
+@use "sass:color";
+
+.pinned {
+  position: sticky;
+  top: 0;
+  /* *cries* */
+  transform: translateX(-2em);
+  z-index: 9;
+  backdrop-filter: blur(.5em);
+}
+
+input[type="text"] {
+  padding: .15em .5em;
+  background: lighten($background, 7%);
+  border-radius: 4px;
+  border: 0;
+
+  &:focus {
+    outline: 1px solid $text-col;
+  }
+}
+
+:global .page-header-input {
+  background: none !important;
+  /* background: rgba($background-light, 60%) !important; */
+
+  & > li {
+    list-style: none;
+    display: flex;
+    margin-block: .35em;
+    padding-right: .5em;
+
+    &:first-child {
+      & > h3 {
+        margin-top: 0;
+        margin-bottom: .75em;
+        font-family: Ubuntu;
+        font-weight: 300;
+
+        & > i {
+          margin-right: .5em;
+        }
+      }
+    }
+
+    & > label {
+      flex-grow: 1;
+    }
+  }
+
+  /* &[data-comp-name="Accordion"] {
+    & label {
+      max-width: 120px;
+    }
+  } */
+}
+
+.input-var-name {
+  margin-inline: .5em;
+
+  & > code {
+    padding: 0 !important;
+    color: color.mix($text-col, $background, 70%) !important;
+
+    background: none !important;
+
+    font-size: .8em;
+    /* cursor: help; */
+    /* opacity: .6; */
+  }
+}
+
+.input {
+  position: relative;
+}
+
+.reset {
+  position: absolute;
+  top: .25em;
+  left: 100%;
+}
+
+#pin-toggle {
+  + label > i {
+    transition: .3s ease transform;
+  }
+  &:not(:checked) + label > i {
+    transform: rotate(-45deg)
+  }
+}

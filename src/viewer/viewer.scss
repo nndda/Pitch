@@ -1,6 +1,7 @@
 @use "../styles/variables" as *;
 
 @use "./components/scopes";
+@use "./toc.scss";
 
 #viewer {
   display: flex;
@@ -9,17 +10,16 @@
 
   height: 100vh;
 
-  padding-top: .5em;
-
-  & > header, > section {
+  & > header, & #wrapper {
     // padding: .5em;
     padding-inline: 2em;
   }
 
   & > header {
     display: flex;
-    padding-block: .5em;
+    padding: 1em;
     padding-bottom: 1em;
+    background: $background;
     border-bottom: 1px solid $border-col;
   }
 }
@@ -27,6 +27,8 @@
 .page-heading {
   margin: .3em .5em;
   margin: 0 .5em;
+  font-size: 1.5em;
+  font-family: Ubuntu;
 }
 
 #btn-home {
@@ -37,4 +39,12 @@
 
 #wrapper {
   overflow-y: scroll;
+  overflow-x: hidden;
+  flex-grow: 1;
+}
+
+.split {
+  display: flex;
+  flex-grow: 1;
+  overflow: hidden;
 }

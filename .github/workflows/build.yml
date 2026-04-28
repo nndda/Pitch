@@ -30,11 +30,11 @@ jobs:
       - name: Build app
         run: npm run build
 
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v7
-        with:
-          name: pitch-build-${{ github.sha }}
-          path: ./dist/
-          if-no-files-found: error
-          retention-days: 3
-          compression-level: 9
+      # - name: Upload build artifact
+      #   uses: actions/upload-artifact@v6
+      #   with:
+      #     name: pitch-build-${{ github.sha }}
+      #     path: ./dist/
+      #     if-no-files-found: error
+      #     retention-days: 3
+      #     compression-level: 9

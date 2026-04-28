@@ -1,70 +1,110 @@
-<script lang=ts>
-  import { state, backToHome } from "../states/components.svelte";
+<script lang="ts">
+  import {
+    onMount,
+  } from "svelte";
+
+  import {
+    state,
+  } from "../states/components.svelte";
+  import {
+    initiateStorageAPI,
+  } from "../states/storage.svelte";
+  import {
+    generateToC,
+  } from "./toc";
+
+  let
+    tocContent: HTMLUListElement
+  , tocWrapper: HTMLElement
+  ;
+
+  const
+    uiState = initiateStorageAPI<boolean>("uistate")
+  ;
+
+  $effect(() => {
+    generateToC(tocContent, state.currentId);
+  });
+
+  onMount(() => {
+    (document.getElementById("toc-toggle") as HTMLInputElement).checked = !uiState.state["toc-collapsed"];
+    tocWrapper.classList.toggle("collapsed", uiState.state["toc-collapsed"] ?? false);
+  });
 </script>
 
 <main id="viewer">
   <header>
-<!--     <button
-      id=btn-home
-      class=icon-only
-      onclick={backToHome}
-      aria-label=Home
-    >
-      <i class="fa-solid fa-house"></i>
-    </button> -->
-    <button
+    <!-- <button
       id="page-prev"
       class="icon-onlyb"
       aria-label="Previous page"
     >
       <i class="fa-solid fa-chevron-left"></i>
-    </button>
+    </button> -->
 
     <h1 class="page-heading">{state.currentId}</h1>
 
-    <button
+    <!-- <button
       id="page-prev"
       class="icon-onlyb"
       aria-label="Previous page"
     >
       <i class="fa-solid fa-chevron-right"></i>
-    </button>
+    </button> -->
 
     <!-- <div class="flex-space"></div> -->
 
-    <div class="hr-v"></div>
-
-    <button
-      id="fave-toggle"
-      class="icon-onlyb"
-      aria-label="Favourite"
-    >
-      <i class="fa-solid fa-star"></i>
-    </button>
+    <!-- <div class="hr-v"></div> -->
 
     <div class="flex-space"></div>
 
-    <button
+    <input
+      type="checkbox"
+      class="toggle"
       id="toc-toggle"
-      class="icon-onlyb"
       aria-label="Table of Content"
+
+
+      onchange={ev => {
+        uiState.update("toc-collapsed", !ev.currentTarget.checked);
+        tocWrapper.classList.toggle("collapsed", uiState.state["toc-collapsed"]);
+      }}
     >
+    <label class="button button-check custom-tip" for="toc-toggle">
       <i class="fa-solid fa-table-list"></i>
-    </button>
+
+      <span class="custom-tip-content custom-left">
+        Table of content
+      </span>
+    </label>
   </header>
-<!-- 
-  <section id=toolbar>
-    <input type=radio>
-    <input type=radio>
-    <input type=radio>
-    <input type=radio>
-  </section>
- -->
+
   <!-- <hr> -->
 
-  <section id="wrapper">
-    {#if state.currentPage}
-      <svelte:component this={state.currentPage} />
-    {/if}
-  </section>
+  <div class="split">
+
+    <section id="wrapper">
+      {#if state.currentPage}
+        <state.currentPage/>
+      {/if}
+    </section>
+
+    <nav
+      id="toc"
+      bind:this={tocWrapper}
+    >
+      <div class="toc-inner">
+        <h1>Table of content</h1>
+
+        <hr>
+
+        <h2>{state.currentId}</h2>
+
+        <ul id="toc-content" bind:this={tocContent}>
+
+        </ul>
+      </div>
+    </nav>
+
+  </div>
 </main>

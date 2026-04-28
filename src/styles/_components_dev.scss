@@ -3,7 +3,7 @@
 @use "../pages/component/components/code-block.css";
 @use "../pages/component/components/dot-leader.css";
 @use "../pages/component/components/image-comparison.css";
-@use "../pages/component/components/info-list.css";
+@use "../pages/component/components/list__info-list.css";
 @use "../pages/component/components/input.css";
 @use "../pages/component/components/label.css";
 @use "../pages/component/components/label__grouped.css";
@@ -13,13 +13,34 @@
 @use "../pages/component/components/spoiler__hover.css";
 @use "../pages/component/components/table.css";
 @use "../pages/component/components/text-divider.css";
-@use "../pages/component/components/timeline-list.css";
+@use "../pages/component/components/list__timeline-list.css";
 @use "../pages/component/components/toggle.css";
 @use "../pages/component/components/tooltip.css";
-@use "../pages/component/components/tree-list.css";
+@use "../pages/component/components/list__tree-list.css";
 
 @use "../pages/component/decorations/drop-cap.css";
 @use "../pages/component/decorations/in-development-sign.css";
 @use "../pages/component/decorations/link-decoration__external.css";
 @use "../pages/component/decorations/link-decoration__profile-page.css";
 @use "../pages/component/decorations/z_fingers.css";
+
+.custom-speed-dial {
+  position: absolute !important;
+  bottom: 1.6em !important;
+  right: 1.6em !important;
+  margin-left: auto !important;
+}
+.custom-speed-dial-home {
+  position: relative !important;
+  bottom: unset !important;
+  right: unset !important;
+  padding: 0 !important;
+  padding-right: .5em !important;
+}
+.custom-speed-dial-home ul {
+  padding: 0 !important;
+}
+.html-view:has(> .custom-speed-dial) {
+  position: relative;
+  min-height: 230px;
+}

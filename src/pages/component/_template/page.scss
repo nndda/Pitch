@@ -1,5 +1,17 @@
-.heading-note {
-  // display: flex;
+@use "../../../styles/variables" as *;
+@use "sass:color";
+
+:global .page-header-list {
+  $block-spacing: 2em;
+
+  position: relative;
+  margin: 0;
+  padding-block: .75em;
+  padding-right: $block-spacing;
+  background: $background-light;
+  border-bottom: 1px solid $border-col;
+  left: -$block-spacing;
+  width: calc(100% + ($block-spacing * 2));
 
   & > .note {
     display: flex;
@@ -9,7 +21,25 @@
     }
   }
 
-  & .label {  
-    margin-right: 1em;  
+  & .label {
+    margin-right: 1em;
+    text-transform: capitalize;
+    padding: 0 .5em;
+    border-radius: 4px;
+
+    &.hacky {
+      background: #18f08b;
+      color: #1c1813;
+    }
+
+    &.experimental {
+      background: $primary;
+      color: #1c1813;
+    }
+
+    &.note {
+      background: rgba($text-col, 0.8);
+      color: $background;
+    }
   }
 }

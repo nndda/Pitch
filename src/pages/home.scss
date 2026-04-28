@@ -1,9 +1,13 @@
+@use "../styles/variables" as *;
+
 .intro {
   display: grid;
   grid-template-columns: auto auto;
+  margin-top: 1.5em;
 }
 .pitch-logo {
   grid-row: span 3;
+  padding: .5em;
 }
 
 .pitch-title {
@@ -11,8 +15,75 @@
   font-family: Ubuntu;
   font-size: 2em;
   font-weight: 300;
+  color: $accent;
+
+  & > small {
+    color: $text-col;
+    font-family: "Roboto Mono";
+  }
 }
 
 .labels {
+  display: flex;
+  gap: .5em;
   margin: 0;
+}
+
+.custom-indev {
+  --bg: #{$background-dark};
+  border-radius: 0;
+  height: 1em;
+
+  & > div {
+    font-size: 1em;
+    padding: 0;
+    padding-inline: 1em;
+  }
+}
+
+.preview-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 25%);
+
+  & > div {
+    min-width: 200px;
+    margin: .5em;
+    flex: none;
+  }
+}
+
+:global {
+  .span-2 {
+    grid-column: span 2;
+  }
+  .span-3 {
+    grid-column: span 3;
+  }
+  .span-4 {
+    grid-column: span 4;
+  }
+}
+
+:global .comp-cont {
+  position: relative;
+  margin: .25em;
+  padding: 1em;
+  padding-top: 3em;
+  border-radius: 7px;
+  background: $background;
+
+  & > button {
+    position: absolute;
+    top: .75em;
+    left: 1em;
+    opacity: .5;
+  }
+
+  & a {
+    color: var(--l) !important;
+
+    &.custom-lb {
+      color: var(--fg) !important;
+    }
+  }
 }

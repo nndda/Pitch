@@ -12,7 +12,7 @@ blockquote.custom-callout {
 
   & > :first-child {
     color: var(--l); /* Color the heading */
-  
+
     & > img {
       vertical-align: middle;
       max-height: 1em;

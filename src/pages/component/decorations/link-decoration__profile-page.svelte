@@ -1,5 +1,8 @@
 <script lang="ts" module>
+  import css from "./link-decoration__profile-page?css-component";
+
   export const data: ComponentData = {
+    css: css,
 
     name: "Profile Page",
     nameDisplay: "Link Decoration — Profile Page",
