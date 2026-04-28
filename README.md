@@ -1,5 +1,5 @@
 <h1 align="center">
-<img src="./assets/pitch.svg" alt="Pitch Logo" width="120">
+<img src="./src/assets/pitch.svg" alt="Pitch Logo" width="120">
 <br>
 Pitch
 </h1>
@@ -12,6 +12,14 @@ Collection of CSS components and tweaks designed specifically for itch.io projec
 </p>
 
 <img align="center" src="https://github.com/user-attachments/assets/2d76ee0c-a243-468a-9794-8d4b1cda7ce3">
+
+<br>
+
+> [!CAUTION]
+> Pitch is currently migrating to the Svelte framework and Vite build system.
+> The current state of the app is incomplete,
+> and there will be breaking changes and bugs in the `main` and `dev` branch.
+
 
 ## Features
 
