@@ -767,7 +767,7 @@
             {@const chkId = `chk-${compId}`}
 
             <li
-              class="comp-item"
+              class="comp-item group"
 
               bind:this={compsRuntimeData[catId].components[compId].li}
             >
@@ -793,12 +793,12 @@
               -->
 
               <div>
-                <i class="fa-regular fa-square-caret-down"></i>
-                <b
+                <i class="icon fa-solid fa-circle"></i>
+                <span
                   class="comp-name-label"
                 >
                   {compData.name}
-                </b>
+                </span>
               </div>
             </li>
 
