@@ -17,8 +17,8 @@
 
     <dt>Arts</dt>
     <dd>
-      <a target="_blank" href="https://itch.io">Illustrious illustrator</a>
-        <br>
+      <!-- <a target="_blank" href="https://itch.io">Illustrious illustrator</a> -->
+        <!-- <br> -->
       <a target="_blank" href="https://itch.io">Adorable assets</a>
     </dd>
 
