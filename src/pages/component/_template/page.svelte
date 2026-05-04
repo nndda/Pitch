@@ -18,6 +18,10 @@
       icon: "fa-solid fa-flask",
       desc: "Contains unconventional CSS/HTML codes and/or implementation.",
     },
+    singular: {
+      icon: "fa-solid fa-hand-point-up",
+      desc: "Only one instance of the component per page.",
+    }
   };
 
   import ComponentInput from "./input.svelte";
