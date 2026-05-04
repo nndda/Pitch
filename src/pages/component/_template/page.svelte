@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { onMount } from "svelte";
+
   const { children, data } = $props();
 
   // svelte-ignore state_referenced_locally
@@ -25,6 +27,13 @@
   };
 
   import ComponentInput from "./input.svelte";
+
+  onMount(() => {
+    document.getElementById("wrapper")!.scrollTo({
+      top: 0,
+      behavior: "instant",
+    });
+  });
 </script>
 
 <style lang="scss">
