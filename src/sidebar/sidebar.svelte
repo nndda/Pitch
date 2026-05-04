@@ -427,7 +427,7 @@
               bind:this={runtimeData[catId].components[compId].li}
             >
               <div>
-                <i class="icon fa-solid fa-circle"></i>
+                <i class="icon fa-solid fa-folder-open"></i>
                 <span
                   class="comp-name-label"
                 >
@@ -443,7 +443,7 @@
               class:sub={compData.manifest.sub}
             >
               <div>
-                <i class="icon fa-regular fa-calendar"></i>
+                <i class="icon fa-solid fa-calendar"></i>
                 <span
                   class="comp-name-label"
                 >
