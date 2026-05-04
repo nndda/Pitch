@@ -1,4 +1,4 @@
-import slugify from "slugify";
+import { slug } from "../scripts/slugify";
 
 // export interface ToCData {
 //   level: string,
@@ -11,7 +11,7 @@ function createLi(hEl: HTMLHeadingElement, idPref: string): HTMLLIElement {
   const
     li = document.createElement("li")
   , liLink = document.createElement("a")
-  , id = slugify( `${idPref}-${hEl.textContent}`, { lower: true, strict: true, }, )
+  , id = slug( `${idPref}-${hEl.textContent}`)
   ;
 
   // hEl.id = id;
@@ -44,11 +44,15 @@ export function generateToC(tocContentContainer: HTMLUListElement, pageTitle: st
 
   // const ToCDataArr: ToCData[] = [];
 
-  (
-    document
-      .querySelectorAll(":is(#wrapper, #wrapper > article) > :is(h1, h2, h3, h4, h5, h6)") as NodeListOf<HTMLHeadingElement>
-  ).forEach((hEl: HTMLHeadingElement): void => {
-    tocContentContainer.appendChild(createLi(hEl, pageTitle));
+  requestAnimationFrame(() => {
+    (
+      document
+        .querySelectorAll(
+          ":is(#wrapper, #wrapper > article) > :is(h1, h2, h3, h4, h5, h6)"
+        ) as NodeListOf<HTMLHeadingElement>
+    ).forEach((hEl: HTMLHeadingElement): void => {
+      tocContentContainer.appendChild(createLi(hEl, pageTitle));
+    });
   });
 
 
