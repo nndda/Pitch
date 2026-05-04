@@ -1,31 +1,6 @@
-<script lang="ts" module>
-  import css from "./toggle?css-component";
-
-  export const data: ComponentData = {
-    css: css,
-
-    name: "Toggle",
-
-    scopes: {
-      compatible: "project",
-      partial: [
-        "profile",
-        "jam",
-      ],
-    },
-
-    tags: [
-      "experimental"
-    ],
-
-    notes: [
-      "Only one instance of the component per page.",
-    ],
-
-  };
-
-  import { CodeHTML, ComponentPage } from "../_template/components";
-
+<script lang="ts">
+  export let data: ComponentData;
+  import { ComponentPage, CodeHTML } from "../_template/components";
 </script>
 
 <ComponentPage data={data}>
@@ -44,7 +19,7 @@
 
     <br> <hr>
 
-    <div class="custom-content-a"> 
+    <div class="custom-content-a">
       Lorem ipsum (/ˌlɔː.rəm ˈɪp.səm/ LOR-əm IP-səm) is a dummy or placeholder text commonly used in graphic design, publishing, and web development to fill empty spaces in a layout that does not yet have content.
     </div>
 

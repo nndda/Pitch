@@ -1,23 +1,6 @@
-<script lang="ts" module>
-  import css from "./callout?css-component";
-
-  export const data: ComponentData = {
-    css: css,
-
-    name: "Callout",
-
-    scopes: {
-      compatible: "project",
-      partial: [
-        "profile",
-        "jam",
-      ],
-    },
-
-  };
-
-  import { CodeHTML, ComponentPage } from "../_template/components";
-
+<script lang="ts">
+  export let data: ComponentData;
+  import { ComponentPage, CodeHTML } from "../_template/components";
 </script>
 
 <ComponentPage data={data}>
@@ -127,9 +110,9 @@
 
           <h4>Yet Another Callout</h4>
           This is yet another Callout component
-          
+
         </blockquote>
-        
+
       </blockquote>
 
     </blockquote>

@@ -1,30 +1,6 @@
-<script lang="ts" module>
-  import css from "./spoiler__click?css-component";
-
-  export const data: ComponentData = {
-    css: css,
-
-    name: "On Click",
-    nameDisplay: "Spoiler — On Click",
-
-    scopes: {
-      compatible: "project",
-      partial: [
-        "profile",
-        "jam",
-      ],
-    },
-
-    tags: [
-      "hacky",
-    ],
-
-    sub: "Spoiler",
-
-  };
-
-  import { CodeHTML, ComponentPage } from "../_template/components";
-
+<script lang="ts">
+  export let data: ComponentData;
+  import { ComponentPage, CodeHTML } from "../_template/components";
 </script>
 
 <ComponentPage data={data}>
@@ -47,7 +23,7 @@
   <CodeHTML html={`
 
     <div>
-      The killer is 
+      The killer is
       <div class="custom-hd-click"><details><summary>
         pretty sus
       </summary></details></div>.

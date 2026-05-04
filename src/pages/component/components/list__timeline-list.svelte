@@ -1,24 +1,6 @@
-<script lang="ts" module>
-  import css from "./list__timeline-list?css-component";
-
-  export const data: ComponentData = {
-    css: css,
-
-    name: "Timeline List",
-
-    scopes: {
-      compatible: "project",
-      partial: [
-        "profile",
-        "jam",
-      ],
-    },
-
-    sub: "List",
-  };
-
-  import { CodeHTML, ComponentPage } from "../_template/components";
-
+<script lang="ts">
+  export let data: ComponentData;
+  import { ComponentPage, CodeHTML } from "../_template/components";
 </script>
 
 <ComponentPage data={data}>

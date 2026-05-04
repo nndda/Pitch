@@ -162,8 +162,26 @@ h2.cat-heading {
     margin-right: .2em;
   }
 
+  /*
   &.wip, &.group {
     color: color.mix($text-col, $background-dark, 70%);
+  }
+  */
+
+  &.wip {
+    & .fa-solid, .comp-name-label {
+      color: $primary;
+    }
+  }
+
+  &.group {
+    & .fa-solid, .comp-name-label {
+      color: $accent;
+    }
+
+    & .comp-name-label {
+      font-weight: bold;
+    }
   }
 
   & label {

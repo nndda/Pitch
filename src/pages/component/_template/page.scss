@@ -4,6 +4,10 @@
 :global .page-header-list {
   $block-spacing: 2em;
 
+  display: flex;
+  flex-direction: column;
+  gap: .65em;
+
   position: relative;
   margin: 0;
   padding-block: .75em;
@@ -34,6 +38,11 @@
 
     &.experimental {
       background: $primary;
+      color: #1c1813;
+    }
+
+    &.singular {
+      background: white;
       color: #1c1813;
     }
 

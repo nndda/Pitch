@@ -27,8 +27,15 @@
   });
 
   onMount(() => {
-    (document.getElementById("toc-toggle") as HTMLInputElement).checked = !uiState.state["toc-collapsed"];
-    tocWrapper.classList.toggle("collapsed", uiState.state["toc-collapsed"] ?? false);
+    const
+      initialToCState = uiState.state["toc-collapsed"] ?? true
+    ;
+
+    (document.getElementById("toc-toggle") as HTMLInputElement).checked = !initialToCState;
+    tocWrapper.classList.toggle(
+      "collapsed",
+      initialToCState,
+    );
   });
 </script>
 
@@ -85,7 +92,11 @@
 
     <section id="wrapper">
       {#if state.currentPage}
-        <state.currentPage/>
+        {#if state.currentData}
+          <state.currentPage data={state.currentData}/>
+        {:else}
+          <state.currentPage/>
+        {/if}
       {/if}
     </section>
 

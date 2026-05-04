@@ -1,37 +1,6 @@
-<script lang="ts" module>
-  import css from "./accordion?css-component";
-
-  export const data: ComponentData = {
-    css: css,
-
-    name: "Accordion",
-
-    scopes: {
-      compatible: "project",
-      partial: [
-        "profile",
-        "jam",
-      ],
-    },
-
-    input: [
-      {
-        name: "Opened icon",
-        var: "accrd-opn",
-        default: "▼",
-        type: "string",
-      },
-      {
-        name: "Closed icon",
-        var: "accrd-cls",
-        default: "►",
-        type: "string",
-      },
-    ],
-  };
-
-  import { CodeHTML, ComponentPage } from "../_template/components";
-
+<script lang="ts">
+  export let data: ComponentData;
+  import { ComponentPage, CodeHTML } from "../_template/components";
 </script>
 
 <ComponentPage data={data}>

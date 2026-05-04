@@ -1,23 +1,6 @@
-<script lang="ts" module>
-  import css from "./z_fingers?css-component";
-
-  export const data: ComponentData = {
-    css: css,
-
-    name: "👉👈",
-
-    scopes: {
-      compatible: "project",
-      partial: [
-        "profile",
-        "jam",
-      ],
-    },
-
-  };
-
-  import { CodeHTML, ComponentPage } from "../_template/components";
-
+<script lang="ts">
+  export let data: ComponentData;
+  import { ComponentPage, CodeHTML } from "../_template/components";
 </script>
 
 <ComponentPage data={data}>

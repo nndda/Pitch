@@ -1,41 +1,6 @@
-<script lang="ts" module>
-  import css from "./read-more?css-component";
-
-  export const data: ComponentData = {
-    css: css,
-
-    name: "Read More",
-
-    scopes: {
-      compatible: "project",
-      partial: [
-        "profile",
-        "jam",
-      ],
-    },
-
-    tags: [
-      "hacky",
-    ],
-
-    input: [
-      {
-        name: "Collapsed text",
-        var: "read-more-cls",
-        default: "Read more...",
-        type: "string",
-      },
-      {
-        name: "Expanded text",
-        var: "read-more-opn",
-        default: "Read less...",
-        type: "string",
-      },
-    ],
-  };
-
-  import { CodeHTML, ComponentPage } from "../_template/components";
-
+<script lang="ts">
+  export let data: ComponentData;
+  import { ComponentPage, CodeHTML } from "../_template/components";
 </script>
 
 <ComponentPage data={data}>

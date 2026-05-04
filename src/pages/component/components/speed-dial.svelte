@@ -1,40 +1,6 @@
-<script lang="ts" module>
-  import css from "./speed-dial?css-component";
-
-  export const data: ComponentData = {
-    css: css,
-
-    name: "Speed Dial",
-
-    scopes: {
-      compatible: "project",
-      partial: [
-        "profile",
-        "jam",
-      ],
-    },
-
-    tags: [
-      "hacky",
-    ],
-
-    notes: [
-      "Only one instance of the component per page.",
-    ],
-
-    // input: [
-    //   {
-    //     name: "Button count",
-    //     id: "SPEED_DIAL_BUTTON_COUNT",
-    //     default: 6,
-    //     type: "int",
-    //   },
-    // ],
-
-  };
-
-  import { CodeHTML, ComponentPage } from "../_template/components";
-
+<script lang="ts">
+  export let data: ComponentData;
+  import { ComponentPage, CodeHTML } from "../_template/components";
 </script>
 
 <ComponentPage data={data}>

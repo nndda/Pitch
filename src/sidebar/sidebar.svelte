@@ -4,90 +4,7 @@
     type Component,
   } from "svelte";
 
-  // NOTE: I kinda want to move these types definition somewhere,
-  // but there's some issues and stuff with the importing/exporting and namespace and such
-  // TODO?: maybe pile the types to the global component manifest's d.ts?
-
-  type SinglePageEntry = {
-    title: string,
-    icon: string,
-    page: Component | null,
-  }
-
-  interface PageEntry {
-    [key: string]: {
-      icon: string,
-      data: {
-        src: string,
-        comp: Component,
-      }[],
-    }
-  }
-
-  type PageComponentImport = Record<string, Component>
-
-  interface ComponentRuntimeItem {
-    type: "item" | "item+group", // not very sure abt the "item+group" implementation tbh...
-    css: CSSData,
-
-    name: string,
-    nameDisplay?: string,
-
-    li: HTMLLIElement | null,
-    chkBox: HTMLInputElement | null,
-
-    page: Component,
-
-    checked: boolean,
-
-    group?: string,
-    items?: HTMLLIElement[],
-
-    isFaved: boolean,
-    isHacky: boolean,
-    isExperimental: boolean,
-
-    tags?: ComponentTags[],
-
-    wip?: true,
-  }
-
-  interface ComponentRuntimeItemGroup {
-    type: "group",
-
-    name: string,
-
-    li: HTMLLIElement | null,
-
-    checkedAll: boolean,
-
-    hasFaved: boolean,
-    hasHacky: boolean,
-    hasExperimental: boolean,
-
-    items: HTMLLIElement[],
-  }
-
-  interface ComponentCategoryData {
-    name: string,
-    components: {
-      [compId: string]: ComponentRuntimeItem | ComponentRuntimeItemGroup,
-    },
-    selection: StorageAPI<boolean>,
-    selectedCountEl: HTMLElement | null,
-    catSelectBtn: HTMLButtonElement | null,
-  }
-
-  interface ComponentRuntimeData {
-    [catId: string]: ComponentCategoryData,
-  }
-
-  // TODO: move everything that can be moved to script
-
-  import {
-    getPages,
-    pitchVer,
-  } from "./sidebar";
+  import { pitchVer } from "./sidebar";
 
   import {
     state,
@@ -98,24 +15,16 @@
   import {
     initiateStorageAPI,
     compsUserInputStorage,
-
-    type StorageAPI,
   } from "../states/storage.svelte";
 
-  import {
-    // applyUserInput,
-    constructRule,
-  } from "../pages/component/_template/input";
+  import { constructRule } from "../pages/component/_template/input";
 
   document.documentElement.setAttribute(
     "style",
     constructRule(compsUserInputStorage.state),
   );
 
-  import {
-    slug,
-    createCompIdFunc,
-  } from "../scripts/slugify";
+  import { slug } from "../scripts/slugify";
 
   // TODO: pile all page-type component to a single entry
   // Pages
@@ -124,311 +33,47 @@
   import OtherResources from "../pages/resources/other-resources.svelte";
   import Showcase from "../pages/resources/showcase.svelte";
 
+  import {
+    runtimeData,
+    catMeta,
+
+    compCheckboxCache,
+    compElCache,
+
+    runtimeDataInit,
+  } from "../states/runtime";
 
   let
     navEl: HTMLElement
   ;
 
   const
-    pagesCatIdSlug: string[] = []
-
-  , pages: PageEntry = {
-
-      Components: {
-        icon: "fa-solid fa-bars-progress",
-        data: getPages( import.meta.glob("/pages/component/components/*.svelte", { eager: true, }) as PageComponentImport ),
-      },
-
-      Decorations: {
-        icon: "fa-solid fa-paint-roller",
-        data: getPages( import.meta.glob("/pages/component/decorations/*.svelte", { eager: true, }) as PageComponentImport ),
-      },
-
-    }
-
-  , {
+    {
       state: compFaves,
       update: updateCompFaves,
     } = initiateStorageAPI<boolean>("faves")
-
-  , compsRuntimeData: ComponentRuntimeData = {}
-
-  , compCheckboxCache: Record<string, Record<string, HTMLInputElement>> = {}
-
-  , compElCache: Record<string, Record<string, HTMLLIElement>> = {}
 
   , uiState = initiateStorageAPI<boolean>("uistate")
 
   ;
 
-  function updateCatSelectionState(catId: string): void {
-    let
-      selected: number = 0
-    , total: number = 0
+  runtimeDataInit();
 
-    , selectedVisible: number = 0
-    , totalVisible: number = 0
-    ;
+  import {
+    updateCatSelectionState,
+    syncCompCheckedState,
+    syncCompGroupItemsClass,
+  } from "./sidebar";
 
-    const
-      catData = compsRuntimeData[catId]
-    , selectEl = catData.catSelectBtn!
-    ;
-
-    for (const compId in catData.components) {
-    // for (const compId in catData.selection.state) {
-      const isVisible = catData.components[compId].li!.checkVisibility();
-
-      total += 1;
-
-      if (isVisible) {
-        totalVisible += 1;
-      }
-
-      // if (catData.selection.state[compId]) {
-      //   selected += 1;
-      // };
-
-      // TODO: i feel like there's better pattern
-      if ("chkBox" in catData.components[compId]) {
-        const checked = catData.components[compId].chkBox!.checked;
-
-        if (checked) {
-          selected += 1
-
-          if (isVisible) {
-            selectedVisible += 1;
-          }
-        }
-      }
-    }
-
-    // TODO: optimize attributes logic
-    selectEl.setAttribute("aria-label", "Clear selection");
-    selectEl.setAttribute("data-status", "select-none");
-
-    if (selectedVisible == 0) { // select all
-      // button is 'empty square'
-      selectEl.setAttribute("data-status", "select-all");
-      selectEl.setAttribute("aria-label", "Select All");
-
-      selectEl.setAttribute("data-icon", "fa-square");
-
-    } else if (selectedVisible === totalVisible) { // clear all selections
-      // button is 'checkmark square'
-      selectEl.setAttribute("data-icon", "fa-square-check");
-
-    } else { // also clear all selection(s)
-      // button is 'minus square'
-      selectEl.setAttribute("data-icon", "fa-square-minus");
-
-    }
-
-    catData.selectedCountEl!.textContent = `${selected}`;
-    catData.selection.flush();
-  }
-
-  // bruh
-  // TODO: optimize setup/initialization
-  for (const cat in pages) {
-
-    const
-      catId = "cat-" + slug(cat)
-    ;
-
-    compsRuntimeData[catId] = {
-      name: cat,
-      components: {},
-      selection: initiateStorageAPI<boolean>(`comps-${catId}`),
-      selectedCountEl: null,
-      catSelectBtn: null,
-    };
-
-    compElCache[catId] = {};
-    compCheckboxCache[catId] = {};
-
-    pagesCatIdSlug.push(catId);
-
-    const slugifyId = createCompIdFunc(catId);
-    // function slugifyId(compName: string): string {
-    //   return slugify(catId + "__" + compName, slugifyOpt)
-    // }
-
-    for (const page in pages[cat].data) {
-      const
-        {
-          src,
-          comp,
-        } = pages[cat].data[page]
-      , compData: ComponentData = (comp as any).data
-      , compId = slugifyId(compData.name)
-      ;
-
-      if (compData.scopes !== "group-only") {
-
-        // Component selected state
-        compsRuntimeData[catId].selection.state[compId] = compsRuntimeData[catId].selection.state[compId] ?? false
-
-        compsRuntimeData[catId].components[compId] = {
-          type: "item",
-          css: compData.css,
-
-          name: compData.name,
-          nameDisplay: compData?.nameDisplay,
-
-          li: null,
-          chkBox: null,
-
-          page: (comp as any).default,
-
-          checked: compsRuntimeData[catId].selection.state[compId],
-
-          isFaved: compFaves[compId] ?? false,
-          isHacky: compData.tags?.includes("hacky") ?? false,
-          isExperimental: compData.tags?.includes("experimental") ?? false,
-
-        } as ComponentRuntimeItem;
-
-        if (compData.sub) {
-          // compsRuntimeData[catId].components[compId] = {
-          //   ... compsRuntimeData[catId].components[compId],
-
-          //   // type: "item+group",
-          //   group: slugifyId(compData.sub),
-          // };
-
-          compsRuntimeData[catId].components[compId].group = slugifyId(compData.sub);
-        }
-
-        if (compData.wip) {
-          compsRuntimeData[catId].components[compId].wip = true;
-        }
-
-        // for (const input of compData.input ?? []) {
-        //   if (compsUserInputStorage.state[input.var]) {
-
-        //   } else {
-        //     if (input.default) {
-        //       if (input.type === "string") {
-        //         compsUserInputStorage.state[input.var] = '"' + input.default + '"';
-        //       } else {
-        //         compsUserInputStorage.state[input.var] = input.default;
-        //       }
-        //     }
-        //   }
-        // }
-
-      } else {
-
-        compsRuntimeData[catId].components[compId] = {
-          type: "group",
-
-          name: compData.name,
-
-          li: null,
-
-          checkedAll: false,
-
-          hasFaved: false,
-          hasHacky: false,
-          hasExperimental: false,
-
-          items: [],
-
-        } as ComponentRuntimeItemGroup;
-
-      }
-
-    }
-
-    compsRuntimeData[catId].selection.flush();
-    compsUserInputStorage.flush();
-  }
-
-
-  function syncCompCheckedState(
-    catId: string,
-    compRuntimeData: ComponentRuntimeItem | ComponentRuntimeItemGroup,
-    checked: boolean,
-  ): void {
-    if ("group" in compRuntimeData && compRuntimeData.group) {
-      const
-        compGroupData = compsRuntimeData[catId].components[compRuntimeData.group]
-      ;
-      if (compGroupData.type === "item") {
-        const
-          chkBox = compGroupData.chkBox!
-        ;
-        if (!chkBox.checked) {
-          chkBox.checked = checked;
-        }
-
-        chkBox.disabled = checked;
-      }
-    }
-  }
-
-  function syncCompGroupItemsClass(
-    compGroupData: ComponentRuntimeItem | ComponentRuntimeItemGroup,
-    className: string,
-  ): void {
-    const hasAnyClass = compGroupData.items!.some(el => {
-      return el.classList.contains(className)
-    });
-
-    if (className === "is-faved") {
-      compGroupData.li!.classList.toggle(
-        "has-faved",
-        hasAnyClass,
-      );
-
-      return;
-    }
-
-    compGroupData.li!.classList.toggle(
-      className,
-      hasAnyClass,
-    );
-  }
-
-  // TODO: move compiler to its own module
-  interface CSSCompilerOption {
-    compressed?: boolean,
-    layer?: boolean,
-  }
-
-  function compileComponent(option: CSSCompilerOption = {}): string {
-    const
-      cssOut: string[] = []
-    ;
-
-    for (const catId in compsRuntimeData) {
-      const
-        compCatData = compsRuntimeData[catId].components
-      ;
-
-      for (const compId in compCatData) {
-        if (compCatData[compId].type === "item") {
-          const
-            compData = compCatData[compId] as ComponentRuntimeItem
-          ;
-
-          if (compData.chkBox!.checked) {
-            cssOut.push(compData.css.compressed);
-          }
-        }
-      }
-    }
-
-    return cssOut.join("");
-  }
+  import { compile } from "../scripts/compiler";
+  import { copyStr } from "../scripts/copy";
 
   // TODO ...
   onMount(() => {
-    for (const catId of pagesCatIdSlug) {
+    for (const catId in runtimeData) {
 
       const
-        catComps = compsRuntimeData[catId].components
+        catComps = runtimeData[catId].components
       ;
 
       for (const compId in catComps) {
@@ -437,8 +82,10 @@
         ;
 
         if (compData.type === "item") {
+
           if (compData.wip) {
             delete catComps[compId];
+
           } else if (compData.group) {
             const
               compParent = catComps[compData.group]
@@ -447,18 +94,9 @@
             compParent.items ??= [];
             compParent.items.push( compData.li! );
           }
+
         }
 
-        // if ("wip" in compData) {
-        //   delete catComps[compId];
-        // } else if (compData.type === "item" && compData.group) {
-        //     const
-        //       compParent = catComps[compData.group]
-        //     ;
-
-        //     compParent.items ??= [];
-        //     compParent.items.push( compData.li! );
-        // }
       }
 
       // bruh
@@ -483,19 +121,14 @@
       updateCatSelectionState(catId);
     }
 
-    CSSCopyBtn.disabled = false;
+    (document.getElementById("css-copy-button") as HTMLButtonElement).disabled = false;
   });
-
-  let
-    CSSCopyBtn: HTMLButtonElement
-  ;
 
 </script>
 
 <style lang="scss">
   @use "./sidebar/sidebar.scss";
 </style>
-
 
 {#snippet PageListItem(
   label: string,
@@ -549,10 +182,12 @@
     >
     <label class="caret-toggle custom-tip" for={catId}>
       <i class="fa-solid fa-caret-down"></i>
-      <!--
-      <span class="custom-tip-content custom-left collapse">
-        Collapse
+      <span class="custom-tip-content custom-left">
+        <!-- Collapse -->
+        <span class="collapse">Collapse</span>
+        <span class="expand">Expand</span>
       </span>
+      <!--
       <span class="custom-tip-content custom-left expand">
         Expand
       </span>
@@ -654,7 +289,7 @@
 
         onchange={ev => {
           navEl.classList.toggle("faves-only", ev.currentTarget.checked);
-          for (const catId in compsRuntimeData) { updateCatSelectionState(catId); }
+          for (const catId in runtimeData) { updateCatSelectionState(catId); }
         }}
       >
       <label class="button button-check custom-tip" for="faved">
@@ -672,7 +307,7 @@
 
         onchange={ev => {
           navEl.classList.toggle("no-hacky", ev.currentTarget.checked);
-          for (const catId in compsRuntimeData) { updateCatSelectionState(catId); }
+          for (const catId in runtimeData) { updateCatSelectionState(catId); }
         }}
       >
       <label class="button button-check custom-tip" for="non-hacky">
@@ -691,7 +326,7 @@
 
         onchange={ev => {
           navEl.classList.toggle("no-experimental", ev.currentTarget.checked);
-          for (const catId in compsRuntimeData) { updateCatSelectionState(catId); }
+          for (const catId in runtimeData) { updateCatSelectionState(catId); }
         }}
       >
       <label class="button button-check custom-tip" for="non-experimental">
@@ -704,7 +339,7 @@
       </label>
     </div>
 
-    {#each Object.entries(compsRuntimeData) as catEntry}
+    {#each Object.entries(runtimeData) as catEntry}
 
       {@const catId = catEntry[0]}
       {@const catData = catEntry[1]}
@@ -713,12 +348,12 @@
       {@const catCompInputName = `cat-inp-${catId}`}
 
       <h2 class="cat-heading cat-comp">
-        <i class="icon {pages[catData.name].icon}"></i>
+        <i class="icon {catMeta[catData.name].icon}"></i>
 
         <span class="text">
           {catData.name}
           <small>
-            <span bind:this={compsRuntimeData[catId].selectedCountEl}>0</span> selected
+            <span bind:this={runtimeData[catId].selectedCountEl}>0</span> selected
           </small>
         </span>
 
@@ -736,21 +371,22 @@
             for (const compId in compCheckboxCache[catId]) {
               const
                 compChkbox = compCheckboxCache[catId][compId]
-              // , compLi = compsRuntimeData[catId].components[compId].li!
               ;
 
-              if (compsRuntimeData[catId].components[compId].li!.checkVisibility()) {
+              if (runtimeData[catId].components[compId].li!.checkVisibility()) {
                 compChkbox.checked = checked;
 
-                compsRuntimeData[catId].selection.state[compId] = checked;
+                // BUG: toggling this also nuked WIP components
+                // This line is apparently the source of it...???
+                runtimeData[catId].selection.state[compId] = checked;
               }
             }
 
             updateCatSelectionState(catId);
-            compsRuntimeData[catId].selection.flush();
+            runtimeData[catId].selection.flush();
           }}
 
-          bind:this={compsRuntimeData[catId].catSelectBtn}
+          bind:this={runtimeData[catId].catSelectBtn}
 
           aria-label="Select all"
           data-icon
@@ -785,36 +421,13 @@
 
           {#if compData.type === "group"}
 
-            {@const chkId = `chk-${compId}`}
-
             <li
               class="comp-item group"
 
-              bind:this={compsRuntimeData[catId].components[compId].li}
+              bind:this={runtimeData[catId].components[compId].li}
             >
-              <!--
-              <input
-                type="checkbox"
-                id={chkId}
-
-                checked={uiState.state[chkId] ?? false}
-
-                onchange={ev => {
-                  uiState.update(chkId, ev.currentTarget.checked);
-                }}
-              >
-              <label class="checkbox caret-toggle right" for={chkId}>
-                <i class="fa-regular fa-square-caret-down"></i>
-              </label>
-              <b
-                class="comp-name-label"
-              >
-                {compData.name}
-              </b>
-              -->
-
               <div>
-                <i class="icon fa-solid fa-circle"></i>
+                <i class="icon fa-solid fa-folder-open"></i>
                 <span
                   class="comp-name-label"
                 >
@@ -827,13 +440,14 @@
 
             <li
               class="comp-item wip"
+              class:sub={compData.manifest.sub}
             >
               <div>
-                <i class="icon fa-regular fa-calendar"></i>
+                <i class="icon fa-solid fa-calendar"></i>
                 <span
                   class="comp-name-label"
                 >
-                  {compData.name}
+                  {compData.manifest.name}
                 </span>
 
                 <span class="tags">
@@ -852,13 +466,13 @@
 
             <li
               class="comp-item"
-              class:sub={compData.group}
+              class:sub={compData.manifest.sub}
               class:is-faved={compData.isFaved}
               class:is-hacky={compData.isHacky}
               class:is-experimental={compData.isExperimental}
 
               bind:this={compElCache[catId][compId]}
-              bind:this={compsRuntimeData[catId].components[compId].li}
+              bind:this={runtimeData[catId].components[compId].li}
             >
 
               <input
@@ -866,25 +480,25 @@
                 id={idIncl}
                 name={catCompInputName}
 
-                checked={compsRuntimeData[catId].selection.state[compId] ?? false}
+                checked={runtimeData[catId].selection.state[compId] ?? false}
 
                 data-compId={compId}
 
                 onchange={ev => {
                   const
-                    compRuntimeData = compsRuntimeData[catId].components[compId]
+                    compRuntimeData = runtimeData[catId].components[compId]
                   , checked = ev.currentTarget.checked
                   ;
 
                   syncCompCheckedState(catId, compRuntimeData, checked);
 
-                  compsRuntimeData[catId].selection.update(compId, checked);
+                  runtimeData[catId].selection.update(compId, checked);
 
                   updateCatSelectionState(catId);
                 }}
 
                 bind:this={compCheckboxCache[catId][compId]}
-                bind:this={(compsRuntimeData[catId].components[compId] as ComponentRuntimeItem).chkBox}
+                bind:this={(runtimeData[catId].components[compId] as ComponentRuntimeItem).chkBox}
               >
               <label class="checkbox" for={idIncl}>
                 <i class="fa-regular fa-square"></i>
@@ -896,9 +510,13 @@
                 id={idView}
                 name="page-view"
 
-                onchange={() => {
-                  state.currentId = compData.name;
-                  state.currentPage = compData.page;
+                onchange={async () => {
+                  state.currentId = compData.manifest.name;
+                  state.currentData = compData.manifest;
+
+                  if (compData.manifest.page) {
+                    state.currentPage = (await compData.manifest.page()) as Component;
+                  }
                 }}
               >
 
@@ -906,7 +524,7 @@
                 class="comp-name-label"
                 for={idView}
               >
-                {compData.name}
+                {compData.manifest.name}
               </label>
 
               <span class="tags">
@@ -929,14 +547,14 @@
                 onchange={ev => {
                   const
                     faved = ev.currentTarget.checked ?? false
-                  , compRuntimeData = (compsRuntimeData[catId].components[compId] as ComponentRuntimeItem)
+                  , compRuntimeData = (runtimeData[catId].components[compId] as ComponentRuntimeItem)
                   ;
 
                   compRuntimeData.li!.classList.toggle("is-faved", faved);
 
                   if (compRuntimeData.group) {
                     syncCompGroupItemsClass(
-                      compsRuntimeData[catId].components[compRuntimeData.group],
+                      runtimeData[catId].components[compRuntimeData.group],
                       "is-faved",
                     );
                   }
@@ -984,14 +602,12 @@
       </span>
 
       <button
+        id="css-copy-button"
         disabled
-        bind:this={CSSCopyBtn}
         onclick={() => {
-          import("../scripts/copy").then(val => {
-            val.copyStr(
-              compileComponent()
-            );
-          });
+          copyStr(
+            compile()
+          );
         }}
       >
         <i class="icon fa-solid fa-copy"></i>

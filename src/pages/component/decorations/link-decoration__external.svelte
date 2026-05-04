@@ -1,30 +1,6 @@
-<script lang="ts" module>
-  import css from "./link-decoration__external?css-component";
-
-  export const data: ComponentData = {
-    css: css,
-
-    name: "External",
-    nameDisplay: "Link Decoration — External",
-
-    scopes: {
-      compatible: [
-        "project",
-        "profile",
-        "jam",
-      ],
-    },
-
-    notes: [
-      `Icon provided by <a href="https://fontawesome.com/" target="_blank">Font Awesome</a>. Licensed under CC BY 4.0`,
-    ],
-
-    sub: "Link Decoration",
-
-  };
-
-  import { CodeHTML, ComponentPage } from "../_template/components";
-
+<script lang="ts">
+  export let data: ComponentData;
+  import { ComponentPage, CodeHTML } from "../_template/components";
 </script>
 
 <ComponentPage data={data}>
