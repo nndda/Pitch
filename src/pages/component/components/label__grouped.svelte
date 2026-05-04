@@ -1,26 +1,6 @@
-<script lang="ts" module>
-  import css from "./label__grouped?css-component";
-
-  export const data: ComponentData = {
-    css: css,
-
-    name: "Grouped",
-    nameDisplay: "Label — Grouped",
-
-    scopes: {
-      compatible: "project",
-      partial: [
-        "profile",
-        "jam",
-      ],
-    },
-
-    sub: "Label",
-
-  };
-
-  import { CodeHTML, ComponentPage } from "../_template/components";
-
+<script lang="ts">
+  export let data: ComponentData;
+  import { ComponentPage, CodeHTML } from "../_template/components";
 </script>
 
 <ComponentPage data={data}>

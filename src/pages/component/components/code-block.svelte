@@ -1,27 +1,6 @@
-<script lang="ts" module>
-  import css from "./code-block?css-component";
-
-  export const data: ComponentData = {
-    css: css,
-
-    name: "Code Block",
-
-    scopes: {
-      compatible: "project",
-      none: [
-        "profile",
-        "jam",
-      ],
-    },
-
-    tags: [
-      "experimental",
-    ],
-
-  };
-
-  import { CodeHTML, ComponentPage } from "../_template/components";
-
+<script lang="ts">
+  export let data: ComponentData;
+  import { ComponentPage, CodeHTML } from "../_template/components";
 </script>
 
 <ComponentPage data={data}>

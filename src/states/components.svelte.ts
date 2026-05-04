@@ -1,5 +1,5 @@
-import {
-  type Component,
+import type {
+  Component,
 } from "svelte";
 
 import Home from "../pages/home.svelte";
@@ -7,11 +7,13 @@ import Home from "../pages/home.svelte";
 interface States {
   currentId: "Pitch" | string,
   currentPage: Component | null
+  currentData: ComponentData | null,
 }
 
 export const state = $state(<States>{
   currentId: "Home",
   currentPage: Home,
+  currentData: null,
 });
 
 export function backToHome(): void {

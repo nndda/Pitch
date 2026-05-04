@@ -1,26 +1,6 @@
-<script lang="ts" module>
-  import css from "./spoiler__hover?css-component";
-
-  export const data: ComponentData = {
-    css: css,
-
-    name: "On Hover",
-    nameDisplay: "Spoiler — On Hover",
-
-    scopes: {
-      compatible: [
-        "project",
-        "profile",
-        "jam",
-      ],
-    },
-
-    sub: "Spoiler",
-
-  };
-
-  import { CodeHTML, ComponentPage } from "../_template/components";
-
+<script lang="ts">
+  export let data: ComponentData;
+  import { ComponentPage, CodeHTML } from "../_template/components";
 </script>
 
 <ComponentPage data={data}>

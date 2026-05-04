@@ -85,7 +85,11 @@
 
     <section id="wrapper">
       {#if state.currentPage}
-        <state.currentPage/>
+        {#if state.currentData}
+          <state.currentPage data={state.currentData}/>
+        {:else}
+          <state.currentPage/>
+        {/if}
       {/if}
     </section>
 

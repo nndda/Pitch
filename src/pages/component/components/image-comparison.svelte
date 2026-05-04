@@ -1,27 +1,6 @@
-<script lang="ts" module>
-  import css from "./code-block?css-component";
-
-  export const data: ComponentData = {
-    css: css,
-
-    name: "Image Comparison",
-
-    scopes: {
-      compatible: "project",
-      partial: [
-        "profile",
-        "jam",
-      ],
-    },
-
-    tags: [
-      "hacky",
-    ],
-
-  };
-
-  import { CodeHTML, ComponentPage } from "../_template/components";
-
+<script lang="ts">
+  export let data: ComponentData;
+  import { ComponentPage, CodeHTML } from "../_template/components";
 </script>
 
 <ComponentPage data={data}>
