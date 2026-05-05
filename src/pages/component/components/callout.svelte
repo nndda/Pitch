@@ -1,6 +1,6 @@
 <script lang="ts">
   export let data: ComponentData;
-  import { ComponentPage, CodeHTML } from "../_template/components";
+  import { ComponentPage, CodeHTML, ComponentRef } from "../_template/components";
 </script>
 
 <ComponentPage data={data}>
@@ -84,7 +84,7 @@
   <h2>Examples</h2>
 
   <p>
-    Callout with <button class="button-primary">Label</button> inside it:
+    Callout with <ComponentRef comp="Label"/> inside it:
   </p>
 
   <CodeHTML html={`

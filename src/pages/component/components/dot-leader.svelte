@@ -1,6 +1,6 @@
 <script lang="ts">
   export let data: ComponentData;
-  import { ComponentPage, CodeHTML } from "../_template/components";
+  import { ComponentPage, CodeHTML, ComponentRef } from "../_template/components";
 </script>
 
 <ComponentPage data={data}>
@@ -127,7 +127,7 @@
   `}/>
 
   <p>
-    Combined with <button class="button-primary">Tree List</button> component.
+    Combined with <ComponentRef comp="Tree List"/> component.
   </p>
 
   <CodeHTML html={`

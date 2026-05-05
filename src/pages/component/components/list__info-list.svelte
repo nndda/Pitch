@@ -1,6 +1,6 @@
 <script lang="ts">
   export let data: ComponentData;
-  import { ComponentPage, CodeHTML } from "../_template/components";
+  import { ComponentPage, CodeHTML, ComponentRef } from "../_template/components";
 </script>
 
 <ComponentPage data={data}>
@@ -111,7 +111,7 @@
   <h2>Examples</h2>
 
   <p>
-    Input map information with <button class="button-primary">Input</button> components:
+    Input map information with <ComponentRef comp="Input"/> components:
   </p>
 
   <CodeHTML html={`

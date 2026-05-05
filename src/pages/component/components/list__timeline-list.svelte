@@ -1,6 +1,6 @@
 <script lang="ts">
   export let data: ComponentData;
-  import { ComponentPage, CodeHTML } from "../_template/components";
+  import { ComponentPage, CodeHTML, ComponentRef } from "../_template/components";
 </script>
 
 <ComponentPage data={data}>
@@ -35,7 +35,7 @@
   <h2>Examples</h2>
 
   <p>
-    Using <button class="button-primary">Label</button> to indicate the changes' type. And also using <button class="button-primary">Input</button> element:
+    Using <ComponentRef comp="Label"/> to indicate the changes' type. And also using <ComponentRef comp="Input"/> element:
   </p>
 
   <CodeHTML html={`
@@ -113,7 +113,7 @@
   `}/>
 
   <p>
-    The same example as above, but wrapped in <button class="button-primary">Read More</button> component:
+    The same example as above, but wrapped in <ComponentRef comp="Read More"/> component:
   </p>
 
   <CodeHTML html={`

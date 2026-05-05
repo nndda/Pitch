@@ -1,6 +1,6 @@
 <script lang="ts">
   export let data: ComponentData;
-  import { ComponentPage, CodeHTML } from "../_template/components";
+  import { ComponentPage, CodeHTML, ComponentRef } from "../_template/components";
 </script>
 
 <ComponentPage data={data}>
@@ -59,7 +59,7 @@
   <h2>Tooltips</h2>
 
   <p>
-    Every buttons on Speed Dial were designed to only have icon. To label the button, you can pair it with the <button class="button-primary">Tooltip</button> component.
+    Every buttons on Speed Dial were designed to only have icon. To label the button, you can pair it with the <ComponentRef comp="Tooltip"/> component.
   </p>
 
   <CodeHTML html={`
