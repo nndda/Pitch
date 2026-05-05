@@ -75,6 +75,10 @@
       onchange={ev => {
         uiState.update("toc-collapsed", !ev.currentTarget.checked);
         tocWrapper.classList.toggle("collapsed", uiState.state["toc-collapsed"]);
+
+        if (ev.currentTarget.checked) {
+          generateToC(tocContent, state.currentId);
+        }
       }}
     >
     <label class="button button-check custom-tip" for="toc-toggle">
