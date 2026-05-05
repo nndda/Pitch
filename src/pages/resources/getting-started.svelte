@@ -74,8 +74,10 @@
           <i class="fa-solid fa-warning"></i>
           Note on pasting
         </h4>
+        <p>
           Paste using <kbd>Ctrl</kbd> + <kbd>V</kbd>.
           If you're using <kbd>Right click</kbd> > <kbd>Paste</kbd> instead, the changes to your page's content might not registered when you clicked the <kbd>Save</kbd> button.
+        </p>
       </blockquote>
     </li>
 
@@ -92,7 +94,9 @@
           <i class="fa-solid fa-question-circle"></i>
           Unable to copy?
         </h4>
+        <p>
           Click the <button><i class="fa-solid fa-eye icon"></i>View</button> button, and select and copy the CSS codes manually.
+        </p>
       </blockquote>
     </li>
 
