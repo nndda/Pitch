@@ -44,9 +44,11 @@
 
   <blockquote class="custom-callout">
 
-    <h4 style="margin: .5em 0;">Buttons Count</h4>
+    <h4>Buttons Count</h4>
 
-    Keep the buttons count to 3-6 buttons.
+    <p>
+      Keep the buttons count to 3-6 buttons.
+    </p>
 
   </blockquote>
 
@@ -57,7 +59,7 @@
   <h2>Tooltips</h2>
 
   <p>
-    Every buttons on Speed Dial were designed to only have icon. To label the button, you can use the <button class="button-primary">Tooltip</button> component.
+    Every buttons on Speed Dial were designed to only have icon. To label the button, you can pair it with the <button class="button-primary">Tooltip</button> component.
   </p>
 
   <CodeHTML html={`
