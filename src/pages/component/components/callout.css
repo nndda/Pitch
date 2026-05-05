@@ -1,21 +1,33 @@
 blockquote.custom-callout {
+  --col: var(--callout-col, var(--l));
+
   font-style: normal; /* Remove the italic blockquote font-style */
-  border: 1px solid var(--br);
-  border-left: 5px solid var(--l);
 
-  padding: .05em 1em;
-  padding-bottom: 1em;
+  padding: 0;
+  margin: 1em;
 
-  background: var(--b2);
+  background: var(--callout-bg-col, var(--b2));
 
+  border: 1px solid var(--callout-border-col, var(--br));
+  border-left: 5px solid var(--col);
   border-radius: 4px;
 
-  & > :first-child {
-    color: var(--l); /* Color the heading */
+  & > :first-child:is(h1, h2, h3, h4, h5, h6) {
+    position: relative;
+    padding-left: 1em;
+    padding-block: 0.5em;
+    margin: 0;
+
+    color: var(--col); /* Color the heading */
+    background: color-mix(in srgb, var(--col) 10%, rgba(0, 0, 0, 0));
 
     & > img {
       vertical-align: middle;
       max-height: 1em;
     }
+  }
+
+  & > :is(p) {
+    margin-inline: 1em;
   }
 }
