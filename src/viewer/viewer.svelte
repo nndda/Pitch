@@ -28,7 +28,8 @@
 
   onMount(() => {
     const
-      initialToCState = uiState.state["toc-collapsed"] ?? true
+      initialToCState = true
+      // initialToCState = uiState.state["toc-collapsed"] ?? true
     ;
 
     (document.getElementById("toc-toggle") as HTMLInputElement).checked = !initialToCState;
