@@ -38,3 +38,7 @@ ul.custom-dot-leader, .custom-dot-leader-item {
     }
   }
 }
+
+ul.custom-dot-leader > li:has(> ul.custom-dot-leader) {
+  padding-left: 1em;
+}
