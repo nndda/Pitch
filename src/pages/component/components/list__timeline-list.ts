@@ -17,4 +17,13 @@ export default {
 
   sub: "List",
 
+  input: [
+    {
+      name: "Marker color",
+      var: "tl-list-marker-col",
+      default: "",
+      type: "color",
+    }
+  ],
+
 } as ComponentData;
