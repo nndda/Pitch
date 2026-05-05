@@ -22,7 +22,7 @@
       margin-bottom: .25em;
 
       &:after {
-        content: var(--accrd-opn, "▼"); /* Marker when its opened */
+        content: var(--accordion-open, "▼"); /* Marker when its opened */
       }
     }
 
@@ -45,7 +45,7 @@
     cursor: pointer;
     display: flex; /* Remove the default marker */
     text-decoration: underline;
-    color: var(--accordion-item-col, var(--l));
+    color: var(--accordion-text-col, var(--l));
 
     &:not(:hover) {
       text-decoration: none;
@@ -55,7 +55,7 @@
     &::after {
       text-align: right;
       flex-grow: 1; /* Move the new marker to the most right */
-      content: var(--accrd-cls, "►"); /* Marker when its closed */
+      content: var(--accordion-close, "►"); /* Marker when its closed */
     }
 
     /* Remove the default marker on itch app */

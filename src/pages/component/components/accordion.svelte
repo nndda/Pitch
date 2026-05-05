@@ -14,17 +14,26 @@
     <div class="custom-accrd">
       <details>
         <summary>How do I get access to custom CSS in my game page?</summary>
-        You can contact itch.io support to enable the custom CSS feature.
+        <p>
+          You can contact itch.io support to enable the custom CSS feature.
+        </p>
       </details>
 
       <details>
         <summary>Can I use this in a commercial project?</summary>
-        Absolutely! The generated CSS codes is licensed under <em>Creative Commons Zero v1.0 Universal</em>.
+        <p>
+          Absolutely! The generated CSS codes is licensed under <em>Creative Commons Zero v1.0 Universal</em>.
+        </p>
       </details>
 
       <details>
-        <summary>Why can't I use this on profile or jam pages?</summary>
-        Some components make use of the page's theme. Unlike project page, profile page and jam page didn't have some of the required color variables needed for the components to be displayed correctly (e.g. button color).
+        <summary>Why can't I use some of the components on profile or jam pages?</summary>
+        <p>
+          Some components make use of the page's theme. Unlike project page, profile page and jam page didn't have some of the required color variables needed for the components to be displayed correctly (e.g. button color).
+        </p>
+        <p>
+          Though, for some components that offers customizations, you can set said customizations manually, and it'll be compatible for any itch.io pages!
+        </p>
       </details>
     </div>
 
@@ -41,20 +50,26 @@
 
       <details>
         <summary>How do I get access to custom CSS in my game page?</summary>
-
-        You can contact itch.io support to enable the custom CSS feature.
+        <p>
+          You can contact itch.io support to enable the custom CSS feature.
+        </p>
       </details>
 
       <details>
         <summary>Can I use this in a commercial project?</summary>
-
-        Absolutely! The generated CSS codes is licensed under <em>Creative Commons Zero v1.0 Universal</em>.
+        <p>
+          Absolutely! The generated CSS codes is licensed under <em>Creative Commons Zero v1.0 Universal</em>.
+        </p>
       </details>
 
       <details>
-        <summary>Why can't I use this on profile or jam pages?</summary>
-
-        Some components make use of the page's theme. Unlike project page, profile page and jam page didn't have some of the required color variables needed for the components to be displayed correctly (e.g. button color).
+        <summary>Why can't I use some of the components on profile or jam pages?</summary>
+        <p>
+          Some components make use of the page's theme. Unlike project page, profile page and jam page didn't have some of the required color variables needed for the components to be displayed correctly (e.g. button color).
+        </p>
+        <p>
+          Though, for some components that offers customizations, you can set said customizations manually, and it'll be compatible for any itch.io pages!
+        </p>
       </details>
     </div>
 
@@ -104,7 +119,7 @@
       </details>
 
       <p class="text-right">
-        For more info, <a href="">click here</a>.
+        For more info, <a href="#">click here</a>.
       </p>
     </div>
 
@@ -121,16 +136,18 @@
     <div class="custom-accrd custom-left">
       <details>
         <summary>Left-aligned accordion</summary>
-
-        This accordion is aligned to the left.
+        <p>
+          This accordion is aligned to the left.
+        </p>
       </details>
     </div>
 
     <div class="custom-accrd custom-right">
       <details>
         <summary>Right-aligned accordion</summary>
-
-        This accordion is aligned to the right.
+        <p>
+          This accordion is aligned to the right.
+        </p>
       </details>
     </div>
 
@@ -148,8 +165,9 @@
     <div class="custom-accrd custom-full-w">
       <details>
         <summary>Full width accordion</summary>
-
-        This accordion takes full width of the page.
+        <p>
+          This accordion takes full width of the page.
+        </p>
       </details>
     </div>
 
@@ -164,24 +182,27 @@
     <div class="custom-accrd" style="max-width: 500px;">
       <details>
         <summary>500px Accordion</summary>
-
-        This accordion has a maximum width of 500px.
+        <p>
+          This accordion has a maximum width of 500px.
+        </p>
       </details>
     </div>
 
     <div class="custom-accrd" style="max-width: 400px;">
       <details>
         <summary>400px Accordion</summary>
-
-        This accordion has a maximum width of 400px.
+        <p>
+          This accordion has a maximum width of 400px.
+        </p>
       </details>
     </div>
 
     <div class="custom-accrd" style="max-width: 300px;">
       <details>
         <summary>300px Accordion</summary>
-
-        This accordion has a maximum width of 300px.
+        <p>
+          This accordion has a maximum width of 300px.
+        </p>
       </details>
     </div>
 

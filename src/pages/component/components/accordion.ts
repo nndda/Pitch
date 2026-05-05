@@ -18,16 +18,39 @@ export default {
   input: [
     {
       name: "Opened icon",
-      var: "accrd-opn",
+      var: "accordion-open",
       default: "▼",
       type: "string",
     },
     {
       name: "Closed icon",
-      var: "accrd-cls",
+      var: "accordion-close",
       default: "►",
       type: "string",
     },
+    {
+      collapse: true,
+    },
+    // {
+    //   heading: "Color",
+    // },
+    {
+      name: "Text color",
+      var: "accordion-text-col",
+      default: "",
+      type: "color",
+    },
+    {
+      name: "Border color",
+      var: "accordion-border-col",
+      default: "",
+      type: "color",
+    },
+  ],
+
+  compatibleOnInputs: [
+    "accordion-text-col",
+    "accordion-border-col",
   ],
 
 } as ComponentData;
