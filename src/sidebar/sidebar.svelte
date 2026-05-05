@@ -28,6 +28,7 @@
 
   // TODO: pile all page-type component to a single entry
   // Pages
+  import SupportMe from "../pages/support.svelte";
   // Resources
   import GettingStarted from "../pages/resources/getting-started.svelte";
   import OtherResources from "../pages/resources/other-resources.svelte";
@@ -138,8 +139,8 @@
 
   {@const chkId = slug(`chk-${label}`)}
 
-  <li class="comp-item">
-    <i class={icon}></i>
+  <li class="comp-item page-item">
+    <i class={icon} data-page-icon={label}></i>
 
     <input
       type="radio"
@@ -151,6 +152,7 @@
     <label
       class="comp-name-label"
       for={chkId}
+      data-page-name={label}
     >
       {label}
       <!-- TODO: there has to be a better way -->
@@ -221,15 +223,21 @@
       {@render PageListItem(
         "Support Me?",
         "fa-solid fa-heart",
+        switchPage( "Support this project!!", SupportMe ),
+      )}
+
+      {@render PageListItem(
+        "Theme",
+        "fa-solid fa-palette",
         backToHome,
       )}
-      <!--
+
       {@render PageListItem(
         "Settings",
         "fa-solid fa-gear",
         backToHome,
       )}
-      -->
+
     </ul>
 
     <h2 class="cat-heading">
@@ -249,11 +257,11 @@
           page: GettingStarted,
         },
 
-        // {
-        //   title: "itch.io's HTML quirks",
-        //   icon: "fa-solid fa-book-bookmark",
-        //   page: null
-        // },
+        {
+          title: "Tips",
+          icon: "fa-solid fa-book-bookmark",
+          page: null
+        },
 
         {
           title: "Other Resources",
@@ -443,8 +451,7 @@
               class:sub={compData.manifest.sub}
             >
               <div>
-                <i class="icon fa-solid fa-calendar"></i>
-                <span
+                <i class="icon fa-solid fa-calendar"></i><span
                   class="comp-name-label"
                 >
                   {compData.manifest.name}
