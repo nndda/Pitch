@@ -1,11 +1,12 @@
 <script>
   const props = $props();
+  import { ComponentRef } from "../component/_template/components";
 </script>
 
 <div class="comp-cont {props.class ?? ""}">
-  <button class="preview">
-    Dot Leader
-  </button>
+  <div class="preview">
+    <ComponentRef comp="Dot Leader"/>
+  </div>
 
   <h3 class="custom-dot-leader-item custom-no-dot">
     <span>Item</span>

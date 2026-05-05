@@ -1,15 +1,16 @@
 <script>
   const props = $props();
+  import { ComponentRef } from "../component/_template/components";
 </script>
 
 <div class="comp-cont {props.class ?? ""}">
-  <button class="preview">
-    Accordion
-  </button>
+  <div class="preview">
+    <ComponentRef comp="Accordion"/>
+  </div>
 
   <div class="custom-accrd">
     <p>
-      This &#123;PROJECT&#125; is licensed under
+      This [PROJECT NAME] is licensed under
       <a href="#">
         CC BY 4.0
       </a>
@@ -44,7 +45,7 @@
 
       <p>
         Provide link to my itch.io page:
-        <code>&#123;username&#125;.itch.io</code>
+        <code>[username].itch.io</code>
       </p>
     </details>
 

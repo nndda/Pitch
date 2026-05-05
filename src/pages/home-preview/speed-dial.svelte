@@ -1,11 +1,12 @@
 <script>
   const props = $props();
+  import { ComponentRef } from "../component/_template/components";
 </script>
 
 <div class="comp-cont {props.class ?? ""}">
-  <button class="preview">
-    Speed Dial
-  </button>
+  <div class="preview">
+    <ComponentRef comp="Speed Dial"/>
+  </div>
 
   <div class="custom-speed-dial custom-tip custom-speed-dial-home">
     <ul class="custom-speed-dial-content">

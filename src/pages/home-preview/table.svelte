@@ -1,11 +1,12 @@
 <script>
   const props = $props();
+  import { ComponentRef } from "../component/_template/components";
 </script>
 
 <div class="comp-cont {props.class ?? ""}">
-  <button class="preview">
-    Table
-  </button>
+  <div class="preview">
+    <ComponentRef comp="Table"/>
+  </div>
 
   <table>
     <thead>
