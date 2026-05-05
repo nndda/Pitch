@@ -56,10 +56,4 @@
 
   `}/>
 
-  <h2>Customization</h2>
-
-  <p>
-    Add the following CSS variables to adjust the tweak manually.
-  </p>
-
 </ComponentPage>

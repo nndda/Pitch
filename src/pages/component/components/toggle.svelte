@@ -61,9 +61,11 @@
 
   <blockquote class="custom-callout">
 
-    <h4 style="margin: .5em 0;">Important Notes</h4>
+    <h4>Important Notes</h4>
 
-    This components comes with a few caveats and drawbacks:
+    <p>
+      This components comes with a few caveats and drawbacks:
+    </p>
 
     <ul>
       <li>
