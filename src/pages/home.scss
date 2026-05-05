@@ -1,8 +1,42 @@
 @use "../styles/variables" as *;
 
+@use "sass:color";
+
+:global #wrapper:has(> .home) {
+  background: $background;
+}
+
+.banner-list {
+  position: sticky;
+  /* width: calc(100% + 4em); */
+  top: .5em;
+
+  /* margin-top: .5em !important; */
+  display: flex;
+  flex-direction: column;
+  gap: .65em;
+  /* backdrop-filter: blur(1em); */
+  z-index: 999;
+
+  /* transform: translateX(-2em); */
+/*
+  &:has(*) {
+    padding: 1em;
+    padding-bottom: 0;
+  }
+
+  & > div {
+    filter: blut(2em);
+  } */
+}
+/*
+header {
+  background: $background-dark;
+} */
+
 .intro {
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: 150px auto;
   margin-top: 1.5em;
 }
 .pitch-logo {
@@ -25,12 +59,18 @@
 
 .labels {
   display: flex;
-  gap: .5em;
+  flex-wrap: wrap;
+  gap: .25em .5em;
   margin: 0;
 }
 
+.desc {
+  max-width: 500px;
+  font-size: 1.1em;
+}
+/*
 .custom-indev {
-  --bg: #{$background-dark};
+  --bg: #{$background};
   border-radius: 0;
   height: 1em;
 
@@ -39,17 +79,17 @@
     padding: 0;
     padding-inline: 1em;
   }
-}
+} */
 
 .preview-grid {
   display: grid;
   grid-template-columns: repeat(4, 25%);
 
-  & > div {
+  /* & > div {
     min-width: 200px;
     margin: .5em;
     flex: none;
-  }
+  } */
 }
 
 :global {
@@ -66,18 +106,25 @@
 
 :global .comp-cont {
   position: relative;
-  margin: .25em;
+  margin: .35em;
   padding: 1em;
   padding-top: 3em;
   border-radius: 7px;
-  background: $background;
+  background: var(--b);
+  /* background: rgba($background, 70%); */
+  /* background: $background-light; */
+  /* border: 1px solid $border-col; */
 
-  & > button {
-    position: absolute;
-    top: .75em;
-    left: 1em;
-    opacity: .5;
+  & > .preview {
+    & > button {
+      position: absolute;
+      top: 1em;
+      left: 1em;
+      opacity: .5;
+      /* background: 0; */
+    }
   }
+
 
   & a {
     color: var(--l) !important;

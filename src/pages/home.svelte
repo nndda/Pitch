@@ -1,6 +1,10 @@
-<!-- TODO: disable ToC on home page -->
+<script lang="ts">
+  import { onDestroy, onMount } from "svelte";
+  import {
+    Bar,
+    PageRef,
+  } from "./elements";
 
-<script>
   import Accordion from "./home-preview/accordion.svelte";
   import InfoList from "./home-preview/info-list.svelte";
   import Callout from "./home-preview/callout.svelte";
@@ -10,19 +14,65 @@
   import TimelineList from "./home-preview/timeline-list.svelte";
   import TreeList from "./home-preview/tree-list.svelte";
   import Table from "./home-preview/table.svelte";
+
+  let
+    tocToggleLabel: HTMLLabelElement
+  ;
+
+  onMount(() => {
+    const
+      tocToggle = document.getElementById("toc-toggle") as HTMLInputElement
+    ;
+
+    tocToggleLabel = document.querySelector("#toc-toggle + label") as HTMLLabelElement;
+
+    if (tocToggle.checked) {
+      tocToggle.click()
+    }
+
+    tocToggleLabel.classList.add("hidden");
+  });
+
+  onDestroy(() => {
+    tocToggleLabel.classList.remove("hidden");
+  });
 </script>
 
 <style lang="scss">
   @use "./home.scss";
 </style>
 
-<article>
 
+<article class="home">
+
+  <div class="banner-list">
+
+    {#if !navigator.clipboard}
+      <Bar
+        name="WARNING!"
+        type="warning"
+      >
+        It seems that your browser doesn't support the clipboard API :/ Try Pitch in a different browser.
+      </Bar>
+    {/if}
+
+    <Bar
+      name="Hey!"
+    >
+      Dev here. I'm struggling financially right now. If you like this project, please consider <PageRef name="Support Me?" label="donating"/> <i class="fa-solid fa-heart"></i>
+    </Bar>
+
+  </div>
+
+  <!--
+  <br>
   <div class="custom-indev">
     <div>
-      Under development
+      UNDER DEVELOPMENT
     </div>
   </div>
+  -->
+
 
   <header class="intro">
 
@@ -34,31 +84,18 @@
 
     <p class="labels">
 
-      <button class="">
-        <i class="icon fa-solid fa-book-bookmark"></i>
-        Getting started
-      </button>
+      <PageRef name="Getting Started"/>
+      <PageRef name="Showcase"/>
 
-      <button class="">
+      <button>
         <i class="icon fa-brands fa-creative-commons"></i>
         CC0
-      </button>
-
-      <br>
-
-      <button class="">
-        <i class="icon fa-solid fa-star"></i>
-        Rate
-      </button>
-      <button class="">
-        <i class="icon fa-solid fa-heart"></i>
-        Support this project!
       </button>
 
     </p>
 
     <p class="desc">
-      Welcome to Pitch! the catalogue of CSS components, decorations, and tweaks, designed specifically for itch.io project pages.
+      Welcome to Pitch! a catalogue of CSS components, decorations, and tweaks, designed specifically for itch.io project pages.
     </p>
   </header>
 
@@ -85,6 +122,8 @@
     </div>
 
   </div>
+
+  <br>
 
   <h2>License</h2>
 
