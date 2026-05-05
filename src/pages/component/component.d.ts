@@ -31,10 +31,18 @@ declare global {
 
   type ComponentUserInputValue = string | number;
 
+
+  type ComponentUserInputItem =
+    ComponentUserInput
+  | ComponentUserInputHeading
+  | ComponentUserInputCollapseMark
+  ;
+
   interface ComponentUserInput {
     name: string,
     var: string,
     default?: string | number,
+    defaultBlank?: true,
     type:
       "string"
     | "int"
@@ -48,6 +56,13 @@ declare global {
     cssInject?: (inputValue: ComponentUserInputValue) => string,
     required?: true,
     hardcoded?: true,
+  }
+  interface ComponentUserInputCollapseMark {
+    collapse: true,
+  }
+  interface ComponentUserInputHeading {
+    heading: string,
+    icon?: string,
   }
 
   interface CSSData {
@@ -66,7 +81,8 @@ declare global {
 
     scopes: Record<ScopeStatus | string, Scopes> | "group-only";
 
-    input?: ComponentUserInput[],
+    input?: ComponentUserInputItem[],
+    compatibleOnInputs?: string[],
 
     tags?: ComponentTags[],
     notes?: string[],

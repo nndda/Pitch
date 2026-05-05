@@ -10,7 +10,8 @@
   backdrop-filter: blur(.5em);
 }
 
-input[type="text"] {
+input[type="text"],
+input[type="color"] {
   padding: .15em .5em;
   background: lighten($background, 7%);
   border-radius: 4px;
@@ -21,6 +22,12 @@ input[type="text"] {
   }
 }
 
+input[type="color"] {
+  min-width: 208px;
+  padding: 0;
+  height: 100%;
+}
+
 :global .page-header-input {
   background: none !important;
   /* background: rgba($background-light, 60%) !important; */
@@ -28,13 +35,29 @@ input[type="text"] {
   & > li {
     list-style: none;
     display: flex;
-    margin-block: .35em;
+    /* margin-block: .35em; */
     padding-right: .5em;
 
-    &:first-child {
-      & > h3 {
+    &.collapse-mark {
+      display: block;
+
+      & > .button {
+        display: inline-block;
+        margin-block: .5em;
+        font-size: .9em;
+      }
+
+      &:has( input:not(:checked) ) {
+        & ~ li {
+          display: none;
+        }
+      }
+    }
+
+    &:first-child, &.sub-heading {
+      & > h3, & > h4 {
         margin-top: 0;
-        margin-bottom: .75em;
+        /* margin-bottom: .75em; */
         font-family: Ubuntu;
         font-weight: 300;
 
@@ -58,10 +81,12 @@ input[type="text"] {
 
 .input-var-name {
   margin-inline: .5em;
+  font-size: .9em;
+  background: 0;
 
   & > code {
     padding: 0 !important;
-    color: color.mix($text-col, $background, 70%) !important;
+    color: color.mix($text-col, $background, 60%) !important;
 
     background: none !important;
 

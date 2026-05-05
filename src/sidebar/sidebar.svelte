@@ -522,6 +522,7 @@
 
               <label
                 class="comp-name-label"
+                data-comp-name={compData.manifest.nameDisplay ?? compData.manifest.name}
                 for={idView}
               >
                 {compData.manifest.name}
