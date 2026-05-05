@@ -21,17 +21,26 @@ export default {
 
   input: [
     {
-      name: "Collapsed text",
-      var: "read-more-cls",
+      name: "Expanded text",
+      var: "read-more-open",
       default: "Read more...",
       type: "string",
     },
     {
-      name: "Expanded text",
-      var: "read-more-opn",
+      name: "Collapsed text",
+      var: "read-more-close",
       default: "Read less...",
       type: "string",
     },
+    {
+      name: "Color",
+      var: "read-more-color",
+      default: "",
+      type: "color",
+    },
+  ],
+  compatibleOnInputs: [
+    "read-more-color",
   ],
 
 } as ComponentData;
