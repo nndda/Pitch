@@ -1,26 +1,123 @@
-const pref: string = "pitchv3__";
-
-type StorageAPIUpdate<T> = (
-  id: string,
-  is: T,
-) => void
-
-export interface StorageAPI<T> {
-  state: Record<string, T>,
-  update: StorageAPIUpdate<T>,
-  flush: () => void,
+export interface ItchProfile {
+  username: string,
+  cover_url: string,
+  url: string,
+  // developer: boolean,
+  // gamer: boolean,
+  // press_user: boolean,
+  // id: number,
+  display_name: string,
 }
 
-export function initiateStorageAPI<T>(
+export type RecordString = Record<string, string>;
+export type RecordBoolean = Record<string, boolean>;
+export type RecordUserInput = Record<string, ComponentUserInputValue>;
+export type RecordUserPreviewCodes = Record<string, { html: string, css: string, }>;
+
+export const
+  pref: string = "pitchv3__"
+
+, currentProject = initiateStorageFlag<string>("currentProject", "New project")
+
+, ui = initiateStorageAPI<{
+
+    toc_collapsed: boolean,
+
+    [key: string]: boolean,
+
+  }>("ui", true)
+
+, projects = initiateStorageAPI<{
+
+    [key: string]: {
+      name: string,
+      url?: string,
+      scope: Scope,
+      theme_text?: string,
+      theme_link?: string,
+      theme_bg?: string,
+      theme_font?: string,
+    },
+
+  }>("projects", true)
+
+, user = initiateStorageAPI<ItchProfile>("user", true)
+
+, settings = initiateStorageAPI<{
+
+    // CSS
+    minify: boolean,
+    use_layer: boolean,
+    isolate_comment_section: boolean,
+
+    // App
+    auto_copy: boolean,
+    show_home_tips: boolean,
+    show_selected_count: boolean,
+    show_faved_badge: boolean,
+    category_action_on_hover: boolean,
+
+  }>("faves")
+
+, theme = initiateStorageAPI<{
+
+    text_col: string,
+    link_col: string,
+    background: string,
+    background_2: string,
+
+    // background_opacity: number,
+
+    font_family: string,
+
+  }>("theme")
+
+, faves = initiateStorageAPI<RecordBoolean>("faves")
+, inputs = initiateStorageAPI<RecordUserInput>("inputs")
+, codes = initiateStorageAPI<RecordUserPreviewCodes>("codes")
+;
+
+export function switchContext(ctx: string): void {
+  currentProject.set(ctx);
+  window.location.href = window.location.href;
+}
+
+type StorageAPIUpdate<
+  T extends object
+> = <K extends keyof T>(
+  id: K,
+  is: T[K],
+) => void;
+
+export interface StorageAPI<T extends object> {
+  state: T,
+  update: StorageAPIUpdate<T>,
+  merge: (data: Partial<T>) => void,
+  flush: () => void,
+}
+export interface StorageAPIWithContext<T extends object> extends StorageAPI<T> {
+  changeContext: (ctx: string) => void,
+}
+
+export function initiateStorageAPI<T extends object>(storageId: string, global: true): StorageAPI<T>
+export function initiateStorageAPI<T extends object>(storageId: string, global?: false): StorageAPIWithContext<T>
+export function initiateStorageAPI<T extends object>(
   storageId: string,
-): StorageAPI<T> {
+  global: boolean = false,
+): StorageAPI<T>
+ | StorageAPIWithContext<T>
+{
 
-  storageId = pref + storageId;
+  const storageIdInit = storageId;
 
-  type StorageData = Record<string, T>;
+  function constructId(ctx: string): string {
+    return pref + (global ? "" : ctx + "__") + storageIdInit;
+  }
+
+  storageId = constructId(currentProject.get() ?? "");
 
   let
-    localData: StorageData = {}
+    localData = {} as T
   ;
 
   try {
@@ -37,18 +134,20 @@ export function initiateStorageAPI<T>(
         "\nstack: ", err.stack,
       )
     } else {
-      console.warn(`Unknown error when parsing local '${storageId}' data.`)
+      console.warn(`Unknown error when parsing local '${storageId}' data.`);
     }
 
   }
 
   const
-    storageObject: StorageData = $state(localData)
+    storageObject: T = $state(localData)
   ;
 
-  function updateFn(
-    id: string,
-    is: T,
+  function updateFn<
+    K extends keyof T
+  >(
+    id: K,
+    is: T[K],
   ): void {
     storageObject[id] = is;
     flushFn();
@@ -61,74 +160,89 @@ export function initiateStorageAPI<T>(
     );
   }
 
+  function mergeFn(data: Partial<T>): void {
+    Object.assign(storageObject, data);
+  }
+
+  if (!global) {
+    return {
+      state: storageObject,
+
+      update: updateFn,
+      merge: mergeFn,
+
+      flush: flushFn,
+
+      changeContext: (ctx: string) => {
+        localStorage.removeItem(storageIdInit);
+        localStorage.setItem(
+          constructId(ctx),
+          JSON.stringify(storageObject),
+        );
+      },
+    } as StorageAPIWithContext<T>;
+  }
+
   return {
     state: storageObject,
 
     update: updateFn,
+    merge: mergeFn,
+
     flush: flushFn,
-  };
+  } as StorageAPI<T>;
 }
 
-export const compsUserInputStorage = initiateStorageAPI<ComponentUserInputValue>("comp-user-input");
-
-export type BooleanRecord = Record<string, boolean>
-
-export interface BooleanStorageAPI {
-  state: BooleanRecord,
-  update: (
-    id: string,
-    is: boolean,
-  ) => void,
-  updateAll: () => void,
+export interface StorageFlag<T extends string | number | boolean> {
+  set: (val: T) => void,
+  get: () => T | null,
 }
 
-export function initiateBooleanStorageAPI(
-  storageId: string,
-): BooleanStorageAPI {
-  let localData: BooleanRecord = {};
+export function initiateStorageFlag<T extends string | number | boolean>(
+  id: string,
+  defaultVal: T | null = null,
+  session: boolean = false,
+): StorageFlag<T> {
+  id = pref + id;
 
-  try {
-
-    const localDataRaw: string = localStorage.getItem(storageId) ?? "";
-    localData = localDataRaw ? JSON.parse(localDataRaw) : {};
-
-  } catch (err) {
-
-    if (err instanceof SyntaxError) {
-      console.error(
-        "SyntaxError: ",
-        "\nmessage: ", err.message,
-        "\nstack: ", err.stack,
-      )
-    } else {
-      console.warn(`Unknown error when parsing local '${storageId}' data.`)
-    }
-
-  }
-
-  const
-    storageObject: BooleanRecord = $state(localData)
-  ;
+  const storage = (session ? sessionStorage : localStorage)
 
   return {
-    state: storageObject,
-
-    update: (
-      id: string,
-      is: boolean,
-    ): void => {
-      storageObject[id] = is;
-      localStorage.setItem(
-        storageId,
-        JSON.stringify(storageObject),
-      );
+    set: (val: T) => {
+      storage.setItem(id, JSON.stringify(val));
     },
 
-    updateAll: (): void => {
-      localStorage.setItem(
-        storageId,
-        JSON.stringify(storageObject),
-      );
-    },
-  };
+    get: () => {
+      let localData : T | null = null;
+
+      try {
+
+        const localDataRaw: string = storage.getItem(id) ?? "";
+        localData = localDataRaw ? JSON.parse(localDataRaw) : null;
+
+      } catch (err) {
+
+        if (err instanceof SyntaxError) {
+          console.error(
+            "SyntaxError: ",
+            "\nmessage: ", err.message,
+            "\nstack: ", err.stack,
+          )
+        } else {
+          console.warn(`Unknown error when parsing local '${id}' data.`);
+        }
+
+      }
+
+      if (localData) {
+        return localData;
+      }
+
+      if (defaultVal) {
+        storage.setItem(id, JSON.stringify(defaultVal));
+      }
+
+      return defaultVal;
+    }
+  }
 }
