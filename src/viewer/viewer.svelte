@@ -1,25 +1,13 @@
 <script lang="ts">
-  import {
-    onMount,
-  } from "svelte";
+  import { onMount } from "svelte";
 
-  import {
-    state,
-  } from "../states/components.svelte";
-  import {
-    initiateStorageAPI,
-  } from "../states/storage.svelte";
-  import {
-    generateToC,
-  } from "./toc";
+  import { state } from "../states/components.svelte";
+  import { ui } from "../states/storage.svelte";
+  import { generateToC } from "./toc";
 
   let
     tocContent: HTMLUListElement
   , tocWrapper: HTMLElement
-  ;
-
-  const
-    uiState = initiateStorageAPI<boolean>("uistate")
   ;
 
   $effect(() => {
@@ -29,7 +17,7 @@
   onMount(() => {
     const
       initialToCState = true
-      // initialToCState = uiState.state["toc-collapsed"] ?? true
+      // initialToCState = ui.state["toc-collapsed"] ?? true
     ;
 
     (document.getElementById("toc-toggle") as HTMLInputElement).checked = !initialToCState;
@@ -74,8 +62,8 @@
 
 
       onchange={ev => {
-        uiState.update("toc-collapsed", !ev.currentTarget.checked);
-        tocWrapper.classList.toggle("collapsed", uiState.state["toc-collapsed"]);
+        ui.update("toc_collapsed", !ev.currentTarget.checked);
+        tocWrapper.classList.toggle("collapsed", ui.state.toc_collapsed);
 
         if (ev.currentTarget.checked) {
           generateToC(tocContent, state.currentId);
@@ -100,7 +88,7 @@
         {#if state.currentData}
           <state.currentPage data={state.currentData}/>
         {:else}
-          <state.currentPage/>
+          <state.currentPage {...state.attr}/>
         {/if}
       {/if}
     </section>
