@@ -1,4 +1,4 @@
-import toast from "not-a-toast";
+import toastN from "not-a-toast";
 import "not-a-toast/style.css";
 import "./toast.scss";
 
@@ -18,8 +18,19 @@ const defaultToast = {
   progressBarColor: "#fc3a78",
 };
 
+export function toast(
+  message: string,
+  cfg: any = {},
+): void {
+  toastN({
+    ... defaultToast,
+    message: message,
+    ... cfg,
+  })
+}
+
 export function copyFailed(): void {
-  toast({
+  toastN({
     ... defaultToast,
     message: "Copy failed!",
     iconType: "error",
@@ -27,7 +38,7 @@ export function copyFailed(): void {
 }
 
 export function copySuccess(): void {
-  toast({
+  toastN({
     ... defaultToast,
     message: "Copied!",
     iconType: "success",
