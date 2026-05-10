@@ -5,15 +5,7 @@
     PageRef,
   } from "./elements";
 
-  import Accordion from "./home-preview/accordion.svelte";
-  import InfoList from "./home-preview/info-list.svelte";
-  import Callout from "./home-preview/callout.svelte";
-  import Labels from "./home-preview/labels.svelte";
-  import SpeedDial from "./home-preview/speed-dial.svelte";
-  import DotLeader from "./home-preview/dot-leader.svelte";
-  import TimelineList from "./home-preview/timeline-list.svelte";
-  import TreeList from "./home-preview/tree-list.svelte";
-  import Table from "./home-preview/table.svelte";
+  import Previews from "./previews/all.svelte";
 
   let
     tocToggleLabel: HTMLLabelElement
@@ -105,23 +97,7 @@
 
   <!-- <h2>Preview</h2> -->
 
-  <div class="preview-grid-wrapper">
-
-    <div class="preview-grid">
-
-      <Labels/>
-      <InfoList/>
-      <Accordion class="span-2"/>
-      <Callout class="span-3"/>
-      <SpeedDial/>
-      <DotLeader class="span-2"/>
-      <TimelineList class="span-2"/>
-      <TreeList/>
-      <Table class="span-3"/>
-
-    </div>
-
-  </div>
+  <Previews/>
 
   <br>
 
