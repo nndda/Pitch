@@ -10,24 +10,6 @@
   backdrop-filter: blur(.5em);
 }
 
-input[type="text"],
-input[type="color"] {
-  padding: .15em .5em;
-  background: lighten($background, 7%);
-  border-radius: 4px;
-  border: 0;
-
-  &:focus {
-    outline: 1px solid $text-col;
-  }
-}
-
-input[type="color"] {
-  min-width: 208px;
-  padding: 0;
-  height: 100%;
-}
-
 :global .page-header-input {
   background: none !important;
   /* background: rgba($background-light, 60%) !important; */

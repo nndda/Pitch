@@ -1,7 +1,26 @@
 @use "../styles/variables" as *;
 
 input {
-  &[type="checkbox"] {
+  &[type="text"],
+  &[type="color"] {
+    padding: .15em .5em;
+    background: lighten($background, 7%);
+    border-radius: 4px;
+    border: 0;
+
+    &:focus {
+      outline: 1px solid $text-col;
+    }
+  }
+
+  &[type="color"] {
+    min-width: 208px;
+    padding: 0;
+    height: 100%;
+  }
+
+  &[type="checkbox"],
+  &[type="radio"] {
     display: none;
 
     & + label {
@@ -77,6 +96,17 @@ input {
     background: lighten($background, 9.5%);
   }
 
+  &.accent {
+    color: $background-dark;
+    background: lighten($accent, 5.5%);
+
+    font-weight: bold;
+
+    &:hover {
+      background: lighten($accent, 9.5%);
+    }
+  }
+
   &.icon-only {
     border: 0;
     outline: 0;
@@ -130,11 +160,12 @@ button {
     $br: 9px;
     border-radius: 0;
 
-    &:first-of-type {
+    &:first-child {
       border-radius: $br 0 0 $br;
       border-right: 0;
     }
-    &:last-of-type {
+
+    &:last-child {
       border-radius: 0 $br $br 0;
     }
   }
