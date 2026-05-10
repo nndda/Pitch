@@ -10,6 +10,13 @@ import type {
 
 declare global {
 
+  const Itch: any; /* Itch API injected via official CDN/itch app */
+
+  interface CSSData {
+    raw: string,
+    compressed: string,
+  }
+
   type Scope =
     "project"
   | "profile"
@@ -29,8 +36,10 @@ declare global {
   | "singular"
   ;
 
-  type ComponentUserInputValue = string | number;
+  type BrowsersCompatStatus = "full" | "limited" | "none";
+  type BrowsersCompat = Record<"firefox" | "safari" | "chrome", BrowsersCompatStatus>;
 
+  type ComponentUserInputValue = string | number;
 
   type ComponentUserInputItem =
     ComponentUserInput
@@ -41,8 +50,7 @@ declare global {
   interface ComponentUserInput {
     name: string,
     var: string,
-    default?: string | number,
-    defaultBlank?: true,
+
     type:
       "string"
     | "int"
@@ -50,10 +58,17 @@ declare global {
     | {
         min: number,
         max: number,
+        step?: number,
       }
     ,
 
-    cssInject?: (inputValue: ComponentUserInputValue) => string,
+    default?: ComponentUserInputValue,
+    defaultDynamic?: () => string,
+
+    cssInjectPre?: (value: ComponentUserInputValue) => string,
+    cssInjectPost?: (value: ComponentUserInputValue) => string,
+    cssMutate?: (value: ComponentUserInputValue, css: string) => string,
+
     required?: true,
     hardcoded?: true,
   }
@@ -65,11 +80,6 @@ declare global {
     icon?: string,
   }
 
-  interface CSSData {
-    raw: string,
-    compressed: string,
-  }
-
   type ComponentPage = Component<{data: ComponentData}>;
 
   interface ComponentData {
@@ -79,10 +89,15 @@ declare global {
     css?: CSSData,
     page?: () => Promise<ComponentPage>,
 
-    scopes: Record<ScopeStatus | string, Scopes> | "group-only";
+    scopes:
+      Record<ScopeStatus | string, Scopes>
+    | Record<"only", Scopes>
+    | "group-only";
 
     input?: ComponentUserInputItem[],
     compatibleOnInputs?: string[],
+
+    browsersCompat?: BrowsersCompat,
 
     tags?: ComponentTags[],
     notes?: string[],
@@ -113,13 +128,9 @@ declare global {
     css: CSSData,
     cssProcessed: string,
 
-    // name: string,
-    // nameDisplay?: string,
-
     li?: HTMLLIElement,
     chkBox?: HTMLInputElement,
 
-    // page: Component,
     page: () => Promise<ComponentPage>,
     manifest: ComponentData,
 
@@ -155,10 +166,12 @@ declare global {
 
   interface ComponentCategoryData {
     name: string,
+
     components: {
       [compId: string]: ComponentRuntimeItem | ComponentRuntimeItemGroup,
     },
-    selection: StorageAPI<boolean>,
+
+    selection: StorageAPI<Record<string, boolean>>,
     selectedCountEl?: HTMLElement,
     catSelectBtn?: HTMLButtonElement,
   }
