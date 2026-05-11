@@ -1,10 +1,18 @@
 <script lang="ts">
-  const {
-    name,
-    type = "",
-    icon = undefined,
-    children,
-  } = $props();
+  import { initiateStorageFlag } from "../../states/storage.svelte";
+
+  const
+    {
+      name,
+      type = "",
+      icon = undefined,
+      children,
+      id
+    } = $props()
+
+  , flag = initiateStorageFlag<boolean>("bar-" + name, false, true)
+  ;
+
 </script>
 
 <style lang="scss">
@@ -34,35 +42,38 @@
   }
 </style>
 
-<div class="cta-banner {type}">
+{#if !flag.get()}
+  <div class="cta-banner {type}">
 
-  <b>
-    {#if icon}
-      <i class={icon}></i>
-    {:else}
-      {#if type === "warning"}
-        <i class="fa-solid fa-warning"></i>
+    <b>
+      {#if icon}
+        <i class={icon}></i>
+      {:else}
+        {#if type === "warning"}
+          <i class="fa-solid fa-warning"></i>
+        {/if}
       {/if}
-    {/if}
 
-    {name}
-  </b>
+      {name}
+    </b>
 
-  <p>
-    {@render children()}
-  </p>
+    <p>
+      {@render children()}
+    </p>
 
-  <button
-    class="icon-only custom-tip"
-    aria-label="Dismiss"
-    onclick={ev => {
-      ev.currentTarget.parentElement!.remove();
-    }}
-  >
-    <i class="fa-solid fa-xmark"></i>
-    <span class="custom-tip-content custom-left">
-      Dismiss
-    </span>
-  </button>
+    <button
+      class="icon-only custom-tip"
+      aria-label="Dismiss"
+      onclick={ev => {
+        flag.set(true);
+        ev.currentTarget.parentElement!.remove();
+      }}
+    >
+      <i class="fa-solid fa-xmark"></i>
+      <span class="custom-tip-content custom-left">
+        Dismiss
+      </span>
+    </button>
 
-</div>
+  </div>
+{/if}
