@@ -4,6 +4,12 @@
 </script>
 
 <ComponentPage data={data}>
+  <style>
+    .html-view {
+      position: relative;
+      min-height: 230px;
+    }
+  </style>
 
   <p>
     Floating button on the bottom-right corner of your page, that reveals more buttons when clicked.
