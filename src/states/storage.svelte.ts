@@ -33,10 +33,6 @@ export const
       name: string,
       url?: string,
       scope: Scope,
-      theme_text?: string,
-      theme_link?: string,
-      theme_bg?: string,
-      theme_font?: string,
     },
 
   }>("projects", true)
@@ -64,7 +60,7 @@ export const
     text_col: string,
     link_col: string,
     background: string,
-    background_2: string,
+    // background_2: string,
 
     // background_opacity: number,
 
