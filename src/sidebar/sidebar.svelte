@@ -27,12 +27,16 @@
 
   import { slug } from "../scripts/slugify";
 
+  import Profile from "../pages/elements/profile.svelte";
+
   // TODO: pile all page-type component to a single entry
+  // TODO: lazyload/dynamic import
   // Pages
   import SupportMe from "../pages/support.svelte";
+  // import Theme from "../pages/theme.svelte";
   // Resources
   import GettingStarted from "../pages/resources/getting-started.svelte";
-  import OtherResources from "../pages/resources/other-resources.svelte";
+  // import OtherResources from "../pages/resources/other-resources.svelte";
   import Showcase from "../pages/resources/showcase.svelte";
 
   import {
@@ -137,7 +141,10 @@
 
   {@const chkId = slug(`chk-${label}`)}
 
-  <li class="comp-item page-item">
+  <li
+    class="comp-item page-item"
+    class:wip={!onchange}
+  >
     <i class={icon} data-page-icon={label}></i>
 
     <input
@@ -145,10 +152,11 @@
       id={chkId}
       name="page-view"
       onchange={onchange}
+      disabled={!onchange}
       checked={label === "Home"}
     >
     <label
-      class="comp-name-label"
+      class="comp-name-label page"
       for={chkId}
       data-page-name={label}
     >
@@ -159,6 +167,23 @@
         <span class="custom-plzzz"></span>
       {/if}
     </label>
+
+    <!--
+    {#if !onchange}
+      <div class="custom-tip-content">
+        Work-in-progress
+      </div>
+      <div>
+        <span class="tags">
+          <span class="wip-icon">
+            <i class="fa-solid fa-road-barrier"></i>
+          <span class="custom-lb wip-badge">
+            WIP
+          </span>
+        </span>
+      </div>
+    {/if}
+    -->
   </li>
 
 {/snippet}
@@ -192,18 +217,9 @@
 
 <nav id="sidebar" bind:this={navEl}>
   <div class="page-lists">
+    <Profile/>
 
-    <h1 class="cat-heading pitch-title">
-      <img class="logo" alt="Pitch logo" src="/assets/pitch-icon-s.png">
-      <span class="text">
-        Pitch
-        <small>
-          v{pitchVer}
-        </small>
-      </span>
-    </h1>
-
-    <hr>
+    <hr/>
 
     <ul>
       {@render PageListItem(
@@ -215,19 +231,21 @@
       {@render PageListItem(
         "Support Me?",
         "fa-solid fa-heart",
-        switchPage( "Support this project!!", SupportMe ),
+        switchPage("Support this project!!", SupportMe),
       )}
 
       {@render PageListItem(
         "Theme",
         "fa-solid fa-palette",
-        backToHome,
+        null,
+        // switchPage("Theme", Theme),
       )}
 
       {@render PageListItem(
         "Settings",
         "fa-solid fa-gear",
-        backToHome,
+        null,
+        // backToHome,
       )}
 
     </ul>
@@ -258,7 +276,7 @@
         {
           title: "Other Resources",
           icon: "fa-solid fa-box-open",
-          page: OtherResources,
+          page: null,
         },
 
         {
@@ -269,7 +287,7 @@
 
       ] as { title, icon, page, } }
 
-        {@render PageListItem( title, icon, switchPage( title, page as Component ), )}
+        {@render PageListItem( title, icon, page !== null ? switchPage( title, page as Component ) : null, )}
 
       {/each}
     </ul>
@@ -338,6 +356,15 @@
         </span>
       </label>
     </div>
+
+    <ul>
+      {@render PageListItem(
+        "Advanced search",
+        "fa-solid fa-magnifying-glass",
+        null,
+        // switchPage("Theme", Theme),
+      )}
+    </ul>
 
     {#each Object.entries(runtimeData) as catEntry}
 

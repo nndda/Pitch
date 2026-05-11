@@ -101,8 +101,8 @@
   }
 
   &.cat-comp {
-    margin-top: .8em;
-    margin-bottom: 1em;
+    margin-top: .2em;
+    margin-bottom: 1.2em;
 
     & > i {
       width: 1em;
@@ -143,6 +143,7 @@ h2.cat-heading {
 //   background: $background-dark;
 // }
 
+/*
 .pitch-title {
   margin-bottom: .5em;
 
@@ -159,6 +160,7 @@ h2.cat-heading {
     color: $text-col;
   }
 }
+*/
 
 .comp-item {
   display: flex;
@@ -167,18 +169,6 @@ h2.cat-heading {
 
   & .checkbox, .icon {
     margin-right: .2em;
-  }
-
-  /*
-  &.wip, &.group {
-    color: color.mix($text-col, $background-dark, 70%);
-  }
-  */
-
-  &.wip {
-    & .fa-solid, .comp-name-label {
-      color: $primary;
-    }
   }
 
   &.group {
@@ -252,12 +242,35 @@ h2.cat-heading {
       opacity: 1;
     }
   }
+
+  /*
+  &.wip, &.group {
+    color: color.mix($text-col, $background-dark, 70%);
+  }
+  */
+
+  &.wip {
+    & .fa-solid, .comp-name-label, .wip-icon {
+      color: $primary;
+    }
+
+    & label {
+      cursor: not-allowed;
+    }
+  }
+
+  &.page-item.wip {
+    & i[data-page-icon], .comp-name-label {
+      opacity: .5;
+      color: $text-col;
+    }
+  }
 }
 
 .page-item {
   padding-bottom: .4em;
 
-  & > label {
+  &:not(.wip) > label {
     flex-grow: 1;
   }
 }
@@ -278,6 +291,9 @@ h2.cat-heading {
 .wip-badge {
   color: $background-dark;
   background: $primary;
+  font-size: .8em;
+  font-family: "Roboto Mono";
+  font-weight: bold;
 }
 
 .css-copy,
