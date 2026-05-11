@@ -12,6 +12,10 @@ import {
   type RecordBoolean,
 } from "../states/storage.svelte";
 
+import itchCSS from "../styles/_itchio.scss?inline";
+export const itchStyling = new CSSStyleSheet();
+itchStyling.replaceSync(itchCSS);
+
 function getCompsManifest(
   imports: ComponentManifestImports,
 ): ComponentData[] {

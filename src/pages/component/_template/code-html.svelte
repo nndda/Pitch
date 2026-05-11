@@ -1,9 +1,8 @@
 <script lang="ts">
-
   import { onMount } from "svelte";
 
   const
-    { html } = $props()
+    { html }: { html: string } = $props()
   , uid: string = $props.id()
   ;
 
@@ -15,17 +14,10 @@
   , HTMLCopyButton: HTMLButtonElement
   ;
 
-  onMount((): void => {
-    import("./code-html").then(val => {
-      const
-        htmlStr = val.initializeHTML(html)
-      ;
-
-      // TODO: maybe use shadow DOM instead?
-      HTMLView.innerHTML = htmlStr;
-
-      val.instatiateEditor(
-        htmlStr,
+  onMount(() => {
+    import("./code-html").then(({ instatiateEditor }) => {
+      instatiateEditor(
+        html,
         HTMLView,
         HTMLEditor,
         HTMLEditorToggle,
@@ -51,12 +43,14 @@
 
       bind:this={HTMLEditorToggle}
     >
+
     <label
       class="button button-check custom-tip"
       for="html-edit-{uid}"
       aria-label="Edit HTML"
     >
       <i class="fa-solid fa-code"></i>
+
       <span class="custom-tip-content">
         Edit HTML
       </span>
