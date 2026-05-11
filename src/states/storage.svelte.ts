@@ -93,10 +93,12 @@ export interface StorageAPI<T extends object> {
   state: T,
   update: StorageAPIUpdate<T>,
   merge: (data: Partial<T>) => void,
+  destroy: () => void,
   flush: () => void,
 }
 export interface StorageAPIWithContext<T extends object> extends StorageAPI<T> {
   changeContext: (ctx: string) => void,
+  duplicateLocal:  (ctx: string) => void,
 }
 
 export function initiateStorageAPI<T extends object>(storageId: string, global: true): StorageAPI<T>
@@ -143,6 +145,10 @@ export function initiateStorageAPI<T extends object>(
     storageObject: T = $state(localData)
   ;
 
+  if (Object.keys(storageObject).length === 0) {
+    localStorage.setItem(storageId, JSON.stringify(storageObject));
+  }
+
   function updateFn<
     K extends keyof T
   >(
@@ -164,7 +170,27 @@ export function initiateStorageAPI<T extends object>(
     Object.assign(storageObject, data);
   }
 
+  function destroyFn(): void {
+    for (const key in storageObject) {
+      delete storageObject[key];
+    }
+
+    localStorage.removeItem(storageId);
+  }
+
   if (!global) {
+    function duplicateLocalFn(ctx: string) {
+      localStorage.setItem(
+        constructId(ctx),
+        JSON.stringify(storageObject),
+      );
+    }
+
+    function changeContextFn(ctx: string) {
+      localStorage.removeItem(storageId);
+      duplicateLocalFn(ctx);
+    }
+
     return {
       state: storageObject,
 
@@ -172,14 +198,10 @@ export function initiateStorageAPI<T extends object>(
       merge: mergeFn,
 
       flush: flushFn,
+      destroy: destroyFn,
 
-      changeContext: (ctx: string) => {
-        localStorage.removeItem(storageIdInit);
-        localStorage.setItem(
-          constructId(ctx),
-          JSON.stringify(storageObject),
-        );
-      },
+      changeContext: changeContextFn,
+      duplicateLocal: duplicateLocalFn,
     } as StorageAPIWithContext<T>;
   }
 
@@ -190,6 +212,7 @@ export function initiateStorageAPI<T extends object>(
     merge: mergeFn,
 
     flush: flushFn,
+    destroy: destroyFn,
   } as StorageAPI<T>;
 }
 
