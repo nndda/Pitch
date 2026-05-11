@@ -1,6 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { CompatibilityNote } from "../_template/components";
+  // import { CompatibilityNote } from "../_template/components";
   import ComponentInput from "./input.svelte";
 
   const
@@ -69,7 +69,6 @@
           </span>
         </b>
         <p>
-          <!-- {note} -->
           {@html note}
         </p>
       </li>

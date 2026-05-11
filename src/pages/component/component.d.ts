@@ -5,7 +5,8 @@ import type {
 } from "svelte";
 
 import type {
-  StorageAPI,
+  RecordBoolean,
+  StorageAPIWithContext,
 } from "../states/storage.svelte";
 
 declare global {
@@ -171,7 +172,7 @@ declare global {
       [compId: string]: ComponentRuntimeItem | ComponentRuntimeItemGroup,
     },
 
-    selection: StorageAPI<Record<string, boolean>>,
+    selection: StorageAPIWithContext<RecordBoolean>,
     selectedCountEl?: HTMLElement,
     catSelectBtn?: HTMLButtonElement,
   }

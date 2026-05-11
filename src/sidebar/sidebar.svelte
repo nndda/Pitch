@@ -13,15 +13,16 @@
   } from "../states/components.svelte";
 
   import {
-    initiateStorageAPI,
-    compsUserInputStorage,
+    ui,
+    faves,
+    inputs,
   } from "../states/storage.svelte";
 
   import { constructRule } from "../pages/component/_template/input";
 
   document.documentElement.setAttribute(
     "style",
-    constructRule(compsUserInputStorage.state),
+    constructRule(inputs.state),
   );
 
   import { slug } from "../scripts/slugify";
@@ -52,10 +53,7 @@
     {
       state: compFaves,
       update: updateCompFaves,
-    } = initiateStorageAPI<boolean>("faves")
-
-  , uiState = initiateStorageAPI<boolean>("uistate")
-
+    } = faves
   ;
 
   runtimeDataInit();
@@ -176,24 +174,18 @@
       class="toggle"
       id={catId}
 
-      checked={uiState.state[catId] ?? false}
+      checked={ui.state[catId] ?? false}
 
       onchange={ev => {
-        uiState.update(catId, ev.currentTarget.checked);
+        ui.update(catId, ev.currentTarget.checked);
       }}
     >
     <label class="caret-toggle custom-tip" for={catId}>
       <i class="fa-solid fa-caret-down"></i>
       <span class="custom-tip-content custom-left">
-        <!-- Collapse -->
         <span class="collapse">Collapse</span>
         <span class="expand">Expand</span>
       </span>
-      <!--
-      <span class="custom-tip-content custom-left expand">
-        Expand
-      </span>
-       -->
     </label>
 
 {/snippet}
@@ -458,9 +450,9 @@
                 </span>
 
                 <span class="tags">
-                    <span class="custom-lb wip-badge">
-                      WIP
-                    </span>
+                  <span class="custom-lb wip-badge">
+                    WIP
+                  </span>
                 </span>
               </div>
             </li>

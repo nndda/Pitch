@@ -1,5 +1,5 @@
 import {
-  compsUserInputStorage,
+  inputs,
 } from "../../../states/storage.svelte";
 
 const rootStyle = document.documentElement.style;
@@ -13,13 +13,13 @@ export function applyUserInput(
     `${value}`,
   );
 
-  compsUserInputStorage.update(cssVar, value);
+  inputs.update(cssVar, value);
 }
 
 export function removeUserInput(cssVar: string): void {
   rootStyle.removeProperty("--" + cssVar);
-  delete compsUserInputStorage.state[cssVar];
-  compsUserInputStorage.flush();
+  delete inputs.state[cssVar];
+  inputs.flush();
 }
 
 export function constructRule(

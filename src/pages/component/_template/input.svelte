@@ -1,23 +1,16 @@
 <script lang="ts">
-  import {
-    onMount,
-  } from "svelte";
+  import { onMount } from "svelte";
 
-  import {
-    compsUserInputStorage,
-  } from "../../../states/storage.svelte";
+  import { inputs } from "../../../states/storage.svelte";
   import {
     applyUserInput,
     removeUserInput,
   } from "./input";
 
-  import {
-    copyStr,
-  } from "../../../scripts/copy";
+  import { copyStr } from "../../../scripts/copy";
 
   const
     { data }: { data: ComponentData } = $props()
-  // bruh
   , changedInputs: Record<string, true> = {}
   ;
 
@@ -26,6 +19,7 @@
   // , resetAllButton: HTMLButtonElement
   ;
 
+  // TODO:
   // function isAnyModified(): boolean {
   //   // for (const btn of resetButtons) {
   //   //   if (!btn.disabled) {
@@ -40,11 +34,11 @@
   //   resetAllButton.disabled = !isAnyModified();
   // });
 
-  // TODO: this could be a potential hot path
+  // TODO: this could be in a potential hot path
   function syncInputCompatibility() {
     if (data.compatibleOnInputs) {
       const
-        inputCurrent = Object.keys(compsUserInputStorage.state)
+        inputCurrent = Object.keys(inputs.state)
       ;
 
       let
@@ -137,7 +131,7 @@
             }
           }}
         >
-<!--
+          <!--
           bind:this={resetAllButton}
 
           onclick={() => {
@@ -147,8 +141,8 @@
                 btn.click();
               }
             }
-          }} -->
-          <!-- <i class="fa-solid fa-arrow-rotate-left"></i> -->
+          }}
+          -->
           <i class="fa-solid fa-trash"></i>
           <span class="custom-tip-content custom-left">
             Reset all fields
@@ -181,7 +175,7 @@
 
     {#if "name" in input}
 
-      {@const isInputNotStored = !(input.var in compsUserInputStorage.state)}
+      {@const isInputNotStored = !(input.var in inputs.state)}
 
       <li>
         <label
@@ -220,7 +214,7 @@
               type="text"
               value={
                 isInputNotStored ? input.default :
-                (compsUserInputStorage.state[input.var] as string).replace(/^"|"$/g, "")
+                (inputs.state[input.var] as string).replace(/^"|"$/g, "")
               }
 
               oninput={ev => onVarInputChange(ev, input)}
@@ -235,7 +229,7 @@
               alpha
 
               value={
-                isInputNotStored ? input.default : compsUserInputStorage.state[input.var]
+                isInputNotStored ? input.default : inputs.state[input.var]
               }
 
               oninput={ev => onVarInputChange(ev, input)}
@@ -249,7 +243,7 @@
             disabled={
               // bruh...
               isInputNotStored ||
-              compsUserInputStorage.state[input.var] === (
+              inputs.state[input.var] === (
                 (input.type === "string") ? '"' + input.default + '"' : input.default
               )
             }
