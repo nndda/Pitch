@@ -47,6 +47,10 @@
         },
 
         sidebar: {
+          show_scope_color: {
+            name: "Color the component list item based on their scopes",
+            desc: `Components that are partially compatible with the current scope will be colored yellow.<br> And components that are not compatible at all will be marked yet.`
+          },
           show_plzzz: {
             name: "Show 👉👈 decoration",
           },
@@ -55,6 +59,7 @@
           },
           category_action_on_hover: {
             name: "Show category actions on hover",
+            desc: `Actions on the category heading, such as expanding/collapsing or selecting/deselecting will be shown when hovered instead.`,
           },
           show_faved_badge: {
             name: "Always show component's favourite badge",
