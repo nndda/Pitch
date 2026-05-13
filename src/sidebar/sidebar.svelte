@@ -16,6 +16,7 @@
     ui,
     faves,
     inputs,
+    settings,
   } from "../states/storage.svelte";
 
   import { constructRule } from "../pages/component/_template/input";
@@ -34,6 +35,7 @@
   // Pages
   import SupportMe from "../pages/support.svelte";
   // import Theme from "../pages/theme.svelte";
+  import Settings from "../pages/settings.svelte";
   // Resources
   import GettingStarted from "../pages/resources/getting-started.svelte";
   // import OtherResources from "../pages/resources/other-resources.svelte";
@@ -164,7 +166,10 @@
       <!-- TODO: there has to be a better way -->
       {#if label === "Support Me?"}
         <!-- &nbsp; ❤️ -->
-        <span class="custom-plzzz"></span>
+        <span
+          class="custom-plzzz"
+          class:hidden={!settings.state["app.sidebar.show_plzzz"]}
+        ></span>
       {/if}
     </label>
 
@@ -215,7 +220,14 @@
 
 {/snippet}
 
-<nav id="sidebar" bind:this={navEl}>
+<nav
+  id="sidebar"
+  class:hide-wip-comps={!settings.state["app.sidebar.show_wip_comps"]}
+  class:hide-wip-pages={!settings.state["app.sidebar.show_wip_pages"]}
+  class:faved-badge-on-hover={!settings.state["app.sidebar.show_faved_badge"]}
+
+  bind:this={navEl}
+>
   <div class="page-lists">
     <Profile/>
 
@@ -244,13 +256,15 @@
       {@render PageListItem(
         "Settings",
         "fa-solid fa-gear",
-        null,
-        // backToHome,
+        switchPage("Settings", Settings),
       )}
 
     </ul>
 
-    <h2 class="cat-heading">
+    <h2
+      class="cat-heading"
+      class:on-hover={settings.state["app.sidebar.category_action_on_hover"]}
+    >
       <span class=text>
         Resources
       </span>
@@ -374,12 +388,20 @@
       {@const catCompList = `comp-list-${catId}`}
       {@const catCompInputName = `cat-inp-${catId}`}
 
-      <h2 class="cat-heading cat-comp">
+      <h2
+        class="cat-heading cat-comp"
+        class:has-count={settings.state["app.sidebar.show_selected_count"]}
+        class:on-hover={settings.state["app.sidebar.category_action_on_hover"]}
+      >
         <i class="icon {catMeta[catData.name].icon}"></i>
 
-        <span class="text">
+        <span
+          class="text"
+        >
           {catData.name}
-          <small>
+          <small
+            class:hidden={!settings.state["app.sidebar.show_selected_count"]}
+          >
             <span bind:this={runtimeData[catId].selectedCountEl}>0</span> selected
           </small>
         </span>

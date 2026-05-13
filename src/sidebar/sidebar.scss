@@ -100,9 +100,27 @@
     }
   }
 
+  /* App settings/user preference */
+  &.on-hover {
+    & > button, label {
+      opacity: 0;
+      transition: .1s opacity;
+    }
+
+    &:hover {
+      & > button, label {
+        opacity: 1;
+      }
+    }
+  }
+
   &.cat-comp {
     margin-top: .2em;
-    margin-bottom: 1.2em;
+    margin-bottom: .5em;
+
+    &.has-count {
+      margin-bottom: 1.2em;
+    }
 
     & > i {
       width: 1em;
@@ -110,6 +128,7 @@
 
     & > .text {
       position: relative;
+
 
       & > small {
         display: block;
@@ -126,9 +145,9 @@
   }
 }
 
-h1.cat-heading {
+/* h1.cat-heading {
   font-size: 1.6em;
-}
+} */
 
 h2.cat-heading {
   font-size: 1.25em;
@@ -294,6 +313,27 @@ h2.cat-heading {
   font-size: .8em;
   font-family: "Roboto Mono";
   font-weight: bold;
+}
+
+/* App settings-related overrides */
+
+.hide-wip-comps .comp-list .wip,
+.hide-wip-pages .page-item.wip {
+  display: none;
+}
+
+.faved-badge-on-hover {
+  & .comp-item.is-faved {
+    & > .fave {
+      opacity: 0;
+    }
+
+    &:hover {
+      & > .fave {
+        opacity: 1;
+      }
+    }
+  }
 }
 
 .css-copy,

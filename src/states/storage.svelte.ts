@@ -42,18 +42,39 @@ export const
 , settings = initiateStorageAPI<{
 
     // CSS
-    minify: boolean,
-    use_layer: boolean,
-    isolate_comment_section: boolean,
+    "css.minify": boolean,
+    "css.use_layer": boolean,
+    "css.isolate_comment_section": boolean,
 
     // App
-    auto_copy: boolean,
-    show_home_tips: boolean,
-    show_selected_count: boolean,
-    show_faved_badge: boolean,
-    category_action_on_hover: boolean,
+    "app.auto_copy": boolean,
+    "app.show_home_tips": boolean,
+    "app.sidebar.show_plzzz": boolean,
+    "app.sidebar.show_selected_count": boolean,
+    "app.sidebar.show_faved_badge": boolean,
+    "app.sidebar.show_wip_comps": boolean,
+    "app.sidebar.show_wip_pages": boolean,
+    "app.sidebar.category_action_on_hover": boolean,
 
-  }>("faves")
+  }>("faves", false, {
+
+    // CSS
+    "css.minify": true,
+    "css.use_layer": false,
+    "css.isolate_comment_section": false,
+
+    // App
+    "app.auto_copy": false,
+    "app.show_home_tips": true,
+
+    "app.sidebar.show_plzzz": true,
+    "app.sidebar.show_selected_count": true,
+    "app.sidebar.show_faved_badge": true,
+    "app.sidebar.show_wip_comps": true,
+    "app.sidebar.show_wip_pages": true,
+    "app.sidebar.category_action_on_hover": false,
+
+  })
 
 , theme = initiateStorageAPI<{
 
@@ -97,11 +118,20 @@ export interface StorageAPIWithContext<T extends object> extends StorageAPI<T> {
   duplicateLocal:  (ctx: string) => void,
 }
 
-export function initiateStorageAPI<T extends object>(storageId: string, global: true): StorageAPI<T>
-export function initiateStorageAPI<T extends object>(storageId: string, global?: false): StorageAPIWithContext<T>
+export function initiateStorageAPI<T extends object>(
+  storageId: string,
+  global: true,
+  defaults?: Partial<T> | null,
+): StorageAPI<T>;
+export function initiateStorageAPI<T extends object>(
+  storageId: string,
+  global?: false,
+  defaults?: Partial<T> | null,
+): StorageAPIWithContext<T>;
 export function initiateStorageAPI<T extends object>(
   storageId: string,
   global: boolean = false,
+  defaults: Partial<T> | null = null,
 ): StorageAPI<T>
  | StorageAPIWithContext<T>
 {
@@ -137,13 +167,20 @@ export function initiateStorageAPI<T extends object>(
 
   }
 
+  if (defaults) {
+    localData = {
+      ... defaults,
+      ... localData,
+    };
+  }
+
   const
     storageObject: T = $state(localData)
   ;
 
-  if (Object.keys(storageObject).length === 0) {
+  // if (Object.keys(storageObject).length === 0) {
     localStorage.setItem(storageId, JSON.stringify(storageObject));
-  }
+  // }
 
   function updateFn<
     K extends keyof T
