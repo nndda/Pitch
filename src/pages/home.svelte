@@ -5,6 +5,8 @@
     PageRef,
   } from "./elements";
 
+  import Tip from "./resources/tips.svelte";
+
   import Previews from "./previews/all.svelte";
 
   let
@@ -56,39 +58,39 @@
 
   </div>
 
-  <!--
-  <br>
-  <div class="custom-indev">
-    <div>
-      UNDER DEVELOPMENT
-    </div>
-  </div>
-  -->
-
-
   <header class="intro">
 
-    <img alt="" class="pitch-logo" src="/assets/pitch-icon-s.png" width="150">
+    <div>
+      <img alt="" class="pitch-logo" src="/assets/pitch-icon-s.png" width="150">
+    </div>
 
+    <div class="header-content">
     <h2 class="pitch-title">
       Pitch<small>.css</small>
     </h2>
 
-    <p class="labels">
+      <p class="labels">
 
-      <PageRef name="Getting Started"/>
-      <PageRef name="Showcase"/>
+        <PageRef name="Getting Started"/>
+        <PageRef name="Showcase"/>
 
-      <button>
-        <i class="icon fa-brands fa-creative-commons"></i>
-        CC0
-      </button>
+        <button>
+          <i class="icon fa-brands fa-creative-commons"></i>
+          CC0
+        </button>
 
-    </p>
+      </p>
 
-    <p class="desc">
-      Welcome to Pitch! a catalogue of CSS components, decorations, and tweaks, designed specifically for itch.io project pages.
-    </p>
+      <p class="desc">
+        Welcome to Pitch! a catalogue of CSS components, decorations, and tweaks, designed specifically for itch.io project pages.
+      </p>
+    </div>
+
+    <div class="tips">
+
+      <Tip/>
+
+    </div>
   </header>
 
   <br>

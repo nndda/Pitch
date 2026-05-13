@@ -35,13 +35,19 @@ header {
 } */
 
 .intro {
-  display: grid;
-  grid-template-columns: 150px auto;
-  margin-top: 1.5em;
+  display: flex;
+  gap: 1em;
+  /* display: grid; */
+  /* grid-template-columns: 150px auto 200px; */
+  margin-top: 1em;
+  padding: 1em;
+
+  /* background: $background-dark; */
 }
 .pitch-logo {
-  grid-row: span 3;
+  /* grid-row: span 3; */
   padding: .5em;
+  object-fit: contain;
 }
 
 .pitch-title {
@@ -57,6 +63,10 @@ header {
   }
 }
 
+.header-content {
+  flex-grow: 1;
+}
+
 .labels {
   display: flex;
   flex-wrap: wrap;
@@ -65,7 +75,7 @@ header {
 }
 
 .desc {
-  max-width: 500px;
+  max-width: 400px;
   font-size: 1.1em;
 }
 /*
