@@ -94,7 +94,7 @@
   .group {
     display: flex;
     flex-direction: column;
-    gap: 1.5em;
+    gap: 1.75em;
     padding: 2em;
 
     & > legend {
@@ -136,9 +136,8 @@
     }
 
     & > p {
-      /* margin: .5em 0; */
-      /* text-indent: 2em; */
-      margin-left: 2em;;
+      margin-left: 2em;
+      margin-bottom: 0;
     }
   }
 </style>

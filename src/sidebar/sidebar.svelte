@@ -291,11 +291,11 @@
           page: GettingStarted,
         },
 
-        {
-          title: "Tips",
-          icon: "fa-solid fa-book-bookmark",
-          page: null
-        },
+        // {
+        //   title: "Tips",
+        //   icon: "fa-solid fa-book-bookmark",
+        //   page: null
+        // },
 
         {
           title: "Other Resources",

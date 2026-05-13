@@ -1,6 +1,4 @@
-import type {
-  Component,
-} from "svelte";
+import type { Component } from "svelte";
 
 import Home from "../pages/home.svelte";
 
@@ -15,7 +13,7 @@ export const state = $state(<States>{
   currentId: "Home",
   currentPage: Home,
   currentData: null,
-  attr: null,
+  attr: {},
 });
 
 export function backToHome(): void {

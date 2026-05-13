@@ -150,11 +150,6 @@
 </div>
 
 <div class="project-cont">
-  <span class="project-label">
-    <i class="fa-solid fa-folder-open"></i>
-    Projects
-  </span>
-
   <div class="btn-group projects">
     <button
       class="custom-tip"
