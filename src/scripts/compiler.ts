@@ -1,30 +1,55 @@
 import {
   runtimeData,
 } from "../states/runtime";
+import {
+  inputs,
+  settings,
+} from "../states/storage.svelte";
 
-interface CSSCompilerOption {
-  compressed: boolean,
-  layer: boolean,
-}
+function layerCSS(css: string): string {
+  // if (settings.state["css.use_layer"]) {
+    if (settings.state["css.minify"]) {
+      return `@layer pitch-css{@layer b,u;@layer u{
 
-export const options: CSSCompilerOption = {
-  compressed: true,
-  layer: false,
+
+  /* <<< YOUR STYLING HERE >>> */
+
+
+}@layer b{${css}}}`;
+    } else {
+      return `@layer pitch-css {
+  @layer base, user;
+
+  @layer user {
+
+
+    /* <<< YOUR STYLING HERE >>> */
+
+
+  }
+
+  @layer base {
+${css}
+  }
+}`;
+    }
+  // }
+
+  // return css;
 }
 
 export function compile(): string {
   const
-    inputStyle = document.documentElement.getAttribute("style")
-  , cssOut: string[] = []
-  ;
+    inputsProps = inputs.state
 
-  if (inputStyle) {
-    cssOut.push(
-      options.compressed
-        ? `:root{${inputStyle}}`
-        : `:root{\n${inputStyle}\n}` // TODO:
-    );
-  }
+  , cssOut: string[] = []
+  , cssMinify = settings.state["css.minify"]
+  , cssIndent = cssMinify ? "" : "  "
+  , cssNewline = cssMinify ? "" : "\n\n"
+
+  , inputStyleProps: string[] = []
+  , inputStyleIncludes: string[] = []
+  ;
 
   for (const catId in runtimeData) {
     const
@@ -38,13 +63,50 @@ export function compile(): string {
         ;
 
         if (compData.chkBox!.checked) {
+          const
+            compInput = compData.manifest.input
+          ;
+
+          if (compInput) {
+            for (const inputItem of compInput) {
+              if ("type" in inputItem) {
+                inputStyleIncludes.push(inputItem.var);
+              }
+            }
+          }
+
           cssOut.push(
-            compData.manifest.css ? compData.manifest.css.compressed : ""
+            cssMinify
+              ? compData.manifest.css!.compressed
+              : compData.manifest.css!.raw
           );
         }
       }
     }
   }
 
-  return cssOut.join("");
+  if (Object.keys(inputsProps).length > 0) {
+    for (const prop of inputStyleIncludes) {
+      if (prop in inputsProps) {
+        inputStyleProps.push( cssIndent +
+          (
+            "--" + prop + ": " + inputsProps[prop] + ";"
+          )
+        );
+      }
+    }
+  }
+
+  const
+    cssOutStr = (
+      inputStyleProps.length > 0
+        ? [":root {", ... inputStyleProps, "}"].join(cssMinify ? "" : "\n")
+        : ""
+    ) + cssNewline + cssOut.join(cssNewline)
+  ;
+
+  return settings.state["css.use_layer"]
+    ? layerCSS(cssMinify ? cssOutStr : cssOutStr.replace(/^/gm, "    "))
+    : cssOutStr
+  ;
 }
