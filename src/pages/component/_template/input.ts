@@ -4,6 +4,26 @@ import {
 
 const rootStyle = document.documentElement.style;
 
+export function isInputVariablesCompatible(
+  data: ComponentData,
+): boolean {
+  if (data.compatibleOnInputs) {
+    const
+      inputCurrent = Object.keys(inputs.state)
+    ;
+
+    for (const inputReq of data.compatibleOnInputs) {
+      if (!inputCurrent.includes(inputReq)) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  return false;
+}
+
 export function applyUserInput(
   cssVar: string,
   value: ComponentUserInputValue,

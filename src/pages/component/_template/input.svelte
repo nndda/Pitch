@@ -5,14 +5,17 @@
   import {
     applyUserInput,
     removeUserInput,
+    isInputVariablesCompatible,
   } from "./input";
 
   import { copyStr } from "../../../scripts/copy";
+  import { state as stateGlobal } from "../../../states/components.svelte";
 
   const
     { data }: { data: ComponentData } = $props()
   , changedInputs: Record<string, true> = {}
   ;
+
 
   let
     pinned = $state(false)
@@ -38,23 +41,13 @@
   function syncInputCompatibility() {
     if (data.compatibleOnInputs) {
       const
-        inputCurrent = Object.keys(inputs.state)
+        isCompatible = isInputVariablesCompatible(data)
+
+      , selectorBase = `.heading[data-comp-name="${data.nameDisplay ?? data.name}"] `
+      , runtimeData = stateGlobal.attr as ComponentRuntimeItem
       ;
 
-      let
-        isCompatible = true
-      ;
-
-      for (const inputReq of data.compatibleOnInputs) {
-        if (!inputCurrent.includes(inputReq)) {
-          isCompatible = false;
-          break;
-        }
-      }
-
-      const
-        selectorBase = `.heading[data-comp-name="${data.nameDisplay ?? data.name}"] `
-      ;
+      runtimeData.li?.classList.toggle("compatible-all", isCompatible);
 
       document.querySelector(selectorBase + ".scopes:not(.compatible-all)")?.classList.toggle("hidden", isCompatible);
       document.querySelector(selectorBase + ".scopes.compatible-all")?.classList.toggle("hidden", !isCompatible);
