@@ -28,6 +28,7 @@ declare global {
     "compatible"
   | "partial"
   | "none"
+  | "only"
   ;
   type Scopes = Scope | Scope[];
 
@@ -92,8 +93,8 @@ declare global {
 
     scopes:
       Record<ScopeStatus | string, Scopes>
-    | Record<"only", Scopes>
-    | "group-only";
+    | "group-only"
+    ;
 
     input?: ComponentUserInputItem[],
     compatibleOnInputs?: string[],
