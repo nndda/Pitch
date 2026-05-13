@@ -4,15 +4,18 @@
   import ComponentInput from "./input.svelte";
 
   const
-    { children, data }: {
+    { children,
+      data,
+    }: {
       children: any,
-      data: ComponentData
+      data: ComponentData,
     } = $props()
 
   , scopesIcons: Record<ScopeStatus, string> = {
       compatible: "fa-solid fa-circle-check",
       partial: "fa-solid fa-triangle-exclamation",
       none: "fa-solid fa-square-xmark",
+      only: "fa-solid fa-square-xmark",
     }
 
   , tagsData: Record<ComponentTags, {icon: string, desc: string}> = {
