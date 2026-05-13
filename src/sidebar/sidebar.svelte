@@ -15,10 +15,17 @@
     faves,
     inputs,
     settings,
+    projects,
+    currentProject,
   } from "../states/storage.svelte";
+  const
+    projectScopes = projects.state[currentProject.get()!].scope
+  ;
 
-  import { constructRule } from "../pages/component/_template/input";
-
+  import {
+    constructRule,
+    isInputVariablesCompatible,
+  } from "../pages/component/_template/input";
   document.documentElement.setAttribute(
     "style",
     constructRule(inputs.state),
@@ -223,6 +230,11 @@
   class:hide-wip-comps={!settings.state["app.sidebar.show_wip_comps"]}
   class:hide-wip-pages={!settings.state["app.sidebar.show_wip_pages"]}
   class:faved-badge-on-hover={!settings.state["app.sidebar.show_faved_badge"]}
+
+  class:show-scope-color={settings.state["app.sidebar.show_scope_color"]}
+  class:scope-project={projectScopes === "project"}
+  class:scope-profile={projectScopes === "profile"}
+  class:scope-jam={projectScopes === "jam"}
 
   bind:this={navEl}
 >
@@ -510,12 +522,29 @@
             {@const idView = `view-${compId}`}
             {@const idFave = `fave-${compId}`}
 
+            {@const compScopeData = (scope: ScopeStatus): string | false => {
+              const
+                compScope = compData.manifest.scopes as Record<string, Scopes>
+              ;
+
+              return compScope[scope] &&
+                (
+                  typeof compScope[scope] === "string"
+                    ? compScope[scope]
+                    : compScope[scope].join(" ")
+                )
+            }}
+
             <li
               class="comp-item"
               class:sub={compData.manifest.sub}
               class:is-faved={compData.isFaved}
               class:is-hacky={compData.isHacky}
               class:is-experimental={compData.isExperimental}
+
+              class:compatible-all={isInputVariablesCompatible(compData.manifest)}
+              data-scope-partial={compScopeData("partial")}
+              data-scope-none={compScopeData("none")}
 
               bind:this={compElCache[catId][compId]}
               bind:this={runtimeData[catId].components[compId].li}
@@ -557,11 +586,15 @@
                 name="page-view"
 
                 onchange={async () => {
-                  state.currentId = compData.manifest.name;
-                  state.currentData = compData.manifest;
-
                   if (compData.manifest.page) {
-                    state.currentPage = (await compData.manifest.page()) as Component;
+                    const
+                      page = await compData.manifest.page() as Component
+                    ;
+
+                    state.currentId = compData.manifest.name;
+                    state.currentData = compData.manifest;
+                    state.attr = compData;
+                    state.currentPage = page;
                   }
                 }}
               >

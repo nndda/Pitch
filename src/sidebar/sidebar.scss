@@ -48,11 +48,36 @@
   &.no-experimental .comp-list .comp-item.is-experimental {
     display: none;
   }
+
+  &.show-scope-color.scope- {
+    $col-partial: color.mix(#ffbe0a, $text-col, 60%);
+    $col-none: color.mix(#e6071d, $text-col, 60%);
+
+    &profile {
+      & .comp-item:not(.compatible-all) {
+        &[data-scope-partial~="profile"] .comp-name-label {
+          color: $col-partial;
+        }
+
+        &[data-scope-none~="profile"] .comp-name-label {
+          color: $col-none;
+        }
+      }
+    }
+
+    &jam {
+      & .comp-item:not(.compatible-all) {
+        &[data-scope-partial~="jam"] .comp-name-label {
+          color: $col-partial;
+        }
+
+        &[data-scope-none~="jam"] .comp-name-label {
+          color: $col-none;
+        }
+      }
+    }
+  }
 }
-/*
-.comp-list {
-  padding-bottom: 1.25em;
-} */
 
 .page-lists {
   flex-grow: 1;

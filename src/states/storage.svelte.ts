@@ -67,6 +67,7 @@ export const
     "app.auto_copy": false,
     "app.show_home_tips": true,
 
+    "app.sidebar.show_scope_color": true,
     "app.sidebar.show_plzzz": true,
     "app.sidebar.show_selected_count": true,
     "app.sidebar.show_faved_badge": true,
