@@ -39,24 +39,7 @@ export const
 
 , user = initiateStorageAPI<ItchProfile>("user", true)
 
-, settings = initiateStorageAPI<{
-
-    // CSS
-    "css.minify": boolean,
-    "css.use_layer": boolean,
-    "css.isolate_comment_section": boolean,
-
-    // App
-    "app.auto_copy": boolean,
-    "app.show_home_tips": boolean,
-    "app.sidebar.show_plzzz": boolean,
-    "app.sidebar.show_selected_count": boolean,
-    "app.sidebar.show_faved_badge": boolean,
-    "app.sidebar.show_wip_comps": boolean,
-    "app.sidebar.show_wip_pages": boolean,
-    "app.sidebar.category_action_on_hover": boolean,
-
-  }>("faves", false, {
+, settingsDefault = {
 
     // CSS
     "css.minify": true,
@@ -75,8 +58,8 @@ export const
     "app.sidebar.show_wip_pages": true,
     "app.sidebar.category_action_on_hover": false,
 
-  })
-
+  }
+, settings = initiateStorageAPI<typeof settingsDefault>("settings", false, settingsDefault)
 , theme = initiateStorageAPI<{
 
     text_col: string,
