@@ -4,8 +4,6 @@
     type Component,
   } from "svelte";
 
-  import { pitchVer } from "./sidebar";
-
   import {
     state,
     backToHome,

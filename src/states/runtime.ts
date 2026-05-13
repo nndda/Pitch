@@ -1,7 +1,4 @@
-import {
-  slug,
-  createCompIdFunc,
-} from "../scripts/slugify";
+import { slug } from "../scripts/slugify";
 
 import {
   initiateStorageAPI,
@@ -44,6 +41,7 @@ export const
 
   }
 ;
+
 export function runtimeDataInit(): void {
   const
     compPagesEntry: PageEntry = {
@@ -57,7 +55,6 @@ export function runtimeDataInit(): void {
 
     const
       catId = "cat-" + slug(cat)
-    , slugifyId = createCompIdFunc(catId)
     ;
 
     runtimeData[catId] = {
