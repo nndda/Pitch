@@ -28,7 +28,7 @@ jobs:
         uses: oven-sh/setup-bun@v2.2
 
       - name: Build app
-        uses: |
+        run: |
           bun run build
 
       - uses: actions/upload-artifact@v7
