@@ -89,12 +89,6 @@
   .project-cont {
     display: flex;
     flex-direction: column;
-    /* gap: .5em; */
-  }
-  .project-label {
-    display: none;
-    padding: .4em .65em;
-    font-size: .9em;
   }
 
   .projects.btn-group {
@@ -179,10 +173,5 @@
         </option>
       {/each}
     </select>
-    <!--
-    <button>
-      <i class="fa-solid fa-square-caret-down"></i>
-    </button>
-    -->
   </div>
 </div>

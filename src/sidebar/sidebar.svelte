@@ -692,7 +692,7 @@
         disabled
         onclick={() => {
           copyStr(
-            compile()
+            compile(),
           );
         }}
       >

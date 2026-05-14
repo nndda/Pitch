@@ -34,11 +34,9 @@ export const
     Components: {
       icon: "fa-solid fa-bars-progress",
     },
-
     Decorations: {
       icon: "fa-solid fa-paint-roller",
     },
-
   }
 ;
 
@@ -47,12 +45,10 @@ export function runtimeDataInit(): void {
     compPagesEntry: PageEntry = {
       Components: getCompsManifest( import.meta.glob("/pages/component/components/*.ts", { eager: true, }) as ComponentManifestImports ),
       Decorations: getCompsManifest( import.meta.glob("/pages/component/decorations/*.ts", { eager: true, }) as ComponentManifestImports ),
-
     }
   ;
 
   for (const cat in compPagesEntry) {
-
     const
       catId = "cat-" + slug(cat)
     ;

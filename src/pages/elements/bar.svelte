@@ -7,7 +7,6 @@
       type = "",
       icon = undefined,
       children,
-      id
     } = $props()
 
   , flag = initiateStorageFlag<boolean>("bar-" + name, false, true)
