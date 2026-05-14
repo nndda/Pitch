@@ -8,6 +8,7 @@
   import Tip from "./resources/tips.svelte";
 
   import Previews from "./previews/all.svelte";
+    import { settings } from "../states/storage.svelte";
 
   let
     tocToggleLabel: HTMLLabelElement
@@ -86,10 +87,11 @@
       </p>
     </div>
 
-    <div class="tips">
-
+    <div
+      class="tips"
+      class:hidden={!settings.state["app.show_home_tips"]}
+    >
       <Tip/>
-
     </div>
   </header>
 

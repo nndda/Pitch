@@ -570,6 +570,12 @@
                   runtimeData[catId].selection.update(compId, checked);
 
                   updateCatSelectionState(catId);
+
+                  if (settings.state["app.auto_copy"]) {
+                    copyStr(
+                      compile(),
+                    );
+                  }
                 }}
 
                 bind:this={compCheckboxCache[catId][compId]}
