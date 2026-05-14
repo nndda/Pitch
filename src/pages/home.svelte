@@ -8,7 +8,9 @@
   import Tip from "./resources/tips.svelte";
 
   import Previews from "./previews/all.svelte";
-    import { settings } from "../states/storage.svelte";
+  import { settings } from "../states/storage.svelte";
+
+  import pitchLogo from "../public/icon.svg?url";
 
   let
     tocToggleLabel: HTMLLabelElement
@@ -61,8 +63,7 @@
   <header class="intro">
 
     <div>
-      <!-- ???? -->
-      <img alt="" class="pitch-logo" src="%BASE_URL%icon.svg" width="150">
+      <img alt="" class="pitch-logo" src={pitchLogo} width="150">
     </div>
 
     <div class="header-content">
