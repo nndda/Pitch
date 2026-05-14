@@ -15,4 +15,19 @@ export default {
     ],
   },
 
+  input: [
+    {
+      name: "Color",
+      var: "indev-col",
+      default: "",
+      type: "color",
+    },
+    {
+      name: "Background",
+      var: "indev-bg",
+      default: "",
+      type: "color",
+    },
+  ],
+
 } as ComponentData;

@@ -1,6 +1,6 @@
 <script lang="ts">
   export let data: ComponentData;
-  import { ComponentPage, CodeHTML } from "../_template/components";
+  import { ComponentPage, CodeHTML, ComponentRef } from "../_template/components";
 </script>
 
 <ComponentPage data={data}>
@@ -148,7 +148,7 @@
   <h2>Examples</h2>
 
   <p>
-    Read More implementation with <button class="button-primary">Timeline List</button> component:
+    Read More implementation with <ComponentRef comp="Timeline List"/> component:
   </p>
 
   <CodeHTML html={`

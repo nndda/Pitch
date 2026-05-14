@@ -1,13 +1,53 @@
 @use "../styles/variables" as *;
 
+@use "sass:color";
+
+:global #wrapper:has(> .home) {
+  background: $background;
+}
+
+.banner-list {
+  position: sticky;
+  /* width: calc(100% + 4em); */
+  top: .5em;
+
+  /* margin-top: .5em !important; */
+  display: flex;
+  flex-direction: column;
+  gap: .65em;
+  /* backdrop-filter: blur(1em); */
+  z-index: 999;
+
+  /* transform: translateX(-2em); */
+/*
+  &:has(*) {
+    padding: 1em;
+    padding-bottom: 0;
+  }
+
+  & > div {
+    filter: blut(2em);
+  } */
+}
+/*
+header {
+  background: $background-dark;
+} */
+
 .intro {
-  display: grid;
-  grid-template-columns: auto auto;
-  margin-top: 1.5em;
+  display: flex;
+  gap: 1em;
+  /* display: grid; */
+  /* grid-template-columns: 150px auto 200px; */
+  margin-top: 1em;
+  padding: 1em;
+
+  /* background: $background-dark; */
 }
 .pitch-logo {
-  grid-row: span 3;
+  /* grid-row: span 3; */
   padding: .5em;
+  object-fit: contain;
 }
 
 .pitch-title {
@@ -23,14 +63,24 @@
   }
 }
 
+.header-content {
+  flex-grow: 1;
+}
+
 .labels {
   display: flex;
-  gap: .5em;
+  flex-wrap: wrap;
+  gap: .25em .5em;
   margin: 0;
 }
 
+.desc {
+  max-width: 400px;
+  font-size: 1.1em;
+}
+/*
 .custom-indev {
-  --bg: #{$background-dark};
+  --bg: #{$background};
   border-radius: 0;
   height: 1em;
 
@@ -39,51 +89,4 @@
     padding: 0;
     padding-inline: 1em;
   }
-}
-
-.preview-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 25%);
-
-  & > div {
-    min-width: 200px;
-    margin: .5em;
-    flex: none;
-  }
-}
-
-:global {
-  .span-2 {
-    grid-column: span 2;
-  }
-  .span-3 {
-    grid-column: span 3;
-  }
-  .span-4 {
-    grid-column: span 4;
-  }
-}
-
-:global .comp-cont {
-  position: relative;
-  margin: .25em;
-  padding: 1em;
-  padding-top: 3em;
-  border-radius: 7px;
-  background: $background;
-
-  & > button {
-    position: absolute;
-    top: .75em;
-    left: 1em;
-    opacity: .5;
-  }
-
-  & a {
-    color: var(--l) !important;
-
-    &.custom-lb {
-      color: var(--fg) !important;
-    }
-  }
-}
+} */

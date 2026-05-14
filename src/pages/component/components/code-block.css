@@ -2,7 +2,7 @@
   position: relative;
   padding: .5em;
 
-  background: var(--b2s);
+  /*background: var(--b2s);*/
 
   font-size: 14px;
 
@@ -11,6 +11,7 @@
   overflow: auto;
 
   border-radius: 3px;
+  border: 1px solid var(--br);
 
   counter-reset: ln;
 

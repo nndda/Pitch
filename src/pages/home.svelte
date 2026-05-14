@@ -1,65 +1,98 @@
-<!-- TODO: disable ToC on home page -->
+<script lang="ts">
+  import { onDestroy, onMount } from "svelte";
+  import {
+    Bar,
+    PageRef,
+  } from "./elements";
 
-<script>
-  import Accordion from "./home-preview/accordion.svelte";
-  import InfoList from "./home-preview/info-list.svelte";
-  import Callout from "./home-preview/callout.svelte";
-  import Labels from "./home-preview/labels.svelte";
-  import SpeedDial from "./home-preview/speed-dial.svelte";
-  import DotLeader from "./home-preview/dot-leader.svelte";
-  import TimelineList from "./home-preview/timeline-list.svelte";
-  import TreeList from "./home-preview/tree-list.svelte";
-  import Table from "./home-preview/table.svelte";
+  import Tip from "./resources/tips.svelte";
+
+  import Previews from "./previews/all.svelte";
+    import { settings } from "../states/storage.svelte";
+
+  let
+    tocToggleLabel: HTMLLabelElement
+  ;
+
+  onMount(() => {
+    const
+      tocToggle = document.getElementById("toc-toggle") as HTMLInputElement
+    ;
+
+    tocToggleLabel = document.querySelector("#toc-toggle + label") as HTMLLabelElement;
+
+    if (tocToggle.checked) {
+      tocToggle.click()
+    }
+
+    tocToggleLabel.classList.add("hidden");
+  });
+
+  onDestroy(() => {
+    tocToggleLabel.classList.remove("hidden");
+  });
 </script>
 
 <style lang="scss">
   @use "./home.scss";
 </style>
 
-<article>
 
-  <div class="custom-indev">
-    <div>
-      Under development
-    </div>
+<article class="home">
+
+  <div class="banner-list">
+
+    {#if !navigator.clipboard}
+      <Bar
+        name="WARNING!"
+        type="warning"
+      >
+        It seems that your browser doesn't support the clipboard API :/ Try Pitch in a different browser.
+      </Bar>
+    {/if}
+
+    <Bar
+      name="Hey!"
+    >
+      Dev here. I'm struggling financially right now. If you like this project, please consider <PageRef name="Support Me?" label="donating"/> <i class="fa-solid fa-heart"></i>
+    </Bar>
+
   </div>
 
   <header class="intro">
 
-    <img alt="" class="pitch-logo" src="/assets/pitch-icon-s.png" width="150">
+    <div>
+      <img alt="" class="pitch-logo" src="/assets/pitch-icon-s.png" width="150">
+    </div>
 
+    <div class="header-content">
     <h2 class="pitch-title">
       Pitch<small>.css</small>
     </h2>
 
-    <p class="labels">
+      <p class="labels">
 
-      <button class="">
-        <i class="icon fa-solid fa-book-bookmark"></i>
-        Getting started
-      </button>
+        <PageRef name="Getting Started"/>
+        <PageRef name="Showcase"/>
 
-      <button class="">
-        <i class="icon fa-brands fa-creative-commons"></i>
-        CC0
-      </button>
+        <button>
+          <i class="icon fa-brands fa-creative-commons"></i>
+          CC0
+        </button>
 
-      <br>
+      </p>
 
-      <button class="">
-        <i class="icon fa-solid fa-star"></i>
-        Rate
-      </button>
-      <button class="">
-        <i class="icon fa-solid fa-heart"></i>
-        Support this project!
-      </button>
+      <p class="desc">
+        Welcome to Pitch! a catalogue of CSS components, decorations, and tweaks, designed specifically for itch.io project pages.
+      </p>
+    </div>
 
-    </p>
-
-    <p class="desc">
-      Welcome to Pitch! the catalogue of CSS components, decorations, and tweaks, designed specifically for itch.io project pages.
-    </p>
+    <div
+      class="tips"
+      class:hidden={!settings.state["app.show_home_tips"]}
+    >
+      <Tip/>
+    </div>
   </header>
 
   <br>
@@ -68,23 +101,9 @@
 
   <!-- <h2>Preview</h2> -->
 
-  <div class="preview-grid-wrapper">
+  <Previews/>
 
-    <div class="preview-grid">
-
-      <Labels/>
-      <InfoList/>
-      <Accordion class="span-2"/>
-      <Callout class="span-3"/>
-      <SpeedDial/>
-      <DotLeader class="span-2"/>
-      <TimelineList class="span-2"/>
-      <TreeList/>
-      <Table class="span-3"/>
-
-    </div>
-
-  </div>
+  <br>
 
   <h2>License</h2>
 

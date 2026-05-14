@@ -1,6 +1,6 @@
 <script lang="ts">
   export let data: ComponentData;
-  import { ComponentPage, CodeHTML } from "../_template/components";
+  import { ComponentPage, CodeHTML, ComponentRef } from "../_template/components";
 </script>
 
 <ComponentPage data={data}>
@@ -166,7 +166,7 @@
   `}/>
 
   <p>
-    Tooltip on grouped <button class="button-primary">Label</button> components.
+    Tooltip on grouped <ComponentRef comp="Label"/> components.
   </p>
 
   <CodeHTML html={`
@@ -200,7 +200,7 @@
   `}/>
 
   <p>
-    Tooltip use on <button class="button-primary">Speed Dial</button> component.
+    Tooltip use on <ComponentRef comp="Speed Dial"/> component.
   </p>
 
   <CodeHTML html={`

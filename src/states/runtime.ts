@@ -1,12 +1,17 @@
-import {
-  slug,
-  createCompIdFunc,
-} from "../scripts/slugify";
+import { slug } from "../scripts/slugify";
 
 import {
   initiateStorageAPI,
-  compsUserInputStorage,
+
+  faves,
+  inputs,
+
+  type RecordBoolean,
 } from "../states/storage.svelte";
+
+import itchCSS from "../styles/_itchio.scss?inline";
+export const itchStyling = new CSSStyleSheet();
+itchStyling.replaceSync(itchCSS);
 
 function getCompsManifest(
   imports: ComponentManifestImports,
@@ -26,39 +31,33 @@ export const
 , compElCache: Record<string, Record<string, HTMLLIElement>> = {}
 
 , catMeta: Record<string, { icon: string, }> = {
-
     Components: {
       icon: "fa-solid fa-bars-progress",
     },
-
     Decorations: {
       icon: "fa-solid fa-paint-roller",
     },
-
   }
 ;
+
 export function runtimeDataInit(): void {
   const
-    favesState = initiateStorageAPI<boolean>("faves")
-  , compPagesEntry: PageEntry = {
-
+    compPagesEntry: PageEntry = {
       Components: getCompsManifest( import.meta.glob("/pages/component/components/*.ts", { eager: true, }) as ComponentManifestImports ),
       Decorations: getCompsManifest( import.meta.glob("/pages/component/decorations/*.ts", { eager: true, }) as ComponentManifestImports ),
-
     }
   ;
 
   for (const cat in compPagesEntry) {
-
     const
       catId = "cat-" + slug(cat)
-    , slugifyId = createCompIdFunc(catId)
     ;
 
     runtimeData[catId] = {
       name: cat,
       components: {},
-      selection: initiateStorageAPI<boolean>(`comps-${catId}`),
+      selection: initiateStorageAPI<RecordBoolean>(`${catId}`),
+
       // selectedCountEl: null,
       // catSelectBtn: null,
     };
@@ -69,7 +68,7 @@ export function runtimeDataInit(): void {
     for (const page in compPagesEntry[cat]) {
       const
         compData = compPagesEntry[cat][page]
-      , compId = slugifyId(compData.name)
+      , compId = slug(compData.nameDisplay ?? compData.name)
       ;
 
       if (compData.scopes !== "group-only") {
@@ -100,7 +99,7 @@ export function runtimeDataInit(): void {
 
               checked: runtimeData[catId].selection.state[compId],
 
-              isFaved: favesState.state[compId] ?? false,
+              isFaved: faves.state[compId] ?? false,
               isHacky: compData.tags?.includes("hacky") ?? false,
               isExperimental: compData.tags?.includes("experimental") ?? false,
 
@@ -117,7 +116,7 @@ export function runtimeDataInit(): void {
           //   group: slugifyId(compData.sub),
           // };
 
-          runtimeData[catId].components[compId].group = slugifyId(compData.sub);
+          runtimeData[catId].components[compId].group = slug(compData.sub);
         }
 
       } else {
@@ -142,6 +141,6 @@ export function runtimeDataInit(): void {
     }
 
     runtimeData[catId].selection.flush();
-    compsUserInputStorage.flush();
+    inputs.flush();
   }
 }

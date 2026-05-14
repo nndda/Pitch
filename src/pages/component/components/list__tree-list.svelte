@@ -1,6 +1,6 @@
 <script lang="ts">
   export let data: ComponentData;
-  import { ComponentPage, CodeHTML } from "../_template/components";
+  import { ComponentPage, CodeHTML, ComponentRef } from "../_template/components";
 </script>
 
 <ComponentPage data={data}>
@@ -84,7 +84,7 @@
   <h2>Examples</h2>
 
   <p>
-    As directory structure view. With <button class="button-primary">Label</button> component.
+    As directory structure view. With <ComponentRef comp="Label"/> component.
   </p>
 
   <CodeHTML html={`
@@ -158,7 +158,7 @@
   `}/>
 
   <p>
-    Combined with <button class="button-primary">Dot Leader</button> component.
+    Combined with <ComponentRef comp="Dot Leader"/> component.
   </p>
 
   <CodeHTML html={`

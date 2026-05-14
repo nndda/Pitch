@@ -1,9 +1,15 @@
 <script lang="ts">
   export let data: ComponentData;
-  import { ComponentPage, CodeHTML } from "../_template/components";
+  import { ComponentPage, CodeHTML, ComponentRef } from "../_template/components";
 </script>
 
 <ComponentPage data={data}>
+  <style>
+    .html-view {
+      position: relative;
+      min-height: 230px;
+    }
+  </style>
 
   <p>
     Floating button on the bottom-right corner of your page, that reveals more buttons when clicked.
@@ -44,9 +50,11 @@
 
   <blockquote class="custom-callout">
 
-    <h4 style="margin: .5em 0;">Buttons Count</h4>
+    <h4>Buttons Count</h4>
 
-    Keep the buttons count to 3-6 buttons.
+    <p>
+      Keep the buttons count to 3-6 buttons.
+    </p>
 
   </blockquote>
 
@@ -57,7 +65,7 @@
   <h2>Tooltips</h2>
 
   <p>
-    Every buttons on Speed Dial were designed to only have icon. To label the button, you can use the <button class="button-primary">Tooltip</button> component.
+    Every buttons on Speed Dial were designed to only have icon. To label the button, you can pair it with the <ComponentRef comp="Tooltip"/> component.
   </p>
 
   <CodeHTML html={`

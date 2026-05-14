@@ -1,11 +1,12 @@
 <script>
   const props = $props();
+  import { ComponentRef } from "../component/_template/components";
 </script>
 
 <div class="comp-cont {props.class ?? ""}">
-  <button class="preview">
-    Label
-  </button>
+  <div class="preview">
+    <ComponentRef comp="Label"/>
+  </div>
 
   <div style="margin: 1.75em 0;">
     <a target="_blank" class="custom-lb" href="https://itch.io/games/tag-cats">Cats</a>

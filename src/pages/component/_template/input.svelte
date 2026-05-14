@@ -1,32 +1,28 @@
 <script lang="ts">
-  // import {
-  //   onMount,
-  // } from "svelte";
+  import { onMount } from "svelte";
 
-  import {
-    compsUserInputStorage,
-  } from "../../../states/storage.svelte";
+  import { inputs } from "../../../states/storage.svelte";
   import {
     applyUserInput,
     removeUserInput,
+    isInputVariablesCompatible,
   } from "./input";
 
-  import {
-    copyStr,
-  } from "../../../scripts/copy";
+  import { copyStr } from "../../../scripts/copy";
+  import { state as stateGlobal } from "../../../states/components.svelte";
 
   const
-    { data } = $props()
-    // svelte-ignore state_referenced_locally
-  , compData: ComponentData = data
+    { data }: { data: ComponentData } = $props()
+  , changedInputs: Record<string, true> = {}
   ;
+
 
   let
     pinned = $state(false)
   // , resetAllButton: HTMLButtonElement
-  , resetButtons: HTMLButtonElement[] = []
   ;
 
+  // TODO:
   // function isAnyModified(): boolean {
   //   // for (const btn of resetButtons) {
   //   //   if (!btn.disabled) {
@@ -40,6 +36,59 @@
   // onMount(() => {
   //   resetAllButton.disabled = !isAnyModified();
   // });
+
+  // TODO: this could be in a potential hot path
+  function syncInputCompatibility() {
+    if (data.compatibleOnInputs) {
+      const
+        isCompatible = isInputVariablesCompatible(data)
+
+      , selectorBase = `.heading[data-comp-name="${data.nameDisplay ?? data.name}"] `
+      , runtimeData = stateGlobal.attr as ComponentRuntimeItem
+      ;
+
+      runtimeData.li?.classList.toggle("compatible-all", isCompatible);
+
+      document.querySelector(selectorBase + ".scopes:not(.compatible-all)")?.classList.toggle("hidden", isCompatible);
+      document.querySelector(selectorBase + ".scopes.compatible-all")?.classList.toggle("hidden", !isCompatible);
+    }
+  }
+
+  function onVarInputChange(
+    ev: Event & {
+      currentTarget: EventTarget & HTMLInputElement
+    },
+    input: ComponentUserInput,
+  ): void {
+    const
+      cssVar = input.var
+    , val = input.type === "string"
+      ? '"' + ev.currentTarget.value + '"'
+      : ev.currentTarget.value
+    ;
+
+    if (!input.hardcoded) {
+      if (ev.currentTarget.value === input.default) {
+        removeUserInput(cssVar);
+
+        if (input.name in changedInputs) {
+          delete changedInputs[input.name];
+        }
+      } else {
+        applyUserInput(cssVar, val);
+
+        changedInputs[input.name] = true;
+      }
+    }
+
+    syncInputCompatibility();
+
+    // resetAllButton.disabled = !isAnyModified();
+  }
+
+  onMount(() => {
+    syncInputCompatibility();
+  });
 </script>
 
 <style lang="scss">
@@ -49,13 +98,13 @@
 <ul
   class="page-header-list page-header-input"
   class:pinned={pinned}
-  data-comp-name={compData.name}
+  data-comp-name={data.name}
 >
 
     <li>
       <h3>
         <i class="fa-solid fa-sliders"></i>
-        Configurations
+        Customizations
       </h3>
 
       <div class="flex-space"></div>
@@ -66,14 +115,16 @@
           aria-label="Reset all fields"
 
           onclick={() => {
-            for (const btn of resetButtons) {
-              if (!btn.disabled) {
-                btn.click();
+            for (const resetBtn of document.querySelectorAll(
+              `.page-header-input button.reset`
+            ) as NodeListOf<HTMLButtonElement>) {
+              if (!resetBtn.disabled) {
+                resetBtn.click();
               }
             }
           }}
         >
-<!--
+          <!--
           bind:this={resetAllButton}
 
           onclick={() => {
@@ -83,8 +134,8 @@
                 btn.click();
               }
             }
-          }} -->
-          <!-- <i class="fa-solid fa-arrow-rotate-left"></i> -->
+          }}
+          -->
           <i class="fa-solid fa-trash"></i>
           <span class="custom-tip-content custom-left">
             Reset all fields
@@ -113,106 +164,148 @@
       </div>
     </li>
 
-  {#each compData.input as input, i}
+  {#each data.input as input, i}
 
-    {@const isInputNotStored = !(input.var in compsUserInputStorage.state)}
+    {#if "name" in input}
 
-    <li>
-      <label
-        for={input.var}
-      >
-        {input.name}
+      {@const isInputNotStored = !(input.var in inputs.state)}
 
-        {#if !input.hardcoded}
+      <li>
+        <label
+          for={input.var}
+        >
+          {input.name}
+
+          {#if !input.hardcoded}
+            <button
+              class="custom-tip input-var-name"
+              onclick={() => {
+                copyStr("--" + input.var);
+              }}
+            >
+              <code>
+                --{input.var}
+              </code>
+
+              <span class="custom-tip-content custom-right">
+                <i class="fa-solid fa-copy"></i>
+              </span>
+
+              <span class="custom-tip-content">
+                CSS variable name
+              </span>
+            </button>
+          {/if}
+        </label>
+
+        <div class="input">
+
+          {#if input.type === "string"}
+
+            <input
+              id={input.var}
+              type="text"
+              value={
+                isInputNotStored ? input.default :
+                (inputs.state[input.var] as string).replace(/^"|"$/g, "")
+              }
+
+              oninput={ev => onVarInputChange(ev, input)}
+            >
+
+          {:else if input.type === "color"}
+
+            <input
+              id={input.var}
+
+              type="color"
+              alpha
+
+              value={
+                isInputNotStored ? input.default : inputs.state[input.var]
+              }
+
+              oninput={ev => onVarInputChange(ev, input)}
+            >
+
+          {/if}
+
           <button
-            class="custom-tip input-var-name"
-            onclick={() => {
-              copyStr("--" + input.var);
-            }}
-          >
-            <code>
-              --{input.var}
-            </code>
-
-            <span class="custom-tip-content custom-right">
-              <i class="fa-solid fa-copy"></i>
-            </span>
-
-            <span class="custom-tip-content">
-              CSS variable name
-            </span>
-          </button>
-        {/if}
-      </label>
-
-      <div class="input">
-        {#if input.type === "string"}
-          <input
-            id={input.var}
-            type="text"
-            value={
-              isInputNotStored ? input.default :
-              (compsUserInputStorage.state[input.var] as string).replace(/^"|"$/g, "")
+            class="icon-only custom-tip reset"
+            aria-label="Reset"
+            disabled={
+              // bruh...
+              isInputNotStored ||
+              inputs.state[input.var] === (
+                (input.type === "string") ? '"' + input.default + '"' : input.default
+              )
             }
 
-            oninput={ev => {
+            onclick={() => {
               const
                 cssVar = input.var
-              , val = '"' + ev.currentTarget.value + '"'
+              ;
+              let
+                val = input.default ?? ""
               ;
 
-              if (ev.currentTarget.value === input.default) {
+              if (input.type === "string") {
+                val = '"' + (val as string) + '"';
+              }
+
+              if (!input.hardcoded) {
                 removeUserInput(cssVar);
-              } else {
-                if (!input.hardcoded) {
-                  applyUserInput(cssVar, val);
-                }
               }
 
               // resetAllButton.disabled = !isAnyModified();
+
+              syncInputCompatibility();
             }}
           >
-        {/if}
+            <i class="fa-solid fa-arrow-rotate-left"></i>
+            <span class="custom-tip-content custom-left">
+              Reset
+            </span>
+          </button>
 
-        <button
-          class="icon-only custom-tip reset"
-          aria-label="Reset"
-          disabled={
-            // bruh...
-            isInputNotStored ||
-            compsUserInputStorage.state[input.var] === (
-              (input.type === "string") ? '"' + input.default + '"' : input.default
-            )
-          }
+        </div>
+      </li>
 
-          onclick={() => {
-            const
-              cssVar = input.var
-            ;
-            let
-              val = input.default ?? ""
-            ;
+    <!--
+    {:else if "heading" in input}
 
-            if (input.type === "string") {
-              val = '"' + (val as string) + '"';
-            }
+      <li class="sub-heading">
+        <h4>
+          {#if input.heading === "Color"}
+            <i class="fa-solid fa-palette"></i>
+          {:else if input.heading === "Layout"}
+            <i class="fa-solid fa-ruler-combined"></i>
+          {:else}
+            <i class="{input.icon}"></i>
+          {/if}
+          {input.heading}
+        </h4>
+      </li>
+    -->
 
-            if (!input.hardcoded) {
-              removeUserInput(cssVar);
-            }
+    {:else if "collapse" in input}
 
-            // resetAllButton.disabled = !isAnyModified();
-          }}
+      {@const toggleId = `collapse-${i}`}
 
-          bind:this={resetButtons[i]}
-        >
-          <i class="fa-solid fa-arrow-rotate-left"></i>
-          <span class="custom-tip-content custom-left">
-            Reset
-          </span>
-        </button>
+      <li class="collapse-mark">
+        <label class="button">
+          Show more...
+          <input
+            type="checkbox"
+            class="toggle"
+            id={toggleId}
+          >
+          <label class="caret-toggle custom-tip" for={toggleId}>
+            <i class="fa-solid fa-caret-right"></i>
+          </label>
+        </label>
+      </li>
 
-      </div>
-    </li>
+    {/if}
   {/each}
 </ul>

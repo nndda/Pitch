@@ -4,8 +4,6 @@
     type Component,
   } from "svelte";
 
-  import { pitchVer } from "./sidebar";
-
   import {
     state,
     backToHome,
@@ -13,24 +11,39 @@
   } from "../states/components.svelte";
 
   import {
-    initiateStorageAPI,
-    compsUserInputStorage,
+    ui,
+    faves,
+    inputs,
+    settings,
+    projects,
+    currentProject,
   } from "../states/storage.svelte";
+  const
+    projectScopes = projects.state[currentProject.get()!].scope
+  ;
 
-  import { constructRule } from "../pages/component/_template/input";
-
+  import {
+    constructRule,
+    isInputVariablesCompatible,
+  } from "../pages/component/_template/input";
   document.documentElement.setAttribute(
     "style",
-    constructRule(compsUserInputStorage.state),
+    constructRule(inputs.state),
   );
 
   import { slug } from "../scripts/slugify";
 
+  import Profile from "../pages/elements/profile.svelte";
+
   // TODO: pile all page-type component to a single entry
+  // TODO: lazyload/dynamic import
   // Pages
+  import SupportMe from "../pages/support.svelte";
+  // import Theme from "../pages/theme.svelte";
+  import Settings from "../pages/settings.svelte";
   // Resources
   import GettingStarted from "../pages/resources/getting-started.svelte";
-  import OtherResources from "../pages/resources/other-resources.svelte";
+  // import OtherResources from "../pages/resources/other-resources.svelte";
   import Showcase from "../pages/resources/showcase.svelte";
 
   import {
@@ -51,10 +64,7 @@
     {
       state: compFaves,
       update: updateCompFaves,
-    } = initiateStorageAPI<boolean>("faves")
-
-  , uiState = initiateStorageAPI<boolean>("uistate")
-
+    } = faves
   ;
 
   runtimeDataInit();
@@ -138,27 +148,52 @@
 
   {@const chkId = slug(`chk-${label}`)}
 
-  <li class="comp-item">
-    <i class={icon}></i>
+  <li
+    class="comp-item page-item"
+    class:wip={!onchange}
+  >
+    <i class={icon} data-page-icon={label}></i>
 
     <input
       type="radio"
       id={chkId}
       name="page-view"
       onchange={onchange}
+      disabled={!onchange}
       checked={label === "Home"}
     >
     <label
-      class="comp-name-label"
+      class="comp-name-label page"
       for={chkId}
+      data-page-name={label}
     >
       {label}
       <!-- TODO: there has to be a better way -->
       {#if label === "Support Me?"}
         <!-- &nbsp; ❤️ -->
-        <span class="custom-plzzz"></span>
+        <span
+          class="custom-plzzz"
+          class:hidden={!settings.state["app.sidebar.show_plzzz"]}
+        ></span>
       {/if}
     </label>
+
+    <!--
+    {#if !onchange}
+      <div class="custom-tip-content">
+        Work-in-progress
+      </div>
+      <div>
+        <span class="tags">
+          <span class="wip-icon">
+            <i class="fa-solid fa-road-barrier"></i>
+          <span class="custom-lb wip-badge">
+            WIP
+          </span>
+        </span>
+      </div>
+    {/if}
+    -->
   </li>
 
 {/snippet}
@@ -174,42 +209,39 @@
       class="toggle"
       id={catId}
 
-      checked={uiState.state[catId] ?? false}
+      checked={ui.state[catId] ?? false}
 
       onchange={ev => {
-        uiState.update(catId, ev.currentTarget.checked);
+        ui.update(catId, ev.currentTarget.checked);
       }}
     >
     <label class="caret-toggle custom-tip" for={catId}>
       <i class="fa-solid fa-caret-down"></i>
       <span class="custom-tip-content custom-left">
-        <!-- Collapse -->
         <span class="collapse">Collapse</span>
         <span class="expand">Expand</span>
       </span>
-      <!--
-      <span class="custom-tip-content custom-left expand">
-        Expand
-      </span>
-       -->
     </label>
 
 {/snippet}
 
-<nav id="sidebar" bind:this={navEl}>
+<nav
+  id="sidebar"
+  class:hide-wip-comps={!settings.state["app.sidebar.show_wip_comps"]}
+  class:hide-wip-pages={!settings.state["app.sidebar.show_wip_pages"]}
+  class:faved-badge-on-hover={!settings.state["app.sidebar.show_faved_badge"]}
+
+  class:show-scope-color={settings.state["app.sidebar.show_scope_color"]}
+  class:scope-project={projectScopes === "project"}
+  class:scope-profile={projectScopes === "profile"}
+  class:scope-jam={projectScopes === "jam"}
+
+  bind:this={navEl}
+>
   <div class="page-lists">
+    <Profile/>
 
-    <h1 class="cat-heading pitch-title">
-      <img class="logo" alt="Pitch logo" src="/assets/pitch-icon-s.png">
-      <span class="text">
-        Pitch
-        <small>
-          v{pitchVer}
-        </small>
-      </span>
-    </h1>
-
-    <hr>
+    <hr/>
 
     <ul>
       {@render PageListItem(
@@ -221,18 +253,28 @@
       {@render PageListItem(
         "Support Me?",
         "fa-solid fa-heart",
-        backToHome,
+        switchPage("Support this project!!", SupportMe),
       )}
-      <!--
+
+      {@render PageListItem(
+        "Theme",
+        "fa-solid fa-palette",
+        null,
+        // switchPage("Theme", Theme),
+      )}
+
       {@render PageListItem(
         "Settings",
         "fa-solid fa-gear",
-        backToHome,
+        switchPage("Settings", Settings),
       )}
-      -->
+
     </ul>
 
-    <h2 class="cat-heading">
+    <h2
+      class="cat-heading"
+      class:on-hover={settings.state["app.sidebar.category_action_on_hover"]}
+    >
       <span class=text>
         Resources
       </span>
@@ -250,7 +292,7 @@
         },
 
         // {
-        //   title: "itch.io's HTML quirks",
+        //   title: "Tips",
         //   icon: "fa-solid fa-book-bookmark",
         //   page: null
         // },
@@ -258,7 +300,7 @@
         {
           title: "Other Resources",
           icon: "fa-solid fa-box-open",
-          page: OtherResources,
+          page: null,
         },
 
         {
@@ -269,7 +311,7 @@
 
       ] as { title, icon, page, } }
 
-        {@render PageListItem( title, icon, switchPage( title, page as Component ), )}
+        {@render PageListItem( title, icon, page !== null ? switchPage( title, page as Component ) : null, )}
 
       {/each}
     </ul>
@@ -339,6 +381,15 @@
       </label>
     </div>
 
+    <ul>
+      {@render PageListItem(
+        "Advanced search",
+        "fa-solid fa-magnifying-glass",
+        null,
+        // switchPage("Theme", Theme),
+      )}
+    </ul>
+
     {#each Object.entries(runtimeData) as catEntry}
 
       {@const catId = catEntry[0]}
@@ -347,12 +398,20 @@
       {@const catCompList = `comp-list-${catId}`}
       {@const catCompInputName = `cat-inp-${catId}`}
 
-      <h2 class="cat-heading cat-comp">
+      <h2
+        class="cat-heading cat-comp"
+        class:has-count={settings.state["app.sidebar.show_selected_count"]}
+        class:on-hover={settings.state["app.sidebar.category_action_on_hover"]}
+      >
         <i class="icon {catMeta[catData.name].icon}"></i>
 
-        <span class="text">
+        <span
+          class="text"
+        >
           {catData.name}
-          <small>
+          <small
+            class:hidden={!settings.state["app.sidebar.show_selected_count"]}
+          >
             <span bind:this={runtimeData[catId].selectedCountEl}>0</span> selected
           </small>
         </span>
@@ -443,17 +502,16 @@
               class:sub={compData.manifest.sub}
             >
               <div>
-                <i class="icon fa-solid fa-calendar"></i>
-                <span
+                <i class="icon fa-solid fa-calendar"></i><span
                   class="comp-name-label"
                 >
                   {compData.manifest.name}
                 </span>
 
                 <span class="tags">
-                    <span class="custom-lb wip-badge">
-                      WIP
-                    </span>
+                  <span class="custom-lb wip-badge">
+                    WIP
+                  </span>
                 </span>
               </div>
             </li>
@@ -464,12 +522,29 @@
             {@const idView = `view-${compId}`}
             {@const idFave = `fave-${compId}`}
 
+            {@const compScopeData = (scope: ScopeStatus): string | false => {
+              const
+                compScope = compData.manifest.scopes as Record<string, Scopes>
+              ;
+
+              return compScope[scope] &&
+                (
+                  typeof compScope[scope] === "string"
+                    ? compScope[scope]
+                    : compScope[scope].join(" ")
+                )
+            }}
+
             <li
               class="comp-item"
               class:sub={compData.manifest.sub}
               class:is-faved={compData.isFaved}
               class:is-hacky={compData.isHacky}
               class:is-experimental={compData.isExperimental}
+
+              class:compatible-all={isInputVariablesCompatible(compData.manifest)}
+              data-scope-partial={compScopeData("partial")}
+              data-scope-none={compScopeData("none")}
 
               bind:this={compElCache[catId][compId]}
               bind:this={runtimeData[catId].components[compId].li}
@@ -495,6 +570,12 @@
                   runtimeData[catId].selection.update(compId, checked);
 
                   updateCatSelectionState(catId);
+
+                  if (settings.state["app.auto_copy"]) {
+                    copyStr(
+                      compile(),
+                    );
+                  }
                 }}
 
                 bind:this={compCheckboxCache[catId][compId]}
@@ -511,17 +592,22 @@
                 name="page-view"
 
                 onchange={async () => {
-                  state.currentId = compData.manifest.name;
-                  state.currentData = compData.manifest;
-
                   if (compData.manifest.page) {
-                    state.currentPage = (await compData.manifest.page()) as Component;
+                    const
+                      page = await compData.manifest.page() as Component
+                    ;
+
+                    state.currentId = compData.manifest.name;
+                    state.currentData = compData.manifest;
+                    state.attr = compData;
+                    state.currentPage = page;
                   }
                 }}
               >
 
               <label
                 class="comp-name-label"
+                data-comp-name={compData.manifest.nameDisplay ?? compData.manifest.name}
                 for={idView}
               >
                 {compData.manifest.name}
@@ -606,7 +692,7 @@
         disabled
         onclick={() => {
           copyStr(
-            compile()
+            compile(),
           );
         }}
       >

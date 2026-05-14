@@ -1,26 +1,144 @@
-const pref: string = "pitchv3__";
-
-type StorageAPIUpdate<T> = (
-  id: string,
-  is: T,
-) => void
-
-export interface StorageAPI<T> {
-  state: Record<string, T>,
-  update: StorageAPIUpdate<T>,
-  flush: () => void,
+export interface ItchProfile {
+  username: string,
+  cover_url: string,
+  url: string,
+  // developer: boolean,
+  // gamer: boolean,
+  // press_user: boolean,
+  // id: number,
+  display_name: string,
 }
 
-export function initiateStorageAPI<T>(
+export type RecordString = Record<string, string>;
+export type RecordBoolean = Record<string, boolean>;
+export type RecordUserInput = Record<string, ComponentUserInputValue>;
+export type RecordUserPreviewCodes = Record<string, { html: string, css: string, }>;
+
+export const
+  pref: string = "pitchv3__"
+
+, currentProject = initiateStorageFlag<string>("currentProject", "New project")
+
+, ui = initiateStorageAPI<{
+
+    toc_collapsed: boolean,
+
+    [key: string]: boolean,
+
+  }>("ui", true)
+
+, projects = initiateStorageAPI<{
+
+    [key: string]: {
+      name: string,
+      url?: string,
+      scope: Scope,
+    },
+
+  }>("projects", true, {
+
+    "New project": {
+      name: "New project",
+      scope: "project",
+    },
+
+  })
+
+, user = initiateStorageAPI<ItchProfile>("user", true)
+
+, settingsDefault = {
+
+    // CSS
+    "css.minify": true,
+    "css.use_layer": false,
+    "css.isolate_comment_section": false,
+
+    // App
+    "app.auto_copy": false,
+    "app.show_home_tips": true,
+
+    "app.sidebar.show_scope_color": true,
+    "app.sidebar.show_plzzz": true,
+    "app.sidebar.show_selected_count": true,
+    "app.sidebar.show_faved_badge": true,
+    "app.sidebar.show_wip_comps": true,
+    "app.sidebar.show_wip_pages": true,
+    "app.sidebar.category_action_on_hover": false,
+
+  }
+, settings = initiateStorageAPI<typeof settingsDefault>("settings", false, settingsDefault)
+
+, themeDefault ={
+
+    text_col: "#eaeaea",
+    link_col: "#fc3a78",
+
+    background: "#171620",
+    // background_2: string,
+    // background_opacity: number,
+
+    font_family: "Lato",
+
+  }
+, theme = initiateStorageAPI<typeof themeDefault>("theme", false, themeDefault)
+
+, faves = initiateStorageAPI<RecordBoolean>("faves")
+, inputs = initiateStorageAPI<RecordUserInput>("inputs")
+, codes = initiateStorageAPI<RecordUserPreviewCodes>("codes")
+;
+
+export function switchContext(ctx: string): void {
+  currentProject.set(ctx);
+  window.location.href = window.location.href;
+}
+
+type StorageAPIUpdate<
+  T extends object
+> = <K extends keyof T>(
+  id: K,
+  is: T[K],
+) => void;
+
+export interface StorageAPI<T extends object> {
+  state: T,
+  update: StorageAPIUpdate<T>,
+  merge: (data: Partial<T>) => void,
+  destroy: () => void,
+  flush: () => void,
+}
+export interface StorageAPIWithContext<T extends object> extends StorageAPI<T> {
+  changeContext: (ctx: string) => void,
+  duplicateLocal:  (ctx: string) => void,
+}
+
+export function initiateStorageAPI<T extends object>(
   storageId: string,
-): StorageAPI<T> {
+  global: true,
+  defaults?: Partial<T> | null,
+): StorageAPI<T>;
+export function initiateStorageAPI<T extends object>(
+  storageId: string,
+  global?: false,
+  defaults?: Partial<T> | null,
+): StorageAPIWithContext<T>;
+export function initiateStorageAPI<T extends object>(
+  storageId: string,
+  global: boolean = false,
+  defaults: Partial<T> | null = null,
+): StorageAPI<T>
+ | StorageAPIWithContext<T>
+{
 
-  storageId = pref + storageId;
+  const storageIdInit = storageId;
 
-  type StorageData = Record<string, T>;
+  function constructId(ctx: string): string {
+    return pref + (global ? "" : ctx + "__") + storageIdInit;
+  }
+
+  storageId = constructId(currentProject.get() ?? "");
 
   let
-    localData: StorageData = {}
+    localData = {} as T
   ;
 
   try {
@@ -37,18 +155,31 @@ export function initiateStorageAPI<T>(
         "\nstack: ", err.stack,
       )
     } else {
-      console.warn(`Unknown error when parsing local '${storageId}' data.`)
+      console.warn(`Unknown error when parsing local '${storageId}' data.`);
     }
 
   }
 
+  if (defaults) {
+    localData = {
+      ... defaults,
+      ... localData,
+    };
+  }
+
   const
-    storageObject: StorageData = $state(localData)
+    storageObject: T = $state(localData)
   ;
 
-  function updateFn(
-    id: string,
-    is: T,
+  // if (Object.keys(storageObject).length === 0) {
+    localStorage.setItem(storageId, JSON.stringify(storageObject));
+  // }
+
+  function updateFn<
+    K extends keyof T
+  >(
+    id: K,
+    is: T[K],
   ): void {
     storageObject[id] = is;
     flushFn();
@@ -61,74 +192,106 @@ export function initiateStorageAPI<T>(
     );
   }
 
+  function mergeFn(data: Partial<T>): void {
+    Object.assign(storageObject, data);
+  }
+
+  function destroyFn(): void {
+    for (const key in storageObject) {
+      delete storageObject[key];
+    }
+
+    localStorage.removeItem(storageId);
+  }
+
+  if (!global) {
+    function duplicateLocalFn(ctx: string) {
+      localStorage.setItem(
+        constructId(ctx),
+        JSON.stringify(storageObject),
+      );
+    }
+
+    function changeContextFn(ctx: string) {
+      localStorage.removeItem(storageId);
+      duplicateLocalFn(ctx);
+    }
+
+    return {
+      state: storageObject,
+
+      update: updateFn,
+      merge: mergeFn,
+
+      flush: flushFn,
+      destroy: destroyFn,
+
+      changeContext: changeContextFn,
+      duplicateLocal: duplicateLocalFn,
+    } as StorageAPIWithContext<T>;
+  }
+
   return {
     state: storageObject,
 
     update: updateFn,
+    merge: mergeFn,
+
     flush: flushFn,
-  };
+    destroy: destroyFn,
+  } as StorageAPI<T>;
 }
 
-export const compsUserInputStorage = initiateStorageAPI<ComponentUserInputValue>("comp-user-input");
-
-export type BooleanRecord = Record<string, boolean>
-
-export interface BooleanStorageAPI {
-  state: BooleanRecord,
-  update: (
-    id: string,
-    is: boolean,
-  ) => void,
-  updateAll: () => void,
+export interface StorageFlag<T extends string | number | boolean> {
+  set: (val: T) => void,
+  get: () => T | null,
 }
 
-export function initiateBooleanStorageAPI(
-  storageId: string,
-): BooleanStorageAPI {
-  let localData: BooleanRecord = {};
+export function initiateStorageFlag<T extends string | number | boolean>(
+  id: string,
+  defaultVal: T | null = null,
+  session: boolean = false,
+): StorageFlag<T> {
+  id = pref + id;
 
-  try {
-
-    const localDataRaw: string = localStorage.getItem(storageId) ?? "";
-    localData = localDataRaw ? JSON.parse(localDataRaw) : {};
-
-  } catch (err) {
-
-    if (err instanceof SyntaxError) {
-      console.error(
-        "SyntaxError: ",
-        "\nmessage: ", err.message,
-        "\nstack: ", err.stack,
-      )
-    } else {
-      console.warn(`Unknown error when parsing local '${storageId}' data.`)
-    }
-
-  }
-
-  const
-    storageObject: BooleanRecord = $state(localData)
-  ;
+  const storage = (session ? sessionStorage : localStorage)
 
   return {
-    state: storageObject,
-
-    update: (
-      id: string,
-      is: boolean,
-    ): void => {
-      storageObject[id] = is;
-      localStorage.setItem(
-        storageId,
-        JSON.stringify(storageObject),
-      );
+    set: (val: T) => {
+      storage.setItem(id, JSON.stringify(val));
     },
 
-    updateAll: (): void => {
-      localStorage.setItem(
-        storageId,
-        JSON.stringify(storageObject),
-      );
-    },
-  };
+    get: () => {
+      let localData : T | null = null;
+
+      try {
+
+        const localDataRaw: string = storage.getItem(id) ?? "";
+        localData = localDataRaw ? JSON.parse(localDataRaw) : null;
+
+      } catch (err) {
+
+        if (err instanceof SyntaxError) {
+          console.error(
+            "SyntaxError: ",
+            "\nmessage: ", err.message,
+            "\nstack: ", err.stack,
+          )
+        } else {
+          console.warn(`Unknown error when parsing local '${id}' data.`);
+        }
+
+      }
+
+      if (localData) {
+        return localData;
+      }
+
+      if (defaultVal) {
+        storage.setItem(id, JSON.stringify(defaultVal));
+      }
+
+      return defaultVal;
+    }
+  }
 }

@@ -1,7 +1,9 @@
 import { mount } from "svelte";
 import "./styles/critical.scss";
+// import "./scripts/init";
 
 document.addEventListener("DOMContentLoaded", async () => {
+
   const
     loadingText = document.getElementById("loading-text")!
   , placeholderEl = document.getElementById("placeholder")!

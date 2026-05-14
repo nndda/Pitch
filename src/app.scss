@@ -19,10 +19,11 @@
   opacity: 0;
 }
 
-#sidebar,
-#toc,
-#viewer > :where(header),
-#wrapper > :where(p, ul, ol, article) {
+body {
+/* #sidebar, */
+/* #toc, */
+/* #viewer > :where(header), */
+/* #wrapper > :where(p, ul, ol, article) { */
 
   & hr {
     width: 100%;

@@ -48,10 +48,35 @@
   &.no-experimental .comp-list .comp-item.is-experimental {
     display: none;
   }
-}
 
-.comp-list {
-  padding-bottom: 1.25em;
+  &.show-scope-color.scope- {
+    $col-partial: color.mix(#ffbe0a, $text-col, 60%);
+    $col-none: color.mix(#e6071d, $text-col, 60%);
+
+    &profile {
+      & .comp-item:not(.compatible-all) {
+        &[data-scope-partial~="profile"] .comp-name-label {
+          color: $col-partial;
+        }
+
+        &[data-scope-none~="profile"] .comp-name-label {
+          color: $col-none;
+        }
+      }
+    }
+
+    &jam {
+      & .comp-item:not(.compatible-all) {
+        &[data-scope-partial~="jam"] .comp-name-label {
+          color: $col-partial;
+        }
+
+        &[data-scope-none~="jam"] .comp-name-label {
+          color: $col-none;
+        }
+      }
+    }
+  }
 }
 
 .page-lists {
@@ -100,11 +125,35 @@
     }
   }
 
+  /* App settings/user preference */
+  &.on-hover {
+    & > button, label {
+      opacity: 0;
+      transition: .1s opacity;
+    }
+
+    &:hover {
+      & > button, label {
+        opacity: 1;
+      }
+    }
+  }
+
   &.cat-comp {
-    margin-bottom: .8em;
+    margin-top: .2em;
+    margin-bottom: .5em;
+
+    &.has-count {
+      margin-bottom: 1.2em;
+    }
+
+    & > i {
+      width: 1em;
+    }
 
     & > .text {
       position: relative;
+
 
       & > small {
         display: block;
@@ -121,9 +170,9 @@
   }
 }
 
-h1.cat-heading {
+/* h1.cat-heading {
   font-size: 1.6em;
-}
+} */
 
 h2.cat-heading {
   font-size: 1.25em;
@@ -138,6 +187,7 @@ h2.cat-heading {
 //   background: $background-dark;
 // }
 
+/*
 .pitch-title {
   margin-bottom: .5em;
 
@@ -154,24 +204,15 @@ h2.cat-heading {
     color: $text-col;
   }
 }
+*/
 
 .comp-item {
-  padding-block: .35em;
+  display: flex;
+  align-items: center;
+  padding-bottom: .6em;
 
   & .checkbox, .icon {
     margin-right: .2em;
-  }
-
-  /*
-  &.wip, &.group {
-    color: color.mix($text-col, $background-dark, 70%);
-  }
-  */
-
-  &.wip {
-    & .fa-solid, .comp-name-label {
-      color: $primary;
-    }
   }
 
   &.group {
@@ -228,7 +269,7 @@ h2.cat-heading {
   }
 
   &.sub {
-    margin-left: 1em;
+    margin-left: 1.35em;
   }
 
   & .fave {
@@ -244,6 +285,37 @@ h2.cat-heading {
     & .fave {
       opacity: 1;
     }
+  }
+
+  /*
+  &.wip, &.group {
+    color: color.mix($text-col, $background-dark, 70%);
+  }
+  */
+
+  &.wip {
+    & .fa-solid, .comp-name-label, .wip-icon {
+      color: $primary;
+    }
+
+    & label {
+      cursor: not-allowed;
+    }
+  }
+
+  &.page-item.wip {
+    & i[data-page-icon], .comp-name-label {
+      opacity: .5;
+      color: $text-col;
+    }
+  }
+}
+
+.page-item {
+  padding-bottom: .4em;
+
+  &:not(.wip) > label {
+    flex-grow: 1;
   }
 }
 
@@ -263,6 +335,30 @@ h2.cat-heading {
 .wip-badge {
   color: $background-dark;
   background: $primary;
+  font-size: .8em;
+  font-family: "Roboto Mono";
+  font-weight: bold;
+}
+
+/* App settings-related overrides */
+
+.hide-wip-comps .comp-list .wip,
+.hide-wip-pages .page-item.wip {
+  display: none;
+}
+
+.faved-badge-on-hover {
+  & .comp-item.is-faved {
+    & > .fave {
+      opacity: 0;
+    }
+
+    &:hover {
+      & > .fave {
+        opacity: 1;
+      }
+    }
+  }
 }
 
 .css-copy,

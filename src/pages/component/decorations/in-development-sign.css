@@ -1,6 +1,6 @@
 .custom-indev {
-  --col: #eca20e;
-  --bg: #1b1b1b;
+  --col: var(--indev-col, #eca20e);
+  --bg: var(--indev-bg, #1b1b1b);
 
   display: flex;
   background-image: repeating-linear-gradient(
@@ -9,7 +9,7 @@
     var(--col) 2rem, var(--col) 3.5rem
   );
   background-size: 200% 200%;
-  border-radius: .5em;
+  border-radius: 4px;
   font-size: .75em;
   font-weight: bolder;
   letter-spacing: .2em;
@@ -20,7 +20,7 @@
     padding: .2em 3em;
     margin-left: 2em;
     background: var(--bg);
-    color: #ecebe8;
+    color: var(--col);
   }
 }
 

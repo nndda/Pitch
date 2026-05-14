@@ -1,8 +1,28 @@
 import {
-  compsUserInputStorage,
+  inputs,
 } from "../../../states/storage.svelte";
 
 const rootStyle = document.documentElement.style;
+
+export function isInputVariablesCompatible(
+  data: ComponentData,
+): boolean {
+  if (data.compatibleOnInputs) {
+    const
+      inputCurrent = Object.keys(inputs.state)
+    ;
+
+    for (const inputReq of data.compatibleOnInputs) {
+      if (!inputCurrent.includes(inputReq)) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  return false;
+}
 
 export function applyUserInput(
   cssVar: string,
@@ -13,13 +33,13 @@ export function applyUserInput(
     `${value}`,
   );
 
-  compsUserInputStorage.update(cssVar, value);
+  inputs.update(cssVar, value);
 }
 
 export function removeUserInput(cssVar: string): void {
   rootStyle.removeProperty("--" + cssVar);
-  delete compsUserInputStorage.state[cssVar];
-  compsUserInputStorage.flush();
+  delete inputs.state[cssVar];
+  inputs.flush();
 }
 
 export function constructRule(

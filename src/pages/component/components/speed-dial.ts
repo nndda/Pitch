@@ -20,7 +20,7 @@ export default {
     "singular",
   ],
 
-  // input: [
+  input: [
   //   {
   //     name: "Button count",
   //     default: 6,
@@ -32,6 +32,16 @@ export default {
   //     var: "SPEED_DIAL_BTN_COUNT",
   //     hardcoded: true,
   //   },
-  // ],
+    {
+      name: "Button color",
+      var: "speed-dial-col",
+      default: "",
+      type: "color",
+    },
+  ],
+
+  compatibleOnInputs: [
+    "speed-dial-col",
+  ],
 
 } as ComponentData;

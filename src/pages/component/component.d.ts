@@ -5,10 +5,18 @@ import type {
 } from "svelte";
 
 import type {
-  StorageAPI,
+  RecordBoolean,
+  StorageAPIWithContext,
 } from "../states/storage.svelte";
 
 declare global {
+
+  const Itch: any; /* Itch API injected via official CDN/itch app */
+
+  interface CSSData {
+    raw: string,
+    compressed: string,
+  }
 
   type Scope =
     "project"
@@ -20,6 +28,7 @@ declare global {
     "compatible"
   | "partial"
   | "none"
+  | "only"
   ;
   type Scopes = Scope | Scope[];
 
@@ -29,12 +38,21 @@ declare global {
   | "singular"
   ;
 
+  type BrowsersCompatStatus = "full" | "limited" | "none";
+  type BrowsersCompat = Record<"firefox" | "safari" | "chrome", BrowsersCompatStatus>;
+
   type ComponentUserInputValue = string | number;
+
+  type ComponentUserInputItem =
+    ComponentUserInput
+  | ComponentUserInputHeading
+  | ComponentUserInputCollapseMark
+  ;
 
   interface ComponentUserInput {
     name: string,
     var: string,
-    default?: string | number,
+
     type:
       "string"
     | "int"
@@ -42,17 +60,26 @@ declare global {
     | {
         min: number,
         max: number,
+        step?: number,
       }
     ,
 
-    cssInject?: (inputValue: ComponentUserInputValue) => string,
+    default?: ComponentUserInputValue,
+    defaultDynamic?: () => string,
+
+    cssInjectPre?: (value: ComponentUserInputValue) => string,
+    cssInjectPost?: (value: ComponentUserInputValue) => string,
+    cssMutate?: (value: ComponentUserInputValue, css: string) => string,
+
     required?: true,
     hardcoded?: true,
   }
-
-  interface CSSData {
-    raw: string,
-    compressed: string,
+  interface ComponentUserInputCollapseMark {
+    collapse: true,
+  }
+  interface ComponentUserInputHeading {
+    heading: string,
+    icon?: string,
   }
 
   type ComponentPage = Component<{data: ComponentData}>;
@@ -64,9 +91,15 @@ declare global {
     css?: CSSData,
     page?: () => Promise<ComponentPage>,
 
-    scopes: Record<ScopeStatus | string, Scopes> | "group-only";
+    scopes:
+      Record<ScopeStatus | string, Scopes>
+    | "group-only"
+    ;
 
-    input?: ComponentUserInput[],
+    input?: ComponentUserInputItem[],
+    compatibleOnInputs?: string[],
+
+    browsersCompat?: BrowsersCompat,
 
     tags?: ComponentTags[],
     notes?: string[],
@@ -97,13 +130,9 @@ declare global {
     css: CSSData,
     cssProcessed: string,
 
-    // name: string,
-    // nameDisplay?: string,
-
     li?: HTMLLIElement,
     chkBox?: HTMLInputElement,
 
-    // page: Component,
     page: () => Promise<ComponentPage>,
     manifest: ComponentData,
 
@@ -139,10 +168,12 @@ declare global {
 
   interface ComponentCategoryData {
     name: string,
+
     components: {
       [compId: string]: ComponentRuntimeItem | ComponentRuntimeItemGroup,
     },
-    selection: StorageAPI<boolean>,
+
+    selection: StorageAPIWithContext<RecordBoolean>,
     selectedCountEl?: HTMLElement,
     catSelectBtn?: HTMLButtonElement,
   }

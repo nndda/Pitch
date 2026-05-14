@@ -1,6 +1,6 @@
 <script lang="ts">
   export let data: ComponentData;
-  import { ComponentPage, CodeHTML } from "../_template/components";
+  import { ComponentPage, CodeHTML, ComponentRef } from "../_template/components";
 </script>
 
 <ComponentPage data={data}>
@@ -14,7 +14,10 @@
     <blockquote class="custom-callout">
 
       <h3>&#9888; Content Warning</h3>
-      Strong language, mild violence, blood, and flashing lights.
+
+      <p>
+        Strong language, mild violence, blood, and flashing lights.
+      </p>
 
     </blockquote>
 
@@ -31,21 +34,30 @@
     <blockquote style="max-width: 500px;" class="custom-callout">
 
       <h3>500px</h3>
-      This Callout element has a maximum width of 500 pixels.
+
+      <p>
+        This Callout element has a maximum width of 500 pixels.
+      </p>
 
     </blockquote>
 
     <blockquote style="max-width: 400px;" class="custom-callout">
 
       <h3>400px</h3>
-      This Callout element has a maximum width of 400 pixels.
+
+      <p>
+        This Callout element has a maximum width of 400 pixels.
+      </p>
 
     </blockquote>
 
     <blockquote style="max-width: 300px;" class="custom-callout">
 
       <h3>300px</h3>
-      This Callout element has a maximum width of 300 pixels.
+
+      <p>
+        This Callout element has a maximum width of 300 pixels.
+      </p>
 
     </blockquote>
 
@@ -60,7 +72,10 @@
     <blockquote style="max-width: 300px; margin: auto;" class="custom-callout">
 
       <h3>Note</h3>
-      This Callout element has a maximum width of 300 pixels, and also is centered.
+
+      <p>
+        This Callout element has a maximum width of 300 pixels, and also is centered.
+      </p>
 
     </blockquote>
 
@@ -69,7 +84,7 @@
   <h2>Examples</h2>
 
   <p>
-    Callout with <button class="button-primary">Label</button> inside it:
+    Callout with <ComponentRef comp="Label"/> inside it:
   </p>
 
   <CodeHTML html={`
@@ -77,14 +92,14 @@
     <blockquote class="custom-callout">
 
       <h3>Note!</h3>
-      This [PROJECT NAME] is still in its alpha stage. And is subject to frequent changes, and bugs.
 
-      <br>
-      <br>
+      <p>
+        This [PROJECT NAME] is still in its alpha stage. And is subject to frequent changes, and bugs.
+      </p>
 
-      <a target="_blank" href="#" class="custom-lb">Report bugs here</a>
-
-      And feel free to share your feedback in the comments!
+      <p>
+        <a target="_blank" href="#" class="custom-lb">Report bugs here</a>, and feel free to share your feedback in the comments!
+      </p>
 
     </blockquote>
 
@@ -99,17 +114,26 @@
     <blockquote class="custom-callout">
 
       <h2>A Callout</h2>
-      This is a Callout component
+
+      <p>
+        This is a Callout component
+      </p>
 
       <blockquote class="custom-callout">
 
         <h3>Another Callout</h3>
-        This is another Callout component
+
+        <p>
+          This is another Callout component
+        </p>
 
         <blockquote class="custom-callout">
 
           <h4>Yet Another Callout</h4>
-          This is yet another Callout component
+
+          <p>
+            This is yet another Callout component
+          </p>
 
         </blockquote>
 

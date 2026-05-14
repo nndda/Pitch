@@ -1,0 +1,56 @@
+name: Deploy app
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/deploy.yml'
+      - 'package.json'
+      - 'bun.lock'
+      - '**/*.svelte'
+      - '**/*.scss'
+      - '**/*.json'
+      - '**/*.js'
+      - '**/*.ts'
+      - 'src/'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2.2
+
+      - name: Build app
+        uses: |
+          bun run build
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: github-pages
+          path: dist/
+
+  deploy:
+    needs: build
+
+    permissions:
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5
+        with:
+          artifact_name: github-pages

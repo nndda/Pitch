@@ -1,6 +1,6 @@
 <script lang="ts">
   export let data: ComponentData;
-  import { ComponentPage, CodeHTML } from "../_template/components";
+  import { ComponentPage, CodeHTML, ComponentRef } from "../_template/components";
 </script>
 
 <ComponentPage data={data}>
@@ -87,7 +87,7 @@
   `}/>
 
   <p>
-    Same as above, but with the text moved inside <button class="button-primary">Tooltip</button> elements.
+    Same as above, but with the text moved inside <ComponentRef comp="Tooltip"/> elements.
   </p>
 
   <CodeHTML html={`

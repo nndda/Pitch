@@ -2,6 +2,8 @@ import { EditorView, basicSetup } from "codemirror";
 import { html as codemirrorHTML } from "@codemirror/lang-html";
 import "./codemirror.scss";
 
+import { itchStyling } from "../../../states/runtime";
+
 import { copyStr } from "../../../scripts/copy";
 
 export let
@@ -104,18 +106,46 @@ export function instatiateEditor(
   HTMLCopyButton: HTMLButtonElement,
 ): void {
 
+  htmlInit = initializeHTML(htmlInit);
+
+  const shadow = HTMLView.attachShadow({ mode: "open", });
+  shadow.adoptedStyleSheets = [ itchStyling ];
+
+  const shadowWrapper = document.createElement("div");
+  shadowWrapper.id = "wrapper";
+
+  const shadowHTMLContainer = document.createElement("div");
+  shadowWrapper.appendChild(shadowHTMLContainer);
+
+  shadow.appendChild(shadowWrapper);
+
+  shadowHTMLContainer.innerHTML = htmlInit;
+
   function updatePreview(html: string): void {
     const
       HTMLNew: string = sanitizeHTML(html)
-    , modified: boolean = htmlInit !== HTMLNew
     ;
 
-    HTMLEditorResetButton.disabled = !modified;
-    HTMLView.innerHTML = HTMLNew;
+    HTMLEditorResetButton.disabled = !(htmlInit !== HTMLNew);
+    shadowHTMLContainer.innerHTML = HTMLNew;
+  }
+
+  function updateEditor(
+    html: string,
+  ): void {
+    shadowHTMLContainer.innerHTML = html;
+
+    view.dispatch({
+      changes: {
+        from: 0,
+        to: view.state.doc.length,
+        insert: html,
+      },
+    });
   }
 
   function resetEditor(): void {
-    updateEditor(htmlInit, HTMLView);
+    updateEditor(htmlInit);
     HTMLEditorResetButton.disabled = true;
   }
 
@@ -123,14 +153,14 @@ export function instatiateEditor(
     copyStr(
       view
       ? view.state.doc.toString()
-      : sanitizeHTML(HTMLView.innerHTML)
+      : sanitizeHTML(shadowHTMLContainer.innerHTML)
     );
   }
 
   HTMLEditorResetButton.addEventListener("click", resetEditor);
   HTMLCopyButton.addEventListener("click", copyHTML);
 
-  const debouncedUpdatePreview = debounce(updatePreview, 550);
+  const debouncedUpdatePreview = debounce(updatePreview, 160);
 
   HTMLEditorToggle.addEventListener("change", (): void => {
 
@@ -157,19 +187,4 @@ export function instatiateEditor(
 
   });
 
-}
-
-export function updateEditor(
-  html: string,
-  HTMLView: HTMLElement,
-): void {
-  HTMLView.innerHTML = html;
-
-  view.dispatch({
-    changes: {
-      from: 0,
-      to: view.state.doc.length,
-      insert: html,
-    }
-  });
 }
