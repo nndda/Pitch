@@ -61,7 +61,8 @@
   <header class="intro">
 
     <div>
-      <img alt="" class="pitch-logo" src="/icon.svg" width="150">
+      <!-- ???? -->
+      <img alt="" class="pitch-logo" src="%BASE_URL%icon.svg" width="150">
     </div>
 
     <div class="header-content">
