@@ -35,7 +35,14 @@ export const
       scope: Scope,
     },
 
-  }>("projects", true)
+  }>("projects", true, {
+
+    "New project": {
+      name: "New project",
+      scope: "project",
+    },
+
+  })
 
 , user = initiateStorageAPI<ItchProfile>("user", true)
 
@@ -60,18 +67,20 @@ export const
 
   }
 , settings = initiateStorageAPI<typeof settingsDefault>("settings", false, settingsDefault)
-, theme = initiateStorageAPI<{
 
-    text_col: string,
-    link_col: string,
-    background: string,
+, themeDefault ={
+
+    text_col: "#eaeaea",
+    link_col: "#fc3a78",
+
+    background: "#171620",
     // background_2: string,
-
     // background_opacity: number,
 
-    font_family: string,
+    font_family: "Lato",
 
-  }>("theme")
+  }
+, theme = initiateStorageAPI<typeof themeDefault>("theme", false, themeDefault)
 
 , faves = initiateStorageAPI<RecordBoolean>("faves")
 , inputs = initiateStorageAPI<RecordUserInput>("inputs")

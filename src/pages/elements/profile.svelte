@@ -21,21 +21,6 @@
     isInsideItch = typeof Itch !== "undefined"
   ;
 
-  if (Object.keys(projects.state).length === 0) {
-
-    projects.update(currentProject.get() as string, {
-      name: "New project",
-      url: "",
-      scope: "project",
-    });
-
-    theme.state.text_col = "#eaeaea";
-    theme.state.link_col = "#fc3a78";
-    theme.state.background = "#171620";
-
-    theme.flush();
-  }
-
   function unselectSidebarPage() {
     const currentPageList = document.querySelector(`input[name="page-view"]:checked`) as HTMLInputElement | null;
 
