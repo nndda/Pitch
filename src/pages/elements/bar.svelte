@@ -8,7 +8,7 @@
       icon = undefined,
       children,
     } = $props()
-
+	// svelte-ignore state_referenced_locally
   , flag = initiateStorageFlag<boolean>("bar-" + name, false, true)
   ;
 
