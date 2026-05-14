@@ -32,12 +32,12 @@ jobs:
 
       - name: Build app
         run: |
-          bun run build
+          bun run build --base=/Pitch/
 
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v5
         with:
-          path: "dist/"
+          path: dist/
 
       # - uses: actions/upload-artifact@v7
       #   with:

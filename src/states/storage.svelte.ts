@@ -68,7 +68,7 @@ export const
   }
 , settings = initiateStorageAPI<typeof settingsDefault>("settings", false, settingsDefault)
 
-, themeDefault ={
+, themeDefault = {
 
     text_col: "#eaeaea",
     link_col: "#fc3a78",

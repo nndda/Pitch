@@ -37,7 +37,6 @@
   @use "./home.scss";
 </style>
 
-
 <article class="home">
 
   <div class="banner-list">
@@ -62,24 +61,36 @@
   <header class="intro">
 
     <div>
-      <img alt="" class="pitch-logo" src="/assets/pitch-icon-s.png" width="150">
+      <img alt="" class="pitch-logo" src="/icon.svg" width="150">
     </div>
 
     <div class="header-content">
-    <h2 class="pitch-title">
-      Pitch<small>.css</small>
-    </h2>
+      <h2 class="pitch-title">
+        Pitch<small>.css</small>
+      </h2>
 
       <p class="labels">
-
-        <PageRef name="Getting Started"/>
-        <PageRef name="Showcase"/>
+        <button>
+          <i class="icon fa-solid fa-box-open"></i>
+          v3.0.0
+        </button>
 
         <button>
           <i class="icon fa-brands fa-creative-commons"></i>
           CC0
         </button>
 
+        <button>
+          Made with
+          <i class="fa-solid fa-heart"></i>
+        </button>
+
+        <b class="flex-break"></b>
+
+        <button>
+          <i class="icon fa-solid fa-road-barrier"></i>
+          Development preview
+        </button>
       </p>
 
       <p class="desc">
@@ -96,10 +107,7 @@
   </header>
 
   <br>
-  <!-- <hr> -->
   <br>
-
-  <!-- <h2>Preview</h2> -->
 
   <Previews/>
 
@@ -108,9 +116,15 @@
   <h2>License</h2>
 
   <ul class="custom-ul">
-    <li>The Pitch web app is licensed under <a href="https://github.com/nndda/Pitch/blob/main/LICENSE" target="_blank" referrerpolicy="origin" rel="nofollow noopener">GNU AGPLv3</a>.</li>
-    <li>The CSS components are licensed under <a href="https://creativecommons.org/publicdomain/zero/1.0/deed.en" target="_blank" referrerpolicy="origin" rel="nofollow noopener">CC0</a>.</li>
-    <li>The placeholder content in the HTML preview and/or in the image preview may be subject to different license or copyright restrictions.</li>
+    <li>
+      The Pitch web app is licensed under <a href="https://github.com/nndda/Pitch/blob/main/LICENSE" target="_blank" referrerpolicy="origin" rel="nofollow noopener">GNU AGPLv3</a>.
+    </li>
+    <li>
+      The CSS components are licensed under <a href="https://creativecommons.org/publicdomain/zero/1.0/deed.en" target="_blank" referrerpolicy="origin" rel="nofollow noopener">CC0</a>.
+    </li>
+    <li>
+      The placeholder content in the HTML preview and/or in the image preview may be subject to different license or copyright restrictions.
+    </li>
   </ul>
 
   <footer>
