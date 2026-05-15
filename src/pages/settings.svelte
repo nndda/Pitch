@@ -26,10 +26,6 @@
           name: "Minify output",
           desc: "Minify the CSS output, reducing its size, at the cost of readability.",
         },
-        use_layer: {
-          name: `Use <code>@layer</code>`,
-          desc: `Wrap the CSS output inside <code>@layer</code>, and provides another <code>@layer</code> for overriding the CSS.`,
-        },
         isolate_comment_section: {
           name: "Isolate comment section",
           desc: "Disallow comment section from using the CSS components.",
