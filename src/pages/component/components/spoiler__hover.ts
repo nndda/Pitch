@@ -15,6 +15,7 @@ export default {
       "jam",
     ],
   },
+  scopeAMPincompatible: true,
 
   sub: "Spoiler",
 

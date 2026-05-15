@@ -95,6 +95,8 @@ declare global {
       Record<ScopeStatus | string, Scopes>
     | "group-only"
     ;
+    // i hate amp
+    scopeAMPincompatible?: true,
 
     input?: ComponentUserInputItem[],
     compatibleOnInputs?: string[],

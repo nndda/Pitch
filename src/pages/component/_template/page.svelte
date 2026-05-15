@@ -11,6 +11,12 @@
       data: ComponentData,
     } = $props()
 
+  , itchScopes = [
+      "project",
+      "profile",
+      "jam",
+    ]
+
   , scopesIcons: Record<ScopeStatus, string> = {
       compatible: "fa-solid fa-circle-check",
       partial: "fa-solid fa-triangle-exclamation",
@@ -83,58 +89,74 @@
   <ComponentInput data={data}/>
 {/if}
 
-<div class="heading" data-comp-name={data.nameDisplay ?? data.name}>
+<div
+  class="heading"
+  data-comp-name={data.nameDisplay ?? data.name}
+>
+  <div class="labels">
 
-  <ul class="scopes">
-    {#each Object.entries((data as ComponentData).scopes) as [scopeType, scopes]}
+    <ul class="labels-list scopes">
+      {#each Object.entries((data as ComponentData).scopes) as [scopeType, scopes]}
 
-      {@const scopeStatus: ScopeStatus = scopeType as ScopeStatus}
+        {@const scopeStatus: ScopeStatus = scopeType as ScopeStatus}
 
-      {#if typeof scopes === "string"}
+        {#if typeof scopes === "string"}
 
-        <li class={scopeType}>
-          <i class="icon {scopesIcons[scopeStatus]}"></i>
+          <li class={scopeType}>
+            <i class="icon {scopesIcons[scopeStatus]}"></i>
+            <ul>
+              <li class=text>{scopes} pages</li>
+            </ul>
+
+          </li>
+
+        {:else}
+
+          <li class={scopeType}>
+            <i class="icon {scopesIcons[scopeStatus]}"></i>
+            <ul>
+              {#each scopes as scope, n}
+                <li class="text {scopeType}">
+                  {scope} pages{#if n < scopes.length - 1},{/if}
+                </li>
+              {/each}
+            </ul>
+          </li>
+
+        {/if}
+
+      {/each}
+    </ul>
+
+    {#if data.compatibleOnInputs}
+
+      <ul class="labels-list scopes compatible-all">
+        <li class="compatible">
+          <i class="icon {scopesIcons.compatible}"></i>
           <ul>
-            <li class=text>{scopes} pages</li>
-          </ul>
-
-        </li>
-
-      {:else}
-
-        <li class={scopeType}>
-          <i class="icon {scopesIcons[scopeStatus]}"></i>
-          <ul>
-            {#each scopes as scope, n}
-              <li class="text {scopeType}">
-                {scope} pages{#if n < scopes.length - 1},{/if}
+            {#each itchScopes as scope, n}
+              <li class="text compatible">
+                {scope} pages{#if n < itchScopes.length - 1},{/if}
               </li>
             {/each}
           </ul>
         </li>
+      </ul>
 
-      {/if}
+    {/if}
 
-    {/each}
-  </ul>
+    {#if data.scopeAMPincompatible}
+      <ul class="labels-list">
+        <li class="none">
+          <i class="icon fa-solid fa-xmark"></i>
+          <!-- ain't bringing the whole Simple Icons library just yet -->
+          <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>AMP</title><path d="M12 0c6.628 0 12 5.373 12 12s-5.372 12-12 12C5.373 24 0 18.627 0 12S5.373 0 12 0zm-.92 19.278l5.034-8.377a.444.444 0 00.097-.268.455.455 0 00-.455-.455l-2.851.004.924-5.468-.927-.003-5.018 8.367s-.1.183-.1.291c0 .251.204.455.455.455l2.831-.004-.901 5.458z"/></svg>
+          AMP incompatible
+        </li>
+      </ul>
+    {/if}
 
-  {#if data.compatibleOnInputs}
-    {@const scopes = ["project", "profile", "jam"]}
-
-    <ul class="scopes compatible-all">
-      <li class="compatible">
-        <i class="icon {scopesIcons.compatible}"></i>
-        <ul>
-          {#each scopes as scope, n}
-            <li class="text compatible">
-              {scope} pages{#if n < scopes.length - 1},{/if}
-            </li>
-          {/each}
-        </ul>
-      </li>
-    </ul>
-  {/if}
-
+  </div>
 </div>
 
 {@render children()}

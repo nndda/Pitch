@@ -14,5 +14,6 @@ export default {
       "jam",
     ],
   },
+  scopeAMPincompatible: true,
 
 } as ComponentData;
