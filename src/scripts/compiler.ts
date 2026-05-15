@@ -51,6 +51,31 @@ export function compile(): string {
   , inputStyleIncludes: string[] = []
   ;
 
+  const cssVarsNotMinified = `#wrapper {
+  --b: var(--itchio_bg_color);
+  --b2: var(--itchio_bg2_color);
+  --b2s: var(--itchio_bg2_sub);
+  --t: var(--itchio_text_color);
+  --l: var(--itchio_link_color);
+  --br: var(--itchio_border_color);
+  --btn: var(--itchio_button_color);
+  --btn_f: var(--itchio_button_fg_color);
+  --btn_s: var(--itchio_button_shadow_color);
+}`;
+
+  cssOut.push(
+    cssMinify
+      ? `#wrapper {--b:var(--itchio_bg_color);--b2:var(--itchio_bg2_color);--b2s:var(--itchio_bg2_sub);--t:var(--itchio_text_color);--l:var(--itchio_link_color);--br:var(--itchio_border_color);--btn:var(--itchio_button_color);--btn_f:var(--itchio_button_fg_color);--btn_s:var(--itchio_button_shadow_color)}`
+      : (
+          settings.state["css.use_layer"]
+            ? cssVarsNotMinified
+              .split("\n")
+              .map(str => str + "  ")
+              .join("\n")
+            : cssVarsNotMinified
+        )
+  )
+
   for (const catId in runtimeData) {
     const
       compCatData = runtimeData[catId].components
