@@ -82,14 +82,14 @@
           CC0
         </button>
 
-        <button>
+        <button class="made-with-love">
           Made with
           <i class="fa-solid fa-heart"></i>
         </button>
 
         <b class="flex-break"></b>
 
-        <button>
+        <button class="in-development">
           <i class="icon fa-solid fa-road-barrier"></i>
           Development preview
         </button>

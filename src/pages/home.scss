@@ -60,3 +60,15 @@
   max-width: 400px;
   font-size: 1.1em;
 }
+
+.made-with-love {
+  & > i {
+    color: $accent;
+  }
+}
+
+.in-development {
+  & > i {
+    color: color.mix(#eca20e, $text-col, 65%);
+  }
+}
