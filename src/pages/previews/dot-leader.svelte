@@ -1,30 +1,30 @@
 <script>
   const props = $props();
-  import { ComponentRef } from "../component/_template/components";
+  import PreviewBlock from "./preview-block.svelte";
 </script>
 
-<div class="comp-cont {props.class ?? ""}">
-  <div class="preview">
-    <ComponentRef comp="Dot Leader"/>
-  </div>
+<PreviewBlock
+  classes={props.class}
+  compRefs={["Dot Leader"]}
+  html={`
+    <h3 class="custom-dot-leader-item custom-no-dot">
+      <span>Item</span>
+      <span>Price</span>
+    </h3>
 
-  <h3 class="custom-dot-leader-item custom-no-dot">
-    <span>Item</span>
-    <span>Price</span>
-  </h3>
-
-  <ul class="custom-dot-leader">
-    <li>
-      <span>Base game</span>
-      <span>$5</span>
-    </li>
-    <li>
-      <span>Base game + bonus content</span>
-      <span>$12.5</span>
-    </li>
-    <li>
-      <span>Supporter Pack</span>
-      <span>$16</span>
-    </li>
-  </ul>
-</div>
+    <ul class="custom-dot-leader">
+      <li>
+        <span>Base game</span>
+        <span>$5</span>
+      </li>
+      <li>
+        <span>Base game + bonus content</span>
+        <span>$12.5</span>
+      </li>
+      <li>
+        <span>Supporter Pack</span>
+        <span>$16</span>
+      </li>
+    </ul>
+  `}
+/>

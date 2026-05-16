@@ -1,22 +1,22 @@
 <script>
   const props = $props();
-  import { ComponentRef } from "../component/_template/components";
+  import PreviewBlock from "./preview-block.svelte";
 </script>
 
-<div class="comp-cont {props.class ?? ""}">
-  <div class="preview">
-    <ComponentRef comp="Callout"/>
-  </div>
+<PreviewBlock
+  classes={props.class}
+  compRefs={["Callout"]}
+  html={`
+    <blockquote class="custom-callout">
 
-  <blockquote class="custom-callout">
+      <h3>⚠ Content Warning</h3>
 
-    <h3>⚠ Content Warning</h3>
+      <p>
+        This project contains the following:
+        <br>
+        Strong language, mild violence, blood, and flashing lights.
+      </p>
 
-    <p>
-      This project contains the following:
-      <br>
-      Strong language, mild violence, blood, and flashing lights.
-    </p>
-
-  </blockquote>
-</div>
+    </blockquote>
+  `}
+/>
