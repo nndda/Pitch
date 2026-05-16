@@ -19,13 +19,13 @@
             <li>Mangosteen</li>
           </ul>
         </li>
-        <li>
+        <!-- <li>
           Veggies
           <ul>
             <li>Salsify</li>
             <li>Kohlrabi</li>
           </ul>
-        </li>
+        </li> -->
       </ul>
     </li>
     <li>

@@ -63,12 +63,12 @@
     <Labels/>
     <InfoList/>
     <Accordion class="span-2"/>
-    <Callout class="span-3"/>
+    <Callout class="span-2"/>
+    <TreeList/>
     <SpeedDial/>
     <DotLeader class="span-2"/>
     <TimelineList class="span-2"/>
-    <TreeList/>
-    <Table class="span-3"/>
+    <Table class="span-4"/>
 
   </div>
 
