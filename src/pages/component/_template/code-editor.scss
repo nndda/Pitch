@@ -19,18 +19,41 @@
   & button, .button {
     font-size: .8em;
   }
+
+  &.main {
+    &:has( > .code-edit-toggle:not(:checked)) {
+      & ~ .codes-toolbar {
+        display: none;
+      }
+    }
+  }
+
+  &:is(.html, .css) {
+
+    border-top: 1px solid $border-col-light;
+  }
+  &.html {
+    & .label {
+      color: $primary-light;
+    }
+  }
+  &.css {
+    & .label {
+      color: $accent-light;
+    }
+  }
 }
 
 .html-view {
   padding: .5em 1em;
 }
 
-.html-editor {
+.code-editor {
   contain: inline-size;
 }
-
+/*
 .copy-status {
   display: flex;
   align-items: center;
   font-size: .8em;
-}
+} */
