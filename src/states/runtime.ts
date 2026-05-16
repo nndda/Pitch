@@ -13,6 +13,8 @@ import itchCSS from "../styles/_itchio.scss?inline";
 export const itchStyling = new CSSStyleSheet();
 itchStyling.replaceSync(itchCSS);
 
+export const inputStyling = new CSSStyleSheet();
+
 function getCompsManifest(
   imports: ComponentManifestImports,
 ): ComponentData[] {

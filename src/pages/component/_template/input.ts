@@ -1,8 +1,5 @@
-import {
-  inputs,
-} from "../../../states/storage.svelte";
-
-const rootStyle = document.documentElement.style;
+import { inputStyling } from "../../../states/runtime";
+import { inputs } from "../../../states/storage.svelte";
 
 export function isInputVariablesCompatible(
   data: ComponentData,
@@ -28,18 +25,16 @@ export function applyUserInput(
   cssVar: string,
   value: ComponentUserInputValue,
 ): void {
-  rootStyle.setProperty(
-    "--" + cssVar,
-    `${value}`,
-  );
-
   inputs.update(cssVar, value);
+
+  inputStyling.replaceSync("#wrapper {" + constructRule(inputs.state) + "}");
 }
 
 export function removeUserInput(cssVar: string): void {
-  rootStyle.removeProperty("--" + cssVar);
   delete inputs.state[cssVar];
   inputs.flush();
+
+  inputStyling.replaceSync("#wrapper {" + constructRule(inputs.state) + "}");
 }
 
 export function constructRule(

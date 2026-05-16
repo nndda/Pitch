@@ -26,9 +26,11 @@
     constructRule,
     isInputVariablesCompatible,
   } from "../pages/component/_template/input";
-  document.documentElement.setAttribute(
-    "style",
-    constructRule(inputs.state),
+  // TODO: I feel like this should be somewhere else more appropriate :/
+  inputStyling.replaceSync(
+    "#wrapper {"
+    + constructRule(inputs.state)
+    + "}",
   );
 
   import { slug } from "../scripts/slugify";
@@ -54,6 +56,7 @@
     compElCache,
 
     runtimeDataInit,
+    inputStyling,
   } from "../states/runtime";
 
   let
