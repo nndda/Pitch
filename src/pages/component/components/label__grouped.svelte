@@ -1,6 +1,6 @@
 <script lang="ts">
   export let data: ComponentData;
-  import { ComponentPage, CodeHTML, ComponentRef } from "../_template/components";
+  import { ComponentPage, CodeEditor, ComponentRef } from "../_template/components";
 </script>
 
 <ComponentPage data={data}>
@@ -9,7 +9,7 @@
     Custom class for container to group multiple <button class="button-general">Label</button> components.
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <p class="custom-grouped-lb">
 
@@ -65,7 +65,7 @@
     Centered container using <code>text-center</code> class, and increased <code>font-size</code> of <code>2em</code>:
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <p class="custom-grouped-lb text-center" style="font-size: 2em;">
       <a href="#" class="custom-lb" style="background: #ff6973; color: #222;">
@@ -90,7 +90,7 @@
     Same as above, but with the text moved inside <ComponentRef comp="Tooltip"/> elements.
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <p class="custom-grouped-lb text-center" style="font-size: 2em;">
       <a href="#" class="custom-lb custom-tip" style="background: #ff6973;">

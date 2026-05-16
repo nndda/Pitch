@@ -1,6 +1,6 @@
 <script lang="ts">
   export let data: ComponentData;
-  import { ComponentPage, CodeHTML, ComponentRef } from "../_template/components";
+  import { ComponentPage, CodeEditor, ComponentRef } from "../_template/components";
 </script>
 
 <ComponentPage data={data}>
@@ -9,7 +9,7 @@
     Connect long, horizontally separated texts with dots to guide the reader's eyes.
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <ul class="custom-dot-leader">
       <li>
@@ -34,7 +34,7 @@
     Add <code>custom-no-dot</code> class to the <code>&lt;li&gt;</code> element to disable the dotted line.
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <ul class="custom-dot-leader">
       <li>
@@ -58,7 +58,7 @@
     to style it to the Dot Leader item styling, without having the whole <code>&lt;ul&gt;</code> and <code>&lt;li&gt;</code>.
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <h3 class="custom-dot-leader-item custom-no-dot">
       <span>Item</span>
@@ -88,7 +88,7 @@
     Nested Dot Leader list with heading.
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <ul class="custom-dot-leader">
       <li>
@@ -130,7 +130,7 @@
     Combined with <ComponentRef comp="Tree List"/> component.
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <h2>"Dvorakh the Cyberdevourer"</h2>
     <ul class="custom-tree custom-dot-leader">

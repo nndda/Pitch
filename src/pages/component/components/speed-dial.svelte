@@ -1,6 +1,6 @@
 <script lang="ts">
   export let data: ComponentData;
-  import { ComponentPage, CodeHTML, ComponentRef } from "../_template/components";
+  import { ComponentPage, CodeEditor, ComponentRef } from "../_template/components";
 </script>
 
 <ComponentPage data={data}>
@@ -15,7 +15,7 @@
     Floating button on the bottom-right corner of your page, that reveals more buttons when clicked.
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <div class="custom-speed-dial">
       <ul class="custom-speed-dial-content">
@@ -68,7 +68,7 @@
     Every buttons on Speed Dial were designed to only have icon. To label the button, you can pair it with the <ComponentRef comp="Tooltip"/> component.
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <div class="custom-speed-dial custom-tip">
       <ul class="custom-speed-dial-content">

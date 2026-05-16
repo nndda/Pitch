@@ -1,6 +1,6 @@
 <script lang="ts">
   export let data: ComponentData;
-  import { ComponentPage, CodeHTML } from "../_template/components";
+  import { ComponentPage, CodeEditor } from "../_template/components";
 </script>
 
 <ComponentPage data={data}>
@@ -9,7 +9,7 @@
     Divider line with text.
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <h1 class="custom-heading-divider">Heading 1</h1>
 
@@ -32,7 +32,7 @@
     Align the text to the left or right, by adding <code>custom-left</code> or <code>custom-right</code> class.
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <h1 class="custom-heading-divider custom-left">Heading</h1>
 
@@ -46,7 +46,7 @@
     Add <code>custom-dashed</code> or <code>custom-dotted</code> class to change the divider line's style.
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <h1 class="custom-heading-divider">Heading</h1>
 

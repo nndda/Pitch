@@ -1,6 +1,6 @@
 <script lang="ts">
   export let data: ComponentData;
-  import { ComponentPage, CodeHTML, ComponentRef } from "../_template/components";
+  import { ComponentPage, CodeEditor, ComponentRef } from "../_template/components";
 </script>
 
 <ComponentPage data={data}>
@@ -9,7 +9,7 @@
     Little snippet that pops up when hovered.
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     This project (and 99% of my other web-related projects) are made with
 
@@ -41,7 +41,7 @@
     </li>
   </ul>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <p class="text-center">
 
@@ -93,7 +93,7 @@
     You can have multiple Tooltip content on an element, as long as each of its position is different.
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <p class="text-center">
 
@@ -143,7 +143,7 @@
     Multiple Tooltip for an image, with custom text alignments for the contents:
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <div class="text-center" style="margin: 2em;">
       <div class="custom-tip">
@@ -169,7 +169,7 @@
     Tooltip on grouped <ComponentRef comp="Label"/> components.
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <p class="custom-grouped-lb text-center" style="font-size: 2em;">
       <a href="#" class="custom-lb custom-tip" style="background: #ff6973;">
@@ -203,7 +203,7 @@
     Tooltip use on <ComponentRef comp="Speed Dial"/> component.
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <div class="custom-speed-dial custom-tip">
       <ul class="custom-speed-dial-content">

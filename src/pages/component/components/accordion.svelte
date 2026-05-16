@@ -1,6 +1,6 @@
 <script lang="ts">
   export let data: ComponentData;
-  import { ComponentPage, CodeHTML } from "../_template/components";
+  import { ComponentPage, CodeEditor } from "../_template/components";
 </script>
 
 <ComponentPage data={data}>
@@ -9,7 +9,7 @@
     Turn walls of texts into list of collapsible contents. It’s basically just a styled list of <code>&lt;details&gt;</code> elements.
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <div class="custom-accrd">
       <details>
@@ -43,7 +43,7 @@
     You can also add elements other than <code>&lt;details&gt;</code> directly inside <code>.custom-accrd</code>. Like a header or footer:
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <div class="custom-accrd">
       <h2>Frequently Asked Questions</h2>
@@ -75,7 +75,7 @@
 
   `}/>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <div class="custom-accrd">
       <p>
@@ -131,7 +131,7 @@
     Accordions are center-aligned by default. To align it to left or right, add another class <code>custom-left</code> or <code>custom-right</code>.
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <div class="custom-accrd custom-left">
       <details>
@@ -160,7 +160,7 @@
     Add <code>custom-full-w</code> class to make it takes up the entire width of the page.
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <div class="custom-accrd custom-full-w">
       <details>
@@ -177,7 +177,7 @@
     Or adjust the width manually by overriding its <code>max-width</code> property.
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <div class="custom-accrd" style="max-width: 500px;">
       <details>

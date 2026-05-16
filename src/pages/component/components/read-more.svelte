@@ -1,6 +1,6 @@
 <script lang="ts">
   export let data: ComponentData;
-  import { ComponentPage, CodeHTML, ComponentRef } from "../_template/components";
+  import { ComponentPage, CodeEditor, ComponentRef } from "../_template/components";
 </script>
 
 <ComponentPage data={data}>
@@ -9,7 +9,7 @@
     Make lengthy content collapsible.
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <div class="custom-read-more">
       <div class="custom-content">
@@ -45,7 +45,7 @@
     Change the <code>.custom-content</code>'s <code>max-height</code> property to adjust the visible height.
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <div class="custom-read-more">
       <div class="custom-content" style="max-height: 160px;">
@@ -81,7 +81,7 @@
     Read More's button are left-aligned by default, add class <code>custom-center</code> or <code>custom-right</code> to the <code>.custom-read-more</code> element, to align the "Read more/less..." button to the center or to the right.
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <div class="custom-read-more">
       <div class="custom-content" >
@@ -115,7 +115,7 @@
     Add class <code>custom-once</code> to disable the "Read less..." button once the content is expanded.
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <div class="custom-read-more custom-once">
       <div class="custom-content" style="max-height: 160px;">
@@ -151,7 +151,7 @@
     Read More implementation with <ComponentRef comp="Timeline List"/> component:
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <div class="custom-read-more">
       <dl class="custom-tl-list custom-content" style="max-height: 12em;">

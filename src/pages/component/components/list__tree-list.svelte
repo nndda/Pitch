@@ -1,6 +1,6 @@
 <script lang="ts">
   export let data: ComponentData;
-  import { ComponentPage, CodeHTML, ComponentRef } from "../_template/components";
+  import { ComponentPage, CodeEditor, ComponentRef } from "../_template/components";
 </script>
 
 <ComponentPage data={data}>
@@ -9,7 +9,7 @@
     Unordered list element, styled as tree view structure.
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <ul class="custom-tree">
       <li>
@@ -48,7 +48,7 @@
     Add <code>custom-tree-dashed</code> or <code>custom-tree-dotted</code> class to the <code>&lt;ul&gt;</code> element to change the style of the outline.
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <ul class="custom-tree">
       <li>
@@ -87,7 +87,7 @@
     As directory structure view. With <ComponentRef comp="Label"/> component.
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <ul class="custom-tree">
       <li>
@@ -124,7 +124,7 @@
     Tree List with headings.
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <ul class="custom-tree">
       <li>
@@ -161,7 +161,7 @@
     Combined with <ComponentRef comp="Dot Leader"/> component.
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <h2>"Dvorakh the Cyberdevourer"</h2>
 

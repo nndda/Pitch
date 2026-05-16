@@ -1,6 +1,6 @@
 <script lang="ts">
   export let data: ComponentData;
-  import { ComponentPage, CodeHTML } from "../_template/components";
+  import { ComponentPage, CodeEditor } from "../_template/components";
 </script>
 
 <ComponentPage data={data}>
@@ -9,7 +9,7 @@
     Compare 2 images together. Slide the handle on the bottom of the images.
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <div class="custom-img-compare">
       <div>

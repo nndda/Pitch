@@ -1,6 +1,6 @@
 <script lang="ts">
   export let data: ComponentData;
-  import { ComponentPage, CodeHTML, ComponentRef } from "../_template/components";
+  import { ComponentPage, CodeEditor, ComponentRef } from "../_template/components";
 </script>
 
 <ComponentPage data={data}>
@@ -9,7 +9,7 @@
     Custom class that style description list element to two-column layout.
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <dl class="custom-info">
 
@@ -38,7 +38,7 @@
     Break new line manually using <code>&lt;br&gt;</code>:
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <dl class="custom-info">
 
@@ -85,7 +85,7 @@
     Info List are center-aligned by default. Add class <code>custom-left</code> to align it to the left.
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <dl class="custom-info custom-left">
 
@@ -114,7 +114,7 @@
     Input map information with <ComponentRef comp="Input"/> components:
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <h2>Input & Controls</h2>
 

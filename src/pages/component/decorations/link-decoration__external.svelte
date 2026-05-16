@@ -1,6 +1,6 @@
 <script lang="ts">
   export let data: ComponentData;
-  import { ComponentPage, CodeHTML } from "../_template/components";
+  import { ComponentPage, CodeEditor } from "../_template/components";
 </script>
 
 <ComponentPage data={data}>
@@ -9,7 +9,7 @@
     Decorate links pointing to external page/site.
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <p>
       The source code for this project is available on the <a class="custom-link-ext" href="https://github.com/nndda/Pitch" target="_blank">GitHub repository</a>! Licensed under GNU AGPLv3 and CC0!

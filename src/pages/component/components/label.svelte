@@ -1,6 +1,6 @@
 <script lang="ts">
   export let data: ComponentData;
-  import { ComponentPage, CodeHTML } from "../_template/components";
+  import { ComponentPage, CodeEditor } from "../_template/components";
 </script>
 
 <ComponentPage data={data}>
@@ -9,7 +9,7 @@
     Highlight genres, tags, tools, or jam. Can be applied to hyperlinks, plain text, or any inline elements, such as <code>&lt;a&gt;</code>, <code>&lt;em&gt;</code>, <code>&lt;strong&gt;</code>, or <code>&lt;span&gt;</code>.
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <em class="custom-lb">
       🎃 Halloween
@@ -31,7 +31,7 @@
     Just add <code>&lt;img&gt;</code> of the images or icons. The image's height will be set to the text height.
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <span class="custom-lb">
       <img alt="" src="https://cdn.jsdelivr.net/gh/nndda/nndda@main/hand_circle.svg">
@@ -56,7 +56,7 @@
     Add and set <code>background</code> and <code>color</code> properties manually.
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <span class="custom-lb" style="background: #46425e; color: #eee;">
       #spooky
@@ -92,7 +92,7 @@
     As a heading badge/label, using <code>&lt;small&gt;</code> element:
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <h1>
       Exciting Features
@@ -115,7 +115,7 @@
     Inline use in a <code>&lt;p&gt;</code> element:
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <p style="max-width: 400px">
       Hello hello, these are some of the features

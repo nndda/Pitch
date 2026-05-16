@@ -1,6 +1,6 @@
 <script lang="ts">
   export let data: ComponentData;
-  import { ComponentPage, CodeHTML, ComponentRef } from "../_template/components";
+  import { ComponentPage, CodeEditor, ComponentRef } from "../_template/components";
 </script>
 
 <ComponentPage data={data}>
@@ -9,7 +9,7 @@
     Inform and highlight content warnings, additional informations, or technical issues.
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <blockquote class="custom-callout">
 
@@ -29,7 +29,7 @@
     Callout takes the full width of the page by default. You can adjust the width manually by adjusting its <code>max-width</code> property:
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <blockquote style="max-width: 500px;" class="custom-callout">
 
@@ -67,7 +67,7 @@
     For Callout with custom width, center it by adding <code>margin: auto;</code>.
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <blockquote style="max-width: 300px; margin: auto;" class="custom-callout">
 
@@ -87,7 +87,7 @@
     Callout with <ComponentRef comp="Label"/> inside it:
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <blockquote class="custom-callout">
 
@@ -109,7 +109,7 @@
     Nested Callout.
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <blockquote class="custom-callout">
 

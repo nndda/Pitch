@@ -1,6 +1,6 @@
 <script lang="ts">
   export let data: ComponentData;
-  import { ComponentPage, CodeHTML } from "../_template/components";
+  import { ComponentPage, CodeEditor } from "../_template/components";
 </script>
 
 <ComponentPage data={data}>
@@ -19,7 +19,7 @@
     Table element with table heading cells on the first column and first row:
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <table>
       <thead>
@@ -61,7 +61,7 @@
 
   `}/>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <table>
       <thead>

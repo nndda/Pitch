@@ -1,6 +1,6 @@
 <script lang="ts">
   export let data: ComponentData;
-  import { ComponentPage, CodeHTML } from "../_template/components";
+  import { ComponentPage, CodeEditor } from "../_template/components";
 </script>
 
 <ComponentPage data={data}>
@@ -9,7 +9,7 @@
     Code block component with number lines on the side.
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <div class="custom-code"><code>
     </code><code>.custom-uwu &#123;
@@ -27,7 +27,7 @@
     Highlight lines by adding <code>custom-hl</code> class to the <code>&lt;code&gt;</code> line.
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <div class="custom-code"><code>extends Control
     </code><code>

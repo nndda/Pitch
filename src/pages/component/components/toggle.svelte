@@ -1,6 +1,6 @@
 <script lang="ts">
   export let data: ComponentData;
-  import { ComponentPage, CodeHTML } from "../_template/components";
+  import { ComponentPage, CodeEditor } from "../_template/components";
 </script>
 
 <ComponentPage data={data}>
@@ -9,7 +9,7 @@
     Switch between two to up to five contents on your page.
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     Languages &nbsp;
     <div class="custom-toggles">

@@ -1,6 +1,6 @@
 <script lang="ts">
   export let data: ComponentData;
-  import { ComponentPage, CodeHTML, ComponentRef } from "../_template/components";
+  import { ComponentPage, CodeEditor, ComponentRef } from "../_template/components";
 </script>
 
 <ComponentPage data={data}>
@@ -9,7 +9,7 @@
     Description list element, specifically styled to represent timeline, changelogs, or update logs.
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <dl class="custom-tl-list">
       <dt>
@@ -38,7 +38,7 @@
     Using <ComponentRef comp="Label"/> to indicate the changes' type. And also using <ComponentRef comp="Input"/> element:
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <dl class="custom-tl-list">
       <dt>
@@ -116,7 +116,7 @@
     The same example as above, but wrapped in <ComponentRef comp="Read More"/> component:
   </p>
 
-  <CodeHTML html={`
+  <CodeEditor html={`
 
     <div class="custom-read-more">
       <dl class="custom-tl-list custom-content" style="max-height: 12em;">
