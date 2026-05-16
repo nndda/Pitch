@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
 import { resolve } from "path";
+import { execSync } from "child_process";
 
 function abs(path: string): string {
   return resolve(__dirname, path)
@@ -62,6 +63,10 @@ for (const compType of ["components", "decorations",]) {
   }
 }
 
+const
+  commitHash = JSON.stringify(execSync("git rev-parse HEAD").toString().trim())
+, commitDate = JSON.stringify(execSync("git --no-pager log -1 --format=%cI").toString().trim())
+;
 
 // https://vite.dev/config/
 export default defineConfig({
@@ -146,4 +151,9 @@ export default defineConfig({
     outDir: "../dist/", // also relative to root
     emptyOutDir: true,
   },
+
+  define: {
+    COMMIT_HASH: commitHash,
+    COMMIT_DATE: commitDate,
+  }
 });

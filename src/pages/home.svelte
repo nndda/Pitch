@@ -12,6 +12,8 @@
 
   import pitchLogo from "../public/icon.svg?url";
 
+  import { formatDistanceToNow } from "date-fns";
+
   let
     tocToggleLabel: HTMLLabelElement
   ;
@@ -129,8 +131,17 @@
     </li>
   </ul>
 
-  <footer>
-    Copyright &copy; 2023-2026 nnda
+  <footer class="footer">
+    <div>
+      Build <a href="https://github.com/nndda/Pitch/commit/{COMMIT_HASH}" target="_blank" referrerpolicy="origin" rel="nofollow noopener">
+        <code>{COMMIT_HASH}</code>
+      </a>
+      <br>
+      Released <b>{formatDistanceToNow( COMMIT_DATE, { addSuffix: true, })}</b>
+    </div>
+    <div>
+      Copyright &copy; 2023-2026 nnda
+    </div>
   </footer>
 
 </article>

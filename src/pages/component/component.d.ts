@@ -13,6 +13,9 @@ declare global {
 
   const Itch: any; /* Itch API injected via official CDN/itch app */
 
+  const COMMIT_HASH: string;
+  const COMMIT_DATE: string;
+
   interface CSSData {
     raw: string,
     compressed: string,

@@ -72,3 +72,14 @@
     color: color.mix(#eca20e, $text-col, 65%);
   }
 }
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  margin-top: 2em;
+
+  & code {
+    padding: 0;
+  }
+}
