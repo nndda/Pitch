@@ -247,6 +247,10 @@
       </span>
     </div>
 
+  `}
+  viewStyling={`
+     position: relative;
+     min-height: 230px;
   `}/>
 
 </ComponentPage>

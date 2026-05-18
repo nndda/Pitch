@@ -6,10 +6,12 @@
       html,
       css = "",
       cssOverrides = "",
+      viewStyling = "",
     }: {
       html: string,
       css?: string,
       cssOverrides?: string,
+      viewStyling?: string,
     } = $props()
   , uid: string = $props.id()
   ;
@@ -55,7 +57,11 @@
 </style>
 
 <div class="codes-container">
-  <div class="html-view" bind:this={HTMLView}></div>
+  <div
+    class="html-view"
+    style={viewStyling}
+    bind:this={HTMLView}>
+  </div>
 
   <div class="codes-toolbar main">
 
