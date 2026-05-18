@@ -91,7 +91,7 @@ declare global {
     name: string,
     nameDisplay?: string,
 
-    css?: CSSData,
+    css: CSSData,
     page?: () => Promise<ComponentPage>,
 
     scopes:
@@ -99,7 +99,11 @@ declare global {
     | "group-only"
     ;
     // i hate amp
+    // TODO: merge AMP to `scopes`
     scopeAMPincompatible?: true,
+
+    // Force disallow comment section from using the component
+    disallowCommentSection?: true,
 
     input?: ComponentUserInputItem[],
     compatibleOnInputs?: string[],
