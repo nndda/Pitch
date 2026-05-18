@@ -6,6 +6,7 @@ import "./codemirror.scss";
 import {
   itchStyling,
   inputStyling,
+  fontLocalStyling,
 } from "../../../states/runtime";
 
 import { copyStr } from "../../../scripts/copy";
@@ -14,6 +15,23 @@ export let
   view: EditorView
 , viewCSS: EditorView
 ;
+
+function getRules(
+  rules: CSSRuleList,
+  output: CSSRule[] = [],
+): CSSRule[] {
+  for (let n = rules.length; n-- > 0;) {
+    const rule = rules[n];
+
+    output.push(rule);
+
+    if (rule instanceof CSSGroupingRule) {
+      getRules(rule.cssRules, output);
+    }
+  }
+
+  return output;
+}
 
 import DOMPurify from "dompurify";
 
@@ -103,6 +121,8 @@ export function initializeHTML(html: string): string {
 import debounce from "lodash/debounce";
 
 export function instatiateEditor(
+  uid: string,
+
   htmlInit: string,
   HTMLView: HTMLElement,
   HTMLEditor: HTMLElement,
@@ -121,7 +141,7 @@ export function instatiateEditor(
   // CSS
   const localStyling = new CSSStyleSheet();
   cssInit = "\n" + dedent(cssInit) + "\n";
-  localStyling.replaceSync(cssInit);
+  updatePreviewCSS(cssInit);
 
   const localStylingOverrides = new CSSStyleSheet();
   if (cssOverrides) {
@@ -161,6 +181,27 @@ export function instatiateEditor(
   function updatePreviewCSS(css: string): void {
     CSSEditorResetButton.disabled = !(cssInit !== css);
     localStyling.replaceSync(css);
+
+    if (css.includes("@font-face")) {
+      const
+        cssFonts: string[] = []
+      ;
+
+      for (const rule of getRules(localStyling.cssRules)) {
+        if (rule instanceof CSSFontFaceRule) {
+          cssFonts.push(rule.cssText);
+        }
+      }
+
+      if (!(uid in fontLocalStyling)) {
+        fontLocalStyling[uid] = new CSSStyleSheet();
+        document.adoptedStyleSheets.push(fontLocalStyling[uid]);
+      }
+
+      fontLocalStyling[uid].replaceSync(
+        cssFonts.join(""),
+      );
+    }
   }
 
   function updateEditor(

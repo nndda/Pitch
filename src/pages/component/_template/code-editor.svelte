@@ -34,6 +34,8 @@
   onMount(() => {
     import("./code-editor").then(({ instatiateEditor }) => {
       instatiateEditor(
+        uid,
+
         html,
         HTMLView,
         HTMLEditor,
