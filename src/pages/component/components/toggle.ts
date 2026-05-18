@@ -21,8 +21,4 @@ export default {
     "singular",
   ],
 
-  notes: [
-    "Only one instance of the component per page.",
-  ],
-
 } as ComponentData;
