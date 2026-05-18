@@ -27,21 +27,20 @@ export function applyUserInput(
 ): void {
   inputs.update(cssVar, value);
 
-  inputStyling.replaceSync("#wrapper {" + constructRule(inputs.state) + "}");
+  inputStyling.replaceSync("#wrapper {" + constructRule() + "}");
 }
 
 export function removeUserInput(cssVar: string): void {
   delete inputs.state[cssVar];
   inputs.flush();
 
-  inputStyling.replaceSync("#wrapper {" + constructRule(inputs.state) + "}");
+  inputStyling.replaceSync("#wrapper {" + constructRule() + "}");
 }
 
-export function constructRule(
-  inputData: Record<string, ComponentUserInputValue>,
-): string {
+export function constructRule(): string {
   const
-    cssOut: string[] = []
+    inputData = inputs.state
+  , cssOut: string[] = []
   ;
 
   for (const cssVar in inputData) {

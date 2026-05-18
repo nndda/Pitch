@@ -29,7 +29,7 @@
   // TODO: I feel like this should be somewhere else more appropriate :/
   inputStyling.replaceSync(
     "#wrapper {"
-    + constructRule(inputs.state)
+    + constructRule()
     + "}",
   );
 
