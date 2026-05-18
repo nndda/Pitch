@@ -16,6 +16,8 @@ export default {
   },
   scopeAMPincompatible: true,
 
+  disallowCommentSection: true,
+
   tags: [
     "hacky",
     "singular",
