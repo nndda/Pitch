@@ -11,7 +11,7 @@
     "cssnano": "8.0.1",
     "cssnano-preset-advanced": "8.0.1",
     "fast-glob": "^3.3.3",
-    "postcss": "^8.5.14",
+    "postcss": "^8.5.15",
     "sass": "^1.99.0",
     "svelte": "^5.55.8",
     "svelte-check": "^4.4.8",
