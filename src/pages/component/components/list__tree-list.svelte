@@ -87,6 +87,10 @@
     As directory structure view. With <ComponentRef comp="Label"/> component.
   </p>
 
+  <p>
+    See <ComponentRef comp="Tree List — Directory"/> flavour.
+  </p>
+
   <CodeEditor html={`
 
     <ul class="custom-tree">
@@ -105,11 +109,11 @@
           </li>
           <li>
             TotallyARealVN.sh
-            <span class="custom-lb">Linux</span>
+            <small class="custom-lb">Linux</small>
           </li>
           <li>
             TotallyARealVN.exe
-            <span class="custom-lb">Windows</span>
+            <small class="custom-lb">Windows</small>
           </li>
           <li>
             TotallyARealVN.py

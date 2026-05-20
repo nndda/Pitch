@@ -23,6 +23,12 @@ ul.custom-dot-leader.custom-tree {
 
 .custom-tree {
   & li {
+
+    /* NOTE: questionable... */
+    & > small.custom-lb {
+      font-size: .85em;
+    }
+
     & > :where(h1, h2, h3, h4, h5, h6) {
       padding-bottom: .3lh;
       margin: 0;
@@ -40,7 +46,7 @@ ul.custom-dot-leader.custom-tree {
       left: -1em;
 
       border-top: .0625em var(--tree-b-style, solid);
-      border-color: var(--tree-outline-color, currentColor) !important;
+      border-color: var(--tree-outline-color);
       width: .6em;
       height: 0;
       top: .5lh;

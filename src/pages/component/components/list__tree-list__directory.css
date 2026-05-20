@@ -1,0 +1,43 @@
+@font-face {
+  font-family: "FA Tree List - Directory";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  /*src: url("./list__tree-list__directory.icons.woff2") format("woff2");*/
+  src: url("https://cdn.jsdelivr.net/gh/nndda/Pitch@7a4c67c780b46e9b528eae48d2d0aa1ca8d7311a/src/pages/component/components/list__tree-list__directory.icons.woff2") format("woff2");
+}
+
+.custom-tree.custom-directory {
+  & ul ul {
+    padding-block: .5em;
+    padding-left: calc(var(--tree-list-indent, 1em) * .5);
+  }
+
+  & li {
+    padding-left: 1em;
+
+    &::before, .custom-file::before {
+      position: absolute;
+      font-family: "FA Tree List - Directory";
+      content: "\f15b";
+      line-height: 0;
+      padding-left: .75em;
+      top: .75em;
+    }
+
+    &:is(:has(> ul), .custom-dir) {
+      --col: var(--tree-list-dir-col, var(--l));
+
+      &::after {
+        border-color: var(--col);
+        top: -.1em;
+      }
+
+      &::before {
+        color: var(--col);
+        content:"\f07c";
+        padding-left: .5em;
+      }
+    }
+  }
+}
