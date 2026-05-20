@@ -541,6 +541,11 @@
             <li
               class="comp-item"
               class:sub={compData.manifest.sub}
+              class:sub-2={
+                compData.manifest.sub &&
+                // NOTE: questionable
+                "group" in (runtimeData[catId].components[slug(compData.group as string)])
+              }
               class:is-faved={compData.isFaved}
               class:is-hacky={compData.isHacky}
               class:is-experimental={compData.isExperimental}
