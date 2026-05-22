@@ -17,7 +17,9 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  build: # --------------------------------------------------------------------
+    name: Build the app
+
     runs-on: ubuntu-latest
 
     steps:
@@ -34,18 +36,21 @@ jobs:
         run: |
           bun run build --base=/Pitch/
 
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: pitch-dist
+          path: dist/
+          retention-days: 1
+
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v5
         with:
           path: dist/
 
-      # - uses: actions/upload-artifact@v7
-      #   with:
-      #     name: github-pages
-      #     path: dist/
-      #     retention-days: 1
+  deploy-gh-pages: # ----------------------------------------------------------
+    name: Deploy to GitHub Pages
 
-  deploy:
     needs: build
 
     permissions:
@@ -65,3 +70,33 @@ jobs:
         uses: actions/deploy-pages@v5
         with:
           artifact_name: github-pages
+
+  deploy-itch: # ---------------------------------------------------------
+    name: Deploy to itch.io
+
+    needs: build
+
+    permissions:
+      contents: read
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download & install butler
+        run: |
+          curl -L -o https://broth.itch.zone/butler/linux-amd64/15.27.0/archive/default
+          unzip -o ./butler-linux-amd64.zip
+          ./butler --version
+
+      - name: Log in to butler
+        run: |
+          ./butler login
+
+      - name: Download build artifact
+        uses: actions/download-artifact@v5
+        with:
+          name: pitch-dist
+
+      - name: Push to Pitch nightly
+        run: |
+          ./butler push ./dist/ nnda/pitch-nightly:web --userversion 1.0.0-test
