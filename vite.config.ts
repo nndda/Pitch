@@ -72,8 +72,8 @@ const
 , commitHash8 = commitHash.slice(1, 9)
 , commitDate = JSON.stringify(execSync("git --no-pager log -1 --format=%cI").toString().trim())
 
-, versionBuildShort = `${packageJSON.version}-${args.includes("--nightly") ? "nightly-" :""}`
-, versionBuild = `${versionBuildShort}${commitHash8}`
+, versionBuildShort = `${packageJSON.version}${args.includes("--nightly") ? "-nightly" :""}`
+, versionBuild = `${versionBuildShort}-${commitHash8}`
 ;
 
 // https://vite.dev/config/
@@ -175,6 +175,6 @@ export default defineConfig({
   define: {
     COMMIT_HASH: commitHash,
     COMMIT_DATE: commitDate,
-    VERSION: versionBuildShort,
+    VERSION: JSON.stringify(versionBuildShort),
   }
 });
