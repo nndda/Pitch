@@ -605,7 +605,7 @@
                       page = await compData.manifest.page() as Component
                     ;
 
-                    state.currentId = compData.manifest.name;
+                    state.currentId = compData.manifest.nameDisplay ?? compData.manifest.name;
                     state.currentData = compData.manifest;
                     state.attr = compData;
                     state.currentPage = page;
