@@ -155,8 +155,8 @@ export default defineConfig({
           type: "asset",
           fileName: "version.txt",
           source: versionBuild,
-        }),
-      },
+        })
+      }
     },
   ],
 
