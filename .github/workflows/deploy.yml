@@ -17,41 +17,8 @@ on:
   workflow_dispatch:
 
 jobs:
-  build: # --------------------------------------------------------------------
-    name: Build the app
-
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v6
-
-      - name: Set up Bun
-        uses: oven-sh/setup-bun@v2
-
-      - name: Install dependencies
-        run: bun ci
-
-      - name: Build app
-        run: |
-          bun run build --base=/Pitch/
-
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v7
-        with:
-          name: pitch-dist
-          path: dist/
-          retention-days: 1
-
-      - name: Upload GitHub Pages artifact
-        uses: actions/upload-pages-artifact@v5
-        with:
-          path: dist/
-
   deploy-gh-pages: # ----------------------------------------------------------
     name: Deploy to GitHub Pages
-
-    needs: build
 
     permissions:
       contents: read
@@ -65,6 +32,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+      - name: Install dependencies
+        run: bun ci
+      - name: Build app
+        run: |
+          bun run build --base=/Pitch/
+
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v5
+        with:
+          path: dist/
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v5
@@ -74,14 +56,19 @@ jobs:
   deploy-itch: # ---------------------------------------------------------
     name: Deploy to itch.io
 
-    needs: build
-
-    permissions:
-      contents: read
-
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+      - name: Set up Bun
+        uses: oven-sh/setup-bun@v2
+      - name: Install dependencies
+        run: bun ci
+      - name: Build app
+        run: |
+          bun run build
+
       - name: Download & install butler
         run: |
           curl -L -o ./butler.zip https://broth.itch.zone/butler/linux-amd64/15.27.0/archive/default
@@ -94,14 +81,8 @@ jobs:
         env:
           BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
 
-      - name: Download build artifact
-        uses: actions/download-artifact@v5
-        with:
-          name: pitch-dist
-          path: dist/
-
       - name: Push to Pitch nightly
         run: |
-          ./butler push ./dist/ nnda/pitch-nightly:web --userversion 1.0.0-test
+          ./butler push ./dist/ nnda/pitch-nightly:web --userversion 1.0.1-test
         env:
           BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
