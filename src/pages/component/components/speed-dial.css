@@ -66,10 +66,15 @@
       transition: .5s ease;
     }
 
+    /*
     &:is(
       [open] img:first-of-type,
       :not([open])img:nth-of-type(2)
-    ) {
+    )
+    */
+    &[open] img:first-of-type,
+    &:not([open]) img:nth-of-type(2)
+    {
       opacity: 0;
       transform: translate(-50%, calc(-50% - .5em));
     }
