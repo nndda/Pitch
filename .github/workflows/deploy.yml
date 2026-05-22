@@ -100,10 +100,6 @@ jobs:
           name: pitch-dist
           path: dist/
 
-      - name: DEBUG
-        run: |
-          ls -l
-
       - name: Push to Pitch nightly
         run: |
           ./butler push ./dist/ nnda/pitch-nightly:web --userversion 1.0.0-test
