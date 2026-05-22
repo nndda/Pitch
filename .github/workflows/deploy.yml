@@ -98,6 +98,7 @@ jobs:
         uses: actions/download-artifact@v5
         with:
           name: pitch-dist
+          path: $GITHUB_WORKSPACE/dist/
 
       - name: DEBUG
         run: |
