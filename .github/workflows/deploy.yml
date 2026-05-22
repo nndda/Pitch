@@ -84,8 +84,8 @@ jobs:
     steps:
       - name: Download & install butler
         run: |
-          curl -L -o https://broth.itch.zone/butler/linux-amd64/15.27.0/archive/default
-          unzip -o ./butler-linux-amd64.zip
+          curl -L -o ./butler.zip https://broth.itch.zone/butler/linux-amd64/15.27.0/archive/default
+          unzip -o ./butler.zip
           ./butler --version
 
       - name: Log in to butler
