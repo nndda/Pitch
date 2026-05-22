@@ -67,7 +67,7 @@ jobs:
         run: bun ci
       - name: Build app
         run: |
-          bunx vite build -- --nightly
+          bunx vite build --base="./" -- --nightly
 
       # TODO: cache butler
       - name: Download & install butler
