@@ -104,8 +104,8 @@ jobs:
         run: |
           ls -l
 
-      # - name: Push to Pitch nightly
-      #   run: |
-      #     ./butler push ./dist/ nnda/pitch-nightly:web --userversion 1.0.0-test
-      #   env:
-      #     BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
+      - name: Push to Pitch nightly
+        run: |
+          ./butler push ./dist/ nnda/pitch-nightly:web --userversion 1.0.0-test
+        env:
+          BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
