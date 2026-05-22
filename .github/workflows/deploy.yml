@@ -67,8 +67,9 @@ jobs:
         run: bun ci
       - name: Build app
         run: |
-          bun run build
+          bunx vite build -- --nightly
 
+      # TODO: cache butler
       - name: Download & install butler
         run: |
           curl -L -o ./butler.zip https://broth.itch.zone/butler/linux-amd64/15.27.0/archive/default
@@ -83,6 +84,6 @@ jobs:
 
       - name: Push to Pitch nightly
         run: |
-          ./butler push ./dist/ nnda/pitch-nightly:web --userversion 1.0.1-test
+          ./butler push ./dist/ nnda/pitch-nightly:web --userversion-file ./dist/version.txt
         env:
           BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}

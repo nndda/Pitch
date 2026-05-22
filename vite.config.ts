@@ -63,9 +63,17 @@ for (const compType of ["components", "decorations",]) {
   }
 }
 
+import packageJSON from "./package.json";
+
 const
-  commitHash = JSON.stringify(execSync("git rev-parse HEAD").toString().trim())
+  args = process.argv
+
+, commitHash = JSON.stringify(execSync("git rev-parse HEAD").toString().trim())
+, commitHash8 = commitHash.slice(1, 9)
 , commitDate = JSON.stringify(execSync("git --no-pager log -1 --format=%cI").toString().trim())
+
+, versionBuildShort = `${packageJSON.version}-${args.includes("--nightly") ? "nightly-" :""}`
+, versionBuild = `${versionBuildShort}${commitHash8}`
 ;
 
 // https://vite.dev/config/
@@ -137,7 +145,19 @@ export default defineConfig({
             }
           });
       }
-    }
+    },
+
+    {
+      name: "output-version-file",
+
+      generateBundle() {
+        this.emitFile({
+          type: "asset",
+          fileName: "version.txt",
+          source: versionBuild,
+        }),
+      },
+    },
   ],
 
   publicDir: abs("./src/public/"),
@@ -155,5 +175,6 @@ export default defineConfig({
   define: {
     COMMIT_HASH: commitHash,
     COMMIT_DATE: commitDate,
+    VERSION: versionBuildShort,
   }
 });

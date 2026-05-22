@@ -76,7 +76,7 @@
       <p class="labels">
         <button>
           <i class="icon fa-solid fa-box-open"></i>
-          v3.0.0
+          v{VERSION}
         </button>
 
         <button>

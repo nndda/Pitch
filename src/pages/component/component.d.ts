@@ -15,6 +15,7 @@ declare global {
 
   const COMMIT_HASH: string;
   const COMMIT_DATE: string;
+  const VERSION: string;
 
   interface CSSData {
     raw: string,
