@@ -1,23 +1,21 @@
-// import css from "./link-decoration__socials?css-component";
+import css from "./link-decoration__socials?css-component";
 
 export default {
-  // css: css,
+  css: css,
 
   name: "Socials",
   nameDisplay: "Link Decoration — Socials",
 
-  // page: async () => (await import("./link-decoration__socials.svelte")).default,
+  page: async () => (await import("./link-decoration__socials.svelte")).default,
 
   scopes: {
-    compatible: "project",
-    partial: [
+    compatible: [
+      "project",
       "profile",
       "jam",
     ],
   },
 
   sub: "Link Decoration",
-
-  wip: true,
 
 } as ComponentData;

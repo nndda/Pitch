@@ -1,0 +1,114 @@
+@font-face {
+  font-family: "FA Social Links";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  /*src: url("./link-decoration__socials.icons.woff2") format("woff2");*/
+  src: url("https://cdn.jsdelivr.net/gh/nndda/Pitch@1b672e6c21757927aefefbd860d39cff58a757db/src/pages/component/components/link-decoration__socials.icons.woff2") format("woff2");
+}
+
+.custom-social-links {
+  & a[href^="https://"]:not(:has(> img), .custom-not-social-link) {
+    white-space: nowrap;
+     /*margin-inline: .25em; */
+
+    &::before {
+      display: inline-block;
+
+      content: var(--i);
+      font-family: "FA Social Links";
+
+      margin-right: .2em;
+      vertical-align: middle;
+      font-size: 1.15em;
+      /*vertical-align: -.1lh; */
+      /*max-width: 1em; */
+      /*width: 1.5em; */
+      /*font-size: 1.2em; */
+
+      line-height: 1;
+      text-align: center;
+      width: 1.25em;
+    }
+
+    &.custom-lb {
+      &::before {
+        padding-block: .15em;
+        /*height: calc(100% - .5em)*/
+      }
+    }
+
+    /* itch.io */
+    &[href$=".itch.io/"],
+    &[href^="https://itch.io/profile/"] {
+      --i: "\f83a";
+    }
+
+    /* Tumblr */
+    &[href$=".tumblr.com/"],
+    &[href^="https://www.tumblr.com/"] {
+      --i: "\f173";
+    }
+
+    /* Twitter */
+    &[href^="https://x.com/"],
+    &[href^="https://twitter.com/"] {
+      --i: "\f099";
+    }
+
+    /* Discord */
+    &[href^="https://discord.gg/"] {
+      --i: "\f392";
+    }
+
+    /* TikTok */
+    &[href^="https://www.tiktok.com/@"] {
+      --i: "\e07b";
+    }
+
+    /* Twitch */
+    &[href^="https://www.twitch.tv/"] {
+      --i: "\f1e8";
+    }
+
+    /* Instagram */
+    &[href^="https://www.instagram.com/"] {
+      --i: "\f16d";
+    }
+
+    /* YouTube */
+    &[href^="https://www.youtube.com/"] {
+      --i: "\f167";
+    }
+
+    /* Ko-fi */
+    &[href^="https://ko-fi.com/"] {
+      --i: "\e856";
+    }
+
+    /* Bluesky */
+    &[href^="https://bsky.app/profile/"] {
+      --i: "\e671";
+    }
+
+    /* Soundcloud */
+    &[href^="https://soundcloud.com/"] {
+      --i: "\f1be";
+    }
+
+    /* Patreon */
+    &[href^="https://www.patreon.com/"] {
+      --i: "\f3d9";
+    }
+
+    /* GitHub */
+    &[href^="https://github.com/"] {
+      --i: "\f09b";
+    }
+
+    /* Steam */
+    &[href^="https://store.steampowered.com/app/"] {
+      --i: "\f1b6";
+    }
+  }
+}
