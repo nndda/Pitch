@@ -12,11 +12,11 @@
     "cssnano-preset-advanced": "8.0.1",
     "fast-glob": "^3.3.3",
     "postcss": "^8.5.15",
-    "sass": "^1.99.0",
+    "sass": "^1.100.0",
     "svelte": "^5.55.9",
     "svelte-check": "^4.4.8",
     "typescript": "^6.0.3",
-    "vite": "^8.0.13"
+    "vite": "^8.0.14"
   },
   "overrides": {
     "picomatch": "^4.0.4"
