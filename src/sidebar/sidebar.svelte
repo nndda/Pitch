@@ -549,6 +549,7 @@
               class:is-faved={compData.isFaved}
               class:is-hacky={compData.isHacky}
               class:is-experimental={compData.isExperimental}
+              class:is-flavour={compData.manifest.flavour}
 
               class:compatible-all={isInputVariablesCompatible(compData.manifest)}
               data-scope-partial={compScopeData("partial")}
@@ -622,6 +623,14 @@
               </label>
 
               <span class="tags">
+                {#if compData.manifest.flavour}
+                  <span class="custom-tip">
+                    <i class="flavour fa-solid fa-ice-cream"></i>
+                    <span class="custom-tip-content">
+                      Flavour
+                    </span>
+                  </span>
+                {/if}
                 {#if compData.isExperimental}
                   <span class="custom-tip">
                     <i class="experimental fa-solid fa-vial"></i>

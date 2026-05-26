@@ -118,6 +118,8 @@ declare global {
 
     wip?: true,
 
+    flavour?: true,
+
     supporterOnly?: true,
   }
 
