@@ -11,17 +11,21 @@
 
   <CodeEditor html={`
 
-    <em class="custom-lb">
-      🎃 Halloween
-    </em>
+    <p>
 
-    <strong class="custom-lb">
-      #OpenSource
-    </strong>
+      <em class="custom-lb">
+        🎃 Halloween
+      </em>
 
-    <span class="custom-lb">
-      Made with ☕
-    </span>
+      <strong class="custom-lb">
+        #OpenSource
+      </strong>
+
+      <span class="custom-lb">
+        Made with ☕
+      </span>
+
+    </p>
 
   `}/>
 
@@ -33,21 +37,25 @@
 
   <CodeEditor html={`
 
-    <span class="custom-lb">
-      <img alt="" src="https://cdn.jsdelivr.net/gh/nndda/nndda@main/hand_circle.svg">
-      Human Made
-    </span>
+    <p>
 
-    <span class="custom-lb">
-      <img alt="" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg">
-      <img alt="" src="https://mirrors.creativecommons.org/presskit/icons/by.svg">
-      CC BY 4.0
-    </span>
+      <span class="custom-lb">
+        <img alt="" src="https://cdn.jsdelivr.net/gh/nndda/nndda@main/hand_circle.svg">
+        Human Made
+      </span>
+
+      <span class="custom-lb">
+        <img alt="" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg">
+        <img alt="" src="https://mirrors.creativecommons.org/presskit/icons/by.svg">
+        CC BY 4.0
+      </span>
+
+    </p>
 
   `}/>
 
   <small>
-    The "Human Made" icon is created by <a target="_blank" href="https://hinokodo.itch.io/human-made">HINOKODO</a>.
+    "Human Made" icon made by <a target="_blank" href="https://hinokodo.itch.io/human-made">HINOKODO</a>.
   </small>
 
   <h2>Custom Colors</h2>
@@ -58,31 +66,75 @@
 
   <CodeEditor html={`
 
-    <span class="custom-lb" style="background: #46425e; color: #eee;">
-      #spooky
-    </span>
+    <p>
 
-    <span class="custom-lb" style="background: #15788c; color: #eee;">
-      #ocean
-    </span>
+      <span class="custom-lb" style="background: #46425e; color: #eee;">
+        #spooky
+      </span>
 
-    <span class="custom-lb" style="background: #00b9be; color: #333;">
-      <img alt="" src="https://cdn.simpleicons.org/godotengine/333" loading="lazy"/>
-      Godot Engine
-    </span>
+      <span class="custom-lb" style="background: #15788c; color: #eee;">
+        #ocean
+      </span>
 
-    <span class="custom-lb" style="background: #ffeecc; color: #222;">
-      #cute
-    </span>
+      <span class="custom-lb" style="background: #00b9be; color: #333;">
+        <img alt="" src="https://cdn.simpleicons.org/godotengine/333" loading="lazy"/>
+        Godot Engine
+      </span>
 
-    <span class="custom-lb" style="background: #ffb0a3; color: #222;">
-      #cat
-    </span>
+      <span class="custom-lb" style="background: #ffeecc; color: #222;">
+        #cute
+      </span>
 
-    <span class="custom-lb" style="background: #ff6973; color: #222;">
-      <img src="https://cdn.simpleicons.org/itchdotio/222" loading="lazy"/>
-      itch.io
-    </span>
+      <span class="custom-lb" style="background: #ffb0a3; color: #222;">
+        #cat
+      </span>
+
+      <span class="custom-lb" style="background: #ff6973; color: #222;">
+        <img src="https://cdn.simpleicons.org/itchdotio/222" loading="lazy"/>
+        itch.io
+      </span>
+
+    </p>
+
+  `}/>
+
+  <h2>Container Element</h2>
+
+  <p>
+    Create a container element with the class <code>custom-lb-container</code>, with the direct children of inline elements as the Label, to avoid writing the class repeatedly.
+  </p>
+
+  <CodeEditor html={`
+
+    <p class="custom-lb-container">
+
+      <span style="background: #46425e; color: #eee;">
+        #spooky
+      </span>
+
+      <span style="background: #15788c; color: #eee;">
+        #ocean
+      </span>
+
+      <span style="background: #00b9be; color: #333;">
+        <img alt="" src="https://cdn.simpleicons.org/godotengine/333" loading="lazy"/>
+        Godot Engine
+      </span>
+
+      <span style="background: #ffeecc; color: #222;">
+        #cute
+      </span>
+
+      <span style="background: #ffb0a3; color: #222;">
+        #cat
+      </span>
+
+      <span style="background: #ff6973; color: #222;">
+        <img src="https://cdn.simpleicons.org/itchdotio/222" loading="lazy"/>
+        itch.io
+      </span>
+
+    </p>
 
   `}/>
 
