@@ -20,6 +20,7 @@ export default {
   ],
 
   sub: "Tree List",
+  flavour: true,
 
   input: [
     {
