@@ -1,0 +1,22 @@
+.custom-lb.custom-tag,
+.custom-lb-container.custom-tag > :is(span, em, strong, u, a) {
+  margin: .2em;
+  padding-left: 1.65em;
+  padding-right: .5em;
+
+  border-radius: 0 .25em .25em 0;
+
+  clip-path: polygon(.7em 0, 100% 0, 100% 100%, .7em 100%, 0 50%);
+  mask: radial-gradient(circle .8em at .85em 50%, transparent .18em, black 20%);
+  mask-composite: subtract;
+
+  &.custom-right {
+    padding-left: .5em;
+    padding-right: 1.65em;
+
+    border-radius: .25em 0 0 .25em;
+
+    clip-path: polygon(calc(100% - .7em) 0, 100% 50%, calc(100% - .7em) 100%, 0 100%, 0 0);
+    mask: radial-gradient(circle .8em at calc(100% - .85em) 50%, transparent .18em, black 20%);
+  }
+}
