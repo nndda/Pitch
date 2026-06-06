@@ -16,6 +16,9 @@ on:
       - 'src/'
   workflow_dispatch:
 
+env:
+  BUTLER_VER: 15.27.0
+
 jobs:
   deploy-gh-pages: # ----------------------------------------------------------
     name: Deploy to GitHub Pages
@@ -32,12 +35,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v6.0.2
-      - name: Set up Bun
-        uses: oven-sh/setup-bun@v2
-      - name: Install dependencies
-        run: bun ci
+      # TODO: make these DRY
+      # Setup
+      - uses: actions/checkout@v6.0.2
+      - uses: oven-sh/setup-bun@v2
+      - uses: actions/cache@v5
+        with:
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-bun-${{ hashFiles('bun.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-bun-
+      - run: bun ci
+
       - name: Build app
         run: |
           bun run build --base=/Pitch/
@@ -59,20 +68,30 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v6
-      - name: Set up Bun
-        uses: oven-sh/setup-bun@v2
-      - name: Install dependencies
-        run: bun ci
+      # Setup
+      - uses: actions/checkout@v6.0.2
+      - uses: oven-sh/setup-bun@v2
+      - uses: actions/cache@v5
+        with:
+          path: ~/.bun/install/cache
+          key: ${{ runner.os }}-bun-${{ hashFiles('bun.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-bun-
+      - run: bun ci
+
       - name: Build app
         run: |
           bunx vite build --base="./" -- --nightly
 
-      # TODO: cache butler
+      - uses: actions/cache@v5
+        with:
+          id: butler-cache
+          path: ./butler
+          key: linux-amd64-butler-${{ env.BUTLER_VER }}
       - name: Download & install butler
+        if: steps.butler-cache.outputs.cache-hit != 'true'
         run: |
-          curl -L -o ./butler.zip https://broth.itch.zone/butler/linux-amd64/15.27.0/archive/default
+          curl -L -o "./butler.zip https://broth.itch.zone/butler/linux-amd64/$BUTLER_VER/archive/default"
           unzip -o ./butler.zip
           ./butler --version
 
