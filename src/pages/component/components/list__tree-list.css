@@ -21,12 +21,16 @@ ul.custom-dot-leader.custom-tree {
   padding-left: 1em;
 }
 
-.custom-tree {
+ul.custom-tree {
   & li {
 
     /* NOTE: questionable... */
     & > small.custom-lb {
       font-size: .85em;
+    }
+
+    &:has(> ul.custom-dot-leader) {
+      padding-left: 0;
     }
 
     & > :where(h1, h2, h3, h4, h5, h6) {
