@@ -15,32 +15,27 @@
 
 @use "./viewer/viewer.scss";
 
+@use "sass:color";
+
 #viewer, #sidebar {
   opacity: 0;
 }
 
-body {
-/* #sidebar, */
-/* #toc, */
-/* #viewer > :where(header), */
-/* #wrapper > :where(p, ul, ol, article) { */
+hr {
+  width: 100%;
+  border-color: $border-col;
+}
 
-  & hr {
-    width: 100%;
-    border-color: $border-col;
-  }
+a {
+  color: $primary;
+}
 
-  & a {
-    color: $primary;
-  }
-
-  & code {
-    display: inline-block;
-    font-family: "Roboto Mono";
-    color: $primary;
-    background: $background-light;
-    padding-inline: .5em;
-  }
+code {
+  display: inline-block;
+  font-family: "Roboto Mono";
+  color: color.mix($primary, $text-col, 50%);
+  background: $background-light;
+  padding-inline: .5em;
 }
 
 .flex-space {
