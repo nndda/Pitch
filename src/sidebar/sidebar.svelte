@@ -489,12 +489,7 @@
               bind:this={runtimeData[catId].components[compId].li}
             >
               <div>
-                <i class="icon fa-solid fa-folder-open"></i>
-                <span
-                  class="comp-name-label"
-                >
-                  {compData.name}
-                </span>
+                <i class="icon fa-solid fa-folder-open"></i><span class="comp-name-label">{compData.name}</span>
               </div>
             </li>
 
@@ -505,7 +500,7 @@
               class:sub={compData.manifest.sub}
             >
               <div>
-                <i class="icon fa-solid fa-calendar"></i><span
+                <i class="fa-solid fa-square-xmark"></i><span
                   class="comp-name-label"
                 >
                   {compData.manifest.name}

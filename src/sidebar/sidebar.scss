@@ -140,11 +140,18 @@
   }
 
   &.cat-comp {
+    margin: 0;
     margin-top: .2em;
     margin-bottom: .5em;
 
+    /* padding-inline: 1em; */
+    padding-bottom: .5em;
+
+    /* background:  lighten($background, 5%); */
+    border-bottom: 1px solid $border-col;
+
     &.has-count {
-      margin-bottom: 1.2em;
+      padding-bottom: 1.5em;
     }
 
     & > i {
@@ -215,15 +222,17 @@ h2.cat-heading {
     margin-right: .2em;
   }
 
+  /*
   &.group {
     & .fa-solid, .comp-name-label {
-      color: $accent;
+      color: $accent-light;
     }
 
     & .comp-name-label {
       font-weight: bold;
     }
   }
+  */
 
   & label {
     white-space: nowrap;
@@ -299,7 +308,7 @@ h2.cat-heading {
 
   &.wip {
     & .fa-solid, .comp-name-label, .wip-icon {
-      color: $primary;
+      color: $tertiary-light;
     }
 
     & label {
@@ -338,7 +347,7 @@ h2.cat-heading {
 
 .wip-badge {
   color: $background-dark;
-  background: $primary;
+  background: $tertiary-light;
   font-size: .8em;
   font-family: "Roboto Mono";
   font-weight: bold;
