@@ -6,8 +6,6 @@
   & > * {
     display: inline-flex;
   }
-
-
 }
 
 .labels-list {
@@ -63,6 +61,9 @@
 }
 .none {
   @include style-scope-label(#e6071d);
+}
+.only {
+  @include style-scope-label($primary);
 }
 .amp {
   @include style-scope-label(#005AF0);

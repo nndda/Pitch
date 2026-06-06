@@ -21,7 +21,7 @@
       compatible: "fa-solid fa-circle-check",
       partial: "fa-solid fa-triangle-exclamation",
       none: "fa-solid fa-square-xmark",
-      only: "fa-solid fa-square-xmark",
+      only: "fa-solid fa-lock",
     }
 
   , tagsData: Record<ComponentTags, {icon: string, desc: string}> = {
@@ -105,7 +105,12 @@
           <li class={scopeType}>
             <i class="icon {scopesIcons[scopeStatus]}"></i>
             <ul>
-              <li class=text>{scopes} pages</li>
+              <li class=text>
+                {scopes} pages
+                {#if scopeType === "only"}
+                  only
+                {/if}
+              </li>
             </ul>
 
           </li>
