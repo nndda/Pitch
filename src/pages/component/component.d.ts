@@ -61,6 +61,7 @@ declare global {
       "string"
     | "int"
     | "color"
+    | "url"
     | {
         min: number,
         max: number,

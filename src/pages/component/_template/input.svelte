@@ -54,6 +54,15 @@
     }
   }
 
+  function CSSifyURL(url: string) {
+    return "url(\"" + encodeURI(url) + "\")";
+  }
+  function UnCSSifyURL(urlVar: string) {
+    return decodeURI(
+      urlVar.replace(/^url\("|"\)$/g, ""),
+    );
+  }
+
   function onVarInputChange(
     ev: Event & {
       currentTarget: EventTarget & HTMLInputElement
@@ -62,13 +71,19 @@
   ): void {
     const
       cssVar = input.var
-    , val = input.type === "string"
-      ? '"' + ev.currentTarget.value + '"'
-      : ev.currentTarget.value
+    , valNew = ev.currentTarget.value
+    , val =
+          input.type === "string"
+        ? '"' + valNew + '"'
+
+        : input.type === "url"
+        ? CSSifyURL(valNew)
+
+        : valNew
     ;
 
     if (!input.hardcoded) {
-      if (ev.currentTarget.value === input.default) {
+      if (valNew === input.default) {
         removeUserInput(cssVar);
 
         if (input.name in changedInputs) {
@@ -208,6 +223,19 @@
               value={
                 isInputNotStored ? input.default :
                 (inputs.state[input.var] as string).replace(/^"|"$/g, "")
+              }
+
+              oninput={ev => onVarInputChange(ev, input)}
+            >
+
+          {:else if input.type === "url"}
+
+            <input
+              id={input.var}
+              type="text"
+              value={
+                isInputNotStored ? input.default :
+                UnCSSifyURL(inputs.state[input.var] as string)
               }
 
               oninput={ev => onVarInputChange(ev, input)}
