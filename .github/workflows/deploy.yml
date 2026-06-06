@@ -91,7 +91,7 @@ jobs:
       - name: Download & install butler
         if: steps.butler-cache.outputs.cache-hit != 'true'
         run: |
-          curl -L -o "./butler.zip https://broth.itch.zone/butler/linux-amd64/$BUTLER_VER/archive/default"
+          curl -L -o ./butler.zip "https://broth.itch.zone/butler/linux-amd64/$BUTLER_VER/archive/default"
           unzip -o ./butler.zip
           ./butler --version
 
