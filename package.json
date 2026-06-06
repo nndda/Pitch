@@ -1,6 +1,11 @@
 {
   "name": "pitch",
   "version": "3.0.0",
+  "author": {
+    "name": "nnda",
+    "email": "talk@nnda.dev",
+    "url": "https://nnda.dev"
+  },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^7.1.2",
     "@tsconfig/svelte": "^5.0.8",
@@ -28,6 +33,7 @@
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.app.json && tsc -p tsconfig.node.json"
   },
+  "packageManager": "bun@1.3.14",
   "type": "module",
   "dependencies": {
     "@codemirror/lang-css": "^6.3.1",
