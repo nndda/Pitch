@@ -22,6 +22,9 @@ $accent-light: lighten($accent, 12.5%);
 $primary: #3ad2fc;
 $primary-light: lighten($primary, 12.5%);
 
+$tertiary: #eca20e;
+$tertiary-light: lighten($tertiary, 12.5%);;
+
 @mixin style-scrollbar($col : $border-col) {
   scrollbar-color: $col $background;
   scrollbar-width: thin;
