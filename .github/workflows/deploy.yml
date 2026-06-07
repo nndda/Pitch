@@ -35,17 +35,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # TODO: make these DRY
-      # Setup
       - uses: actions/checkout@v6.0.2
-      - uses: oven-sh/setup-bun@v2
-      - uses: actions/cache@v5
-        with:
-          path: ~/.bun/install/cache
-          key: ${{ runner.os }}-bun-${{ hashFiles('bun.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-bun-
-      - run: bun ci
+      - uses: ./.github/actions/setup-bun
 
       - name: Build app
         run: |
@@ -68,37 +59,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # Setup
       - uses: actions/checkout@v6.0.2
-      - uses: oven-sh/setup-bun@v2
-      - uses: actions/cache@v5
-        with:
-          path: ~/.bun/install/cache
-          key: ${{ runner.os }}-bun-${{ hashFiles('bun.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-bun-
-      - run: bun ci
+      - uses: ./.github/actions/setup-bun
 
       - name: Build app
         run: |
           bunx vite build --base="./" -- --nightly
 
-      - uses: actions/cache@v5
-        id: butler-cache
+      - uses: ./.github/actions/setup-butler
         with:
-          path: ./butler
-          key: linux-amd64-butler-${{ env.BUTLER_VER }}
-      - name: Download & install butler
-        if: steps.butler-cache.outputs.cache-hit != 'true'
-        run: |
-          curl -L -o ./butler.zip "https://broth.itch.zone/butler/linux-amd64/$BUTLER_VER/archive/default"
-          unzip -o ./butler.zip
-          ./butler --version
-
-      - name: Log in to butler
-        run: |
-          ./butler login
-        env:
           BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
 
       - name: Push to Pitch nightly
