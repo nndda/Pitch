@@ -86,6 +86,10 @@
   position: absolute;
   top: .25em;
   left: 100%;
+
+  &[disabled] {
+    opacity: 0;
+  }
 }
 
 #pin-toggle {
