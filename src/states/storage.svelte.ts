@@ -161,10 +161,14 @@ export function initiateStorageAPI<T extends object>(
   }
 
   if (defaults) {
-    localData = {
-      ... defaults,
-      ... localData,
-    };
+    // if (typeof defaults === "object") {
+      if (Object.keys(localData).length === 0) {
+        localData = {
+          ... defaults,
+          ... localData,
+        };
+      }
+    // }
   }
 
   const
