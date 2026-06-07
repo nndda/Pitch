@@ -8,10 +8,12 @@ export default {
   page: async () => (await import("./code-block.svelte")).default,
 
   scopes: {
-    compatible: "project",
-    none: [
-      "profile",
+    compatible: [
+      "project",
       "jam",
+    ],
+    partial: [
+      "profile",
     ],
   },
   scopeAMPincompatible: true,

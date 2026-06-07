@@ -9,11 +9,11 @@ export default {
   page: async () => (await import("./label__tag.svelte")).default,
 
   scopes: {
-    compatible: "project",
-    partial: [
-      "profile",
+    compatible: [
+      "project",
       "jam",
     ],
+    partial: "profile",
   },
 
   sub: "Label",

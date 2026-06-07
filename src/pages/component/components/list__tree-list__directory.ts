@@ -9,11 +9,11 @@ export default {
   page: async () => (await import("./list__tree-list__directory.svelte")).default,
 
   scopes: {
-    compatible: "project",
-    partial: [
-      "profile",
+    compatible: [
+      "project",
       "jam",
     ],
+    partial: "profile",
   },
   compatibleOnInputs: [
     "tree-list-dir-col",

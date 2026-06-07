@@ -8,11 +8,11 @@ export default {
   page: async () => (await import("./image-comparison.svelte")).default,
 
   scopes: {
-    compatible: "project",
-    partial: [
-      "profile",
+    compatible: [
+      "project",
       "jam",
     ],
+    partial: "profile",
   },
 
   tags: [
