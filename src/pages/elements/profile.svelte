@@ -136,6 +136,7 @@
         unselectSidebarPage();
         switchPage("New project", ProjectNew as Component, { mode: "new" })();
       }}
+      disabled={ Object.keys(projects.state).length >= 5 }
     >
       <i class="fa-solid fa-plus"></i>
       <span class="custom-tip-content custom-right">
