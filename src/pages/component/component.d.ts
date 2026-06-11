@@ -45,7 +45,7 @@ declare global {
   type BrowsersCompatStatus = "full" | "limited" | "none";
   type BrowsersCompat = Record<"firefox" | "safari" | "chrome", BrowsersCompatStatus>;
 
-  type ComponentUserInputValue = string | number;
+  type ComponentUserInputValue = string;
 
   type ComponentUserInputItem =
     ComponentUserInput
