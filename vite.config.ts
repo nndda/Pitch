@@ -37,7 +37,7 @@ const
     autoprefixer(),
   ])
 , CSSCompsBaseDir = "src/pages/component/"
-, reCSSCompsSrc = /src\/pages\/component\/(components|decorations)\/.+\.css$/
+, reCSSCompsSrc = /src\/pages\/component\/(components|decorations|tweaks)\/.+\.css$/
 , reCSSExt = /\.css$/
 ;
 
@@ -47,7 +47,11 @@ console.log(
   "Pitch: copying components' CSS...",
 );
 
-for (const compType of ["components", "decorations",]) {
+for (const compType of [
+  "components",
+  "decorations",
+  "tweaks",
+]) {
   for (const path of readdirSync(CSSCompsBaseDir + compType)) {
 
     if (reCSSExt.test(path)) {
@@ -131,6 +135,7 @@ export default defineConfig({
           .add(fg.sync([
               "src/pages/component/components/*.css",
               "src/pages/component/decorations/*.css",
+              "src/pages/component/tweaks/*.css",
           ]))
           .on("change", path => {
             if (reCSSCompsSrc.test(path)) {

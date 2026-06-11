@@ -1,5 +1,7 @@
 import { slug } from "../scripts/slugify";
 
+import compPagesEntry from "../pages/component/imports";
+
 import {
   initiateStorageAPI,
 
@@ -18,17 +20,6 @@ export const
 , fontLocalStyling: Record<string, CSSStyleSheet> = {}
 ;
 
-function getCompsManifest(
-  imports: ComponentManifestImports,
-): ComponentData[] {
-  return Object.entries(imports).map((
-    [
-      _,
-      mod,
-    ]
-  ) => mod.default);
-}
-
 export const
   runtimeData: ComponentRuntimeData = {}
 
@@ -42,16 +33,13 @@ export const
     Decorations: {
       icon: "fa-solid fa-paint-roller",
     },
+    Tweaks: {
+      icon: "fa-solid fa-pen-ruler",
+    },
   }
 ;
 
 export function runtimeDataInit(): void {
-  const
-    compPagesEntry: PageEntry = {
-      Components: getCompsManifest( import.meta.glob("/pages/component/components/*.ts", { eager: true, }) as ComponentManifestImports ),
-      Decorations: getCompsManifest( import.meta.glob("/pages/component/decorations/*.ts", { eager: true, }) as ComponentManifestImports ),
-    }
-  ;
 
   for (const cat in compPagesEntry) {
     const
