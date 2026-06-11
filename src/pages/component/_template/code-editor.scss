@@ -46,6 +46,9 @@
 
 .html-view {
   padding: .5em 1em;
+  /* NOTE: questionable... */
+  overflow-x: hidden;
+  contain: inline-size;
 }
 
 .code-editor {
