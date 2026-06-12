@@ -8,7 +8,7 @@ src/pages/component/tweaks/*
 
 # Opinionated dev workspace
 ign-*
-*.png
+# *.png
 /*.woff2
 
 # Python
