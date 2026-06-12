@@ -300,7 +300,7 @@ export function instatiateCSSViewer(
         EditorView.theme({}, {dark: true}),
       ],
       parent: CSSEditor,
-      doc: cssInit,
+      doc: "\n" + dedent(cssInit) + "\n",
     });
   ;
 
