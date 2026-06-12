@@ -168,12 +168,12 @@ export default defineConfig({
   publicDir: abs("./src/public/"),
   appType: "spa",
   build: {
-    assetsDir: "./assets/", // relative to root
+    assetsDir: "./", // relative to outDir
     license: true,
 
     copyPublicDir: true,
 
-    outDir: "../dist/", // also relative to root
+    outDir: "../dist/", // relative to root
     emptyOutDir: true,
   },
 
