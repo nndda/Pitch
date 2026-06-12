@@ -4,6 +4,19 @@ src/pages/component/components/*
 src/pages/component/decorations/*
 !src/pages/component/decorations/*.*
 
+# Opinionated dev workspace
+ign-*
+*.png
+/*.woff2
+
+# Python
+lib/
+lib64
+include/
+bin/
+share/
+pyvenv.cfg
+
 # Logs
 logs
 *.log
