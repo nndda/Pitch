@@ -52,3 +52,18 @@
     }
   }
 }
+
+:global #wrapper figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 1.5em;
+  border: 2px solid $border-col;
+  border-radius: 6px;
+
+  & > figcaption {
+    margin-top: 1em;
+    font-style: normal;
+  }
+}
