@@ -1,7 +1,10 @@
 <script lang="ts">
   import { onMount } from "svelte";
 
-  import { inputs } from "../../../states/storage.svelte";
+  import {
+    inputs,
+    type RecordString,
+  } from "../../../states/storage.svelte";
   import {
     applyUserInput,
     removeUserInput,
@@ -14,8 +17,21 @@
   const
     { data }: { data: ComponentData } = $props()
   , changedInputs: Record<string, true> = {}
+  , valueFormats: RecordString = $state({})
+  , formatRe = /(\d+)(\w+)/
   ;
 
+  // svelte-ignore state_referenced_locally
+  for (const input of data.input!) {
+    if ("type" in input) {
+      if (input.type === "size") {
+        valueFormats[input.var] = input.var in inputs.state
+          ? (getFormat(inputs.state[input.var]) ?? input.defaultFormat)! // TODO: dumb asf
+          : input.defaultFormat!
+        ;
+      }
+    }
+  }
 
   let
     pinned = $state(false)
@@ -63,27 +79,54 @@
     );
   }
 
+  function getFormat(
+    value: string,
+  ): string | null {
+      const
+        reRes = formatRe.exec(value)
+      ;
+
+      if (reRes && reRes.length > 1) return reRes[2];
+
+      return null;
+  }
+
+  function isValueEqualsDefault(
+    value: string,
+    input: ComponentUserInput,
+  ): boolean {
+    return value === (
+        input.type === "string"
+      ? '"' + input.default + '"'
+
+      : input.type === "size"
+      ? input.default + input.defaultFormat!
+
+      : input.default
+    )
+  }
+
   function onVarInputChange(
-    ev: Event & {
-      currentTarget: EventTarget & HTMLInputElement
-    },
+    value: string,
     input: ComponentUserInput,
   ): void {
     const
       cssVar = input.var
-    , valNew = ev.currentTarget.value
     , val =
           input.type === "string"
-        ? '"' + valNew + '"'
+        ? '"' + value + '"'
 
         : input.type === "url"
-        ? CSSifyURL(valNew)
+        ? CSSifyURL(value)
 
-        : valNew
+        : input.type === "size"
+        ? value + (valueFormats[input.var] ?? input.defaultFormat)
+
+        : value
     ;
 
     if (!input.hardcoded) {
-      if (valNew === input.default) {
+      if (isValueEqualsDefault(val, input)) {
         removeUserInput(cssVar);
 
         if (input.name in changedInputs) {
@@ -99,6 +142,19 @@
     syncInputCompatibility();
 
     // resetAllButton.disabled = !isAnyModified();
+  }
+
+  function onVarFormatInputChange(
+    format: string,
+    input: ComponentUserInput,
+  ): void {
+    valueFormats[input.var] = format;
+
+    // NOTE: kinda dumb, but whatever
+    onVarInputChange(
+      (document.getElementById(input.var) as HTMLInputElement)?.value,
+      input,
+    )
   }
 
   onMount(() => {
@@ -185,6 +241,15 @@
 
       {@const isInputNotStored = !(input.var in inputs.state)}
 
+      {@const inputEv = (
+          ev: Event & {
+            currentTarget: EventTarget & HTMLInputElement
+          }
+        ) => {
+          onVarInputChange(ev.currentTarget.value, input);
+        }
+      }
+
       <li>
         <label
           for={input.var}
@@ -225,7 +290,7 @@
                 (inputs.state[input.var] as string).replace(/^"|"$/g, "")
               }
 
-              oninput={ev => onVarInputChange(ev, input)}
+              oninput={inputEv}
             >
 
           {:else if input.type === "url"}
@@ -238,7 +303,7 @@
                 UnCSSifyURL(inputs.state[input.var] as string)
               }
 
-              oninput={ev => onVarInputChange(ev, input)}
+              oninput={ev => {onVarInputChange(ev.currentTarget.value, input)}}
             >
 
           {:else if input.type === "color"}
@@ -253,8 +318,48 @@
                 isInputNotStored ? input.default : inputs.state[input.var]
               }
 
-              oninput={ev => onVarInputChange(ev, input)}
+              oninput={inputEv}
             >
+
+          {:else if input.type === "size"}
+
+            {@const currentValue = isInputNotStored ? input.default! : inputs.state[input.var]}
+
+            {@const selectedFormat = getFormat(currentValue) ?? input.defaultFormat}
+
+            <input
+              id={input.var}
+
+              type="number"
+              min="0"
+              max="999999"
+
+              value={
+                isInputNotStored
+                  ? input.default
+                  : formatRe.exec(inputs.state[input.var])![1]
+              }
+
+              oninput={inputEv}
+            >
+            <select
+              id="{input.var}-format"
+
+              value={valueFormats[input.var]}
+
+              oninput={ev => {onVarFormatInputChange(ev.currentTarget.value, input)}}
+            >
+              {#each [
+                "em", "rem", "px"
+              ] as format}
+                <option
+                  selected={format === selectedFormat}
+                  value={format}
+                >
+                  {format}
+                </option>
+              {/each}
+            </select>
 
           {/if}
 
@@ -262,11 +367,7 @@
             class="icon-only custom-tip reset"
             aria-label="Reset"
             disabled={
-              // bruh...
-              isInputNotStored ||
-              inputs.state[input.var] === (
-                (input.type === "string") ? '"' + input.default + '"' : input.default
-              )
+              isInputNotStored || isValueEqualsDefault(inputs.state[input.var], input)
             }
 
             onclick={() => {
@@ -279,6 +380,8 @@
 
               if (input.type === "string") {
                 val = '"' + (val as string) + '"';
+              } else if (input.type === "size") {
+                valueFormats[input.var] = input.defaultFormat!;
               }
 
               if (!input.hardcoded) {

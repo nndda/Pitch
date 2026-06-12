@@ -62,6 +62,7 @@ declare global {
     | "int"
     | "color"
     | "url"
+    | "size"
     | {
         min: number,
         max: number,
@@ -70,6 +71,11 @@ declare global {
     ,
 
     default?: ComponentUserInputValue,
+    defaultFormat?:
+      "em"
+    | "rem"
+    | "px"
+    ,
     defaultDynamic?: () => string,
 
     cssInjectPre?: (value: ComponentUserInputValue) => string,
