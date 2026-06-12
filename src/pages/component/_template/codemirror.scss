@@ -42,10 +42,21 @@
   }
 
   & .ͼi {
-    color: #74dfc4;
+    color: $accent-light;
+    /* color: #74dfc4; */
   }
   & .ͼe {
     color: #b4dce7;
+  }
+  & .ͼj, .ͼd, .ͼc {
+    color: $primary;
+  }
+  & .ͼb {
+    color: $accent-light;
+  }
+  & .ͼm {
+    color: rgba($text-col, 70%);
+    font-style: italic;
   }
 
   & .cm-tooltip {
