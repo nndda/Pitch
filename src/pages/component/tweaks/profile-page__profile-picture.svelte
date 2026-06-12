@@ -10,7 +10,7 @@
   </p>
 
   <figure>
-    <img src="./assets/tweaks/profile-picture-with-banner.png" alt="" width="450"/>
+    <img src="./assets/tweaks/profile-picture-with-banner.webp" alt="" width="450"/>
     <figcaption>
       Profile Picture on a profile page
     </figcaption>
@@ -21,7 +21,7 @@
   </p>
 
   <figure>
-    <img src="./assets/tweaks/profile-picture-without-banner.png" alt="" width="450"/>
+    <img src="./assets/tweaks/profile-picture-without-banner.webp" alt="" width="450"/>
     <figcaption>
       Profile Picture on a profile page without the banner image
     </figcaption>

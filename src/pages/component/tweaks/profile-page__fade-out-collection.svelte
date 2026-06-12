@@ -10,7 +10,7 @@
   </p>
 
   <figure>
-    <img src="./assets/tweaks/fade-out-collection.png" alt="" width="680"/>
+    <img src="./assets/tweaks/fade-out-collection.webp" alt="" width="680"/>
     <figcaption>
       Collection carousel with the tweak on a profile page
     </figcaption>
