@@ -1,4 +1,5 @@
 import { EditorView, basicSetup } from "codemirror";
+import { EditorState } from "@codemirror/state"
 import { html as codemirrorHTML } from "@codemirror/lang-html";
 import { css as codemirrorCSS } from "@codemirror/lang-css";
 import "./codemirror.scss";
@@ -280,4 +281,30 @@ export function instatiateEditor(
 
   });
 
+}
+
+export function instatiateCSSViewer(
+  cssInit: string,
+  CSSEditor: HTMLElement,
+  CSSCopyButton: HTMLButtonElement,
+): void {
+  new EditorView({
+      extensions: [
+        basicSetup,
+        EditorView.lineWrapping,
+
+        EditorState.readOnly.of(true),
+        EditorView.editable.of(false),
+        codemirrorCSS(),
+
+        EditorView.theme({}, {dark: true}),
+      ],
+      parent: CSSEditor,
+      doc: cssInit,
+    });
+  ;
+
+  CSSCopyButton.addEventListener("click", () => {
+    copyStr(cssInit);
+  });
 }
