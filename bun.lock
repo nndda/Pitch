@@ -18,7 +18,7 @@
         "codemirror": "^6.0.2",
         "date-fns": "^4.4.0",
         "dedent": "^1.7.2",
-        "dompurify": "^3.4.9",
+        "dompurify": "^3.4.10",
         "lodash": "^4.18.1",
         "modern-normalize": "^3.0.1",
         "not-a-toast": "^1.1.5",
@@ -35,7 +35,7 @@
         "cssnano-preset-advanced": "^8.0.2",
         "fast-glob": "^3.3.3",
         "postcss": "^8.5.15",
-        "sass": "^1.100.0",
+        "sass": "^1.101.0",
         "svelte": "^5.56.3",
         "svelte-check": "^4.6.0",
         "typescript": "^6.0.3",
@@ -271,7 +271,7 @@
 
     "domhandler": ["domhandler@5.0.3", "", { "dependencies": { "domelementtype": "^2.3.0" } }, "sha512-cgwlv/1iFQiFnU96XXgROh8xTeetsnJiDsTc7TYCLFd9+/WNkIqPTxiM/8pSd8VIrhXGTf1Ny1q1hquVqDJB5w=="],
 
-    "dompurify": ["dompurify@3.4.9", "", { "optionalDependencies": { "@types/trusted-types": "^2.0.7" } }, "sha512-4dPSRMRDqHvs0V4YDFCsaIZo4if5u0xM+llyxiM2fwuZFdKArUBAF3VtI2+n8NKg9P870WMdYk0UhqQNoWXbfQ=="],
+    "dompurify": ["dompurify@3.4.10", "", { "optionalDependencies": { "@types/trusted-types": "^2.0.7" } }, "sha512-0xzNv0e7oYC6yyuOGZIABPM4qtg3QxLFniDNPP4ZP90wR8Yq3zgwpRbrNiT4N3IKqDbbYFEJLV+JWEs19aZ//w=="],
 
     "domutils": ["domutils@3.2.2", "", { "dependencies": { "dom-serializer": "^2.0.0", "domelementtype": "^2.3.0", "domhandler": "^5.0.3" } }, "sha512-6kZKyUajlDuqlHKVX1w7gyslj9MPIXzIFiz/rGu35uC1wMi+kMhQwGhl4lt9unC9Vb9INnY9Z3/ZA3+FhASLaw=="],
 
