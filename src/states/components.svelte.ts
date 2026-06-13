@@ -21,7 +21,11 @@ export function backToHome(): void {
   state.currentPage = Home;
 }
 
-export function switchPage(pageTitle: string, page: Component, attr: any = {}): () => void {
+export function switchPage(
+  pageTitle: string,
+  page: Component,
+  attr: any = {},
+): () => void {
   return (): void => {
     state.currentId = pageTitle;
     state.attr = attr;
