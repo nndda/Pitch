@@ -23,6 +23,9 @@ export const
 export const
   runtimeData: ComponentRuntimeData = {}
 
+, event = new EventTarget()
+, eventCSSCompiled = "css-compiled"
+
 , compCheckboxCache: Record<string, Record<string, HTMLInputElement>> = {}
 , compElCache: Record<string, Record<string, HTMLLIElement>> = {}
 
@@ -38,6 +41,7 @@ export const
     },
   }
 ;
+
 
 export function runtimeDataInit(): void {
 

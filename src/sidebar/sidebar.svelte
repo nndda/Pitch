@@ -38,6 +38,8 @@
 
   import Profile from "../pages/elements/profile.svelte";
 
+  import CSSViewerPage from "../pages/css-viewer/index.svelte";
+
   // TODO: pile all page-type component to a single entry
   // TODO: lazyload/dynamic import
   // Pages
@@ -720,7 +722,15 @@
         Copy
       </button>
 
-      <button>
+      <button
+        onclick={() => {
+          unselectSidebarPage();
+          switchPage(
+            "Finalized CSS Codes",
+            CSSViewerPage,
+          )();
+        }}
+      >
         <i class="icon fa-solid fa-eye"></i>
         View
       </button>

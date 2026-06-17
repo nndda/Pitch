@@ -287,8 +287,11 @@ export function instatiateCSSViewer(
   cssInit: string,
   CSSEditor: HTMLElement,
   CSSCopyButton: HTMLButtonElement,
-): void {
-  new EditorView({
+  dedentCodes: boolean = true
+): {
+  CSSUpdateCb: (css: string) => void,
+} {
+  const view = new EditorView({
       extensions: [
         basicSetup,
         EditorView.lineWrapping,
@@ -300,11 +303,25 @@ export function instatiateCSSViewer(
         EditorView.theme({}, {dark: true}),
       ],
       parent: CSSEditor,
-      doc: "\n" + dedent(cssInit) + "\n",
+      doc: (dedentCodes ? "\n" + dedent(cssInit) + "\n" : cssInit),
     });
   ;
 
   CSSCopyButton.addEventListener("click", () => {
     copyStr(cssInit);
   });
+
+  function CSSUpdateCbFn(css: string) {
+    view.dispatch({
+      changes: {
+        from: 0,
+        to: view.state.doc.length,
+        insert: css,
+      },
+    });
+  }
+
+  return {
+    CSSUpdateCb: CSSUpdateCbFn,
+  }
 }

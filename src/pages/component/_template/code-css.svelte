@@ -1,13 +1,14 @@
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { onMount, onDestroy } from "svelte";
 
   const
     {
-      css
+      css,
+      compiledViewer = false, // why...
     }: {
       css: string,
+      compiledViewer?: boolean, // why...
     } = $props()
-  , uid: string = $props.id()
   ;
 
   let
@@ -17,15 +18,44 @@
   , CSSCopyButton: HTMLButtonElement
   ;
 
+  import {
+    event,
+    eventCSSCompiled
+  } from "../../../states/runtime";
+
+  import {
+    compile,
+  } from "../../../scripts/compiler";
+
+  const destroyCb = {
+    cb: null as null | any, // i am losing brain cells
+  };
+
   onMount(() => {
     import("./code-editor").then(({ instatiateCSSViewer }) => {
-      instatiateCSSViewer(
-        css,
+      const cssEditorAPI = instatiateCSSViewer(
+        compiledViewer ? compile() : css,
 
         CSSEditor,
         CSSCopyButton,
+        false,
       );
+
+      function updateCompiledCSS() {
+        cssEditorAPI.CSSUpdateCb(compile());
+      }
+      destroyCb.cb = updateCompiledCSS;
+
+      if (compiledViewer) {
+        event.addEventListener(eventCSSCompiled, updateCompiledCSS);
+      }
     });
+  });
+
+  onDestroy(() => {
+    if (destroyCb.cb) {
+      event.removeEventListener(eventCSSCompiled, destroyCb.cb);
+    }
   });
 </script>
 

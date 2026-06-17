@@ -1,5 +1,8 @@
 import {
   runtimeData,
+
+  event,
+  eventCSSCompiled,
 } from "../states/runtime";
 
 export function updateCatSelectionState(catId: string): void {
@@ -67,6 +70,8 @@ export function updateCatSelectionState(catId: string): void {
 
   catData.selectedCountEl!.textContent = `${selected}`;
   catData.selection.flush();
+
+  event.dispatchEvent(new Event(eventCSSCompiled));
 }
 
 export function syncCompCheckedState(
