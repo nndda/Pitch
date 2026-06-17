@@ -50,19 +50,18 @@ export const
 
     // CSS
     "css.minify": true,
-    "css.use_layer": false,
     "css.isolate_comment_section": false,
 
     // App
     "app.auto_copy": false,
     "app.show_home_tips": true,
 
-    "app.sidebar.show_scope_color": true,
+    "app.sidebar.show_scope_color": false,
     "app.sidebar.show_plzzz": true,
     "app.sidebar.show_selected_count": true,
-    "app.sidebar.show_faved_badge": true,
-    "app.sidebar.show_wip_comps": true,
-    "app.sidebar.show_wip_pages": true,
+    "app.sidebar.show_faved_badge": false,
+    "app.sidebar.show_wip_comps": false,
+    "app.sidebar.show_wip_pages": false,
     "app.sidebar.category_action_on_hover": false,
 
   }
