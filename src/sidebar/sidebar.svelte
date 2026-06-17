@@ -45,6 +45,7 @@
   // import Theme from "../pages/theme.svelte";
   import Settings from "../pages/settings.svelte";
   // Resources
+  import PitchApp from "../pages/resources/pitch-app.svelte";
   import GettingStarted from "../pages/resources/getting-started.svelte";
   // import OtherResources from "../pages/resources/other-resources.svelte";
   import Showcase from "../pages/resources/showcase.svelte";
@@ -293,6 +294,12 @@
           title: "Getting Started",
           icon: "fa-solid fa-book-bookmark",
           page: GettingStarted,
+        },
+
+        {
+          title: "Using Pitch",
+          icon: "fa-solid fa-paint-roller",
+          page: null,
         },
 
         // {
