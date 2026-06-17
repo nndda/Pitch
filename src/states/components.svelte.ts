@@ -1,5 +1,15 @@
 import type { Component } from "svelte";
 
+export function unselectSidebarPage(): void {
+  const
+    currentPageList = document.querySelector(`input[name="page-view"]:checked`) as HTMLInputElement | null
+  ;
+
+  if (currentPageList) {
+    currentPageList.checked = false;
+  }
+}
+
 import Home from "../pages/home.svelte";
 
 interface States {

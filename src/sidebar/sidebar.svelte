@@ -8,6 +8,7 @@
     state,
     backToHome,
     switchPage,
+    unselectSidebarPage,
   } from "../states/components.svelte";
 
   import {

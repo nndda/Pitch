@@ -12,7 +12,10 @@
     type ItchProfile,
   } from "../../states/storage.svelte";
 
-  import { switchPage } from "../../states/components.svelte";
+  import {
+    switchPage,
+    unselectSidebarPage,
+  } from "../../states/components.svelte";
 
   // Projects
   import ProjectNew from "../projects/new.svelte";
@@ -20,14 +23,6 @@
   const
     isInsideItch = typeof Itch !== "undefined"
   ;
-
-  function unselectSidebarPage() {
-    const currentPageList = document.querySelector(`input[name="page-view"]:checked`) as HTMLInputElement | null;
-
-    if (currentPageList) {
-      currentPageList.checked = false;
-    }
-  }
 
   onMount(() => {
     if (isInsideItch) {
