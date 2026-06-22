@@ -27,12 +27,19 @@
         display: flex;
         flex-direction: row;
 
+        /* Hardcoded $background-dark */
+        background: #171620;
+
         max-height: 100dvh;
         max-width: 1700px;
         overflow: hidden;
       }
 
       #placeholder {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
         position: absolute;
         width: 100vw;
         height: 100vh;
@@ -41,14 +48,8 @@
 
       .logo {
         text-align: center;
-
-        & > img {
-          display: block;
-          position: relative;
-          margin: auto;
-        }
       }
-
+      /*
       .brush {
         margin: auto;
         transform:
@@ -62,6 +63,7 @@
         width: 19em;
         height: 12em;
       }
+      */
 
       @keyframes brush-rolling {
         0% {
@@ -82,7 +84,7 @@
   <body>
     <div id="placeholder">
       <div class="logo">
-        <div class="brush"></div>
+        <!--<div class="brush"></div>-->
         <img src="/icon.svg" alt="Pitch logo" fetchpriority="high" width="200" height="200">
         <div class="loading">
           Loading <span id="loading-text"></span>...
