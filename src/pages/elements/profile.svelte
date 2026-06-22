@@ -69,7 +69,7 @@
     border-radius: 7px;
     width: 50px;
     height: 50px;
-    background: $text-col;
+    /* background: $text-col; */
   }
 
   .info {
@@ -107,12 +107,15 @@
 
 <div class="profile-cont">
   <div class="avatar">
-    <img id="pitch-avatar" src="https://itch.io/static/images/frog.png" alt="">
+    <img id="pitch-avatar" src="/icon.svg" alt="">
+    <!-- <img id="pitch-avatar" src="https://itch.io/static/images/frog.png" alt=""> -->
   </div>
 
   <div class="info">
-    <div id="pitch-displayname">Guest</div>
-    <small id="pitch-userurl">itch.io</small>
+    <div id="pitch-displayname">
+      Pitch
+    </div>
+    <small id="pitch-userurl">v3.0.0</small>
   </div>
   <!--
   <div>
