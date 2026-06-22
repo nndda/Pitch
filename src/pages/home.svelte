@@ -63,44 +63,50 @@
   </div>
 
   <header class="intro">
+    <div class="intro-app">
+      <div>
+        <img alt="" class="pitch-logo" src={pitchLogo} width="150">
+      </div>
 
-    <div>
-      <img alt="" class="pitch-logo" src={pitchLogo} width="150">
+      <div class="header-content">
+        <h2 class="pitch-title">
+          Pitch<small>.css</small>
+        </h2>
+
+        <p class="labels">
+          <button>
+            <i class="icon fa-solid fa-box-open"></i>
+            v{VERSION}
+          </button>
+
+          <button>
+            <i class="icon fa-brands fa-creative-commons"></i>
+            CC0
+          </button>
+
+          <button class="made-with-love">
+            Made with
+            <i class="fa-solid fa-heart"></i>
+          </button>
+
+          <b class="flex-break"></b>
+
+          <button class="in-development">
+            <i class="icon fa-solid fa-road-barrier"></i>
+            Development preview
+          </button>
+        </p>
+
+        <p class="desc">
+          Welcome to Pitch! a catalogue of CSS components, decorations, and tweaks, designed specifically for itch.io project pages.
+        </p>
+      </div>
     </div>
 
-    <div class="header-content">
-      <h2 class="pitch-title">
-        Pitch<small>.css</small>
-      </h2>
-
-      <p class="labels">
-        <button>
-          <i class="icon fa-solid fa-box-open"></i>
-          v{VERSION}
-        </button>
-
-        <button>
-          <i class="icon fa-brands fa-creative-commons"></i>
-          CC0
-        </button>
-
-        <button class="made-with-love">
-          Made with
-          <i class="fa-solid fa-heart"></i>
-        </button>
-
-        <b class="flex-break"></b>
-
-        <button class="in-development">
-          <i class="icon fa-solid fa-road-barrier"></i>
-          Development preview
-        </button>
-      </p>
-
-      <p class="desc">
-        Welcome to Pitch! a catalogue of CSS components, decorations, and tweaks, designed specifically for itch.io project pages.
-      </p>
-    </div>
+    <p class="user-actions">
+      <!-- <i class="fa-solid fa-clock-rotate-left"></i> -->
+      <!-- Continue where you left: <PageRef name="Settings"/> -->
+    </p>
 
     <div
       class="tips"

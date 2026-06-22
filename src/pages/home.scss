@@ -18,15 +18,32 @@
 }
 
 .intro {
-  display: flex;
-  gap: 1em;
+  display: grid;
+  /* grid-gap: 1em; */
   /* display: grid; */
-  /* grid-template-columns: 150px auto 200px; */
+  /* grid-template-columns: auto 200px; */
+  grid-template-areas:
+    "app tips"
+   "actions tips"
+  ;
   margin-top: 1em;
   padding: 1em;
 
   /* background: $background-dark; */
 }
+
+.intro-app {
+  grid-area: app;
+
+  display: flex;
+}
+.user-actions {
+  grid-area: actions;
+}
+.tips {
+  grid-area: tips;
+}
+
 .pitch-logo {
   /* grid-row: span 3; */
   padding: .5em;
