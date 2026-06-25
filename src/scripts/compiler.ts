@@ -79,7 +79,7 @@ export function compile(): string {
           ).push(
             minify
               ? compManifest.css.compressed
-              : compManifest.css.raw
+              : "/*\n    " + (compManifest.nameDisplay ?? compManifest.name) + "\n*/\n\n" + compManifest.css.raw
           );
         }
       }
