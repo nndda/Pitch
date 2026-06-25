@@ -39,7 +39,7 @@
 
   css={`
     p {
-      max-width: 25em;
+      max-width: 27em;
       margin-inline: auto;
     }
   `}
@@ -110,7 +110,7 @@
 
   css={`
     p {
-      max-width: 25em;
+      max-width: 27em;
       margin-inline: auto;
     }
   `}
