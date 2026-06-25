@@ -15,12 +15,13 @@
 
   <CodeEditor html={`
 
-    Press <kbd>Ctrl</kbd> + <kbd>A</kbd> to select all text.
+    <p>
+      Press <kbd>Ctrl</kbd> + <kbd>A</kbd> to select all text.
+    </p>
 
-    <br>
-    <br>
-
-    Then press <kbd>Ctrl</kbd> + <kbd>C</kbd> to copy them.
+    <p>
+      Then press <kbd>Ctrl</kbd> + <kbd>C</kbd> to copy them.
+    </p>
 
   `}/>
 
@@ -28,33 +29,33 @@
 
   <CodeEditor html={`
 
-    Use <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> or <kbd>←</kbd> <kbd>→</kbd> <kbd>↑</kbd> <kbd>↓</kbd> to move around.
+    <p>
+      Use <kbd>W</kbd> <kbd>A</kbd> <kbd>S</kbd> <kbd>D</kbd> or <kbd>←</kbd> <kbd>→</kbd> <kbd>↑</kbd> <kbd>↓</kbd> to move around.
+    </p>
 
-    <br>
-    <br>
+    <p>
+      Hold down <kbd>Shift</kbd> to sprint, and <kbd>C</kbd> to crouch.
+    </p>
 
-    Hold down <kbd>Shift</kbd> to sprint, and <kbd>C</kbd> to crouch.
-
-    <br>
-    <br>
-
-    Press <kbd>Tab</kbd> to open your inventory.
+    <p>
+      Press <kbd>Tab</kbd> to open your inventory.
+    </p>
 
   `}/>
 
   <CodeEditor html={`
 
-    <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>N</kbd>
+    <p>
+      <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>N</kbd>
+    </p>
 
-    <br>
-    <br>
+    <p>
+      <kbd>Shift</kbd> + <kbd>Tab</kbd>
+    </p>
 
-    <kbd>Shift</kbd> + <kbd>Tab</kbd>
-
-    <br>
-    <br>
-
-    <kbd>Ctrl</kbd> + <kbd>C</kbd>
+    <p>
+      <kbd>Ctrl</kbd> + <kbd>C</kbd>
+    </p>
 
   `}/>
 
