@@ -1,0 +1,78 @@
+.custom-cat-ear-div {
+  --thick: var(--cat-ear-thickness, 3px);
+  --col: var(--cat-ear-color, currentColor);
+  --size: var(--cat-ear-size, 4em);
+
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  column-gap: var(--cat-ear-spacing, 3em);
+
+  min-height: var(--size);
+
+  margin-block: 1em;
+
+  border-bottom: var(--thick) solid var(--col);
+
+  overflow: hidden;
+  z-index: 9;
+
+  &::before, &::after {
+    content: ".";
+    background: var(--col);
+
+    /*
+      Material Design Icons (https://pictogrammers.com/library/mdi/) by the Pictogrammers (https://pictogrammers.com/) licensed under Apache 2.0 (https://pictogrammers.com/docs/general/license/)
+    */
+    --nkmm: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M1,21H23L12,2' /%3E%3C/svg%3E");
+
+    mask-image: var(--nkmm);
+    -webkit-mask-image: var(--nkmm);
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+
+    translate: 0 calc(var(--size) * .2);
+    /*mask-position: 0 calc(1em + var(--thick) * 0.5);*/
+
+    height: var(--size);
+    width: var(--size);
+
+    transform-origin: 50% 100%;
+
+    animation-timing-function: cubic-bezier( .175, .885, .32, 1.275 );
+    animation: var(--anim);
+  }
+
+  &::after {
+    scale: -1 1;
+  }
+
+  &.custom-anim-wiggle {
+    --anim: cat-ear-wiggle 3s infinite alternate;
+  }
+
+  &.custom-anim-twitch {
+    &::before {
+      --anim: cat-ear-twitch 3s infinite;
+    }
+  }
+}
+
+@keyframes cat-ear-wiggle {
+  0%, 20% {
+    transform: rotateX(0) skewX(0);
+  }
+  10% {
+    transform: rotateX(60deg) skewX(30deg);
+  }
+}
+
+@keyframes cat-ear-twitch {
+  0%, 10% {
+    transform: rotateX(0) skewX(0) rotateY(0);
+  }
+  3% {
+    transform: rotateX(50deg) skewX(25deg) rotateY(3deg);
+  }
+}
