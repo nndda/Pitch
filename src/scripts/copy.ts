@@ -9,8 +9,8 @@ export function copyStr(str: string): void {
   if (isCopyAllowed) {
     navigator.clipboard.writeText(str)
       .then(
-        () => { copySuccess() },
-        () => { copyFailed() }
+        copySuccess,
+        copyFailed,
       )
   } else {
     copyFailed();
