@@ -1,18 +1,24 @@
 <h1 align="center">
-<img src="./src/assets/pitch.svg" alt="Pitch Logo" width="120">
+<img src="./src/public/icon.svg" alt="Pitch Logo" width="120">
 <br>
 Pitch
 </h1>
 
 <p align="center">
-<a href="https://nnda.itch.io/pitch/" target="_blank"><img src="https://img.shields.io/badge/Available%20on%20itch.io-ff2449?style=flat-square&logo=itchdotio&logoColor=%23ffffff" alt="Available on itch.io" height="20"></a>
-<br>
-<br>
-Collection of CSS components and tweaks designed specifically for itch.io project pages.
+<a href="https://nnda.itch.io/pitch/"><img src="https://github.com/user-attachments/assets/85edeef9-6f93-4813-b7dd-2febbd557fff" alt="Available on itch.io" height="48"></a>
 </p>
 
-<img align="center" src="https://github.com/user-attachments/assets/2d76ee0c-a243-468a-9794-8d4b1cda7ce3">
+<br>
 
+<p align="center">
+  Catalogue of CSS components, decorations, and tweaks, designed specifically for itch.io pages.
+</p>
+
+<br>
+
+<img align="center" src="https://github.com/user-attachments/assets/60c13c33-7667-4a99-ae0b-b7806367283b">
+
+<br>
 <br>
 
 > [!CAUTION]
