@@ -1,6 +1,8 @@
 <script lang="ts">
   import { onMount, onDestroy } from "svelte";
 
+  import dedent from "dedent";
+
   const
     {
       css,
@@ -34,7 +36,7 @@
   onMount(() => {
     import("./code-editor").then(({ instatiateCSSViewer }) => {
       const cssEditorAPI = instatiateCSSViewer(
-        compiledViewer ? compile() : css,
+        compiledViewer ? compile() : "\n" + dedent(css) + "\n",
 
         CSSEditor,
         CSSCopyButton,
