@@ -107,7 +107,7 @@
 
 <div class="profile-cont">
   <div class="avatar">
-    <img id="pitch-avatar" src="/icon.svg" alt="">
+    <img id="pitch-avatar" src="./icon.svg" alt="">
     <!-- <img id="pitch-avatar" src="https://itch.io/static/images/frog.png" alt=""> -->
   </div>
 
