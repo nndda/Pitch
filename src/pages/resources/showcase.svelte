@@ -211,7 +211,7 @@
         <!-- TODO: -->
         <!-- i am weeping -->
         <img
-          src="/assets/showcase/{image}"
+          src="./assets/showcase/{image}"
           alt=""
           class="hovered"
 
