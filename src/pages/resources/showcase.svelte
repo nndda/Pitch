@@ -1,5 +1,7 @@
 <script lang="ts">
-  import {shuffle} from "lodash";
+  import { shuffle } from "lodash";
+
+  import  { ComponentRef } from "../component/_template/components";
 
   interface ShowcaseEntry {
     title?: string,
@@ -14,6 +16,8 @@
     image: string,
 
     type: Scope,
+
+    compsUsed: string[],
   }
 
   const authorNnda = {
@@ -29,6 +33,13 @@
       image: "nnda.itch.io.png",
 
       type: "profile",
+
+      compsUsed: [
+        "Label",
+        "Cat Ear Divider",
+        "Profile Picture",
+        "Fade Out Collection",
+      ],
     },
 
     {
@@ -40,6 +51,13 @@
       image: "nnda.itch.io__in-plain-sight.png",
 
       type: "project",
+
+      compsUsed: [
+        "Label",
+        "Info List",
+        "Comment Vote Icons",
+        "Collapsible User Tools",
+      ],
     },
 
     {
@@ -51,6 +69,15 @@
       image: "nnda.itch.io__paws-n-plates.png",
 
       type: "project",
+
+      compsUsed: [
+        "Callout",
+        "Label",
+        "Info List",
+        "Input",
+        "Speed Dial",
+        "Comment Vote Icons",
+      ],
     },
 
     {
@@ -63,6 +90,12 @@
       image: "nnda.itch.io__obscura.png",
 
       type: "project",
+
+      compsUsed: [
+        "Accordion",
+        "Callout",
+        "Label",
+      ],
     },
 
     {
@@ -75,8 +108,35 @@
       image: "nnda.itch.io__vintage-tilesets.png",
 
       type: "project",
+
+      compsUsed: [
+        "Speed Dial",
+        "Author Badge",
+        "Comment Vote Icons",
+      ],
     },
 
+    {
+      title: "TwistedFates:LUCAS - Episode 1",
+      desc: "",
+
+      author: {
+        name: "orribu",
+        username: "orribu",
+      },
+
+      itchioSlug: "orribu.itch.io/twistedfates-lucas-ep1",
+      image: "orribu.itch.io__twistedfates-lucas-ep1.png",
+
+      type: "project",
+
+      compsUsed: [
+        "In Development Sign",
+        "Callout",
+        "Info List",
+        "Toggle",
+      ],
+    },
   ]);
 </script>
 
@@ -96,9 +156,11 @@
     The items displayed are randomly sorted every time you open this page.
   </p>
 
+  <br>
+
   <div class="showcase-grid">
 
-  {#each entries as {title, desc, author, itchioSlug, image, type}}
+  {#each entries as {title, desc, author, itchioSlug, image, type, compsUsed}}
 
     <div class="entry">
       <h4 class="title">
@@ -128,10 +190,59 @@
 
         {/if}
 
+        <div class="action">
+
+          <button
+            class="custom-tip comps-used-btn"
+            onclick={ev => {
+              ev.currentTarget.classList.toggle("toggled");
+            }}
+          >
+            <i class="fa-solid fa-box-open"></i>
+            <span class="custom-tip-content">
+              Components used
+            </span>
+          </button>
+        </div>
+
       </h4>
 
       <div class="thumb">
-        <img src="/assets/showcase/{image}" alt="">
+        <!-- TODO: -->
+        <!-- i am weeping -->
+        <img
+          src="/assets/showcase/{image}"
+          alt=""
+          class="hovered"
+
+          onload={ev => {
+            ev.currentTarget.classList.remove("hovered");
+            (ev.currentTarget as HTMLElement).style.setProperty(
+              "--img-height",
+              `-${ev.currentTarget.clientHeight}px`,
+            );
+          }}
+
+          onmouseenter={ev => {
+            ev.currentTarget.style.setProperty(
+              "--img-height",
+              `-${ev.currentTarget.clientHeight}px`,
+            );
+            // requestAnimationFrame(() => {
+              ev.currentTarget.classList.add("hovered");
+            // })
+          }}
+
+          onmouseleave={ev => {
+            ev.currentTarget.classList.remove("hovered");
+          }}
+        >
+
+        <p class="comps-used-list">
+          {#each compsUsed as compName }
+            <ComponentRef comp={compName}/>
+          {/each}
+        </p>
       </div>
 
       <div class="info">
@@ -144,9 +255,7 @@
               ""
             }
           "></i>
-
           {type} page
-
         </div>
       </div>
 

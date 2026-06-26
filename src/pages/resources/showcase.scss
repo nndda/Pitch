@@ -4,65 +4,128 @@
 @use "sass:color";
 
 .showcase-grid {
-  $gap: .75em;
+  $gap: 1.25em;
   $col: 3;
   display: grid;
   grid-template-columns: repeat($col, calc(math.div(100%, $col) - $gap));
   grid-gap: $gap;
 }
 
+.comps-used-btn {
+  font-size: .9em;
+  padding: .6em;
+
+  &.toggled {
+    color: $background-dark;
+    background: $text-col;;
+  }
+}
+
+.comps-used-list {
+  position: absolute;
+
+  display: none;
+  flex-wrap: wrap;
+  gap: .5em;
+
+  top: 0;
+  /* left: 1em; */
+  padding: 0 1em;
+}
+
+:global {
+  .comps-used-btn.toggled {
+    color: $background-dark;
+    background: $text-col;;
+  }
+
+  .entry:has(.comps-used-btn.toggled) {
+
+    & .thumb img {
+      filter: blur(9px) brightness(55%) grayscale(50%);
+    }
+    & .comps-used-list {
+      display: flex;
+    }
+  }
+}
+
 .entry {
-  // background: $background;
-  padding: .5em;
-
-  // border: 1px solid $border-col;
-  // border-radius: 6px;
-
-  // overflow: hidden;
+  padding-inline: .5em;
 
   & .title {
     margin: 0;
     margin: .5em;
     font-size: 1.2em;
 
-    // min-height: 1em + 1.2em + 1em;
+    display: grid;
+    column-gap: 1em;
+    grid-template-columns: auto min-content;
+    grid-template-rows: auto auto;
+
+    & > a {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    & > .action {
+      grid-row: span 2;
+    }
   }
+
   & .author {
-    display: block;
-    // margin: .5em;
-    // margin-left: .5em;
+    grid-row: 2 / 2;
+
     margin-top: .5em;
     margin-bottom: .7em;
+
     font-size: .8em;
-    font-weight: lighter;
+    font-weight: normal;
   }
 
   & .thumb {
-    max-height: 300px;
-    border-radius: 7px 7px 0 0;
+    position: relative;
+
+    height: 300px;
+
     --l: linear-gradient(180deg, #fff 60%, #0000);
     -webkit-mask-image: var(--l);
     mask: alpha var(--l);
-  border: 1px solid $border-col;
 
-    // border-radius: 12px;
+    border: 1px solid $border-col;
+    border-radius: 7px 7px 0 0;
 
     overflow: hidden;
-    & img {
+
+    & > img {
+      position: absolute;
+      top: 0;
       display: block;
       width: 100%;
+      transition:
+        top 1.5s ease
+      , filter .5s ease
+      ;
+
+      &.hovered {
+        top: calc(var(--img-height) + 100%);
+      }
     }
+
   }
 
   & .type {
     display: flex;
     align-items: center;
+    margin-bottom: .75em;
   }
 
   & .info {
+    position: relative;
+
     color: color.mix($text-col, $background-dark, 75%);
     transform: translate(1em, -1.5em);
-    // margin-bottom: .5em;
     font-size: .8em;
 
     & .icon {
