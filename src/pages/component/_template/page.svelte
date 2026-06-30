@@ -2,6 +2,8 @@
   import { onMount } from "svelte";
   import ComponentInput from "./input.svelte";
 
+  import { copyStr } from "../../../scripts/copy";
+
   import {
     LabelScopes,
   } from "./labels/";
@@ -85,6 +87,37 @@
 >
   <div class="labels">
     <LabelScopes componentData={data}/>
+  </div>
+
+  <div class="flex-space"></div>
+
+  <div class="comp-btns">
+    CSS source
+    <ul class="buttons-list">
+      <li>
+        <button
+          class="custom-tip"
+          onclick={() => {
+            copyStr(data.css.raw);
+          }}
+        >
+          <i class="icon fa-solid fa-copy"></i>
+          <span class="custom-tip-content">
+            Copy
+          </span>
+        </button>
+      </li>
+      <!--
+      <li>
+        <button class="custom-tip">
+          <i class="icon fa-solid fa-eye"></i>
+          <span class="custom-tip-content">
+            View
+          </span>
+        </button>
+      </li>
+      -->
+    </ul>
   </div>
 </div>
 
