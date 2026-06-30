@@ -12,16 +12,15 @@
   padding: 0;
   font-size: .9em;
 
-  & ul, li {
+  & ul, li, button {
     display: inline-flex;
     align-items: center;
     gap: .5em;
     padding: 0;
   }
 
-  & > li {
+  & button {
     margin: .2em .5em;
-    padding: .3em .5em;
     border-radius: 6px;
     // background: red;
 
@@ -39,18 +38,17 @@
 }
 
 @mixin style-scope-label($col) {
-  background: color.mix($background, $col, 70%);
+  & button {
+    background: color.mix($background, $col, 70%);
 
-  & > .icon {
-    color: lighten($col, 15%);
+    &:hover {
+      background: color.mix($background, $col, 55%);
+    }
+
+    & .icon {
+      color: lighten($col, 15%);
+    }
   }
-
-  // & .tooltip-content {
-  //   width: 100%;
-  //   padding: .5em;
-  //   background: color.mix($background, $col, 80%);
-  //   white-space: wrap;
-  // }
 }
 
 .compatible {
