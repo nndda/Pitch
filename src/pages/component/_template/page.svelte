@@ -1,6 +1,5 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  // import { CompatibilityNote } from "../_template/components";
   import ComponentInput from "./input.svelte";
 
   const
@@ -165,13 +164,3 @@
 </div>
 
 {@render children()}
-
-<!--
-{#if data.compatibleOnInputs}
-  <h2>
-    Compatibility Notes
-  </h2>
-
-  <CompatibilityNote inputs={data.compatibleOnInputs}/>
-{/if}
--->
