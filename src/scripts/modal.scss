@@ -1,0 +1,47 @@
+@use "../styles/variables" as *;
+@use "sass:color";
+
+#dialog {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  width: 65vw;
+
+  z-index: 9;
+
+  margin-top: 3em;
+  padding: 1em 1.5em;
+
+  background: $background-dark;
+  border: 1px solid $border-col;
+  box-sizing: border-box;
+  border-radius: 4px;
+
+  transition: .5s ease;
+  transition-behavior: allow-discrete;
+
+  &::backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+
+    background-color: rgba($background-dark, 50%);
+    backdrop-filter: blur(.8em);
+
+    opacity: 1;
+
+    transition: .5s ease;
+  }
+
+  @starting-style {
+    opacity: 0;
+    translate: 0 1em;
+
+    &::backdrop {
+      opacity: 0;
+    }
+  }
+}
