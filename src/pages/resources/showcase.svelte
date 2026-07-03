@@ -137,6 +137,31 @@
         "Toggle",
       ],
     },
+
+    {
+      title: "Don't Slime Down",
+      desc: "",
+
+      author: {
+        name: "Inaudito Studios",
+        username: "inauditostudios",
+      },
+
+      itchioSlug: "inauditostudios.itch.io/dont-slime-down",
+      image: "inauditostudios.itch.io__dont-slime-down.png",
+
+      type: "project",
+
+      compsUsed: [
+        "Callout",
+        "Info List",
+        "Input",
+        "Toggle",
+        "Tooltip",
+        "Author Badge",
+        "Comment Vote Icons",
+      ],
+    },
   ]);
 </script>
 
