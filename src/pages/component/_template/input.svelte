@@ -2,10 +2,6 @@
   import { onMount } from "svelte";
 
   import {
-    inputs,
-    type RecordString,
-  } from "../../../states/storage.svelte";
-  import {
     applyUserInput,
     removeUserInput,
     isInputVariablesCompatible,
@@ -15,7 +11,11 @@
   import { state as stateGlobal } from "../../../states/components.svelte";
 
   const
-    { data }: { data: ComponentData } = $props()
+    { data, inputs }:
+      {
+        data: ComponentData,
+        inputs: RecordString,
+      } = $props()
   , changedInputs: Record<string, true> = {}
   , valueFormats: RecordString = $state({})
   , formatRe = /(\d+)(\w+)/
@@ -25,8 +25,8 @@
   for (const input of data.input!) {
     if ("type" in input) {
       if (input.type === "size") {
-        valueFormats[input.var] = input.var in inputs.state
-          ? (getFormat(inputs.state[input.var]) ?? input.defaultFormat)! // TODO: dumb asf
+        valueFormats[input.var] = input.var in inputs
+          ? (getFormat(inputs[input.var]) ?? input.defaultFormat)! // TODO: dumb asf
           : input.defaultFormat!
         ;
       }
@@ -54,10 +54,10 @@
   // });
 
   // TODO: this could be in a potential hot path
-  function syncInputCompatibility() {
+  async function syncInputCompatibility() {
     if (data.compatibleOnInputs) {
       const
-        isCompatible = isInputVariablesCompatible(data)
+        isCompatible = await isInputVariablesCompatible(data)
 
       , selectorBase = `.heading[data-comp-name="${data.nameDisplay ?? data.name}"] `
       , runtimeData = stateGlobal.attr as ComponentRuntimeItem
@@ -106,10 +106,10 @@
     )
   }
 
-  function onVarInputChange(
+  async function onVarInputChange(
     value: string,
     input: ComponentUserInput,
-  ): void {
+  ): Promise<void> {
     const
       cssVar = input.var
     , val =
@@ -133,13 +133,13 @@
           delete changedInputs[input.name];
         }
       } else {
-        applyUserInput(cssVar, val);
+        await applyUserInput(cssVar, val);
 
         changedInputs[input.name] = true;
       }
     }
 
-    syncInputCompatibility();
+    await syncInputCompatibility();
 
     // resetAllButton.disabled = !isAnyModified();
   }
@@ -239,7 +239,7 @@
 
     {#if "name" in input}
 
-      {@const isInputNotStored = !(input.var in inputs.state)}
+      {@const isInputNotStored = !(input.var in inputs)}
 
       {@const inputEv = (
           ev: Event & {
@@ -287,7 +287,7 @@
               type="text"
               value={
                 isInputNotStored ? input.default :
-                (inputs.state[input.var] as string).replace(/^"|"$/g, "")
+                (inputs[input.var] as string).replace(/^"|"$/g, "")
               }
 
               oninput={inputEv}
@@ -300,7 +300,7 @@
               type="text"
               value={
                 isInputNotStored ? input.default :
-                UnCSSifyURL(inputs.state[input.var] as string)
+                UnCSSifyURL(inputs[input.var] as string)
               }
 
               oninput={ev => {onVarInputChange(ev.currentTarget.value, input)}}
@@ -315,7 +315,7 @@
               alpha
 
               value={
-                isInputNotStored ? input.default : inputs.state[input.var]
+                isInputNotStored ? input.default : inputs[input.var]
               }
 
               oninput={inputEv}
@@ -323,7 +323,7 @@
 
           {:else if input.type === "size"}
 
-            {@const currentValue = isInputNotStored ? input.default! : inputs.state[input.var]}
+            {@const currentValue = isInputNotStored ? input.default! : inputs[input.var]}
 
             {@const selectedFormat = getFormat(currentValue) ?? input.defaultFormat}
 
@@ -337,7 +337,7 @@
               value={
                 isInputNotStored
                   ? input.default
-                  : formatRe.exec(inputs.state[input.var])![1]
+                  : formatRe.exec(inputs[input.var])![1]
               }
 
               oninput={inputEv}
@@ -367,10 +367,10 @@
             class="icon-only custom-tip reset"
             aria-label="Reset"
             disabled={
-              isInputNotStored || isValueEqualsDefault(inputs.state[input.var], input)
+              isInputNotStored || isValueEqualsDefault(inputs[input.var], input)
             }
 
-            onclick={() => {
+            onclick={async () => {
               const
                 cssVar = input.var
               ;
@@ -390,7 +390,7 @@
 
               // resetAllButton.disabled = !isAnyModified();
 
-              syncInputCompatibility();
+              await syncInputCompatibility();
             }}
           >
             <i class="fa-solid fa-arrow-rotate-left"></i>

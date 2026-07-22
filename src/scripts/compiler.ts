@@ -2,20 +2,18 @@ import {
   runtimeData,
   // compCheckboxCache,
 } from "../states/runtime";
-import {
-  inputs,
-  projects,
-  settings,
-  currentProject,
-} from "../states/storage.svelte";
 
-export function compile(): string {
+import { getProject } from "../storage/db";
+
+export async function compile(): Promise<string> {
   const
-    inputsProps = inputs.state
-  , isProject = projects.state[currentProject.get()!].scope === "project"
+    project = (await getProject())
+
+  , inputsProps = project?.inputs!
+  , isProject = project?.scope === "project"
 
   , cssOut: string[] = []
-  , minify = settings.state["css.minify"]
+  , minify = project?.app.settings.css.minify
   , cssIndent = minify ? "" : "  "
   , cssNewline = minify ? "" : "\n\n"
 
@@ -23,7 +21,7 @@ export function compile(): string {
   , inputStyleIncludes: string[] = []
 
   , compsNoCommentSection: string[] = []
-  , settingNoCommentSection = settings.state["css.isolate_comment_section"]
+  , settingNoCommentSection = project?.app.settings.css.isolateCommentSection
   ;
 
   cssOut.push(

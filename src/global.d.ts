@@ -4,3 +4,8 @@ declare module "*?css-component" {
 }
 
 declare module "not-a-toast";
+
+declare type RecordString = Record<string, string>;
+declare type RecordBoolean = Record<string, boolean>;
+declare type RecordUserInput = Record<string, ComponentUserInputValue>;
+declare type RecordUserPreviewCodes = Record<string, { html: string, css: string, }>;

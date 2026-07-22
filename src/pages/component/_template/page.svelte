@@ -8,6 +8,8 @@
     LabelScopes,
   } from "./labels/";
 
+  import { project } from "../../../storage/db";
+
   const
     { children,
       data,
@@ -77,8 +79,10 @@
   </ul>
 {/if}
 
+{#if $project}
+
 {#if data.input}
-  <ComponentInput data={data}/>
+  <ComponentInput data={data} inputs={$project.inputs}/>
 {/if}
 
 <div
@@ -122,3 +126,5 @@
 </div>
 
 {@render children()}
+
+{/if}

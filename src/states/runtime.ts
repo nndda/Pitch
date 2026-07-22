@@ -1,21 +1,15 @@
 import { slug } from "../scripts/slugify";
+import { getProject } from "../storage/db";
 
 import compPagesEntry from "../pages/component/imports";
 
-import {
-  initiateStorageAPI,
-
-  faves,
-  inputs,
-
-  type RecordBoolean,
-} from "../states/storage.svelte";
-
+// Simulated itch.io's CSS + ALL of Pitch's components' CSS
 import itchCSS from "../styles/_itchio.scss?inline";
 export const itchStyling = new CSSStyleSheet();
 itchStyling.replaceSync(itchCSS);
 
 export const
+  // User's CSS input stylesheet
   inputStyling = new CSSStyleSheet()
 , fontLocalStyling: Record<string, CSSStyleSheet> = {}
 ;
@@ -42,25 +36,19 @@ export const
   }
 ;
 
+const project = await getProject();
 
-export function runtimeDataInit(): void {
+export function runtimeDataInit() {
 
   for (const cat in compPagesEntry) {
-    const
-      catId = "cat-" + slug(cat)
-    ;
 
-    runtimeData[catId] = {
+    runtimeData[cat] = {
       name: cat,
       components: {},
-      selection: initiateStorageAPI<RecordBoolean>(`${catId}`),
-
-      // selectedCountEl: null,
-      // catSelectBtn: null,
     };
 
-    compElCache[catId] = {};
-    compCheckboxCache[catId] = {};
+    compElCache[cat] = {};
+    compCheckboxCache[cat] = {};
 
     for (const page in compPagesEntry[cat]) {
       const
@@ -72,12 +60,12 @@ export function runtimeDataInit(): void {
 
         const
           isWIP = compData.wip
+
+          // Component selected state
+        , isChecked = (project?.components[cat])?.[compId] ?? false
         ;
 
-        // Component selected state
-        runtimeData[catId].selection.state[compId] ??= false;
-
-        runtimeData[catId].components[compId] = {
+        runtimeData[cat].components[compId] = {
 
           type: "item",
           manifest: compData,
@@ -94,9 +82,9 @@ export function runtimeDataInit(): void {
               li: null,
               chkBox: null,
 
-              checked: runtimeData[catId].selection.state[compId],
+              checked: isChecked,
 
-              isFaved: faves.state[compId] ?? false,
+              isFaved: project!.faves[compId] ?? false,
               isHacky: compData.tags?.includes("hacky") ?? false,
               isExperimental: compData.tags?.includes("experimental") ?? false,
 
@@ -113,12 +101,12 @@ export function runtimeDataInit(): void {
           //   group: slugifyId(compData.sub),
           // };
 
-          runtimeData[catId].components[compId].group = slug(compData.sub);
+          runtimeData[cat].components[compId].group = slug(compData.sub);
         }
 
       } else {
 
-        runtimeData[catId].components[compId] = {
+        runtimeData[cat].components[compId] = {
           type: "group",
 
           name: compData.name,
@@ -132,12 +120,7 @@ export function runtimeDataInit(): void {
           items: [],
 
         } as ComponentRuntimeItemGroup;
-
       }
-
     }
-
-    runtimeData[catId].selection.flush();
-    inputs.flush();
   }
 }

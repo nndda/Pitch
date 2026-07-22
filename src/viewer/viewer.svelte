@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
 
   import { state } from "../states/components.svelte";
-  import { ui } from "../states/storage.svelte";
+  import { projectUpdate } from "../storage/db";
   import { generateToC } from "./toc";
 
   let
@@ -61,9 +61,14 @@
       aria-label="Table of Content"
 
 
-      onchange={ev => {
-        ui.update("toc_collapsed", !ev.currentTarget.checked);
-        tocWrapper.classList.toggle("collapsed", ui.state.toc_collapsed);
+      onchange={async ev => {
+        // TODO: I think ToC states are not working :/
+
+        const tocCollapsed = !ev.currentTarget.checked;
+
+        await projectUpdate({ ["app.uiState.TOCCollapsed"]: tocCollapsed});
+
+        tocWrapper.classList.toggle("collapsed", tocCollapsed);
 
         if (ev.currentTarget.checked) {
           generateToC(tocContent, state.currentId);

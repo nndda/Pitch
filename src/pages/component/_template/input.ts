@@ -1,12 +1,17 @@
 import { inputStyling } from "../../../states/runtime";
-import { inputs } from "../../../states/storage.svelte";
+import { getProject, projectUpdate } from "../../../storage/db";
 
-export function isInputVariablesCompatible(
+export async function isInputVariablesCompatible(
   data: ComponentData,
-): boolean {
+): Promise<boolean> {
+
+  const
+    inputData = (await getProject())?.inputs!
+  ;
+
   if (data.compatibleOnInputs) {
     const
-      inputCurrent = Object.keys(inputs.state)
+      inputCurrent = Object.keys(inputData)
     ;
 
     for (const inputReq of data.compatibleOnInputs) {
@@ -21,25 +26,27 @@ export function isInputVariablesCompatible(
   return false;
 }
 
-export function applyUserInput(
+export async function applyUserInput(
   cssVar: string,
   value: ComponentUserInputValue,
-): void {
-  inputs.update(cssVar, value);
+): Promise<void> {
+  // @ts-ignore
+  await projectUpdate({ ["inputs." + cssVar]: value });
 
-  inputStyling.replaceSync("#wrapper {" + constructRule() + "}");
+  inputStyling.replaceSync("#wrapper {" + await constructRule() + "}");
 }
 
-export function removeUserInput(cssVar: string): void {
-  delete inputs.state[cssVar];
-  inputs.flush();
+export async function removeUserInput(cssVar: string): Promise<void> {
+  await projectUpdate(proj => {
+    delete proj.inputs[cssVar];
+  });
 
-  inputStyling.replaceSync("#wrapper {" + constructRule() + "}");
+  inputStyling.replaceSync("#wrapper {" + await constructRule() + "}");
 }
 
-export function constructRule(): string {
+export async function constructRule(): Promise<string> {
   const
-    inputData = inputs.state
+    inputData = (await getProject())?.inputs!
   , cssOut: string[] = []
   ;
 
