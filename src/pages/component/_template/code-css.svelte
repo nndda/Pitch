@@ -33,18 +33,18 @@
     cb: null as null | any, // i am losing brain cells
   };
 
-  onMount(() => {
-    import("./code-editor").then(({ instatiateCSSViewer }) => {
+  onMount(async () => {
+    import("./code-editor").then(async ({ instatiateCSSViewer }) => {
       const cssEditorAPI = instatiateCSSViewer(
-        compiledViewer ? compile() : "\n" + dedent(css) + "\n",
+        compiledViewer ? (await compile()) : "\n" + dedent(css) + "\n",
 
         CSSEditor,
         CSSCopyButton,
         false,
       );
 
-      function updateCompiledCSS() {
-        cssEditorAPI.CSSUpdateCb(compile());
+      async function updateCompiledCSS() {
+        cssEditorAPI.CSSUpdateCb((await compile()));
       }
       destroyCb.cb = updateCompiledCSS;
 
@@ -61,6 +61,7 @@
   });
 </script>
 
+<!-- svelte-ignore css_unused_selector -->
 <style lang="scss">
   @use "./code-editor.scss";
 </style>

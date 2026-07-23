@@ -219,6 +219,8 @@
 
           <button
             class="custom-tip comps-used-btn"
+            class:toggled={false/*wtf*/}
+
             onclick={ev => {
               ev.currentTarget.classList.toggle("toggled");
             }}

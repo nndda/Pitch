@@ -11,7 +11,7 @@
 
   import { project } from "../storage/db";
 
-  import pitchLogo from "../public/icon.svg?url";
+  import pitchLogo from "/icon.svg?url";
 
   import { formatDistanceToNow } from "date-fns";
 

@@ -216,7 +216,7 @@
   id="sidebar"
   class:hide-wip-comps={!$project?.app.settings.app.sidebar.showWipComps}
   class:hide-wip-pages={!$project?.app.settings.app.sidebar.showWipPages}
-  class:faved-badge-on-hover={!!$project?.app.settings.app.sidebar.showFavedBadge}
+  class:faved-badge-on-hover={!$project?.app.settings.app.sidebar.showFavedBadge}
 
   class:show-scope-color={$project?.app.settings.app.sidebar.showScopeColor}
   class:scope-project={$project?.scope === "project"}

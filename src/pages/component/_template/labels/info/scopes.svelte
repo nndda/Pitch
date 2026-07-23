@@ -11,8 +11,6 @@ import { LabelScopes } from "../";
       scopes: Scopes,
       componentData: ComponentData,
     } = $props()
-
-  , compName = componentData.nameDisplay ?? componentData.name
   ;
 </script>
 
@@ -21,13 +19,16 @@ import { LabelScopes } from "../";
     text-transform: capitalize;
   }
 
-  .scopes-list {
-    padding-left: 1em;
-    margin: 0;
-    /* display: inline-block; */
-  }
-
+  // .scopes-list {
+  //   padding-left: 1em;
+  //   margin: 0;
+  //   /* display: inline-block; */
+  // }
 </style>
+
+{#if componentData}
+
+  {@const compName = componentData.nameDisplay ?? componentData.name}
 
 <h2>
   <q class="scope-status">
@@ -52,25 +53,34 @@ import { LabelScopes } from "../";
 
 <p>
   <b>{compName}</b> is
-  {#if scopeStatus === "compatible"}
-    <b>fully compatible</b>
-  {:else if scopeStatus === "partial"}
-    <b>partially compatible</b>
-  {:else if scopeStatus === "none"}
-    <b>not compatible</b>
-  {:else if scopeStatus === "only"}
-    <b>only compatible</b>
-  {/if}
+  <b>
+    {#if scopeStatus === "compatible"}
+      fully compatible
+    {:else if scopeStatus === "partial"}
+      partially compatible
+    {:else if scopeStatus === "none"}
+      not compatible
+    {:else if scopeStatus === "only"}
+      only compatible
+    {/if}
+  </b>
   with the page(s) listed above.
 </p>
 
 <p>
+  {#if scopeStatus === "partial"}
+    The component will appears, or even behave differently on those pages.
+  {/if}
+
+  <!-- TODO -->
+  <!--
   {#if scopeStatus === "compatible"}
   {:else if scopeStatus === "partial"}
     The component will appears, or even behave differently on those pages.
   {:else if scopeStatus === "none"}
   {:else if scopeStatus === "only"}
   {/if}
+   -->
 </p>
 
 {#if componentData.compatibleOnInputs && scopeStatus !== "compatible"}
@@ -84,4 +94,6 @@ import { LabelScopes } from "../";
       <li><code>--{input}</code></li>
     {/each}
   </ul>
+{/if}
+
 {/if}

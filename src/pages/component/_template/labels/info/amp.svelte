@@ -7,10 +7,12 @@
     }: {
       componentData: ComponentData,
     } = $props()
-
-  , compName = componentData.nameDisplay ?? componentData.name
   ;
 </script>
+
+{#if componentData}
+
+  {@const compName = componentData.nameDisplay ?? componentData.name}
 
 <h2>AMP incompatible label</h2>
 
@@ -26,9 +28,11 @@
 </blockquote>
 
 <p>
-  <b>{compName}</b> is incompatible with <a referrerpolicy="no-referrer" rel="nofollower noopener" href="https://en.wikipedia.org/wiki/Accelerated_Mobile_Pages" target="_blank">AMP</a> version of the devlog pages.
+  <b>{componentData.nameDisplay ?? componentData.name}</b> is incompatible with <a referrerpolicy="no-referrer" rel="nofollower noopener" href="https://en.wikipedia.org/wiki/Accelerated_Mobile_Pages" target="_blank">AMP</a> version of the devlog pages.
 </p>
 
 <p>
   More on this <a referrerpolicy="no-referrer" rel="nofollower noopener" href="https://nnda.itch.io/pitch/devlog/1565390/rewrite-release-2-long-overdue-devlog" target="_blank">here</a>.
 </p>
+
+{/if}

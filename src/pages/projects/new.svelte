@@ -18,14 +18,15 @@
 
 
   let
-    nameField: HTMLInputElement
-  , noticeSameName: boolean = $state(false)
+    noticeSameName: boolean = $state(false)
   ;
 
   // TODO: I feel like there's room for refactor
-  async function onNameChange() {
+  async function onNameChange(ev: Event & {
+      currentTarget: EventTarget & HTMLInputElement
+  }) {
     const
-      newName = nameField.value
+      newName = ev.currentTarget.value
     , isNameAlreadyUsed = (await db.projects.get(newName) !== undefined)
     ;
 
@@ -161,7 +162,6 @@
       autocomplete="off"
       placeholder="e.g. My Epic Project"
 
-      bind:this={nameField}
       data-default={$project.name}
 
       oninput={onNameChange}
