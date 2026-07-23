@@ -48,3 +48,16 @@
   flex-grow: 1;
   overflow: hidden;
 }
+
+.social-link-cont {
+  display: flex;
+  gap: .6em;
+  margin-inline: 1em;
+}
+
+.social-link {
+  display: inline-block;
+  padding: .25em;
+  // color: $accent;
+  text-decoration: none;
+}
