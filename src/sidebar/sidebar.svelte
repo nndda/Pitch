@@ -79,7 +79,7 @@
   import { copyStr } from "../scripts/copy";
 
   // TODO ...
-  onMount(() => {
+  onMount(async () => {
     for (const catId in runtimeData) {
       const catComps = runtimeData[catId].components;
 
@@ -101,6 +101,11 @@
         const compData = catComps[compId];
 
         if ("checked" in compData) {
+          compData.li!.classList.toggle(
+            "compatible-all",
+            await isInputVariablesCompatible(compData.manifest),
+          )
+
           syncCompCheckedState(catId, compData, compData.checked);
         }
 
@@ -566,7 +571,6 @@
               class:is-experimental={compData.isExperimental}
               class:is-flavour={compData.manifest.flavour}
 
-              class:compatible-all={isInputVariablesCompatible(compData.manifest)}
               data-scope-partial={compScopeData("partial")}
               data-scope-none={compScopeData("none")}
 
