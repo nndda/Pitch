@@ -84,7 +84,7 @@ export function runtimeDataInit() {
 
               checked: isChecked,
 
-              isFaved: project!.faves[compId] ?? false,
+              isFaved: project?.faves[compId] ?? false,
               isHacky: compData.tags?.includes("hacky") ?? false,
               isExperimental: compData.tags?.includes("experimental") ?? false,
 
