@@ -1,49 +1,43 @@
 <script lang="ts">
   import PageRef from "../elements/page-ref.svelte";
 
+  import { switchContext } from "../../states/storage.svelte";
   import {
-    currentProject,
-    projects,
+    db,
+    projectDefault,
+    projectUpdate,
+    projectCount,
+    project,
 
-    settings,
-    theme,
-    faves,
-    inputs,
-    codes,
-
-    switchContext,
-  } from "../../states/storage.svelte";
-
-  import {
-    catMeta,
-    runtimeData,
-  } from "../../states/runtime";
+    type ProjectsDB,
+  } from "../../storage/db";
 
   const
     { mode = "new" }: { mode: "new" | "edit" } = $props()
-  , currentProjectId = currentProject.get() ?? ""
   ;
+
 
   let
-    nameField: HTMLInputElement
-  , noticeSameName: boolean = $state(false)
+    noticeSameName: boolean = $state(false)
   ;
 
-  function onNameChange() {
+  // TODO: I feel like there's room for refactor
+  async function onNameChange(ev: Event & {
+      currentTarget: EventTarget & HTMLInputElement
+  }) {
     const
-      newName = nameField.value
+      newName = ev.currentTarget.value
+    , isNameAlreadyUsed = (await db.projects.get(newName) !== undefined)
     ;
 
     if (mode === "edit") {
       noticeSameName = (
-        (newName !== projects.state[currentProjectId].name)
+        (newName !== $project?.name)
           &&
-        (newName in projects.state)
+        isNameAlreadyUsed
       )
     } else if (mode === "new") {
-      noticeSameName = (
-        newName in projects.state
-      )
+      noticeSameName = isNameAlreadyUsed
     }
 
     if (noticeSameName) {
@@ -139,6 +133,8 @@
   }
 </style>
 
+{#if $project}
+
 <form
   id="proj-new"
   onsubmit={ev => {
@@ -166,12 +162,11 @@
       autocomplete="off"
       placeholder="e.g. My Epic Project"
 
-      bind:this={nameField}
-      data-default={projects.state[currentProjectId].name}
+      data-default={$project.name}
 
       oninput={onNameChange}
 
-      value={mode === "edit" ? projects.state[currentProjectId].name ?? "" : ""}
+      value={mode === "edit" ? $project.name ?? "" : ""}
     />
 
     <span
@@ -182,6 +177,7 @@
       Project <b><q class="proj-name-display"></q></b> already exists
     </span>
 
+    <!--
     <label for="proj-url">
       itch.io URL <small>(optional)</small>
     </label>
@@ -190,8 +186,9 @@
       id="proj-url"
       autocomplete="off"
       placeholder="e.g. https://nnda.itch.io/pitch"
-      value={mode === "edit" ? projects.state[currentProjectId].url : ""}
+      value={mode === "edit" ? $project.url : ""}
     />
+    -->
   </fieldset>
 
   <fieldset class="group">
@@ -307,45 +304,47 @@
     class="accent"
     id="proj-create"
     type="button"
-    onclick={() => {
+    onclick={async () => {
       function getValue(id: string): string {
+        console.log("id: ", id)
         return (document.getElementById(id) as HTMLInputElement).value;
       }
 
-      const projId = getValue("proj-name");
+      const
+        projId = getValue("proj-name")
+      , isNameChanged = projId !== $project.name
+      , newData: Partial<ProjectsDB> = {
+          scope: (document.querySelector(`[name="proj-scope-select"]:checked`) as HTMLInputElement).value as Scope,
+
+          ...(
+            mode === "new" ? { theme: {
+              text_col: getValue("proj-theme-text"),
+              link_col: getValue("proj-theme-link"),
+              background: getValue("proj-theme-bg"),
+              font_family: getValue("proj-theme-font"),
+            }} : {}
+          ),
+        }
+      ;
 
       if (mode === "edit") {
-        for (const state of [
-          settings,
-          theme,
-          faves,
-          inputs,
-          codes,
-        ]) {
-          state.changeContext(projId);
+        await projectUpdate(newData);
+
+        if (isNameChanged) {
+          await db.transaction("rw", db.projects, async () => {
+            await db.projects.add({
+              ...$project,
+              name: projId,
+            });
+            await db.projects.delete($project.name)
+          });
         }
-
-        for (const cat in runtimeData) {
-          runtimeData[cat].selection.changeContext(projId);
-        }
-
-        delete projects.state[currentProjectId];
-        projects.flush();
-      }
-
-      projects.update(projId, {
-        name: projId,
-        url: getValue("proj-url"),
-        scope: (document.querySelector(`#proj-new [name="proj-scope-select"]:checked`) as HTMLInputElement).value as Scope,
-      });
-
-      if (mode === "new") {
-        theme.state.text_col = getValue("proj-theme-text");
-        theme.state.link_col = getValue("proj-theme-link");
-        theme.state.background = getValue("proj-theme-bg");
-        theme.state.font_family = getValue("proj-theme-font")
-
-        theme.duplicateLocal(projId);
+      } else if (mode === "new") {
+        await db.projects.add({
+          ...projectDefault,
+          ...newData,
+          name: projId,
+        });
       }
 
       switchContext(projId);
@@ -360,34 +359,17 @@
     {/if}
   </button>
 
-  {#if mode === "edit" && Object.keys(projects.state).length > 1}
+  {#if mode === "edit" && $projectCount > 1}
     <button
       class="no-style delete-btn"
       type="button"
-      onclick={() => {
+      onclick={async () => {
         if (
-          confirm(`Delete project "${projects.state[currentProjectId].name ?? ""}"?`)
+          confirm(`Delete project "${$project.name ?? ""}"?`)
         ) {
+          await db.projects.delete($project.name);
 
-          for (const state of [
-            settings,
-            theme,
-            faves,
-            inputs,
-            codes,
-          ]) {
-            state.destroy();
-          }
-
-          for (const cat in runtimeData) {
-            runtimeData[cat].selection.destroy();
-          }
-
-          delete projects.state[currentProjectId];
-          projects.flush();
-
-          switchContext(Object.keys(projects.state)[0]);
-
+          switchContext((await db.projects.toCollection().first())?.name!);
         }
       }}
     >
@@ -397,3 +379,5 @@
   {/if}
 
 </form>
+
+{/if}

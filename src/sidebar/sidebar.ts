@@ -5,7 +5,11 @@ import {
   eventCSSCompiled,
 } from "../states/runtime";
 
-export function updateCatSelectionState(catId: string): void {
+import { getProject } from "../storage/db";
+
+export async function updateCatSelectionState(catId: string): Promise<void> {
+  const project = (await getProject())!;
+
   let
     selected: number = 0
   , total: number = 0
@@ -20,7 +24,6 @@ export function updateCatSelectionState(catId: string): void {
   ;
 
   for (const compId in catData.components) {
-  // for (const compId in catData.selection.state) {
     const isVisible = catData.components[compId].li!.checkVisibility();
 
     total += 1;
@@ -29,13 +32,9 @@ export function updateCatSelectionState(catId: string): void {
       totalVisible += 1;
     }
 
-    // if (catData.selection.state[compId]) {
-    //   selected += 1;
-    // };
-
     // TODO: i feel like there's better pattern
     if ("chkBox" in catData.components[compId]) {
-      const checked = catData.components[compId].chkBox!.checked;
+      const checked = project.components[catId][compId] ?? false;
 
       if (checked) {
         selected += 1
@@ -69,7 +68,6 @@ export function updateCatSelectionState(catId: string): void {
   }
 
   catData.selectedCountEl!.textContent = `${selected}`;
-  catData.selection.flush();
 
   event.dispatchEvent(new Event(eventCSSCompiled));
 }

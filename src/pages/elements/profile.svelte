@@ -1,16 +1,17 @@
 <script lang="ts">
-  import { onMount, type Component } from "svelte";
+  import {
+    type Component,
+  } from "svelte";
+
   import {
     currentProject,
-
-    user as userData,
-    projects,
-    theme,
-
     switchContext,
-
-    type ItchProfile,
   } from "../../states/storage.svelte";
+
+  import {
+    projectCount,
+    projectArr,
+  } from "../../storage/db";
 
   import {
     switchPage,
@@ -20,38 +21,6 @@
   // Projects
   import ProjectNew from "../projects/new.svelte";
 
-  const
-    isInsideItch = typeof Itch !== "undefined"
-  ;
-
-  onMount(() => {
-    if (isInsideItch) {
-      fetch(
-        "https://itch.io/api/1/jwt/me",
-        {
-          headers: {
-            Authorization: process.env.ITCHIO_API_KEY as string,
-          },
-        },
-      )
-        .then(res => res.json())
-        .then(json => JSON.parse(json))
-        .then(({ user }: { user: ItchProfile }) => {
-
-          userData.merge(user);
-          userData.flush();
-
-          (
-            document.getElementById("pitch-avatar") as HTMLImageElement
-          ).src = user.cover_url;
-
-          document.getElementById("pitch-displayname")!.textContent = user.display_name;
-          document.getElementById("pitch-userurl")!.textContent = user.username + ".itch.io";
-
-        })
-      ;
-    }
-  });
 </script>
 
 <style lang="scss">
@@ -108,7 +77,6 @@
 <div class="profile-cont">
   <div class="avatar">
     <img id="pitch-avatar" src="./icon.svg" alt="">
-    <!-- <img id="pitch-avatar" src="https://itch.io/static/images/frog.png" alt=""> -->
   </div>
 
   <div class="info">
@@ -117,13 +85,6 @@
     </div>
     <small id="pitch-userurl">v3.0.0</small>
   </div>
-  <!--
-  <div>
-    <button>
-      <i class="fa-solid fa-right-from-bracket"></i>
-    </button>
-  </div>
-  -->
 </div>
 
 <div class="project-cont">
@@ -134,9 +95,10 @@
         unselectSidebarPage();
         switchPage("New project", ProjectNew as Component, { mode: "new" })();
       }}
-      disabled={ Object.keys(projects.state).length >= 5 }
+      disabled={ $projectCount >= 50 }
     >
       <i class="fa-solid fa-plus"></i>
+
       <span class="custom-tip-content custom-right">
         Create new project
       </span>
@@ -150,6 +112,7 @@
       }}
     >
       <i class="fa-solid fa-pencil"></i>
+
       <span class="custom-tip-content custom-right">
         Edit project
       </span>
@@ -163,12 +126,12 @@
         switchContext(ev.currentTarget.value);
       }}
     >
-      {#each Object.keys(projects.state) as projId, i}
+      {#each $projectArr as project, i}
         <option
-          value={projId}
-          selected={currentProject.get() === projId || i === 0}
+          value={project.name}
+          selected={currentProject.get() === project.name}
         >
-          {projects.state[projId].name}
+          {project.name}
         </option>
       {/each}
     </select>

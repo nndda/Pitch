@@ -1,11 +1,25 @@
 <script lang="ts">
   import {
-    settings,
-    type RecordString,
-  } from "../states/storage.svelte";
-  type SettingsKey = keyof typeof settings.state;
+    Dexie,
+  } from "dexie";
 
-  // NOTE: current implementation can only have one-level of nested item though :/
+  import {
+    getProject,
+    projectUpdate,
+    // type ProjectsDB,
+  } from "../storage/db";
+
+  let
+    settingsObj: Object = {}
+  ;
+  getProject().then(proj => {
+    settingsObj = proj?.app.settings!;
+  });
+
+  // NOTE: still figuring out this for the below
+  // type SettingsKey = keyof ProjectsDB["app"]["settings"]
+  // NOTE: there has to be a better way.
+  // current implementation can only have one-level of nested item :/
   interface SettingsData {
     [cat: string]: {
       [item: string]: SettingsItem | {
@@ -13,6 +27,7 @@
       },
     },
   }
+
   interface SettingsItem {
     name: string,
     type?: "boolean" | "string" | "number",
@@ -26,49 +41,50 @@
           name: "Minify output",
           desc: "Minify the CSS output, reducing its size, at the cost of readability.",
         },
-        isolate_comment_section: {
+        isolateCommentSection: {
           name: "Isolate comment section",
           desc: "Disallow comment section from using the CSS components.",
         },
       },
 
       app: {
-        auto_copy: {
+        autoCopy: {
           name: "Auto-copy",
           desc: "Copy the CSS, every time a component gets added/removed.",
         },
-        show_home_tips: {
+        showHomeTips: {
           name: "Show tips",
           desc: "Show tips box on the home page.",
         },
 
         sidebar: {
-          show_scope_color: {
+          showScopeColor: {
             name: "Color the component list item based on their scopes",
             desc: `Components that are partially compatible with the current scope will be colored yellow.<br> And components that are not compatible at all will be marked yet.`
           },
-          show_plzzz: {
+          showPlzzz: {
             name: "Show 👉👈 decoration",
           },
-          show_selected_count: {
+          showSelectedCount: {
             name: "Show selected component count",
           },
-          category_action_on_hover: {
+          categoryActionOnHover: {
             name: "Show category actions on hover",
             desc: `Actions on the category heading, such as expanding/collapsing or selecting/deselecting will be shown when hovered instead.`,
           },
-          show_faved_badge: {
+          showFavedBadge: {
             name: "Always show component's favourite badge",
           },
-          show_wip_comps: {
+          showWipComps: {
             name: "Show WIP components"
           },
-          show_wip_pages: {
+          showWipPages: {
             name: "Show WIP pages",
           },
         },
       },
     }
+
   , nameMap: RecordString = {
       css: "CSS",
       app: "Pitch App",
@@ -139,7 +155,7 @@
 </style>
 
 {#snippet Item(
-  id: SettingsKey,
+  id: string,
   itemData: SettingsItem | {
     [itemSub: string]: SettingsItem,
   },
@@ -152,18 +168,18 @@
         type="checkbox"
         id={id}
 
-        checked={settings.state[id]}
-        onchange={ev => {
-          settings.update(
-            id,
-            ev.currentTarget.checked,
-          )
+        checked={Dexie.getByKeyPath(settingsObj, id)}
+
+        onchange={async ev => {
+          // @ts-ignore
+          await projectUpdate({ ["app.settings." + id]: ev.currentTarget.checked });
         }}
       />
       <label for={id}>
         <i class="fa-regular fa-circle checked-not"></i>
         <i class="fa-solid fa-circle-check checked"></i>
         {@html itemData.name}
+        <!-- <code><small>{id}</small></code> -->
       </label>
 
       {#if itemData.desc}
@@ -187,13 +203,13 @@
         {@const itemData = settingsData[cat][item]}
 
         {#if itemData.name}
-          {@render Item(`${cat}.${item}` as SettingsKey, itemData)}
+          {@render Item(`${cat}.${item}`, itemData)}
         {:else}
           <fieldset class="group">
             <legend>{nameMap[item]}</legend>
 
             {#each Object.keys(itemData) as itemSub}
-              {@render Item(`${cat}.${item}.${itemSub}` as SettingsKey, (itemData as { [itemSub: string]: SettingsItem} )[itemSub])}
+              {@render Item(`${cat}.${item}.${itemSub}`, (itemData as { [itemSub: string]: SettingsItem} )[itemSub])}
             {/each}
           </fieldset>
         {/if}

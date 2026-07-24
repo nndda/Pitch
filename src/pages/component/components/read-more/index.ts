@@ -1,0 +1,46 @@
+import css from "./styles?css-component";
+
+export default {
+  css: css,
+
+  name: "Read More",
+
+  page: async () => (await import("./page.svelte")).default,
+
+  scopes: {
+    compatible: [
+      "project",
+      "jam",
+    ],
+    partial: "profile",
+  },
+
+  tags: [
+    "hacky",
+  ],
+
+  input: [
+    {
+      name: "Expanded text",
+      var: "read-more-open",
+      default: "Read more...",
+      type: "string",
+    },
+    {
+      name: "Collapsed text",
+      var: "read-more-close",
+      default: "Read less...",
+      type: "string",
+    },
+    {
+      name: "Color",
+      var: "read-more-color",
+      default: "",
+      type: "color",
+    },
+  ],
+  compatibleOnInputs: [
+    "read-more-color",
+  ],
+
+} as ComponentData;

@@ -10,7 +10,7 @@
     }
     = $props()
   ;
-  import { ComponentRef, ItchPreview } from "../component/_template/components";
+  import { ComponentRef, ItchPreview } from "../elements";
 </script>
 
 <div class="comp-cont {classes || ""}">

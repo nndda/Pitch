@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
 
   import { state } from "../states/components.svelte";
-  import { ui } from "../states/storage.svelte";
+  import { projectUpdate } from "../storage/db";
   import { generateToC } from "./toc";
 
   let
@@ -54,6 +54,48 @@
 
     <div class="flex-space"></div>
 
+    <div class="social-link-cont">
+      {#each [
+        {
+          name: "Bluesky",
+          url: "bsky.app/profile/nnda.dev",
+          icon: "bluesky"
+        },
+        {
+          name: "Patreon",
+          url: "www.patreon.com/nnda",
+          icon: "patreon"
+        },
+        {
+          name: "Ko-fi",
+          url: "ko-fi.com/nnda",
+          icon: "ko-fi"
+        },
+        {
+          name: "itch.io",
+          url: "nnda.itch.io/",
+          icon: "itch-io"
+        },
+        {
+          name: "GitHub",
+          url: "github.com/nndda/Pitch",
+          icon: "github"
+        },
+      ] as { name, url, icon }}
+        <a
+          target="_blank"
+          href="https://{url}"
+          rel="nofollow noopener"
+          class="social-link custom-tip button"
+        >
+          <i class="fa-brands fa-{icon}"></i>
+          <span class="custom-tip-content">
+            {name}
+          </span>
+        </a>
+      {/each}
+    </div>
+
     <input
       type="checkbox"
       class="toggle"
@@ -61,9 +103,14 @@
       aria-label="Table of Content"
 
 
-      onchange={ev => {
-        ui.update("toc_collapsed", !ev.currentTarget.checked);
-        tocWrapper.classList.toggle("collapsed", ui.state.toc_collapsed);
+      onchange={async ev => {
+        // TODO: I think ToC states are not working :/
+
+        const tocCollapsed = !ev.currentTarget.checked;
+
+        await projectUpdate({ ["app.uiState.TOCCollapsed"]: tocCollapsed});
+
+        tocWrapper.classList.toggle("collapsed", tocCollapsed);
 
         if (ev.currentTarget.checked) {
           generateToC(tocContent, state.currentId);

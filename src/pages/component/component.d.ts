@@ -192,7 +192,6 @@ declare global {
       [compId: string]: ComponentRuntimeItem | ComponentRuntimeItemGroup,
     },
 
-    selection: StorageAPIWithContext<RecordBoolean>,
     selectedCountEl?: HTMLElement,
     catSelectBtn?: HTMLButtonElement,
   }

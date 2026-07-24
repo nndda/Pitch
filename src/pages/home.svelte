@@ -8,9 +8,10 @@
   import Tip from "./resources/tips.svelte";
 
   import Previews from "./previews/all.svelte";
-  import { settings } from "../states/storage.svelte";
 
-  import pitchLogo from "../public/icon.svg?url";
+  import { project } from "../storage/db";
+
+  import pitchLogo from "/icon.svg?url";
 
   import { formatDistanceToNow } from "date-fns";
 
@@ -110,7 +111,7 @@
 
     <div
       class="tips"
-      class:hidden={!settings.state["app.show_home_tips"]}
+      class:hidden={!$project?.app.settings.app.showHomeTips}
     >
       <Tip/>
     </div>

@@ -33,20 +33,18 @@
   padding: 0 1em;
 }
 
-:global {
-  .comps-used-btn.toggled {
-    color: $background-dark;
-    background: $text-col;;
+.comps-used-btn.toggled {
+  color: $background-dark;
+  background: $text-col;;
+}
+
+.entry:has(.comps-used-btn.toggled) {
+
+  & .thumb img {
+    filter: blur(9px) brightness(55%) grayscale(50%);
   }
-
-  .entry:has(.comps-used-btn.toggled) {
-
-    & .thumb img {
-      filter: blur(9px) brightness(55%) grayscale(50%);
-    }
-    & .comps-used-list {
-      display: flex;
-    }
+  & .comps-used-list {
+    display: flex;
   }
 }
 
@@ -91,7 +89,8 @@
 
     --l: linear-gradient(180deg, #fff 60%, #0000);
     -webkit-mask-image: var(--l);
-    mask: alpha var(--l);
+    mask-image: var(--l);
+    mask-type: alpha;
 
     border: 1px solid $border-col;
     border-radius: 7px 7px 0 0;

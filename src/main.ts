@@ -9,6 +9,10 @@ document.addEventListener("DOMContentLoaded", async () => {
   , placeholderEl = document.getElementById("placeholder")!
   ;
 
+  loadingText.textContent = "storage";
+  const db = await import("./storage/db");
+  await db.init();
+
   loadingText.textContent = "styling";
   await import("./app.scss");
 

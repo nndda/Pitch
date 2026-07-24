@@ -1,7 +1,7 @@
 <script lang="ts">
   import { shuffle } from "lodash";
 
-  import  { ComponentRef } from "../component/_template/components";
+  import  { ComponentRef } from "../elements";
 
   interface ShowcaseEntry {
     title?: string,
@@ -137,6 +137,31 @@
         "Toggle",
       ],
     },
+
+    {
+      title: "Don't Slime Down",
+      desc: "",
+
+      author: {
+        name: "Inaudito Studios",
+        username: "inauditostudios",
+      },
+
+      itchioSlug: "inauditostudios.itch.io/dont-slime-down",
+      image: "inauditostudios.itch.io__dont-slime-down.png",
+
+      type: "project",
+
+      compsUsed: [
+        "Callout",
+        "Info List",
+        "Input",
+        "Toggle",
+        "Tooltip",
+        "Author Badge",
+        "Comment Vote Icons",
+      ],
+    },
   ]);
 </script>
 
@@ -194,6 +219,8 @@
 
           <button
             class="custom-tip comps-used-btn"
+            class:toggled={false/*wtf*/}
+
             onclick={ev => {
               ev.currentTarget.classList.toggle("toggled");
             }}

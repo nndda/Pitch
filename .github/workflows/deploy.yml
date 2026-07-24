@@ -1,9 +1,14 @@
 name: Deploy app
 
 on:
+  pull_request:
+    branches:
+      - dev
+      - main
   push:
     branches:
       - main
+      - dev
     paths:
       - '.github/workflows/deploy.yml'
       - 'package.json'
@@ -20,8 +25,25 @@ env:
   BUTLER_VER: 15.27.0
 
 jobs:
+  build-test: # ---------------------------------------------------------------
+    name: Test Build
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v6.0.2
+      - uses: ./.github/actions/setup-bun
+
+      - name: Build app
+        run: |
+          bun run build
+
   deploy-gh-pages: # ----------------------------------------------------------
     name: Deploy to GitHub Pages
+    if: ${{ github.ref_name == 'main' && github.event_name == 'push' }}
+
+    needs:
+      - build-test
 
     permissions:
       contents: read
@@ -35,7 +57,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v6.0.2
+      - uses: actions/checkout@v6.0.3
       - uses: ./.github/actions/setup-bun
 
       - name: Build app
@@ -53,13 +75,17 @@ jobs:
         with:
           artifact_name: github-pages
 
-  deploy-itch: # ---------------------------------------------------------
-    name: Deploy to itch.io
+  deploy-itch-nightly: # ---------------------------------------------------------
+    name: Deploy to itch.io (nightly)
+    if: ${{ github.ref_name == 'dev' && github.event_name == 'push' }}
+
+    needs:
+      - build-test
 
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v6.0.2
+      - uses: actions/checkout@v6.0.3
       - uses: ./.github/actions/setup-bun
 
       - name: Build app

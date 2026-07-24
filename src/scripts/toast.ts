@@ -29,6 +29,19 @@ export function toast(
   })
 }
 
+export function toastErr(
+  message: string,
+  cfg: any = {},
+): void {
+  toastN({
+    ... defaultToast,
+    message: `<i class="fa-solid fa-circle-xmark"></i> ` + message,
+
+    duration: 9000,
+    ... cfg,
+  })
+}
+
 export function copyFailed(): void {
   toastN({
     ... defaultToast,

@@ -1,0 +1,87 @@
+@use "../../styles/variables" as *;
+@use "sass:color";
+
+:global .page-header-list {
+  $block-spacing: 2em;
+
+  display: flex;
+  flex-direction: column;
+  gap: .65em;
+
+  position: relative;
+  margin: 0;
+  padding-block: .75em;
+  padding-right: $block-spacing;
+  background: $background-light;
+  border-bottom: 1px solid $border-col;
+  left: -$block-spacing;
+  width: calc(100% + ($block-spacing * 2));
+
+  & > .note {
+    display: flex;
+
+    & p {
+      margin: 0;
+    }
+  }
+
+  & .label {
+    margin-right: 1em;
+    text-transform: capitalize;
+    padding: 0 .5em;
+    border-radius: 4px;
+
+    &.hacky {
+      background: #18f08b;
+      color: #1c1813;
+    }
+
+    &.experimental {
+      background: $primary;
+      color: #1c1813;
+    }
+
+    &.singular {
+      background: white;
+      color: #1c1813;
+    }
+
+    &.note {
+      background: rgba($text-col, 0.8);
+      color: $background;
+    }
+  }
+}
+
+:global #wrapper figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  padding: 1.5em;
+  border: 2px solid $border-col;
+  border-radius: 6px;
+
+  & > figcaption {
+    margin-top: 1em;
+    font-style: normal;
+  }
+}
+
+.heading {
+  display: flex
+}
+
+.buttons-list {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+  gap: .25em;
+  /* margin-inline: .5em; */
+  margin-left: .5em;
+}
+.comp-btns {
+  display: flex;
+  align-items: center;
+}
