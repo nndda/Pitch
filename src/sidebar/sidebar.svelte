@@ -19,7 +19,7 @@
   import {
     constructRule,
     isInputVariablesCompatible,
-  } from "../pages/component/_template/input";
+  } from "../pages/elements/input";
 
   // TODO: I feel like this should be somewhere else more appropriate :/
   constructRule().then(rules => {

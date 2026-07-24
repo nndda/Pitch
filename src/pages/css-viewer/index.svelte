@@ -1,7 +1,7 @@
 <script lang="ts">
   import {
     CodeViewerCSS,
-  } from "../component/_template/components";
+  } from "../elements";
 </script>
 
 <CodeViewerCSS css={""} compiledViewer={true}/>

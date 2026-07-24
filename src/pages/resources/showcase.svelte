@@ -1,7 +1,7 @@
 <script lang="ts">
   import { shuffle } from "lodash";
 
-  import  { ComponentRef } from "../component/_template/components";
+  import  { ComponentRef } from "../elements";
 
   interface ShowcaseEntry {
     title?: string,

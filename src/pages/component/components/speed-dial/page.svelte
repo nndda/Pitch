@@ -1,0 +1,117 @@
+<script lang="ts">
+  export let data: ComponentData;
+  import { ComponentPage, CodeEditor, ComponentRef } from "../../../elements";
+</script>
+
+<ComponentPage data={data}>
+  <style>
+    .html-view {
+      position: relative;
+      min-height: 230px;
+    }
+  </style>
+
+  <p>
+    Floating button on the bottom-right corner of your page, that reveals more buttons when clicked.
+  </p>
+
+  <CodeEditor html={`
+
+    <div class="custom-speed-dial">
+      <ul class="custom-speed-dial-content">
+        <li>
+          <a href="https://www.patreon.com/nnda" class="custom-speed-dial-btn">
+            <img src="https://cdn.simpleicons.org/patreon/fff" loading="lazy">
+          </a>
+        </li>
+
+        <li>
+          <a href="https://buymeacoffee.com/nnda" class="custom-speed-dial-btn">
+            <img src="https://cdn.simpleicons.org/buymeacoffee/fff" loading="lazy">
+          </a>
+        </li>
+
+        <li>
+          <a href="https://ko-fi.com/nnda" class="custom-speed-dial-btn">
+            <img src="https://cdn.simpleicons.org/kofi/fff" loading="lazy">
+          </a>
+        </li>
+      </ul>
+
+      <details>
+        <summary>
+          <img alt="Open" src="https://s2.svgbox.net/octicons.svg?ic=heart-fill&amp;color=white" loading="lazy">
+          <img alt="Close" src="https://s2.svgbox.net/octicons.svg?ic=x&amp;color=white" loading="lazy">
+        </summary>
+      </details>
+    </div>
+
+  `}/>
+
+  <blockquote class="custom-callout">
+
+    <h4>Buttons Count</h4>
+
+    <p>
+      Keep the buttons count to 3-6 buttons.
+    </p>
+
+  </blockquote>
+
+  <p>
+    To change the button's icon, change the <code>&lt;img&gt;</code> tag inside <code>&lt;summary&gt;</code> with the <code>alt</code> "Open" and "Close" appropriately.
+  </p>
+
+  <h2>Tooltips</h2>
+
+  <p>
+    Every buttons on Speed Dial were designed to only have icon. To label the button, you can pair it with the <ComponentRef comp="Tooltip"/> component.
+  </p>
+
+  <CodeEditor html={`
+
+    <div class="custom-speed-dial custom-tip">
+      <ul class="custom-speed-dial-content">
+        <li>
+          <a href="https://www.patreon.com/nnda" class="custom-speed-dial-btn custom-tip">
+            <img loading="lazy" src="https://cdn.simpleicons.org/patreon/fff">
+            <span class="custom-tip-content custom-left">
+              Patreon
+            </span>
+          </a>
+        </li>
+
+        <li>
+          <a href="https://buymeacoffee.com/nnda" class="custom-speed-dial-btn custom-tip">
+            <img loading="lazy" src="https://cdn.simpleicons.org/buymeacoffee/fff">
+            <span class="custom-tip-content custom-left">
+              Buy Me A Coffee
+            </span>
+          </a>
+        </li>
+
+        <li>
+          <a href="https://ko-fi.com/nnda" class="custom-speed-dial-btn custom-tip">
+            <img loading="lazy" src="https://cdn.simpleicons.org/kofi/fff">
+            <span class="custom-tip-content custom-left">
+              Ko-fi
+            </span>
+          </a>
+        </li>
+      </ul>
+
+      <details open>
+        <summary>
+          <img loading="lazy" alt="Open" src="https://s2.svgbox.net/octicons.svg?ic=heart-fill&color=white">
+          <img loading="lazy" alt="Close" src="https://s2.svgbox.net/octicons.svg?ic=x&color=white">
+        </summary>
+      </details>
+
+      <span class="custom-tip-content custom-left">
+        Support me!
+      </span>
+    </div>
+
+  `}/>
+
+</ComponentPage>

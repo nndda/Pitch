@@ -1,10 +1,5 @@
 # Pitch-specific components
-src/pages/component/components/*
-!src/pages/component/components/*.*
-src/pages/component/decorations/*
-!src/pages/component/decorations/*.*
-src/pages/component/tweaks/*
-!src/pages/component/tweaks/*.*
+src/pages/component/**/*/styles
 
 # Opinionated dev workspace
 ign-*

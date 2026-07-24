@@ -1,10 +1,10 @@
 import { defineConfig } from "vite";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
-import { resolve } from "path";
+import { resolve, join, relative } from "path";
 import { execSync } from "child_process";
 
 function abs(path: string): string {
-  return resolve(__dirname, path)
+  return resolve(import.meta.dirname, path)
 }
 
 // Pitch CSS components tooling
@@ -14,9 +14,9 @@ import {
   copyFile,
 } from "fs/promises";
 
-import {
-  readdirSync,
-} from "fs";
+// import {
+//   readdirSync,
+// } from "fs";
 
 import postcss from "postcss";
 import autoprefixer from "autoprefixer";
@@ -36,35 +36,21 @@ const
     })),
     autoprefixer(),
   ])
-, CSSCompsBaseDir = "src/pages/component/"
+// , CSSCompsBaseDir = "src/pages/component/"
 , reCSSCompsSrc = /src\/pages\/component\/(components|decorations|tweaks)\/.+\.css$/
 , reCSSExt = /\.css$/
 ;
 
 console.log(
-  "Pitch: dev server started",
-  "\n",
-  "Pitch: copying components' CSS...",
+  "Pitch: dev server started\nPitch: copying components' CSS...",
 );
 
-for (const compType of [
-  "components",
-  "decorations",
-  "tweaks",
-]) {
-  for (const path of readdirSync(CSSCompsBaseDir + compType)) {
-
-    if (reCSSExt.test(path)) {
-      // console.log(`Pitch: copying ${compType}/${path}...`);
-
-      const absPath = CSSCompsBaseDir + compType + "/" + path;
-
-      copyFile(absPath, absPath.replace(reCSSExt, "")).then(() => {
-        console.log(`Pitch: ${compType}/${path} copied!`)
-      });
-    }
-
-  }
+for (const cssPath of fg.globSync(
+  join(abs("."), "src/pages/component/**/*.css"),
+)) {
+  copyFile(cssPath, cssPath.replace(reCSSExt, "")).then(() => {
+    console.log(`Pitch: ${relative(import.meta.dirname, cssPath)} copied!`)
+  });
 }
 
 import packageJSON from "./package.json";
@@ -133,9 +119,9 @@ export default defineConfig({
       configureServer(server) {
         server.watcher
           .add(fg.sync([
-              "src/pages/component/components/*.css",
-              "src/pages/component/decorations/*.css",
-              "src/pages/component/tweaks/*.css",
+              "src/pages/component/components/**/*/styles.css",
+              "src/pages/component/decorations/**/*/styles.css",
+              "src/pages/component/tweaks/**/*/styles.css",
           ]))
           .on("change", path => {
             if (reCSSCompsSrc.test(path)) {
@@ -144,8 +130,6 @@ export default defineConfig({
 
               copyFile(path, path.replace(reCSSExt, "")).then(() => {
                 console.log(`Pitch: ${path} copied!`);
-
-                // server.hot.send({ type: "full-reload", });
               });
             }
           });
