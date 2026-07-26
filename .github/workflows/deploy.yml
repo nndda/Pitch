@@ -38,66 +38,66 @@ jobs:
         run: |
           bun run build
 
-  deploy-gh-pages: # ----------------------------------------------------------
-    name: Deploy to GitHub Pages
-    if: ${{ github.ref_name == 'main' && github.event_name == 'push' }}
+  # deploy-gh-pages: # ----------------------------------------------------------
+  #   name: Deploy to GitHub Pages
+  #   if: ${{ github.ref_name == 'main' && github.event_name == 'push' }}
 
-    needs:
-      - build-test
+  #   needs:
+  #     - build-test
 
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
+  #   permissions:
+  #     contents: read
+  #     pages: write
+  #     id-token: write
 
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  #   environment:
+  #     name: github-pages
+  #     url: ${{ steps.deployment.outputs.page_url }}
 
-    runs-on: ubuntu-latest
+  #   runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v6.0.3
-      - uses: ./.github/actions/setup-bun
+  #   steps:
+  #     - uses: actions/checkout@v6.0.3
+  #     - uses: ./.github/actions/setup-bun
 
-      - name: Build app
-        run: |
-          bun run build --base=/Pitch/
+  #     - name: Build app
+  #       run: |
+  #         bun run build --base=/Pitch/
 
-      - name: Upload GitHub Pages artifact
-        uses: actions/upload-pages-artifact@v5
-        with:
-          path: dist/
+  #     - name: Upload GitHub Pages artifact
+  #       uses: actions/upload-pages-artifact@v5
+  #       with:
+  #         path: dist/
 
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v5
-        with:
-          artifact_name: github-pages
+  #     - name: Deploy to GitHub Pages
+  #       id: deployment
+  #       uses: actions/deploy-pages@v5
+  #       with:
+  #         artifact_name: github-pages
 
-  deploy-itch-nightly: # ---------------------------------------------------------
-    name: Deploy to itch.io (nightly)
-    if: ${{ github.ref_name == 'dev' && github.event_name == 'push' }}
+  # deploy-itch-nightly: # ---------------------------------------------------------
+  #   name: Deploy to itch.io (nightly)
+  #   if: ${{ github.ref_name == 'dev' && github.event_name == 'push' }}
 
-    needs:
-      - build-test
+  #   needs:
+  #     - build-test
 
-    runs-on: ubuntu-latest
+  #   runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v6.0.3
-      - uses: ./.github/actions/setup-bun
+  #   steps:
+  #     - uses: actions/checkout@v6.0.3
+  #     - uses: ./.github/actions/setup-bun
 
-      - name: Build app
-        run: |
-          bunx vite build --base="./" -- --nightly
+  #     - name: Build app
+  #       run: |
+  #         bunx vite build --base="./" -- --nightly
 
-      - uses: ./.github/actions/setup-butler
-        with:
-          BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
+  #     - uses: ./.github/actions/setup-butler
+  #       with:
+  #         BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
 
-      - name: Push to Pitch nightly
-        run: |
-          ./butler push ./dist/ nnda/pitch-nightly:web --userversion-file ./dist/version.txt
-        env:
-          BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
+  #     - name: Push to Pitch nightly
+  #       run: |
+  #         ./butler push ./dist/ nnda/pitch-nightly:web --userversion-file ./dist/version.txt
+  #       env:
+  #         BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
