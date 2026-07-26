@@ -1,6 +1,6 @@
 import { defineConfig } from "vite";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
-import { resolve, join, relative } from "path";
+import { resolve, relative } from "path";
 import { execSync } from "child_process";
 
 function abs(path: string): string {
@@ -28,7 +28,8 @@ import cssnanoPresetAdvanced from "cssnano-preset-advanced";
 import fg from "fast-glob";
 
 const
-  postcsssssss = postcss([
+  root = abs(".")
+, postcsssssss = postcss([
     cssnano(cssnanoPresetAdvanced({
       discardOverridden: false,
       discardUnused: false,
@@ -46,7 +47,7 @@ console.log(
 );
 
 for (const cssPath of fg.globSync(
-  join(abs("."), "src/pages/component/**/*.css"),
+  resolve(root, "./src/pages/component/**/*.css"),
 )) {
   copyFile(cssPath, cssPath.replace(reCSSExt, "")).then(() => {
     console.log(`Pitch: ${relative(import.meta.dirname, cssPath)} copied!`)
@@ -68,7 +69,7 @@ const
 
 // https://vite.dev/config/
 export default defineConfig({
-  root: abs("./src/"),
+  root: resolve(root, "./src/"),
 
   plugins: [
     svelte(),
@@ -118,11 +119,9 @@ export default defineConfig({
 
       configureServer(server) {
         server.watcher
-          .add(fg.sync([
-              "src/pages/component/components/**/*/styles.css",
-              "src/pages/component/decorations/**/*/styles.css",
-              "src/pages/component/tweaks/**/*/styles.css",
-          ]))
+          .add(fg.globSync(
+            resolve(root, "./src/pages/component/**/*.css"),
+          ))
           .on("change", path => {
             if (reCSSCompsSrc.test(path)) {
 
