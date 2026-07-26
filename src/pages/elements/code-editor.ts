@@ -5,6 +5,10 @@ import { css as codemirrorCSS } from "@codemirror/lang-css";
 import "./codemirror.scss";
 
 import {
+  extractFontFace,
+} from "../../scripts/css";
+
+import {
   itchStyling,
   inputStyling,
   fontLocalStyling,
@@ -16,23 +20,6 @@ export let
   view: EditorView
 , viewCSS: EditorView
 ;
-
-function getRules(
-  rules: CSSRuleList,
-  output: CSSRule[] = [],
-): CSSRule[] {
-  for (let n = rules.length; n-- > 0;) {
-    const rule = rules[n];
-
-    output.push(rule);
-
-    if (rule instanceof CSSGroupingRule) {
-      getRules(rule.cssRules, output);
-    }
-  }
-
-  return output;
-}
 
 import DOMPurify from "dompurify";
 
@@ -183,25 +170,15 @@ export function instatiateEditor(
     CSSEditorResetButton.disabled = !(cssInit !== css);
     localStyling.replaceSync(css);
 
-    if (css.includes("@font-face")) {
-      const
-        cssFonts: string[] = []
-      ;
+    const fontFaces = extractFontFace(css);
 
-      for (const rule of getRules(localStyling.cssRules)) {
-        if (rule instanceof CSSFontFaceRule) {
-          cssFonts.push(rule.cssText);
-        }
-      }
-
+    if (fontFaces !== "") {
       if (!(uid in fontLocalStyling)) {
         fontLocalStyling[uid] = new CSSStyleSheet();
         document.adoptedStyleSheets.push(fontLocalStyling[uid]);
       }
 
-      fontLocalStyling[uid].replaceSync(
-        cssFonts.join(""),
-      );
+      fontLocalStyling[uid].replaceSync(fontFaces);
     }
   }
 
