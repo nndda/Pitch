@@ -1,10 +1,7 @@
 @font-face {
   font-family: "FA Tree List - Directory";
-  font-style: normal;
-  font-display: swap;
-  font-weight: 400;
-  /*src: url("./list__tree-list__directory.icons.woff2") format("woff2");*/
-  src: url("https://cdn.jsdelivr.net/gh/nndda/Pitch@7a4c67c780b46e9b528eae48d2d0aa1ca8d7311a/src/pages/component/components/list__tree-list__directory.icons.woff2") format("woff2");
+  /*src: url("./icons.woff2") format("woff2");*/
+  src: url("https://cdn.jsdelivr.net/gh/nndda/Pitch@16c8bd97133cebe0208d2cfbc64e0527a92ba65c/src/pages/component/components/list/tree-list/directory/icons.woff2") format("woff2");
 }
 
 .custom-tree.custom-directory {
