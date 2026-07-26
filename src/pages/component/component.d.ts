@@ -20,6 +20,11 @@ declare global {
   interface CSSData {
     raw: string,
     compressed: string,
+
+    fontFaces: {
+      raw: string,
+      compressed: string,
+    },
   }
 
   type Scope =

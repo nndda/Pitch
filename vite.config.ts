@@ -3,6 +3,8 @@ import { svelte } from "@sveltejs/vite-plugin-svelte";
 import { resolve, relative } from "path";
 import { execSync } from "child_process";
 
+import "./src/pages/component/component.d.ts";
+
 function abs(path: string): string {
   return resolve(import.meta.dirname, path)
 }
@@ -26,6 +28,30 @@ import cssnanoPresetAdvanced from "cssnano-preset-advanced";
 
 // i hate life
 import fg from "fast-glob";
+
+import type {
+  ChildNode,
+} from "postcss";
+
+function extractFontFace(
+  cssSrc: string,
+): string {
+  return postcss
+    .parse(cssSrc, { from: undefined, })
+    .nodes
+    .map((child: ChildNode): string => {
+      if (
+        child.type === "atrule" &&
+        child.name === "font-face"
+      ) {
+        return child.toString();
+      }
+
+      return "";
+    })
+    .join("")
+  ;
+}
 
 const
   root = abs(".")
@@ -103,13 +129,24 @@ export default defineConfig({
         , css = (await postcsssssss
             .process(cssRaw, { from: path })
           ).css
+
+        , fontFaceRaw = extractFontFace(cssRaw)
+        // NOTE: questionable
+        , fontFace = (await postcsssssss
+            .process(fontFaceRaw)
+          ).css
         ;
 
         return {
           code: `export default ${JSON.stringify({
             raw: cssRaw,
             compressed: css,
-          })}`
+
+            fontFaces: {
+              raw: fontFaceRaw,
+              compressed: fontFace,
+            },
+          } as CSSData)}`
         };
       }
     },

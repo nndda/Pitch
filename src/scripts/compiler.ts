@@ -46,6 +46,32 @@ export async function compile(): Promise<string> {
       compCatData = runtimeData[catId].components
     ;
 
+    // NOTE: font-faces iter
+    // Since these needs to be at top-level
+    const fontFaces: string[] = [];
+    for (const compId in compCatData) {
+      if (compCatData[compId].type === "item") {
+        const
+          compData = compCatData[compId] as ComponentRuntimeItem
+        , compManifest = compData.manifest
+        ;
+
+        if (compData.chkBox!.checked) {
+          const fontFaceStr = compManifest.css.fontFaces[
+            minify ? "compressed" : "raw"
+          ];
+
+          // // De-dupe same @font-faces
+          // TODO: maybe use something based on the font-family property,
+          // instead of the whole at-rule string?
+          if (!fontFaces.includes(fontFaceStr)) {
+            fontFaces.push(fontFaceStr);
+          }
+        }
+      }
+    }
+    cssOut.push(...fontFaces);
+
     for (const compId in compCatData) {
       if (compCatData[compId].type === "item") {
         const
