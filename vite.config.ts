@@ -80,7 +80,7 @@ for (const cssPath of fg.globSync(
   });
 }
 
-import packageJSON from "./package.json";
+import packageJSON from "./package.json" with { type: "json" };
 
 const
   args = process.argv
