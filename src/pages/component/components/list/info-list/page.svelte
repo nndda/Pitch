@@ -1,6 +1,6 @@
 <script lang="ts">
   export let data: ComponentData;
-  import { ComponentPage, CodeEditor, ComponentRef } from "../../../../elements";
+  import { ComponentPage, CodeEditor, CodeViewerCSS, ComponentRef } from "../../../../elements";
 </script>
 
 <ComponentPage data={data}>
@@ -32,7 +32,7 @@
 
   `}/>
 
-  <h2>Line Break</h2>
+  <h2>Line Breaks</h2>
 
   <p>
     Break new line manually using <code>&lt;br&gt;</code>:
@@ -78,6 +78,59 @@
     </dl>
 
   `}/>
+
+  <blockquote class="custom-callout">
+    <h3>
+      <i class="fa-solid fa-info-circle"></i>
+      Title/Info Column
+    </h3>
+
+    <p>
+      Text on the left column (the key/name/title field) will not wrap.
+    </p>
+  </blockquote>
+
+  {@const HTMLWrapSample = `
+    <dl class="custom-info">
+
+      <dt>Arts</dt>
+      <dd>
+        <a href="#">Amazing artist</a>
+      </dd>
+
+      <dt>Story</dt>
+      <dd>
+        <a href="#">Witty writer</a>
+      </dd>
+
+      <dt>Some Very Very Very Absudrly, Hyper-Specific, And Comically Long Role Name</dt>
+      <dd>
+        <a href="#">Also Very Very Very Absudrly, Hyper-Specific, And Comically Long Name</a>
+      </dd>
+
+    </dl>
+  `}
+
+  <CodeEditor html={HTMLWrapSample}/>
+
+  <p>
+    If you'd like to have the left-column text wrapped, add the following CSS:
+  </p>
+
+  {@const CSSWrapEnable = `
+    dl.custom-info {
+      & > dt {
+        white-space: wrap;
+      }
+    }
+  `}
+
+  <CodeViewerCSS css={CSSWrapEnable}/>
+
+  <CodeEditor
+    html={HTMLWrapSample}
+    css={CSSWrapEnable}
+  />
 
   <h2>Aligning</h2>
 

@@ -9,6 +9,7 @@ dl.custom-info {
   & > dt {
     text-align: right;
     font-weight: 700;
+    white-space: nowrap;
   }
 
   &.custom-left {
