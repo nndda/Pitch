@@ -1,0 +1,73 @@
+ol.custom-steps {
+  counter-reset: steps-list;
+  padding-left: 2.5em;
+
+  & > li {
+    --h-margin-off: .15em;
+
+    position: relative;
+    list-style: none;
+
+    counter-increment: steps-list;
+
+    /* Heavens forgive me */
+    &:has(> h1:first-of-type) {
+      --h-mult: 1.5em;
+      --h-margin-off: .25em;
+    }
+    &:has(> h2:first-of-type) {
+      --h-mult: 1.25em;
+      --h-margin-off: .25em;
+    }
+    &:has(> h3:first-of-type) {
+      --h-mult: 1.15em;
+    }
+    &:has(> h4:first-of-type) {
+      --h-mult: 1em;
+    }
+    &:has(> h5:first-of-type) {
+      --h-mult: .8em;
+    }
+    &:has(> h6:first-of-type) {
+      --h-mult: .6em;
+    }
+
+    &::before {
+      content: counter(steps-list);
+
+      position:absolute;
+      display: inline-block;
+      margin-right: .5em;
+
+      font-size: var(--h-mult);
+      font-weight: 700;
+
+      top: 0;
+      margin-top: var(--h-margin-off);
+      left: -2em;
+
+      width: 1.5em;
+
+      background: var(--l);
+      color: var(--b2);
+
+      border-radius: 50%;
+      text-align: center;
+    }
+
+    &::after {
+      content: "";
+
+      position: absolute;
+
+      font-size: var(--h-mult);
+
+      top: 1.5em;
+      left: -1.3em;
+      margin-top: .25lh;
+
+      height: calc(100% - 1.25em);
+      border-left: 2px dashed var(--l);
+    }
+  }
+}

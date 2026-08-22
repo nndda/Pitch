@@ -1,22 +1,22 @@
-// import css from "./styles?css-component";
+import css from "./styles?css-component";
 
 export default {
-  // css: css,
+  css: css,
 
   name: "Steps List",
 
-  // page: async () => (await import("./page.svelte")).default,
+  page: async () => (await import("./page.svelte")).default,
 
   scopes: {
     compatible: [
       "project",
-      "profile",
       "jam",
+    ],
+    partial: [
+      "profile",
     ],
   },
 
   sub: "List",
-
-  wip: true,
 
 } as ComponentData;
