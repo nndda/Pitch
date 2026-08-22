@@ -6,23 +6,6 @@
     "email": "talk@nnda.dev",
     "url": "https://nnda.dev"
   },
-  "devDependencies": {
-    "@sveltejs/vite-plugin-svelte": "^7.3.0",
-    "@tsconfig/svelte": "^5.0.8",
-    "@types/chroma-js": "^3.1.2",
-    "@types/lodash": "^4.17.25",
-    "@types/node": "^26.2.0",
-    "autoprefixer": "^10.5.4",
-    "cssnano": "^8.0.7",
-    "cssnano-preset-advanced": "^8.0.7",
-    "fast-glob": "^3.3.3",
-    "postcss": "^8.5.26",
-    "sass": "^1.103.1",
-    "svelte": "^5.56.10",
-    "svelte-check": "^4.7.6",
-    "typescript": "^7.0.2",
-    "vite": "^8.2.2"
-  },
   "overrides": {
     "immutable": "^5.1.9",
     "picomatch": "^4.0.4",
@@ -57,5 +40,22 @@
     "modern-normalize": "^3.0.1",
     "not-a-toast": "^1.1.5",
     "slugify": "^1.6.9"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^7.3.0",
+    "@tsconfig/svelte": "^5.0.8",
+    "@types/chroma-js": "^3.1.2",
+    "@types/lodash": "^4.17.25",
+    "@types/node": "^26.2.0",
+    "autoprefixer": "^10.5.4",
+    "cssnano": "^8.0.8",
+    "cssnano-preset-advanced": "^8.0.8",
+    "fast-glob": "^3.3.3",
+    "postcss": "^8.5.26",
+    "sass": "^1.103.1",
+    "svelte": "^5.56.10",
+    "svelte-check": "^4.7.6",
+    "typescript": "^7.0.2",
+    "vite": "^8.2.2"
   }
 }
