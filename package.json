@@ -46,7 +46,7 @@
     "@tsconfig/svelte": "^5.0.8",
     "@types/chroma-js": "^3.1.2",
     "@types/lodash": "^4.17.25",
-    "@types/node": "^26.2.0",
+    "@types/node": "^26.3.0",
     "autoprefixer": "^10.5.4",
     "cssnano": "^8.0.8",
     "cssnano-preset-advanced": "^8.0.8",
