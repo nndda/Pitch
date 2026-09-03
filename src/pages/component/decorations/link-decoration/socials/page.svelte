@@ -26,6 +26,29 @@
 
   <CodeEditor html={`
 
+    <p class="custom-social-links">
+      <a href="https://bsky.app/profile/did:plc:iwluqzosr2cjuzldtanzewke" target="_blank">Bluesky</a>
+      |
+      <a href="https://twitter.com/" target="_blank">Twitter</a>
+      |
+      <a href="https://www.patreon.com/" target="_blank">Patreon</a>
+    </p>
+
+  `}
+
+  css={`
+
+    p.custom-social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1em;
+    }
+
+  `}
+  />
+
+  <CodeEditor html={`
+
     <p class="custom-social-links text-justify">
       If you're on Bluesky, follow me at
       <a href="https://bsky.app/profile/did:plc:iwluqzosr2cjuzldtanzewke" target="_blank">@nnda.dev</a>.
@@ -38,10 +61,12 @@
   `}
 
   css={`
-    p {
+
+    p.custom-social-links {
       max-width: 27em;
       margin-inline: auto;
     }
+
   `}
   />
 
