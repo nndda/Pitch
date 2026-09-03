@@ -1,5 +1,6 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import { fade } from "svelte/transition";
 
   import { currentPage } from "../states/page.svelte";
 
@@ -7,7 +8,7 @@
   import { generateToC } from "./toc";
 
   let
-    tocContent: HTMLUListElement
+    tocContent: HTMLUListElement = $state()!
   , tocWrapper: HTMLElement
   ;
 
@@ -137,41 +138,68 @@
   <div class="split">
 
     <section id="wrapper">
-      {#if currentPage.content}
-        {#await currentPage.content()}
+      {#key currentPage.content}
 
-          <strong>
-            Loading ...
-          </strong>
+        {#if currentPage.content}
+          {#await currentPage.content() then Page}
 
-        {:then Page}
+            <!--
+            <div
+              id="viewer-loading"
+            >
 
-          <Page
-            data={currentPage.componentData}
-            {...currentPage.attr}
-          />
+              <strong>
+                Loading ...
+              </strong>
 
-        {:catch err}
+            </div>
+            -->
 
-        {/await}
-      {/if}
+          <!-- {:then Page} -->
+
+            <div
+              id="page"
+              in:fade={{ duration: 200 }}
+              out:fade={{ duration: 150 }}
+            >
+
+              <Page
+                data={currentPage.componentData}
+                {...currentPage.attr}
+              />
+
+            </div>
+
+          <!-- {:catch err} -->
+
+          {/await}
+        {/if}
+      {/key}
     </section>
 
     <nav
       id="toc"
       bind:this={tocWrapper}
     >
-      <div class="toc-inner">
-        <h1>Table of content</h1>
+      {#key currentPage.content}
+        <div
+          class="toc-inner"
 
-        <hr>
+          in:fade={{ duration: 200 }}
+          out:fade={{ duration: 150 }}
+        >
 
-        <h2>{currentPage.title}</h2>
+          <br>
 
-        <ul id="toc-content" bind:this={tocContent}>
+          <h2>Table of content</h2>
 
-        </ul>
-      </div>
+          <hr>
+
+          <h3>{currentPage.title}</h3>
+          <ul id="toc-content" bind:this={tocContent}></ul>
+
+        </div>
+      {/key}
     </nav>
 
   </div>

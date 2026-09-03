@@ -2,7 +2,7 @@
 
 @use "sass:color";
 
-:global #wrapper:has(> .home) {
+:global #wrapper:has(> #page > .home) {
   background: $background;
 }
 
