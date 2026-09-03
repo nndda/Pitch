@@ -1,7 +1,8 @@
 <script lang="ts">
   import { onMount } from "svelte";
 
-  import { state } from "../states/components.svelte";
+  import { currentPage } from "../states/page.svelte";
+
   import { projectUpdate } from "../storage/db";
   import { generateToC } from "./toc";
 
@@ -11,7 +12,7 @@
   ;
 
   $effect(() => {
-    generateToC(tocContent, state.currentId);
+    generateToC(tocContent, currentPage.title);
   });
 
   onMount(() => {
@@ -38,7 +39,12 @@
       <i class="fa-solid fa-chevron-left"></i>
     </button> -->
 
-    <h1 class="page-heading">{state.currentId}</h1>
+    <h1 class="page-heading">
+      <i
+        class="page-icon {currentPage.icon}"
+      ></i>
+      {currentPage.title}
+    </h1>
 
     <!-- <button
       id="page-prev"
@@ -113,7 +119,7 @@
         tocWrapper.classList.toggle("collapsed", tocCollapsed);
 
         if (ev.currentTarget.checked) {
-          generateToC(tocContent, state.currentId);
+          generateToC(tocContent, currentPage.title);
         }
       }}
     >
@@ -131,12 +137,23 @@
   <div class="split">
 
     <section id="wrapper">
-      {#if state.currentPage}
-        {#if state.currentData}
-          <state.currentPage data={state.currentData}/>
-        {:else}
-          <state.currentPage {...state.attr}/>
-        {/if}
+      {#if currentPage.content}
+        {#await currentPage.content()}
+
+          <strong>
+            Loading ...
+          </strong>
+
+        {:then Page}
+
+          <Page
+            data={currentPage.componentData}
+            {...currentPage.attr}
+          />
+
+        {:catch err}
+
+        {/await}
       {/if}
     </section>
 
@@ -149,7 +166,7 @@
 
         <hr>
 
-        <h2>{state.currentId}</h2>
+        <h2>{currentPage.title}</h2>
 
         <ul id="toc-content" bind:this={tocContent}>
 

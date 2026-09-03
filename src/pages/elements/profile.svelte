@@ -1,9 +1,5 @@
 <script lang="ts">
   import {
-    type Component,
-  } from "svelte";
-
-  import {
     currentProject,
     switchContext,
   } from "../../states/storage.svelte";
@@ -14,12 +10,11 @@
   } from "../../storage/db";
 
   import {
-    switchPage,
+    goToPage,
     unselectSidebarPage,
-  } from "../../states/components.svelte";
+  } from "../../states/page.svelte";
 
-  // Projects
-  import ProjectNew from "../projects/new.svelte";
+  const projectNewPage = async () => (await import("../projects/new.svelte")).default;
 
 </script>
 
@@ -93,7 +88,13 @@
       class="custom-tip"
       onclick={() => {
         unselectSidebarPage();
-        switchPage("New project", ProjectNew as Component, { mode: "new" })();
+        goToPage({
+          title: "New project",
+          content: projectNewPage,
+          attr: {
+            mode: "new",
+          }
+        });
       }}
       disabled={ $projectCount >= 50 }
     >
@@ -108,7 +109,13 @@
       class="custom-tip"
       onclick={() => {
         unselectSidebarPage();
-        switchPage("Edit project", ProjectNew as Component, { mode: "edit" })();
+        goToPage({
+          title: "Edit project",
+          content: projectNewPage,
+          attr: {
+            mode: "edit",
+          }
+        });
       }}
     >
       <i class="fa-solid fa-pencil"></i>

@@ -1,7 +1,6 @@
 <script lang="ts">
   import {
     onMount,
-    type Component,
   } from "svelte";
 
   import {
@@ -10,11 +9,9 @@
   } from "../storage/db";
 
   import {
-    state,
-    backToHome,
-    switchPage,
+    goToPage,
     unselectSidebarPage,
-  } from "../states/components.svelte";
+  } from "../states/page.svelte";
 
   import {
     constructRule,
@@ -38,19 +35,26 @@
 
   import Profile from "../pages/elements/profile.svelte";
 
-  import CSSViewerPage from "../pages/css-viewer/index.svelte";
+  import CSSViewer from "../pages/css-viewer";
 
-  // TODO: pile all page-type component to a single entry
-  // TODO: lazyload/dynamic import
+
   // Pages
-  import SupportMe from "../pages/support.svelte";
-  // import Theme from "../pages/theme.svelte";
-  import Settings from "../pages/settings.svelte";
+  import {
+    Home,
+    Support,
+    Settings,
+
+    AdvancedSearch,
+  } from "../pages";
+
   // Resources
-  import PitchApp from "../pages/resources/pitch-app.svelte";
-  import GettingStarted from "../pages/resources/getting-started.svelte";
-  // import OtherResources from "../pages/resources/other-resources.svelte";
-  import Showcase from "../pages/resources/showcase.svelte";
+  import {
+    GettingStarted,
+    PitchApp,
+    OtherResources,
+    Showcase,
+  } from "../pages/resources";
+
 
   import {
     runtimeData,
@@ -127,18 +131,28 @@
 <style lang="scss"> @use "./sidebar/sidebar.scss"; </style>
 
 {#snippet PageListItem(
-  label: string,
-  icon: string,
-  onchange: any = null,
+  page: PageData,
 )}
 
-  {@const chkId = slug(`chk-${label}`)}
+  {@const {
+    title,
+    content,
+
+    icon,
+    attr,
+  } = page}
+
+  {@const chkId = slug(`chk-${title}`)}
+
+  {@const onchange = content ? () => {
+    goToPage(page);
+  } : null}
 
   <li
     class="comp-item page-item"
     class:wip={!onchange}
   >
-    <i class={icon} data-page-icon={label}></i>
+    <i class={icon} data-page-icon={title}></i>
 
     <input
       type="radio"
@@ -146,17 +160,16 @@
       name="page-view"
       onchange={onchange}
       disabled={!onchange}
-      checked={label === "Home"}
+      checked={title === "Home"}
     >
     <label
       class="comp-name-label page"
       for={chkId}
-      data-page-name={label}
+      data-page-name={title}
     >
-      {label}
+      {title}
       <!-- TODO: there has to be a better way -->
-      {#if label === "Support Me?"}
-        <!-- &nbsp; ❤️ -->
+      {#if title === "Support Me?"}
         <span
           class="custom-plzzz"
           class:hidden={!$project?.app.settings.app.sidebar.showPlzzz}
@@ -164,22 +177,27 @@
       {/if}
     </label>
 
-    <!--
     {#if !onchange}
+
+      <!--
       <div class="custom-tip-content">
         Work-in-progress
       </div>
+      -->
+
       <div>
         <span class="tags">
           <span class="wip-icon">
             <i class="fa-solid fa-road-barrier"></i>
+          </span>
+          <!--
           <span class="custom-lb wip-badge">
             WIP
           </span>
+          -->
         </span>
       </div>
     {/if}
-    -->
   </li>
 
 {/snippet}
@@ -202,6 +220,7 @@
         await projectUpdate({ ["app.uiState." + catId]: ev.currentTarget.checked })
       }}
     >
+
     <label class="caret-toggle custom-tip" for={catId}>
       <i class="fa-solid fa-caret-down"></i>
       <span class="custom-tip-content custom-left">
@@ -214,6 +233,7 @@
 
 <nav
   id="sidebar"
+
   class:hide-wip-comps={!$project?.app.settings.app.sidebar.showWipComps}
   class:hide-wip-pages={!$project?.app.settings.app.sidebar.showWipPages}
   class:faved-badge-on-hover={!$project?.app.settings.app.sidebar.showFavedBadge}
@@ -231,31 +251,17 @@
     <hr/>
 
     <ul>
-      {@render PageListItem(
-        "Home",
-        "fa-solid fa-house",
-        backToHome,
-      )}
+      {#each [
 
-      {@render PageListItem(
-        "Support Me?",
-        "fa-solid fa-heart",
-        switchPage("Support this project!!", SupportMe),
-      )}
+        Home,
+        Support,
+        Settings,
 
-      {@render PageListItem(
-        "Theme",
-        "fa-solid fa-palette",
-        null,
-        // switchPage("Theme", Theme),
-      )}
+      ] as page}
 
-      {@render PageListItem(
-        "Settings",
-        "fa-solid fa-gear",
-        switchPage("Settings", Settings),
-      )}
+        {@render PageListItem(page)}
 
+      {/each}
     </ul>
 
     <h2
@@ -270,41 +276,16 @@
     </h2>
 
     <ul>
-      {#each <SinglePageEntry[]>[
+      {#each [
 
-        {
-          title: "Getting Started",
-          icon: "fa-solid fa-book-bookmark",
-          page: GettingStarted,
-        },
+        GettingStarted,
+        PitchApp,
+        OtherResources,
+        Showcase,
 
-        {
-          title: "Using Pitch",
-          icon: "fa-solid fa-paint-roller",
-          page: null,
-        },
+      ] as page}
 
-        // {
-        //   title: "Tips",
-        //   icon: "fa-solid fa-book-bookmark",
-        //   page: null
-        // },
-
-        {
-          title: "Other Resources",
-          icon: "fa-solid fa-box-open",
-          page: null,
-        },
-
-        {
-          title: "Showcase",
-          icon: "fa-solid fa-star",
-          page: Showcase,
-        },
-
-      ] as { title, icon, page, } }
-
-        {@render PageListItem( title, icon, page !== null ? switchPage( title, page as Component ) : null, )}
+        {@render PageListItem(page.default)}
 
       {/each}
     </ul>
@@ -375,12 +356,7 @@
     </div>
 
     <ul>
-      {@render PageListItem(
-        "Advanced search",
-        "fa-solid fa-magnifying-glass",
-        null,
-        // switchPage("Theme", Theme),
-      )}
+      {@render PageListItem(AdvancedSearch)}
     </ul>
 
     {#each Object.entries(runtimeData) as catEntry}
@@ -683,18 +659,20 @@
                 id={idView}
                 name="page-view"
 
-                onchange={async () => {
-                  if (compData.manifest.page) {
-                    const
-                      page = await compData.manifest.page() as Component
-                    ;
+                onchange={
+                  compData.manifest.page ?
+                    async () => {
+                      goToPage({
+                        title: compHumanName,
+                        content: compData.manifest.page,
 
-                    state.currentId = compHumanName;
-                    state.currentData = compData.manifest;
-                    state.attr = compData;
-                    state.currentPage = page;
-                  }
-                }}
+                        icon: catMeta[catId].icon,
+
+                        componentData: compData.manifest,
+                        attr: compData,
+                      });
+                    } : null
+                }
               >
 
               <label
@@ -836,10 +814,7 @@
       <button
         onclick={() => {
           unselectSidebarPage();
-          switchPage(
-            "Finalized CSS Codes",
-            CSSViewerPage,
-          )();
+          goToPage(CSSViewer);
         }}
       >
         <i class="icon fa-solid fa-eye"></i>

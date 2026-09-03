@@ -17,6 +17,19 @@ declare global {
   const COMMIT_DATE: string;
   const VERSION: string;
 
+  // Generic page data
+  interface PageData {
+    title: string,
+
+    content?: () => Promise<Component | ComponentPage>,
+
+    componentData?: ComponentData,
+
+    icon?: string,
+    attr?: object,
+  }
+
+
   interface CSSData {
     raw: string,
     compressed: string,

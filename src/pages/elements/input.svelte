@@ -8,7 +8,7 @@
   } from "./input";
 
   import { copyStr } from "../../scripts/copy";
-  import { state as stateGlobal } from "../../states/components.svelte";
+  import { currentPage } from "../../states/page.svelte";
 
   const
     { data, inputs }:
@@ -60,7 +60,7 @@
         isCompatible = await isInputVariablesCompatible(data)
 
       , selectorBase = `.heading[data-comp-name="${data.nameDisplay ?? data.name}"] `
-      , runtimeData = stateGlobal.attr as ComponentRuntimeItem
+      , runtimeData = currentPage.attr as ComponentRuntimeItem
       ;
 
       runtimeData.li?.classList.toggle("compatible-all", isCompatible);

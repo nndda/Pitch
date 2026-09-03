@@ -12,9 +12,14 @@
     type ProjectsDB,
   } from "../../storage/db";
 
-  const
-    { mode = "new" }: { mode: "new" | "edit" } = $props()
-  ;
+
+  import { currentPage } from "../../states/page.svelte";
+
+  // BUG: switching new/edit while in the page doesn't re-render the content ://
+
+  // TODO: typing headache
+  // @ts-ignore
+  const mode = currentPage?.attr?.mode! ?? "new";
 
 
   let
