@@ -1,14 +1,8 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import ComponentInput from "./input.svelte";
-
   import { copyStr } from "../../scripts/copy";
-
-  import {
-    LabelScopes,
-  } from "./labels/";
-
   import { project } from "../../storage/db";
+  import { LabelScopes } from "./labels/";
 
   const
     { children,
@@ -80,10 +74,6 @@
 {/if}
 
 {#if $project}
-
-{#if data.input}
-  <ComponentInput data={data} inputs={$project.inputs}/>
-{/if}
 
 <div
   class="heading"

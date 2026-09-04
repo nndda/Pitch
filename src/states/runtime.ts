@@ -29,6 +29,7 @@ export const
 
 , event = new EventTarget()
 , eventCSSCompiled = "css-compiled"
+, eventCSSInputChanged = "css-input-changed"
 
 , compCheckboxCache: Record<string, Record<string, HTMLInputElement>> = {}
 , compElCache: Record<string, Record<string, HTMLLIElement>> = {}
