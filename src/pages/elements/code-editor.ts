@@ -1,12 +1,10 @@
 import { EditorView, basicSetup } from "codemirror";
 import { EditorState } from "@codemirror/state"
 import { html as codemirrorHTML } from "@codemirror/lang-html";
+import { extractFontFace } from "../../scripts/css";
+import { copyStr } from "../../scripts/copy";
 import { css as codemirrorCSS } from "@codemirror/lang-css";
 import "./codemirror.scss";
-
-import {
-  extractFontFace,
-} from "../../scripts/css";
 
 import {
   itchStyling,
@@ -14,12 +12,12 @@ import {
   fontLocalStyling,
 } from "../../states/runtime";
 
-import { copyStr } from "../../scripts/copy";
+const editorExts = [
+  basicSetup,
+  EditorView.lineWrapping,
 
-export let
-  view: EditorView
-, viewCSS: EditorView
-;
+  EditorView.theme({}, {dark: true}),
+];
 
 import DOMPurify from "dompurify";
 
@@ -126,6 +124,11 @@ export function instatiateEditor(
   CSSCopyButton: HTMLButtonElement,
 ): void {
 
+  let
+    view: EditorView
+  , viewCSS: EditorView
+  ;
+
   // CSS
   const localStyling = new CSSStyleSheet();
   cssInit = "\n" + dedent(cssInit) + "\n";
@@ -221,11 +224,9 @@ export function instatiateEditor(
 
       view = new EditorView({
         extensions: [
-          basicSetup,
-          EditorView.lineWrapping,
-          codemirrorHTML(),
+          ...editorExts,
 
-          EditorView.theme({}, {dark: true}),
+          codemirrorHTML(),
 
           EditorView.updateListener.of((update): void => {
             debouncedUpdatePreview(update.state.doc.toString());
@@ -237,11 +238,9 @@ export function instatiateEditor(
 
       viewCSS = new EditorView({
         extensions: [
-          basicSetup,
-          EditorView.lineWrapping,
-          codemirrorCSS(),
+          ...editorExts,
 
-          EditorView.theme({}, {dark: true}),
+          codemirrorCSS(),
 
           EditorView.updateListener.of((update): void => {
             debouncedUpdateCSS(update.state.doc.toString());
