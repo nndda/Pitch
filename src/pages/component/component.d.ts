@@ -19,7 +19,7 @@ declare global {
     componentData?: ComponentRuntimeItem,
 
     icon?: string,
-    attr?: object,
+    attr?: any,
   }
 
 
