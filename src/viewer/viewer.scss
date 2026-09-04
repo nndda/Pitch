@@ -29,6 +29,30 @@
   margin: 0 .5em;
   font-size: 1.5em;
   font-family: Ubuntu;
+  font-weight: lighter;
+}
+
+.page-icon {
+  margin-right: .5em;;
+}
+
+.heading-comp-actions {
+  display: flex;
+  align-items: center;
+  gap: .5em;
+  font-size: 1.3em;
+  border-right: 2px solid $border-col;
+  padding-right: 1em;
+
+  & .fa-solid {
+    &.fa-square-check {
+      color: $primary !important;
+    }
+
+    &.fa-star {
+      color: $tertiary  !important;
+    }
+  }
 }
 
 #btn-home {
