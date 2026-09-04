@@ -52,7 +52,7 @@
     "cssnano-preset-advanced": "9.0.2",
     "fast-glob": "^3.3.3",
     "postcss": "^8.5.28",
-    "sass": "^1.103.1",
+    "sass": "^1.104.0",
     "svelte": "^5.57.0",
     "svelte-check": "^4.7.6",
     "typescript": "^7.0.2",
