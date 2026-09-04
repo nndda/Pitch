@@ -212,7 +212,9 @@
   <div class="split">
 
     <section id="wrapper">
-      {#key currentPage.content}
+
+      <!-- NOTE: not sure if relying on `title` is enough :/ -->
+      {#key currentPage.title}
 
         {#if currentPage.content}
           {#await currentPage.content() then Page}

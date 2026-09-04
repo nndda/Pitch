@@ -15,8 +15,6 @@
 
   import { currentPage } from "../../states/page.svelte";
 
-  // BUG: switching new/edit while in the page doesn't re-render the content ://
-
   // TODO: typing headache
   // @ts-ignore
   const mode = currentPage?.attr?.mode! ?? "new";
