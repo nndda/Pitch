@@ -1,5 +1,7 @@
 export { default as Bar } from "./bar.svelte";
 
+export { default as IconTooltip } from "./icon-tooltip.svelte";
+
 export { default as PageRef } from "./page-ref.svelte";
 export { default as ComponentRef } from "./component-ref-button.svelte";
 
