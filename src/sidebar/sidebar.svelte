@@ -3,7 +3,7 @@
   import { project, projectUpdate } from "../storage/db";
   import { goToPage, unselectSidebarPage } from "../states/page.svelte";
   import { isInputVariablesCompatible } from "../pages/elements/input";
-  import { toast, toastErr } from "../scripts/toast";
+  import { IconTooltip } from "../pages/elements";
   import { toastErr } from "../scripts/toast";
   import { slug } from "../scripts/slugify";
   import { compile } from "../scripts/compiler";
@@ -568,23 +568,25 @@
               </label>
 
               <span class="tags">
+
                 {#if compData.manifest.flavour}
-                  <span class="custom-tip">
-                    <i class="flavour fa-solid fa-ice-cream"></i>
-                    <span class="custom-tip-content">
-                      Flavour
-                    </span>
-                  </span>
+
+                  <IconTooltip
+                    icon="flavour fa-solid fa-ice-cream"
+                    tooltip="Flavour"
+                  />
+
                 {/if}
 
                 {#if compData.isExperimental}
-                  <span class="custom-tip">
-                    <i class="experimental fa-solid fa-vial"></i>
-                    <span class="custom-tip-content">
-                      Experimental
-                    </span>
-                  </span>
+
+                  <IconTooltip
+                    icon="experimental fa-solid fa-vial"
+                    tooltip="Experimental"
+                  />
+
                 {/if}
+
               </span>
 
               <input
@@ -598,19 +600,21 @@
                 }}
               >
               <label class="checkbox fave" for={idFave}>
-                <span class="checked-not custom-tip">
-                  <i class="fa-regular fa-star"></i>
-                  <span class="custom-tip-content">
-                    Favourite
-                  </span>
-                </span>
 
-                <span class="checked custom-tip">
-                  <i class="fa-solid fa-star"></i>
-                  <span class="custom-tip-content">
-                    Un-favourite
-                  </span>
-                </span>
+                <IconTooltip
+                  icon="fa-regular fa-star"
+                  tooltip="Favourite"
+
+                  elClass="checked-not"
+                />
+
+                <IconTooltip
+                  icon="fa-solid fa-star"
+                  tooltip="Un-favourite"
+
+                  elClass="checked"
+                />
+
               </label>
             </li>
 
