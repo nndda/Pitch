@@ -107,6 +107,11 @@ export function runtimeDataInit() {
                     content: compData.page,
 
                     componentData: runtimeData[cat].components[compId] as ComponentRuntimeItem,
+
+                    attr: {
+                      catId: cat,
+                      compId: compId,
+                    }
                   });
                 },
 
