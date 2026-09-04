@@ -3,9 +3,8 @@
 #toc {
   position: relative;
 
-  // min-width: 250px;
-  width: 260px;
-  min-width: 260px;
+  width: 280px;
+  min-width: 280px;
 
   transition:
     .5s width ease
@@ -19,6 +18,7 @@
 
   & > .toc-inner {
     padding: 1em 1.5em;
+    padding-top: 0;
     border-left: 1px solid $border-col;
     overflow-x: hidden;
     white-space: nowrap;
@@ -36,16 +36,8 @@
     }
   }
 
-  & ul {
-    padding-left: 1.35em;
-  }
-
   & li {
-    // display: list-item;
-    // list-style: none;
     margin-bottom: .6em;
-
-    font-size: .9em;
 
     & > a {
       color: $text-col;

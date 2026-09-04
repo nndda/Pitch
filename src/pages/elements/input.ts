@@ -46,7 +46,7 @@ export async function removeUserInput(cssVar: string): Promise<void> {
 
 export async function constructRule(): Promise<string> {
   const
-    inputData = (await getProject())?.inputs!
+    inputData = (await getProject())?.inputs ?? {}
   , cssOut: string[] = []
   ;
 

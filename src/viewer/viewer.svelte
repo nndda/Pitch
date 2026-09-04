@@ -6,6 +6,7 @@
   import { currentPage } from "../states/page.svelte";
   import { project, projectUpdate } from "../storage/db";
   import { generateToC } from "./toc";
+  import ComponentInput from "../pages/elements/input.svelte";
 
   let
     tocContent: HTMLUListElement = $state()!
@@ -183,7 +184,6 @@
       id="toc-toggle"
       aria-label="Table of Content"
 
-
       onchange={async ev => {
         // TODO: I think ToC states are not working :/
 
@@ -193,7 +193,7 @@
 
         tocWrapper.classList.toggle("collapsed", tocCollapsed);
 
-        if (ev.currentTarget.checked) {
+        if (ev.currentTarget?.checked) {
           generateToC(tocContent, currentPage.title);
         }
       }}
@@ -264,6 +264,17 @@
           in:fade={{ duration: 200 }}
           out:fade={{ duration: 150 }}
         >
+
+          {#if currentPage.componentData?.manifest.input}
+
+              <ComponentInput
+                data={
+                  currentPage.componentData.manifest as ComponentData & { input: ComponentUserInputItem[] }
+                }
+                inputs={$project?.inputs ?? {}}
+              />
+
+          {/if}
 
           <br>
 

@@ -1,5 +1,10 @@
 <script lang="ts">
-  import type { Component } from "svelte";
+  import { onMount, type Component } from "svelte";
+
+  import { InfoAMP, InfoScopes } from "./info/";
+  import { showModal } from "../../../scripts/modal";
+  import { isInputVariablesCompatible } from "../input";
+  import { event, eventCSSInputChanged } from "../../../states/runtime";
 
   const
     {
@@ -24,16 +29,21 @@
     }
   ;
 
-  import {
-    InfoAMP,
-    InfoScopes,
-  } from "./info/";
-  import { showModal } from "../../../scripts/modal";
+  let
+    isCompaible = $state(false)
+  ;
+
+  event.addEventListener(eventCSSInputChanged, async () => {
+    isCompaible = await isInputVariablesCompatible(componentData as ComponentData);
+  });
+
+  onMount(() => {
+    event.dispatchEvent(new Event(eventCSSInputChanged));
+  })
 </script>
 
-{#if componentData.scopes}
-  <ul class="labels-list scopes">
-    {#each Object.entries(componentData.scopes) as [scopeType, scopes]}
+ 	<ul class="labels-list scopes" class:hidden={isCompaible}>
+    {#each Object.entries(componentData.scopes!) as [scopeType, scopes]}
 
       {@const scopeStatus: ScopeStatus = scopeType as ScopeStatus}
       {@const scopeInfoComp = previewOnly ? null : () => {
@@ -87,10 +97,8 @@
 
     {/each}
   </ul>
-{/if}
 
-{#if componentData.compatibleOnInputs}
-  <ul class="labels-list scopes compatible-all">
+ 	<ul class="labels-list scopes compatible-all" class:hidden={!isCompaible}>
     <li class="compatible">
       <button
         onclick={() => {
@@ -116,7 +124,6 @@
       </button>
     </li>
   </ul>
-{/if}
 
 {#if componentData.scopeAMPincompatible}
   <ul class="labels-list">

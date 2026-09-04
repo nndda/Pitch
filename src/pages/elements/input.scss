@@ -1,24 +1,18 @@
 @use "../../styles/variables" as *;
 @use "sass:color";
 
-.pinned {
-  position: sticky;
-  top: 0;
-  /* *cries* */
-  transform: translateX(-2em);
-  z-index: 9;
-  backdrop-filter: blur(.5em);
-}
-
 :global .page-header-input {
-  background: none !important;
-  /* background: rgba($background-light, 60%) !important; */
-
   & > li {
+    position: relative;
+
     list-style: none;
     display: flex;
-    /* margin-block: .35em; */
-    padding-right: .5em;
+    // flex-wrap: wrap;
+    gap: .5em;
+
+    &.input-li {
+      padding-bottom: 1.35lh;
+    }
 
     &.collapse-mark {
       display: block;
@@ -26,7 +20,6 @@
       & > .button {
         display: inline-block;
         margin-block: .5em;
-        font-size: .9em;
       }
 
       &:has( input:not(:checked) ) {
@@ -39,7 +32,6 @@
     &:first-child, &.sub-heading {
       & > h3, & > h4 {
         margin-top: 0;
-        /* margin-bottom: .75em; */
         font-family: Ubuntu;
         font-weight: 300;
 
@@ -61,42 +53,41 @@
   } */
 }
 
+.input-var-cont {
+  position: absolute;
+  inset: 1.3lh 0;
+}
+
 .input-var-name {
-  margin-inline: .5em;
-  font-size: .9em;
+  width: fit-content;
   background: 0;
+  padding: 0;
 
   & > code {
+
     padding: 0 !important;
     color: color.mix($text-col, $background, 60%) !important;
 
     background: none !important;
 
     font-size: .8em;
-    /* cursor: help; */
-    /* opacity: .6; */
   }
 }
 
 .input {
-  position: relative;
+  display: flex;
+  width: 100%;
+  max-width: calc(80% - 4em);
+
+  & > input {
+    width: 100%;
+  }
 }
 
 .reset {
-  position: absolute;
-  top: .25em;
-  left: 100%;
+  margin-left: .5em;
 
   &[disabled] {
     opacity: 0;
-  }
-}
-
-#pin-toggle {
-  + label > i {
-    transition: .3s ease transform;
-  }
-  &:not(:checked) + label > i {
-    transform: rotate(-45deg)
   }
 }

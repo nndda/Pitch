@@ -1,19 +1,12 @@
 <script lang="ts">
-  import { onMount } from "svelte";
-
-  import {
-    applyUserInput,
-    removeUserInput,
-    isInputVariablesCompatible,
-  } from "./input";
-
+  import { event, eventCSSInputChanged } from "../../states/runtime";
   import { copyStr } from "../../scripts/copy";
-  import { currentPage } from "../../states/page.svelte";
+  import { applyUserInput, removeUserInput } from "./input";
 
   const
     { data, inputs }:
       {
-        data: ComponentData,
+        data: ComponentData & { input: ComponentUserInputItem[] },
         inputs: RecordString,
       } = $props()
   , changedInputs: Record<string, true> = {}
@@ -22,7 +15,7 @@
   ;
 
   // svelte-ignore state_referenced_locally
-  for (const input of data.input!) {
+  for (const input of data.input) {
     if ("type" in input) {
       if (input.type === "size") {
         valueFormats[input.var] = input.var in inputs
@@ -32,11 +25,6 @@
       }
     }
   }
-
-  let
-    pinned = $state(false)
-  // , resetAllButton: HTMLButtonElement
-  ;
 
   // TODO:
   // function isAnyModified(): boolean {
@@ -53,25 +41,10 @@
   //   resetAllButton.disabled = !isAnyModified();
   // });
 
-  // TODO: this could be in a potential hot path
-  async function syncInputCompatibility() {
-    if (data.compatibleOnInputs) {
-      const
-        isCompatible = await isInputVariablesCompatible(data)
-
-      , selectorBase = `.heading[data-comp-name="${data.nameDisplay ?? data.name}"] `
-      ;
-
-      currentPage.componentData?.li?.classList.toggle("compatible-all", isCompatible);
-
-      document.querySelector(selectorBase + ".scopes:not(.compatible-all)")?.classList.toggle("hidden", isCompatible);
-      document.querySelector(selectorBase + ".scopes.compatible-all")?.classList.toggle("hidden", !isCompatible);
-    }
-  }
-
   function CSSifyURL(url: string) {
     return "url(\"" + encodeURI(url) + "\")";
   }
+
   function UnCSSifyURL(urlVar: string) {
     return decodeURI(
       urlVar.replace(/^url\("|"\)$/g, ""),
@@ -138,9 +111,7 @@
       }
     }
 
-    await syncInputCompatibility();
-
-    // resetAllButton.disabled = !isAnyModified();
+    event.dispatchEvent(new Event(eventCSSInputChanged));
   }
 
   function onVarFormatInputChange(
@@ -155,10 +126,6 @@
       input,
     )
   }
-
-  onMount(() => {
-    syncInputCompatibility();
-  });
 </script>
 
 <style lang="scss">
@@ -167,7 +134,6 @@
 
 <ul
   class="page-header-list page-header-input"
-  class:pinned={pinned}
   data-comp-name={data.name}
 >
 
@@ -211,26 +177,6 @@
             Reset all fields
           </span>
         </button>
-
-        <input
-          type="checkbox"
-          id="pin-toggle"
-
-          checked={pinned}
-
-          onchange={ev => {
-            pinned = ev.currentTarget.checked;
-          }}
-        >
-        <label
-          class="custom-tip button icon-only"
-          for="pin-toggle"
-        >
-          <i class="fa-solid fa-thumbtack"></i>
-          <span class="custom-tip-content custom-left">
-            Pin input field
-          </span>
-        </label>
       </div>
     </li>
 
@@ -249,32 +195,11 @@
         }
       }
 
-      <li>
+      <li class="input-li">
         <label
           for={input.var}
         >
           {input.name}
-
-          {#if !input.hardcoded}
-            <button
-              class="custom-tip input-var-name"
-              onclick={() => {
-                copyStr("--" + input.var);
-              }}
-            >
-              <code>
-                --{input.var}
-              </code>
-
-              <span class="custom-tip-content custom-right">
-                <i class="fa-solid fa-copy"></i>
-              </span>
-
-              <span class="custom-tip-content">
-                CSS variable name
-              </span>
-            </button>
-          {/if}
         </label>
 
         <div class="input">
@@ -369,7 +294,7 @@
               isInputNotStored || isValueEqualsDefault(inputs[input.var], input)
             }
 
-            onclick={async () => {
+            onclick={() => {
               const
                 cssVar = input.var
               ;
@@ -389,7 +314,7 @@
 
               // resetAllButton.disabled = !isAnyModified();
 
-              await syncInputCompatibility();
+              event.dispatchEvent(new Event(eventCSSInputChanged));
             }}
           >
             <i class="fa-solid fa-arrow-rotate-left"></i>
@@ -399,6 +324,29 @@
           </button>
 
         </div>
+
+        {#if !input.hardcoded}
+          <div class="input-var-cont">
+            <button
+              class="custom-tip input-var-name"
+              onclick={() => {
+                copyStr("--" + input.var);
+              }}
+            >
+              <code>
+                --{input.var}
+              </code>
+
+              <span class="custom-tip-content custom-right">
+                <i class="fa-solid fa-copy"></i>
+              </span>
+
+              <span class="custom-tip-content">
+                CSS variable name
+              </span>
+            </button>
+          </div>
+        {/if}
       </li>
 
     <!--
@@ -418,6 +366,7 @@
       </li>
     -->
 
+    <!--
     {:else if "collapse" in input}
 
       {@const toggleId = `collapse-${i}`}
@@ -435,6 +384,7 @@
           </label>
         </label>
       </li>
+      -->
 
     {/if}
   {/each}
