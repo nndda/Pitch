@@ -20,6 +20,8 @@ declare global {
 
     icon?: string,
     attr?: any,
+
+    subPages?: PageData[],
   }
 
 
