@@ -1,34 +1,30 @@
 <script lang="ts">
-  import {
-    onMount,
-  } from "svelte";
-
-  import {
-    project,
-    projectUpdate,
-  } from "../storage/db";
-
-  import {
-    goToPage,
-    unselectSidebarPage,
-  } from "../states/page.svelte";
-
-  import {
-    constructRule,
-    isInputVariablesCompatible,
-  } from "../pages/elements/input";
-
-
-  import {
-    toast,
-    toastErr,
-  } from "../scripts/toast";
+  import { onMount } from "svelte";
+  import { project, projectUpdate } from "../storage/db";
+  import { goToPage, unselectSidebarPage } from "../states/page.svelte";
+  import { isInputVariablesCompatible } from "../pages/elements/input";
+  import { toast, toastErr } from "../scripts/toast";
   import { slug } from "../scripts/slugify";
+  import { compile } from "../scripts/compiler";
+  import { copyStr } from "../scripts/copy";
+
+  import {
+    runtimeData,
+    catMeta,
+
+    compCheckboxCache,
+    compElCache,
+
+    runtimeDataInit,
+  } from "../states/runtime";
+
+  import {
+    updateCatSelectionState,
+    syncCompCheckedState,
+    syncCompGroupItemsClass,
+  } from "./sidebar";
 
   import Profile from "../pages/elements/profile.svelte";
-
-  import CSSViewer from "../pages/css-viewer";
-
 
   // Pages
   import {
@@ -47,32 +43,11 @@
     Showcase,
   } from "../pages/resources";
 
-
-  import {
-    runtimeData,
-    catMeta,
-
-    compCheckboxCache,
-    compElCache,
-
-    runtimeDataInit,
-    inputStyling,
-  } from "../states/runtime";
-
   let
     navEl: HTMLElement
   ;
 
   runtimeDataInit();
-
-  import {
-    updateCatSelectionState,
-    syncCompCheckedState,
-    syncCompGroupItemsClass,
-  } from "./sidebar";
-
-  import { compile } from "../scripts/compiler";
-  import { copyStr } from "../scripts/copy";
 
   // TODO ...
   onMount(async () => {
@@ -200,27 +175,55 @@
 
   {@const catId = `cat-heading-${id}`}
 
-    <input
-      type="checkbox"
-      class="toggle"
-      id={catId}
+  <input
+    type="checkbox"
+    class="toggle"
+    id={catId}
 
-      checked={$project?.app.uiState[catId] ?? false}
+    checked={$project?.app.uiState[catId] ?? false}
 
-      onchange={async ev => {
-        // @ts-ignore
-        await projectUpdate({ ["app.uiState." + catId]: ev.currentTarget.checked })
-      }}
+    onchange={async ev => {
+      // @ts-ignore
+      await projectUpdate({ ["app.uiState." + catId]: ev.currentTarget.checked })
+    }}
+  >
+
+  <label class="caret-toggle custom-tip" for={catId}>
+    <i class="fa-solid fa-caret-down"></i>
+
+    <span class="custom-tip-content custom-left">
+      <span class="collapse">Collapse</span>
+      <span class="expand">Expand</span>
+    </span>
+  </label>
+
+{/snippet}
+
+
+{#snippet PageCatalogue({name, items}: {
+  name?: string,
+  items: PageData[],
+})}
+  {#if name}
+    <h2
+      class="cat-heading"
+      class:on-hover={$project?.app.settings.app.sidebar.categoryActionOnHover}
     >
-
-    <label class="caret-toggle custom-tip" for={catId}>
-      <i class="fa-solid fa-caret-down"></i>
-      <span class="custom-tip-content custom-left">
-        <span class="collapse">Collapse</span>
-        <span class="expand">Expand</span>
+      <span class="text">
+        {name}
       </span>
-    </label>
 
+      {@render HeadingCatToggle(name)}
+    </h2>
+  {/if}
+
+  <ul>
+    {#each items as pageData}
+
+      {@render PageListItem(pageData)}
+
+    {/each}
+  </ul>
 {/snippet}
 
 <nav
@@ -238,49 +241,28 @@
   bind:this={navEl}
 >
   <div class="page-lists">
+
     <Profile/>
 
     <hr/>
 
-    <ul>
-      {#each [
-
+    {@render PageCatalogue({
+      items: [
         Home,
         Support,
         Settings,
+      ],
+    })}
 
-      ] as page}
-
-        {@render PageListItem(page)}
-
-      {/each}
-    </ul>
-
-    <h2
-      class="cat-heading"
-      class:on-hover={$project?.app.settings.app.sidebar.categoryActionOnHover}
-    >
-      <span class=text>
-        Resources
-      </span>
-
-      {@render HeadingCatToggle("resources")}
-    </h2>
-
-    <ul>
-      {#each [
-
+    {@render PageCatalogue({
+      name: "Resources",
+      items: [
         GettingStarted,
         PitchApp,
         OtherResources,
         Showcase,
-
-      ] as page}
-
-        {@render PageListItem(page.default)}
-
-      {/each}
-    </ul>
+      ],
+    })}
 
     <hr>
 
@@ -775,7 +757,9 @@
 
     <p>
       Don't see what you're looking for?
+
       <br>
+
       <a href="https://github.com/nndda/Pitch/issues/new/choose">Suggest a component!</a>
       or even
       <a href="https://github.com/nndda/Pitch/issues/new/choose">submit one!</a>
@@ -786,7 +770,7 @@
   <div class="action-cont">
     <div class="btn-group css-copy">
       <span>
-        <i class="icon fa-brands fa-css"></i>
+        <!-- <i class="icon fa-brands fa-css"></i> -->
         CSS
       </span>
 
@@ -806,7 +790,11 @@
       <button
         onclick={() => {
           unselectSidebarPage();
-          goToPage(CSSViewer);
+          import("../pages/css-viewer")
+            .then(page => {
+              goToPage(page.default);
+            })
+          ;
         }}
       >
         <i class="icon fa-solid fa-eye"></i>
