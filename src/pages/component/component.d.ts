@@ -1,13 +1,6 @@
 export {};
 
-import type {
-  Component,
-} from "svelte";
-
-import type {
-  RecordBoolean,
-  StorageAPIWithContext,
-} from "../states/storage.svelte";
+import type { Component } from "svelte";
 
 declare global {
 
@@ -60,8 +53,9 @@ declare global {
   | "singular"
   ;
 
-  type BrowsersCompatStatus = "full" | "limited" | "none";
-  type BrowsersCompat = Record<"firefox" | "safari" | "chrome", BrowsersCompatStatus>;
+  // TODO:
+  // type BrowsersCompatStatus = "full" | "limited" | "none";
+  // type BrowsersCompat = Record<"firefox" | "safari" | "chrome", BrowsersCompatStatus>;
 
   type ComponentUserInputValue = string;
 
@@ -94,11 +88,12 @@ declare global {
     | "rem"
     | "px"
     ,
-    defaultDynamic?: () => string,
+    // TODO:
+    // defaultDynamic?: () => string,
 
-    cssInjectPre?: (value: ComponentUserInputValue) => string,
-    cssInjectPost?: (value: ComponentUserInputValue) => string,
-    cssMutate?: (value: ComponentUserInputValue, css: string) => string,
+    // cssInjectPre?: (value: ComponentUserInputValue) => string,
+    // cssInjectPost?: (value: ComponentUserInputValue) => string,
+    // cssMutate?: (value: ComponentUserInputValue, css: string) => string,
 
     required?: true,
     hardcoded?: true,
@@ -134,7 +129,7 @@ declare global {
     input?: ComponentUserInputItem[],
     compatibleOnInputs?: string[],
 
-    browsersCompat?: BrowsersCompat,
+    // browsersCompat?: BrowsersCompat,
 
     tags?: ComponentTags[],
     notes?: string[],
@@ -167,8 +162,8 @@ declare global {
     css: CSSData,
     cssProcessed: string,
 
-    li?: HTMLLIElement,
-    chkBox?: HTMLInputElement,
+    li: HTMLLIElement,
+    chkBox: HTMLInputElement,
 
     page: () => Promise<ComponentPage>,
     manifest: ComponentData,
