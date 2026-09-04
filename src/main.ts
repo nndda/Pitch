@@ -16,6 +16,17 @@ document.addEventListener("DOMContentLoaded", async () => {
   loadingText.textContent = "styling";
   await import("./app.scss");
 
+  const { constructRule } = await import("./pages/elements/input")
+  const { inputStyling } = await import("./states/runtime")
+
+  constructRule().then(rules => {
+    inputStyling.replaceSync(
+      "#wrapper {"
+      + rules
+      + "}",
+    );
+  });
+
   loadingText.textContent = "app";
   const { default: App, } = await import("./app.svelte");
 

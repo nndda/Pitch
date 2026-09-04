@@ -18,14 +18,6 @@
     isInputVariablesCompatible,
   } from "../pages/elements/input";
 
-  // TODO: I feel like this should be somewhere else more appropriate :/
-  constructRule().then(rules => {
-    inputStyling.replaceSync(
-      "#wrapper {"
-      + rules
-      + "}",
-    );
-  });
 
   import {
     toast,
