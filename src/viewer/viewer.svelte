@@ -2,9 +2,9 @@
   import { onMount } from "svelte";
   import { fade } from "svelte/transition";
 
+  import { IconTooltip } from "../pages/elements";
   import { currentPage } from "../states/page.svelte";
-
-  import { projectUpdate } from "../storage/db";
+  import { project, projectUpdate } from "../storage/db";
   import { generateToC } from "./toc";
 
   let
@@ -39,6 +39,80 @@
     >
       <i class="fa-solid fa-chevron-left"></i>
     </button> -->
+
+    {#key currentPage.componentData}
+      {#if currentPage.componentData}
+
+        {@const { catId, compId }: {
+          catId: string,
+          compId: string
+        } = currentPage.attr}
+
+        <div class="heading-comp-actions">
+
+          <input
+            type="checkbox"
+            id="heading-comp-incl"
+
+            checked={
+              $project?.components[catId][compId] ?? false
+            }
+
+            onchange={async ev => {
+              await currentPage.componentData?.api?.toggleInclude(ev.currentTarget.checked);
+            }}
+          >
+
+          <label class="checkbox fave" for="heading-comp-incl">
+
+            <IconTooltip
+              icon="fa-regular fa-square-plus"
+              tooltip="Add"
+
+              elClass="checked-not"
+            />
+
+            <IconTooltip
+              icon="fa-solid fa-square-check"
+              tooltip="Remove"
+
+              elClass="checked"
+            />
+
+          </label>
+
+          <input
+            type="checkbox"
+            id="heading-comp-fave"
+
+            checked={$project?.faves[compId] ?? false}
+
+            onchange={async ev => {
+              await currentPage.componentData?.api?.toggleFavourite(ev.currentTarget.checked);
+            }}
+          >
+
+          <label class="checkbox fave" for="heading-comp-fave">
+
+            <IconTooltip
+              icon="fa-regular fa-star"
+              tooltip="Favourite"
+
+              elClass="checked-not"
+            />
+
+            <IconTooltip
+              icon="fa-solid fa-star"
+              tooltip="Un-favourite"
+
+              elClass="checked"
+            />
+
+          </label>
+
+        </div>
+      {/if}
+    {/key}
 
     <h1 class="page-heading">
       <i
