@@ -44,6 +44,12 @@
     Showcase,
   } from "../pages/resources";
 
+  // Spellbook
+  import {
+    GettingMoreFonts,
+    AMPPageRedirect,
+  } from "../pages/spellbooks"
+
   let
     navEl: HTMLElement
   ;
@@ -108,6 +114,8 @@
 
     icon,
     attr,
+
+    subPages,
   } = page}
 
   {@const chkId = slug(`chk-${title}`)}
@@ -166,6 +174,12 @@
         </span>
       </div>
     {/if}
+
+    {#if subPages}
+      {@render PageCatalogue({
+        items: subPages,
+      })}
+    {/if}
   </li>
 
 {/snippet}
@@ -199,7 +213,6 @@
   </label>
 
 {/snippet}
-
 
 {#snippet PageCatalogue({name, items}: {
   name?: string,
@@ -616,12 +629,32 @@
                 />
 
               </label>
+
             </li>
 
           {/if}
         {/each}
       </ul>
     {/each}
+
+    <h2
+      class="cat-heading cat-comp cat-spellbook"
+      class:on-hover={$project?.app.settings.app.sidebar.categoryActionOnHover}
+    >
+      <span class=text>
+        <i class="fa-solid fa-book-skull"></i>
+        Spellbook
+      </span>
+
+      {@render HeadingCatToggle("spellbook")}
+    </h2>
+
+    {@render PageCatalogue({
+      items: [
+        GettingMoreFonts,
+        AMPPageRedirect,
+      ],
+    })}
 
     <p>
       Don't see what you're looking for?

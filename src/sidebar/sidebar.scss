@@ -115,6 +115,12 @@
     color: $accent;
   }
 
+  &.cat-spellbook {
+    & > .text, > .icon {
+      color: $primary;
+    }
+  }
+
   & > .text {
     flex-grow: 1;
   }
@@ -215,8 +221,14 @@ h2.cat-heading {
 
 .comp-item {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   padding-bottom: .75em;
+
+  & > ul {
+    flex-grow: 1;
+    margin-top: .5em !important;
+  }
 
   & .checkbox, .icon {
     margin-right: .2em;
