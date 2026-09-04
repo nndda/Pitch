@@ -4,6 +4,7 @@
   import { goToPage, unselectSidebarPage } from "../states/page.svelte";
   import { isInputVariablesCompatible } from "../pages/elements/input";
   import { toast, toastErr } from "../scripts/toast";
+  import { toastErr } from "../scripts/toast";
   import { slug } from "../scripts/slugify";
   import { compile } from "../scripts/compiler";
   import { copyStr } from "../scripts/copy";
@@ -333,9 +334,8 @@
       {@render PageListItem(AdvancedSearch)}
     </ul>
 
-    {#each Object.entries(runtimeData) as catEntry}
+    {#each Object.entries(runtimeData) as [ _, catData ]}
 
-      {@const catData = catEntry[1]}
       {@const catId = catData.name}
 
       {@const catCompList = `comp-list-${catId}`}
@@ -449,10 +449,7 @@
       </h2>
 
       <ul id={catCompList} class="comp-list">
-        {#each Object.entries(catEntry[1].components) as compEntry}
-
-          {@const compId = compEntry[0]}
-          {@const compData = compEntry[1]}
+        {#each Object.entries(catData.components) as [ compId, compData ]}
 
           {#if compData.type === "group"}
 
@@ -487,7 +484,10 @@
               </div>
             </li>
 
-          {:else if compData.type === "item" || compData.type === "item+group"}
+          {:else if
+            compData.type === "item" ||
+            compData.type === "item+group"
+          }
 
             {@const idIncl = `incl-${compId}`}
             {@const idView = `view-${compId}`}
@@ -540,84 +540,7 @@
                 data-compId={compId}
 
                 onchange={async ev => {
-                  const
-                    compRuntimeData = runtimeData[catId].components[compId]
-                  , checked = ev.currentTarget.checked
-                  ;
-
-                  let
-                    updated = false
-                  ;
-
-                  try {
-                    const
-                      // Update the project's DB selection state
-                      updates = await projectUpdate(proj => {
-                        if (!(catId in proj.components)) {
-                          proj.components[catId] = {}
-                        }
-
-                        // Delete the key if not checked (not selected), instead of flagging it to false
-                        // if (checked) {
-                        //   proj.components[catId][compId] = true;
-                        // } else {
-                        //   delete proj.components[catId][compId];
-                        // }
-
-                        // Flag false explicitly if not checked, rather than deleting the key
-                        proj.components[catId][compId] = checked;
-                      })
-                    ;
-
-                    // If the DB gets updated...
-                    if (updates > 0) {
-
-                      updateCatSelectionState(catId);
-
-                      // Auto copy
-                      if ($project?.app.settings.app.autoCopy) {
-                        copyStr(
-                          await compile(),
-                        );
-                      }
-
-                      // Notify the user about the component's selection state
-                      toast(
-                        checked ?
-                          // NOTE: not sure which icon is better :/
-                          // `<i class="fa-solid fa-check-to-slot"></i> <b>${compHumanName}</b> added` :
-                          `<i class="fa-solid fa-square-check"></i> <b>${compHumanName}</b> added` :
-                          `<i class="fa-solid fa-border-none"></i> <b>${compHumanName}</b> removed`
-                      );
-
-                      updated = true;
-
-                    } else {
-
-                      // If nothing gets updated...
-                      // Notify the user
-                      toastErr(
-                        checked ?
-                          `Failed to remove <b>${compHumanName}</b>` :
-                          `Failed to add <b>${compHumanName}</b>`
-                      );
-
-                    }
-
-                  } catch (err) {
-                    toastErr(`${err}`);
-                  }
-
-                  if (updated) {
-
-                    syncCompCheckedState(catId, compRuntimeData, checked);
-
-                  } else {
-
-                    // Revert back selection state if failed to update
-                    ev.currentTarget.checked = !checked;
-
-                  }
+                  await compData.api?.toggleInclude(ev.currentTarget.checked);
                 }}
 
                 bind:this={compCheckboxCache[catId][compId]}
@@ -633,20 +556,7 @@
                 id={idView}
                 name="page-view"
 
-                onchange={
-                  compData.manifest.page ?
-                    async () => {
-                      goToPage({
-                        title: compHumanName,
-                        content: compData.manifest.page,
-
-                        icon: catMeta[catId].icon,
-
-                        componentData: compData.manifest,
-                        attr: compData,
-                      });
-                    } : null
-                }
+                onchange={compData.api?.openPage}
               >
 
               <label
@@ -684,53 +594,7 @@
                 checked={$project?.faves[compId] ?? false}
 
                 onchange={async ev => {
-                  const
-                    faved = ev.currentTarget.checked ?? false
-                  , compRuntimeData = (runtimeData[catId].components[compId] as ComponentRuntimeItem)
-                  ;
-
-                  compRuntimeData.li!.classList.toggle("is-faved", faved);
-
-                  if (compRuntimeData.group) {
-                    syncCompGroupItemsClass(
-                      runtimeData[catId].components[compRuntimeData.group],
-                      "is-faved",
-                    );
-                  }
-
-                  try {
-                    const
-                      // Update the project's DB faved state
-                      updates = await projectUpdate(proj => {
-                        if (faved) {
-                          proj.faves[compId] = true;
-                        } else {
-                          delete proj.faves[compId];
-                        }
-                      })
-                    ;
-
-                    // If the DB gets updated...
-                    if (updates > 0) {
-                      // Notify the user about the component's favourited state
-                      toast(
-                        faved ?
-                          `<i class="fa-solid fa-star"></i> Added <b>${compHumanName}</b> to favourites` :
-                          `<i class="fa-regular fa-star"></i> Removed <b>${compHumanName}</b> from favourites`
-                      );
-                    } else {
-                      // If nothing gets updated...
-                      // Notify the user
-                      toastErr(
-                        faved ?
-                          `Failed to remove <b>${compHumanName}</b> from favourites` :
-                          `Failed to add <b>${compHumanName}</b> to favourites`
-                      );
-                    }
-                  } catch (err) {
-                    toastErr(`${err}`)
-                  }
-
+                  await compData.api?.toggleFavourite(ev.currentTarget.checked ?? false);
                 }}
               >
               <label class="checkbox fave" for={idFave}>

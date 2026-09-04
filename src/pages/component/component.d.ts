@@ -16,7 +16,7 @@ declare global {
 
     content?: () => Promise<Component | ComponentPage>,
 
-    componentData?: ComponentData,
+    componentData?: ComponentRuntimeItem,
 
     icon?: string,
     attr?: object,
@@ -180,6 +180,17 @@ declare global {
     tags?: ComponentTags[],
 
     wip?: true,
+  }
+
+  interface ComponentRuntimeItem {
+    wip: undefined,
+
+    api?: {
+      openPage(): void,
+
+      toggleInclude(included: boolean): Promise<void>,
+      toggleFavourite(faved: boolean): Promise<void>,
+    },
   }
 
   interface ComponentRuntimeItemGroup {
