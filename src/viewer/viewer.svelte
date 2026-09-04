@@ -136,6 +136,7 @@
 
     <div class="flex-space"></div>
 
+    <!--
     <div class="social-link-cont">
       {#each [
         {
@@ -177,6 +178,7 @@
         </a>
       {/each}
     </div>
+    -->
 
     <input
       type="checkbox"
