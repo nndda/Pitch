@@ -111,7 +111,7 @@ declare global {
     icon?: string,
   }
 
-  type ComponentPage = Component<{data: ComponentData}>;
+  type ComponentPage = Component<{data?: ComponentData}>;
 
   interface ComponentData {
     name: string,
