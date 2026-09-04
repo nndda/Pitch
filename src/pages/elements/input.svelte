@@ -60,10 +60,9 @@
         isCompatible = await isInputVariablesCompatible(data)
 
       , selectorBase = `.heading[data-comp-name="${data.nameDisplay ?? data.name}"] `
-      , runtimeData = currentPage.attr as ComponentRuntimeItem
       ;
 
-      runtimeData.li?.classList.toggle("compatible-all", isCompatible);
+      currentPage.componentData?.li?.classList.toggle("compatible-all", isCompatible);
 
       document.querySelector(selectorBase + ".scopes:not(.compatible-all)")?.classList.toggle("hidden", isCompatible);
       document.querySelector(selectorBase + ".scopes.compatible-all")?.classList.toggle("hidden", !isCompatible);
