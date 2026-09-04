@@ -164,7 +164,7 @@
             >
 
               <Page
-                data={currentPage.componentData}
+                data={currentPage.componentData?.manifest}
                 {...currentPage.attr}
               />
 
