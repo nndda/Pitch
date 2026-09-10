@@ -40,13 +40,6 @@
 
 <main id="viewer">
   <header>
-    <!-- <button
-      id="page-prev"
-      class="icon-onlyb"
-      aria-label="Previous page"
-    >
-      <i class="fa-solid fa-chevron-left"></i>
-    </button> -->
 
     {#key currentPage.componentData}
       {#if currentPage.componentData}
@@ -129,63 +122,7 @@
       {currentPage.title}
     </h1>
 
-    <!-- <button
-      id="page-prev"
-      class="icon-onlyb"
-      aria-label="Previous page"
-    >
-      <i class="fa-solid fa-chevron-right"></i>
-    </button> -->
-
-    <!-- <div class="flex-space"></div> -->
-
-    <!-- <div class="hr-v"></div> -->
-
     <div class="flex-space"></div>
-
-    <!--
-    <div class="social-link-cont">
-      {#each [
-        {
-          name: "Bluesky",
-          url: "bsky.app/profile/nnda.dev",
-          icon: "bluesky"
-        },
-        {
-          name: "Patreon",
-          url: "www.patreon.com/nnda",
-          icon: "patreon"
-        },
-        {
-          name: "Ko-fi",
-          url: "ko-fi.com/nnda",
-          icon: "ko-fi"
-        },
-        {
-          name: "itch.io",
-          url: "nnda.itch.io/",
-          icon: "itch-io"
-        },
-        {
-          name: "GitHub",
-          url: "github.com/nndda/Pitch",
-          icon: "github"
-        },
-      ] as { name, url, icon }}
-        <a
-          target="_blank"
-          href="https://{url}"
-          rel="nofollow noopener"
-          class="social-link custom-tip button"
-        >
-          <i class="fa-brands fa-{icon}"></i>
-          <span class="custom-tip-content">
-            {name}
-          </span>
-        </a>
-      {/each}
-    </div>
-    -->
 
     <input
       type="checkbox"
@@ -213,31 +150,14 @@
     </label>
   </header>
 
-  <!-- <hr> -->
-
   <div class="split">
 
     <section id="wrapper">
 
       <!-- NOTE: not sure if relying on `title` is enough :/ -->
       {#key currentPage.title}
-
         {#if currentPage.content}
           {#await currentPage.content() then Page}
-
-            <!--
-            <div
-              id="viewer-loading"
-            >
-
-              <strong>
-                Loading ...
-              </strong>
-
-            </div>
-            -->
-
-          <!-- {:then Page} -->
 
             <div
               id="page"
@@ -251,8 +171,6 @@
               />
 
             </div>
-
-          <!-- {:catch err} -->
 
           {/await}
         {/if}
