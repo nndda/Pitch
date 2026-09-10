@@ -1,26 +1,21 @@
 <script lang="ts">
-  import { onMount } from "svelte";
+  import { onMount, tick } from "svelte";
   import { fade } from "svelte/transition";
 
   import { IconTooltip } from "../pages/elements";
-  import { currentPage } from "../states/page.svelte";
+  import { currentPage, tocHeadings, generateToC } from "../states/page.svelte";
   import { project, projectUpdate } from "../storage/db";
-  import { generateToC } from "./toc";
   import ComponentInput from "../pages/elements/input.svelte";
 
   let
-    tocContent: HTMLUListElement = $state()!
-  , tocWrapper: HTMLElement
+    tocWrapper: HTMLElement
   ;
-
-  $effect(() => {
-    generateToC(tocContent, currentPage.title);
-  });
 
   onMount(() => {
     const
       initialToCState = true
       // initialToCState = ui.state["toc-collapsed"] ?? true
+    , mut = new MutationObserver(generateToC);
     ;
 
     (document.getElementById("toc-toggle") as HTMLInputElement).checked = !initialToCState;
@@ -28,6 +23,18 @@
       "collapsed",
       initialToCState,
     );
+
+
+    tick().then(() => {
+      mut.observe(
+        document.getElementById("wrapper")!,
+        {
+          childList: true,
+          subtree: true,
+          attributes: true,
+        },
+      );
+    });
   });
 </script>
 
@@ -195,9 +202,6 @@
 
         tocWrapper.classList.toggle("collapsed", tocCollapsed);
 
-        if (ev.currentTarget?.checked) {
-          generateToC(tocContent, currentPage.title);
-        }
       }}
     >
     <label class="button button-check custom-tip" for="toc-toggle">
@@ -285,7 +289,20 @@
           <hr>
 
           <h3>{currentPage.title}</h3>
-          <ul id="toc-content" bind:this={tocContent}></ul>
+
+          {#key tocHeadings}
+            <ul id="toc-content">
+              {#each tocHeadings as el}
+                <li
+                  class="lv-{parseInt(el.tagName.at(1)!)}"
+                >
+                  <button class="icon-only">
+                    {el.textContent}
+                  </button>
+                </li>
+              {/each}
+            </ul>
+          {/key}
 
         </div>
       {/key}

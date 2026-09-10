@@ -33,3 +33,17 @@ export function goToPage(page: PageData) {
   currentPage.icon = page.icon;
   currentPage.attr = page.attr;
 }
+
+export const tocHeadings: Element[] = $state([]);
+
+export function generateToC() {
+  tocHeadings.length = 0;
+
+  tocHeadings.push(
+    ...Array
+      .from(
+        document
+          .querySelectorAll(`:where(#page, #page > article) > :where(h2, h3, h4, h5, h6)`)
+      )
+  );
+}

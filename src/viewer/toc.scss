@@ -37,7 +37,7 @@
   }
 
   & li {
-    margin-bottom: .6em;
+    margin-bottom: .75em;
 
     & > a {
       color: $text-col;
@@ -48,10 +48,44 @@
         text-decoration: underline;
       }
     }
+  }
+}
 
-    &.H3 {
-      margin-left: 1em;
+#toc-content {
+  list-style: none;
+  padding-left: .5em;
+
+  & li {
+    display: flex;
+
+    opacity: .5;
+
+    & > button {
+      justify-content: start;
+      flex-grow: 1;
     }
+
+    &:hover {
+      opacity: 1;
+
+      & > button {
+        text-decoration: underline 1px solid;
+      }
+    }
+  }
+
+  & .lv-2 {
+    font-size: 1.15em;
+  }
+
+  & .lv-3 {
+    font-size: 0.95em;
+    margin-left: 1em;
+  }
+
+  & .lv-4 {
+    font-size: 0.9em;
+    margin-left: 1em * 2;
   }
 }
 
