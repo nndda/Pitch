@@ -57,6 +57,10 @@ export interface ProjectsDB {
           showWipPages: boolean,
           categoryActionOnHover: boolean,
         },
+
+        componentPage: {
+          alwaysShowCompatibleScopeBadge: boolean,
+        },
       },
     },
   },
@@ -109,7 +113,11 @@ export const
             showFavedBadge: false,
             showWipComps: false,
             showWipPages: false,
-            categoryActionOnHover: false,
+            categoryActionOnHover: true,
+          },
+
+          componentPage: {
+            alwaysShowCompatibleScopeBadge: false,
           },
         },
       },
