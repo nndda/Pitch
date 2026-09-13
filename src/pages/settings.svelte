@@ -82,6 +82,12 @@
             name: "Show WIP pages",
           },
         },
+
+        componentPage: {
+          alwaysShowCompatibleScopeBadge: {
+            name: "Always show compatible badge",
+          },
+        },
       },
     }
 
@@ -89,6 +95,7 @@
       css: "CSS",
       app: "Pitch App",
       sidebar: "Sidebar",
+      componentPage: "Component Page",
     }
   ;
 </script>

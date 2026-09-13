@@ -5,6 +5,7 @@
   import { showModal } from "../../../scripts/modal";
   import { isInputVariablesCompatible } from "../input";
   import { event, eventCSSInputChanged } from "../../../states/runtime";
+  import { project } from "../../../storage/db";
 
   const
     {
@@ -42,7 +43,27 @@
   })
 </script>
 
- 	<ul class="labels-list scopes" class:hidden={isCompaible}>
+<style>
+  .label-icon-only {
+    height: 100%;
+
+    & > i {
+      font-size: 1em;
+    }
+  }
+
+  .show-compatible-scope {
+    & .compatible, & + .compatible-all {
+      display: none !important;
+    }
+  }
+</style>
+
+ 	<ul
+    class="labels-list scopes"
+    class:show-compatible-scope={!$project?.app.settings.app.componentPage.alwaysShowCompatibleScopeBadge}
+    class:hidden={isCompaible}
+  >
     {#each Object.entries(componentData.scopes!) as [scopeType, scopes]}
 
       {@const scopeStatus: ScopeStatus = scopeType as ScopeStatus}
