@@ -181,7 +181,6 @@
       })}
     {/if}
   </li>
-
 {/snippet}
 
 {#snippet HeadingCatToggle(
@@ -211,7 +210,6 @@
       <span class="expand">Expand</span>
     </span>
   </label>
-
 {/snippet}
 
 {#snippet PageCatalogue({name, items}: {

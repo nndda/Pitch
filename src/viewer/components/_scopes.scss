@@ -3,6 +3,10 @@
 @use "../../styles/variables" as *;
 
 .labels {
+  display: flex;
+  min-height: 4em;
+  gap: .5em;
+
   & > * {
     display: inline-flex;
   }
@@ -14,13 +18,13 @@
 
   & ul, li, button {
     display: inline-flex;
-    align-items: center;
+    // align-items: center;
     gap: .5em;
     padding: 0;
   }
 
   & button {
-    margin: .2em .5em;
+    // margin: .2em .5em;
     border-radius: 6px;
     // background: red;
 

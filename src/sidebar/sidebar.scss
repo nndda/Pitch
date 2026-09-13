@@ -352,6 +352,8 @@ h2.cat-heading {
 .tags {
   font-size: .9em;
 
+  margin-right: .5em;
+
   & :global .experimental {
     color: $primary;
   }
