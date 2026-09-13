@@ -140,7 +140,7 @@
         }}
       >
         <ul>
-          <li>
+          <li style="align-items: center;">
             <i class="icon fa-solid fa-xmark"></i>
             <!-- ain't bringing the whole Simple Icons library just yet -->
             <svg
