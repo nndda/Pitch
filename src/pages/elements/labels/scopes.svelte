@@ -45,7 +45,80 @@
   })
 </script>
 
-<style>
+<style lang="scss">
+  @use "sass:color";
+  @use "../../../styles/variables" as *;
+
+  :global {
+    .labels {
+      display: flex;
+      min-height: 4em;
+      gap: .5em;
+
+      & > * {
+        display: inline-flex;
+      }
+    }
+
+    .labels-list {
+      padding: 0;
+      font-size: .9em;
+
+      & ul, li, button {
+        display: inline-flex;
+        // align-items: center;
+        gap: .5em;
+        padding: 0;
+      }
+
+      & button {
+        // margin: .2em .5em;
+        border-radius: 6px;
+        // background: red;
+
+        & > svg {
+          display: inline-flex;
+          height: 1em;
+          fill: $text-col;
+        }
+      }
+
+      & .text {
+        text-transform: capitalize;
+      }
+    }
+  }
+
+  @mixin style-scope-label($col) {
+    & button {
+      background: color.mix($background, $col, 70%);
+
+      &:hover {
+        background: color.mix($background, $col, 55%);
+      }
+
+      & .icon {
+        color: lighten($col, 15%);
+      }
+    }
+  }
+
+  .compatible {
+    @include style-scope-label(#21bd19);
+  }
+  .partial {
+    @include style-scope-label(#ffbe0a);
+  }
+  .none {
+    @include style-scope-label(#e6071d);
+  }
+  .only {
+    @include style-scope-label($primary);
+  }
+  .amp {
+    @include style-scope-label(#005AF0);
+  }
+
   .label-icon-only {
     height: 100%;
 
