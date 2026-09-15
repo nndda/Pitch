@@ -16,9 +16,12 @@
 
 <h2>AMP incompatible label</h2>
 
-<LabelScopes componentData={{
-  scopeAMPincompatible: true,
-}}/>
+<LabelScopes
+  componentData={{
+    scopeAMPincompatible: true,
+  }}
+  previewOnly={true}
+/>
 
 <blockquote class="custom-callout">
   <h3>Note</h3>
@@ -28,7 +31,7 @@
 </blockquote>
 
 <p>
-  <b>{componentData.nameDisplay ?? componentData.name}</b> is incompatible with <a referrerpolicy="no-referrer" rel="nofollower noopener" href="https://en.wikipedia.org/wiki/Accelerated_Mobile_Pages" target="_blank">AMP</a> version of the devlog pages.
+  <b>{compName}</b> is incompatible with <a referrerpolicy="no-referrer" rel="nofollower noopener" href="https://en.wikipedia.org/wiki/Accelerated_Mobile_Pages" target="_blank">AMP</a> version of the devlog pages.
 </p>
 
 <p>

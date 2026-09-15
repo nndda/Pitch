@@ -36,13 +36,16 @@
     isCompaible = $state(false)
   ;
 
-  event.addEventListener(eventCSSInputChanged, async () => {
-    isCompaible = await isInputVariablesCompatible(componentData as ComponentData);
-  });
+  // svelte-ignore state_referenced_locally
+  if (!previewOnly) {
+    event.addEventListener(eventCSSInputChanged, async () => {
+      isCompaible = await isInputVariablesCompatible(componentData as ComponentData);
+    });
 
-  onMount(() => {
-    event.dispatchEvent(new Event(eventCSSInputChanged));
-  })
+    onMount(() => {
+      event.dispatchEvent(new Event(eventCSSInputChanged));
+    })
+  }
 </script>
 
 <style lang="scss">
@@ -141,12 +144,13 @@
   }
 </style>
 
+{#if componentData.scopes}
  	<ul
     class="labels-list scopes"
     class:show-compatible-scope={!$project?.app.settings.app.componentPage.alwaysShowCompatibleScopeBadge}
     class:hidden={isCompaible}
   >
-    {#each Object.entries(componentData.scopes!) as [scopeType, scopes]}
+    {#each Object.entries(componentData.scopes) as [scopeType, scopes]}
 
       {@const scopeStatus: ScopeStatus = scopeType as ScopeStatus}
       {@const scopeInfoComp = previewOnly ? null : () => {
@@ -200,7 +204,9 @@
 
     {/each}
   </ul>
+{/if}
 
+{#if !previewOnly}
  	<ul class="labels-list scopes compatible-all" class:hidden={!isCompaible}>
     <li class="compatible">
       <button
@@ -227,6 +233,7 @@
       </button>
     </li>
   </ul>
+{/if}
 
 {#if componentData.scopeAMPincompatible}
   <ul class="labels-list">
