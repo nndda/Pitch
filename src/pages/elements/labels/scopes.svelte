@@ -62,6 +62,7 @@
 
     .labels-list {
       padding: 0;
+      gap: .5em;
       font-size: .9em;
 
       & ul, li, button {
