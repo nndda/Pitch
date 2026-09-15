@@ -6,7 +6,7 @@
   const
     {
       css,
-      compiledViewer = false, // why...
+      compiledViewer, // why...
     }: {
       css: string,
       compiledViewer?: boolean, // why...
@@ -46,10 +46,13 @@
       async function updateCompiledCSS() {
         cssEditorAPI.CSSUpdateCb((await compile()));
       }
+
       destroyCb.cb = updateCompiledCSS;
 
       if (compiledViewer) {
         event.addEventListener(eventCSSCompiled, updateCompiledCSS);
+
+        updateCompiledCSS();
       }
     });
   });
