@@ -16,25 +16,25 @@
   import { formatDistanceToNow } from "date-fns";
 
   let
-    tocToggleLabel: HTMLLabelElement
+    sidebarRightToggleLabel: HTMLLabelElement
   ;
 
   onMount(() => {
     const
-      tocToggle = document.getElementById("toc-toggle") as HTMLInputElement
+      sidebarRightToggle = document.getElementById("sidebar-right-toggle") as HTMLInputElement
     ;
 
-    tocToggleLabel = document.querySelector("#toc-toggle + label") as HTMLLabelElement;
+    sidebarRightToggleLabel = document.querySelector("#sidebar-right-toggle + label") as HTMLLabelElement;
 
-    if (tocToggle.checked) {
-      tocToggle.click()
+    if (sidebarRightToggle.checked) {
+      sidebarRightToggle.click()
     }
 
-    tocToggleLabel.classList.add("hidden");
+    sidebarRightToggleLabel.classList.add("hidden");
   });
 
   onDestroy(() => {
-    tocToggleLabel.classList.remove("hidden");
+    sidebarRightToggleLabel.classList.remove("hidden");
   });
 </script>
 

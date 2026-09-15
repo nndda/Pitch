@@ -16,7 +16,7 @@
       previewOnly?: boolean,
     } = $props()
 
-  , tocToggleEl = document.getElementById("toc-toggle") as HTMLInputElement
+  , sidebarRightToggleEl = document.getElementById("sidebar-right-toggle") as HTMLInputElement
 
   , itchScopes = [
       "project",
@@ -133,7 +133,7 @@
     }
   }
 
-  :global #viewer:has(#toc-toggle:checked) {
+  :global #viewer:has(#sidebar-right-toggle:checked) {
     & .customization-shortcut {
       display: none;
     }
@@ -272,10 +272,10 @@
         class="custom-tip label-icon-only"
         onclick={() => {
           // TODO: bruh
-          // cant target the #toc-toggle, and then toggle its checked property for some reason ://
+          // cant target the sidebar-right-toggle, and then toggle its checked property for some reason ://
           //
           // maybe use global state in runtime.ts instead??
-          if (!tocToggleEl.checked) tocToggleEl.click();
+          if (!sidebarRightToggleEl.checked) sidebarRightToggleEl.click();
         }}
       >
         <i class="icon fa-solid fa-sliders"></i>

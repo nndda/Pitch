@@ -1,6 +1,6 @@
 @use "../styles/variables" as *;
 
-#toc {
+#sidebar-right {
   position: relative;
 
   width: 280px;
@@ -16,7 +16,7 @@
     min-width: 0;
   }
 
-  & > .toc-inner {
+  & > .sidebar-right-inner {
     padding: 1em 1.5em;
     padding-top: 0;
     border-left: 1px solid $border-col;
