@@ -8,20 +8,19 @@
   import ComponentInput from "../pages/elements/input.svelte";
 
   let
-    tocWrapper: HTMLElement
+    sidebarRightWrapper: HTMLElement
   ;
 
   onMount(() => {
     const
-      initialToCState = true
-      // initialToCState = ui.state["toc-collapsed"] ?? true
+      initialSidebarRightState = true
     , mut = new MutationObserver(generateToC);
     ;
 
-    (document.getElementById("toc-toggle") as HTMLInputElement).checked = !initialToCState;
-    tocWrapper.classList.toggle(
+    (document.getElementById("sidebar-right-toggle") as HTMLInputElement).checked = !initialSidebarRightState;
+    sidebarRightWrapper.classList.toggle(
       "collapsed",
-      initialToCState,
+      initialSidebarRightState,
     );
 
 
@@ -127,21 +126,21 @@
     <input
       type="checkbox"
       class="toggle"
-      id="toc-toggle"
+      id="sidebar-right-toggle"
       aria-label="Table of Content"
 
       onchange={async ev => {
-        // TODO: I think ToC states are not working :/
+        // TODO: I think these states are not working :/
 
-        const tocCollapsed = !ev.currentTarget.checked;
+        const sidebarRightCollapsed = !ev.currentTarget.checked;
 
-        await projectUpdate({ ["app.uiState.TOCCollapsed"]: tocCollapsed});
+        await projectUpdate({ ["app.uiState.TOCCollapsed"]: sidebarRightCollapsed});
 
-        tocWrapper.classList.toggle("collapsed", tocCollapsed);
+        sidebarRightWrapper.classList.toggle("collapsed", sidebarRightCollapsed);
 
       }}
     >
-    <label class="button button-check custom-tip" for="toc-toggle">
+    <label class="button button-check custom-tip" for="sidebar-right-toggle">
       <i class="fa-solid fa-table-list"></i>
 
       <span class="custom-tip-content custom-left">
@@ -178,12 +177,12 @@
     </section>
 
     <nav
-      id="toc"
-      bind:this={tocWrapper}
+      id="sidebar-right"
+      bind:this={sidebarRightWrapper}
     >
       {#key currentPage.content}
         <div
-          class="toc-inner"
+          class="sidebar-right-inner"
 
           in:fade={{ duration: 200 }}
           out:fade={{ duration: 150 }}
