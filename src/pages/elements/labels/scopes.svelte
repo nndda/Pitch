@@ -16,6 +16,8 @@
       previewOnly?: boolean,
     } = $props()
 
+  , tocToggleEl = document.getElementById("toc-toggle") as HTMLInputElement
+
   , itchScopes = [
       "project",
       "profile",
@@ -55,6 +57,12 @@
   .show-compatible-scope {
     & .compatible, & + .compatible-all {
       display: none !important;
+    }
+  }
+
+  :global #viewer:has(#toc-toggle:checked) {
+    & .customization-shortcut {
+      display: none;
     }
   }
 </style>
@@ -177,6 +185,28 @@
             AMP incompatible
           </li>
         </ul>
+      </button>
+    </li>
+  </ul>
+{/if}
+
+
+{#if componentData.input}
+ 	<ul class="labels-list">
+    <li class="customization-shortcut">
+      <button
+        aria-label="Customization available!"
+        class="custom-tip label-icon-only"
+        onclick={() => {
+          // TODO: bruh
+          // cant target the #toc-toggle, and then toggle its checked property for some reason ://
+          //
+          // maybe use global state in runtime.ts instead??
+          if (!tocToggleEl.checked) tocToggleEl.click();
+        }}
+      >
+        <i class="icon fa-solid fa-sliders"></i>
+        <span class="custom-tip-content">Customization available</span>
       </button>
     </li>
   </ul>
