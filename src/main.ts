@@ -1,5 +1,5 @@
 import { mount } from "svelte";
-import "./styles/critical.scss";
+import "@styles/critical.scss";
 // import "./scripts/init";
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -10,14 +10,14 @@ document.addEventListener("DOMContentLoaded", async () => {
   ;
 
   loadingText.textContent = "storage";
-  const db = await import("./storage/db");
+  const db = await import("@db");
   await db.init();
 
   loadingText.textContent = "styling";
   await import("./app.scss");
 
-  const { constructRule } = await import("./pages/elements/input")
-  const { inputStyling } = await import("./states/runtime")
+  const { constructRule } = await import("@elements/input")
+  const { inputStyling } = await import("@runtime/stylesheets")
 
   constructRule().then(rules => {
     inputStyling.replaceSync(

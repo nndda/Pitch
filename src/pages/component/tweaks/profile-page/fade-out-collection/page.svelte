@@ -1,6 +1,6 @@
 <script lang="ts">
   export let data: ComponentData;
-  import { ComponentPage, CodeViewerCSS } from "../../../../elements";
+  import { ComponentPage, CodeViewerCSS } from "@elements";
 </script>
 
 <ComponentPage data={data}>

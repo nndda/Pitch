@@ -1,14 +1,5 @@
-import {
-  Dexie,
-  liveQuery,
-} from "dexie";
-
-import type {
-  EntityTable,
-  UpdateSpec,
-  InsertType,
-  IndexableType,
-} from "dexie";
+import { Dexie, liveQuery } from "dexie";
+import type { EntityTable, UpdateSpec, InsertType, IndexableType } from "dexie";
 
 import { currentProject } from "../states/storage.svelte";
 

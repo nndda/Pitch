@@ -1,16 +1,12 @@
 import { EditorView, basicSetup } from "codemirror";
 import { EditorState } from "@codemirror/state"
 import { html as codemirrorHTML } from "@codemirror/lang-html";
-import { extractFontFace } from "../../scripts/css";
-import { copyStr } from "../../scripts/copy";
 import { css as codemirrorCSS } from "@codemirror/lang-css";
 import "./codemirror.scss";
 
-import {
-  itchStyling,
-  inputStyling,
-  fontLocalStyling,
-} from "../../states/runtime";
+import { itchStyling, inputStyling, fontLocalStyling } from "@runtime/stylesheets";
+import { extractFontFace } from "@pitch/css";
+import { copyStr } from "@utils";
 
 const editorExts = [
   basicSetup,

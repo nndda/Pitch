@@ -1,9 +1,7 @@
-import { slug } from "../scripts/slugify";
-import { getProject, projectUpdate } from "../storage/db";
-import { toast, toastErr } from "../scripts/toast";
-import { goToPage } from "./page.svelte";
-import { copyStr } from "../scripts/copy";
-import { compile } from "../scripts/compiler";
+import { getProject, projectUpdate } from "@db";
+import { copyStr, slug, toast, toastErr } from "@utils";
+import { goToPage } from "../states/page.svelte";
+import { compile } from "@pitch/css";
 
 import {
   updateCatSelectionState,
@@ -13,38 +11,12 @@ import {
 
 import compPagesEntry from "../pages/component/imports";
 
-// Simulated itch.io's CSS + ALL of Pitch's components' CSS
-import itchCSS from "../styles/_itchio.scss?inline";
-export const itchStyling = new CSSStyleSheet();
-itchStyling.replaceSync(itchCSS);
-
-export const
-  // User's CSS input stylesheet
-  inputStyling = new CSSStyleSheet()
-, fontLocalStyling: Record<string, CSSStyleSheet> = {}
-;
-
 export const
   runtimeData: ComponentRuntimeData = {}
-
-, event = new EventTarget()
-, eventCSSCompiled = "css-compiled"
-, eventCSSInputChanged = "css-input-changed"
 
 , compCheckboxCache: Record<string, Record<string, HTMLInputElement>> = {}
 , compElCache: Record<string, Record<string, HTMLLIElement>> = {}
 
-, catMeta: Record<string, { icon: string, }> = {
-    Components: {
-      icon: "fa-solid fa-bars-progress",
-    },
-    Decorations: {
-      icon: "fa-solid fa-paint-roller",
-    },
-    Tweaks: {
-      icon: "fa-solid fa-pen-ruler",
-    },
-  }
 ;
 
 const project = await getProject();

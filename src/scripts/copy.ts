@@ -1,7 +1,4 @@
-import {
-  copyFailed,
-  copySuccess,
-} from "./toast";
+import { copyFailed, copySuccess } from "./toast";
 
 export const isCopyAllowed = navigator.clipboard;
 

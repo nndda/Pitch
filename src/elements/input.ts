@@ -1,5 +1,5 @@
-import { inputStyling } from "../../states/runtime";
-import { getProject, projectUpdate } from "../../storage/db";
+import { inputStyling } from "@runtime/stylesheets";
+import { getProject, projectUpdate } from "@db";
 
 export async function isInputVariablesCompatible(
   data: ComponentData,

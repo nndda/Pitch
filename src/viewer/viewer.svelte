@@ -2,10 +2,10 @@
   import { onMount, tick } from "svelte";
   import { fade } from "svelte/transition";
 
-  import { IconTooltip } from "../pages/elements";
   import { currentPage, tocHeadings, generateToC } from "../states/page.svelte";
-  import { project, projectUpdate } from "../storage/db";
-  import ComponentInput from "../pages/elements/input.svelte";
+
+  import { ComponentInput, IconTooltip } from "@elements";
+  import { project, projectUpdate } from "@db";
 
   let
     sidebarRightWrapper: HTMLElement

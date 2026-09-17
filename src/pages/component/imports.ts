@@ -1,4 +1,5 @@
 import { sortBy } from "lodash";
+
 const rePathSlash = /[^/]+$/;
 
 function getCompsManifest(

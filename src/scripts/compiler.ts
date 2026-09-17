@@ -1,9 +1,5 @@
-import {
-  runtimeData,
-  // compCheckboxCache,
-} from "../states/runtime";
-
-import { getProject } from "../storage/db";
+import { runtimeData } from "@runtime";
+import { getProject } from "@db";
 
 export async function compile(): Promise<string> {
   const

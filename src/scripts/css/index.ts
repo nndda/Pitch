@@ -1,3 +1,5 @@
+export * from "../compiler";
+
 export function getRules(
   rules: CSSRuleList,
   output: CSSRule[] = [],

@@ -8,15 +8,24 @@
     "types": ["svelte", "vite/client"],
     "skipLibCheck": true,
     "noEmit": true,
-    /**
-     * Typecheck JS in `.svelte` and `.js` files by default.
-     * Disable checkJs if you'd like to use dynamic types in JS.
-     * Note that setting allowJs false does not prevent the use
-     * of JS in `.svelte` files.
-     */
+
     "allowJs": true,
     "checkJs": true,
-    "moduleDetection": "force"
+    "moduleDetection": "force",
+
+    "paths": {
+      "@elements": ["./src/elements"],
+      "@elements/*": ["./src/elements/*"],
+      "@pages": ["./src/pages"],
+      "@pages/*": ["./src/pages/*"],
+      "@styles/*": ["./src/styles/*"],
+      "@pitch/meta": ["./src/pages/component/meta.ts"],
+      "@pitch/css": ["./src/scripts/css/"],
+      "@db": ["./src/storage/db.ts"],
+      "@utils": ["./src/scripts/utils"],
+      "@runtime": ["./src/runtime"],
+      "@runtime/*": ["./src/runtime/*"]
+    }
   },
   "include": [
     "src/**/*.ts",

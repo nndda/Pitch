@@ -1,6 +1,6 @@
 <script lang="ts">
-  import PageRef from "../elements/page-ref.svelte";
-
+  import { PageRef } from "@elements";
+  import { currentPage } from "../../states/page.svelte";
   import { switchContext } from "../../states/storage.svelte";
   import {
     db,
@@ -10,10 +10,7 @@
     project,
 
     type ProjectsDB,
-  } from "../../storage/db";
-
-
-  import { currentPage } from "../../states/page.svelte";
+  } from "@db";
 
   // TODO: typing headache
   // @ts-ignore

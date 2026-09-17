@@ -1,4 +1,8 @@
-export { default as GettingMoreFonts } from "./getting-more-fonts";
-export { default as WebfontIcons } from "./getting-more-fonts/webfont-icons";
+import GettingMoreFonts from "./getting-more-fonts";
+import AMPPageRedirect from "./amp-page-redirect";
 
-export { default as AMPPageRedirect } from "./amp-page-redirect";
+export default [
+  GettingMoreFonts,
+
+  AMPPageRedirect,
+] as PageData[];

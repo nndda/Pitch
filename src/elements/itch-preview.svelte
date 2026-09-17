@@ -1,9 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import {
-      inputStyling,
-      itchStyling,
-    } from "../../states/runtime";
+    import { inputStyling, itchStyling } from "@runtime/stylesheets";
 
   const
     { html }:
