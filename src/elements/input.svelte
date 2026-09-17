@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { event, eventCSSInputChanged } from "../../states/runtime";
-  import { copyStr } from "../../scripts/copy";
+  import { event, CSSInputChanged } from "@runtime/events";
+  import { copyStr } from "@utils";
   import { applyUserInput, removeUserInput } from "./input";
 
   const
@@ -111,7 +111,7 @@
       }
     }
 
-    event.dispatchEvent(new Event(eventCSSInputChanged));
+    event.dispatchEvent(new Event(CSSInputChanged));
   }
 
   function onVarFormatInputChange(
@@ -314,7 +314,7 @@
 
               // resetAllButton.disabled = !isAnyModified();
 
-              event.dispatchEvent(new Event(eventCSSInputChanged));
+              event.dispatchEvent(new Event(CSSInputChanged));
             }}
           >
             <i class="fa-solid fa-arrow-rotate-left"></i>

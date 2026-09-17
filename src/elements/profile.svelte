@@ -1,25 +1,14 @@
 <script lang="ts">
-  import {
-    currentProject,
-    switchContext,
-  } from "../../states/storage.svelte";
+  import { currentProject, switchContext } from "../states/storage.svelte";
+  import { projectCount, projectArr } from "@db";
+  import { goToPage, unselectSidebarPage } from "../states/page.svelte";
 
-  import {
-    projectCount,
-    projectArr,
-  } from "../../storage/db";
-
-  import {
-    goToPage,
-    unselectSidebarPage,
-  } from "../../states/page.svelte";
-
-  const projectNewPage = async () => (await import("../projects/new.svelte")).default;
+  const projectNewPage = async () => (await import("../pages/projects/new.svelte")).default;
 
 </script>
 
 <style lang="scss">
-  @use "../../styles/variables" as *;
+  @use "../styles/variables" as *;
 
   .profile-cont {
     display: flex;

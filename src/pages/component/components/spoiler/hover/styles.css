@@ -1,13 +1,5 @@
 .custom-hd {
-  /*
-  &:not(:hover) {
-    color: #0000;
-    background: var(--t);
-  }
-  */
-
-  &::selection, :not(:hover) {
-    /*color: var(--t);*/
+  &::selection, &:not(:hover) {
     background: currentColor;
   }
 }

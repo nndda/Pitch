@@ -28,32 +28,6 @@
     }
   }
 
-  :global .comp-cont {
-    position: relative;
-    margin: .35em;
-    padding: 1em;
-    padding-top: 3em;
-    border-radius: 7px;
-    background: var(--b);
-
-    & > .preview {
-      & > button {
-        position: absolute;
-        top: 1em;
-        left: 1em;
-        opacity: .5;
-      }
-    }
-
-    & a {
-      color: var(--l) !important;
-
-      &.custom-lb {
-        color: var(--fg) !important;
-      }
-    }
-  }
-
 </style>
 
 <div class="preview-grid-wrapper">

@@ -1,7 +1,7 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { copyStr } from "../../scripts/copy";
-  import { project } from "../../storage/db";
+  import { project } from "@db";
+  import { copyStr } from "@utils";
   import { LabelScopes } from "./labels/";
 
   const

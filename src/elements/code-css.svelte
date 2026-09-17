@@ -20,14 +20,8 @@
   , CSSCopyButton: HTMLButtonElement
   ;
 
-  import {
-    event,
-    eventCSSCompiled
-  } from "../../states/runtime";
-
-  import {
-    compile,
-  } from "../../scripts/compiler";
+  import { event, CSSCompiled } from "@runtime/events";
+  import { compile } from "@pitch/css";
 
   const destroyCb = {
     cb: null as null | any, // i am losing brain cells
@@ -50,7 +44,7 @@
       destroyCb.cb = updateCompiledCSS;
 
       if (compiledViewer) {
-        event.addEventListener(eventCSSCompiled, updateCompiledCSS);
+        event.addEventListener(CSSCompiled, updateCompiledCSS);
 
         updateCompiledCSS();
       }
@@ -59,7 +53,7 @@
 
   onDestroy(() => {
     if (destroyCb.cb) {
-      event.removeEventListener(eventCSSCompiled, destroyCb.cb);
+      event.removeEventListener(CSSCompiled, destroyCb.cb);
     }
   });
 </script>

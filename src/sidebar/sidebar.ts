@@ -1,21 +1,15 @@
-import {
-  runtimeData,
-
-  event,
-  eventCSSCompiled,
-} from "../states/runtime";
-
-import { getProject } from "../storage/db";
+import { runtimeData } from "@runtime";
+import { event, CSSCompiled } from "@runtime/events";
+import { getProject } from "@db";
 
 export async function updateCatSelectionState(catId: string): Promise<void> {
   const project = (await getProject())!;
 
-  let
-    selected: number = 0
-  , total: number = 0
+  let selected: number = 0
+    , total: number = 0
 
-  , selectedVisible: number = 0
-  , totalVisible: number = 0
+    , selectedVisible: number = 0
+    , totalVisible: number = 0
   ;
 
   const
@@ -69,7 +63,7 @@ export async function updateCatSelectionState(catId: string): Promise<void> {
 
   catData.selectedCountEl!.textContent = `${selected}`;
 
-  event.dispatchEvent(new Event(eventCSSCompiled));
+  event.dispatchEvent(new Event(CSSCompiled));
 }
 
 export function syncCompCheckedState(

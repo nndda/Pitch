@@ -1,58 +1,21 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { project, projectUpdate } from "../storage/db";
+
+  import { catMetadata } from "@pitch/meta";
+  import { project, projectUpdate } from "@db";
+  import { IconTooltip, Profile } from "@elements";
+  import { isInputVariablesCompatible } from "@elements/input";
   import { goToPage, unselectSidebarPage } from "../states/page.svelte";
-  import { isInputVariablesCompatible } from "../pages/elements/input";
-  import { IconTooltip } from "../pages/elements";
-  import { toastErr } from "../scripts/toast";
-  import { slug } from "../scripts/slugify";
-  import { compile } from "../scripts/compiler";
-  import { copyStr } from "../scripts/copy";
+  import { slug, copyStr, toastErr } from "@utils";
+  import { compile } from "@pitch/css";
+  import { runtimeData, compCheckboxCache, compElCache, runtimeDataInit } from "@runtime";
 
-  import {
-    runtimeData,
-    catMeta,
-
-    compCheckboxCache,
-    compElCache,
-
-    runtimeDataInit,
-  } from "../states/runtime";
-
-  import {
-    updateCatSelectionState,
-    syncCompCheckedState,
-    syncCompGroupItemsClass,
-  } from "./sidebar";
-
-  import Profile from "../pages/elements/profile.svelte";
+  import { updateCatSelectionState, syncCompCheckedState, syncCompGroupItemsClass } from "./sidebar";
 
   // Pages
-  import {
-    Home,
-    Support,
-    Settings,
+  import pagesMain, { AdvancedSearch, pagesResources, pagesSpellbooks } from "@pages";
 
-    AdvancedSearch,
-  } from "../pages";
-
-  // Resources
-  import {
-    GettingStarted,
-    PitchApp,
-    OtherResources,
-    Showcase,
-  } from "../pages/resources";
-
-  // Spellbook
-  import {
-    GettingMoreFonts,
-    AMPPageRedirect,
-  } from "../pages/spellbooks"
-
-  let
-    navEl: HTMLElement
-  ;
+  let navEl: HTMLElement;
 
   runtimeDataInit();
 
@@ -102,7 +65,9 @@
   });
 </script>
 
-<style lang="scss"> @use "./sidebar/sidebar.scss"; </style>
+<style lang="scss">
+  @use "./sidebar/sidebar.scss";
+</style>
 
 {#snippet PageListItem(
   page: PageData,
@@ -259,21 +224,12 @@
     <hr/>
 
     {@render PageCatalogue({
-      items: [
-        Home,
-        Support,
-        Settings,
-      ],
+      items: pagesMain,
     })}
 
     {@render PageCatalogue({
       name: "Resources",
-      items: [
-        GettingStarted,
-        PitchApp,
-        OtherResources,
-        Showcase,
-      ],
+      items: pagesResources,
     })}
 
     <hr>
@@ -357,7 +313,7 @@
         class:has-count={$project?.app.settings.app.sidebar.showSelectedCount}
         class:on-hover={$project?.app.settings.app.sidebar.categoryActionOnHover}
       >
-        <i class="icon {catMeta[catData.name].icon}"></i>
+        <i class="icon {catMetadata[catData.name].icon}"></i>
 
         <span
           class="text"
@@ -535,6 +491,8 @@
               data-scope-partial={compScopeData("partial")}
               data-scope-none={compScopeData("none")}
 
+              data-comp-name={compHumanName}
+
               bind:this={compElCache[catId][compId]}
               bind:this={runtimeData[catId].components[compId].li}
             >
@@ -543,6 +501,8 @@
                 type="checkbox"
                 id={idIncl}
                 name={catCompInputName}
+
+                class="comp-checkbox"
 
                 checked={
                   $project?.components[catData.name][compId] ?? false
@@ -648,10 +608,7 @@
     </h2>
 
     {@render PageCatalogue({
-      items: [
-        GettingMoreFonts,
-        AMPPageRedirect,
-      ],
+      items: pagesSpellbooks,
     })}
 
     <p>

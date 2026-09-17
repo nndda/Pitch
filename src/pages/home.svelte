@@ -1,19 +1,14 @@
 <script lang="ts">
   import { onDestroy, onMount } from "svelte";
-  import {
-    Bar,
-    PageRef,
-  } from "./elements";
+  import { formatDistanceToNow } from "date-fns";
+
+  import { Bar, PageRef } from "@elements";
+  import { project } from "@db";
 
   import Tip from "./resources/tips.svelte";
-
   import Previews from "./previews/all.svelte";
 
-  import { project } from "../storage/db";
-
   import pitchLogo from "/icon.svg?url";
-
-  import { formatDistanceToNow } from "date-fns";
 
   let
     sidebarRightToggleLabel: HTMLLabelElement

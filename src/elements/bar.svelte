@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { initiateStorageFlag } from "../../states/storage.svelte";
+  import { initiateStorageFlag } from "../states/storage.svelte";
 
   const
     {
@@ -15,7 +15,7 @@
 </script>
 
 <style lang="scss">
-  @use "../../styles/variables" as *;
+  @use "../styles/variables" as *;
   @use "sass:color";
 
   .cta-banner {

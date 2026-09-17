@@ -3,6 +3,13 @@ import { svelte } from "@sveltejs/vite-plugin-svelte";
 import { resolve, relative } from "path";
 import { execSync } from "child_process";
 
+import tsconfigAppJSON from "./tsconfig.app.json" with { type: "json" };
+
+interface AliasObj {
+  find: string | RegExp,
+  replacement: string,
+}
+
 import "./src/pages/component/component.d.ts";
 
 function abs(path: string): string {
@@ -184,6 +191,38 @@ export default defineConfig({
       }
     },
   ],
+
+  resolve: {
+    alias: [
+      // NOTE: DRY, but...
+      ... Object
+        .entries(tsconfigAppJSON.compilerOptions.paths)
+        .reduce(( prev, [ alias, pathArr ] ) => {
+
+            function removeAst(str: string) {
+              return str.replace(/\*/, "");
+            }
+
+            return [
+              ...prev,
+              (
+                alias.endsWith("*") ?
+                {
+                  find: new RegExp(removeAst(alias).replaceAll(/\//g, "\\/") + "(.+)"),
+                  replacement: removeAst(abs(pathArr[0])) + "$1",
+                } :
+                {
+                  find: alias,
+                  replacement: abs(pathArr[0]),
+                }
+              ),
+            ];
+
+          },
+          [] as AliasObj[],
+        )
+    ],
+  },
 
   publicDir: abs("./src/public/"),
   appType: "spa",

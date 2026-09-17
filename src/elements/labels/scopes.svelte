@@ -2,10 +2,10 @@
   import { onMount, type Component } from "svelte";
 
   import { InfoAMP, InfoScopes } from "./info/";
-  import { showModal } from "../../../scripts/modal";
+  import { showModal } from "../../scripts/modal";
   import { isInputVariablesCompatible } from "../input";
-  import { event, eventCSSInputChanged } from "../../../states/runtime";
-  import { project } from "../../../storage/db";
+  import { event, CSSInputChanged } from "@runtime/events";
+  import { project } from "@db";
 
   const
     {
@@ -38,19 +38,19 @@
 
   // svelte-ignore state_referenced_locally
   if (!previewOnly) {
-    event.addEventListener(eventCSSInputChanged, async () => {
+    event.addEventListener(CSSInputChanged, async () => {
       isCompaible = await isInputVariablesCompatible(componentData as ComponentData);
     });
 
     onMount(() => {
-      event.dispatchEvent(new Event(eventCSSInputChanged));
+      event.dispatchEvent(new Event(CSSInputChanged));
     })
   }
 </script>
 
 <style lang="scss">
   @use "sass:color";
-  @use "../../../styles/variables" as *;
+  @use "../../styles/variables" as *;
 
   :global {
     .labels {

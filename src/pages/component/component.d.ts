@@ -1,6 +1,7 @@
 export {};
 
 import type { Component } from "svelte";
+import { cat, scopes, scopeStatus, tags } from "@pitch/meta";
 
 declare global {
 
@@ -35,25 +36,13 @@ declare global {
     },
   }
 
-  type Scope =
-    "project"
-  | "profile"
-  | "jam"
-  | "devlog"
-  ;
-  type ScopeStatus =
-    "compatible"
-  | "partial"
-  | "none"
-  | "only"
-  ;
+  type ComponentCategory = typeof cat[number];
+
+  type Scope = typeof scopes[number];
+  type ScopeStatus = typeof scopeStatus[number];
   type Scopes = Scope | Scope[];
 
-  type ComponentTags =
-    "hacky"
-  | "experimental"
-  | "singular"
-  ;
+  type ComponentTags = typeof tags[number];
 
   // TODO:
   // type BrowsersCompatStatus = "full" | "limited" | "none";
@@ -212,7 +201,7 @@ declare global {
   }
 
   interface ComponentCategoryData {
-    name: string,
+    name: ComponentCategory,
 
     components: {
       [compId: string]: ComponentRuntimeItem | ComponentRuntimeItemGroup,

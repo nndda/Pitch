@@ -1,17 +1,9 @@
 <script lang="ts">
-  import {
-    Dexie,
-  } from "dexie";
+  import { Dexie } from "dexie";
+  import { getProject, projectUpdate } from "@db";
 
-  import {
-    getProject,
-    projectUpdate,
-    // type ProjectsDB,
-  } from "../storage/db";
+  let settingsObj: Object = {};
 
-  let
-    settingsObj: Object = {}
-  ;
   getProject().then(proj => {
     settingsObj = proj?.app.settings!;
   });
