@@ -46,6 +46,9 @@
   {:else if currentTab === "Examples"}
     <PageExamples/>
   {:else if currentTab === "Source Code"}
-    <CodeViewerCSS css={data.css.raw}/>
+    <CodeViewerCSS
+      css={data.css.raw}
+      noDedent={true}
+    />
   {/if}
 </article>
