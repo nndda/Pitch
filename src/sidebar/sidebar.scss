@@ -262,29 +262,25 @@ h2.cat-heading {
   & input {
     &[type="radio"] {
       display: none;
+    }
+  }
 
-      &:checked {
-        & + label {
-          font-weight: bold;
-          // opacity: 1;
-          color: $text-col;
-          // color: $primary;
+  & label {
+    &:has(input[type="radio"]:checked) {
+      font-weight: bold;
+      // opacity: 1;
+      color: $text-col;
+      // color: $primary;
 
-          text-decoration: underline 1px solid;
-        }
-      }
+      text-decoration: underline 1px solid;
     }
 
-    &[type="checkbox"] {
-      &:checked {
-        & + label {
-          opacity: 1;
+    &:has(input[type="checkbox"]:checked) {
+      opacity: 1;
 
-          & ~ .comp-name-label {
-            opacity: 1;
-            font-weight: bold;
-          }
-        }
+      & ~ .comp-name-label {
+        opacity: 1;
+        font-weight: bold;
       }
     }
   }

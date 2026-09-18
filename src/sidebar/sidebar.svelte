@@ -95,19 +95,19 @@
   >
     <i class={icon} data-page-icon={title}></i>
 
-    <input
-      type="radio"
-      id={chkId}
-      name="page-view"
-      onchange={onchange}
-      disabled={!onchange}
-      checked={title === "Home"}
-    >
     <label
       class="comp-name-label page"
       for={chkId}
       data-page-name={title}
     >
+      <input
+        type="radio"
+        id={chkId}
+        name="page-view"
+        onchange={onchange}
+        disabled={!onchange}
+        checked={title === "Home"}
+      >
       {title}
       <!-- TODO: there has to be a better way -->
       {#if title === "Support Me?"}
