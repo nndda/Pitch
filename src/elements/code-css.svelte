@@ -7,9 +7,11 @@
     {
       css,
       compiledViewer, // why...
+      noDedent,
     }: {
       css: string,
       compiledViewer?: boolean, // why...
+      noDedent?: true,
     } = $props()
   ;
 
@@ -30,7 +32,11 @@
   onMount(async () => {
     import("./code-editor").then(async ({ instatiateCSSViewer }) => {
       const cssEditorAPI = instatiateCSSViewer(
-        compiledViewer ? (await compile()) : "\n" + dedent(css) + "\n",
+        compiledViewer ? (await compile()) : "\n" + (
+          noDedent
+            ? css
+            : dedent(css)
+        ) + "\n",
 
         CSSEditor,
         CSSCopyButton,
