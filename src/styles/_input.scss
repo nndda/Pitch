@@ -1,5 +1,46 @@
 @use "../styles/variables" as *;
 
+label.checkbox {
+  cursor: pointer;
+
+  & > input {
+    display: none;
+
+    &:not(:checked) {
+      & ~ :is(.fa-square-check, .checked) {
+        display: none;
+      }
+    }
+
+    &:checked {
+      & ~ :is(.fa-square, .checked-not) {
+        display: none;
+      }
+    }
+  }
+
+  &:has(input:checked) {
+    &.caret-toggle {
+      & .collapse {
+        display: none;
+      }
+
+      & .expand {
+        display: inline;
+      }
+
+      & > .fa-caret-down {
+        transform: rotate(90deg);
+      }
+    }
+
+    &.button-check {
+      background: $text-col;
+      color: $background;
+    }
+  }
+}
+
 input {
   &[type="text"],
   &[type="color"] {
@@ -17,48 +58,6 @@ input {
     // min-width: 208px;
     padding: 0;
     height: 100%;
-  }
-
-  &[type="checkbox"],
-  &[type="radio"] {
-    display: none;
-
-    & + label {
-      cursor: pointer;
-    }
-
-    &:not(:checked) {
-      & + label {
-        & > :is(.fa-square-check, .checked) {
-          display: none;
-        }
-      }
-    }
-
-    &:checked {
-      & + label {
-        & > :is(.fa-square, .checked-not) {
-          display: none;
-        }
-
-        &.caret-toggle {
-          & .collapse {
-            display: none;
-          }
-          & .expand {
-            display: inline;
-          }
-          & > i {
-            transform: rotate(90deg);
-          }
-        }
-
-        &.button-check {
-          background: $text-col;
-          color: $background;
-        }
-      }
-    }
   }
 }
 
