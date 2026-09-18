@@ -19,3 +19,6 @@ export { default as ItchPreview } from "./itch-preview.svelte";
 export { default as Profile } from "./profile.svelte";
 
 export { default as Link } from "./link.svelte";
+
+export { default as Tabs } from "./tabs.svelte";
+export { default as TabsComponentPage } from "./tabs-component-page.svelte";
