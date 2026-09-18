@@ -1,6 +1,6 @@
 import { defineConfig } from "vite";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
-import { resolve, relative } from "path";
+import { resolve, relative, dirname, join } from "path";
 import { execSync } from "child_process";
 
 import tsconfigAppJSON from "./tsconfig.app.json" with { type: "json" };
@@ -35,6 +35,35 @@ import cssnanoPresetAdvanced from "cssnano-preset-advanced";
 
 // i hate life
 import fg from "fast-glob";
+
+import { writeFileSync } from "fs";
+
+// NOTE: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+const pageTemplate = `<script lang="ts">
+  export let data: ComponentData;
+  import { ComponentPage } from "@elements";
+
+  import Docs from "./page.docs.svelte";
+  import Examples from "./page.examples.svelte";
+</script>
+
+<ComponentPage
+  data={data}
+
+  PageDocumentation={Docs}
+  PageExamples={Examples}
+/>`;
+
+fg.globSync(
+  resolve(abs("."), "./src/pages/component/**/*/page.docs.svelte"),
+).forEach(path => {
+  writeFileSync(
+    join(dirname(path), "page.svelte"),
+    pageTemplate,
+    { encoding: "utf-8" },
+  );
+});
 
 import type {
   ChildNode,
