@@ -153,6 +153,11 @@ declare global {
     css: CSSData,
     cssProcessed: string,
 
+    id: {
+      cat: ComponentCategory,
+      comp: string,
+    },
+
     li: HTMLLIElement,
     chkBox: HTMLInputElement,
 

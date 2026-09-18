@@ -8,7 +8,7 @@
   import { goToPage, unselectSidebarPage } from "../states/page.svelte";
   import { slug, copyStr, toastErr } from "@utils";
   import { compile } from "@pitch/css";
-  import { runtimeData, compCheckboxCache, compElCache, runtimeDataInit } from "@runtime";
+  import { runtimeData, compCheckboxCache, runtimeDataInit } from "@runtime";
 
   import { updateCatSelectionState, syncCompCheckedState, syncCompGroupItemsClass } from "./sidebar";
 
@@ -348,7 +348,7 @@
             try {
               updatesTotal += await projectUpdate(proj => {
                 // Bulk update the component's selection DB
-                proj.components[catId] = Object.keys(compCheckboxCache[catId]).reduce(
+                proj.components[catId] = Object.keys(compCheckboxCache).reduce(
                   (
                     prev, compId,
                   ) => {
@@ -360,7 +360,7 @@
                       runtimeData[catId].components[compId].li!.checkVisibility()
                     ) {
                       prev[compId] = checked;
-                      compCheckboxCache[catId][compId].checked = checked;
+                      compCheckboxCache[compId].checked = checked;
                     }
 
                     return prev;
@@ -496,7 +496,6 @@
 
               data-comp-name={compHumanName}
 
-              bind:this={compElCache[catId][compId]}
               bind:this={runtimeData[catId].components[compId].li}
             >
 
