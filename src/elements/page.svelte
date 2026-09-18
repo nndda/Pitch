@@ -1,15 +1,22 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import type { Component } from "svelte";
   import { project } from "@db";
   import { copyStr } from "@utils";
   import { LabelScopes } from "./labels/";
+  import { TabsComponentPage } from "@elements";
 
   const
-    { children,
+    {
+      // children,
       data,
+      PageDocumentation,
+      PageExamples,
     }: {
-      children: any,
+      // children: any,
       data: ComponentData,
+      PageDocumentation: Component,
+      PageExamples: Component,
     } = $props()
 
   , tagsData: Record<ComponentTags, {icon: string, desc: string}> = {
@@ -115,6 +122,10 @@
   </div>
 </div>
 
-{@render children()}
+<TabsComponentPage
+  data={data}
+  PageDocumentation={PageDocumentation}
+  PageExamples={PageExamples}
+/>
 
 {/if}
