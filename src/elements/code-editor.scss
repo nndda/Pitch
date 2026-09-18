@@ -21,7 +21,7 @@
   }
 
   &.main {
-    &:has( > .code-edit-toggle:not(:checked)) {
+    &:has(.code-edit-toggle:not(:checked)) {
       & ~ .codes-toolbar {
         display: none;
       }

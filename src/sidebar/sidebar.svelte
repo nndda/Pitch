@@ -154,20 +154,20 @@
 
   {@const catId = `cat-heading-${id}`}
 
-  <input
-    type="checkbox"
-    class="toggle"
-    id={catId}
+  <label class="checkbox caret-toggle custom-tip" for={catId}>
+    <input
+      type="checkbox"
+      class="toggle"
+      id={catId}
 
-    checked={$project?.app.uiState[catId] ?? false}
+      checked={$project?.app.uiState[catId] ?? false}
 
-    onchange={async ev => {
-      // @ts-ignore
-      await projectUpdate({ ["app.uiState." + catId]: ev.currentTarget.checked })
-    }}
-  >
+      onchange={async ev => {
+        // @ts-ignore
+        await projectUpdate({ ["app.uiState." + catId]: ev.currentTarget.checked });
+      }}
+    >
 
-  <label class="caret-toggle custom-tip" for={catId}>
     <i class="fa-solid fa-caret-down"></i>
 
     <span class="custom-tip-content custom-left">
@@ -240,17 +240,18 @@
         Filter
       </span>
 
-      <input
-        type="checkbox"
-        name="filter-group"
-        id="faved"
+      <label class="checkbox button button-check custom-tip" for="faved">
+        <input
+          type="checkbox"
+          name="filter-group"
+          id="faved"
 
-        onchange={ev => {
-          navEl.classList.toggle("faves-only", ev.currentTarget.checked);
-          for (const catId in runtimeData) { updateCatSelectionState(catId); }
-        }}
-      >
-      <label class="button button-check custom-tip" for="faved">
+          onchange={ev => {
+            navEl.classList.toggle("faves-only", ev.currentTarget.checked);
+            for (const catId in runtimeData) { updateCatSelectionState(catId); }
+          }}
+        >
+
         <i class="fa-solid fa-star"></i>
 
         <span class="custom-tip-content">
@@ -258,17 +259,18 @@
         </span>
       </label>
 
-      <input
-        type="checkbox"
-        name="filter-group"
-        id="non-hacky"
+      <label class="checkbox button button-check custom-tip" for="non-hacky">
+        <input
+          type="checkbox"
+          name="filter-group"
+          id="non-hacky"
 
-        onchange={ev => {
-          navEl.classList.toggle("no-hacky", ev.currentTarget.checked);
-          for (const catId in runtimeData) { updateCatSelectionState(catId); }
-        }}
-      >
-      <label class="button button-check custom-tip" for="non-hacky">
+          onchange={ev => {
+            navEl.classList.toggle("no-hacky", ev.currentTarget.checked);
+            for (const catId in runtimeData) { updateCatSelectionState(catId); }
+          }}
+        >
+
         <i class="fa-solid fa-flask"></i>
         <i class="fa-solid fa-slash"></i>
 
@@ -277,17 +279,18 @@
         </span>
       </label>
 
-      <input
-        type="checkbox"
-        name="filter-group"
-        id="non-experimental"
+      <label class="checkbox button button-check custom-tip" for="non-experimental">
+        <input
+          type="checkbox"
+          name="filter-group"
+          id="non-experimental"
 
-        onchange={ev => {
-          navEl.classList.toggle("no-experimental", ev.currentTarget.checked);
-          for (const catId in runtimeData) { updateCatSelectionState(catId); }
-        }}
-      >
-      <label class="button button-check custom-tip" for="non-experimental">
+          onchange={ev => {
+            navEl.classList.toggle("no-experimental", ev.currentTarget.checked);
+            for (const catId in runtimeData) { updateCatSelectionState(catId); }
+          }}
+        >
+
         <i class="fa-solid fa-vial"></i>
         <i class="fa-solid fa-slash"></i>
 
@@ -497,44 +500,43 @@
               bind:this={runtimeData[catId].components[compId].li}
             >
 
-              <input
-                type="checkbox"
-                id={idIncl}
-                name={catCompInputName}
-
-                class="comp-checkbox"
-
-                checked={
-                  $project?.components[catData.name][compId] ?? false
-                }
-
-                data-compId={compId}
-
-                onchange={async ev => {
-                  await compData.api?.toggleInclude(ev.currentTarget.checked);
-                }}
-
-                bind:this={compCheckboxCache[catId][compId]}
-                bind:this={(runtimeData[catId].components[compId] as ComponentRuntimeItem).chkBox}
-              >
               <label class="checkbox" for={idIncl}>
+                <input
+                  type="checkbox"
+                  id={idIncl}
+                  name={catCompInputName}
+
+                  class="comp-checkbox"
+
+                  checked={
+                    $project?.components[catData.name][compId] ?? false
+                  }
+
+                  data-compId={compId}
+
+                  onchange={async ev => {
+                    await compData.api?.toggleInclude(ev.currentTarget.checked);
+                  }}
+
+                  bind:this={compCheckboxCache[compId]}
+                  bind:this={(runtimeData[catId].components[compId] as ComponentRuntimeItem).chkBox}
+                >
                 <i class="fa-regular fa-square"></i>
                 <i class="fa-solid fa-square-check"></i>
               </label>
 
-              <input
-                type="radio"
-                id={idView}
-                name="page-view"
-
-                onchange={compData.api?.openPage}
-              >
-
               <label
-                class="comp-name-label"
+                class="checkbox comp-name-label"
                 data-comp-name={compHumanName}
                 for={idView}
               >
+                <input
+                  type="radio"
+                  id={idView}
+                  name="page-view"
+
+                  onchange={compData.api?.openPage}
+                >
                 {compData.manifest.name}
               </label>
 
@@ -560,17 +562,17 @@
 
               </span>
 
-              <input
-                type="checkbox"
-                id={idFave}
-
-                checked={$project?.faves[compId] ?? false}
-
-                onchange={async ev => {
-                  await compData.api?.toggleFavourite(ev.currentTarget.checked ?? false);
-                }}
-              >
               <label class="checkbox fave" for={idFave}>
+                <input
+                  type="checkbox"
+                  id={idFave}
+
+                  checked={$project?.faves[compId] ?? false}
+
+                  onchange={async ev => {
+                    await compData.api?.toggleFavourite(ev.currentTarget.checked ?? false);
+                  }}
+                >
 
                 <IconTooltip
                   icon="fa-regular fa-star"

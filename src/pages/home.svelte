@@ -19,7 +19,7 @@
       sidebarRightToggle = document.getElementById("sidebar-right-toggle") as HTMLInputElement
     ;
 
-    sidebarRightToggleLabel = document.querySelector("#sidebar-right-toggle + label") as HTMLLabelElement;
+    sidebarRightToggleLabel = document.querySelector("label:has(#sidebar-right-toggle)") as HTMLLabelElement;
 
     if (sidebarRightToggle.checked) {
       sidebarRightToggle.click()

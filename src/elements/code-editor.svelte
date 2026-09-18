@@ -67,19 +67,18 @@
 
   <div class="codes-toolbar main">
 
-    <input
-      type="checkbox"
-      class="code-edit-toggle"
-      id="code-edit-{uid}"
-
-      bind:this={HTMLEditorToggle}
-    >
-
     <label
-      class="button button-check custom-tip"
+      class="checkbox button button-check custom-tip"
       for="code-edit-{uid}"
       aria-label="Edit HTML & CSS"
     >
+      <input
+        type="checkbox"
+        class="code-edit-toggle"
+        id="code-edit-{uid}"
+
+        bind:this={HTMLEditorToggle}
+      >
       <i class="fa-solid fa-code"></i>
 
       <span class="custom-tip-content">

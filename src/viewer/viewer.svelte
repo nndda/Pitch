@@ -50,20 +50,19 @@
 
         <div class="heading-comp-actions">
 
-          <input
-            type="checkbox"
-            id="heading-comp-incl"
-
-            checked={
-              $project?.components[catId][compId] ?? false
-            }
-
-            onchange={async ev => {
-              await currentPage.componentData?.api?.toggleInclude(ev.currentTarget.checked);
-            }}
-          >
-
           <label class="checkbox fave" for="heading-comp-incl">
+            <input
+              type="checkbox"
+              id="heading-comp-incl"
+
+              checked={
+                $project?.components[catId][compId] ?? false
+              }
+
+              onchange={async ev => {
+                await currentPage.componentData?.api?.toggleInclude(ev.currentTarget.checked);
+              }}
+            >
 
             <IconTooltip
               icon="fa-regular fa-square-plus"
@@ -81,18 +80,17 @@
 
           </label>
 
-          <input
-            type="checkbox"
-            id="heading-comp-fave"
-
-            checked={$project?.faves[compId] ?? false}
-
-            onchange={async ev => {
-              await currentPage.componentData?.api?.toggleFavourite(ev.currentTarget.checked);
-            }}
-          >
-
           <label class="checkbox fave" for="heading-comp-fave">
+            <input
+              type="checkbox"
+              id="heading-comp-fave"
+
+              checked={$project?.faves[compId] ?? false}
+
+              onchange={async ev => {
+                await currentPage.componentData?.api?.toggleFavourite(ev.currentTarget.checked);
+              }}
+            >
 
             <IconTooltip
               icon="fa-regular fa-star"
@@ -123,24 +121,27 @@
 
     <div class="flex-space"></div>
 
-    <input
-      type="checkbox"
-      class="toggle"
-      id="sidebar-right-toggle"
-      aria-label="Table of Content"
-
-      onchange={async ev => {
-        // TODO: I think these states are not working :/
-
-        const sidebarRightCollapsed = !ev.currentTarget.checked;
-
-        await projectUpdate({ ["app.uiState.TOCCollapsed"]: sidebarRightCollapsed});
-
-        sidebarRightWrapper.classList.toggle("collapsed", sidebarRightCollapsed);
-
-      }}
+    <label
+      class="checkbox button button-check custom-tip"
+      for="sidebar-right-toggle"
     >
-    <label class="button button-check custom-tip" for="sidebar-right-toggle">
+      <input
+        type="checkbox"
+        class="toggle"
+        id="sidebar-right-toggle"
+        aria-label="Table of Content"
+
+        onchange={async ev => {
+          // TODO: I think these states are not working :/
+
+          const sidebarRightCollapsed = !ev.currentTarget.checked;
+
+          await projectUpdate({ ["app.uiState.TOCCollapsed"]: sidebarRightCollapsed});
+
+          sidebarRightWrapper.classList.toggle("collapsed", sidebarRightCollapsed);
+
+        }}
+      >
       <i class="fa-solid fa-table-list"></i>
 
       <span class="custom-tip-content custom-left">

@@ -163,18 +163,18 @@
   {#if itemData.type === "boolean" || !itemData.type}
     <div class="input-group">
 
-      <input
-        type="checkbox"
-        id={id}
+      <label class="checkbox" for={id}>
+        <input
+          type="checkbox"
+          id={id}
 
-        checked={Dexie.getByKeyPath(settingsObj, id)}
+          checked={Dexie.getByKeyPath(settingsObj, id)}
 
-        onchange={async ev => {
-          // @ts-ignore
-          await projectUpdate({ ["app.settings." + id]: ev.currentTarget.checked });
-        }}
-      />
-      <label for={id}>
+          onchange={async ev => {
+            // @ts-ignore
+            await projectUpdate({ ["app.settings." + id]: ev.currentTarget.checked });
+          }}
+        />
         <i class="fa-regular fa-circle checked-not"></i>
         <i class="fa-solid fa-circle-check checked"></i>
         {@html itemData.name}
