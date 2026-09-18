@@ -1,5 +1,6 @@
 # Pitch-specific components
 src/pages/component/**/*/styles
+src/pages/component/**/*/page.svelte
 
 # Opinionated dev workspace
 ign-*
