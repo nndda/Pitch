@@ -17,13 +17,13 @@
 
 <style lang="scss">
   .group {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: .25em;
     padding-bottom: .5em;;
 
     &:not(:hover) {
-      opacity: .5;
+      opacity: .9;
     }
 
     & .fa-regular, & .fa-solid {
