@@ -14,8 +14,8 @@ import compPagesEntry from "../pages/component/imports";
 export const
   runtimeData: ComponentRuntimeData = {}
 
-, compCheckboxCache: Record<string, Record<string, HTMLInputElement>> = {}
-, compElCache: Record<string, Record<string, HTMLLIElement>> = {}
+, compCheckboxCache: Record<string, HTMLInputElement> = {}
+, compDataFlatLookup: Record<string, ComponentRuntimeItem> = {}
 
 ;
 
@@ -29,9 +29,6 @@ export function runtimeDataInit() {
       name: cat,
       components: {},
     };
-
-    compElCache[cat] = {};
-    compCheckboxCache[cat] = {};
 
     for (const page in compPagesEntry[cat]) {
       const
@@ -60,6 +57,11 @@ export function runtimeDataInit() {
               wip: isWIP,
 
             } : {
+
+              id: {
+                cat: cat,
+                comp: compId,
+              },
 
               cssProcessed: "",
 
@@ -232,6 +234,8 @@ export function runtimeDataInit() {
 
           runtimeData[cat].components[compId].group = slug(compData.sub);
         }
+
+        compDataFlatLookup[compHumanName] = runtimeData[cat].components[compId];
 
       } else {
 
