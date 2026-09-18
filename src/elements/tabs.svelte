@@ -76,7 +76,7 @@
         onchange={ev => {
           if (onactive) {
             if (ev.currentTarget.checked) {
-              onactive(name);
+              onactive(tab.name);
             }
           }
         }}
