@@ -42,7 +42,7 @@
         const compData = catComps[compId];
 
         if ("checked" in compData) {
-          compData.li!.classList.toggle(
+          compData.li.classList.toggle(
             "compatible-all",
             await isInputVariablesCompatible(compData.manifest),
           )
@@ -348,24 +348,28 @@
             try {
               updatesTotal += await projectUpdate(proj => {
                 // Bulk update the component's selection DB
-                proj.components[catId] = Object.keys(compCheckboxCache).reduce(
-                  (
-                    prev, compId,
-                  ) => {
-                    if (
-                      // TODO: I feel like there's a better approach.
-                      // Query the visible <li> elements of components' list.
-                      // This works with filters, since filters just toggle the components
-                      // <li>'s visibility based on its metadata.
-                      runtimeData[catId].components[compId].li!.checkVisibility()
-                    ) {
-                      prev[compId] = checked;
-                      compCheckboxCache[compId].checked = checked;
-                    }
+                proj.components[catId] = Object
+                  .entries(runtimeData[catId].components)
+                  .reduce(
+                    ( prev, [ compId, compData ] ) => {
+                      if (compData.type === "item") {
+                        if (
+                          // TODO: I feel like there's a better approach.
+                          // Query the visible <li> elements of components' list.
+                          // This works with filters, since filters just toggle the components
+                          // <li>'s visibility based on its metadata.
+                          compData.li.checkVisibility()
+                        ) {
+                          prev[compId] = checked;
+                          compData.chkBox.checked = checked;
+                        }
+                      }
 
-                    return prev;
-                  }, {} as RecordBoolean,
-                );
+                      return prev;
+                    },
+                    { } as RecordBoolean,
+                  )
+                ;
               });
 
               if (updatesTotal > 0) {
