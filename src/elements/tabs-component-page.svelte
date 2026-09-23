@@ -10,7 +10,7 @@
     }: {
       data: ComponentData,
       PageDocumentation: Component,
-      PageExamples: Component,
+      PageExamples: Component | null,
     } = $props()
   ;
 
@@ -25,9 +25,14 @@
       name: "Documentation",
       icon: "fa-solid fa-book-bookmark",
     },
+    ...(PageExamples ? [
+      {
+        name: "Examples",
+        icon: "fa-solid fa-folder-open",
+      },
+    ] : []),
     {
-      name: "Examples",
-      icon: "fa-solid fa-folder-open",
+      name: "flex-space",
     },
     {
       name: "Source Code",
@@ -43,7 +48,7 @@
 <article>
   {#if currentTab === "Documentation"}
     <PageDocumentation/>
-  {:else if currentTab === "Examples"}
+  {:else if PageExamples && currentTab === "Examples"}
     <PageExamples/>
   {:else if currentTab === "Source Code"}
     <CodeViewerCSS
