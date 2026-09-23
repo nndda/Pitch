@@ -66,27 +66,31 @@
 
 <fieldset class="tabs">
   {#each data as tab, i}
-    <label>
-      <input
-        type="radio"
-        name={slug(name)}
-        id="tab-{slug(tab.name)}"
-        checked={i === 0}
+    {#if tab.name === "flex-space"}
+      <div class="flex-space"></div>
+    {:else}
+      <label>
+        <input
+          type="radio"
+          name={slug(name)}
+          id="tab-{slug(tab.name)}"
+          checked={i === 0}
 
-        onchange={ev => {
-          if (onactive) {
-            if (ev.currentTarget.checked) {
-              onactive(tab.name);
+          onchange={ev => {
+            if (onactive) {
+              if (ev.currentTarget.checked) {
+                onactive(tab.name);
+              }
             }
-          }
-        }}
-      />
+          }}
+        />
 
-      {#if tab.icon}
-        <i class={tab.icon}></i>
-      {/if}
+        {#if tab.icon}
+          <i class={tab.icon}></i>
+        {/if}
 
-      {tab.name}
-    </label>
+        {tab.name}
+      </label>
+    {/if}
   {/each}
 </fieldset>
