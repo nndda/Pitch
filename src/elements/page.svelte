@@ -2,7 +2,7 @@
   import { onMount } from "svelte";
   import type { Component } from "svelte";
   import { project } from "@db";
-  import { copyStr } from "@utils";
+  // import { copyStr } from "@utils";
   import { LabelScopes } from "./labels/";
   import { TabsComponentPage } from "@elements";
 
@@ -90,6 +90,7 @@
     <LabelScopes componentData={data}/>
   </div>
 
+<!--
   <div class="flex-space"></div>
 
   <div class="comp-btns">
@@ -108,7 +109,6 @@
           </span>
         </button>
       </li>
-      <!--
       <li>
         <button class="custom-tip">
           <i class="icon fa-solid fa-eye"></i>
@@ -117,9 +117,10 @@
           </span>
         </button>
       </li>
-      -->
     </ul>
   </div>
+-->
+
 </div>
 
 <TabsComponentPage
