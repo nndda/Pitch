@@ -43,7 +43,7 @@ export function generateToC() {
     ...Array
       .from(
         document
-          .querySelectorAll(`:where(#page, #page > article) > :where(h2, h3, h4, h5, h6)`)
+          .querySelectorAll(`:where(#page, #page > article) > :where(h1, h2, h3, h4, h5, h6)`)
       )
   );
 }

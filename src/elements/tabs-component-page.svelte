@@ -17,6 +17,20 @@
   let currentTab = $state("Documentation");
 </script>
 
+<style lang="scss">
+  @use "../styles/variables" as *;
+  @use "sass:color";
+
+  article > h1:first-child {
+    opacity: 0;
+    height: 0;
+    // color: color.mix($text-col, $background, 40%);
+    // font-weight: 200;
+    // font-size: 1.8em;
+    // margin-block: 1em;
+  }
+</style>
+
 <Tabs
   name={data.nameDisplay ?? data.name}
 
@@ -46,6 +60,8 @@
 />
 
 <article>
+  <h1>{currentTab}</h1>
+
   {#if currentTab === "Documentation"}
     <PageDocumentation/>
   {:else if PageExamples && currentTab === "Examples"}
