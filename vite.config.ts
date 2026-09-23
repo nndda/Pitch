@@ -1,125 +1,27 @@
 import { defineConfig } from "vite";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
-import { resolve, relative, dirname, join } from "path";
+import { resolve } from "path";
 import { execSync } from "child_process";
 
+import packageJSON from "./package.json" with { type: "json" };
 import tsconfigAppJSON from "./tsconfig.app.json" with { type: "json" };
+
+import PitchCSSSourcePlugin from "./src/plugins/pitch-css-source.ts";
+
+import "./src/pages/component/component.d.ts";
 
 interface AliasObj {
   find: string | RegExp,
   replacement: string,
 }
 
-import "./src/pages/component/component.d.ts";
-
 function abs(path: string): string {
   return resolve(import.meta.dirname, path)
 }
 
-// Pitch CSS components tooling
-// TODO: make the whole components/decorations/tweaks programmable/DRY
-import {
-  readFile,
-  copyFile,
-} from "fs/promises";
-
-// import {
-//   readdirSync,
-// } from "fs";
-
-import postcss from "postcss";
-import autoprefixer from "autoprefixer";
-
-import cssnano from "cssnano";
-import cssnanoPresetAdvanced from "cssnano-preset-advanced";
-
-// i hate life
-import fg from "fast-glob";
-
-import { writeFileSync } from "fs";
-
-// NOTE: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-
-const pageTemplate = `<script lang="ts">
-  export let data: ComponentData;
-  import { ComponentPage } from "@elements";
-
-  import Docs from "./page.docs.svelte";
-  import Examples from "./page.examples.svelte";
-</script>
-
-<ComponentPage
-  data={data}
-
-  PageDocumentation={Docs}
-  PageExamples={Examples}
-/>`;
-
-fg.globSync(
-  resolve(abs("."), "./src/pages/component/**/*/page.docs.svelte"),
-).forEach(path => {
-  writeFileSync(
-    join(dirname(path), "page.svelte"),
-    pageTemplate,
-    { encoding: "utf-8" },
-  );
-});
-
-import type {
-  ChildNode,
-} from "postcss";
-
-function extractFontFace(
-  cssSrc: string,
-): string {
-  return postcss
-    .parse(cssSrc, { from: undefined, })
-    .nodes
-    .map((child: ChildNode): string => {
-      if (
-        child.type === "atrule" &&
-        child.name === "font-face"
-      ) {
-        return child.toString();
-      }
-
-      return "";
-    })
-    .join("")
-  ;
-}
-
-const
-  root = abs(".")
-, postcsssssss = postcss([
-    cssnano(cssnanoPresetAdvanced({
-      discardOverridden: false,
-      discardUnused: false,
-      reduceIdents: false,
-    })),
-    autoprefixer(),
-  ])
-// , CSSCompsBaseDir = "src/pages/component/"
-, reCSSCompsSrc = /src\/pages\/component\/(components|decorations|tweaks)\/.+\.css$/
-, reCSSExt = /\.css$/
-;
-
-console.log(
-  "Pitch: dev server started\nPitch: copying components' CSS...",
-);
-
-for (const cssPath of fg.globSync(
-  resolve(root, "./src/pages/component/**/*.css"),
-)) {
-  copyFile(cssPath, cssPath.replace(reCSSExt, "")).then(() => {
-    console.log(`Pitch: ${relative(import.meta.dirname, cssPath)} copied!`)
-  });
-}
-
-import packageJSON from "./package.json" with { type: "json" };
-
 const
   args = process.argv
+, root = abs(".")
 
 , commitHash = JSON.stringify(execSync("git rev-parse HEAD").toString().trim())
 , commitHash8 = commitHash.slice(1, 9)
@@ -134,79 +36,14 @@ export default defineConfig({
   root: resolve(root, "./src/"),
 
   plugins: [
-    svelte(),
-
-    // TODO: add error handling, maybe
-
-    // TODO:
-    // WHAT. THE. FUCK. VITE???? LET ME HAVE MY CUSTOM CSS MODULE!!!!!!!!!!!!!
-    {
-      name: "pitch-css-component",
-      enforce: "pre",
-
-      async load(id) {
-
-        // WHY IS THE PLUGIN FIGHTING MEEEEAWODNAWIDUNIASBUBDUAWYNDIQNOCMSZOMOWQDOUNWQIDUNQWIDUHIUH
-        // I just want to handle the Pitch's CSS component manually myself, that's all...
-        //
-        // But why is Vite keep on insisting on touching it too!!!
-        // LEMME IMPORT IT THE WAY I WANT!!!!!
-        // For some reason, custom CSS module still got processed by Vite.
-        //
-        // So, as a workaround, extensionless copy of the components' CSS source code will be created
-        // with a script on pre dev/build (for now).
-        // if (!id.endsWith(".css?css-component")) { // <- no, absolutely no .css apparently
-        if (!id.endsWith("?css-component")) return;
-
-        const
-          path = id.replace("?css-component", "")
-        , cssRaw = await readFile(path, "utf-8")
-
-        , css = (await postcsssssss
-            .process(cssRaw, { from: path })
-          ).css
-
-        , fontFaceRaw = extractFontFace(cssRaw)
-        // NOTE: questionable
-        , fontFace = (await postcsssssss
-            .process(fontFaceRaw)
-          ).css
-        ;
-
-        return {
-          code: `export default ${JSON.stringify({
-            raw: cssRaw,
-            compressed: css,
-
-            fontFaces: {
-              raw: fontFaceRaw,
-              compressed: fontFace,
-            },
-          } as CSSData)}`
-        };
-      }
-    },
-
-    {
-      name: "css-copy",
-
-      configureServer(server) {
-        server.watcher
-          .add(fg.globSync(
-            resolve(root, "./src/pages/component/**/*.css"),
-          ))
-          .on("change", path => {
-            if (reCSSCompsSrc.test(path)) {
-
-              console.log(`Pitch: ${path} changed, copying...`);
-
-              copyFile(path, path.replace(reCSSExt, "")).then(() => {
-                console.log(`Pitch: ${path} copied!`);
-              });
-            }
-          });
-      }
-    },
+    svelte({
+      extensions: [ ".svelte", ".html" ],
+      // include: [
+      //   /\.svelte/,
+      //   /\,html\?css-sample/,
+      // ],
+    }),
+    PitchCSSSourcePlugin,
 
     {
       name: "output-version-file",
