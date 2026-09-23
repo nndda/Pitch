@@ -16,7 +16,7 @@
       // children: any,
       data: ComponentData,
       PageDocumentation: Component,
-      PageExamples: Component,
+      PageExamples: Component | null,
     } = $props()
 
   , tagsData: Record<ComponentTags, {icon: string, desc: string}> = {
