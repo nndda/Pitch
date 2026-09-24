@@ -4,9 +4,14 @@
   const
     {
       name,
-      type = "",
-      icon = undefined,
+      type,
+      icon,
       children,
+    }: {
+      name: string,
+      type?: "warning",
+      icon?: string,
+      children: any,
     } = $props()
 	// svelte-ignore state_referenced_locally
   , flag = initiateStorageFlag<boolean>("bar-" + name, false, true)
