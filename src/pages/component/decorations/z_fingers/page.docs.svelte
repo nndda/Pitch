@@ -8,8 +8,8 @@
 
 <CodeEditor html={`
 
-  <p style="font-size: 2em;">
-    rate plzzzzz?? 🥺 <span class="custom-plzzz"></span>
-  </p>
+<p style="font-size: 2em;">
+  rate plzzzzz?? 🥺 <span class="custom-plzzz"></span>
+</p>
 
 `}/>

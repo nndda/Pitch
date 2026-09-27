@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { CodeEditor, ComponentRef } from "@elements";
+  import Examples from "./examples";
 </script>
 
 <style lang="scss">
@@ -21,51 +21,9 @@
   Add <code>custom-social-links</code> class to the container element with the social links.
 </p>
 
-<CodeEditor html={`
+<Examples.basic/>
 
-  <p class="custom-social-links">
-    <a href="https://bsky.app/profile/did:plc:iwluqzosr2cjuzldtanzewke" target="_blank">Bluesky</a>
-    |
-    <a href="https://twitter.com/" target="_blank">Twitter</a>
-    |
-    <a href="https://www.patreon.com/" target="_blank">Patreon</a>
-  </p>
-
-`}
-
-css={`
-
-  p.custom-social-links {
-    display: flex;
-    justify-content: center;
-    gap: 1em;
-  }
-
-`}
-/>
-
-<CodeEditor html={`
-
-  <p class="custom-social-links text-justify">
-    If you're on Bluesky, follow me at
-    <a href="https://bsky.app/profile/did:plc:iwluqzosr2cjuzldtanzewke" target="_blank">@nnda.dev</a>.
-    Don't forget to absolutely annihilate that subscribe button on our epic YouTube channel
-    <a href="https://www.youtube.com/@nnda_dev" target="_blank">@nnda_dev</a>.
-    Hang out, chill, and chat on our epic
-    <a href="https://discord.gg/" target="_blank">Discord server</a>!!
-  </p>
-
-`}
-
-css={`
-
-  p.custom-social-links {
-    max-width: 27em;
-    margin-inline: auto;
-  }
-
-`}
-/>
+<Examples.paragraph/>
 
 <p>
   Currently, the following platforms are supported:
@@ -122,86 +80,7 @@ css={`
   If you have a link that you don't want to decorate, simply add <code>custom-not-social-link</code> class to the <code>&lt;a&gt;</code> tag.
 </p>
 
-<CodeEditor html={`
-
-  <p class="custom-social-links text-justify">
-    If you're on Bluesky, follow me at <a href="https://bsky.app/profile/did:plc:iwluqzosr2cjuzldtanzewke" target="_blank">@nnda.dev</a>. Don't forget to absolutely annihilate that subscribe button on our epic YouTube channel <a href="https://www.youtube.com/@nnda_dev" target="_blank">@nnda_dev</a>. Hang out, chill, and chat on our epic <a class="custom-not-social-link" href="https://discord.gg/" target="_blank">Discord server</a>!!
-  </p>
-
-`}
-
-css={`
-  p {
-    max-width: 27em;
-    margin-inline: auto;
-  }
-`}
-/>
-
-<h2>Examples</h2>
-
-<p>With <ComponentRef comp="Info List"/> component.</p>
-
-<CodeEditor html={`
-
-  <dl class="custom-info custom-social-links">
-
-    <dt>Director</dt>
-    <dd>
-      <a href="https://github.com/" target="_blank">Dedicated developer</a>
-    </dd>
-
-    <dt>Story</dt>
-    <dd>
-      <a href="https://www.tumblr.com/" target="_blank">Witty writer</a>
-    </dd>
-
-    <dt>Arts</dt>
-    <dd>
-      <a href="https://bsky.app/profile/" target="_blank">Illustrious illustrator</a>
-        <br>
-      <a href="https://www.instagram.com/" target="_blank">Devoted designer</a>
-        <br>
-      <a href="https://www.youtube.com/" target="_blank">Amazing animator</a>
-    </dd>
-
-    <dt>Programming</dt>
-    <dd>
-      <a href="https://github.com/" target="_blank">Creative coder</a>
-        <br>
-      <a href="https://github.com/" target="_blank">Proficient programmer</a>
-    </dd>
-
-    <dt>Sounds</dt>
-    <dd>
-      <a href="https://soundcloud.com/" target="_blank">Classic composer</a>
-        <br>
-      <a href="https://itch.io/profile/" target="_blank">Stunning sound designer</a>
-    </dd>
-
-  </dl>
-
-`}/>
-
-<p>With <ComponentRef comp="Label — Grouped"/> component.</p>
-
-<CodeEditor html={`
-
-  <p class="custom-grouped-lb custom-social-links text-center" style="font-size: 2em;">
-    <a href="https://www.youtube.com/" class="custom-lb" target="_blank" style="background: #ff6973; color: #222;">
-      YouTube
-    </a>
-
-    <a href="https://www.tumblr.com/" class="custom-lb" target="_blank" style="background: #36465D; color: #eee;">
-      Tumblr
-    </a>
-
-    <a href="https://bsky.app/profile/" class="custom-lb" target="_blank" style="background: #15788c; color: #eee;">
-      Bluesky
-    </a>
-  </p>
-
-`}/>
+<Examples.paragraph_exclude/>
 
 <h2>Troubleshooting</h2>
 

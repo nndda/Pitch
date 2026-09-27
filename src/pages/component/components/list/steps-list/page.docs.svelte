@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { CodeEditor } from "@elements";
+  import Examples from "./examples";
 </script>
 
 <p>
@@ -10,32 +10,4 @@
   Consists (and <i>require</i>) one heading element, as the first child of the <code>&lt;li&gt;</code> elements.
 </p>
 
-<CodeEditor html={`
-
-  <ol class="custom-steps">
-    <li>
-      <h3>Download</h3>
-
-      <p>
-        Download the game/tool/cool stuff from the download page.
-      </p>
-    </li>
-
-    <li>
-      <h3>Install</h3>
-
-      <p>
-        Extract the content of the downloaded file.
-      </p>
-    </li>
-
-    <li>
-      <h3>Have fun :)</h3>
-
-      <p>
-        Double click the file, and have fun :)
-      </p>
-    </li>
-  </ol>
-
-`}/>
+<Examples.basic/>
