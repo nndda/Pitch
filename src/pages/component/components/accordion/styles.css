@@ -73,7 +73,17 @@
     margin-right: 0;
   }
 
-  &.custom-full-w {
-    max-width: 100%;
+}
+
+.custom-callout {
+  & > .custom-accrd {
+    border-left: 0;
+    border-right: 0;
+    border-radius: 0;
+
+    &:last-child {
+       margin-bottom: 0;
+
+    }
   }
 }
