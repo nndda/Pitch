@@ -5,6 +5,7 @@ import { dirname, join, resolve, relative } from "path";
 import { copyFile, readFile } from "fs/promises";
 import { readFileSync, writeFileSync, existsSync } from "fs";
 import fg from "fast-glob";
+import dedent from "dedent";
 import postcss from "postcss";
 import cssnano from "cssnano";
 import cssnanoPresetAdvanced from "cssnano-preset-advanced";
@@ -172,6 +173,8 @@ export default {
 
       , reRes = reCSSTag.exec(source)
       , src = source.split(reCSSTag, 2)
+
+      , isSpeedDial = source.includes("custom-speed-dial")
       ;
 
       return {
@@ -181,8 +184,16 @@ export default {
           </script>
 
           <CodeEditor
-            html={\`${reRes ? src[1] : source}\`}
-            ${reRes ? `css={\`${src[0].replace("<style>", "")}\`}` : ""}
+            html={\`${(reRes ? src[1] : source).trim()}\`}
+
+            ${reRes ? `css={\`${dedent(src[0].replace("<style>", ""))}\`}` : ""}
+
+            ${isSpeedDial ? `
+              viewStyling={\`
+                position: relative;
+                min-height: 250px;
+              \`}
+            ` : ""}
           />
         `
       };
