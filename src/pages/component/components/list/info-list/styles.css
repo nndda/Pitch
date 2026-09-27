@@ -12,6 +12,10 @@ dl.custom-info {
     white-space: nowrap;
   }
 
+  & > dd {
+    grid-column: 2;
+  }
+
   &.custom-left {
     grid-template-columns: min-content auto;
   }
