@@ -8,12 +8,12 @@
 
 <CodeEditor html={`
 
-  <div class="custom-img-compare">
-    <div>
-      <img alt="" src="https://img.itch.zone/aW1nLzIxMDc4NDIzLnBuZw==/original/l07Whc.png">
-    </div>
-
-    <img alt="" src="https://img.itch.zone/aW1nLzIxMDc4NDMxLnBuZw==/original/3W4DMV.png">
+<div class="custom-img-compare">
+  <div>
+    <img alt="" src="https://img.itch.zone/aW1nLzIxMDc4NDIzLnBuZw==/original/l07Whc.png">
   </div>
+
+  <img alt="" src="https://img.itch.zone/aW1nLzIxMDc4NDMxLnBuZw==/original/3W4DMV.png">
+</div>
 
 `}/>

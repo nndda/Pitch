@@ -19,8 +19,9 @@
   .group {
     display: inline-flex;
     align-items: center;
-    gap: .25em;
-    padding-bottom: .5em;;
+    gap: .15em;
+    padding-bottom: .5em;
+    margin-inline: .25em;;
 
     &:not(:hover) {
       opacity: .9;
@@ -36,28 +37,30 @@
   {#if withCheckbox}
     {@const compData = compDataFlatLookup[comp]}
 
-    <label
-      class="checkbox custom-tip"
-      for="comp-ref-{uid}"
-    >
-      <input
-        type="checkbox"
-        id="comp-ref-{uid}"
-
-        onchange={async ev => {
-          await compData.api?.toggleInclude(ev.currentTarget.checked);
-        }}
-
-        checked={
-          $project?.components[compData.id.cat][compData.id.comp]
-        }
+    {#if compData}
+      <label
+        class="checkbox custom-tip"
+        for="comp-ref-{uid}"
       >
-      <i class="fa-regular fa-plus checked-not"></i>
-      <i class="fa-solid fa-square-check"></i>
-      <span class="custom-tip-content">
-        add component
-      </span>
-    </label>
+        <input
+          type="checkbox"
+          id="comp-ref-{uid}"
+
+          onchange={async ev => {
+            await compData.api?.toggleInclude(ev.currentTarget.checked);
+          }}
+
+          checked={
+            $project?.components[compData.id.cat][compData.id.comp]
+          }
+        >
+        <i class="fa-regular fa-plus-square checked-not"></i>
+        <i class="fa-solid fa-square-check"></i>
+        <span class="custom-tip-content">
+          add component
+        </span>
+      </label>
+    {/if}
   {/if}
 
   <button

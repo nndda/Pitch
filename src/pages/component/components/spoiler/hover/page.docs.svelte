@@ -1,30 +1,11 @@
 <script lang="ts">
-  import { CodeEditor } from "@elements";
+  import Examples from "./examples";
 </script>
 
 <p>
   Hide any lines of text. Hover over it to show the content.
 </p>
 
-<CodeEditor html={`
+<Examples.basic/>
 
-  <p>
-    The one who stole Nina's muffins was
-    <span class="custom-hd">
-      Mr. Snuffles.
-    </span>
-  </p>
-
-`}/>
-
-<CodeEditor html={`
-
-  <p>
-    The killer is
-    <span class="custom-hd">
-      pretty sus
-    </span>.
-    I'm shocked, shocked I say!
-  </p>
-
-`}/>
+<Examples.basic_2/>

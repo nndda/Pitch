@@ -1,0 +1,69 @@
+<dl class="custom-tl-list">
+  <dt>
+    v1.2.1
+    <small>25 March 2025</small>
+  </dt>
+
+  <dd>
+    <span class="custom-lb">new</span>
+    Introducing various bugs to be fixed on the next update
+  </dd>
+  <dd>
+    <span class="custom-lb">changed</span>
+    Petting cat are now enabled for enterprise edition
+  </dd>
+
+
+  <dt>
+    v1.2
+    <small>21 April 2024</small>
+  </dt>
+
+  <dd>
+    <span class="custom-lb">new</span>
+    Player can now exit the game by pressing <kbd>alt</kbd> + <kbd>f4</kbd>
+  </dd>
+  <dd>
+    <span class="custom-lb">new</span>
+    Added new recipe: bread
+  </dd>
+  <dd>
+    <span class="custom-lb">fixed</span>
+    All cutscenes will now be unskippable
+  </dd>
+  <dd>
+    <span class="custom-lb">fixed</span>
+    Petting a cat will no longer spawn blackholes
+  </dd>
+  <dd>
+    <span class="custom-lb">changed</span>
+    Petting cat are now disabled
+  </dd>
+  <dd>
+    <span class="custom-lb">changed</span>
+    Sets minimum frame-per-seconds to be at least 60
+  </dd>
+
+
+  <dt>
+    v1.1
+    <small>17 April 2024</small>
+  </dt>
+
+  <dd>
+    <span class="custom-lb">new</span>
+    Turning off the device will exit the game
+  </dd>
+  <dd>
+    <span class="custom-lb">new</span>
+    Introducing autosave feature, which save the game's state every 50ms
+  </dd>
+  <dd>
+    <span class="custom-lb">fixed</span>
+    Babies will no longer forced to accept trial by combat
+  </dd>
+  <dd>
+    <span class="custom-lb">changed</span>
+    Wearing a low, soft felt hat with a curled brim and the crown creased lengthwise will slow the movement down by 156%
+  </dd>
+</dl>

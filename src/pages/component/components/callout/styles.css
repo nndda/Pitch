@@ -12,14 +12,14 @@ blockquote.custom-callout {
   border-left: 5px solid var(--col);
   border-radius: 4px;
 
-  & > :first-child:is(h1, h2, h3, h4, h5, h6) {
+  & > :first-child:where(h1, h2, h3, h4, h5, h6) {
     position: relative;
     padding-left: 1em;
     padding-block: 0.5em;
     margin: 0;
 
     color: var(--col); /* Color the heading */
-    background: color-mix(in srgb, var(--col) 10%, rgba(0, 0, 0, 0));
+    background-color: color-mix(in srgb, var(--col) 10%, rgba(0, 0, 0, 0));
 
     & > img {
       vertical-align: middle;

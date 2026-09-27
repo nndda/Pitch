@@ -1,18 +1,12 @@
 <script lang="ts">
-  import { CodeEditor } from "@elements";
+  import Examples from "./examples";
 </script>
 
 <p>
   Customizable, animatable divider with cat ears.
 </p>
 
-<CodeEditor html={`
-  <div class="custom-cat-ear-div custom-anim-wiggle"></div>
-
-  <div style="font-size: 3em;" class="text-center">
-    ≈ •ω• ≈
-  </div>
-`}/>
+<Examples.neko_face/>
 
 <h2>
   Animations
@@ -31,22 +25,4 @@
   </li>
 </ul>
 
-<CodeEditor html={`
-  <div class="custom-cat-ear-div"></div>
-
-  <div class="text-center">
-    No animation
-  </div>
-
-  <div class="custom-cat-ear-div custom-anim-twitch"></div>
-
-  <div class="text-center">
-    Twitch
-  </div>
-
-  <div class="custom-cat-ear-div custom-anim-wiggle"></div>
-
-  <div class="text-center">
-    Wiggle
-  </div>
-`}/>
+<Examples.animations/>

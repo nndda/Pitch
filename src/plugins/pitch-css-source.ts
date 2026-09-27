@@ -5,6 +5,7 @@ import { dirname, join, resolve, relative } from "path";
 import { copyFile, readFile } from "fs/promises";
 import { readFileSync, writeFileSync, existsSync } from "fs";
 import fg from "fast-glob";
+import dedent from "dedent";
 import postcss from "postcss";
 import cssnano from "cssnano";
 import cssnanoPresetAdvanced from "cssnano-preset-advanced";
@@ -122,19 +123,55 @@ export default {
     // ;
   },
 
+  transform(code, id) {
+    const
+      isSample = id.endsWith("?css-sample")
+    ;
+
+    if ( !isSample ) { return; }
+
+    const
+      path = id.replace("?css-sample", "")
+      , source = code
+    // , source = await readFile(path, "utf-8")
+
+    , reRes = reCSSTag.exec(source)
+    , src = source.split(reCSSTag, 2)
+
+    , isSpeedDial = source.includes("custom-speed-dial")
+    ;
+
+    return {
+      code: `
+        <script lang="ts">
+          import { CodeEditor } from "@elements";
+        </script>
+
+        <CodeEditor
+          html={\`${(reRes ? src[1] : source).trim()}\`}
+
+          ${reRes ? `css={\`${dedent(src[0].replace("<style>", ""))}\`}` : ""}
+
+          ${isSpeedDial ? `
+            viewStyling={\`
+              position: relative;
+              min-height: 250px;
+            \`}
+          ` : ""}
+        />
+      `
+    };
+  },
+
   async load(id) {
     const
       isCSSSource = id.endsWith("?css-component")
-    , isSample = id.endsWith(".html")
+    // , isSample = id.endsWith("?css-sample")
     ;
 
-    if (
-      !(isCSSSource || isSample)
-    ) {
-      return;
-    }
+    if ( !isCSSSource ) { return; }
 
-    if (isCSSSource) {
+    // if (isCSSSource) {
       const
         path = id.replace("?css-component", "")
       , cssRaw = await readFile(path, "utf-8")
@@ -163,29 +200,5 @@ export default {
           },
         } as CSSData)}`,
       };
-    }
-
-    if (isSample) {
-      const
-        path = id.replace("?css-component", "")
-      , source = await readFile(path, "utf-8")
-
-      , reRes = reCSSTag.exec(source)
-      , src = source.split(reCSSTag, 2)
-      ;
-
-      return {
-        code: `
-          <script lang="ts">
-            import { CodeEditor } from "@elements";
-          </script>
-
-          <CodeEditor
-            html={\`${reRes ? src[1] : source}\`}
-            ${reRes ? `css={\`${src[0].replace("<style>", "")}\`}` : ""}
-          />
-        `
-      };
-    }
   }
 } as Plugin;

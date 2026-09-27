@@ -1,0 +1,14 @@
+<ul class="custom-dot-leader">
+  <li>
+    <span>Base game</span>
+    <span>$5</span>
+  </li>
+  <li>
+    <span>Base game + bonus content</span>
+    <span>$12.5</span>
+  </li>
+  <li>
+    <span>Supporter Pack</span>
+    <span>$16</span>
+  </li>
+</ul>

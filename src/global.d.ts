@@ -6,7 +6,7 @@ namespace global {
     export default value;
   }
 
-  declare module "*.html" {
+  declare module "*.svelte?css-sample" {
     const value: Component;
     export default value;
   }

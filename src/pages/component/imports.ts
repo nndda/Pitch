@@ -21,9 +21,9 @@ function getCompsManifest(
 
 export default {
   Components:
-    getCompsManifest( import.meta.glob("./components/**/*/index.ts", { eager: true, }) as ComponentManifestImports ),
+    getCompsManifest( import.meta.glob(["./components/**/*/index.ts", "!./components/**/examples/index.ts"], { eager: true, }) as ComponentManifestImports ),
   Decorations:
-    getCompsManifest( import.meta.glob("./decorations/**/*/index.ts", { eager: true, }) as ComponentManifestImports ),
+    getCompsManifest( import.meta.glob(["./decorations/**/*/index.ts", "!./decorations/**/examples/index.ts"], { eager: true, }) as ComponentManifestImports ),
   Tweaks:
-    getCompsManifest( import.meta.glob("./tweaks/**/*/index.ts", { eager: true, }) as ComponentManifestImports ),
+    getCompsManifest( import.meta.glob(["./tweaks/**/*/index.ts", "!./tweaks/**/examples/index.ts"], { eager: true, }) as ComponentManifestImports ),
 } as PageEntry;
