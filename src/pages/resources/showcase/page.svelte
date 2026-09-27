@@ -161,6 +161,29 @@
         "Comment Vote Icons",
       ],
     },
+
+    {
+      title: "LOVE alt delete",
+      desc: "",
+
+      author: {
+        name: "Jacoder23",
+        username: "jacoder23",
+      },
+
+      itchioSlug: "jacoder23.itch.io/love-alt-delete",
+      image: "jacoder23.itch.io__love-alt-delete.png",
+
+      type: "project",
+
+      compsUsed: [
+        "Info List",
+        "Label",
+        "Read More",
+        "Tooltip",
+        "Collapsible User Tools",
+      ],
+    },
   ]);
 </script>
 
