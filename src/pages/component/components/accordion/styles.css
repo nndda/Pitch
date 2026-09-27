@@ -1,7 +1,7 @@
 .custom-accrd {
   --br-accrd: var(--accordion-border-col, var(--br));
 
-  max-width: var(--accordion-width, 553px);
+  max-width: var(--accordion-width, 100%);
 
   /* Center the accordion by default */
   margin: auto;
