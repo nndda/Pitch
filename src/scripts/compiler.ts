@@ -8,7 +8,9 @@ export async function compile(): Promise<string> {
   , inputsProps = project?.inputs!
   , isProject = project?.scope === "project"
 
-  , cssOut: string[] = []
+  , cssOut: string[] = [
+      `/* Pitch-v${VERSION} @${COMMIT_HASH} */`
+    ]
   , minify = project?.app.settings.css.minify
   , cssIndent = minify ? "" : "  "
   , cssNewline = minify ? "" : "\n\n"
