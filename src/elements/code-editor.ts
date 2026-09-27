@@ -94,10 +94,10 @@ export function sanitizeHTML(html: string): string {
   return DOMPurify.sanitize(html);
 }
 
-import dedent from "dedent";
+// import dedent from "dedent";
 
 export function initializeHTML(html: string): string {
-  return "\n" + dedent(sanitizeHTML(html)) + "\n";
+  return "\n" + sanitizeHTML(html) + "\n";
 }
 
 import debounce from "lodash/debounce";
@@ -127,7 +127,7 @@ export function instatiateEditor(
 
   // CSS
   const localStyling = new CSSStyleSheet();
-  cssInit = "\n" + dedent(cssInit) + "\n";
+  cssInit = "\n" + cssInit.trim() + "\n";
   updatePreviewCSS(cssInit);
 
   const localStylingOverrides = new CSSStyleSheet();
@@ -275,7 +275,7 @@ export function instatiateCSSViewer(
         EditorView.theme({}, {dark: true}),
       ],
       parent: CSSEditor,
-      doc: (dedentCodes ? "\n" + dedent(cssInit) + "\n" : cssInit),
+      doc: (dedentCodes ? "\n" + cssInit.trim() + "\n" : cssInit),
     });
   ;
 
