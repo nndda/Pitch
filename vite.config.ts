@@ -37,11 +37,7 @@ export default defineConfig({
 
   plugins: [
     svelte({
-      extensions: [ ".svelte", ".html" ],
-      // include: [
-      //   /\.svelte/,
-      //   /\,html\?css-sample/,
-      // ],
+      extensions: [ ".svelte" ],
     }),
     PitchCSSSourcePlugin,
 

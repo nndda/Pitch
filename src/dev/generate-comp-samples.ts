@@ -22,14 +22,14 @@ export function generateSampleBarrelExport(pagePath: string) {
   ;
 
   for (const file of readdirSync(examplesPath)) {
-    if (file.endsWith(".html")) {
+    if (file.endsWith(".svelte")) {
       const
         sample = basename(file)
       , sampleSlug = sample.replaceAll(/(-|\.|\+)/g, "_")
       ;
 
-      importsStr.push(`import ${sampleSlug} from "./${sample}";`);
-      exportStr.push(`"${basename(file, ".html").replaceAll(/(-|\.|\+)/g, "_")}": ${sampleSlug},`);
+      importsStr.push(`import ${sampleSlug} from "./${sample}?css-sample";`);
+      exportStr.push(`"${basename(file, ".svelte").replaceAll(/(-|\.|\+)/g, "_")}": ${sampleSlug},`);
     }
   }
 
