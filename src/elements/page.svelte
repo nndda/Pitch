@@ -1,38 +1,21 @@
 <script lang="ts">
-  import { onMount } from "svelte";
-  import type { Component } from "svelte";
+  import { onMount, type Component } from "svelte";
+
   import { project } from "@db";
-  // import { copyStr } from "@utils";
   import { LabelScopes } from "./labels/";
   import { TabsComponentPage } from "@elements";
+  import { tagsData } from "@pitch/meta";
 
   const
     {
-      // children,
       data,
       PageDocumentation,
       PageExamples,
     }: {
-      // children: any,
       data: ComponentData,
       PageDocumentation: Component,
       PageExamples: Component | null,
     } = $props()
-
-  , tagsData: Record<ComponentTags, {icon: string, desc: string}> = {
-      experimental: {
-        icon: "fa-solid fa-vial",
-        desc: "Use with caution, and test thoroughly.",
-      },
-      hacky: {
-        icon: "fa-solid fa-flask",
-        desc: "Contains unconventional CSS/HTML codes and/or implementation.",
-      },
-      singular: {
-        icon: "fa-solid fa-hand-point-up",
-        desc: "Only one instance of the component per page.",
-      }
-    }
   ;
 
   onMount(() => {

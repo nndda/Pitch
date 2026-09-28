@@ -5,6 +5,7 @@
   import { showModal } from "../../scripts/modal";
   import { isInputVariablesCompatible } from "../input";
   import { event, CSSInputChanged } from "@runtime/events";
+  import { scopesIcons } from "@pitch/meta"
   import { project } from "@db";
 
   const
@@ -12,29 +13,19 @@
       componentData,
       previewOnly = false,
     }: {
-      componentData: Partial<ComponentData>,
+      componentData: Partial<ComponentData> & { scopes: Record<ScopeStatus, Scopes> },
       previewOnly?: boolean,
     } = $props()
 
   , sidebarRightToggleEl = document.getElementById("sidebar-right-toggle") as HTMLInputElement
 
-  , itchScopes = [
-      "project",
-      "profile",
-      "jam",
-    ]
-
-  , scopesIcons: Record<ScopeStatus, string> = {
-      compatible: "fa-solid fa-circle-check",
-      partial: "fa-solid fa-triangle-exclamation",
-      none: "fa-solid fa-square-xmark",
-      only: "fa-solid fa-lock",
-    }
+  , compatibleWithAllByDefault = (() => {
+      const scopes = Object.keys(componentData.scopes) as ScopeStatus[];
+      return scopes.includes("compatible") && scopes.length === 1;
+    })();
   ;
 
-  let
-    isCompaible = $state(false)
-  ;
+  let isCompaible = $state(false);
 
   // svelte-ignore state_referenced_locally
   if (!previewOnly) {
@@ -70,15 +61,12 @@
 
       & ul, li, button {
         display: inline-flex;
-        // align-items: center;
         gap: .5em;
         padding: 0;
       }
 
       & button {
-        // margin: .2em .5em;
         border-radius: 6px;
-        // background: red;
 
         & > svg {
           display: inline-flex;
@@ -132,7 +120,7 @@
   }
 
   .show-compatible-scope {
-    & .compatible, & + .compatible-all {
+    & .compatible {
       display: none !important;
     }
   }
@@ -144,11 +132,38 @@
   }
 </style>
 
-{#if componentData.scopes}
+{#if compatibleWithAllByDefault || (!previewOnly && isCompaible)}
+
+ 	<ul class="labels-list scopes compatible-all">
+    <li class="compatible">
+      <button
+        onclick={() => {
+          showModal(
+            InfoScopes as Component,
+            // TODO: lack typing :/
+            {
+              "scopeStatus": "compatible",
+              "scopes": [ "project", "profile", "jam" ],
+              "componentData": componentData,
+            },
+          );
+        }}
+      >
+        <i class="icon {scopesIcons.compatible}"></i>
+        <ul>
+          <li class="text compatible">
+            All Pages
+          </li>
+        </ul>
+      </button>
+    </li>
+  </ul>
+
+{:else if !isCompaible}
+
  	<ul
     class="labels-list scopes"
     class:show-compatible-scope={!$project?.app.settings.app.componentPage.alwaysShowCompatibleScopeBadge}
-    class:hidden={isCompaible}
   >
     {#each Object.entries(componentData.scopes) as [scopeType, scopes]}
 
@@ -206,34 +221,7 @@
   </ul>
 {/if}
 
-{#if !previewOnly}
- 	<ul class="labels-list scopes compatible-all" class:hidden={!isCompaible}>
-    <li class="compatible">
-      <button
-        onclick={() => {
-          showModal(
-            InfoScopes as Component,
-            // TODO: lack typing :/
-            {
-              "scopeStatus": "compatible",
-              "scopes": itchScopes,
-              "componentData": componentData,
-            },
-          );
-        }}
-      >
-        <i class="icon {scopesIcons.compatible}"></i>
-        <ul>
-            {#each itchScopes as scope, n}
-              <li class="text compatible">
-                {scope} pages{#if n < itchScopes.length - 1},{/if}
-              </li>
-            {/each}
-        </ul>
-      </button>
-    </li>
-  </ul>
-{/if}
+
 
 {#if componentData.scopeAMPincompatible}
   <ul class="labels-list">
@@ -270,6 +258,7 @@
     </li>
   </ul>
 {/if}
+
 
 
 {#if componentData.input}
