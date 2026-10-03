@@ -1,7 +1,9 @@
 @use "../styles/variables" as *;
+@use "sass:color";
 
 label.checkbox {
   cursor: pointer;
+  border: 1px solid #0000;
 
   & > input {
     display: none;
@@ -35,8 +37,11 @@ label.checkbox {
     }
 
     &.button-check {
-      background: $text-col;
-      color: $background;
+      // background: $text-col;
+      // color: $background;
+      background: color.mix($accent, $background, 30%);
+      color: $accent;
+      border: 1px solid;
     }
   }
 }
