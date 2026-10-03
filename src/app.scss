@@ -60,6 +60,18 @@ code {
   border-bottom:1px solid var(--br);
 }
 
+.span-2 {
+  grid-column: span 2;
+}
+
+.span-3 {
+  grid-column: span 3;
+}
+
+.span-4 {
+  grid-column: span 4;
+}
+
 #page > article {
   // padding-top: 1em;
   padding-bottom: 2em;
