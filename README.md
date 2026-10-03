@@ -46,6 +46,12 @@ bun run dev
 bun run build
 ```
 
+<p align="center">
+  <a href="https://github.com/Crysta1221/tech_logos">
+    <img width="350" src="https://github.com/user-attachments/assets/adcd90f5-5ede-40d3-a0c4-1b916e74195f">
+  </a>
+</p>
+
 ## Licenses
 
 - The Pitch web app is licensed under [AGPLv3](LICENSE).
