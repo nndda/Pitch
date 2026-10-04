@@ -125,7 +125,7 @@ export function runtimeDataInit() {
                       updateCatSelectionState(cat);
 
                       // Auto copy
-                      if (project?.app.settings.app.autoCopy) {
+                      if ((await getProject())?.app.settings.app.autoCopy) {
                         copyStr(
                           await compile(),
                         );
