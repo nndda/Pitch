@@ -8,6 +8,8 @@ export { default as ComponentRef } from "./component-ref-button.svelte";
 export { default as ComponentPage } from "./page.svelte";
 export { default as ComponentInput } from "./input.svelte";
 
+export { default as Skeleton } from "./skeleton.svelte";
+
 export { default as Images } from "./images.svelte";
 export { default as CompatibilityNote } from "./compatibility-note.svelte";
 
