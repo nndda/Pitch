@@ -37,6 +37,7 @@
     "dedent": "^1.7.2",
     "dexie": "^4.4.6",
     "dompurify": "^3.4.16",
+    "fuse.js": "^7.5.0",
     "lodash": "^4.18.1",
     "modern-normalize": "^3.0.1",
     "not-a-toast": "^1.1.5",
