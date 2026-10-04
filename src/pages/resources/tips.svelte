@@ -58,43 +58,43 @@
 </style>
 
 <div class="tips">
-    <small>
-      <i class="fa-solid fa-circle-info"></i>
-      Tips
-    </small>
+  <small>
+    <i class="fa-solid fa-circle-info"></i>
+    Tips
+  </small>
 
-    <h3>
-      <i class="{tipsArr[currentId].icon}"></i>
-      {tipsArr[currentId].cat}
-    </h3>
+  <h3>
+    <i class="{tipsArr[currentId].icon}"></i>
+    {tipsArr[currentId].cat}
+  </h3>
 
-    <p class="tips-desc">
-      {@html tipsArr[currentId].item}
-    </p>
+  <p class="tips-desc">
+    {@html tipsArr[currentId].item}
+  </p>
 
-    <div class="control">
-      <button
-        class="icon-only"
-        aria-label="Previous"
-        onclick={() => {
-           currentId = (((currentId - 1) % len) + len) % len
-        }}
-      >
-        <i class="fa-solid fa-circle-arrow-left"></i>
-      </button>
+  <div class="control">
+    <button
+      class="icon-only"
+      aria-label="Previous"
+      onclick={() => {
+          currentId = (((currentId - 1) % len) + len) % len
+      }}
+    >
+      <i class="fa-solid fa-circle-arrow-left"></i>
+    </button>
 
-      <span>
-        {currentId + 1} of {len}
-      </span>
+    <span>
+      {currentId + 1} of {len}
+    </span>
 
-      <button
-        class="icon-only"
-        aria-label="Next"
-        onclick={() => {
-           currentId = (((currentId + 1) % len) + len) % len
-        }}
-      >
-        <i class="fa-solid fa-circle-arrow-right"></i>
-      </button>
-    </div>
+    <button
+      class="icon-only"
+      aria-label="Next"
+      onclick={() => {
+          currentId = (((currentId + 1) % len) + len) % len
+      }}
+    >
+      <i class="fa-solid fa-circle-arrow-right"></i>
+    </button>
+  </div>
 </div>
