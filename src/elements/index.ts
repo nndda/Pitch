@@ -14,6 +14,7 @@ export { default as Images } from "./images.svelte";
 export { default as CompatibilityNote } from "./compatibility-note.svelte";
 
 export { default as PreviewBlock } from "./preview-block.svelte";
+export { default as PreviewCatalogue } from "./preview-catalogue.svelte";
 
 export { default as CodeEditor } from "./code-editor.svelte";
 export { default as CodeViewerCSS } from "./code-css.svelte"
