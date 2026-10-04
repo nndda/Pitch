@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { Skeleton } from "@elements";
   import { onMount } from "svelte";
 
   const
@@ -33,6 +34,8 @@
 
   onMount(() => {
     import("./code-editor").then(({ instatiateEditor }) => {
+      HTMLView.classList.remove("loading");
+
       instatiateEditor(
         uid,
 
@@ -60,9 +63,12 @@
 
 <div class="codes-container">
   <div
-    class="html-view"
+    class="html-view loading"
     style={viewStyling}
     bind:this={HTMLView}>
+
+      <Skeleton size="25px"/>
+
   </div>
 
   <div class="codes-toolbar main">
