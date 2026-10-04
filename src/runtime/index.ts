@@ -11,12 +11,17 @@ import {
 
 import compPagesEntry from "../pages/component/imports";
 
+interface RuntimeSessionData {
+  selectedCompCount: RecordNumber,
+}
+
 export const
   runtimeData: ComponentRuntimeData = {}
-
+, runtimeSessionData: RuntimeSessionData = {
+    selectedCompCount: {},
+  }
 , compCheckboxCache: Record<string, HTMLInputElement> = {}
 , compDataFlatLookup: Record<string, ComponentRuntimeItem> = {}
-
 ;
 
 const project = await getProject();
