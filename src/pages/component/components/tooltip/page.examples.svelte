@@ -13,13 +13,15 @@
 
 <h2>Composing</h2>
 
-<h2>Label</h2>
+<h3>Label</h3>
 
 <p>
   Tooltip on grouped <ComponentRef comp="Label" withCheckbox={true}/> components.
 </p>
 
 <ExamplesLabel.socials__tooltip/>
+
+<h3>Speed Dial</h3>
 
 <p>
   Tooltip use on <ComponentRef comp="Speed Dial" withCheckbox={true}/> component.
