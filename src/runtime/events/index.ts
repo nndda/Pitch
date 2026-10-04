@@ -3,4 +3,5 @@ export const
 
 , CSSCompiled = "css-compiled"
 , CSSInputChanged = "css-input-changed"
+, ComponentSelectionChanged = "comp-selection-changed"
 ;
