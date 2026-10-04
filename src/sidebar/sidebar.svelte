@@ -3,7 +3,7 @@
 
   import { catMetadata } from "@pitch/meta";
   import { project, projectUpdate } from "@db";
-  import { IconTooltip, Profile } from "@elements";
+  import { IconTooltip, Link, Profile } from "@elements";
   import { isInputVariablesCompatible } from "@elements/input";
   import { goToPage, unselectSidebarPage } from "../states/page.svelte";
   import { slug, copyStr, toastErr } from "@utils";
@@ -621,9 +621,13 @@
 
       <br>
 
-      <a href="https://github.com/nndda/Pitch/issues/new/choose">Suggest a component!</a>
+      <Link h="https://github.com/nndda/Pitch/issues/new/choose">
+        Suggest a component
+      </Link>
       or even
-      <a href="https://github.com/nndda/Pitch/issues/new/choose">submit one!</a>
+      <Link h="https://github.com/nndda/Pitch/issues/new/choose">
+        submit one!
+      </Link>
     </p>
 
   </div>
