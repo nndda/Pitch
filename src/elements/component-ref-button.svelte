@@ -6,16 +6,27 @@
     {
       comp,
       withCheckbox,
+      asLink,
     }: {
       comp: string,
       withCheckbox?: true,
+      asLink?: true,
     } = $props()
 
   , uid = $props.id()
   ;
+
+  function lookup() {
+    (
+      compDataFlatLookup[comp].li.querySelector(`label input[name="page-view"]`
+    ) as HTMLElement).click();
+  }
 </script>
 
 <style lang="scss">
+  @use "../styles/variables" as *;
+  @use "sass:color";
+
   .group {
     display: inline-flex;
     align-items: center;
@@ -29,6 +40,12 @@
 
     & .fa-regular, & .fa-solid {
       font-size: 1.25em;
+    }
+
+    & > button {
+      &:hover {
+        text-decoration: underline 1px solid color.mix($text-col, transparent, 60%);
+      }
     }
   }
 </style>
@@ -64,12 +81,10 @@
   {/if}
 
   <button
-    onclick={() => {
-      (
-        compDataFlatLookup[comp].li.querySelector(`label input[name="page-view"]`
-      ) as HTMLElement).click();
-    }}
+    class:no-style={asLink}
+    onclick={lookup}
   >
-    { comp }
+    {comp}
   </button>
+
 </div>
