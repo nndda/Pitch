@@ -4,7 +4,7 @@
 
   import { currentPage, tocHeadings, generateToC } from "../states/page.svelte";
 
-  import { ComponentInput, IconTooltip } from "@elements";
+  import { ComponentInput, IconTooltip, Skeleton } from "@elements";
   import { project, projectUpdate } from "@db";
 
   let
@@ -157,7 +157,11 @@
       <!-- NOTE: not sure if relying on `title` is enough :/ -->
       {#key currentPage.title}
         {#if currentPage.content}
-          {#await currentPage.content() then Page}
+          {#await currentPage.content()}
+
+            <Skeleton/>
+
+          {:then Page}
 
             <div
               id="page"
