@@ -1,5 +1,5 @@
-import { runtimeData } from "@runtime";
-import { event, CSSCompiled } from "@runtime/events";
+import { runtimeData, runtimeSessionData } from "@runtime";
+import { event, CSSCompiled, ComponentSelectionChanged } from "@runtime/events";
 import { getProject } from "@db";
 
 export async function updateCatSelectionState(catId: string): Promise<void> {
@@ -63,6 +63,9 @@ export async function updateCatSelectionState(catId: string): Promise<void> {
 
   catData.selectedCountEl!.textContent = `${selected}`;
 
+  runtimeSessionData.selectedCompCount[catId] = selected;
+
+  event.dispatchEvent(new Event(ComponentSelectionChanged));
   event.dispatchEvent(new Event(CSSCompiled));
 }
 
