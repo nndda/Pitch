@@ -219,4 +219,14 @@ declare global {
   interface ComponentRuntimeData {
     [catId: string]: ComponentCategoryData,
   }
+
+  interface SearchKeys {
+    name: string,
+    keywords: string,
+  };
+
+  type ComponentCatalogue = Record<string, {
+    preview: Component,
+    data: SearchKeys,
+  }>;
 }
