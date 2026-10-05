@@ -16,7 +16,7 @@ Pitch
 
 <br>
 
-<img align="center" src="https://github.com/user-attachments/assets/60c13c33-7667-4a99-ae0b-b7806367283b">
+<img align="center" src="https://github.com/user-attachments/assets/5d9791b3-63c5-42bd-a170-3d5d33248e81">
 
 <br>
 <br>
