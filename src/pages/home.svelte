@@ -277,14 +277,22 @@
 
     {#await Promise.all([
       import("./previews/components/index.svelte"),
+      import("./previews/decorations/index.svelte"),
+      import("./previews/tweaks/index.svelte"),
     ])}
 
       <Skeleton/>
 
-    {:then [ { default: PreviewCatalogueComponents }, ]}
+    {:then [
+      { default: PreviewCatalogueComponents },
+      { default: PreviewCatalogueDecorations },
+      { default: PreviewCatalogueTweaks },
+    ]}
 
       <div in:fade={{ duration: 500 }}>
         <PreviewCatalogueComponents/>
+        <PreviewCatalogueDecorations/>
+        <PreviewCatalogueTweaks/>
       </div>
 
       { initializeCatalogue() }
