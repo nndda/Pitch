@@ -17,6 +17,15 @@
   // svelte-ignore state_referenced_locally
   , compData = compDataFlatLookup[compRef]
   ;
+
+  function getSearchables(manifest: ComponentData): SearchKeys {
+    return {
+      name: manifest.nameDisplay ?? manifest.name,
+      keywords: [
+        manifest.tags?.join(" "),
+      ].join(" "),
+    }
+  }
 </script>
 
 <!-- svelte-ignore css_unused_selector -->
@@ -109,4 +118,9 @@
   >
     <ItchPreview html={html}/>
   </div>
+
+  <div
+    class="comp-cat-searchable-data hidden"
+    data-search-key={JSON.stringify(getSearchables(compData.manifest))}
+  ></div>
 </div>
