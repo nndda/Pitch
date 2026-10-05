@@ -5,8 +5,8 @@
   display: flex;
   flex-direction: column;
 
-  min-width: 17.5em;
-  width: 17.5em;
+  min-width: 18em;
+  width: 18em;
 
   padding: .5em;
 
@@ -224,14 +224,11 @@ h2.cat-heading {
   flex-wrap: wrap;
   align-items: center;
   padding-bottom: .75em;
+  gap: .3em;
 
   & > ul {
     flex-grow: 1;
     margin-top: .5em !important;
-  }
-
-  & .checkbox, .icon {
-    margin-right: .2em;
   }
 
   /*
@@ -245,6 +242,12 @@ h2.cat-heading {
     }
   }
   */
+
+  &.group {
+    & .icon {
+      margin-right: .3em;
+    }
+  }
 
   & label {
     white-space: nowrap;
@@ -347,8 +350,6 @@ h2.cat-heading {
 
 .tags {
   font-size: .9em;
-
-  margin-right: .5em;
 
   & :global .experimental {
     color: $primary;

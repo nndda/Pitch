@@ -543,27 +543,31 @@
                 {compData.manifest.name}
               </label>
 
-              <span class="tags">
+              {#if compData.manifest.flavour || compData.isExperimental}
 
-                {#if compData.manifest.flavour}
+                <span class="tags">
 
-                  <IconTooltip
-                    icon="flavour fa-solid fa-ice-cream"
-                    tooltip="Flavour"
-                  />
+                  {#if compData.manifest.flavour}
 
-                {/if}
+                    <IconTooltip
+                      icon="flavour fa-solid fa-ice-cream"
+                      tooltip="Flavour"
+                    />
 
-                {#if compData.isExperimental}
+                  {/if}
 
-                  <IconTooltip
-                    icon="experimental fa-solid fa-vial"
-                    tooltip="Experimental"
-                  />
+                  {#if compData.isExperimental}
 
-                {/if}
+                    <IconTooltip
+                      icon="experimental fa-solid fa-vial"
+                      tooltip="Experimental"
+                    />
 
-              </span>
+                  {/if}
+
+                </span>
+
+              {/if}
 
               <label class="checkbox fave" for={idFave}>
                 <input
