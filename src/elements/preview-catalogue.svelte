@@ -37,13 +37,19 @@
   }
 </style>
 
-<h2 class="cat-heading">
+<h2
+  class="cat-heading cat-el"
+  data-cat={cat}
+>
   <i class={catMetadata[cat].icon}></i>
   <span>{cat}</span>
   <small>{catMetadata[cat].desc}</small>
 </h2>
 
-<div class="preview-grid-wrapper">
+<div
+  class="preview-grid-wrapper cat-el"
+  data-cat={cat}
+>
   <div class="preview-grid">
 
     {@render children()}
