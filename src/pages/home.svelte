@@ -1,18 +1,27 @@
 <script lang="ts">
   import { onDestroy, onMount } from "svelte";
-  import { formatDistanceToNow } from "date-fns";
+  import { fade } from "svelte/transition";
 
-  import { Bar, PageRef } from "@elements";
-  import { project } from "@db";
+  import Header from "./home.header.svelte";
+  import Footer from "./home.footer.svelte";
 
-  import Tip from "./resources/tips.svelte";
-  import Previews from "./previews/all.svelte";
+  import { Skeleton } from "@elements";
+  import { runtimeSessionData } from "@runtime";
+  import { ComponentSelectionChanged, event } from "@runtime/events";
 
-  import pitchLogo from "/icon.svg?url";
-
-  let
-    sidebarRightToggleLabel: HTMLLabelElement
+  let sidebarRightToggleLabel: HTMLLabelElement
+  ,   selectedCompsCount: number = $state(0)
   ;
+
+  function updateCompCount() {
+    selectedCompsCount = 0;
+
+    for (const catId in runtimeSessionData.selectedCompCount) {
+      selectedCompsCount += runtimeSessionData.selectedCompCount[catId];
+    }
+  }
+
+  event.addEventListener(ComponentSelectionChanged, updateCompCount);
 
   onMount(() => {
     const
@@ -26,6 +35,8 @@
     }
 
     sidebarRightToggleLabel.classList.add("hidden");
+
+    updateCompCount();
   });
 
   onDestroy(() => {
@@ -39,111 +50,108 @@
 
 <article class="home">
 
-  <div class="banner-list">
+  <Header/>
 
-    {#if !navigator.clipboard}
-      <Bar
-        name="WARNING!"
-        type="warning"
-      >
-        It seems that your browser doesn't support the clipboard API :/ Try Pitch in a different browser.
-      </Bar>
-    {/if}
+  <br>
 
-    <Bar
-      name="Hey!"
-    >
-      Dev here. I'm struggling financially right now. If you like this project, please consider <PageRef name="Support Me?" label="donating"/> <i class="fa-solid fa-heart"></i>
-    </Bar>
+  <div class="home-cat-heading custom-tip">
+    <div class="custom-tip-content" style="min-width: 65%;">
+      <div class="custom-indev">
+        <div style="margin-inline: auto;">Section in development</div>
+      </div>
+    </div>
+
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <input type="text" placeholder="Search component"/>
+
+    <select>
+      <option id="search-id-all">
+        All
+      </option>
+
+      {#await import("@pitch/meta") then { cat }}
+        {#each cat as c}
+          <option id="search-id-{c}">
+            {c}
+          </option>
+        {/each}
+      {/await}
+    </select>
+
+    <!-- <div class="flex-space"></div> -->
+
+    <div class="btn-group filter-group">
+      <!--
+      <label class="checkbox button button-check custom-tip">
+        <input
+          type="checkbox"
+          name="filter-group"
+
+          onchange={null}
+        >
+
+        <i class="fa-solid fa-star"></i>
+
+        <span class="custom-tip-content">
+          Favourited
+        </span>
+      </label>
+      -->
+
+      <label class="checkbox button button-check custom-tip">
+        <input
+          type="checkbox"
+          name="filter-group"
+
+          onchange={null}
+        >
+
+        <i class="fa-solid fa-flask"></i>
+        <i class="fa-solid fa-slash"></i>
+
+        <span class="custom-tip-content">
+          No Hacky Components
+        </span>
+      </label>
+
+      <label class="checkbox button button-check custom-tip">
+        <input
+          type="checkbox"
+          name="filter-group"
+          onchange={null}
+        >
+
+        <i class="fa-solid fa-vial"></i>
+        <i class="fa-solid fa-slash"></i>
+
+        <span class="custom-tip-content">
+          No Experimental Components
+        </span>
+      </label>
+    </div>
+
+    <div class="flex-space"></div>
+
+    <span>{selectedCompsCount} selected</span>
+  </div>
+
+  <div class="cat-container">
+
+    {#await Promise.all([
+      import("./previews/components/index.svelte"),
+    ])}
+
+      <Skeleton/>
+
+    {:then [ {default: PreviewCatalogueComponents}, ]}
+
+      <div in:fade={{ duration: 500 }}>
+        <PreviewCatalogueComponents/>
+      </div>
+
+    {/await}
 
   </div>
 
-  <header class="intro">
-    <div class="intro-app">
-      <div>
-        <img alt="" class="pitch-logo" src={pitchLogo} width="150">
-      </div>
-
-      <div class="header-content">
-        <h2 class="pitch-title">
-          Pitch<small>.css</small>
-        </h2>
-
-        <p class="labels">
-          <button>
-            <i class="icon fa-solid fa-box-open"></i>
-            v{VERSION}
-          </button>
-
-          <button>
-            <i class="icon fa-brands fa-creative-commons"></i>
-            CC0
-          </button>
-
-          <button class="made-with-love">
-            Made with
-            <i class="fa-solid fa-heart"></i>
-          </button>
-
-          <b class="flex-break"></b>
-
-          <button class="in-development">
-            <i class="icon fa-solid fa-road-barrier"></i>
-            Development preview
-          </button>
-        </p>
-
-        <p class="desc">
-          Welcome to Pitch! a catalogue of CSS components, decorations, and tweaks, designed specifically for itch.io project pages.
-        </p>
-      </div>
-    </div>
-
-    <p class="user-actions">
-      <!-- <i class="fa-solid fa-clock-rotate-left"></i> -->
-      <!-- Continue where you left: <PageRef name="Settings"/> -->
-    </p>
-
-    <div
-      class="tips"
-      class:hidden={!$project?.app.settings.app.showHomeTips}
-    >
-      <Tip/>
-    </div>
-  </header>
-
-  <br>
-  <br>
-
-  <Previews/>
-
-  <br>
-
-  <h2>License</h2>
-
-  <ul class="custom-ul">
-    <li>
-      The Pitch web app is licensed under <a href="https://github.com/nndda/Pitch/blob/main/LICENSE" target="_blank" referrerpolicy="origin" rel="nofollow noopener">GNU AGPLv3</a>.
-    </li>
-    <li>
-      The CSS components are licensed under <a href="https://creativecommons.org/publicdomain/zero/1.0/deed.en" target="_blank" referrerpolicy="origin" rel="nofollow noopener">CC0</a>.
-    </li>
-    <li>
-      The placeholder content in the HTML preview and/or in the image preview may be subject to different license or copyright restrictions.
-    </li>
-  </ul>
-
-  <footer class="footer">
-    <div>
-      Build <a href="https://github.com/nndda/Pitch/commit/{COMMIT_HASH}" target="_blank" referrerpolicy="origin" rel="nofollow noopener">
-        <code>{COMMIT_HASH}</code>
-      </a>
-      <br>
-      Released <b>{formatDistanceToNow( COMMIT_DATE, { addSuffix: true, })}</b>
-    </div>
-    <div>
-      Copyright &copy; 2023-2026 nnda
-    </div>
-  </footer>
-
+  <Footer/>
 </article>

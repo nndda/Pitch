@@ -1,102 +1,48 @@
 @use "../styles/variables" as *;
-
 @use "sass:color";
 
 :global #wrapper:has(> #page > .home) {
   background: $background;
 }
 
-.banner-list {
+.home-cat-heading {
+  display: flex;
+  align-items: center;
   position: sticky;
-  top: .5em;
-
-  display: flex;
-  flex-direction: column;
-
-  gap: .65em;
   z-index: 999;
-}
+  top:0;
 
-.intro {
-  display: grid;
-  /* grid-gap: 1em; */
-  /* display: grid; */
-  /* grid-template-columns: auto 200px; */
-  grid-template-areas:
-    "app tips"
-   "actions tips"
-  ;
-  margin-top: 1em;
-  padding: 1em;
+  // kinda stinky
+  translate: -2rem;
+  width: calc(100% + 4rem);
+  background: $background-dark;
+  padding:1.5em;
+  margin-block: 1.5em;
+  gap: .5em;
 
-  /* background: $background-dark; */
-}
+  border: 1px solid $border-col;
+  border-left: 0;
+  border-right: 0;
 
-.intro-app {
-  grid-area: app;
-
-  display: flex;
-}
-.user-actions {
-  grid-area: actions;
-}
-.tips {
-  grid-area: tips;
-}
-
-.pitch-logo {
-  /* grid-row: span 3; */
-  padding: .5em;
-  object-fit: contain;
-}
-
-.pitch-title {
-  font-family: Ubuntu;
-  font-size: 2em;
-  font-weight: 300;
-  color: $accent;
-
-  & > small {
-    color: $text-col;
-    font-family: "Roboto Mono";
-  }
-}
-
-.header-content {
-  flex-grow: 1;
-}
-
-.labels {
-  display: flex;
-  flex-wrap: wrap;
-  gap: .25em .5em;
-  margin: 0;
-}
-
-.desc {
-  max-width: 400px;
-  font-size: 1.1em;
-}
-
-.made-with-love {
-  & > i {
-    color: $accent;
-  }
-}
-
-.in-development {
-  & > i {
-    color: color.mix(#eca20e, $text-col, 65%);
-  }
-}
-
-.footer {
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
-  margin-top: 2em;
-
-  & code {
+  & .btn-group.filter-group {
+    gap: .25em;
     padding: 0;
+    margin: 0;
+
+    & > label {
+      padding: .5em 1em;
+    }
   }
+
+  & input[type="text"], select, .btn-group {
+      background: $background-light;
+      padding: .5em;
+      border: 1px solid $border-col;
+      border-radius: 7px;
+  }
+}
+
+.cat-container {
+  position: relative;
+  min-height: 200px;
 }

@@ -384,9 +384,8 @@ h2.cat-heading {
   }
 }
 
-.css-copy,
-.filter-group {
-  box-shadow: 0 0 1em .5em $background;
+:global :is(.css-copy, .filter-group) {
+  // box-shadow: 0 0 1em .5em $background;
   background: $background-dark;
 }
 
@@ -415,6 +414,9 @@ h2.cat-heading {
   top: .5em;
   margin-bottom: .6em;
   z-index: 9;
+}
+
+:global .filter-group {
 
   & label {
     position: relative;
