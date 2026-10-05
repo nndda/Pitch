@@ -24,6 +24,15 @@
   border-left: 0;
   border-right: 0;
 
+  &.disabled {
+    cursor: not-allowed;
+    // filter: grayscale(1);
+    //
+    & label, select, input {
+      pointer-events: none;
+    }
+  }
+
   & .btn-group.filter-group {
     gap: .25em;
     padding: 0;

@@ -86,7 +86,11 @@
   }
 </style>
 
-<div class="comp-cont {classes || ""}">
+<div
+  class="comp-cont {classes || ""}"
+  class:is-hacky={compData.manifest.tags?.includes("hacky")}
+  class:is-experimental={compData.manifest.tags?.includes("experimental")}
+>
   <div class="ref-cont">
     <ComponentRef comp={compRef} withCheckbox={true} asLink={true}/>
 
