@@ -102,17 +102,14 @@
     width: 100%;
   }
 
-  [name="proj-scope-select"] {
-    &:checked {
-      & + label {
-        font-weight: bold;
-      }
+  label[for^="proj-scope-"] {
+    &:hover {
+      text-decoration: underline;
     }
 
-    &:not(:checked) + label {
-      &:hover {
-        text-decoration: underline;
-      }
+    &:has(> input:checked) {
+      text-decoration: none;
+      font-weight: bold;
     }
   }
 
