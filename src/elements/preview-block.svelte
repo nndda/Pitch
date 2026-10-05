@@ -5,10 +5,12 @@
 
   const {
       html,
+      img,
       compRef,
       classes,
     }: {
-      html: string,
+      html?: string,
+      img?: string,
       compRef: string,
       classes?: string,
     }
@@ -54,10 +56,21 @@
       // box-shadow: 0 0 .5em color.mix($background-dark, $accent, 85%);
       // outline:1px solid color.mix($background-dark, $accent, 55%);
     // }
+    //
+    &:hover {
+      & .ref-cont {
+        opacity: 1;
+      }
+    }
   }
 
   .html-cont {
     padding: .5em 1em;
+
+    & .img-only {
+      display: block;
+      margin: auto;
+    }
   }
 
   :global .ref-cont {
@@ -67,9 +80,17 @@
     background: color.mix($background-dark, $background-light, 78%);
     border-bottom:1px solid $border-col;
 
+    transition: opacity .3s ease;
+    opacity: .3;
+
+    // &:hover {
+    //   opacity: 1;
+    // }
+
     &:has(input:checked) {
       background: color.mix($background-dark, $accent, 95%);
       border-bottom:1px solid color.mix($background-dark, $accent, 55%);
+      opacity: 1;
 
       & label {
         color: $accent !important;
@@ -120,7 +141,11 @@
     class="html-cont"
     style={compRef === "Speed Dial" ? `min-height: 200px;` : null}
   >
-    <ItchPreview html={html}/>
+    {#if html}
+      <ItchPreview html={html}/>
+    {:else if img}
+      <img class="img-only" src={img} alt="">
+    {/if}
   </div>
 
   <div
