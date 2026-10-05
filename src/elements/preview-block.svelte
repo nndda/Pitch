@@ -103,7 +103,10 @@
 
   </div>
 
-  <div class="html-cont">
+  <div
+    class="html-cont"
+    style={compRef === "Speed Dial" ? `min-height: 200px;` : null}
+  >
     <ItchPreview html={html}/>
   </div>
 </div>
