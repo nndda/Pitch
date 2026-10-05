@@ -72,9 +72,9 @@
     & label {
       padding: .3em 0;
 
-      &:not(:first-child) {
-        padding-top: 1em;
-      }
+      // &:not(:first-child) {
+      //   padding-top: 1em;
+      // }
     }
 
     & input[type="color"] {
@@ -195,41 +195,41 @@
     <legend>Scope</legend>
 
     <div class="input-group">
-      <input
-        type="radio"
-        id="proj-scope-project"
-        name="proj-scope-select"
-        value="project"
-        checked
-      />
+      <label for="proj-scope-project" class="checkbox">
+        <input
+          type="radio"
+          id="proj-scope-project"
+          name="proj-scope-select"
+          value="project"
+          checked
+        />
 
-      <label for="proj-scope-project">
         <i class="fa-regular fa-circle checked-not"></i>
         <i class="fa-solid fa-circle-check checked"></i>
         Project page
       </label>
 
-      <input
-        type="radio"
-        id="proj-scope-profile"
-        name="proj-scope-select"
-        value="profile"
-      />
+      <label for="proj-scope-profile" class="checkbox">
+        <input
+          type="radio"
+          id="proj-scope-profile"
+          name="proj-scope-select"
+          value="profile"
+        />
 
-      <label for="proj-scope-profile">
         <i class="fa-regular fa-circle checked-not"></i>
         <i class="fa-solid fa-circle-check checked"></i>
         Profile page
       </label>
 
-      <input
-        type="radio"
-        id="proj-scope-jam"
-        name="proj-scope-select"
-        value="jam"
-      />
+      <label for="proj-scope-jam" class="checkbox">
+        <input
+          type="radio"
+          id="proj-scope-jam"
+          name="proj-scope-select"
+          value="jam"
+        />
 
-      <label for="proj-scope-jam">
         <i class="fa-regular fa-circle checked-not"></i>
         <i class="fa-solid fa-circle-check checked"></i>
         Jam page
