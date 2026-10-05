@@ -50,7 +50,7 @@
     "@types/lodash": "^4.17.25",
     "@types/node": "^26.6.4",
     "autoprefixer": "^10.6.1",
-    "cssnano": "^9.2.1",
+    "cssnano": "^9.2.2",
     "cssnano-preset-advanced": "^9.1.4",
     "fast-glob": "^3.3.3",
     "postcss": "^8.5.28",
