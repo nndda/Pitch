@@ -218,7 +218,14 @@
                 <li
                   class="lv-{parseInt(el.tagName.at(1)!)}"
                 >
-                  <button class="icon-only">
+                  <button
+                    class="icon-only"
+                    onclick={() => {
+                      el.scrollIntoView({
+                        behavior: "smooth",
+                      });
+                    }}
+                  >
                     {el.textContent}
                   </button>
                 </li>
