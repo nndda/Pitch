@@ -78,6 +78,7 @@ declare global {
       "em"
     | "rem"
     | "px"
+    | "%"
     ,
     // TODO:
     // defaultDynamic?: () => string,

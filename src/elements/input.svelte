@@ -11,7 +11,7 @@
       } = $props()
   , changedInputs: Record<string, true> = {}
   , valueFormats: RecordString = $state({})
-  , formatRe = /(\d+)(\w+)/
+  , formatRe = /(\d+)(\w+|\%)/
   ;
 
   // svelte-ignore state_referenced_locally
@@ -274,7 +274,7 @@
               oninput={ev => {onVarFormatInputChange(ev.currentTarget.value, input)}}
             >
               {#each [
-                "em", "rem", "px"
+                "em", "rem", "px", "%"
               ] as format}
                 <option
                   selected={format === selectedFormat}
