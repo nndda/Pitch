@@ -9,13 +9,20 @@
   import { slug, copyStr, toastErr } from "@utils";
   import { compile } from "@pitch/css";
   import { runtimeData, compCheckboxCache, runtimeDataInit } from "@runtime";
+  import { event, ComponentSelectionChanged } from "@runtime/events"
 
   import { updateCatSelectionState, syncCompCheckedState, syncCompGroupItemsClass } from "./sidebar";
 
   // Pages
   import pagesMain, { AdvancedSearch, pagesResources, pagesSpellbooks } from "@pages";
 
-  let navEl: HTMLElement;
+  let navEl: HTMLElement
+  ,   isCopyReady = $state(false)
+  ;
+
+  event.addEventListener(ComponentSelectionChanged, () => {
+    isCopyReady = true;
+  });
 
   runtimeDataInit();
 
@@ -645,11 +652,15 @@
 
       <button
         id="css-copy-button"
+        class:has-badge={
+          $project?.app.settings.app.autoCopy ? false : isCopyReady
+        }
         disabled
         onclick={async () => {
           copyStr(
             await compile(),
           );
+          isCopyReady = false;
         }}
       >
         <i class="icon fa-solid fa-copy"></i>

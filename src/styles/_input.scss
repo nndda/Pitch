@@ -133,6 +133,31 @@ input {
       background: none;
     }
   }
+
+  &.has-badge {
+    position: relative;
+
+    &::before {
+      content: "";
+      position: absolute;
+      inset: -.3em;
+      width: .85em;
+      height: .85em;
+      background: $accent;
+      border-radius: 50%;
+
+      animation: badge-beat 1.5s ease infinite;
+    }
+  }
+}
+
+@keyframes badge-beat {
+  10%, 25% {
+    scale: 1.25;
+  }
+  35% {
+    scale: 1;
+  }
 }
 
 button {
