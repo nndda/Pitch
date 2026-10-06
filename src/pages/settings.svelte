@@ -108,19 +108,20 @@
     gap: 1.75em;
     padding: 2em;
 
+    & legend {
+      & > h2, & > h3 {
+        margin-block: 0;
+        font-size: 1.75em;
+      }
+    }
+
     & > legend {
       color: $accent;
-      font-size: 2em;
-      font-weight: bold;
       font-family: Ubuntu;
       letter-spacing: .05em;
     }
 
     & > .group {
-      & > legend {
-        font-size: 1.5em;
-      }
-
       & label {
         font-size: 1.1em;
         font-weight: 400;
@@ -196,7 +197,11 @@
 >
   {#each Object.keys(settingsData) as cat}
     <fieldset class="group">
-      <legend>{nameMap[cat]}</legend>
+      <legend>
+        <h2 data-toc>
+          {nameMap[cat]}
+        </h2>
+      </legend>
 
       {#each Object.keys(settingsData[cat]) as item}
         {@const itemData = settingsData[cat][item]}
@@ -205,7 +210,11 @@
           {@render Item(`${cat}.${item}`, itemData)}
         {:else}
           <fieldset class="group">
-            <legend>{nameMap[item]}</legend>
+            <legend>
+              <h3 data-toc>
+                {nameMap[item]}
+              </h3>
+            </legend>
 
             {#each Object.keys(itemData) as itemSub}
               {@render Item(`${cat}.${item}.${itemSub}`, (itemData as { [itemSub: string]: SettingsItem} )[itemSub])}
