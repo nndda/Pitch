@@ -23,8 +23,8 @@
 
   <br>
 
-  <p class="custom-grouped-lb">
-    <a href="#" class="custom-lb custom-tip" style="background: #ff6973;">
+  <p class="custom-grouped custom-lb-container">
+    <a href="#" class="custom-tip" style="background: #ff6973;">
       <img height="32" src="https://cdn.simpleicons.org/youtube/222"/>
 
       <span class="custom-tip-content">
@@ -32,7 +32,7 @@
       </span>
     </a>
 
-    <a href="#" class="custom-lb custom-tip" style="background: #46425e;">
+    <a href="#" class="custom-tip" style="background: #46425e;">
       <img height="32" src="https://cdn.simpleicons.org/mastodon/eee"/>
 
       <span class="custom-tip-content">
@@ -40,7 +40,7 @@
       </span>
     </a>
 
-    <a href="#" class="custom-lb custom-tip" style="background: #15788c;">
+    <a href="#" class="custom-tip" style="background: #15788c;">
       <img height="32" src="https://cdn.simpleicons.org/bluesky/eee"/>
 
       <span class="custom-tip-content">
