@@ -31,3 +31,11 @@
 </p>
 
 <Examples.container/>
+
+<h3>Grouped</h3>
+
+<p>
+  Add the class <code>custom-grouped</code> in the container element to <em>visually</em> group multiple Labels.
+</p>
+
+<Examples.basic_grouped/>
