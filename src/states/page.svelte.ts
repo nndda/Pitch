@@ -36,14 +36,36 @@ export function goToPage(page: PageData) {
 
 export const tocHeadings: Element[] = $state([]);
 
+const
+  selHeadings = "h1, h2, h3, h4, h5, h6"
+, selHeadingsWhere = ":where(" + selHeadings + ")"
+, selPageSpellbook = "#page .spellbook"
+;
+
 export function generateToC() {
   tocHeadings.length = 0;
 
+  // TODO: probably could be optimized better ://
+
   tocHeadings.push(
-    ...Array
-      .from(
-        document
-          .querySelectorAll(`:where(#page, #page > article) > :where(h1, h2, h3, h4, h5, h6)`)
-      )
+    ...Array.from(
+      document.querySelectorAll(`:where(#page, #page > article) > ` + selHeadingsWhere),
+    ),
+    ...Array.from(
+      document.querySelectorAll(`#page [data-toc]`),
+    ),
   );
+
+  const elPageSpellbook = document.querySelector(selPageSpellbook);
+
+  if (elPageSpellbook) {
+    tocHeadings.push(
+      ...Array.from(
+        document.querySelectorAll(selPageSpellbook + " > " + selHeadingsWhere),
+      ),
+      ...Array.from(
+        elPageSpellbook.querySelectorAll(`.custom-steps > li > ` + selHeadingsWhere),
+      ),
+    )
+  }
 }
