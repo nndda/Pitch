@@ -1,12 +1,15 @@
 @use "../../node_modules/modern-normalize/modern-normalize.css";
 
 @use "@fontsource/ubuntu";
+@use "@fontsource/lato";
 
 @use "./variables" as *;
 
 body {
   color: $text-col;
   background: $background-dark;
+
+  font-family: Ubuntu;
 
   @include style-scrollbar();
 }
