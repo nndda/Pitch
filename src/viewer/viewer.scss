@@ -2,6 +2,8 @@
 
 @use "./sidebar-right.scss";
 
+@use "sass:color";
+
 #viewer {
   display: flex;
   flex-direction: column;
@@ -84,4 +86,33 @@
   padding: .25em;
   // color: $accent;
   text-decoration: none;
+}
+
+article {
+  color: color.mix($text-col, $background-dark, 85%);
+  // font-family: Lato;
+
+  & p {
+    line-height: 1.5lh;
+  }
+
+  &.spellbook {
+    margin: auto;
+    max-width: 680px;
+
+    & .custom-steps {
+      margin-top: 2em;
+      & > li {
+        padding-bottom: 1.5em;
+      }
+    }
+
+    & img {
+      display: inline-block;
+      max-width: calc(680px - 2em);
+      overflow: hidden;
+      border-radius: 12px;
+      margin: 1em;
+    }
+  }
 }
