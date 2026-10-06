@@ -41,6 +41,13 @@ export default {
       default: "",
       type: "color",
     },
+    {
+      name: "B. Radius",
+      var: "speed-dial-b-radius",
+      default: "50%",
+      type: "size",
+      defaultFormat: "%",
+    },
   ],
 
   compatibleOnInputs: [
