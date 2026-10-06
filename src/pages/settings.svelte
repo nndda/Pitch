@@ -52,7 +52,7 @@
         sidebar: {
           showScopeColor: {
             name: "Color the component list item based on their scopes",
-            desc: `Components that are partially compatible with the current scope will be colored yellow.<br> And components that are not compatible at all will be marked yet.`
+            desc: `Components that are partially compatible with the current scope will be colored yellow.<br> And components that are not compatible at all will be colored red.`
           },
           showPlzzz: {
             name: "Show 👉👈 decoration",
