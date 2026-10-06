@@ -261,7 +261,15 @@
               value={
                 isInputNotStored
                   ? input.default
-                  : formatRe.exec(inputs[input.var])![1]
+                  : (() => {
+                    const re = formatRe.exec(inputs[input.var]);
+
+                    if (re) {
+                      return re[1];
+                    }
+
+                    return input.default;
+                  })()
               }
 
               oninput={inputEv}
