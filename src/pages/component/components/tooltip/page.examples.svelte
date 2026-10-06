@@ -1,7 +1,7 @@
 <script lang="ts">
   import { ComponentRef } from "@elements";
   import Examples from "./examples";
-  import ExamplesLabel from "../label/grouped/examples";
+  import ExamplesLabel from "../label/examples";
   import ExamplesSpeedDial from "../speed-dial/examples";
 </script>
 
