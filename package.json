@@ -50,14 +50,14 @@
     "@types/lodash": "^4.17.25",
     "@types/node": "^26.6.4",
     "autoprefixer": "^10.6.1",
-    "cssnano": "^9.2.2",
-    "cssnano-preset-advanced": "^9.1.4",
+    "cssnano": "^9.3.2",
+    "cssnano-preset-advanced": "^9.2.2",
     "fast-glob": "^3.3.3",
-    "postcss": "^8.5.28",
+    "postcss": "^8.5.29",
     "sass": "^1.105.1",
-    "svelte": "^5.57.1",
+    "svelte": "^5.57.2",
     "svelte-check": "^4.7.6",
     "typescript": "^7.0.2",
-    "vite": "^8.3.2"
+    "vite": "^8.3.3"
   }
 }
