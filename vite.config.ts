@@ -1,5 +1,6 @@
 import { defineConfig } from "vite";
 import { svelte } from "@sveltejs/vite-plugin-svelte";
+import { VitePWA } from "vite-plugin-pwa";
 import { resolve } from "path";
 import { execSync } from "child_process";
 
@@ -39,7 +40,54 @@ export default defineConfig({
     svelte({
       extensions: [ ".svelte" ],
     }),
+
     PitchCSSSourcePlugin,
+
+    VitePWA({
+      registerType: "prompt",
+      workbox: {
+        globPatterns: ["**/*.{js,css,html,json,svg,ico,webp,png,woff,woff2}"]
+      },
+      manifest: {
+        name: "Pitch - CSS components for itch.io pages",
+        short_name: "Pitch",
+        description: "Catalogue of CSS components & tweaks, specifically made for your itch.io pages.",
+
+        icons: [
+          {
+            src: "./icon.svg",
+            sizes: "any",
+            type: "image/svg+xml"
+          },
+          {
+            src: "./icon.192.png",
+            sizes: "192x192",
+            type: "image/png"
+          },
+          {
+            src: "./icon.512.png",
+            sizes: "512x512",
+            type: "image/png"
+          }
+        ],
+
+        display: "standalone",
+
+        theme_color: "#FC3A78",
+        background_color: "#171620",
+
+        categories: [
+          "developer tools",
+          "design"
+        ],
+
+        lang: "en",
+
+        start_url: "/",
+
+        prefer_related_applications: false
+      },
+    }),
 
     {
       name: "output-version-file",
