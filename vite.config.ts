@@ -6,7 +6,7 @@ import { execSync } from "child_process";
 import packageJSON from "./package.json" with { type: "json" };
 import tsconfigAppJSON from "./tsconfig.app.json" with { type: "json" };
 
-import PitchCSSSourcePlugin from "./src/plugins/pitch-css-source.ts";
+import PitchCSSSourcePlugin from "./src/plugins/pitch-css-source";
 
 import "./src/pages/component/component.d.ts";
 
