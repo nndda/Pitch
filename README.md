@@ -15,6 +15,7 @@ Pitch
   <br>
   <a href="https://github.com/nndda/Pitch"><img alt="Last commit" height="22" src="https://img.shields.io/github/last-commit/nndda/Pitch/main?style=flat-square&amp;labelColor=%23d41c56&amp;color=%23262334"></a>
   <a href="https://github.com/nndda/Pitch"><img alt="Components count" height="22" src="https://img.shields.io/badge/components-34-red?style=flat-square&amp;logoColor=%23fff&amp;labelColor=%23d41c56&amp;color=%23262334"></a>
+  <img src="https://img.shields.io/badge/%E2%99%A5%EF%B8%8E%20Made%20by-human-fc3a78?style=flat-square" alt="Made by human">
 </p>
 
 <p align="center">
