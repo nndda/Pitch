@@ -2,6 +2,19 @@ import { mount } from "svelte";
 import "@styles/critical.scss";
 // import "./scripts/init";
 
+import { registerSW } from "virtual:pwa-register";
+const updateSW = registerSW({
+  onNeedRefresh() {
+    const yes = prompt("Updated version of Pitch is available. Refresh now?");
+    if (yes) {
+      updateSW();
+    }
+  },
+  // onOfflineReady() {
+  //   alert("Pitch is now offline ready!");
+  // },
+});
+
 document.addEventListener("DOMContentLoaded", async () => {
 
   const

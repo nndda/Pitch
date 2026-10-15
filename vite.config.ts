@@ -46,7 +46,8 @@ export default defineConfig({
     VitePWA({
       registerType: "prompt",
       workbox: {
-        globPatterns: ["**/*.{js,css,html,json,svg,ico,webp,png,woff,woff2}"]
+        // globPatterns: ["**/*.{js,css,html,json,svg,ico,webp,png,woff,woff2}"],
+        cleanupOutdatedCaches: true,
       },
       manifest: {
         name: "Pitch - CSS components for itch.io pages",

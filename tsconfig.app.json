@@ -5,7 +5,11 @@
     "target": "ES2023",
     "useDefineForClassFields": true,
     "module": "ESNext",
-    "types": ["svelte", "vite/client"],
+    "types": [
+      "svelte",
+      "vite/client",
+      "vite-plugin-pwa/client"
+    ],
     "skipLibCheck": true,
     "noEmit": true,
 
